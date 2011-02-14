@@ -1,448 +1,902 @@
-..  Copyright (C)  Jeffrey Elkner, Allen B. Downey and Chris Meyers.
+..  Copyright (C)  Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers.
     Permission is granted to copy, distribute and/or modify this document
     under the terms of the GNU Free Documentation License, Version 1.3
     or any later version published by the Free Software Foundation;
-    with Invariant Sections being Foreward, Preface, and Contributor List, no
+    with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-Functions
-=========
-
-.. index::
-    single: function
-    single: function definition
-    single: definition; function
-
-Definitions and use
--------------------
-
-In the context of programming, a **function** is a named sequence of statements
-that performs a desired operation. This operation is specified in a **function
-definition**. In Python, the syntax for a function definition is:
-
-.. sourcecode:: python
+.. |rle_start| image:: illustrations/rle_start.png
+   
+.. |rle_end| image:: illustrations/rle_end.png
+ 
+.. |rle_open| image:: illustrations/rle_open.png
+   
+.. |rle_close| image:: illustrations/rle_close.png    
+ 
+|
     
-    def NAME( LIST OF PARAMETERS ):
-        STATEMENTS
+Strings
+=======
 
-You can make up any names you want for the functions you create, except that
-you can't use a name that is a Python keyword. The list of parameters specifies
-what information, if any, you have to provide in order to use the new function.
+.. index:: compound data types, character, subscript operator, index
 
-There can be any number of statements inside the function, but they have to be
-indented from the ``def``. In the examples in this book, we will use the
-standard indentation of four spaces. Function definitions are the first of
-several **compound statements** we will see, all of which have the same
-pattern:
+A compound data type
+--------------------
 
-#. A **header**, which begins with a keyword and ends with a colon.
-#. A **body** consisting of one or more Python statements, each
-   indented the same amount -- *4 spaces is the Python standard* -- from
-   the header.
+So far we have seen built-in types like: ``int``, ``float``, 
+``bool``, ``str`` and we've seen lists. 
+Strings and lists are qualitatively different from the others because they
+are made up of smaller pieces.  In the case of strings, they're made up of smaller
+strings each containing one **character**.  
 
-In a function definition, the keyword in the header is ``def``, which is
-followed by the name of the function and a list of *parameters* enclosed in
-parentheses. The parameter list may be empty, or it may contain any number of
-parameters. In either case, the parentheses are required.
+Types that comprise smaller pieces are called **compound data types**.
+Depending on what we are doing, we may want to treat a compound data type as a
+single thing, or we may want to access its parts. This ambiguity is useful.
 
-The first couple of functions we are going to write have no parameters, so the
-syntax looks like this:
+Working with strings as single things
+-------------------------------------
 
-.. sourcecode:: python
+We previously saw that each turtle instance has its own attributes and 
+a number of methods that can be applied to the instance.  For example,
+we wrote ``tess.turn(90)``.  
+
+Strings are also objects.  Each string instance has its own attributes and methods.  
+
+For example::
+
+    >>> ss = "Hello, World!"
+    >>> tt = ss.upper()
+    >>> tt
+    'HELLO, WORLD'
     
-    def new_line():
-        print          # a print statement with no arguments prints a new line
+`upper` is a method that can be invoked on any string object 
+to create a new string, in which all the 
+characters are in uppercase.  (The original string `ss` remains unchanged.)
 
-This function is named ``new_line``. The empty parentheses indicate that it has
-no parameters. Its body contains only a single statement, which outputs a
-newline character. (That's what happens when you use a ``print`` command
-without any arguments.)
+There are also methods like `lower`, `capitalize`, and `swapcase` that do other interesting stuff.
 
-Defining a new function does not make the function run. To do that we need a
-**function call**. Function calls contain the name of the function being
-executed followed by a list of values, called *arguments*, which are assigned
-to the parameters in the function definition. Our first examples have an empty
-parameter list, so the function calls do not take any arguments. Notice,
-however, that the *parentheses are required in the function call*:
+To learn what methods are available, you can consult the Help documentation, look for 
+the ``string`` module, and read the documentation.  Or, if you're a bit lazier, 
+simply type the following into a PyScripter script::
 
-.. sourcecode:: python
+    ss = "Hello, World!"
+    tt = ss.
     
-    print "First Line."
-    new_line()
-    print "Second Line."
+When you type the period to select one of the methods of `ss`, PyScripter will pop up a 
+selection window showing all the methods (there are around 70 of them --- thank goodness we'll only
+use a few of those!) that could be used on your string. 
 
-The output of this program is:
+.. image::  illustrations/string_methods.png
+ 
+When you type the name of the method, some further help about it's parameter and return
+type, and its docstring, will be displayed.  This is a good example of a tool --- PyScripter ---
+using the meta-information --- the docstrings --- provided by the module programmers. 
 
-.. sourcecode:: python
-    
-    First line.
-    
-    Second line.
+.. image::  illustrations/swapcase.png
 
-The extra space between the two lines is a result of the ``new_line()``
-function call. What if we wanted more space between the lines? We could call
-the same function repeatedly:
-
-.. sourcecode:: python
-    
-    print "First Line."
-    new_line()
-    new_line()
-    new_line()
-    print "Second Line."
-
-Or we could write a new function named ``three_lines`` that prints three new
-lines:
-
-.. sourcecode:: python
-    
-    def three_lines():
-        new_line()
-        new_line()
-        new_line()
-    
-    print "First Line."
-    three_lines()
-    print "Second Line."
-
-This function contains three statements, all of which are indented by four
-spaces. Since the next statement is not indented, Python knows that it is not
-part of the function.
-
-You should notice a few things about this program:
-
-* You can call the same procedure repeatedly. In fact, it is quite common and
-  useful to do so.
-* You can have one function call another function; in this case ``three_lines`` 
-  calls ``new_line``.
-
-So far, it may not be clear why it is worth the trouble to create all of these
-new functions. Actually, there are a lot of reasons, but this example
-demonstrates two:
-
-#. Creating a new function gives you an opportunity to name a group of
-   statements. Functions can simplify a program by hiding a complex computation 
-   behind a single command and by using English words in place of arcane code.
-#. Creating a new function can make a program smaller by eliminating repetitive 
-   code. For example, a short way to print nine consecutive new lines is to
-   call ``three_lines`` three times.
-
-Pulling together the code fragments from the previous section into a script
-named ``tryme1.py``, the whole program looks like this:
-
-.. sourcecode:: python
-    
-    def new_line():
-        print
-    
-    def three_lines():
-        new_line()
-        new_line()
-        new_line()
-    
-    print "First Line."
-    three_lines()
-    print "Second Line."
-
-This program contains two function definitions: ``new_line`` and
-``three_lines``. Function definitions get executed just like other statements,
-but the effect is to create the new function. The statements inside the
-function do not get executed until the function is called, and the function
-definition generates no output.
-
-As you might expect, you have to create a function before you can execute it.
-In other words, the function definition has to be executed before the first
-time it is called.
-
-
-.. index:: flow of execution
-
-Flow of execution
------------------
-
-In order to ensure that a function is defined before its first use, you have to
-know the order in which statements are executed, which is called the **flow of
-execution**.
-
-Execution always begins at the first statement of the program.  Statements are
-executed one at a time, in order from top to bottom.
-
-Function definitions do not alter the flow of execution of the program, but
-remember that statements inside the function are not executed until the
-function is called. Although it is not common, you can define one function
-inside another. In this case, the inner definition isn't executed until the
-outer function is called.
-
-Function calls are like a detour in the flow of execution. Instead of going to
-the next statement, the flow jumps to the first line of the called function,
-executes all the statements there, and then comes back to pick up where it left
-off.
-
-That sounds simple enough, until you remember that one function can call
-another. While in the middle of one function, the program might have to execute
-the statements in another function. But while executing that new function, the
-program might have to execute yet another function!
-
-Fortunately, Python is adept at keeping track of where it is, so each time a
-function completes, the program picks up where it left off in the function that
-called it. When it gets to the end of the program, it terminates.
-
-What's the moral of this sordid tale? When you read a program, don't read from
-top to bottom. Instead, follow the flow of execution.
-
-
-.. index::
-    single: parameter
-    single: function; parameter
-    single: argument
-    single: function; argument
-    single: import
-    single: import statement
-
-Parameters, arguments, and the ``import`` statement
----------------------------------------------------
-
-Most functions require arguments, values that control how the function does its
-job. For example, if you want to find the absolute value of a number, you have
-to indicate what the number is. Python has a built-in function for computing
-the absolute value:
-
-.. sourcecode:: python
-    
-    >>> abs(5)
-    5
-    >>> abs(-5)
-    5
-
-In this example, the arguments to the ``abs`` function are 5 and -5.
-
-Some functions take more than one argument. For example the built-in function
-``pow`` takes two arguments, the base and the exponent. Inside the function,
-the values that are passed get assigned to variables called **parameters**.
-
-.. sourcecode:: python
-    
-    >>> pow(2, 3)
-    8
-    >>> pow(7, 4)
-    2401
-
-Another built-in function that takes more than one argument is ``max``.
-
-.. sourcecode:: python
-    
-    >>> max(7, 11)
-    11
-    >>> max(4, 1, 17, 2, 12)
-    17
-    >>> max(3 * 11, 5**3, 512 - 9, 1024**0)
-    503
-
-``max`` can be sent any number of arguments, separated by commas, and will
-return the maximum value sent. The arguments can be either simple values or
-expressions. In the last example, 503 is returned, since it is larger than 33,
-125, and 1.
-
-Here is an example of a user-defined function that has a parameter:
-
-.. sourcecode:: python
-    
-    def print_twice(param):
-        print param, param 
-
-This function takes a single **argument** and assigns it to the parameter named
-``param``. The value of the parameter (at this point we have no idea what it
-will be) is printed twice, followed by a newline.  The name ``param`` was
-chosen to reinforce the idea that it is a *parameter*, but in general, you will
-want to choose a name for your parameters that describes their use in the
-function.
-
-The interactive Python shell provides us with a convenient way to test our
-functions. We can use the **import statement** to bring the functions we have
-defined in a script into the interpreter session. To see how this works, assume
-the ``print_twice`` function is defined in a script named ``chap03.py``. We can
-now test it interactively by *importing* it into our Python shell session:
-
-.. sourcecode:: python
-    
-    >>> from chap03 import *
-    >>> print_twice('Spam')
-    Spam Spam
-    >>> print_twice(5)
-    5 5
-    >>> print_twice(3.14159)
-    3.14159 3.14159
-
-In a function call, the value of the argument is assigned to the corresponding
-parameter in the function definition. In effect, it is if ``param = 'Spam'`` is
-executed when ``print_twice('Spam')`` is called, ``param = 5`` in
-``print_twice(5)``, and ``param = 3.14159`` in ``print_twice(3.14159)``.
-
-Any type of argument that can be printed can be sent to ``print_twice`` In the
-first function call, the argument is a string. In the second, it's an integer.
-In the third, it's a ``float``.
-
-As with built-in functions, we can use an expression as an argument for
-``print_twice``:
-
-.. sourcecode:: python
-    
-    >>> print_twice('Spam' * 4)
-    SpamSpamSpamSpam SpamSpamSpamSpam
-
-``'Spam'*4`` is first evaluated to ``'SpamSpamSpamSpam'``, which is then
-passed as an argument to ``print_twice``.
-
-
-.. index::
-    single: composition
-    single: function; composition
-
-Composition
------------
-
-Just as with mathematical functions, Python functions can be **composed**,
-meaning that you use the result of one function as the input to another.
-
-.. sourcecode:: python
-    
-    >>> print_twice(abs(-7))
-    7 7
-    >>> print_twice(max(3, 1, abs(-11), 7))
-    11 11
-
-In the first example, ``abs(-7)`` evaluates to 7, which then becomes the
-argument to ``print_twice``. In the second example we have two levels of
-composition, since ``abs(-11)`` is first evaluated to 11 before ``max(3,
-1, 11, 7)`` is evaluated to 11 and ``print_twice(11)`` then displays the
-result.
-
-We can also use a variable as an argument:
-
-.. sourcecode:: python
-    
-    >>> sval = 'Eric, the half a bee.'
-    >>> print_twice(sval)
-    Eric, the half a bee. Eric, the half a bee.
-
-Notice something very important here. The name of the variable we pass as an
-argument (``sval``) has nothing to do with the name of the parameter
-(``param``).  Again, it is as if  ``param = sval`` is executed when
-``print_twice(sval)`` is called. It doesn't matter what the value was named in
-the caller, in ``print_twice`` it's name is ``param``.
-
-.. index::
-    single: local variable
-    single: variable; local
-
-Variables and parameters are local
+Working with the parts of a string
 ----------------------------------
 
-When you create a **local variable** inside a function, it only exists inside
-the function, and you cannot use it outside. For example:
+The **indexing operator** (Python uses square brackets to enclose the index) 
+selects a single character substring from a string:
 
 .. sourcecode:: python
     
-    def cat_twice(part1, part2):
-        cat = part1 + part2
-        print_twice(cat)
+    >>> fruit = "banana"
+    >>> m = fruit[1]
+    >>> print(m)
 
-This function takes two arguments, concatenates them, and then prints the
-result twice. We can call the function with two strings:
+The expression ``fruit[1]`` selects character number 1 from ``fruit``, and creates a new
+string containing just this one character. The variable ``m`` refers to the result. 
+When we display ``m``, we could get a surprise::
+
+    a
+
+For perverse reasons, computer scientists always start counting
+from zero. The letter at subscript position zero of ``"banana"`` is ``b``.  So at
+position ``[1]`` we have the letter ``a``.
+
+If you want the zero-eth letter of a string, you just put 0, or any expression
+with the value 0, in the brackets:
 
 .. sourcecode:: python
     
-    >>> chant1 = "Pie Jesu domine, "
-    >>> chant2 = "Dona eis requiem."
-    >>> cat_twice(chant1, chant2)
-    Pie Jesu domine, Dona eis requiem. Pie Jesu domine, Dona eis requiem.
+    >>> m = fruit[0]
+    >>> print(m)
+    b
 
-When ``cat_twice`` terminates, the variable ``cat`` is destroyed. If we
-try to print it, we get an error:
+The expression in brackets is called an **index**. An index specifies a member
+of an ordered collection, in this case the collection of characters in the string. The index
+*indicates* which one you want, hence the name. It can be any integer
+expression.
 
-.. sourcecode:: python
-    
-    >>> print cat
-    NameError: name 'cat' is not defined
+Note that indexing returns a *string* --- Python has no special type for a single character.
+It is just a string of length 1.
 
-Parameters are also local. For example, outside the function ``print_twice``,
-there is no such thing as ``param``. If you try to use it, Python will
-complain.
+We've also seen lists previously.  The same indexing notation works to extract elements from
+a list::
+
+    >>> prime_nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
+    >>> prime_nums[4]
+    11
+    >>> friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
+    >>> friends[3]
+    'Angelina'
 
 
 .. index::
-    single: stack diagram
-    single: function frame
-    single: frame
-    single: traceback
-    single: stack trace
+    single: len function
+    single: function; len
+    single: runtime error
+    single: negative index
+    single: index; negative
 
-Stack diagrams
---------------
+Length
+------
 
-To keep track of which variables can be used where, it is sometimes useful to
-draw a **stack diagram**. Like state diagrams, stack diagrams show the value of
-each variable, but they also show the function to which each variable belongs.
-
-Each function is represented by a **frame**. A frame is a box with the name of
-a function beside it and the parameters and variables of the function inside
-it. The stack diagram for the previous example looks like this:
-
-.. image:: illustrations/stack.png
-   :alt: Stack diagram 
-
-The order of the stack shows the flow of execution. ``print_twice`` was called
-by ``cat_twice``, and ``cat_twice`` was called by ``__main__``, which is a
-special name for the topmost function. When you create a variable outside of
-any function, it belongs to ``__main__``.
-
-Each parameter refers to the same value as its corresponding argument.  So,
-``part1`` has the same value as ``chant1``, ``part2`` has the same value as
-``chant2``, and ``param`` has the same value as ``cat``.
-
-If an error occurs during a function call, Python prints the name of the
-function, and the name of the function that called it, and the name of the
-function that called *that*, all the way back to the top most function.
-
-To see how this works, create a Python script named ``tryme2.py`` that looks
-like this:
+The ``len`` function, when applied to a string, returns the number of characters in a string:
 
 .. sourcecode:: python
     
-    def print_twice(param):
-        print param, param 
-        print cat
-    
-    def cat_twice(part1, part2):
-        cat = part1 + part2
-        print_twice(cat)
-    
-    chant1 = "Pie Jesu domine, "
-    chant2 = "Dona eis requim."
-    cat_twice(chant1, chant2)
+    >>> fruit = "banana"
+    >>> len(fruit)
+    6
 
-We've added the statement, ``print cat`` inside the ``print_twice`` function,
-but ``cat`` is not defined there. Running this script will produce an error
-message like this:
+To get the last letter of a string, you might be tempted to try something like
+this:
 
 .. sourcecode:: python
     
-    Traceback (innermost last):
-      File "tryme2.py", line 11, in <module>
-        cat_twice(chant1, chant2)
-      File "tryme2.py", line 7, in cat_twice
-        print_twice(cat)
-      File "tryme2.py", line 3, in print_twice
-        print cat
-    NameError: global name 'cat' is not defined
+    sz = len(fruit)
+    last = fruit[sz]       # ERROR!
 
-This list of functions is called a **traceback**. It tells you what program
-file the error occurred in, and what line, and what functions were executing at
-the time. It also shows the line of code that caused the error.
+That won't work. It causes the runtime error
+``IndexError: string index out of range``. The reason is that there is no
+letter at index position 6 in ``"banana"``. 
+Since we started counting at zero, the six indexes are
+numbered 0 to 5. To get the last character, we have to subtract 1 from
+``length``:
 
-Notice the similarity between the traceback and the stack diagram.  It's not a
-coincidence. In fact, another common name for a traceback is a *stack trace*.
+.. sourcecode:: python
+    
+    sz = len(fruit)
+    last = fruit[sz-1]
+
+Alternatively, we can use **negative indices**, which count backward from the
+end of the string. The expression ``fruit[-1]`` yields the last letter,
+``fruit[-2]`` yields the second to last, and so on.
+
+As you might have guessed, indexing with a negative index also works like this for lists. 
+
+.. index:: traversal, for loop, concatenation, abecedarian series
+
+.. index::
+    single: McCloskey, Robert
+    single: Make Way for Ducklings    
+
+Traversal and the ``for`` loop
+------------------------------
+
+A lot of computations involve processing a string one character at a time.
+Often they start at the beginning, select each character in turn, do something
+to it, and continue until the end. This pattern of processing is called a
+**traversal**. One way to encode a traversal is with a ``while`` statement:
+
+.. sourcecode:: python
+    
+    ix = 0
+    while ix < len(fruit):
+        letter = fruit[ix]
+        print(letter)
+        ix += 1
+
+This loop traverses the string and displays each letter on a line by itself.
+The loop condition is ``ix < len(fruit)``, so when ``ix`` is equal to the
+length of the string, the condition is false, and the body of the loop is not
+executed. The last character accessed is the one with the index
+``len(fruit)-1``, which is the last character in the string.
+
+But we've previously seen how the ``for`` loop can easily iterate over lists: ``for``
+also works for strings:
+
+.. sourcecode:: python
+    
+    for c in fruit:
+        print(c)
+
+Each time through the loop, the next character in the string is assigned to the
+variable ``c``. The loop continues until no characters are left.
+
+The following example shows how to use concatenation and a ``for`` loop to
+generate an abecedarian series. Abecedarian refers to a series or list in which
+the elements appear in alphabetical order. For example, in Robert McCloskey's
+book *Make Way for Ducklings*, the names of the ducklings are Jack, Kack, Lack,
+Mack, Nack, Ouack, Pack, and Quack.  This loop outputs these names in order:
+
+.. sourcecode:: python
+    
+    prefixes = "JKLMNOPQ"
+    suffix = "ack"
+       
+    for p in prefixes:
+        print(p + suffix)
+
+The output of this program is::
+    
+    Jack
+    Kack
+    Lack
+    Mack
+    Nack
+    Oack
+    Pack
+    Qack
+
+
+Of course, that's not quite right because Ouack and Quack are misspelled.
+You'll fix this as an exercise below.
+
+
+.. index:: slice, string slice
+
+Slices
+------
+
+A substring of a string (or a list) is called a **slice**. Selecting a slice is similar to
+selecting a character:
+
+.. sourcecode:: python
+    
+    >>> s = "Peter, Paul, and Mary"
+    >>> print(s[0:5])
+    Peter
+    >>> print(s[7:11])
+    Paul
+    >>> print(s[17:21])
+    Mary
+    >>> friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
+    >>> print(friends[2:4])
+    ['Brad', 'Angelina']
+
+The operator ``[n:m]`` returns the part of the string from the n'th character
+to the m'th character, including the first but excluding the last. This
+behavior is counter-intuitive; it makes more sense if you imagine the indices
+pointing *between* the characters, as in the following diagram:
+
+.. image:: illustrations/banana.png
+   :alt: 'banana' string
+
+If you omit the first index (before the colon), the slice starts at the
+beginning of the string. If you omit the second index, the slice goes to the
+end of the string. Thus:
+
+.. sourcecode:: python
+    
+    >>> fruit = "banana"
+    >>> fruit[:3]
+    'ban'
+    >>> fruit[3:]
+    'ana'
+
+What do you think ``s[:]`` means?   What about ``friends[4:]``? 
+
+
+.. index:: string comparison, comparison of strings
+
+String comparison
+-----------------
+
+The comparison operators work on strings. To see if two strings are equal:
+
+.. sourcecode:: python
+    
+    if word == "banana":
+        print("Yes, we have no bananas!")
+
+Other comparison operations are useful for putting words in
+`lexigraphical order <http://en.wikipedia.org/wiki/Lexicographic_order>`__:
+
+.. sourcecode:: python
+    
+    if word < "banana":
+        print("Your word, " + word + ", comes before banana.")
+    elif word > "banana":
+        print("Your word, " + word + ", comes after banana.")
+    else:
+        print("Yes, we have no bananas!")
+
+This is similar to the alphabetical order you would use with a dictionary,
+except that all the uppercase letters come before all the lowercase letters. As
+a result:
+
+.. sourcecode:: python
+    
+    Your word, Zebra, comes before banana.
+
+A common way to address this problem is to convert strings to a standard
+format, such as all lowercase, before performing the comparison. A more
+difficult problem is making the program realize that zebras are not fruit.
+
+
+.. index:: mutable, immutable, runtime error
+
+Strings are immutable
+---------------------
+
+It is tempting to use the ``[]`` operator on the left side of an assignment,
+with the intention of changing a character in a string.  For example:
+
+.. sourcecode:: python
+    
+    greeting = "Hello, world!"
+    greeting[0] = 'J'            # ERROR!
+    print(greeting)
+
+Instead of producing the output ``Jello, world!``, this code produces the
+runtime error ``TypeError: 'str' object does not support item assignment``.
+
+Strings are **immutable**, which means you can't change an existing string. The
+best you can do is create a new string that is a variation on the original:
+
+.. sourcecode:: python
+    
+    greeting = "Hello, world!"
+    newGreeting = 'J' + greeting[1:]
+    print(newGreeting)
+
+The solution here is to concatenate a new first letter onto a slice of
+``greeting``. This operation has no effect on the original string.
+
+
+.. index::
+    single: in
+    single: in operator
+    single: operator; in
+
+The ``in`` and ``not in`` operators
+-----------------------------------
+
+The ``in`` operator tests if one string is a substring of another:
+
+.. sourcecode:: python
+    
+    >>> 'p' in 'apple'
+    True
+    >>> 'i' in 'apple'
+    False
+    >>> 'ap' in 'apple'
+    True
+    >>> 'pa' in 'apple'
+    False
+
+Note that a string is a substring of itself, and the empty string is a 
+substring of any other string. (Also note that computer scientists 
+like to think about these edge cases quite carefully!) 
+
+.. sourcecode:: python
+    
+    >>> 'a' in 'a'
+    True
+    >>> 'apple' in 'apple'
+    True
+    >>> '' in 'a'
+    True
+    >>> '' in 'apple'
+    True
+    
+The ``not in`` operator returns the logical opposite results of ``in``::
+
+    >>> 'x' not in 'apple'
+    True
+
+Combining the ``in`` operator with string concatenation using ``+``, we can
+write a function that removes all the vowels from a string:
+
+.. sourcecode:: python
+    
+    def remove_vowels(s):
+        vowels = "aeiouAEIOU"
+        s_without_vowels = ""
+        for x in s:
+            if x not in vowels:
+                s_without_vowels += x
+        return s_without_vowels 
+       
+    test(remove_vowels("compsci"), "cmpsc")
+    test(remove_vowels("aAbEefIijOopUus"), "bfjps")
+
+
+
+.. index:: traversal, eureka traversal, pattern of computation,
+           computation pattern
+
+A ``find`` function
+-------------------
+
+What does the following function do?
+
+.. sourcecode:: python
+    
+    def find(strng, ch):
+        """
+          Find and return the index of ch in strng.  
+          Return -1 if ch does not occur in strng.
+        """
+        ix = 0
+        while ix < len(strng):
+            if strng[ix] == ch:
+                return ix
+            ix += 1
+        return -1
+        
+    test(find("Compsci", "p"), 3)
+    test(find("Compsci", "C"), 0)
+    test(find("Compsci", "i"), 6)
+    test(find("Compsci", "x"), -1)
+    
+
+In a sense, ``find`` is the opposite of the indexing operator. Instead of taking
+an index and extracting the corresponding character, it takes a character and
+finds the index where that character appears. If the character is not found,
+the function returns ``-1``.
+
+This is another example where we see a ``return`` statement inside a loop.
+If ``strng[ix] == ch``, the function returns immediately, breaking out of
+the loop prematurely.
+
+If the character doesn't appear in the string, then the program exits the loop
+normally and returns ``-1``.
+
+This pattern of computation is sometimes called a eureka traversal because as
+soon as we find what we are looking for, we can cry Eureka!  and stop looking.
+
+
+.. index:: counting pattern
+
+Looping and counting
+--------------------
+
+The following program counts the number of times the letter ``a`` appears in a
+string, and is another example of the counter pattern introduced in
+:ref:`counting`:
+
+.. sourcecode:: python
+    
+    def count_a(text): 
+        count = 0
+        for c in text:
+            if c == 'a':
+                count += 1
+        return(count)
+
+    test(count_a("banana"), 3)    
+
+.. index:: optional parameter, default value
+
+.. _optional_parameters:
+
+Optional parameters
+-------------------
+
+To find the locations of the second or third occurence of a character in a
+string, we can modify the ``find`` function, adding a third parameter for the
+starting postion in the search string:
+
+.. sourcecode:: python
+    
+    def find2(strng, ch, start):
+        ix = start 
+        while ix < len(strng):
+            if strng[ix] == ch:
+                return ix
+            ix += 1
+        return -1
+        
+    test(find2('banana', 'a', 2), 3)
+
+The call ``find2('banana', 'a', 2)`` now returns ``3``, the index of the first
+occurrence of 'a' in 'banana' after index 2. What does
+``find2('banana', 'n', 3)`` return? If you said, 4, there is a good chance you
+understand how ``find2`` works.
+
+Better still, we can combine ``find`` and ``find2`` using an
+**optional parameter**:
+
+.. sourcecode:: python
+    
+    def find(strng, ch, start=0):
+        ix = start 
+        while ix < len(strng):
+            if strng[ix] == ch:
+                return ix
+            ix += 1
+        return -1
+
+The call ``find('banana', 'a', 2)`` to this version of ``find`` behaves just
+like ``find2``, while in the call ``find('banana', 'a')``, ``start`` will be
+set to the **default value** of ``0``.
+
+Adding another optional parameter to ``find`` makes it search from a starting
+position, up to but not including the end position:
+
+.. sourcecode:: python
+    
+    def find(strng, ch, start=0, end=None):
+        ix = start 
+        if end == None:
+           end = len(strng)
+        while ix < end:
+            if strng[ix] == ch:
+                return ix
+            ix += 1 
+        return -1
+
+The optional value for ``end`` is interesting: we give it a default value ``None`` if the
+caller does not supply any argument.  In the body of the function we test what ``end`` is,
+and if the caller did not supply any argument, we reassign ``end`` to be the length of the string.
+If the caller has supplied an argument for ``end``, however, the caller's value will be used in the loop.
+
+The semantics of ``start`` and ``end`` in this function are precisely the same as they are in
+the ``range`` function.
+
+Here are some test cases that should pass:: 
+
+    ss = "Python strings have some interesting methods."
+    test(find(ss, 's'), 7)
+    test(find(ss, 's', 7), 7)
+    test(find(ss, 's', 8), 13)
+    test(find(ss, 's', 8, 13), -1)
+    test(find(ss, '.'), len(ss)-1)
+
+.. index:: module, string module, dir function, dot notation, function type,
+           docstring
+
+More ``string`` methods
+-----------------------
+ 
+Now that we've done all this work to write a powerful ``find`` function, we can let on that
+there is already a ``find`` method that works on strings, with precisely these same semantics::
+
+    test(ss.find('s'), 7)
+    test(ss.find('s', 7), 7)
+    test(ss.find('s', 8), 13)
+    test(ss.find('s', 8, 13), -1)
+    test(ss.find('.'), len(ss)-1)
+    
+Usually we'd prefer to use the methods that Python provides rather than reinvent
+our own equivalents. But many of the available built-in functions and methods make good
+teaching exercises, and the underlying techniques you learn are your building blocks
+to becoming a proficient programmer.
+
+The ``string`` module contains useful functions that manipulate strings.  As
+usual, we have to import the module before we can use it.  We
+can use the same trick as before: as we type the period, PyScripter will pop
+up a selection list of the available attributes that can be accessed directly
+through the module name (``string``).  Notice that these are different from
+the methods that are attached to each string instance.
+
+.. sourcecode:: python
+    
+    import string
+    ...
+    string.
+    
+Pops up these hints:
+
+.. image:: illustrations/string_members.png
+
+You will notice that there are different icons next to some items
+in the list.  Recall that objects can have *attributes* (e.g. the
+colour of a turtle's pen), and *methods* (functions that can be called
+on the object).  The icon alongside  ``capwords`` indicates that this
+is a method that can be called.  The icon alongside ``digits`` indicate
+that this is an attribute.  It's value can be used directly::
+
+    >>> string.digits
+    '0123456789'
+    >>> string.hexdigits
+    '0123456789abcdefABCDEF'
+    >>> string.capwords('the cat in the hat')
+    'The Cat In The Hat'
+    
+Actually, the built-in ``find`` method is more general than our version. It can find
+substrings, not just characters:
+
+.. sourcecode:: python
+    
+    >>> "banana".find("na")
+    2
+    >>> "banana".find("na", 3)
+    4
+
+
+.. index:: character classification, uppercase, lowercase, dot notation,
+           whitespace, string module, Python Library Reference
+
+Character classification
+------------------------
+
+It is often helpful to examine a character and test whether it is upper- or
+lowercase, or whether it is a character or a digit. The ``string`` module
+provides several constants that are useful for these purposes. One of these,
+``string.digits``, we have already seen.
+
+The string ``string.ascii_lowercase`` contains all of the ascii letters that the system
+considers to be lowercase. Similarly, ``string.ascii_uppercase`` contains all of the
+uppercase letters. ``string.punctuation`` comprises all the characters considered
+to be punctuation. Try the following and see what you get:
+
+.. sourcecode:: python
+    
+    print(string.ascii_lowercase)
+    print(string.ascii_uppercase)
+    print(string.digits)
+    print(string.punctuation)
+
+We can use these constants and their ``find`` methods to classify characters. For example, if
+``string.ascii_lowercase.find(ch)`` returns a value other than ``-1``, then ``ch`` must be
+lowercase:
+
+Another constant defined in the ``string`` module may surprise you when you
+print it:
+
+.. sourcecode:: python
+    
+    >>> print(string.whitespace)
+    
+**Whitespace** characters move the cursor without printing anything.  They
+create the white space between visible characters (at least on white paper).
+The constant ``string.whitespace`` contains all the whitespace characters,
+including space, tab (``\t``), and newline (``\n``).
+
+While we could use ``find`` and these constants, there are also string methods 
+that are much more convenient for classifing the string, for example::
+    
+    >>> "2".isdigit()
+    True
+    >>> "x".isprintable()
+    True
+    >>> "?".ispunctuation()
+    Traceback (most recent call last):
+    File "<interactive input>", line 1, in <module>
+    AttributeError: 'str' object has no attribute 'ispunctuation'
+
+Oops!  It seems they forgot to create a method for the last one.  We'll need to do this one the long way.  
+So let's use these to remove all punction from a string, similar to our
+previous example where we removed all vowels::
+
+    import string
+        
+    def remove_punctuation(s):
+        s_without_punct = ""
+        for letter in s:
+            if letter not in string.punctuation:
+                s_without_punct += letter
+        return s_without_punct
+
+    test(remove_punctuation('"Well, I never did!", said Alice.'),
+                                "Well I never did said Alice")
+    test(remove_punctuation("Are you very, very, sure?"),
+                                 "Are you very very sure")
+                                 
+One of the most useful methods on strings is the ``split`` method:
+it splits a single multi-word string into a list of individual words, removing
+all the whitespace between them.  
+    
+    >>> ss = remove_punctuation('"Well, I never did!", said Alice.')
+    >>> wds = ss.split()
+    >>> wds
+    ['Well', 'I', 'never', 'did', 'said', 'Alice']
+
+There are other useful functions in the ``string`` module, and other
+methods on string instances, but this book isn't
+intended to be a reference manual. On the other hand, the *Python Library
+Reference* is. Along with a wealth of other documentation, it's available from
+the Python website, `http://www.python.org <http://www.python.org>`__.
+
+
+.. index:: string formating, operations on strings
+
+The format method for strings
+-----------------------------
+ 
+The easiest and most powerful way to format a string in Python 3 is to use the
+*format* method.  To see how this works, let's start with a few examples:
+
+.. sourcecode:: python
+    :linenos:
+    
+    s1 = "His name is {0}!".format("Arthur")
+    print(s1)
+
+    name = "Alice"
+    age = 10
+    s2 = "I am {0} and I am {1} years old.".format(name, age)
+    print(s2)
+
+    n1 = 4
+    n2 = 5
+    s3 = "2**10 = {0} and {1} * {2} = {3:f}".format(2**10, n1, n2, n1 * n2)
+    print(s3)
+    
+Running the script produces::
+
+    His name is Arthur!
+    I am Alice and I am 10 years old.
+    2**10 = 1024 and 4 * 5 = 20.000000
+
+The key idea is that one provides a *formatter string* which
+contains embedded *placeholder fields*, ``... {0} ... {1} ... {2} ...`` etc.
+The **format method** of a string uses the numbers as indexes into
+its arguments, and substitutes the appropriate argument into each
+placeholder fields.  
+
+Each of the placeholders can optionally contain an additional **format specification** ---
+it is always introduced by the ``:`` symbol.  This can control things like
+
+* whether the field is aligned left ``<``, centered ``^``, or right ``>``
+* the width allocated to the field within the result string (a number like ``10``)
+* the type of conversion (we'll initially only force conversion to float, ``f``, as we did in
+  line 11 of the code above, or perhaps we'll ask integer numbers to be converted to hexadecimal using ``x``)
+* if the type conversion is a float, you can also specify how many decimal places are wanted 
+  (typically, ``.2f`` is useful for working with currencies to two decimal places.)
+
+Let's do a few simple and common examples that should be enough for most needs.  If you need to
+do anything more esoteric, use *help* and read all the gory details.
+
+.. sourcecode:: python
+
+    n1 = "Paris"
+    n2 = "Whitney"
+    n3 = "Hilton"
+
+    print("The value of pi to three decimal places is {0:.3f}".format(3.1415926))
+    print("123456789 123456789 123456789 123456789 123456789 123456789")
+    print("|||{0:<15}|||{1:^15}|||{2:>15}|||Born in {3}|||".format(n1,n2,n3,1981))
+    print("The decimal value {0} converts to hex value {0:x}".format(123456))
+
+This script produces the output::
+
+    The value of pi to three decimal places is 3.142
+    123456789 123456789 123456789 123456789 123456789 123456789
+    |||Paris          |||    Whitney    |||         Hilton|||Born in 1981|||
+    The decimal value 123456 converts to hex value 1e240
+    
+You can have multiple placeholders indexing the
+same argument, or perhaps even have extra arguments that are not referenced
+at all:
+
+.. sourcecode:: python
+
+    letter = """
+    Dear {0} {2}.
+     {0}, I have an interesting money-making proposition for you!
+     If you deposit $10 million into my bank account I can double your money ...
+    """
+
+    print(letter.format("Paris", "Whitney", "Hilton"))
+    print(letter.format("Bill", "Henry", "Gates"))
+    
+This produces the following::
+
+    Dear Paris Hilton.
+         Paris, I have an interesting money-making proposition for you!
+         If you deposit $10 million into my bank account I can double your money ...
+
+    Dear Bill Gates.
+         Bill, I have an interesting money-making proposition for you!
+         If you deposit $10 million into my bank account I can double your money ...
+
+As you might expect, you'll get an index error if 
+your placeholders refer to arguments that you do not provide::
+
+    >>> "hello {3}".format("Dave")
+    Traceback (most recent call last):
+      File "<interactive input>", line 1, in <module>
+    IndexError: tuple index out of range
+    
+The following example illustrates the real utility of string formatting:
+
+.. sourcecode:: python
+    
+    print("i\ti**2\ti**3\ti**5\ti**10\ti**20")
+    for i in range(1, 11):
+        print(i, '\t', i**2, '\t', i**3, '\t', i**5, '\t', i**10, '\t', i**20)
+
+This program prints out a table of various powers of the numbers from 1 to 10.
+(This assumes that the tab width is 8.  You might see
+something even worse than this if you tab width is set to 4.)
+In its current form it relies on the tab character ( ``\t``) to align the
+columns of values, but this breaks down when the values in the table get larger
+than the tab width::
+    
+    i       i**2    i**3    i**5    i**10   i**20
+    1       1       1       1       1       1
+    2       4       8       32      1024    1048576
+    3       9       27      243     59049   3486784401
+    4       16      64      1024    1048576         1099511627776
+    5       25      125     3125    9765625         95367431640625
+    6       36      216     7776    60466176        3656158440062976
+    7       49      343     16807   282475249       79792266297612001
+    8       64      512     32768   1073741824      1152921504606846976
+    9       81      729     59049   3486784401      12157665459056928801
+    10      100     1000    100000  10000000000     100000000000000000000
+
+One possible solution would be to change the tab width, but the first column
+already has more space than it needs. The best solution would be to set the
+width of each column independently. As you may have guessed by now, string
+formatting provides the solution.  We can also right-justify each field:
+
+.. sourcecode:: python
+        
+    layout = "{0:>4}{1:>6}{2:>6}{3:>8}{4:>13}{5:>24}"
+
+    print(layout.format('i', 'i**2', 'i**3', 'i**5', 'i**10', 'i**20'))
+    for i in range(1, 11):
+        print(layout.format(i, i**2, i**3, i**5, i**10, i**20))
+ 
+
+Running this version produces the following output::
+    
+   i  i**2  i**3    i**5        i**10                   i**20
+   1     1     1       1            1                       1
+   2     4     8      32         1024                 1048576
+   3     9    27     243        59049              3486784401
+   4    16    64    1024      1048576           1099511627776
+   5    25   125    3125      9765625          95367431640625
+   6    36   216    7776     60466176        3656158440062976
+   7    49   343   16807    282475249       79792266297612001
+   8    64   512   32768   1073741824     1152921504606846976
+   9    81   729   59049   3486784401    12157665459056928801
+  10   100  1000  100000  10000000000   100000000000000000000
+
+
+Summary 
+------- 
+
+This chapter introduced a lot of new ideas.  The following summary 
+may prove helpful in remembering what you learned.
+
+.. glossary::
+
+    indexing (``[]``)
+        Access a single character in a string using its position (starting from
+        0).  Example: ``'This'[2]`` evaluates to ``'i'``.
+
+    length function (``len``)
+        Returns the number of characters in a string.  Example:
+        ``len('happy')`` evaluates to ``5``.
+
+    for loop traversal (``for``)
+        *Traversing* a string means accessing each character in the string, one
+        at a time.  For example, the following for loop:
+
+        .. sourcecode:: python
+
+            for ix in 'Example':
+                ...
+
+        executes the body of the loop 7 times with different values of `ix` each time.
+
+    slicing (``[:]``)
+        A *slice* is a substring of a string. Example: ``'bananas and
+        cream'[3:6]`` evaluates to ``ana`` (so does ``'bananas and
+        cream'[1:4]``).
+
+    string comparison (``>, <, >=, <=, ==, !=``)
+        The six common comparision operators work with strings, evaluating according to
+        `lexigraphical order
+        <http://en.wikipedia.org/wiki/Lexicographic_order>`__.  Examples:
+        ``'apple' < 'banana'`` evaluates to ``True``.  ``'Zeta' < 'Appricot'
+        evaluates to ``False``.  ``'Zebra' <= 'aardvark'`` evaluates to
+        ``True`` because all upper case letters precede lower case letters.
+
+    in and not in operator (``in``, ``not in``)
+        The ``in`` operator tests whether one string is contained
+        inside another string.  Examples: ``'heck' in "I'll be checking for
+        you."`` evaluates to ``True``.  ``'cheese' in "I'll be checking for
+        you."`` evaluates to ``False``.
 
 
 Glossary
@@ -450,170 +904,167 @@ Glossary
 
 .. glossary::
 
-    argument
-        A value provided to a function when the function is called. This value
-        is assigned to the corresponding parameter in the function.
+    compound data type
+        A data type in which the values are made up of components, or elements,
+        that are themselves values.
 
-    body
-        The second part of a compound statement. The body consists of a
-        sequence of statements all indented the same amount from the beginning
-        of the header.  The standard amount of indentation used within the
-        Python community is 4 spaces.
+    default value
+        The value given to an optional parameter if no argument for it is
+        provided in the function call.
 
-    compound statement
-        A statement that consists of two parts:
+    docstring
+        A string constant on the first line of a function or module definition
+        (and as we will see later, in class and method definitions as well).
+        Docstrings provide a convinient way to associate documentation with
+        code. Docstrings are also used by the ``doctest`` module for automated
+        testing.
 
-        #. header - which begins with a keyword determining the statement
-           type, and ends with a colon.
-        #. body - containing one or more statements indented the same amount
-           from the header.
+    dot notation
+        Use of the **dot operator**, ``.``, to access functions inside a
+        module, or to access methods and attributes of an object.
 
-        The syntax of a compound statement looks like this:
+    immutable
+        A compound data type whose elements can not be assigned new values.
 
-        .. sourcecode:: python
-        
-            keyword expression:
-                statement
-                statement ...
+    index
+        A variable or value used to select a member of an ordered collection, such as
+        a character from a string, or an element from a list.
 
-    flow of execution
-        The order in which statements are executed during a program run.
+    optional parameter
+        A parameter written in a function header with an assignment to a
+        default value which it will receive if no corresponding argument is
+        given for it in the function call.
 
-    frame
-        A box in a stack diagram that represents a function call. It contains
-        the local variables and parameters of the function.
+    slice
+        A part of a string (substring) specified by a range of indices. More
+        generally, a subsequence of any sequence type in Python can be created
+        using the slice operator (``sequence[start:stop]``).
 
-    function
-        A named sequence of statements that performs some useful operation.
-        Functions may or may not take parameters and may or may not produce a
-        result.
+    traverse
+        To iterate through the elements of a collection, performing a similar
+        operation on each.
 
-    function call
-        A statement that executes a function. It consists of the name of the
-        function followed by a list of arguments enclosed in parentheses.
-
-    function composition
-        Using the output from one function call as the input to another.
-
-    function definition
-        A statement that creates a new function, specifying its name,
-        parameters, and the statements it executes.
-
-    header
-        The first part of a compound statement. Headers begin with a keyword and
-        end with a colon (:)
-
-    import
-        A statement which permits functions and variables defined in a Python
-        script to be brought into the environment of another script or a
-        running Python shell.For example, assume the following is in a script
-        named ``tryme.py``:
-
-        .. sourcecode:: python
-        
-            def print_thrice(thing):
-                print thing, thing, thing
-        
-            n = 42
-            s = "And now for something completely different..."
-
-        Now begin a python shell from within the same directory where
-        ``tryme.py`` is located::
-
-            $ ls
-            tryme.py  
-            $ python
-            >>>
-
-        Three names are defined in ``tryme.py``: ``print_thrice``, ``n``, and
-        ``s``.  If we try to access any of these in the shell without first
-        importing, we get an error:
-
-        .. sourcecode:: python
-
-            >>> n
-            Traceback (most recent call last):
-              File "<stdin>", line 1, in <module> 
-            NameError: name 'n' is not defined
-            >>> print_thrice("ouch!")
-            Traceback (most recent call last):
-              File "<stdin>", line 1, in <module>
-            NameError: name 'print_thrice' is not defined
-
-        If we import everything from ``tryme.py``, however, we can use
-        everything defined in it:
-
-        .. sourcecode:: python
-        
-            >>> from tryme import *
-            >>> n
-            42
-            >>> s
-            'And now for something completely different...'
-            >>> print_thrice("Yipee!")
-            Yipee! Yipee! Yipee!
-            >>>
-
-        Note that you do not include the ``.py`` from the script name in the
-        import statement.
-
-    local variable
-        A variable defined inside a function. A local variable can only be used
-        inside its function.
-
-    parameter
-        A name used inside a function to refer to the value passed as an
-        argument.
-
-    stack diagram
-        A graphical representation of a stack of functions, their variables,
-        and the values to which they refer.
-
-    traceback
-        A list of the functions that are executing, printed when a runtime
-        error occurs. A traceback is also commonly refered to as a
-        *stack trace*, since it lists the functions in the order in which they
-        are stored in the
-        `runtime stack <http://en.wikipedia.org/wiki/Runtime_stack>`__.
+    whitespace
+        Any of the characters that move the cursor without printing visible
+        characters. The constant ``string.whitespace`` contains all the
+        white-space characters.
 
 
 Exercises
 ---------
 
-#. Using a text editor, create a Python script named ``tryme3.py`` .  Write a
-   function in this file called ``nine_lines`` that uses ``three_lines`` to
-   print nine blank lines. Now add a function named ``clear_screen`` that
-   prints out twenty-five blank lines. The last line of your program should be
-   a *call* to ``clear_screen``.
-#. Move the last line of ``tryme3.py`` to the top of the program, so the
-   *function call* to ``clear_screen`` appears before the *function
-   definition*.   Run the program and record what error message you get.  Can
-   you state a rule about *function definitions* and *function calls* which
-   describes where they can appear relative to each other in a program?
-#. Starting with a working version of ``tryme3.py`` , move the definition of
-   ``new_line`` after the definition of ``three_lines``. Record what happens
-   when you run this program. Now move the definition of ``new_line`` below a
-   call to ``three_lines()``. Explain how this is an example of the rule you
-   stated in the previous exercise.
-#. Fill in the *body* of the *function definition* for ``cat_n_times`` so that
-   it will print the string, s, n times:
+We suggest you create a single file containing the test scaffolding from our previous chapters,
+and put all functions that require tests into that file. 
+
+#. What is the result of each of the following::
+
+    >>> 'Python'[1]
+    >>> "Strings are sequences of characters."[5]
+    >>> len("wonderful")
+    >>> 'Mystery'[:4]
+    >>> 'p' in 'Pinapple'
+    >>> 'apple' in 'Pinapple'
+    >>> 'pear' not in 'Pinapple'
+    >>> 'apple' > 'pinapple'
+    >>> 'pinapple' < 'Peach'
+    
+#. Modify:
 
    .. sourcecode:: python
     
-       def cat_n_times(s, n):
-           <fill in your code here> 
+       prefixes = "JKLMNOPQ"
+       suffix = "ack"
+       
+       for letter in prefixes:
+           print(letter + suffix)
 
-   Save this function in a script named ``import_test.py``. Now at a unix
-   prompt, make sure you are in the same directory where the
-   ``import_test.py`` is located ( ``ls`` should show ``import_test.py``).
-   Start a Python shell and try the following:
+   so that ``Ouack`` and ``Quack`` are spelled correctly.
+   
+#. Encapsulate
 
    .. sourcecode:: python
     
-        >>> from import_test import *
-        >>> cat_n_times('Spam', 7)
-        SpamSpamSpamSpamSpamSpamSpam
+       fruit = "banana"
+       count = 0
+       for char in fruit:
+           if char == 'a':
+               count += 1
+       print(count)
 
-   If all is well, your session should work the same as this one.  Experiment
-   with other calls to ``cat_n_times`` until you feel comfortable with how it
-   works.
+   in a function named ``count_letters``, and generalize it so that it accepts
+   the string and the letter as arguments.  Make the function return the number
+   of characters, rather than print the answer.  The caller should do the printing.
+     
+#. Now rewrite the ``count_letters`` function so that instead of traversing the 
+   string, it repeatedly calls the ``find`` method, with the optional third parameter 
+   to locate new occurences of the letter being counted.
+   
+#. Assign to a variable in your program a triple-quoted string that contains 
+   your favourite paragraph of text - perhaps a poem, a speech, instructions
+   to bake a cake, some inspirational verses, etc.
+
+   Write a function which removes all punctuation from string, breaks the string
+   into a list of words, and counts the number of words in your text that contain
+   the letter 'e'.  Your program should print an analysis of the text like this::
+
+       Your text contains 243 words, of which 109 (44.8%) contain an 'e'.      
+
+#. Print out a neatly formatted multiplication table, up to 12 x 12.
+
+#. Write a function that reverses its string argument, and satisfies these tests::
+
+      test(reverse('happy'), 'yppah')
+      test(reverse('Python'), 'nohtyP')
+      test(reverse(''), '')
+      test(reverse('a'), 'a')
+   
+#. Write a function that mirrors its argument:: 
+
+       test(mirror('good'), 'gooddoog')
+       test(mirror('Python'), 'PythonnohtyP')
+       test(mirror(''), '')
+       test(mirror('a'), 'aa')
+
+#. Write a function that removes all occurrences of a given letter from a string::
+    
+        test(remove_letter('a', 'apple'), 'pple')
+        test(remove_letter('a', 'banana'), 'bnn')
+        test(remove_letter('z', 'banana'), 'banana')
+        test(remove_letter('i', 'Mississippi'), 'Msssspp')
+        test(remove_letter('b', ''), '')
+        test(remove_letter('b', 'c'), '')
+
+#. Write a function that recognizes palindromes. (Hint: use your ``reverse`` function to make this easy!)::
+
+       test(is_palindrome('abba'), True)
+       test(is_palindrome('abab'), False)
+       test(is_palindrome('tenet'), True)
+       test(is_palindrome('banana'), False)
+       test(is_palindrome('straw warts'), True)
+       test(is_palindrome('a'), True)
+       test(is_palindrome(''), ??)    # Is an empty string a palindrome?
+
+#. Write a function that counts how many times a substring occurs in a string::  
+   
+       test(count('is', 'Mississippi'), 2)
+       test(count('an', 'banana'), 2)
+       test(count('ana', 'banana'), 2)
+       test(count('nana', 'banana'), 1)
+       test(count('nanan', 'banana'), 0)
+       test(count('aaa', 'aaaaaa'), 4)
+   
+#. Write a function that removes the first occurrence of a string from another string::
+
+        test(remove('an', 'banana'), 'bana')
+        test(remove('cyc', 'bicycle'), 'bile')
+        test(remove('iss', 'Mississippi'), 'Missippi')
+        test(remove('egg', 'bicycle'), 'bicycle')
+ 
+#. Write a function that removes all occurrences of a string from another string::
+ 
+        test(remove_all('an', 'banana'), 'ba')
+        test(remove_all('cyc', 'bicycle'), 'bile')
+        test(remove_all('iss', 'Mississippi'), 'Mippi')
+        test(remove_all('eggs', 'bicycle'), 'bicycle')
+
+  
