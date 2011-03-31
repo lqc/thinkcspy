@@ -1366,7 +1366,7 @@ Exercises
 
    .. sourcecode:: python
     
-       def scalar_mult(n, m):
+       def scalar_mult(s, m):
            """
              >>> a = [[1, 2], [3, 4]]
              >>> scalar_mult(3, a)

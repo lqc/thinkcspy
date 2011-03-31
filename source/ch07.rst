@@ -270,8 +270,8 @@ best you can do is create a new string that is a variation on the original:
 .. sourcecode:: python
     
     greeting = "Hello, world!"
-    newGreeting = 'J' + greeting[1:]
-    print newGreeting
+    new_greeting = 'J' + greeting[1:]
+    print new_greeting
 
 The solution here is to concatenate a new first letter onto a slice of
 ``greeting``. This operation has no effect on the original string.
