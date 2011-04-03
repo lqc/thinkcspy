@@ -330,7 +330,7 @@ Notice something very important here. The name of the variable we pass as an
 argument (``sval``) has nothing to do with the name of the parameter
 (``param``).  Again, it is as if  ``param = sval`` is executed when
 ``print_twice(sval)`` is called. It doesn't matter what the value was named in
-the caller, in ``print_twice`` it's name is ``param``.
+the caller, in ``print_twice`` its name is ``param``.
 
 .. index::
     single: local variable
