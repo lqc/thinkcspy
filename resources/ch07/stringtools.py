@@ -92,28 +92,36 @@ def count(sub, s):
 
 def remove(sub, s):
     """
-    """
-    """
       >>> remove('an', 'banana')
       'bana'
       >>> remove('cyc', 'bicycle')
       'bile'
       >>> remove('iss', 'Mississippi')
-      'Mippi'
+      'Missippi'
+      >>> remove('egg', 'bicycle')
+      'bicycle'
     """
+    index = string.find(s, sub)
+    if index != -1:
+        return s[:index] + s[index+len(sub):]
+    return s
 
 
 def remove_all(sub, s):
     """
-    """
-    """
-      >>> remove('an', 'banana')
+      >>> remove_all('an', 'banana')
       'ba'
-      >>> remove('cyc', 'bicycle')
+      >>> remove_all('cyc', 'bicycle')
       'bile'
-      >>> remove('iss', 'Mississippi')
+      >>> remove_all('iss', 'Mississippi')
       'Mippi'
+      >>> remove_all('eggs', 'bicycle')
+      'bicycle'
     """
+    ns = remove(sub, s)
+    while ns != remove(sub, ns):
+        ns = remove(sub, ns)
+    return ns
 
 
 if __name__ == '__main__':
