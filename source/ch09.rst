@@ -47,9 +47,9 @@ boolean expression:
 .. sourcecode:: python
     
     >>> if []:
-    ...    print 'This is true."
+    ...    print 'This is true.'
     ... else:
-    ...    print 'This is false."
+    ...    print 'This is false.'
     ...
     This is false.
     >>>
