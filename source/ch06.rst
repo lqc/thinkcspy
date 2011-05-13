@@ -129,10 +129,16 @@ empty string:
         for wd in xs:
             if len(wd) == 2:
                return wd
-        return ""
+        return ''
 
-    test(find_first_2_letter_word(["This",  "is", "a", "dead", "parrot"]), "is")   
-    test(find_first_2_letter_word(["I",  "like",  "cheese"]), "")     
+.. sourcecode:: python
+    
+    >>> print(absolute_value(0))
+    None        
+    >>> find_first_2_letter_word(['This',  'is', 'a', 'dead', 'parrot'])
+    'is'    
+    >>> find_first_2_letter_word(["I",  "like",  "cheese"]) 
+    ''    
 
 Single-step through this code and convince yourself that in the first test case
 that we've provided, the function returns while processing the second element
@@ -450,7 +456,7 @@ easier is called **scaffolding**.
 A collection of tests for some code is called its **test suite**.  
 
 There are a few different preferred ways to do unit testing in Python --- 
-but at this stage we're going to ignore what the Python community ususally does, 
+but at this stage we're going to ignore what the Python community usually does, 
 and we're going to start with two functions that we'll write ourselves.
 We'll use these for writing our unit tests.
 
@@ -647,7 +653,7 @@ After completing each exercise, confirm that all the tests pass.
    ``a == b``, and ``-1`` if ``a < b`` ::
     
        test(compare(5, 4), 1)
-       test(compare(7, 7, 0)
+       test(compare(7, 7), 0)
        test(compare(2, 3), -1)
        test(compare(42, 1), 1)
 
@@ -735,5 +741,5 @@ After completing each exercise, confirm that all the tests pass.
         test(c2f(-40), -40)
         test(c2f(12), 54)
         test(c2f(18), 64)
-        test(c2f(-48) -54)
+        test(c2f(-48), -54)
 
