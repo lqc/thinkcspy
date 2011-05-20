@@ -259,7 +259,7 @@ The 3n + 1 sequence
 Let's look at a simple sequence that has fascinated and foxed mathematicians for many years.
 They still cannot answer even quite simple questions about this.  
 
-The rule is to atart from
+The rule is to start from
 some given ``n``, and to generate
 the next term of the sequence from ``n``, either by halving ``n``, 
 (whenever ``n`` is even), or else by multiplying it by three and adding 1.  The sequence
@@ -429,7 +429,7 @@ integer:
 
     def num_digits(n):
         count = 0
-        while n > 0:
+        while n != 0:
             count = count + 1
             n = n // 10
         return count
@@ -460,13 +460,10 @@ before incrementing the counter will do the trick:
 
 Confirm that ``test(num_zero_and_five_digits(1055030250), 7)`` passes.
 
-Notice, however, that some of the tests below fail. Explain why.  Do you think this is a bug in
-the code, or a bug in the specifications, our expectations, or the tests? ::
+Notice, however, that ``test(num_digits(0), 1)`` fails.  Explain why.  Do you think this is a bug in
+the code, or a bug in the specifications, our expectations, or the tests?  
 
-    test(num_digits(1055030250), 10)
-    test(num_digits(0050), 4)
-    test(num_digits(0), 1)
-
+    
 .. index:: abbreviated assignment    
     
 Abbreviated assignment
@@ -1057,7 +1054,7 @@ enough to the previous one, we can write a function for computing the square roo
     def sqrt(n):
         approx = n/2.0
         better = (approx + n/approx)/2.0
-        while  better !=  approx):
+        while  better != approx:
             approx = better
             better = (approx + n/approx)/2.0
         return approx
@@ -1353,7 +1350,7 @@ these building blocks.
            # This is all dummy code right at the moment...
            import random                # see ch 10 for details 
            rng = random.Random()
-           result = rnd.randrange(-1,2) # pick a random result.
+           result = rng.randrange(-1,2) # pick a random result.
            print("Human plays first={0},  winner={1} ".format(human_plays_first, result))
            return result
            
