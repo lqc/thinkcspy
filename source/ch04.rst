@@ -89,7 +89,7 @@ of this "building block":
 
     alex = turtle.Turtle()            # create alex
     draw_square(alex, 50)             # Call the function to draw the square
-    wn.exitonclick()
+    wn.mainloop()
 
         
 .. image:: illustrations/alex04.png 
@@ -155,7 +155,7 @@ function a little, and we get tess to draw 15 squares, with some variations.
         tess.forward(10)             # move tess along a little
         tess.right(18)               # and give her some extra turn
 
-    wn.exitonclick()
+    wn.mainloop()
 
 .. image:: illustrations/tess05.png 
 

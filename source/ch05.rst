@@ -533,7 +533,7 @@ And now we'll add two lines to fill each bar.  Our final program now looks like 
     for a in xs:
          draw_bar(tess, a)
 
-    wn.exitonclick()
+    wn.mainloop()
 
 It produces the following, which is more satisfying:
 

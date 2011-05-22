@@ -59,7 +59,7 @@ name if you follow the naming rules from the previous chapter).
     alex.left(90)                    # turn by 90 degrees
     alex.forward(30)                 # complete the second side of a rectangle
 
-    wn.exitonclick()                 # Wait for a mouseclick, then exit
+    wn.mainloop()                    # Leave the window active, until the user closes it
     
 When we run this program, a new window pops up:
 
@@ -86,10 +86,9 @@ do this by **invoking**, or activating, alex's **methods** --- these are
 the instructions that all turtles know how to respond to.
 
 The last line plays a part too: the `wn` variable refers to
-the window shown above. When we invoke its `exitonclick` method, it pauses
-the execution of the program, and waits for the user to click the mouse in
-somewhere the window.  When this click event occurs, the response is to close the 
-turtle window and exit (stop execution of) the Python program.   
+the window shown above. When we invoke its `mainloop` method, it enters
+a state where it waits for events (like keypresses, or mouse movement and clicks).
+The program will terminate when the user closes the window.  
     
 An object can have various methods --- things it can do --- and it can also have
 **attributes** --- (sometimes called *properties*).  For example, each turtle has
@@ -123,7 +122,7 @@ variable name for this turtle):
     tess.left(120)
     tess.forward(50)
 
-    wn.exitonclick()
+    wn.mainloop()
   
 When we run this program, this new window pops up, and will remain on the 
 screen until we click on it.
@@ -190,7 +189,7 @@ what happens when alex completes his rectangle, and tess completes her triangle:
     alex.forward(50)
     alex.left(90)
 
-    wn.exitonclick()
+    wn.mainloop()
 
 .. image:: illustrations/tess03.png  
   
@@ -423,7 +422,7 @@ Let's do an example that shows off some of these new features:
        tess.forward(size)          # move tess along  
        tess.right(24)              # and turn her
 
-   wn.exitonclick()
+   wn.mainloop()
    
 .. image:: illustrations/tess07.png   
 
@@ -472,8 +471,8 @@ Glossary
     invoke
         An object has methods.  We use the verb invoke to mean *activate the
         method*.  Invoking a method is done by putting parentheses after the method
-        name, with some possible arguments.  So  ``wn.exitonclick()`` is an invocation
-        of the ``exitonclick`` method.  
+        name, with some possible arguments.  So  ``tess.forward()`` is an invocation
+        of the ``forward`` method.  
          
     module
         A file containing Python definitions and statements intended for use in other 
