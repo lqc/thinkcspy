@@ -48,20 +48,10 @@ turtle and start drawing a rectangle. (We'll call the variable that
 refers to our first turtle `alex`, but you can choose another 
 name if you follow the naming rules from the previous chapter).
 
-.. sourcecode:: python
+.. literalinclude:: resources/ch03/alex_01.py
    :linenos:
-
-    import turtle                    # allows us to use turtles
-    wn = turtle.Screen()             # creates a playground for turtles
-    alex = turtle.Turtle()           # create a turtle, assign to alex
-
-    alex.forward(50)                 # tell alex to move forward by 50 units
-    alex.left(90)                    # turn by 90 degrees
-    alex.forward(30)                 # complete the second side of a rectangle
-
-    wn.mainloop()                    # Leave the window active, until the user closes it
     
-When we run this program, a new window pops up:
+When we run this program (which we've called :download:`alex_01.py <resources/ch03/alex_01.py>`), a new window pops up:
 
 .. image:: illustrations/tess01.png  
     
@@ -103,29 +93,20 @@ some text in the title bar, and a size and position on the screen.  These are al
 part of the state of the window object. 
 
 Quite a number of methods exist that allow us to modify the turtle and the
-window objects.  We'll just show a couple. We've only commented those
+window objects.  We'll just show a couple. In this program :download:`tess_02.py <resources/ch03/alex_01.py>` we've only commented those
 lines that are different from the previous example (and we've used a different
 variable name for this turtle):
     
+.. literalinclude:: resources/ch03/tess_02.py
+   :linenos:
+
+    
 .. sourcecode:: python
     
-    import turtle
-    wn = turtle.Screen()
-    wn.bgcolor("lightgreen")         # set the window background colour
-    wn.title("Hello, Tess!")         # set the window title
 
-    tess = turtle.Turtle()
-    tess.color("blue")               # make tess blue
-    tess.pensize(3)                  # set the width of her pen
-
-    tess.forward(50)
-    tess.left(120)
-    tess.forward(50)
-
-    wn.mainloop()
   
 When we run this program, this new window pops up, and will remain on the 
-screen until we click on it.
+screen until we close it.
 
 .. image:: illustrations/tess02.png 
 
@@ -153,43 +134,13 @@ Instances --- a herd of turtles
 Just like we can have many different integers in a program, we can have many turtles.
 Each of them is called an **instance**.  Each instance has its own attributes and 
 methods --- so alex might draw with a thin black pen and be at some position,
-while tess might be going in her own direction with a fat pink pen.  So here is
-what happens when alex completes his rectangle, and tess completes her triangle:
+while tess might be going in her own direction with a fat pink pen.  Our program is 
+:download:`tess_n_alex.py <resources/ch03/tess_n_alex.py>`:  
 
-.. sourcecode:: python
+.. literalinclude:: resources/ch03/tess_n_alex.py
    :linenos:
 
-    import turtle
-    wn = turtle.Screen()             # Set up the window and its attributes
-    wn.bgcolor("lightgreen")
-    wn.title("Tess & Alex")
-
-    tess = turtle.Turtle()           # create tess and set some attributes
-    tess.color("hotpink")
-    tess.pensize(5)
-
-    alex = turtle.Turtle()           # create alex
-
-    tess.forward(80)                 # Let tess draw an equilateral triangle
-    tess.left(120)
-    tess.forward(80)
-    tess.left(120)
-    tess.forward(80)
-    tess.left(120)                   # complete the triangle
-
-    tess.right(180)                  # turn tess around
-    tess.forward(80)                 # and move her away from the origin
- 
-    alex.forward(50)                 # make alex draw a square
-    alex.left(90)
-    alex.forward(50)
-    alex.left(90)
-    alex.forward(50)
-    alex.left(90)
-    alex.forward(50)
-    alex.left(90)
-
-    wn.mainloop()
+Here is what happens when alex completes his rectangle, and tess completes her triangle:
 
 .. image:: illustrations/tess03.png  
   
@@ -237,25 +188,28 @@ quite know how to send email yet, so for the moment we'll just print a message f
 
     for f in ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]:
         invitation = "Hi " + f + ".  Please come to my party on Saturday!"
-        print(invitation) 
+        print(invitation)
+    # more code can follow here ...            
       
 
 When we run this, the output looks like this:
 
 .. image:: illustrations/partyInvite.png  
 
-* **f** in this ``for`` statement is called the **loop variable**.  
+* **f** in this ``for`` statement is called the **loop variable**.  We could have chosen another variable name instead.
 * Lines 2 and 3 are the **loop body**.  The loop body is always
-  indented. The indentation determines exactly what statements are "in the loop".
+  indented. The indentation determines exactly what statements are "in the body of the loop".
 * On each *iteration* or *pass* of the loop, first a check is done to see if there are 
   still more items to be processed.  If there are none left (this is called
   the **terminating condition** of the loop), the loop has finished.
-  Program execution continues at the next statement after the loop body. 
+  Program execution continues at the next statement after the loop body, (e.g. in this case
+  the next statement below the comment in line 4).  
 * If there are items still to be processed, the loop variable is updated to refer to the
   next item in the list.  This means, in this case, that the loop body is executed 
   here 7 times, and each time `f` will refer to a different friend. 
 * At the end of each execution of the body of the loop, Python returns 
-  to the ``for`` statement, to see if there are more items to be handled.
+  to the ``for`` statement, to see if there are more items to be handled, and to assign the
+  next one to `f`.
 
 .. index:: control flow, flow of execution
   
@@ -310,7 +264,7 @@ This does exactly the same, but using just three lines:
         # sets x to each of ... [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
    
 * Computer scientists like to count from 0!
-* ``range`` creates an object that can deliver a sequence of values to the ``for`` loop.
+* ``range`` can deliver a sequence of values to the loop variable in the ``for`` loop.
   They start at 0, and in these cases do not include the 4 or the 10. 
 * Our little trick earlier to make sure that alex did the final turn to complete
   360 degrees has paid off: if we had not done that, then we would not have been
@@ -402,33 +356,16 @@ A few more turtle methods and tricks
   and this will remain after the turtle has moved somewhere else. 
   Stamping works, even when the pen is up. 
     
-Let's do an example that shows off some of these new features:
+Let's do an example, :download:`tess_n_alex.py <resources/ch03/tess_n_alex.py>`, that shows off some of these new features:
 
-.. sourcecode:: python
+.. literalinclude:: resources/ch03/tess_spiral.py
    :linenos:
-   
-   import turtle
-   wn = turtle.Screen()             
-   wn.bgcolor("lightgreen")
-   tess = turtle.Turtle()            
-   tess.shape("turtle")
-   tess.color("blue")
-
-   tess.penup()                    # this is new
-   size = 20
-   for i in range(30):
-       tess.stamp()                # leave an impression on the canvas
-       size = size + 3             # increase the size on every iteration
-       tess.forward(size)          # move tess along  
-       tess.right(24)              # and turn her
-
-   wn.mainloop()
    
 .. image:: illustrations/tess07.png   
 
-Be careful now: all except one of the shapes you see on the screen here
+Be careful now!   How many times was the body of the loop executed?   How many turtle images do you see on the screen?  All except one of the shapes you see on the screen here
 are footprints created by ``stamp``.  But the program still only has *one* turtle
-instance --- can you figure out which one is the real tess?  (Hint: if you're not
+instance --- can you figure out which one here is the real tess?  (Hint: if you're not
 sure, write a new line of code after the ``for`` loop to change tess' colour,
 or to put her pen down and draw a line, or to change her shape, etc.)
    
@@ -457,11 +394,11 @@ Glossary
     
     loop variable
         A variable used as part of a for loop. It is assigned a different value on
-        each iteration of the loop, and is used as part of the terminating condition of the loop,
+        each iteration of the loop.
     
     instance
-        An object that belongs to a class.  `tess` and `alex` are different instances of
-        the class `Turtle` 
+        An object of a certain type, or class.  `tess` and `alex` are different instances of
+        the class `Turtle`.  
     
     method
         A function that is attached to an object.  Invoking or activating the method

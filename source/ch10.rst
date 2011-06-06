@@ -636,12 +636,12 @@ next newline character:
 
     
     >>> print(infile.readlines())
-    ['line two\012', 'line three\012']
+    ['line two\n', 'line three\n']
 
 
 In this case, the output is in list format, which means that the
 strings appear with quotation marks and the newline character appears
-as the escape sequence ``\\012``.
+at the end of each.
 
 At the end of the file, ``readline`` returns the empty string and
 ``readlines`` returns the empty list:
@@ -1057,7 +1057,7 @@ Exercises
 
     d. Try this::
     
-         d = calendar.LocalTextCalendar(6, "SPANISH")    # create an instance
+         d = calendar.LocaleTextCalendar(6, "SPANISH")    # create an instance
          d.pryear(2011)   
         
        Try a few other languages, including one that doesn't work, and see what happens.
@@ -1151,7 +1151,7 @@ Exercises
             
         test(myreplace(',', ';', 'this, that, and some other thing'),
                                  'this; that; and some other thing')
-        test(myreplace(' ', '**', 'Words will now      be  separated by stars.')
+        test(myreplace(' ', '**', 'Words will now      be  separated by stars.'),
                                   'Words**will**now**be**separated**by**stars.')
     
    Your solution should pass the tests.
@@ -1162,7 +1162,7 @@ Exercises
    
         test(cleanword('what?'),  'what')
         test(cleanword('"now!"'), 'now')
-        test(cleanword('?+="w-o-r-d!,@$()"''),  'word')
+        test(cleanword('?+="w-o-r-d!,@$()"'),  'word')
     
         test(has_dashdash('distance--but'), True)
         test(has_dashdash('several'), False)

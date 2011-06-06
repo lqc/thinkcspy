@@ -27,21 +27,21 @@ Conditionals
 The modulus operator
 --------------------
 
-The **modulus operator** works on integers (and integer expressions) and yields
-the remainder when the first operand is divided by the second. In Python, the
+The **modulus operator** works on integers (and integer expressions) and gives
+the remainder when the first number is divided by the second. In Python, the
 modulus operator is a percent sign (``%``). The syntax is the same as for other
 operators:
 
 .. sourcecode:: python
     
-    >>> quotient = 7 // 3     # This is the integer division operator
-    >>> print(quotient)
+    >>> q = 7 // 3     # This is integer division operator
+    >>> print(q)
     2
-    >>> remainder = 7 % 3
-    >>> print(remainder)
+    >>> r  = 7 % 3
+    >>> print(r)
     1
 
-So 7 divided by 3 is 2 with 1 left over.
+So 7 divided by 3 is 2 with a remainder of 1.
 
 The modulus operator turns out to be surprisingly useful. For example, you can
 check whether one number is divisible by another---if ``x % y`` is zero, then
@@ -80,10 +80,10 @@ Boolean values and expressions
 ------------------------------
 
 The Python type for storing true and false values is called ``bool``, named
-after the British mathematician, George Boole. George Boole created *Boolean
+after the British mathematician, George Boole. He created *Boolean
 algebra*, which is the basis of all modern computer arithmetic.
 
-There are only two **boolean values**: ``True`` and ``False``.  Capitalization
+There are only two boolean values, ``True`` and ``False``.  Capitalization
 is important, since ``true`` and ``false`` are not boolean values.
 
 .. sourcecode:: python
@@ -166,12 +166,15 @@ statement:
 .. sourcecode:: python
     
     if x % 2 == 0:
-        print(x, " is even")
+        print(x, " is even.")
+        print("Did you know that 2 is the only even number that is prime?")
     else:
-        print(x, " is odd")    
+        print(x, " is odd.") 
+        print("Did you know that multiplying two odd numbers always gives an odd result?")
+    
 
 The boolean expression after the ``if`` statement is called the **condition**.
-If it is true, then the indented statements get executed. If not, then the statements
+If it is true, then all the indented statements get executed. If not, then all the statements
 indented under the `else` clause get executed. 
 
 .. sidebar::  Flowchart of a **if** statement with an **else** 
@@ -232,7 +235,13 @@ executed, otherwise the flow of execution continues to the statement after the `
     
     if x < 0:
         print("The negative number ",  x, " is not valid here.")
+        x = 42
+        print("I've decided to use the number 42 instead.")
         
+    print("The square root of ", x, "is", math.sqrt(x))
+    
+In this case, the print function that outputs the square root is the one after the ``if`` - not
+because we left a blank line, but because of the way the code is indented.       
 
 .. admonition:: Python terminology
     
@@ -458,7 +467,7 @@ Here are a couple of new tricks for our turtles:
   ``alex.write("Hello")``.
 * One can fill a shape (circle, semicircle, triangle, etc.) with a fill colour.  It is a two-step process.
   First you call the method ``alex.begin_fill()``, then you draw the shape, then call ``alex.end_fill()``. 
-* We've previously set the color of our turtle - we can now also set it's fill-colour, which need not
+* We've previously set the color of our turtle - we can now also set it's fillcolour, which need not
   be the same as the turtle and the pen colour.  We use ``alex.color("blue","red")`` to set the turtle
   to draw in blue, and fill in red. 
   
@@ -480,7 +489,8 @@ Corresponding to each data measurement, we'll draw a simple rectangle of that he
         t.right(90)
         t.forward(height)        # And down again!
         t.left(90)               # put the turtle facing the way we found it.
-        
+        t.forward(10)            # leave small gap after each bar
+ 
     ...    
     for v in xs:                 # assume xs and tess are ready 
         draw_bar(tess, v)    
@@ -502,43 +512,17 @@ The result looks a lot better now:
 
 .. image:: illustrations/tess_bar_2.png
 
-And now we'll add two lines to fill each bar.  Our final program now looks like this:
+And now we'll add two lines to fill each bar.  Our final program, at :download:`tess_barchart.py <resources/ch05/tess_barchart.py>`, now looks like this:
 
-.. sourcecode:: python
-
-    import turtle
-
-    def draw_bar(t, height):
-        """ Get turtle t to draw one bar, of height. """
-        t.begin_fill()               # added this line
-        t.left(90)
-        t.forward(height)
-        t.write('  '+ str(height))
-        t.right(90)
-        t.forward(40)
-        t.right(90)
-        t.forward(height)
-        t.left(90)
-        t.end_fill()                 # added this line
-
-    wn = turtle.Screen()             # Set up the window and its attributes
-    wn.bgcolor("lightgreen")
-
-    tess = turtle.Turtle()           # create tess and set some attributes
-    tess.color("blue", "red")
-    tess.pensize(3)
-
-    xs = [48,117,200,240,160,260,220]
-
-    for a in xs:
-         draw_bar(tess, a)
-
-    wn.mainloop()
+.. literalinclude:: resources/ch05/tess_barchart.py
+   :linenos:
 
 It produces the following, which is more satisfying:
 
 .. image:: illustrations/tess_bar_3.png
 
+
+Mmm.  Perhaps the bars should not be joined to each other at the bottom.  We'll need to pick up the pen while making the gap between the bars.  We'll leave that as an exercise for you!
 
 Glossary
 --------
@@ -683,11 +667,11 @@ Exercises
     
     Test your function by printing the mark and the grade for all the elements in this list.
     
-#.  Modify the turtle bar chart program so that it leaves small gaps between each bar.
+#.  Modify the turtle bar chart program so that the pen is up for the small gaps between each bar.
 
 #.  Modify the turtle bar chart program so that the bar for any value 
-    of 200 or more is filled with red, values between [100 and 200) are filled yellow,
-    and bars representing values less than 100 are filled green.    
+    of 200 or more is filled with red, values between [100 and 200) are filled with yellow,
+    and bars representing values less than 100 are filled with green.    
   
 #.  In the turtle bar chart program, what do you expect to happen if one or more 
     of the data values in the list is negative?   Try it out.  Change the

@@ -304,15 +304,14 @@ they help the programmer document, or remember, what the variable is used for.
 .. caution::
    Beginners sometimes confuse "meaningful to the human readers" with "meaningful to the computer".
    So they'll wrongly think that because they've called some variable ``average`` or ``pi``, it will
-   somehow automagically calculate an average, or automagically associate the variable ``pi`` with 
-   the value 3.14159.  No! The computer doesn't attach semantic 
-   meaning to your variable names. 
-   
+   somehow magically calculate an average, or magically know that the variable ``pi`` should have a 
+   value like 3.14159.  No! The computer doesn't understand what you intend the variable to mean.
+    
    So you'll find some instructors who deliberately don't choose meaningful 
-   names when they teach beginners --- not because they don't think it is a good habit,
-   but because they're trying to reinforce the message that you, the programmer, have
-   to write some program code to calculate the average, or you must write an assignment 
-   statement to give a variable the value you want it to have.
+   names when they teach beginners --- not because we don't think it is a good habit,
+   but because we're trying to reinforce the message that you --- the programmer --- must
+   write the program code to calculate the average, and you must write an assignment 
+   statement to give the variable ``pi`` the value you want it to have.
 
 .. index:: statement
 
