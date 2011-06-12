@@ -192,7 +192,7 @@ work:
             self.y = y 
 
         def distance_from_origin(self):
-            return ((self.x ** 2) + (self.y ** 2) ** 0.5)
+            return ((self.x ** 2) + (self.y ** 2)) ** 0.5
 
 Let's create a few point instances, look at their attributes, and call our new
 method on them:
