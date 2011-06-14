@@ -351,7 +351,7 @@ For our *nested number list*, however, ``sum`` will not work:
     >>> 
 
 The problem is that the third element of this list, ``[11, 13]``, is itself a
-list, which can not be added to ``1``, ``2``, and ``8``.
+list, so it cannot just be added to ``1``, ``2``, and ``8``.
 
 .. index:: recursion, recursive call, base case, infinite recursion, recursion; infinite
 
@@ -428,11 +428,9 @@ we check to see whether this is the initializing (first) value for
 
 The two examples above each have a **base case** which does not lead to a
 recursive call: the case where the element is a number and not a list. Without
-a base case, you have **infinite recursion**, and your program will not work.
+a base case, you'll have **infinite recursion**, and your program will not work.
 Python stops after reaching a maximum recursion depth and returns a runtime
-error.
-
-Run this little script:
+error.   See how this happens, by running this little script which we will call `infinite_recursion.py`: 
 
 .. sourcecode:: python
     
@@ -445,26 +443,26 @@ Run this little script:
 After watching the messages flash by, you will be presented with the end of a
 long traceback that ends with a message like the following::
 
-    RuntimeError: maximum recursion depth exceeded
+    RuntimeError: maximum recursion depth exceeded ...
 
 We would certainly never want something like this to happen to a user of one of
 our programs, so before finishing the recursion discussion, let's see how
-errors like this are handled in Python.
+errors, any kinds of errors, are handled in Python.
 
 .. index:: exception, handling an exception, exception; handling, try ... except 
 
 Exceptions
 ----------
 
-Whenever a runtime error occurs, it creates an **exception**. The program stops
-running at this point and Python prints out the traceback, which ends with the
-exception that occured.
+Whenever a runtime error occurs, it creates an **exception** object. The program stops
+running at this point and Python prints out the traceback, which ends with a message
+describing the exception that occurred.
 
 For example, dividing by zero creates an exception:
 
 .. sourcecode:: python
     
-    >>> print 55/0
+    >>> print(55/0)
     Traceback (most recent call last):
       File "<interactive input>", line 1, in <module>
     ZeroDivisionError: integer division or modulo by zero
@@ -475,7 +473,7 @@ So does accessing a non-existent list item:
 .. sourcecode:: python
     
     >>> a = []
-    >>> print a[5]
+    >>> print(a[5])
     Traceback (most recent call last):
       File "<interactive input>", line 1, in <module>
     IndexError: list index out of range
@@ -507,7 +505,7 @@ to handle the exception:
     
     filename = input('Enter a file name: ')
     try:
-        f = open (filename, "r")
+        f = open (filename, 'r')
     except:
         print('There is no file named', filename)
 
@@ -520,7 +518,7 @@ The ``try`` statement executes and monitors the statements in the first block. I
 exceptions occur, it skips the block under the ``except`` clause. If any exception occurs,
 it executes the statements in the ``except`` clause and then continues.
 
-We can encapsulate this capability in a function: ``exists`` takes a filename
+We could encapsulate this capability in a function: ``exists`` which takes a filename
 and returns true if the file exists, false if it doesn't:
 
 .. sourcecode:: python
@@ -543,7 +541,7 @@ and returns true if the file exists, false if it doesn't:
     settings don't allow you to access the file.
 
     Python provides a module called ``os.path`` (this is the first
-    time we've seen a module name with two namespace components). It
+    time we've seen a dotted module name with two namespace components). It
     provides a number of useful functions to work with paths, files and directories,
     so you should check out the help.  
     
@@ -561,22 +559,30 @@ You can use multiple ``except`` clauses to handle different kinds of exceptions
 (see the `Errors and Exceptions <http://docs.python.org/tut/node10.html>`__
 lesson from Python creator Guido van Rossum's `Python Tutorial
 <http://docs.python.org/tut/tut.html>`__ for a more complete discussion of
-exceptions).
+exceptions).  So your program could do one thing if the file does not exist,
+but do something else if the file was in use by another program.
 
-If your program detects an error condition, you can make it **raise** an
+Can your program deliberately cause an exception?  
+If your program detects an error condition, you can **raise** an
 exception. Here is an example that gets input from the user and checks that the
-number is non-negative.
+number is non-negative:
 
 .. sourcecode:: python
+   :linenos:
     
     def get_age():
         age = int(input('Please enter your age: '))
         if age < 0:
             raise ValueError('{0} is not a valid age'.format(age))
         return age
+  
 
 The ``raise`` statement creates an exception object, in this case, a ValueError 
-object, which encapsulates your specific information about the error.   
+object, which encapsulates your specific information about the error. And it 
+immediately exits from the function, and its caller, and its caller, until it 
+encounters a ``try ... except`` that can handle the exception.   We call this 
+"unwinding the call stack".
+ 
 ``ValueError`` is one of the built-in exception types which
 most closely matches the kind of error we want to raise. The complete listing
 of built-in exceptions is found in  the `Built-in Exceptions
@@ -584,7 +590,8 @@ of built-in exceptions is found in  the `Built-in Exceptions
 Library Reference <http://docs.python.org/lib/>`__, again by Python's creator, 
 Guido van Rossum.
 
-If the function that called ``get_age`` handles the error, then the program can
+If the function that called ``get_age`` (or its caller, or their caller, ...) 
+handles the error, then the program can
 continue; otherwise, Python prints the traceback and exits:
 
 .. sourcecode:: python
@@ -597,7 +604,7 @@ continue; otherwise, Python prints the traceback and exits:
     Traceback (most recent call last):
       File "<interactive input>", line 1, in <module>
       File "learn_exceptions.py", line 4, in get_age
-        raise ValueError, '{0} is not a valid age'.format(age)
+        raise ValueError('{0} is not a valid age'.format(age))
     ValueError: -2 is not a valid age
     >>>
 
@@ -614,7 +621,7 @@ so that it stops when it reaches the maximum recursion depth allowed:
         try:
             recursion_depth(number + 1)
         except:
-            print("Maximum recursion depth exceeded.")
+            print("I cannot go any deeper into this wormhole.")
     
     recursion_depth(0)
 
@@ -626,14 +633,14 @@ The ``finally`` clause of the ``try`` statement
 -----------------------------------------------
 
 A common programming pattern is to grab a resource of some kind --- e.g. 
-we create a window for turtles to draw on, or dial up a connection to our
+we create a window for turtles to draw on, or we dial up a connection to our
 internet service provider, or we may open a file for writing.   
-Then we perform some computation which may raise exceptions, 
+Then we perform some computation which may raise an exception, 
 or may work without any problems.
 
-In either case, we want to "clean up" the resources we grabbed --- e.g. close
+Whatever happens, we want to "clean up" the resources we grabbed --- e.g. close
 the window, disconnect our dial-up connection, or close the file.  The ``finally``
-clause of the ``try`` statement is the mechanism for doing just this.  Consider
+clause of the ``try`` statement is the way to do just this.  Consider
 this (somewhat contrived) example:
 
 .. sourcecode:: python
@@ -669,8 +676,8 @@ Lines 14-15 does this for us.  Whether we complete the statements in the ``try``
 clause successfully or not, the ``finally`` block will always be executed.
 
 Notice that the exception is still unhandled --- only an ``except`` clause can
-handle an exception, so your program will still crash.  But it's turtle window
-will be closed when it crashes! 
+handle an exception, so your program will still crash.  But at least it's turtle 
+window will be closed before it crashes! 
 
 
 .. index:: fibonacci numbers
@@ -787,16 +794,16 @@ Glossary
         An error that occurs at runtime.
 
     handle an exception
-        To prevent an exception from terminating a program by wrapping
+        To prevent an exception from causing your program to crash, by wrapping
         the block of code in a ``try`` / ``except`` construct.
 
     immutable data type
         A data type which cannot be modified.  Assignments to elements or
-        slices of immutable types cause a runtime error.
+        slices (sub-parts) of immutable types cause a runtime error.
 
     infinite recursion
-        A function that calls itself recursively without ever reaching the base
-        case. Eventually, an infinite recursion causes a runtime error.
+        A function that calls itself recursively without ever reaching any base
+        case. Eventually, infinite recursion causes a runtime error.
 
     mutable data type
         A data type which can be modified. All mutable types are compound
@@ -804,59 +811,44 @@ Glossary
         types; strings and tuples are not.
 
     raise
-        To cause an exception by using the ``raise`` statement.
+        To create a deliberate exception by using the ``raise`` statement.
 
     recursion
-        The process of calling the function that is already executing.
+        The process of calling a function that is already executing.
 
     recursive call
         The statement that calls an already executing function.  Recursion can
-        even be indirect --- function `f` can call `g` which calls `h`, 
+        also be indirect --- function `f` can call `g` which calls `h`, 
         and `h` could make a call back to `f`.
 
     recursive definition
         A definition which defines something in terms of itself. To be useful
         it must include *base cases* which are not recursive. In this way it
         differs from a *circular definition*.  Recursive definitions often
-        provide an elegant way to express complex data structures.
+        provide an elegant way to express complex data structures, like a directory
+        that can contain other directories, or a menu that can contain other menus.
 
     tuple
-        A data type that contains a sequence of elements of any type, like a
-        list, but is immutable. Tuples can be used wherever an immutable type
-        is required, such as a key in a dictionary (see next chapter).
+        An immutable data type that contains related elements. Tuples are used
+        to group together related data, such as a person's name, their age, 
+        and their gender.  Tuples can be used wherever an immutable type
+        is required, such as for a key in a dictionary (see the next chapter).
 
     tuple assignment
         An assignment to all of the elements in a tuple using a single
-        assignment statement. Tuple assignment occurs in parallel rather than
+        assignment statement. Tuple assignment occurs *simultaneously* rather than
         in sequence, making it useful for swapping values.
 
 
 Exercises
 ---------
-
-#.
-   .. sourcecode:: python
-    
-        def swap(x, y):      # incorrect version
-             print("before swap statement: id(x):", id(x), "id(y):", id(y))
-             x, y = y, x
-             print "after swap statement: id(x):", id(x), "id(y):", id(y))
-    
-        (a, b) = (0, 1)
-        print( "before swap function call: id(a):", id(a), "id(b):", id(b)
-        swap(a, b)
-        print("after swap function call: id(a):", id(a), "id(b):", id(b))
-
-   Run this program and describe the results. Use the results to explain
-   why this version of ``swap`` does not work as intended. What will be the
-   values of ``a`` and ``b`` after the call to ``swap``?
    
 #. Modify the Koch fractal program so that it draws a Koch snowflake, like this:
 
    .. image:: illustrations/koch_snowflake.png
    
    
-.. index:: fractal; Cesaro torn square
+   .. index:: fractal; Cesaro torn square
    
 #. Draw a Cesaro torn square fractal, of the order given by the user.  A torn square 
    consists of four torn lines.   We show four different squares of orders 0,1,2,3.     
@@ -866,7 +858,7 @@ Exercises
 
    .. image:: illustrations/cesaro_torn_square.png
    
-.. index:: fractal; Sierpinski triangle
+   .. index:: fractal; Sierpinski triangle
    
 #. A Sierpinski triangle of order 0 is an equilateral triangle.  
    An order 1 triangle can be drawn by drawing 3 smaller triangles 
@@ -882,13 +874,8 @@ Exercises
 
    .. image:: illustrations/sierpinski_colour.png
    
-#. Create a module named ``seqtools.py``. Add the functions ``encapsulate`` and 
-   ``insert_in_middle`` from the chapter. Add tests which test that these
-   two functions work as intended with all three sequence types.
    
-   
-   
-#. Add each of the following functions to ``seqtools.py``:
+#. Add each of the following functions to a script called ``seqtools.py``:
 
    .. sourcecode:: python
     
@@ -947,14 +934,14 @@ Exercises
             test(sort_sequence([3, 4, 6, 7, 8, 2]),  [2, 3, 4, 6, 7, 8])
             test(sort_sequence((3, 4, 6, 7, 8, 2)),  (2, 3, 4, 6, 7, 8))
             test(sort_sequence("nothappy"), 'ahnoppty')
-         
-   As usual, work on each of these one at a time until they pass all the tests.
+
+   As usual, add your test function and work on each of these one at a time until they pass all the tests.
    
    .. admonition:: |rle_open|  But do you really want to do this? |rle_close| 
    
        Disclaimer.  These exercises illustrate nicely that the sequence abstraction is
        general, (because slicing, indexing, and concatenation is so general), so it is possible to 
-       write general functions that work over all sequence types.  Nice lesson about generalization!
+       write general functions that work over all sequence types.  A nice lesson about generalization!
        
        Another view is that tuples are different from lists and strings precisely 
        because you want to think about them very differently. 
@@ -978,7 +965,7 @@ Exercises
         test(recursive_min([2, 9, [1, 13], 8, 6]), 1)
         test(recursive_min([2, [[100, 1], 90], [10, 13], 8, 6]), 1)
         test(recursive_min([2, [[13, -7], 90], [1, 100], 8, 6]), -7)
-        test(recursive_min([[[-13, 7], 90], 2, [1, 100], 8, 6]), 13)
+        test(recursive_min([[[-13, 7], 90], 2, [1, 100], 8, 6]), -13)
  
 #. Write a function ``count`` that returns the number of occurences
    of ``target`` in  a nested list:
@@ -1015,9 +1002,31 @@ Exercises
    does not enter anything at all.)   
    
 #. Use help to find out what ``sys.getrecursionlimit()`` and
-   ``sys.setrecursionlimit(n)`` do. Create several *experiments* similar to what
-   was done in ``infinite_recursion.py`` to test your understanding of how
-   these module functions work.
+   ``sys.setrecursionlimit(n)`` do. Create several experiments similar to what
+   was done in `infinite_recursion.py`
+   to test your understanding of how these module functions work.
+ 
+#. Suppose you want to swap around the values in two variables.  You decide
+   to factor this out into a reusable function, and write this code:
+
+    .. sourcecode:: python
+    
+        def swap(x, y):      # incorrect version
+             print("before swap statement: x:", x, "y:", y)
+             (x, y) = (y, x)
+             print("after swap statement: x:", x, "y:", y)
+    
+        a = ["This", "is", "fun"]
+        b = [2,3,4] 
+        print("before swap function call: a:", a, "b:", b)
+        swap(a, b)
+        print("after swap function call: a:", a, "b:", b)
+
+   Run this program and describe the results.  Oops!  So it didn't do what you intended!   
+   Explain why this version of ``swap`` does not work as intended. 
+   Using a Python visualizer like the one at http://netserv.ict.ru.ac.za/python3_viz 
+   may help you build a good conceptual model of what is going on.  
+   What will be the values of ``a`` and ``b`` after the call to ``swap``?  
    
 #. Write a program that walks a directory structure (as in the last section of
    this chapter), but instead of printing filenames, it returns a list of all
@@ -1041,7 +1050,7 @@ Exercises
    these two recursive programs.  Because you're going to destroy files on your disks, you better
    get this right, or you risk losing files you care about.  So excellent
    advice is that initially you should fake the deletion of the files --- just print
-   the full path names of each file that you intent to delete.  Once you're happy
+   the full path names of each file that you intend to delete.  Once you're happy
    that your logic is correct, and you can see that you're not deleting the wrong
    things, you can replace the print statement with the real thing.
    
