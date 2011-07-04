@@ -54,12 +54,12 @@ We have seen the ``return`` statement before, but in a fruitful function the
 ``return`` statement includes a **return value**. This statement means: evaluate 
 the return expression, and then return it immediately as the result (the fruit)
 of this function.  The expression provided can be arbitrarily complicated, 
-so we could have written this function more concisely:
+so we could have written this function like this:
 
 .. sourcecode:: python
     
     def area(radius):
-        return 3.14159 * radius**2
+        return 3.14159 * radius * radius
 
 On the other hand, **temporary variables** like ``b`` above often make debugging
 easier.
@@ -100,7 +100,7 @@ through the program hits a ``return`` statement. The following version of
 
 .. sourcecode:: python
     
-    def absolute_value(x):
+    def bad_absolute_value(x):
         if x < 0:
             return -x
         elif x > 0:
@@ -112,7 +112,7 @@ case, the return value is a special value called **None**:
 
 .. sourcecode:: python
     
-    >>> print(absolute_value(0))
+    >>> print(bad_absolute_value(0))
     None
 
 All Python functions return ``None`` whenever they do not return another value.
@@ -132,9 +132,7 @@ empty string:
         return ''
 
 .. sourcecode:: python
-    
-    >>> print(absolute_value(0))
-    None        
+         
     >>> find_first_2_letter_word(['This',  'is', 'a', 'dead', 'parrot'])
     'is'    
     >>> find_first_2_letter_word(["I",  "like",  "cheese"]) 
@@ -228,7 +226,7 @@ Next we compute the sum of squares of ``dx`` and ``dy``:
     def distance(x1, y1, x2, y2):
         dx = x2 - x1
         dy = y2 - y1
-        dsquared = dx**2 + dy**2
+        dsquared = dx*dx + dy*dy
         return 0.0
 
 Again, we could run the program at this stage and check the value of ``dsquared`` (which
@@ -242,7 +240,7 @@ we compute and return the result:
     def distance(x1, y1, x2, y2):
         dx = x2 - x1
         dy = y2 - y1
-        dsquared = dx**2 + dy**2
+        dsquared = dx*dx + dy*dy
         result = dsquared**0.5
         return result
 
@@ -264,16 +262,38 @@ The key aspects of the process are:
    point, if there is an error, you will know exactly where it is.
 #. Use temporary variables to hold intermediate values so that you can easily inspect
    and check them.
-#. Once the program is working, you might want to consolidate multiple statements 
-   into compound expressions,
-   but only do this if it does not make the program more difficult to read.
+#. Once the program is working, relax, sit back, and play around with your options.
+   (There is interesting research that links "playfulness" to better understanding,
+   better learning, more enjoyment, and a more positive mindset about 
+   what you can achieve --- so spend some time fiddling around!) 
+   You might want to consolidate multiple statements into one bigger compound expression,
+   or rename the variables you've used, or see if you can make the function shorter. 
+   A good guideline is to aim for making code as easy as possible for others to read.
 
+Here is another version of the function.  It makes use of a square root function
+that is in the ``math`` module (we'll learn about modules shortly).  Which do you
+prefer?  Which looks "closer" to the Pythagorean formula we started out with?
+
+
+.. sourcecode:: python
+    
+    import math
+    
+    def distance(x1, y1, x2, y2):
+        return math.sqrt( (x2-x1)**2 + (y2-y1)**2 )  
+   
+.. sourcecode:: python
+    
+    >>> distance(1, 2, 4, 6)
+    5.0   
+      
 .. index:: debugging   
    
 Debugging with ``print``
 ------------------------
 
-Another powerful technique for debugging is to insert ``print`` functions
+Another powerful technique for debugging (an alternative to single-stepping and 
+inspection of program variables), is to insert extra ``print`` functions
 in carefully selected places in your code.  Then, by inspecting the output
 of the program, you can check whether the algorithm is doing what you expect
 it to.  Be clear about the following, however:
@@ -462,7 +482,7 @@ We'll use these for writing our unit tests.
 
 Let's start with the ``absolute_value`` function that we wrote earlier in this
 chapter.  Recall that we wrote a few different versions, the last of which was
-incorrect, and had a bug. Would tests have help catch this bug?
+incorrect, and had a bug. Would tests have caught this bug?
 
 First we plan our tests.  We'd like to know
 if the function returns the correct value when its argument is negative,
@@ -496,8 +516,8 @@ of the test, which will help when we want to fix any tests that fail.
             msg = "Test on line {0} failed. Expected '{1}', but got '{2}'.".format(linenum, expected, actual)
         print(msg)
  
-There is also some slightly tricky string formatting using the ``format`` method which we will
-gloss over for the moment, and cover in detail in a future chapter.  
+There is also some slightly tricky string formatting using the ``format`` method 
+which we will gloss over for the moment, and cover in detail in a future chapter.  
 But with this function written, we can proceed to construct our test suite:
 
 .. sourcecode:: python
@@ -513,7 +533,8 @@ But with this function written, we can proceed to construct our test suite:
     test_suite()        # and here is the call to run the tests
     
 Here you'll see that we've constructed five tests in our test suite.  We could run this
-against the first or second versions (the correct versions) of ``absolute_value``, and we'd get output similar to the following:: 
+against the first or second versions (the correct versions) of ``absolute_value``, 
+and we'd get output similar to the following:: 
 
     Test on line 24 passed.
     Test on line 25 passed.
@@ -601,10 +622,80 @@ Exercises
 ---------
 
 All of the exercises below should be added to a single file.  In that file, you should
-also add the ``test`` and ``test_suite`` scaffolding functions shown above, and then, as you work through the exercises, add the new tests to your test suite. 
+also add the ``test`` and ``test_suite`` scaffolding functions shown above, and then, 
+as you work through the exercises, add the new tests to your test suite.  
+(If you open the online version of the textbook,
+you can easily cut and paste the tests and the fragments of code into your Python editor.)
 
 After completing each exercise, confirm that all the tests pass.
 
+#.  The four compass points can be abbreviated by single-letter strings as "N", "E", "S", and "W".
+    Write a function ``turn_clockwise`` that takes one of these four compass points as 
+    its parameter, and returns the next compass point in the clockwise direction. 
+    Here are some tests that should pass::
+    
+       test(turn_clockwise("N"), "E")
+       test(turn_clockwise("W"), "N")
+    
+    You might ask `"What if the argument to the function is some other value?"`  For all
+    other cases, the function should return the value ``None``::
+
+       test(turn_clockwise(42), None)
+       test(turn_clockwise("rubbish"), None)
+
+       
+#.  Write a function ``day_name`` that converts an integer number 0 to 6 into the name of
+    a day.  Assume day 0 is "Sunday".  Once again, return None if the arguments to the function
+    are not valid.  Here are some tests that should pass::
+   
+       test(day_name(3), "Wednesday")
+       test(day_name(6), "Saturday")
+       test(day_name(42), None)
+
+       
+#.  Write the inverse function ``day_num`` which is given a day name, and returns its number::
+
+        test(day_num("Friday"), 5)
+        test(day_num("Sunday"), 0)
+        test(day_num(day_name(3)), 3)
+        test(day_name(day_num("Thursday")), "Thursday")
+        
+    Once again, if this function is given an invalid argument, it should return ``None``::
+    
+        test(day_num("Halloween"), None);
+    
+#.  Write a function that helps answer questions like '"Today is Wednesday.  I leave on holiday
+    in 19 days time.  What day will that be?"' So the function must take a day name and
+    a ``delta`` argument --- the number of days to add --- and should return the resulting day name::
+
+        test(day_add("Monday", 4),  "Friday")
+        test(day_add("Tuesday", 0), "Tuesday")
+        test(day_add("Tuesday", 14), "Tuesday")
+        test(day_add("Sunday", 100), "Tuesday")
+        
+    `Hint: use the first two functions written above to help you write this one.` 
+        
+#.  Can your ``day_add`` function already work with negative deltas? For example,
+    -1 would be yesterday, or -7 would be a week ago::
+    
+        test(day_add("Sunday", -1), "Saturday")
+        test(day_add("Sunday", -7), "Sunday")
+        test(day_add("Tuesday", -100), "Sunday")
+        
+    If your function already works, explain why.  If it does not work, make it work.
+    
+    `Hint:` Play with some cases of using the modulus function `%` 
+    (introduced at the beginning of the previous chapter).  Specifically, explore 
+    what happens to  ``x % 7``  when x is negative. 
+    
+#.  Write a function ``days_in_month`` which takes the name of a month, and returns the number
+    of days in the month.  Ignore leap years::
+
+       test(days_in_month("February"), 28)
+       test(days_in_month("December"), 31)
+       
+    If the function is given invalid arguments, it should return ``None``.
+           
 #. Write a function ``to_secs`` that converts hours, minutes and seconds to 
    a total number of seconds.  Here are some tests that should pass::
    
