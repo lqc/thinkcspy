@@ -24,9 +24,9 @@ Strings
 A compound data type
 --------------------
 
-So far we have seen built-in types like: ``int``, ``float``, 
-``bool``, ``str`` and we've seen lists. 
-Strings and lists are qualitatively different from the others because they
+So far we have seen built-in types like ``int``, ``float``, 
+``bool``, ``str`` and we've seen lists and pairs. 
+Strings, lists, and pairs are qualitatively different from the others because they
 are made up of smaller pieces.  In the case of strings, they're made up of smaller
 strings each containing one **character**.  
 
@@ -39,16 +39,17 @@ Working with strings as single things
 
 We previously saw that each turtle instance has its own attributes and 
 a number of methods that can be applied to the instance.  For example,
-we wrote ``tess.turn(90)``.  
+we could set the turtle's color, and we wrote ``tess.turn(90)``.  
 
-Strings are also objects.  Each string instance has its own attributes and methods.  
+Just like a turtle, a strings is also an object.  So each string instance 
+has its own attributes and methods.  
 
 For example::
 
     >>> ss = "Hello, World!"
     >>> tt = ss.upper()
     >>> tt
-    'HELLO, WORLD'
+    'HELLO, WORLD!'
     
 `upper` is a method that can be invoked on any string object 
 to create a new string, in which all the 
@@ -93,8 +94,8 @@ When we display ``m``, we could get a surprise::
 
     a
 
-For perverse reasons, computer scientists always start counting
-from zero. The letter at subscript position zero of ``"banana"`` is ``b``.  So at
+Computer scientists always start counting
+from zero! The letter at subscript position zero of ``"banana"`` is ``b``.  So at
 position ``[1]`` we have the letter ``a``.
 
 If you want the zero-eth letter of a string, you just put 0, or any expression
@@ -168,6 +169,10 @@ end of the string. The expression ``fruit[-1]`` yields the last letter,
 ``fruit[-2]`` yields the second to last, and so on.
 
 As you might have guessed, indexing with a negative index also works like this for lists. 
+
+We won't use negative indexes in the rest of these notes --- not many computer languages
+use this idiom, and you'll probably be better off avoiding it. But there is plenty of
+Python code out on the Internet that will use this trick, so it is best to know that it exists. 
 
 .. index:: traversal, for loop, concatenation, abecedarian series
 
@@ -261,15 +266,18 @@ selecting a character:
 
 The operator ``[n:m]`` returns the part of the string from the n'th character
 to the m'th character, including the first but excluding the last. This
-behavior is counter-intuitive; it makes more sense if you imagine the indices
+behavior makes sense if you imagine the indices
 pointing *between* the characters, as in the following diagram:
 
 .. image:: illustrations/banana.png
    :alt: 'banana' string
 
-If you omit the first index (before the colon), the slice starts at the
-beginning of the string. If you omit the second index, the slice goes to the
-end of the string. Thus:
+Now if you imagine this as a piece of paper, the slice operator ``[n:m]`` cuts
+the paper at the ``n`` and ``m`` positions.  
+   
+Two tricks are added to this: if you omit the first index (before the colon), 
+the slice starts at the beginning of the string. If you omit the second index, 
+the slice extends to the end of the string. Thus:
 
 .. sourcecode:: python
     
@@ -447,8 +455,8 @@ the loop prematurely.
 If the character doesn't appear in the string, then the program exits the loop
 normally and returns ``-1``.
 
-This pattern of computation is sometimes called a eureka traversal because as
-soon as we find what we are looking for, we can cry Eureka!  and stop looking.
+This pattern of computation is sometimes called a `eureka traversal` because as
+soon as we find what we are looking for, we can cry "Eureka!"  and stop looking.
 
 
 .. index:: counting pattern
@@ -512,7 +520,12 @@ Better still, we can combine ``find`` and ``find2`` using an
             ix += 1
         return -1
 
-The call ``find('banana', 'a', 2)`` to this version of ``find`` behaves just
+When a function has an optional parameter, the caller `may` provide a 
+matching argument. If the third argument is provided to ``find``, it gets assigned 
+to ``start``.  But if the caller leaves the argument out, then start is given
+a default value indicated by the assignment ``start=0`` in the function definition.
+ 
+So the call ``find('banana', 'a', 2)`` to this version of ``find`` behaves just
 like ``find2``, while in the call ``find('banana', 'a')``, ``start`` will be
 set to the **default value** of ``0``.
 
@@ -551,145 +564,120 @@ Here are some test cases that should pass::
 .. index:: module, string module, dir function, dot notation, function type,
            docstring
 
-More ``string`` methods
------------------------
+The built-in ``find`` method
+----------------------------
  
 Now that we've done all this work to write a powerful ``find`` function, we can let on that
-there is already a ``find`` method that works on strings, with precisely these same semantics::
+strings already have their own built-in``find`` method.  It can do everything 
+that our one can do, and more! ::
 
     test(ss.find('s'), 7)
     test(ss.find('s', 7), 7)
     test(ss.find('s', 8), 13)
     test(ss.find('s', 8, 13), -1)
     test(ss.find('.'), len(ss)-1)
-    
-Usually we'd prefer to use the methods that Python provides rather than reinvent
-our own equivalents. But many of the available built-in functions and methods make good
-teaching exercises, and the underlying techniques you learn are your building blocks
-to becoming a proficient programmer.
-
-The ``string`` module contains useful functions that manipulate strings.  As
-usual, we have to import the module before we can use it.  We
-can use the same trick as before: as we type the period, PyScripter will pop
-up a selection list of the available attributes that can be accessed directly
-through the module name (``string``).  Notice that these are different from
-the methods that are attached to each string instance.
+     
+The built-in ``find`` method is more general than our version. It can find
+substrings, not just single characters:
 
 .. sourcecode:: python
     
-    import string
-    ...
-    string.
-    
-Pops up these hints:
-
-.. image:: illustrations/string_members.png
-
-You will notice that there are different icons next to some items
-in the list.  Recall that objects can have *attributes* (e.g. the
-colour of a turtle's pen), and *methods* (functions that can be called
-on the object).  The icon alongside  ``capwords`` indicates that this
-is a method that can be called.  The icon alongside ``digits`` indicate
-that this is an attribute.  It's value can be used directly::
-
-    >>> string.digits
-    '0123456789'
-    >>> string.hexdigits
-    '0123456789abcdefABCDEF'
-    >>> string.capwords('the cat in the hat')
-    'The Cat In The Hat'
-    
-Actually, the built-in ``find`` method is more general than our version. It can find
-substrings, not just characters:
-
-.. sourcecode:: python
-    
-    >>> "banana".find("na")
+    >>> "banana".find("nan")
     2
     >>> "banana".find("na", 3)
     4
 
+Usually we'd prefer to use the methods that Python provides rather than reinvent
+our own equivalents. But many of the built-in functions and methods make good
+teaching exercises, and the underlying techniques you learn are your building blocks
+to becoming a proficient programmer.
 
-.. index:: character classification, uppercase, lowercase,  
-           whitespace, string module, Python Library Reference
+The ``split`` method
+--------------------
 
-Character classification
+One of the most useful methods on strings is the ``split`` method:
+it splits a single multi-word string into a list of individual words, removing
+all the whitespace between them.  (Whitespace means any tabs, newlines, or spaces.)
+This allows us to read input as a single string,
+and split it into words.
+    
+    >>> ss = 'Well I never did said Alice' 
+    >>> wds = ss.split()
+    >>> wds
+    ['Well', 'I', 'never', 'did', 'said', 'Alice']
+    
+Cleaning up your strings
 ------------------------
 
-It is often helpful to examine a character and test whether it is upper- or
-lowercase, or whether it is a character or a digit. The ``string`` module
-provides several constants that are useful for these purposes. One of these,
-``string.digits``, we have already seen.
+We'll often work with strings that contain punctuation, or tab and newline characters,
+especially, as we'll see in a future chapter, when we read our text from files or from 
+the Internet. But if we're writing a program, say, to count word frequencies or check the
+spelling of each word, we'd prefer to strip off these unwanted characters.
 
-The string ``string.ascii_lowercase`` contains all of the ascii letters that the system
-considers to be lowercase. Similarly, ``string.ascii_uppercase`` contains all of the
-uppercase letters. ``string.punctuation`` comprises all the characters considered
-to be punctuation. Try the following and see what you get:
+We'll show just one example of how to strip punctuation from a string.
+Remember that strings are immutable, so we cannot change the string with the
+punctuation --- we need to traverse the original string and create a new string,
+omitting any punctuation:
 
-.. sourcecode:: python
+.. sourcecode:: python    
+ 
+    punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
     
-    print(string.ascii_lowercase)
-    print(string.ascii_uppercase)
-    print(string.digits)
-    print(string.punctuation)
+    def remove_punctuation(s):
+        s_without_punct = ""
+        for letter in s:
+            if letter not in punctuation:
+                s_without_punct += letter
+        return s_without_punct
 
-We can use these constants and their ``find`` methods to classify characters. For example, if
-``string.ascii_lowercase.find(ch)`` returns a value other than ``-1``, then ``ch`` must be
-lowercase:
+Setting up that first assignment is messy and error-prone.  
+Fortunately, the Python ``string`` module already does it
+for us.  So we will make a slight improvement to this 
+program --- we'll import the ``string`` module and use its definition: 
 
-Another constant defined in the ``string`` module may surprise you when you
-print it:
-
-.. sourcecode:: python
-    
-    >>> print(string.whitespace)
-    
-**Whitespace** characters move the cursor without printing anything.  They
-create the white space between visible characters (at least on white paper).
-The constant ``string.whitespace`` contains all the whitespace characters,
-including space, tab (``\t``), and newline (``\n``).
-
-While we could use ``find`` and these constants, there are also string methods 
-that are much more convenient for classifing the string, for example::
-    
-    >>> "2".isdigit()
-    True
-    >>> "x".isprintable()
-    True
-    >>> "?".ispunctuation()
-    Traceback (most recent call last):
-    File "<interactive input>", line 1, in <module>
-    AttributeError: 'str' object has no attribute 'ispunctuation'
-
-Oops!  It seems they forgot to create a method for the last one.  We'll need to do this one the long way.  
-So let's use these to remove all punction from a string, similar to our
-previous example where we removed all vowels::
+.. sourcecode:: python   
 
     import string
-        
+    
     def remove_punctuation(s):
         s_without_punct = ""
         for letter in s:
             if letter not in string.punctuation:
                 s_without_punct += letter
         return s_without_punct
-
+ 
     test(remove_punctuation('"Well, I never did!", said Alice.'),
                                 "Well I never did said Alice")
     test(remove_punctuation("Are you very, very, sure?"),
                                  "Are you very very sure")
-                                 
-One of the most useful methods on strings is the ``split`` method:
-it splits a single multi-word string into a list of individual words, removing
-all the whitespace between them.  
-    
-    >>> ss = remove_punctuation('"Well, I never did!", said Alice.')
-    >>> wds = ss.split()
-    >>> wds
-    ['Well', 'I', 'never', 'did', 'said', 'Alice']
 
-There are other useful functions in the ``string`` module, and other
-methods on string instances, but this book isn't
+
+Composing together this function and the ``split`` method from the previous section
+makes a useful combination --- we'll clean out the punctuation, and
+``split`` will clean out the newlines and tabs while turning the string into
+a list of words:
+
+.. sourcecode:: python 
+
+       my_story = '''
+       Pythons are constrictors, which means that they will 'squeeze' the life 
+       out of their prey. They coil themselves around their prey and with 
+       each breath the creature takes the snake will squeeze a little tighter 
+       until they stop breathing completely. Once the heart stops the prey 
+       is swallowed whole. The entire animal is digested in the snake's 
+       stomach except for fur or feathers. What do you think happens to the fur, 
+       feathers, beaks, and eggshells? The 'extra stuff' gets passed out as --- 
+       you guessed it --- snake POOP! '''
+       
+       wds = remove_punctuation(my_story).split()
+       print(wds)
+       
+The output::
+                            
+       ['Pythons', 'are', 'constrictors', ... , 'it', 'snake', 'POOP']                            
+  
+There are other useful functions in the ``string`` module, other ways to
+classify characters, and other methods on string instances, but this book isn't
 intended to be a reference manual. On the other hand, the *Python Library
 Reference* is. Along with a wealth of other documentation, it's available from
 the Python website, `http://www.python.org <http://www.python.org>`__.
@@ -726,12 +714,12 @@ Running the script produces::
     2**10 = 1024 and 4 * 5 = 20.000000
 
 The key idea is that one provides a *formatter string* which
-contains embedded *placeholder fields*, ``... {0} ... {1} ... {2} ...`` etc.
+contains *placeholder fields*, ``... {0} ... {1} ... {2} ...`` etc.
 The **format method** of a string uses the numbers as indexes into
 its arguments, and substitutes the appropriate argument into each
-placeholder fields.  
+placeholder field.  
 
-Each of the placeholders can optionally contain an additional **format specification** ---
+Each of the placeholders can also contain a **format specification** ---
 it is always introduced by the ``:`` symbol.  This can control things like
 
 * whether the field is aligned left ``<``, centered ``^``, or right ``>``
@@ -768,11 +756,11 @@ at all:
 
 .. sourcecode:: python
 
-    letter = """
+    letter = '''
     Dear {0} {2}.
      {0}, I have an interesting money-making proposition for you!
      If you deposit $10 million into my bank account I can double your money ...
-    """
+    '''
 
     print(letter.format("Paris", "Whitney", "Hilton"))
     print(letter.format("Bill", "Henry", "Gates"))
@@ -795,7 +783,8 @@ your placeholders refer to arguments that you do not provide::
       File "<interactive input>", line 1, in <module>
     IndexError: tuple index out of range
     
-The following example illustrates the real utility of string formatting:
+The following example illustrates the real utility of string formatting.
+First, we'll try to print a table without using string formatting:
 
 .. sourcecode:: python
     
@@ -825,7 +814,7 @@ than the tab width::
 One possible solution would be to change the tab width, but the first column
 already has more space than it needs. The best solution would be to set the
 width of each column independently. As you may have guessed by now, string
-formatting provides the solution.  We can also right-justify each field:
+formatting provides a much nicer solution.  We can also right-justify each field:
 
 .. sourcecode:: python
         
@@ -836,7 +825,7 @@ formatting provides the solution.  We can also right-justify each field:
         print(layout.format(i, i**2, i**3, i**5, i**10, i**20))
  
 
-Running this version produces the following output::
+Running this version produces the following (much more satisfying) output::
     
    i  i**2  i**3    i**5        i**10                   i**20
    1     1     1       1            1                       1
@@ -885,8 +874,8 @@ may prove helpful in remembering what you learned.
 
     string comparison (``>, <, >=, <=, ==, !=``)
         The six common comparision operators work with strings, evaluating according to
-        `lexicographical order.  Examples:
-        ``'apple' < 'banana'`` evaluates to ``True``.  ``'Zeta' < 'Appricot'
+        `lexicographical` order.  Examples:
+        ``'apple' < 'banana'`` evaluates to ``True``.  ``'Zeta' < 'Appricot'``
         evaluates to ``False``.  ``'Zebra' <= 'aardvark'`` evaluates to
         ``True`` because all upper case letters precede lower case letters.
 
@@ -914,12 +903,10 @@ Glossary
         A string constant on the first line of a function or module definition
         (and as we will see later, in class and method definitions as well).
         Docstrings provide a convinient way to associate documentation with
-        code. Docstrings are also used by the ``doctest`` module for automated
-        testing.
+        code. Docstrings are also used by programming tools to provide interactive help.
 
     dot notation
-        Use of the **dot operator**, ``.``, to access functions inside a
-        module, or to access methods and attributes of an object.
+        Use of the **dot operator**, ``.``, to access methods and attributes of an object.
 
     immutable
         A compound data type whose elements can not be assigned new values.
@@ -960,11 +947,11 @@ and put all functions that require tests into that file.
     >>> "Strings are sequences of characters."[5]
     >>> len("wonderful")
     >>> 'Mystery'[:4]
-    >>> 'p' in 'Pinapple'
-    >>> 'apple' in 'Pinapple'
-    >>> 'pear' not in 'Pinapple'
-    >>> 'apple' > 'pinapple'
-    >>> 'pinapple' < 'Peach'
+    >>> 'p' in 'Pineapple'
+    >>> 'apple' in 'Pineapple'
+    >>> 'pear' not in 'Pineapple'
+    >>> 'apple' > 'pineapple'
+    >>> 'pineapple' < 'Peach'
     
 #. Modify:
 
