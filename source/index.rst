@@ -34,6 +34,7 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 * `Chapter 6 <ch06.html>`__ *Fruitful functions*
 * `Chapter 7 <ch07.html>`__ *Iteration*
 * `Chapter 8 <ch08.html>`__ *Strings*
+* `Chapter 9 <ch_events.html>`__ *Event handling*
 * `Chapter 9 <ch09.html>`__ *Lists*
 * `Chapter 10 <ch10.html>`__ *Modules and Files*
 * `Chapter 11 <ch11.html>`__ *Recursion and Exceptions*
@@ -77,6 +78,7 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
     ch06.rst
     ch07.rst
     ch08.rst
+    ch_events.rst
     ch09.rst
     ch10.rst
     ch11.rst

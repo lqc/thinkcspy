@@ -104,39 +104,21 @@ error:
       File "<interactive input>", line 1, in <module>
     IndexError: list index out of range
 
-If an index has a negative value, it counts backward from the end of
-the list:
-
-.. sourcecode:: python
-
-    
-    >>> numbers[-1]
-    5
-    >>> numbers[-2]
-    17
-    >>> numbers[-3]
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    IndexError: list index out of range
-
-``numbers[-1]`` is the last element of the list, ``numbers[-2]`` is the second
-to last, and ``numbers[-3]`` doesn't exist.
-
 It is common to use a loop variable as a list index.
 
 .. sourcecode:: python
     
     horsemen = ["war", "famine", "pestilence", "death"]
 
-    for i in range(4):
+    for i in [0, 1, 2, 3]:
         print(horsemen[i])
 
 Each time through the loop, the variable ``i`` is used as an index into the
-list, printing the ``i``-eth element. This pattern of computation is called a
+list, printing the ``i``'th element. This pattern of computation is called a
 **list traversal**.
 
 The above sample doesn't need or use the index ``i`` for anything, so this  
-even simpler version might be preferred:
+simpler version should be preferred:
 
 .. sourcecode:: python
     
@@ -151,7 +133,8 @@ List length
 -----------
 
 The function ``len`` returns the length of a list, which is equal to the number
-of its elements. It is a good idea to use this value as the upper bound of a
+of its elements. If you are going to use an integer index to access the list,
+it is a good idea to use this value as the upper bound of a
 loop instead of a constant. That way, if the size of the list changes, you
 won't have to go through the program changing all the loops; they will work
 correctly for any size list:
@@ -193,6 +176,27 @@ other sequences:
     False
    >>> 'debauchery' not in horsemen
     True
+    
+This allows a more elegant version of the nested loop program we previously used 
+to count the number of students doing Computer Science
+in the section :ref:`nested_data`:  
+
+.. sourcecode:: python
+    
+        students = [
+            ("John", ["CompSci", "Physics"]),
+            ("Vusi", ["Maths", "CompSci", "Stats"]),
+            ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
+            ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
+            ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
+            
+    # Count how many students are taking CompSci
+    counter = 0
+    for (name, subjects) in students:
+        if "CompSci" in subjects:            
+               counter += 1
+               
+    print("The number of students taking CompSci is", counter)
 
 
 List operations
@@ -251,7 +255,7 @@ update one of the elements:
     
     >>> fruit = ["banana", "apple", "quince"]
     >>> fruit[0] = "pear"
-    >>> fruit[-1] = "orange"
+    >>> fruit[2] = "orange"
     >>> fruit
     ['pear', 'apple', 'orange']
 
@@ -328,10 +332,10 @@ The ``del`` statement removes an element from a list:
     >>> a
     ['one', 'three']
 
-As you might expect, ``del`` handles negative indices and causes a runtime
+As you might expect, ``del`` causes a runtime
 error if the index is out of range.
 
-You can use a slice as an index for ``del``:
+You can also use a slice as an index for ``del``:
 
 .. sourcecode:: python
     
@@ -412,7 +416,7 @@ variables refer to the same object:
     
     >>> a = [1, 2, 3]
     >>> b = a
-    >>> id(a) == id(b)
+    >>> a is b
     True
     
 In this case, the state snapshot looks like this:
@@ -431,9 +435,10 @@ is **aliased**. Changes made with one alias affect the other:
 
 Although this behavior can be useful, it is sometimes unexpected or
 undesirable. In general, it is safer to avoid aliasing when you are working
-with mutable objects. Of course, for immutable objects, there's no problem.
-That's why Python is free to alias strings when it sees an opportunity to
-economize.
+with mutable objects. Of course, for immutable objects, there's no problem - it is
+just not possible to change something and get a surprise when you access an alias name.
+That's why Python is free to alias strings (and any other immutable kinds of data)
+when it sees an opportunity to economize.
 
 .. index:: clone
 
@@ -456,7 +461,8 @@ The easiest way to clone a list is to use the slice operator:
 Taking any slice of ``a`` creates a new list. In this case the slice happens to
 consist of the whole list.
 
-Now we are free to make changes to ``b`` without worrying about ``a``:
+Now we are free to make changes to ``b`` without worrying that we'll inadvertently be
+changing ``a``:
 
 .. sourcecode:: python
     
@@ -517,8 +523,8 @@ each of its elements. The following squares all the numbers from ``1`` to
         numbers[i] = numbers[i]**2
 
 Take a moment to think about ``range(len(numbers))`` until you understand how
-it works. We are interested here in both the *value* and its *index* within the
-list, so that we can assign a new value to it.
+it works. We are interested here in both the *value* if an item, and its *index* within the
+list, so that we can assign a new value to that position withing the list.
 
 This pattern is common enough that Python provides a nicer way to implement it:
 
@@ -526,17 +532,17 @@ This pattern is common enough that Python provides a nicer way to implement it:
     
     numbers = [1, 2, 3, 4, 5]
     
-    for i, value in enumerate(numbers):
+    for (i, value) in enumerate(numbers):
         numbers[i] = value**2
 
-``enumerate`` generates both the index and the value associated with it during
+``enumerate`` generates pairs of both (index, value) during
 the list traversal. Try this next example to see more clearly how ``enumerate``
 works:
 
 .. sourcecode:: python
     
-    >>> for i, value in enumerate(['banana', 'apple', 'pear', 'quince']):
-    ...    print(i, value)
+    >>> for (i, v) in enumerate(['banana', 'apple', 'pear', 'quince']):
+    ...    print(i, v)
     ...
     0 banana
     1 apple
@@ -550,9 +556,9 @@ List parameters
 ---------------
 
 Passing a list as an argument actually passes a reference to the list, not a
-copy of the list. Since lists are mutable changes made to the 
-elements referenced by the parameter change
-the same list that the argument is referencing. 
+copy or clone of the list. So parameter passing creates an alias for you: the caller
+has one variable referencing the list, and the called function has an alias, but there
+is only one underlying list.
 For example, the function below takes a list as an
 argument and multiplies each element in the list by 2:
 
@@ -560,8 +566,8 @@ argument and multiplies each element in the list by 2:
     
     def double_stuff(a_list):
         """ Overwrite each element in a_list with double its value. """
-        for index, value in enumerate(a_list):
-            a_list[index] = 2 * value
+        for (idx, val) in enumerate(a_list):
+            a_list[idx] = 2 * val
 
 If we add the following onto our script:
 
@@ -584,20 +590,23 @@ same object.
    
 Since the list object is shared by two frames, we drew it between them.
 
-If a function modifies the elements of a list parameter, the caller sees the change.
+If a function modifies the items of a list parameter, the caller sees the change.
 
 .. admonition::  Use the Python visualizer!
 
-    We've earlier mentioned the Python visualizer at http://netserv.ict.ru.ac.za/python3_viz.
+    We've already mentioned the Python visualizer at http://netserv.ict.ru.ac.za/python3_viz.
     It is a very useful tool for building a good understanding of aliases, assignments,
-    and passing arguments to functions.  
+    and passing arguments to functions.  Pay special attention to cases where you clone 
+    a list or have two separate lists, and cases where there is only one underlying list,
+    but more than one variable is aliased to reference the list.
 
 .. index:: list; append
     
 List methods
 ------------
 
-The dot operator can also be used to access built-in methods of list objects.  
+The dot operator can also be used to access built-in methods of list objects.  We'll
+start with the most useful method for adding something onto the end of an existing list... 
 
 .. sourcecode:: python
     
@@ -611,16 +620,17 @@ The dot operator can also be used to access built-in methods of list objects.
     >>>
 
 ``append`` is a list method which adds the argument passed to it to the end of
-the list. Continuing with this example, we show several other list methods:
+the list. We'll use it heavily when we're creating new lists.
+Continuing with this example, we show several other list methods:
 
 .. sourcecode:: python
     
     >>> mylist.insert(1, 12)
     >>> mylist
     [5, 12, 27, 3, 12]
-    >>> mylist.count(12)
+    >>> mylist.count(12)  // how many 12's are in mylist?
     2
-    >>> mylist.extend([5, 9, 5, 11])
+    >>> mylist.extend([5, 9, 5, 11])  
     >>> mylist
     [5, 12, 27, 3, 12, 5, 9, 5, 11])
     >>> mylist.index(9)
@@ -638,8 +648,8 @@ the list. Continuing with this example, we show several other list methods:
     [3, 5, 5, 5, 9, 11, 12, 27]
     >>>
 
-Experiment with the list methods shown here, and read their documentation until you feel confident that
-you understand how they work.
+Experiment and play with the list methods shown here, and read their documentation until 
+you feel confident that you understand how they work.
 
 .. index:: side effect, modifier
 
@@ -669,24 +679,33 @@ This version of ``double_stuff`` does not change its arguments:
 
 .. sourcecode:: python
     
-    >>> from ch09 import double_stuff
     >>> things = [2, 5, 9]
     >>> double_stuff(things)
     [4, 10, 18]
     >>> things
     [2, 5, 18]
-    >>>
 
 To use the pure function version of ``double_stuff`` to modify ``things``,
-you would assign the return value back to ``things``:
+you would assign the return value back to another variable:
 
 .. sourcecode:: python
     
+    >>> dthings = double_stuff(things)
+    >>> dthings
+    [4, 10, 18]
+    >>>        
+    
+An early rule we saw for assignment said "first evaluate the right hand side, then
+assign the resulting value to the variable".  So it is quite safe to assign the function
+result to the same variable that was passed to the function:
+
+.. sourcecode:: python
+
+    >>> things = [2, 5, 9]
     >>> things = double_stuff(things)
     >>> things
-    [4, 10, 'SpamSpam', 19.0]
-    >>>        
-        
+    [4, 10, 18]
+    >>>            
 
 Which is better?
 ----------------
@@ -709,7 +728,7 @@ important **pattern** for your toolbox. Whenever you need to
 write a function that creates and returns a list, the pattern is
 usually::
 
-    initialize a result variable to be an empty list
+    initialize a result variable to be the empty list
     loop
        create a new element 
        append it to result
@@ -756,7 +775,7 @@ Or we can combine them:
     20
 
 Bracket operators evaluate from left to right, so this expression gets the
-three-eth element of ``nested`` and extracts the one-eth element from it.
+three-'th element of ``nested`` and extracts the one-'th element from it.
 
 .. index:: matrix
 
@@ -765,25 +784,27 @@ Matrices
 
 Nested lists are often used to represent matrices. For example, the matrix:
 
+.. image:: illustrations/matrix2.png
+
 might be represented as:
 
 .. sourcecode:: python
     
-    >>> matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    >>> mx = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-``matrix`` is a list with three elements, where each element is a row of the
+``mx`` is a list with three elements, where each element is a row of the
 matrix. We can select an entire row from the matrix in the usual way:
 
 .. sourcecode:: python
     
-    >>> matrix[1]
+    >>> mx[1]
     [4, 5, 6]
 
 Or we can extract a single element from the matrix using the double-index form:
 
 .. sourcecode:: python
     
-    >>> matrix[1][1]
+    >>> mx[1][1]
     5
 
 The first index selects the row, and the second index selects the column.
@@ -837,9 +858,9 @@ Notice how thinking about the test cases *first*, especially those
 tough edge condition cases, helps us create a clearer specification
 of what we need our function to do.  
 
-This technique is called *test-driven* because code should only be written when
-there is a failing test to make pass. Motivated by the failing tests, we can now
-produce a more general solution:
+This technique is called *test-driven* because --- if we are to believe the extremists
+--- code should only be written when there is a failing test to make pass. 
+Motivated by the failing tests, we can now produce a more general solution:
 
 .. sourcecode:: python
 
@@ -892,8 +913,9 @@ When run, we get::
     Test on line 24 passed.
     Test on line 28 failed. Expected '[[0, 0], [0, 0], [0, 7], [0, 0]]', but got '[[0, 7], [0, 7], [0, 7], [0, 7]]'.
  
-This test is not a "one-liner" like most of our other tests have been.  It illustrates that tests can
-be arbitrarily complex, and may require some setup before we can test what we wish to.  
+This last test is not a "one-liner" like most of our other tests have been.  
+It illustrates that tests can be arbitrarily complex, and may require some 
+setup before we can test what we wish to.  
 
 Software development teams generally have people whose sole job is to 
 construct devious and complex test cases for a product.
@@ -904,6 +926,10 @@ often move into testing roles because
 they find it very challenging work, and it requires more 
 "thinking out of the box" to be able to anticipate
 situations in which some code could fail.  
+
+In addition, the test suites that go with a large software product
+are regarded as valuable company "assets", just as the code itself is a 
+valuable asset. 
 
 With a failing test to fix, we are now driven to a better solution:
 

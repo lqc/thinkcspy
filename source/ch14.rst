@@ -210,7 +210,7 @@ shallow and deep equality.
     with different memory addresses, in one case the ``==`` operator tests for deep equality, 
     while in the case of points it makes a shallow test. 
 
-..index:: copy, copy; deep, copy; shallow 
+.. index:: copy, copy; deep, copy; shallow 
 
 Copying
 -------
