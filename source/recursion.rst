@@ -5,162 +5,13 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 |      
     
-Recursion and Exceptions
-========================
+Recursion
+========= 
 
-.. index:: mutable, immutable, tuple
-
-Tuples and mutability
----------------------
-
-So far, you have seen two compound types: strings, which are made up of
-characters; and lists, which are made up of elements of any type.  One of the
-differences we noted is that the elements of a list can be modified, but the
-characters in a string cannot. In other words, strings are **immutable** and
-lists are **mutable**.
-
-A **tuple**, like a list, is a sequence of items of any type. Unlike lists,
-however, tuples are immutable. Syntactically, a tuple is a comma-separated
-sequence of values.  Although it is not necessary, it is conventional to 
-enclose tuples in parentheses:
-
-.. sourcecode:: python
-    
-    >>> julia = ("Julia", "Roberts", 1967, "Duplicity", 2009, "Actress", "Atlanta, Georgia")
-    
-Tuples are useful for representing what other languages often call *records* ---
-some related information that belongs together, like your student record.  There is
-no description of what each of these *fields* means, but we can guess.  A tuple
-lets us "chunk" together related information and use it as a single thing.
- 
-Tuples support the same sequence operations as strings and
-lists. The index operator selects an element from a tuple.
-
-.. sourcecode:: python
-    
-    >>> julia[2]
-    1967
-
-But if we try to use item assignment to modify one of the elements of the
-tuple, we get an error:
-
-.. sourcecode:: python
-    
-    >>> julia[0] = 'X'
-    TypeError: 'tuple' object does not support item assignment
-
-Of course, even if we can't modify the elements of a tuple, we can make a variable
-reference a new tuple holding different information.  To construct the new tuple,
-it is convenient that we can slice parts of the old tuple and join up the
-bits to make the new tuple.  So ``julia`` has a new recent film, and we might want
-to change her tuple:
-
-.. sourcecode:: python
-    
-    >>> julia = julia[:3] + ("Eat Pray Love", 2010) + julia[5:]
-    >>> julia
-    ('Julia', 'Roberts', 1967, 'Eat Pray Love', 2010, 'Actress', 'Atlanta, Georgia')
-
-
-To create a tuple with a single element (but you're probably not likely
-to do that too often), we have to include the final comma, because without
-the final comma, Python treats the ``(5)`` below as an integer in parentheses:
-
-.. sourcecode:: python
-    
-    >>> tup = (5,)
-    >>> type(tup)
-    <class 'tuple'> 
-    >>> x = (5)
-    >>> type(x)
-    <class 'int'>     
-    
-.. index::
-    single: assignment; tuple 
-    single: tuple; assignment  
-  
-Tuple assignment
-----------------
-
-Python has a very powerful **tuple assignment** feature that allows a tuple of variables 
-on the left of an assignment to be assigned values from a tuple
-on the right of the assignment.
-
-.. sourcecode:: python
-    
-    (name, surname, birth_year, movie, movie_year, profession, birth_place) = julia
-    
-This does the equivalent of seven assignment statements, all on one easy line.  
-One requirement is that the number of variables on the left must match the number
-of elements in the tuple. 
-     
-Once in a while, it is useful to swap the values of two variables.  With
-conventional assignment statements, we have to use a temporary variable. For
-example, to swap ``a`` and ``b``:
-
-.. sourcecode:: python
-    
-    temp = a
-    a = b
-    b = temp
-
-Tuple assignment solves this problem neatly:
-
-.. sourcecode:: python
-    
-    (a, b) = (b, a)
-
-The left side is a tuple of variables; the right side is a tuple of values.
-Each value is assigned to its respective variable. All the expressions on the
-right side are evaluated before any of the assignments. This feature makes
-tuple assignment quite versatile.
-
-Naturally, the number of variables on the left and the number of values on the
-right have to be the same:
-
-.. sourcecode:: python
-    
-    >>> (a, b, c, d) = (1, 2, 3)
-    ValueError: need more than 3 values to unpack 
-
-.. index::
-    single: tuple; return value 
-
-Tuples as return values
------------------------
-
-Functions can return tuples as return values. This is very useful --- we often want to
-know some batsman's highest and lowest score, or we want to find the mean and the standard 
-deviation, or we want to know the year, the month, and the day, or if we're doing some
-some ecological modelling we may want to know the number of rabbits and the number
-of wolves on an island at a given time.  In each case, a function (which 
-can only return a single value), can create a single tuple holding multiple elements. 
-
-For example, we could write a function that returns both the area and the circumference
-of a circle of radius r:
-
-.. sourcecode:: python
-    
-    def f(r):
-        """ Return (circumference, area) of a circle of radius r """
-        c = 2 * math.pi * r
-        a = math.pi * r * r
-        return (c, a)
-    
-.. index:: fractal, fractal; Koch, Koch fractal
-    
+   
 Drawing Fractals
 ----------------
 
@@ -449,237 +300,6 @@ We would certainly never want something like this to happen to a user of one of
 our programs, so before finishing the recursion discussion, let's see how
 errors, any kinds of errors, are handled in Python.
 
-.. index:: exception, handling an exception, exception; handling, try ... except 
-
-Exceptions
-----------
-
-Whenever a runtime error occurs, it creates an **exception** object. The program stops
-running at this point and Python prints out the traceback, which ends with a message
-describing the exception that occurred.
-
-For example, dividing by zero creates an exception:
-
-.. sourcecode:: python
-    
-    >>> print(55/0)
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    ZeroDivisionError: integer division or modulo by zero
-    >>>
-
-So does accessing a non-existent list item:
-
-.. sourcecode:: python
-    
-    >>> a = []
-    >>> print(a[5])
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    IndexError: list index out of range
-    >>>
-
-Or trying to make an item assignment on a tuple:
-
-.. sourcecode:: python
-    
-    >>> tup = ('a', 'b', 'd', 'd')
-    >>> tup[2] = 'c' 
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    TypeError: 'tuple' object does not support item assignment
-    >>>
-
-In each case, the error message on the last line has two parts: the type of
-error before the colon, and specifics about the error after the colon.
-
-Sometimes we want to execute an operation that might cause an exception, but we
-don't want the program to stop. We can **handle the exception** using the
-``try`` statement to "wrap" a region of code.  
-
-For example, we might prompt the user for the name of a file and then try to
-open it. If the file doesn't exist, we don't want the program to crash; we want
-to handle the exception:
-
-.. sourcecode:: python
-    
-    filename = input('Enter a file name: ')
-    try:
-        f = open (filename, 'r')
-    except:
-        print('There is no file named', filename)
-
-The ``try`` statement has three separate clauses, or parts, 
-introduced by the keywords ``try`` ... ``except`` ... ``finally``.
-The ``finally`` clause can be omitted, so we'll consider the two-clause version
-of the ``try`` statement first.        
-        
-The ``try`` statement executes and monitors the statements in the first block. If no
-exceptions occur, it skips the block under the ``except`` clause. If any exception occurs,
-it executes the statements in the ``except`` clause and then continues.
-
-We could encapsulate this capability in a function: ``exists`` which takes a filename
-and returns true if the file exists, false if it doesn't:
-
-.. sourcecode:: python
-    
-    def exists(filename):
-        try:
-            f = open(filename)
-            f.close()
-            return True 
-        except:
-            return False 
-
-.. sidebar:: How to test if a file exists, without using exceptions
-
-    The function we've just shown is not one we'd recommend. It opens
-    and closes the file, which is semantically different from asking "does
-    it exist?". How?  Firstly, it might update some timestamps on the file.  
-    Secondly, it might tell you that there is no such file if some other 
-    program already happens to have the file open, or if your permissions 
-    settings don't allow you to access the file.
-
-    Python provides a module called ``os.path`` (this is the first
-    time we've seen a dotted module name with two namespace components). It
-    provides a number of useful functions to work with paths, files and directories,
-    so you should check out the help.  
-    
-    .. sourcecode:: python
-    
-        import os.path
-        
-        # This is the preferred way to check if a file exists.
-        if os.path.isfile("c:/temp/testdata.txt"):
-           ...
-           
-   
-            
-You can use multiple ``except`` clauses to handle different kinds of exceptions
-(see the `Errors and Exceptions <http://docs.python.org/tut/node10.html>`__
-lesson from Python creator Guido van Rossum's `Python Tutorial
-<http://docs.python.org/tut/tut.html>`__ for a more complete discussion of
-exceptions).  So your program could do one thing if the file does not exist,
-but do something else if the file was in use by another program.
-
-Can your program deliberately cause an exception?  
-If your program detects an error condition, you can **raise** an
-exception. Here is an example that gets input from the user and checks that the
-number is non-negative:
-
-.. sourcecode:: python
-   :linenos:
-    
-    def get_age():
-        age = int(input('Please enter your age: '))
-        if age < 0:
-            raise ValueError('{0} is not a valid age'.format(age))
-        return age
-  
-
-The ``raise`` statement creates an exception object, in this case, a ValueError 
-object, which encapsulates your specific information about the error. And it 
-immediately exits from the function, and its caller, and its caller, until it 
-encounters a ``try ... except`` that can handle the exception.   We call this 
-"unwinding the call stack".
- 
-``ValueError`` is one of the built-in exception types which
-most closely matches the kind of error we want to raise. The complete listing
-of built-in exceptions is found in  the `Built-in Exceptions
-<http://docs.python.org/lib/module-exceptions.html>`__ section of the `Python 
-Library Reference <http://docs.python.org/lib/>`__, again by Python's creator, 
-Guido van Rossum.
-
-If the function that called ``get_age`` (or its caller, or their caller, ...) 
-handles the error, then the program can
-continue; otherwise, Python prints the traceback and exits:
-
-.. sourcecode:: python
-    
-    >>> get_age()
-    Please enter your age: 42
-    42 
-    >>> get_age()
-    Please enter your age: -2
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-      File "learn_exceptions.py", line 4, in get_age
-        raise ValueError('{0} is not a valid age'.format(age))
-    ValueError: -2 is not a valid age
-    >>>
-
-The error message includes the exception type and the additional information
-you provided.
-
-Using exception handling, we can now modify our infinite recursion function
-so that it stops when it reaches the maximum recursion depth allowed:
-
-.. sourcecode:: python
-    
-    def recursion_depth(number):
-        print("Recursion depth number", number)
-        try:
-            recursion_depth(number + 1)
-        except:
-            print("I cannot go any deeper into this wormhole.")
-    
-    recursion_depth(0)
-
-Run this version and observe the results.
-
-.. index:: try ... except ... finally
-
-The ``finally`` clause of the ``try`` statement
------------------------------------------------
-
-A common programming pattern is to grab a resource of some kind --- e.g. 
-we create a window for turtles to draw on, or we dial up a connection to our
-internet service provider, or we may open a file for writing.   
-Then we perform some computation which may raise an exception, 
-or may work without any problems.
-
-Whatever happens, we want to "clean up" the resources we grabbed --- e.g. close
-the window, disconnect our dial-up connection, or close the file.  The ``finally``
-clause of the ``try`` statement is the way to do just this.  Consider
-this (somewhat contrived) example:
-
-.. sourcecode:: python
-   :linenos:
-
-    import turtle, time
-
-    def show_poly():
-        try:
-            win = turtle.Screen()   # Grab or create some resource - a window...
-            tess = turtle.Turtle()
-                # This dialog could be cancelled, or the conversion to int might fail.
-            n = int(input("How many sides do you want in your polygon?"))
-            angle = 360 / n
-            for i in range(n):      # Draw the polygon 
-                tess.forward(10)
-                tess.left(angle)
-            time.sleep(3)           # make program wait for a few seconds
-        finally:         
-            win.bye()               # close the turtle's window.
-
-
-    show_poly()
-    show_poly()
-    show_poly()
-
-In lines 18-20, ``show_poly`` is called three times.  Each one creates a new
-window for its turtle, and draws a polygon with the number of sides
-input by the user.  But what if the user enters a string that cannot be
-converted to an int?  What if they close the dialog?  We'll get an exception, 
-*but even though we've had an exception, we still want to close the turtle's window*.  
-Lines 14-15 does this for us.  Whether we complete the statements in the ``try`` 
-clause successfully or not, the ``finally`` block will always be executed.
-
-Notice that the exception is still unhandled --- only an ``except`` clause can
-handle an exception, so your program will still crash.  But at least it's turtle 
-window will be closed before it crashes! 
-
-
 .. index:: fibonacci numbers
 
 Case study: Fibonacci numbers  
@@ -787,31 +407,9 @@ Glossary
         A branch of the conditional statement in a recursive function that does
         not give rise to further recursive calls.
 
-    data structure
-        An organization of data for the purpose of making it easier to use.
-
-    exception
-        An error that occurs at runtime.
-
-    handle an exception
-        To prevent an exception from causing your program to crash, by wrapping
-        the block of code in a ``try`` / ``except`` construct.
-
-    immutable data type
-        A data type which cannot be modified.  Assignments to elements or
-        slices (sub-parts) of immutable types cause a runtime error.
-
     infinite recursion
         A function that calls itself recursively without ever reaching any base
         case. Eventually, infinite recursion causes a runtime error.
-
-    mutable data type
-        A data type which can be modified. All mutable types are compound
-        types.  Lists and dictionaries (see next chapter) are mutable data
-        types; strings and tuples are not.
-
-    raise
-        To create a deliberate exception by using the ``raise`` statement.
 
     recursion
         The process of calling a function that is already executing.
@@ -827,18 +425,6 @@ Glossary
         differs from a *circular definition*.  Recursive definitions often
         provide an elegant way to express complex data structures, like a directory
         that can contain other directories, or a menu that can contain other menus.
-
-    tuple
-        An immutable data type that contains related elements. Tuples are used
-        to group together related data, such as a person's name, their age, 
-        and their gender.  Tuples can be used wherever an immutable type
-        is required, such as for a key in a dictionary (see the next chapter).
-
-    tuple assignment
-        An assignment to all of the elements in a tuple using a single
-        assignment statement. Tuple assignment occurs *simultaneously* rather than
-        in sequence, making it useful for swapping values.
-
 
 Exercises
 ---------
@@ -937,7 +523,7 @@ Exercises
 
    As usual, add your test function and work on each of these one at a time until they pass all the tests.
    
-   .. admonition:: |rle_open|  But do you really want to do this? |rle_close| 
+   .. admonition::  But do you really want to do this? 
    
        Disclaimer.  These exercises illustrate nicely that the sequence abstraction is
        general, (because slicing, indexing, and concatenation is so general), so it is possible to 
@@ -993,13 +579,6 @@ Exercises
        
 #. Rewrite the fibonacci algorithm without using recursion. Can you find bigger
    terms of the sequence?  Can you find ``fib(200)``?
-                 
-#. Write a function named ``readposint`` that uses the ``input`` dialog to
-   prompt the user for a positive
-   integer and then checks the input to confirm that it meets the requirements. 
-   It should be able to handle inputs that cannot be converted to int, as well
-   as negative ints, and edge cases (e.g. when the user closes the dialog, or
-   does not enter anything at all.)   
    
 #. Use help to find out what ``sys.getrecursionlimit()`` and
    ``sys.setrecursionlimit(n)`` do. Create several experiments similar to what

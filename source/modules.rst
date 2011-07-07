@@ -5,19 +5,11 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 |    
     
-Modules and Files
-=================
+Modules
+=======
 
 
 Modules
@@ -25,12 +17,12 @@ Modules
 
 A **module** is a file containing Python definitions and statements intended
 for use in other Python programs. There are many Python modules that come with
-Python as part of the **standard library**. We have seen two of these already,
+Python as part of the **standard library**. We have seen at least two of these already,
 the ``turtle`` module and the ``string`` module.
 
 We have also shown you how to access help. The help system contains 
 a listing of all the standard modules that are available with Python.  
-You are encouraged to use and navigate help. 
+Play with help! 
 
 .. _random_numbers:
 
@@ -71,7 +63,7 @@ Other methods can also generate other distributions e.g. a bell-shaped,
 or "normal" distribution might be more appropriate for estimating seasonal rainfall,
 or the concentration of a compound in the body after taking a dose of medicine. 
 
-The ``random()`` method returns a floating number in the range [0.0, 1.0) --- the
+The ``random()`` method returns a floating point number in the range [0.0, 1.0) --- the
 square bracket means "closed interval on the left" and the round parenthesis means
 "open interval on the right".  In other words, 0.0 is possible, but all returned
 numbers will be strictly less than 1.0.  It is usual to *scale* the results after
@@ -115,8 +107,8 @@ precisely the same random sequence as it will tomorrow!
 Picking balls from bags, throwing dice, shuffling a pack of cards
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here is an example to generate a list containing `n` random ints between one and
-`limit`: 
+Here is an example to generate a list containing `n` random ints between a
+lower and an upper bound: 
 
 .. sourcecode:: python
 
@@ -137,23 +129,61 @@ Here is an example to generate a list containing `n` random ints between one and
 [8, 1, 8, 5, 6] 
 
 Notice that we got a duplicate in the result. Often this is
-wanted, e.g. if we throw a die five times, we would expect
+wanted, e.g. if we throw a die five times, we would expect some
 duplicates. 
 
 But what if you don't want duplicates?  If you wanted 5 distinct months, 
-then this algorithm is wrong.  A better algorithm is to generate the 
+then this algorithm is wrong.  In this case a good algorithm is to generate the 
 list of possibilities, shuffle it, and slice off the number of elements you want::
 
-    xs = list(range(1,13))  # make the list 1..12
-    random.shuffle(xs)      # shuffle it
-    result = xs[:5]         # take the first five elements
+    xs = list(range(1,13))  # make the list 1..12.  There are no duplicates
+    random.shuffle(xs)      # shuffle the list
+    result = xs[:5]         # take the first five elements.
  
-In statistics courses, the first case is usually described as
-pulling balls out of a bag *with replacement* --- you put the drawn
-ball back in each time.  The latter case, with no duplicates, 
-is usually described as pulling balls out of the bag *without
-replacement*. 
+In statistics courses, the first case --- allowing duplicates --- is usually 
+described as pulling balls out of a bag *with replacement* --- you put the drawn
+ball back in each time, so it can occur again.  The latter case, with no duplicates, 
+is usually described as pulling balls out of the bag *without replacement*. Once the
+ball is drawn, it doesn't go back to be drawn again.  TV lotto games work like this.
 
+The second "shuffle and slice" algorithm would not be so great if 
+you only wanted a few elements, but from a very large domain.  
+Suppose I wanted five numbers between one and ten million, without duplicates.  
+Generating a list of ten million items, shuffling it, and then slicing off 
+the first five would be a performance disaster!  So let us have another try:  
+
+.. sourcecode:: python
+
+    import random
+
+    def make_random_ints_no_dups(num, lower_bound, upper_bound):
+       """
+         Generate a list containing num random ints between lower_bound
+         and upper_bound. upper_bound is an open bound.  The result
+         list cannot contain duplicates.
+       """
+       result = []
+       rng = random.Random()
+       for i in range(num):
+            while True:
+                candidate = rng.randrange(lower_bound, upper_bound)
+                if candidate not in result:
+                    break;
+
+            result.append(candidate)
+       return result
+
+    xs = make_random_ints_no_dups(5, 1, 10000000)
+    print(xs)
+    
+This agreeably produces 5 random numbers, without duplicates:: 
+
+   [3344629, 1735163, 9433892, 1081511, 4923270]
+   
+Even this function has its pitfalls.  Can you spot what is going to happen in
+this case? ::
+
+   xs = make_random_ints_no_dups(10, 1, 6)
 
 The `math` module
 -----------------
@@ -182,28 +212,28 @@ rather than degrees.  There are two functions ``radians`` and ``degrees`` to
 convert between the two popular ways of measuring angles.
 
 Notice another difference between this module and our use of ``random`` and ``turtle``:
-in ``random`` and ``turtle`` we create objects and call methods on the object.  This is
+in ``random`` and ``turtle`` we create objects and we call methods on the object.  This is
 because objects have *state* --- a turtle has a colour, a position, a heading, etc., 
 and every random number generator has a seed value that determines its next result. 
 
-Mathematical functions are "pure" and don't need any state --- calculating the square root of
+Mathematical functions are "pure" and don't have any state --- calculating the square root of
 2.0 doesn't depend on any kind of state or history about what happened in the past.  
-So the functions are not methods of a stateful object --- 
-they are simply housed together in a module called `math`.  
+So the functions are not methods of an object --- 
+they are simply functions that are grouped together in a module called `math`.    
 
 .. index:: import statement, statement; import
 
 Creating your own modules
 -------------------------
 
-All we need to create our own modules is to save our script as 
+All we need to do to create our own modules is to save our script as 
 a file with a ``.py`` extension on the filename.  Suppose,
 for example, this script is saved as a file named ``seqtools.py``::
 
     def remove_at(pos, seq):
         return seq[:pos] + seq[pos+1:]
 
-We can now use our module in both scripts and the Python shell. To do so, we
+We can now use our module, both in scripts we write, or in the interactive Python interpreter. To do so, we
 must first *import* the module.  
 
 .. sourcecode:: python
@@ -214,7 +244,7 @@ must first *import* the module.
     'A sting!'
 
 
-Notice that  we do not include the ``.py`` file extension when
+We do not include the ``.py`` file extension when
 importing. Python expects the file names of Python modules to end in ``.py``,
 so the file extention is not included in the **import statement**.
 
@@ -266,7 +296,7 @@ multiple modules without causing an identification problem.
     
     # module1.py
     
-    question = "What is the meaning of life, the Universe, and everything?"
+    question = "What is the meaning of Life, the Universe, and Everything?"
     answer = 42
 
 .. sourcecode:: python
@@ -290,7 +320,7 @@ We can now import both modules and access ``question`` and ``answer`` in each:
     
 will output the following::
 
-    What is the meaning of life, the Universe, and everything?
+    What is the meaning of Life, the Universe, and Everything?
     What is your quest?
     42
     To seek the holy grail.
@@ -471,360 +501,6 @@ own, say ``my_own_unit_tester.py``, and simply use one line in each new script i
 
     from my_own_unit_tester import test
 
-.. index:: file   
-    
-Reading and writing files
--------------------------
-
-While a program is running, its data is stored in *random access memory* (RAM).
-RAM is fast and inexpensive, but it is also **volatile**, which means that when
-the program ends, or the computer shuts down, data in RAM disappears. To make
-data available the next time you turn on your computer and start your program,
-you have to write it to a **non-volatile** storage medium, such a hard drive,
-usb drive, or CD-RW.
-
-Data on non-volatile storage media is stored in named locations on the media
-called **files**. By reading and writing files, programs can save information
-between program runs.
-
-Working with files is a lot like working with a notebook. To use a notebook,
-you have to open it. When you're done, you have to close it.  While the
-notebook is open, you can either write in it or read from it. In either case,
-you know where you are in the notebook. You can read the whole notebook in its
-natural order or you can skip around.
-
-All of this applies to files as well. To open a file, you specify its name and
-indicate whether you want to read or write. 
-
-Opening a file creates a file object. In this example, the variable ``myfile``
-refers to the new object.
-
-.. sourcecode:: python
-    
-    myfile = open('test.dat', 'w')
-
-The open function takes two arguments. The first is the name of the file, and
-the second is the **mode**. Mode ``'w'`` means that we are opening the file for
-writing.
-
-If there is no file named ``test.dat``, it will be created. If there already is
-one, it will be replaced by the file we are writing.
-
-To put data in the file we invoke the ``write`` method on the object:
-
-.. sourcecode:: python
-    
-    myfile.write("Now is the time")
-    myfile.write("to close the file")
-
-Closing the file tells the system that we are done writing and makes
-the file available for reading:
-
-.. sourcecode:: python
-    
-    myfile.close()
-
-Now we can open the file again, this time for reading, and read the
-contents into a string. This time, the mode argument is ``'r'`` for reading:
-
-.. sourcecode:: python
-    
-    >>> myfile = open('test.dat', 'r')
-
-If we try to open a file that doesn't exist, we get an error:
-
-.. sourcecode:: python
-    
-    >>> myfile = open('test.cat', 'r')
-    IOError: [Errno 2] No such file or directory: 'test.cat'
-
-Not surprisingly, the ``read`` method reads data from the file. With no
-arguments, it reads the entire contents of the file into a single
-string:
-
-.. sourcecode:: python
-    
-    >>> text = myfile.read()
-    >>> print(text)
-    Now is the timeto close the file
-
-There is no space between time and to because we did not write a space
-between the strings.
-
-``read`` can also take an argument that indicates how many characters to read:
-
-.. sourcecode:: python
-    
-    >>> myfile = open('test.dat', 'r')
-    >>> print(myfile.read(5))
-    Now i
-
-If not enough characters are left in the file, ``read`` returns the remaining
-characters. When we get to the end of the file, ``read`` returns the empty
-string:
-
-.. sourcecode:: python
-    
-    >>> print(myfile.read(1000006))
-    s the timeto close the file
-    >>> print(myfile.read())
-       
-    >>>
-
-The following function copies a file, reading and writing up to fifty
-characters at a time. The first argument is the name of the original file; the
-second is the name of the new file:
-
-.. sourcecode:: python
-    
-    def copy_file(oldfile, newfile):
-        infile = open(oldfile, 'r')
-        outfile = open(newfile, 'w')
-        while True:
-            text = infile.read(50)
-            if text == "":
-                break
-            outfile.write(text)
-        infile.close()
-        outfile.close()
-
-This functions continues looping, reading 50 characters from ``infile`` and
-writing the same 50 charaters to ``outfile`` until the end of ``infile`` is
-reached, at which point ``text`` is empty and the ``break`` statement is
-executed.
-
-.. index:: file; text,  text file
-
-Text files
-----------
-
-A **text file** is a file that contains printable characters and whitespace,
-organized into lines separated by newline characters.  Since Python is
-specifically designed to process text files, it provides methods that make the
-job easy.
-
-Notice the subtle difference in abstraction here: in the previous section, we
-simply regarded a file as containing many characters, and could read them one
-at a time, many at a time, or all at once.  In this section, specifically for
-reading data, we're interested in files that are organized into lines, 
-and will process them line-at-a-time.
-
-To demonstrate, we'll create a text file with three lines of text separated by
-newlines:
-
-.. sourcecode:: python
-    
-    >>> outfile = open("test.dat","w")
-    >>> outfile.write("line one\nline two\nline three\n")
-    >>> outfile.close()
-
-The ``readline`` method reads all the characters up to and including the
-next newline character:
-
-.. sourcecode:: python
-    
-    >>> infile = open("test.dat","r")
-    >>> print(infile.readline())
-    line one
-       
-    >>>
-
-
-``readlines`` returns all of the remaining lines as a list of strings:
-
-.. sourcecode:: python
-
-    
-    >>> print(infile.readlines())
-    ['line two\n', 'line three\n']
-
-
-In this case, the output is in list format, which means that the
-strings appear with quotation marks and the newline character appears
-at the end of each.
-
-At the end of the file, ``readline`` returns the empty string and
-``readlines`` returns the empty list:
-
-.. sourcecode:: python
-    
-    >>> print(infile.readline())
-       
-    >>> print(infile.readlines())
-    []
-
-The following is an example of a line-processing program. ``filter`` makes a
-copy of ``oldfile``, omitting any lines that begin with ``#``:
-
-.. sourcecode:: python
-    
-    def filter(oldfile, newfile):
-        infile = open(oldfile, 'r')
-        outfile = open(newfile, 'w')
-        while True:
-            text = infile.readline()
-            if text == "":
-               break
-            if text[0] == '#':
-               continue
-            outfile.write(text)
-        infile.close()
-        outfile.close()
-        return
-
-The **continue statement** ends the current iteration of the loop, but
-continues looping. The flow of execution moves to the top of the loop, checks
-the condition, and proceeds accordingly.
-
-Thus, if ``text`` is the empty string, the loop exits. If the first character
-of ``text`` is a hash mark, the flow of execution goes to the top of the loop.
-Only if both conditions fail do we copy ``text`` into the new file.
-
-.. index:: directory
-
-Directories
------------
-
-Files on non-volatile storage media are organized by a set of rules known as a
-**file system**. File systems are made up of files and **directories**, which
-are containers for both files and other directories.
-
-When you create a new file by opening it and writing, the new file goes in the
-current directory (wherever you were when you ran the program). Similarly, when
-you open a file for reading, Python looks for it in the current directory.
-
-If you want to open a file somewhere else, you have to specify the **path** to
-the file, which is the name of the directory (or folder) where the file is
-located:
-
-.. sourcecode:: python
-    
-    >>> wordsfile = open('/usr/share/dict/words', 'r')
-    >>> wordlist = wordsfile.readlines()
-    >>> print(wordlist[:6])
-    ['\n', 'A\n', "A's\n", 'AOL\n', "AOL's\n", 'Aachen\n']
-
-This (unix) example opens a file named ``words`` that resides in a directory named
-``dict``, which resides in ``share``, which resides in ``usr``, which resides
-in the top-level directory of the system, called ``/``. It then reads in each
-line into a list using ``readlines``, and prints out the first 5 elements from
-that list.  
-
-A Windows path might be ``"c:/temp/words.txt"`` or ``"c:\\temp\\words.txt"``.
-Because backslashes are used to escape things like newlines and tabs, you need 
-to write two backslashes in a literal string to get one!  So the length of these two
-strings is the same!
-
-You cannot use ``/`` or ``\`` as part of a filename; they are reserved as a **delimiter**
-between directory and filenames.
-
-The file ``/usr/share/dict/words`` should exist on unix-based systems, and
-contains a list of words in alphabetical order.
-
-
-What about fetching something from the web?
--------------------------------------------
-
-The Python libraries are pretty messy in places.  But here is a very
-simple example that copies a web URL to a local file, and then opens
-and prints the file contents using the techniques we've covered above.
-
-.. sourcecode:: python
-    :linenos:
-    
-    import urllib.request
-
-    url = 'http://www.cs.ru.ac.za/courses/CSc102/pythons.txt' 
-    destination_filename = 'c:\\temp\\tempfile.txt'
-    
-    wf = urllib.request.urlretrieve(url, destination_filename)
-
-    f = open(destination_filename)
-    s = f.read()
-    f.close()
-    print(s)
-    
-The ``urlretrieve`` function collects the resource at the url, and
-saves it to a local file.  You could use this to download any kind
-of content from Internet.
-   
-You'll need to get a few things right before this works:  
- * The page you're trying to fetch must exist!  Check this using a browser.
- * You'll need permission to write to the destination filename.
- * If you are behind a proxy server, (as many students are), this may
-   require some more special handling to work around your proxy. 
-   Use a local text resource for the purpose of this demonstration! 
-  
-
-Counting Letters
-----------------
-
-The ``ord`` function returns the integer representation of a character:
-
-.. sourcecode:: python
-    
-    >>> ord('a')
-    97
-    >>> ord('A')
-    65
-    >>>
-
-This example explains why ``'Apple' < 'apple'`` evaluates to ``True``.
-
-The ``chr`` function is the inverse of ``ord``. It takes an integer as an
-argument and returns its character representation:
-
-.. sourcecode:: python
-    
-    >>> for i in range(65, 71):
-    ...     print(chr(i))
-    ...
-    A
-    B
-    C
-    D
-    E
-    F
-    >>>
-
-The following program, ``countletters.py`` counts the number of times each
-character occurs in the book `Alice in Wonderland <./resources/ch10/alice_in_wonderland.txt>`__:
-
-.. sourcecode:: python
-    
-    #
-    # countletters.py
-    #
-    
-    def display(i):
-        if i == 10: return 'LF'
-        if i == 13: return 'CR' 
-        if i == 32: return 'SPACE' 
-        return chr(i)
-    
-    infile = open('alice_in_wonderland.txt', 'r')
-    text = infile.read()
-    infile.close()
-    
-    counts = 128 * [0]
-    
-    for letter in text:
-        counts[ord(letter)] += 1
-    
-    layout = "{0:>12} {1:>5}\n"
-    outfile = open('alice_counts.dat', 'w')
-    outfile.write(layout.format("Character", "Count"))
-    outfile.write("============ =====\n")
-    
-    for i in range(len(counts)):
-        if counts[i] > 0:
-            outfile.write(layout.format(display(i), counts[i]))
-    
-    outfile.close()
-
-Run this program and look at the output file it generates using a text editor.
-You will be asked to analyze the program in the exercises below.
-
 
 Glossary
 --------
@@ -863,31 +539,10 @@ Glossary
         and proceeds accordingly, so further execution of the loop body may still take
         place.
 
-    delimiter
-        A sequence of one or more characters used to specify the boundary
-        between separate parts of text.
-
-    directory
-        A named collection of files, also called a folder.  Directories can
-        contain files and other directories, which are refered to as
-        *subdirectories* of the directory that contains them.
-
     dot operator
         The dot operator ( ``.``) permits access to attributes and functions of
         a module (or attributes and methods of a class or instance -- as we
         have seen elsewhere).
-
-    file
-        A named entity, usually stored on a hard drive, floppy disk, or CD-ROM,
-        that contains a stream of characters.
-
-    file system
-        A method for naming, accessing, and organizing files and the data they
-        contain. 
-            
-    fully qualified name
-        A name that is prefixed by some namespace identifier and the dot operator, or
-        by an instance object, e.g. ``math.sqrt`` or ``tess.forward(10)``.
 
     import statement
         A statement which makes the objects contained in a module available for
@@ -911,11 +566,6 @@ Glossary
             namespace for the imported module, requiring ``mymod.v1`` to access
             the ``v1`` variable.
 
-    Jython
-        An implementation of the Python programming language written in Java.
-        (see the Jython home page at `http://www.jython.org
-        <http://www.jython.org>`__ for more information.)
-
     method
         Function-like attribute of an object. Methods are *invoked* (called) on
         an object using the dot operator. For example:
@@ -929,11 +579,6 @@ Glossary
 
         We say that the method, ``upper`` is invoked on the string, ``s``.
         ``s`` is implicitely the first argument to ``upper``.
-
-    mode
-        A distinct method of operation within a computer program.  Files in
-        Python can be openned in one of three modes: read (``'r'``), write
-        (``'w'``), and append (``'a'``).
 
     module
         A file containing Python definitions and statements intended for use in
@@ -961,81 +606,15 @@ Glossary
 
         prevents naming collisions.
         
-    non-volatile memory
-        Memory that can maintain its state without power. Hard drives, flash
-        drives, and rewritable compact disks (CD-RW) are each examples of
-        non-volatile memory.
-
-    path
-        A sequence of directory names that specifies the exact location of a
-        file.
-
-    standard library
+     standard library
         A library is a collection of software used as tools in the development
         of other software. The standard library of a programming language is
         the set of such tools that are distributed with the core programming
         language.  Python comes with an extensive standard library.
 
-    text file
-        A file that contains printable characters organized into lines
-        separated by newline characters.
-
-    volatile memory
-        Memory which requires an electrical current to maintain state. The
-        *main memory* or RAM of a computer is volatile.  Information stored in
-        RAM is lost when the computer is turned off.
- 
 Exercises
 ---------
 
-#. Every week a computer scientist buys four lotto tickets. He always choses the 
-   same prime numbers, with the hope that he ever hits the jackpot, others
-   will suddenly get interested in prime numbers.  He represents his weekly tickets
-   in Python as a list of lists::
-
-        my_tickets = [ [ 7, 17, 37, 19, 23, 43], 
-                       [ 7,  2, 13, 41, 31, 43], 
-                       [ 2,  5,  7, 11, 13, 17], 
-                       [13, 17, 37, 19, 23, 43] ]
-                       
-   Complete these exercises.
-    
-   a. Each lotto draw takes six random balls, numbered from 1 to 49.  Write
-      a function to return a lotto draw.
-   b. Write a function that returns compares a single ticket and a draw, and returns
-      the number of correct picks on that ticket::
-      
-        test(lotto_match([42, 4, 7, 11, 1, 13], [2, 5, 7, 11, 13, 17]), 3)
-         
-   c. Write a function that takes a list of tickets and a draw, and returns a list 
-      telling how many picks were correct on each ticket::
-      
-        test(lotto_matches([42, 4, 7, 11, 1, 13], my_tickets), [1, 2, 3, 1])
-      
-   d. Write a function that takes a list of integers, and returns the number of primes in the list::
-   
-        test(primes_in([42, 4, 7, 11, 1, 13]), 3)
-   
-   e. Write a function to discover whether the computer scientist has missed any
-      prime numbers in his selection of the four tickets.  Return a list of all primes that he has missed::
-      
-         test(prime_misses(my_tickets), [3, 29, 47])
-         
-   f. Write a function that repeatedly makes a new draw, and compares the draw to the four tickets.
-   
-      i. Count how many draws are needed until one of the computer scientist's tickets has at least 
-         3 correct picks.
-         Try the experiment twenty times, and average out the number of draws needed.
-       
-      ii. How many draws are needed, on average, before he gets at least 4 picks correct?  
-              
-      iii. How many draws are needed, on average, before he gets at least 5 correct?  (Hint: this
-           might take a while.  It would be nice if you could print some dots, like a progress bar,
-           to show when each of the 20 experiments has completed.)
-
-      Notice that we have difficulty constructing test cases here, because our random numbers
-      are not deterministic. Automated testing only really works if you already know what 
-      the answer should be! 
 
 #. Open help for the ``calendar`` module. 
 
@@ -1115,7 +694,7 @@ Exercises
    Run ``mymodule1.py`` and ``namespace_test.py`` again. In which case do you
    see the new print statement?
    
-#. In a Python shell try the following:
+#. In a Python shell / interactive interpreter, try the following:
 
    .. sourcecode:: python
     
@@ -1123,8 +702,6 @@ Exercises
 
    What does Tim Peter's have to say about namespaces?
    
-#. Rewrite ``matrix_mult`` from the last chapter using what you have learned
-   about list methods.
    
 #. Give the Python interpreter's response to each of the following from a
    continuous interpreter session:
@@ -1194,59 +771,3 @@ Exercises
 
    Save this module so you can use the tools it contains in future programs.
    
-#. `unsorted_fruits.txt <resources/ch10/unsorted_fruits.txt>`__ contains a
-   list of 26 fruits, each one with a name that begins with a different letter
-   of the alphabet. Write a program named ``sort_fruits.py`` that reads in the
-   fruits from ``unsorted_fruits.txt`` and writes them out in alphabetical
-   order to a file named ``sorted_fruits.txt``.
-   
-#. Answer the following questions about ``countletters.py``:
-
-   a. Explain in detail what the three lines do:
-
-      .. sourcecode:: python
-        
-            infile = open('alice_in_wonderland.txt', 'r')
-            text = infile.read()
-            infile.close()
-
-      What would ``type(text)`` return after these lines have been executed?
-      
-   b. What does the expression ``128 * [0]`` evaluate to? Read about `ASCII
-      <http://en.wikipedia.org/wiki/ASCII>`__ in Wikipedia and explain why you 
-      think the variable, ``counts`` is assigned to ``128 * [0]`` in light of
-      what you read.
-      
-   c. What does
-
-      .. sourcecode:: python
-        
-            for letter in text:
-                counts[ord(letter)] += 1
-
-      do to ``counts``?
-      
-   d. Explain the purpose of the ``display`` function. Why does it check for
-      values ``10``, ``13``, and ``32``? What is special about those values?
-      
-   e. Describe in detail what the lines
-
-      .. sourcecode:: python
-        
-            layout = "{0:>9} {1:>5}\n"
-            outfile = open('alice_counts.dat', 'w')
-            outfile.write(layout.format("Character", "Count"))
-                          outfile.write("========= =====\n")
-
-      do. What will be in ``alice_counts.dat`` when they finish executing?
-      
-   f. Finally, explain in detail what
-
-      .. sourcecode:: python
-        
-            for i in range(len(counts)):
-                if counts[i] > 0:
-                    outfile.write(layout.format(display(i), counts[i]))
-
-      does. 
-

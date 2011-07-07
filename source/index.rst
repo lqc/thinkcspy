@@ -34,22 +34,25 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 * `Chapter 6 <fruitful_functions.html>`__ *Fruitful functions*
 * `Chapter 7 <iteration.html>`__ *Iteration*
 * `Chapter 8 <strings.html>`__ *Strings*
-* `Chapter 9 <events.html>`__ *Event handling*
-* `Chapter 10 <lists.html>`__ *Lists*
-* `Chapter 11 <modules_and_files.html>`__ *Modules and Files*
-* `Chapter 12 <list_algorithms.html>`__ *List Algorithms*
-* `Chapter 13 <classes_and_objects_I.html>`__ *Classes and Objects - the Basics*
-* `Chapter 14 <classes_and_objects_II.html>`__ *Classes and Objects - Digging a little deeper*
-* `Chapter 15 <pygame.html>`__ *PyGame*
-* `Chapter 16 <recursion_and_exceptions.html>`__ *Recursion and Exceptions*
-* `Chapter 17 <dictionaries.html>`__ *Dictionaries*
-* `Chapter 18 <even_more_oop.html>`__ *Even more OOP*
-* `Chapter 20 <inheritance.html>`__ *Inheritance*
-* `Chapter 19 <sets.html>`__ *Sets of Objects*
-* `Chapter 21 <linked_lists.html>`__ *Linked Lists*
-* `Chapter 22 <stacks.html>`__ *Stacks*
-* `Chapter 23 <queues.html>`__ *Queues*
-* `Chapter 24 <trees.html>`__ *Trees*
+* `Chapter 9 <tuples.html>`__ *Tuples*
+* `Chapter 10 <events.html>`__ *Event handling*
+* `Chapter 11 <lists.html>`__ *Lists*
+* `Chapter 12 <modules.html>`__ *Modules*
+* `Chapter 13 <files.html>`__ *Files*
+* `Chapter 14 <list_algorithms.html>`__ *List Algorithms*
+* `Chapter 15 <classes_and_objects_I.html>`__ *Classes and Objects - the Basics*
+* `Chapter 16 <classes_and_objects_II.html>`__ *Classes and Objects - Digging a little deeper*
+* `Chapter 17 <pygame.html>`__ *PyGame*
+* `Chapter 18 <recursion.html>`__ *Recursion*
+* `Chapter 19 <exceptions.html>`__ *Exceptions*
+* `Chapter 20 <dictionaries.html>`__ *Dictionaries*
+* `Chapter 21 <even_more_oop.html>`__ *Even more OOP*
+* `Chapter 22 <inheritance.html>`__ *Inheritance*
+* `Chapter 23 <sets.html>`__ *Sets of Objects*
+* `Chapter 24 <linked_lists.html>`__ *Linked Lists*
+* `Chapter 25 <stacks.html>`__ *Stacks*
+* `Chapter 26 <queues.html>`__ *Queues*
+* `Chapter 27 <trees.html>`__ *Trees*
 * `Appendix A <app_a.html>`__ *Debugging*
 * `Appendix B <app_b.html>`__ *An odds-and-ends Workbook*
 * `Appendix C <app_c.html>`__ *Configuring Ubuntu for Python Development*
@@ -80,14 +83,17 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
     fruitful_functions.rst
     iteration.rst
     strings.rst
+    tuples.rst
     events.rst
     lists.rst
-    modules_and_files.rst
+    modules.rst
+    files.rst
     list_algorithms.rst
     classes_and_objects_I.rst
     classes_and_objects_II.rst
     pygame.rst
-    recursion_and_exceptions.rst
+    recursion.rst
+    exceptions.rst
     dictionaries.rst
     even_more_oop.rst
     inheritance.rst
