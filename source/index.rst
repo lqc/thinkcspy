@@ -26,30 +26,30 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 * `Preface <preface.html>`__
 * `Preface-3 <preface3-rle.html>`__   *This Rhodes Local Edition (RLE) of the book* 
 * `Contributor List <contrib.html>`__
-* `Chapter 1 <ch01.html>`__ *The way of the program*
-* `Chapter 2 <ch02.html>`__ *Variables, expressions, and statements*
-* `Chapter 3 <ch03.html>`__ *Hello, little turtles!*  
-* `Chapter 4 <ch04.html>`__ *Functions*
-* `Chapter 5 <ch05.html>`__ *Conditionals*
-* `Chapter 6 <ch06.html>`__ *Fruitful functions*
-* `Chapter 7 <ch07.html>`__ *Iteration*
-* `Chapter 8 <ch08.html>`__ *Strings*
-* `Chapter 9 <ch_events.html>`__ *Event handling*
-* `Chapter 10 <ch09.html>`__ *Lists*
-* `Chapter 11 <ch10.html>`__ *Modules and Files*
-* `Chapter 12 <ch_list_algorithms.html>`__ *List Algorithms*
-* `Chapter 13 <ch13.html>`__ *Classes and Objects - the Basics*
-* `Chapter 14 <ch14.html>`__ *Classes and Objects - Digging a little deeper*
-* `Chapter 15 <ch_pygame.html>`__ *PyGame*
-* `Chapter 16 <ch11.html>`__ *Recursion and Exceptions*
-* `Chapter 17 <ch12.html>`__ *Dictionaries*
-* `Chapter 18 <ch15.html>`__ *Even more OOP*
-* `Chapter 20 <ch17.html>`__ *Inheritance*
-* `Chapter 19 <ch16.html>`__ *Sets of Objects*
-* `Chapter 21 <ch18.html>`__ *Linked Lists*
-* `Chapter 22 <ch19.html>`__ *Stacks*
-* `Chapter 23 <ch20.html>`__ *Queues*
-* `Chapter 24 <ch21.html>`__ *Trees*
+* `Chapter 1 <way_of_the_program.html>`__ *The way of the program*
+* `Chapter 2 <variables_expressions_statements.html>`__ *Variables, expressions, and statements*
+* `Chapter 3 <hello_little_turtles.html>`__ *Hello, little turtles!*  
+* `Chapter 4 <functions.html>`__ *Functions*
+* `Chapter 5 <conditionals.html>`__ *Conditionals*
+* `Chapter 6 <fruitful_functions.html>`__ *Fruitful functions*
+* `Chapter 7 <iteration.html>`__ *Iteration*
+* `Chapter 8 <strings.html>`__ *Strings*
+* `Chapter 9 <events.html>`__ *Event handling*
+* `Chapter 10 <lists.html>`__ *Lists*
+* `Chapter 11 <modules_and_files.html>`__ *Modules and Files*
+* `Chapter 12 <list_algorithms.html>`__ *List Algorithms*
+* `Chapter 13 <classes_and_objects_I.html>`__ *Classes and Objects - the Basics*
+* `Chapter 14 <classes_and_objects_II.html>`__ *Classes and Objects - Digging a little deeper*
+* `Chapter 15 <pygame.html>`__ *PyGame*
+* `Chapter 16 <recursion_and_exceptions.html>`__ *Recursion and Exceptions*
+* `Chapter 17 <dictionaries.html>`__ *Dictionaries*
+* `Chapter 18 <even_more_oop.html>`__ *Even more OOP*
+* `Chapter 20 <inheritance.html>`__ *Inheritance*
+* `Chapter 19 <sets.html>`__ *Sets of Objects*
+* `Chapter 21 <linked_lists.html>`__ *Linked Lists*
+* `Chapter 22 <stacks.html>`__ *Stacks*
+* `Chapter 23 <queues.html>`__ *Queues*
+* `Chapter 24 <trees.html>`__ *Trees*
 * `Appendix A <app_a.html>`__ *Debugging*
 * `Appendix B <app_b.html>`__ *An odds-and-ends Workbook*
 * `Appendix C <app_c.html>`__ *Configuring Ubuntu for Python Development*
@@ -72,31 +72,30 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
     :numbered:
     :hidden:
 
-    ch01.rst
-    ch02.rst
-    ch03.rst
-    ch04.rst
-    ch05.rst
-    ch06.rst
-    ch07.rst
-    ch08.rst
-    ch_events.rst
-    ch09.rst
-    ch10.rst
-    ch_list_algorithms.rst
-    ch13.rst
-    ch14.rst
-    ch_pygame.rst
-    ch11.rst
-    ch12.rst
-    ch15.rst
-    ch17.rst
-    ch16.rst
-    ch18.rst
-    ch19.rst
-    ch20.rst
-
-    ch21.rst
+    way_of_the_program.rst
+    variables_expressions_statements.rst
+    hello_little_turtles.rst
+    functions.rst
+    conditionals.rst
+    fruitful_functions.rst
+    iteration.rst
+    strings.rst
+    events.rst
+    lists.rst
+    modules_and_files.rst
+    list_algorithms.rst
+    classes_and_objects_I.rst
+    classes_and_objects_II.rst
+    pygame.rst
+    recursion_and_exceptions.rst
+    dictionaries.rst
+    even_more_oop.rst
+    inheritance.rst
+    sets.rst
+    linked_lists.rst
+    stacks.rst
+    queues.rst
+    trees.rst
 
 .. toctree::
     :maxdepth: 1

@@ -14,6 +14,7 @@
    
 .. |rle_close| image:: illustrations/rle_close.png
     
+|
     
 Variables, expressions and statements
 =====================================
