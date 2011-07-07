@@ -16,16 +16,17 @@
  
 |    
     
-.. index:: list, element, sequence, collection    
+.. index:: list, element, item, sequence, collection    
     
 Lists
 =====
 
-A **list** is an ordered set of values, where each value is identified by an
-index. The values that make up a list are called its **elements**. Lists are
+A **list** is an ordered collection of values. The values that make up a list 
+are called its **elements**, or its **items**. 
+We will use the term `element` or `item` to mean the same thing. Lists are
 similar to strings, which are ordered collections of characters, except that the
-elements of a list can have any type.  Lists and strings --- and other things
-that behave like ordered sets --- are called **sequences**.
+elements of a list can be any type.  Lists and strings --- and other collections
+that maintain the order of their items --- are called **sequences**.
 
 .. index:: nested list, list; nested
 
@@ -51,19 +52,17 @@ list contains a string, a float, an integer, and
 
 A list within another list is said to be **nested**.
 
-Finally, there is a special list that contains no elements. It is called the
-empty list, and is denoted ``[]``.
+Finally, a list with no elements is called an empty list,
+and is denoted ``[]``.
 
-With all these ways to create lists, it would be disappointing if we couldn't
-assign list values to variables or pass lists as parameters to functions. We
-have already seen that we can:
+We have already seen that we can assign list values to variables or pass lists as parameters to functions:
 
 .. sourcecode:: python
     
     >>> vocabulary = ["ameliorate", "castigate", "defenestrate"]
     >>> numbers = [17, 123]
-    >>> empty = []
-    >>> print(vocabulary, numbers, empty)
+    >>> an_empty_list = []
+    >>> print(vocabulary, numbers, an_empty_list)
     ['ameliorate', 'castigate', 'defenestrate'] [17, 123] []
 
 .. _accessing-elements:
@@ -157,7 +156,7 @@ single element in its parent list. The length of this list is 4:
 
 .. sourcecode:: python
     
-    ['spam!', 1, ['Brie', 'Roquefort', 'Pol le Veq'], [1, 2, 3]]
+    ['car makers', 1, ['Ford', 'Toyota', 'BMW'], [1, 2, 3]]
 
 
 List membership
@@ -349,8 +348,8 @@ index.
 
 .. index:: is operator, objects and values
 
-Objects and values
-------------------
+Objects and references
+----------------------
 
 If we execute these assignment statements,
 
@@ -359,18 +358,16 @@ If we execute these assignment statements,
     a = "banana"
     b = "banana"
 
-we know that ``a`` and ``b`` will refer to a string with the letters
-``"banana"``. But we don't know yet whether they point to the *same* string.
+we know that ``a`` and ``b`` will refer to a string ojbect with the letters
+``"banana"``. But we don't know yet whether they point to the *same* string object.
 
-There are two possible ways the Python interpreter could arrange its internal states:
+There are two possible ways the Python interpreter could arrange its memory:
 
 .. image:: illustrations/list1.png
    :alt: List illustration 
 
-In one case, ``a`` and ``b`` refer to two different things that have the same
-value. In the second case, they refer to the same thing. These things have
-names --- they are called **objects**. An object is something a variable can
-refer to.
+In one case, ``a`` and ``b`` refer to two different objects that have the same
+value. In the second case, they refer to the same object. 
 
 We can test whether two names refer to the same object using the *is*
 operator: 
@@ -381,7 +378,7 @@ operator:
     True
 
 This tells us that both ``a`` and ``b`` refer to the same object, and that it
-is the second of the two state snapshots that describes the relationship. 
+is the second of the two state snapshots that accurately describes the relationship. 
 
 Since strings are *immutable*, Python optimizes resources by making two names
 that refer to the same string value refer to the same object.
@@ -459,7 +456,10 @@ The easiest way to clone a list is to use the slice operator:
     [1, 2, 3]
 
 Taking any slice of ``a`` creates a new list. In this case the slice happens to
-consist of the whole list.
+consist of the whole list.  So now the relationship is like this:
+
+.. image:: illustrations/mult_references2.png
+   :alt: State snapshot for equal different lists 
 
 Now we are free to make changes to ``b`` without worrying that we'll inadvertently be
 changing ``a``:
@@ -523,17 +523,18 @@ each of its elements. The following squares all the numbers from ``1`` to
         numbers[i] = numbers[i]**2
 
 Take a moment to think about ``range(len(numbers))`` until you understand how
-it works. We are interested here in both the *value* if an item, and its *index* within the
-list, so that we can assign a new value to that position withing the list.
+it works. 
 
+In this example we are interested in both the *value* if an item, (we want to 
+square the value), and its *index* (so that we can assign a new value to that position).
 This pattern is common enough that Python provides a nicer way to implement it:
 
 .. sourcecode:: python
     
     numbers = [1, 2, 3, 4, 5]
     
-    for (i, value) in enumerate(numbers):
-        numbers[i] = value**2
+    for (i, val) in enumerate(numbers):
+        numbers[i] = val**2
 
 ``enumerate`` generates pairs of both (index, value) during
 the list traversal. Try this next example to see more clearly how ``enumerate``
@@ -558,7 +559,7 @@ List parameters
 Passing a list as an argument actually passes a reference to the list, not a
 copy or clone of the list. So parameter passing creates an alias for you: the caller
 has one variable referencing the list, and the called function has an alias, but there
-is only one underlying list.
+is only one underlying list object.
 For example, the function below takes a list as an
 argument and multiplies each element in the list by 2:
 
@@ -595,7 +596,7 @@ If a function modifies the items of a list parameter, the caller sees the change
 .. admonition::  Use the Python visualizer!
 
     We've already mentioned the Python visualizer at http://netserv.ict.ru.ac.za/python3_viz.
-    It is a very useful tool for building a good understanding of aliases, assignments,
+    It is a very useful tool for building a good understanding of references, aliases, assignments,
     and passing arguments to functions.  Pay special attention to cases where you clone 
     a list or have two separate lists, and cases where there is only one underlying list,
     but more than one variable is aliased to reference the list.
@@ -728,7 +729,7 @@ important **pattern** for your toolbox. Whenever you need to
 write a function that creates and returns a list, the pattern is
 usually::
 
-    initialize a result variable to be the empty list
+    initialize a result variable to be an empty list
     loop
        create a new element 
        append it to result
@@ -738,7 +739,7 @@ Let us show another use of this pattern.  Assuming you already have a function
 ``is_prime(x)`` that can test if x is prime.  Write a function
 to return a list of all prime numbers less than n::
 
-   def primes_upto(n):
+   def primes_lessthan(n):
        """ Return a list of all prime numbers less than n. """
        result = []
        for i in range(2, n):
@@ -955,6 +956,49 @@ Using TDD has several benefits to our software development process.  It:
 * assures that we have a well developed automated test suite for our software,
   facilitating later additions and improvements.
 
+
+.. admonition::  Beware of using `*` for replicating objects
+
+    The bug we introduced and caught here was really tricky, and required a deep 
+    insight into the inner workings of Python. The Python designers gave us 
+    us a cute-looking shorthand notation ``xs * 3``, but it was not at all 
+    obvious that what we were getting was three alias references, rather than three 
+    clones of `xs`. You might prefer to avoid language features that have
+    hidden landmines.  
+    
+    For example, if your boss gave you the working 
+    version of `create_matrix` above, and said "instead of initializing each 
+    element of the array to 0, make that value a parameter of the function, 
+    so that the caller can choose what initial values he wants in the matrix.  
+    You leap into action, and deliver this new version, proudly announcing that
+    it passes all the tests:
+
+    .. sourcecode:: python
+       :linenos:
+    
+       def make_matrix(rows, columns, val=0):
+           """
+              Create an empty matrix, all elements val (which defaults to 0),
+              of rows where each row has columns elements
+           """
+           matrix = []
+           for r in range(rows):
+               this_row = [val] * columns
+               matrix.append(this_row)
+           return matrix
+
+    But when your boss wants a matrix of dates, he calls your function like this::
+    
+        dts = make_matrix(3, 4, [1,'Jan',2012])
+        
+    Oops! It is wrong again, because again the `*` operator on line 7 has created
+    aliases again!  Changing one of the months in the matrix of dates 
+    changes all the others in the same row! 
+    
+    We'll see how to solve this in the next chapter.
+ 
+
+  
 .. index:: strings and lists, split, join
 
 Strings and lists
