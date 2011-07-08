@@ -1055,7 +1055,7 @@ like this::
    
 We can put many pairs into a list of pairs::
 
-    celebs =  [("Paris Hilton", 1981), ("Brad Pitt", 1963), ("Jack Nicholson", 1937), ("Justine Bieber", 1994)] 
+    celebs =  [("Paris Hilton", 1981), ("Brad Pitt", 1963), ("Jack Nicholson", 1937), ("Justin Bieber", 1994)] 
  
 Here is a quick sample of things we can do with structured data like this.  First,
 print all the celebs::
@@ -1065,7 +1065,7 @@ print all the celebs::
    
 This prints the following::
    
-    [('Paris Hilton', 1981), ('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justine Bieber', 1994)]
+    [('Paris Hilton', 1981), ('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justin Bieber', 1994)]
     4
  
 Notice that the celebs list has just 4 elements, each of them pairs.  

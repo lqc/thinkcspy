@@ -116,8 +116,9 @@ Each time through the loop, the variable ``i`` is used as an index into the
 list, printing the ``i``'th element. This pattern of computation is called a
 **list traversal**.
 
-The above sample doesn't need or use the index ``i`` for anything, so this  
-simpler version should be preferred:
+The above sample doesn't need or use the index ``i`` for anything besides getting
+the items from the list, so this more direct version --- where the `for` loop gets
+the items --- might be preferred:
 
 .. sourcecode:: python
     
@@ -147,9 +148,8 @@ correctly for any size list:
 
     
 The last time the body of the loop is executed, ``i`` is ``len(horsemen) - 1``, 
-which is the index of the last element. Of course, the version in the previous
-section that didn't use any index looks even more attractive now: it doesn't need
-any adjustments if extra elements are added to the list.
+which is the index of the last element. (But the version without the index
+looks even better now!)
 
 Although a list can contain another list, the nested list still counts as a
 single element in its parent list. The length of this list is 4:
@@ -162,7 +162,7 @@ single element in its parent list. The length of this list is 4:
 List membership
 ---------------
 
-``in`` and ``not in`` are boolean operators that tests membership in a sequence. We
+``in`` and ``not in`` are boolean operators that test membership in a sequence. We
 used them previously with strings, but they also work with lists and
 other sequences:
 
@@ -173,10 +173,10 @@ other sequences:
     True
     >>> 'debauchery' in horsemen
     False
-   >>> 'debauchery' not in horsemen
+    >>> 'debauchery' not in horsemen
     True
     
-This allows a more elegant version of the nested loop program we previously used 
+Using this produces a more elegant version of the nested loop program we previously used 
 to count the number of students doing Computer Science
 in the section :ref:`nested_data`:  
 
@@ -188,14 +188,14 @@ in the section :ref:`nested_data`:
             ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
             ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
             ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
-            
-    # Count how many students are taking CompSci
-    counter = 0
-    for (name, subjects) in students:
-        if "CompSci" in subjects:            
-               counter += 1
-               
-    print("The number of students taking CompSci is", counter)
+                
+        # Count how many students are taking CompSci
+        counter = 0
+        for (name, subjects) in students:
+            if "CompSci" in subjects:            
+                   counter += 1
+                   
+        print("The number of students taking CompSci is", counter)
 
 
 List operations
@@ -511,30 +511,29 @@ Any list expression can be used in a ``for`` loop:
 The first example prints all the multiples of 3 between 0 and 19. The second
 example expresses enthusiasm for various fruits.
 
-Since lists are mutable, it is often desirable to traverse a list, modifying
-each of its elements. The following squares all the numbers from ``1`` to
-``5``:
+Since lists are mutable, we often want to traverse a list, changing
+each of its elements. The following squares all the numbers in the list `xs`:
 
 .. sourcecode:: python
 
-    numbers = [1, 2, 3, 4, 5]
+    xs = [1, 2, 3, 4, 5]
     
-    for i in range(len(numbers)):
-        numbers[i] = numbers[i]**2
+    for i in range(len(xs)):
+        xs[i] = xs[i]**2
 
-Take a moment to think about ``range(len(numbers))`` until you understand how
+Take a moment to think about ``range(len(xs))`` until you understand how
 it works. 
 
-In this example we are interested in both the *value* if an item, (we want to 
-square the value), and its *index* (so that we can assign a new value to that position).
+In this example we are interested in both the *value* of an item, (we want to 
+square that value), and its *index* (so that we can assign the new value to that position).
 This pattern is common enough that Python provides a nicer way to implement it:
 
 .. sourcecode:: python
     
-    numbers = [1, 2, 3, 4, 5]
+    xs = [1, 2, 3, 4, 5]
     
-    for (i, val) in enumerate(numbers):
-        numbers[i] = val**2
+    for (i, val) in enumerate(xs):
+        xs[i] = val**2
 
 ``enumerate`` generates pairs of both (index, value) during
 the list traversal. Try this next example to see more clearly how ``enumerate``
@@ -626,25 +625,23 @@ Continuing with this example, we show several other list methods:
 
 .. sourcecode:: python
     
-    >>> mylist.insert(1, 12)
+    >>> mylist.insert(1, 12)   # insert 12 at position 1, shifting other items up
     >>> mylist
     [5, 12, 27, 3, 12]
-    >>> mylist.count(12)  // how many 12's are in mylist?
+    >>> mylist.count(12)       # how many times is 12 in mylist?
     2
-    >>> mylist.extend([5, 9, 5, 11])  
+    >>> mylist.extend([5, 9, 5, 11])   # put a whole list onto the end of mylist
     >>> mylist
     [5, 12, 27, 3, 12, 5, 9, 5, 11])
-    >>> mylist.index(9)
+    >>> mylist.index(9)                # find the index of the first item 9 in mylist
     6
-    >>> mylist.count(5)
-    3
     >>> mylist.reverse()
     >>> mylist
     [11, 5, 9, 5, 12, 3, 27, 12, 5]
     >>> mylist.sort()
     >>> mylist
-    [3, 5, 5, 5, 9, 11, 12, 12, 27]
-    >>> mylist.remove(12)
+    [3, 5, 5, 5, 9, 11, 12, 12, 27]   
+    >>> mylist.remove(12)             # remove the first 12 in the list
     >>> mylist
     [3, 5, 5, 5, 9, 11, 12, 27]
     >>>
@@ -684,7 +681,7 @@ This version of ``double_stuff`` does not change its arguments:
     >>> double_stuff(things)
     [4, 10, 18]
     >>> things
-    [2, 5, 18]
+    [2, 5, 9]
 
 To use the pure function version of ``double_stuff`` to modify ``things``,
 you would assign the return value back to another variable:
@@ -694,7 +691,6 @@ you would assign the return value back to another variable:
     >>> dthings = double_stuff(things)
     >>> dthings
     [4, 10, 18]
-    >>>        
     
 An early rule we saw for assignment said "first evaluate the right hand side, then
 assign the resulting value to the variable".  So it is quite safe to assign the function
@@ -705,10 +701,9 @@ result to the same variable that was passed to the function:
     >>> things = [2, 5, 9]
     >>> things = double_stuff(things)
     >>> things
-    [4, 10, 18]
-    >>>            
+    [4, 10, 18]      
 
-.. admonition:: Which is better?
+.. admonition:: Which style is better?
   
     Anything that can be done with modifiers can also be done with pure functions.
     In fact, some programming languages only allow pure functions. There is some
@@ -743,7 +738,7 @@ to return a list of all prime numbers less than n::
        result = []
        for i in range(2, n):
            if is_prime(i):
-               result.append(i)
+              result.append(i)
        return result
 
 .. index:: strings and lists, split, join
@@ -815,22 +810,22 @@ to produce the values when they are needed.   This is very convenient if your
 computation is abandoned early, as in this case::
 
     def f(n):
-    """ Find the first positive integer between 101 and n that is divisible by 21 """
+    """ Find the first positive integer between 101 and less than n that is divisible by 21 """
         for i in range(101, n):
            if (i % 21 == 0):
-                return i
+               return i
                 
                 
     test(f(110), 105)
     test(f(1000000000), 105)
 
 
-.. sidebar:: Your Mileage May Vary
+.. sidebar:: YMMV: Your Mileage May Vary
 
     The acronym YMMV stands for *your mileage may vary*.  American car advertisements
-    often quoted fuel consumption figures for cars, that they would get 28 miles per
-    gallon, etc.  But this always had to be accompanied by legal small-print
-    telling you that your mileage may vary.  The term YMMV is now used
+    often quoted fuel consumption figures for cars, e.g. that they would get 28 miles per
+    gallon.  But this always had to be accompanied by legal small-print
+    warning the reader that they might not get the same.  The term YMMV is now used
     idiomatically to mean "your results may differ", 
     e.g. *The battery life on this phone is 3 days, but YMMV.*     
     
@@ -935,16 +930,20 @@ Glossary
 
     element
         One of the values in a list (or other sequence). The bracket operator
-        selects elements of a list.
+        selects elements of a list.  Also called *item*.
 
     index
-        An integer variable or value that indicates an element of a list.
+        An integer value that indicates the position of an item in a list.
+        Indexes start from 0. 
+        
+    item
+        See *element*.
 
     list
-        A collection of objects, where each object is identified by an index.
+        A collection of values, each in a fixed position within the list.
         Like other types ``str``, ``int``, ``float``, etc. there is also a
-        ``list`` type-converter function that tries to turn its argument into a 
-        list. 
+        ``list`` type-converter function that tries to turn whatever argument 
+        you give it into a list. 
 
     list traversal
         The sequential accessing of each element in a list.
@@ -984,8 +983,7 @@ Glossary
         each element identified by an index.
         
     side effect
-        A change in the state of a program made by calling a function that is
-        not a result of reading the return value from the function. Side
+        A change in the state of a program made by calling a function. Side
         effects can only be produced by modifiers.
 
     step size
@@ -1037,7 +1035,7 @@ Exercises
        that = ['I', 'am', 'not', 'a', 'crook']
        print("Test 1: {0}".format(this is that))
        that = this
-       print("Test 2: {0}".format(this == that))
+       print("Test 2: {0}".format(this is that))
 
    Provide a *detailed* explaination of the results.
      
@@ -1077,108 +1075,7 @@ Exercises
    ``cross_product(u, v)`` that takes two lists of numbers of length 3 and
    returns their
    `cross product <http://en.wikipedia.org/wiki/Cross_product>`__.  You should
-   write your own tests and use the test driven development process
-   described in the chapter.      
-
-#. Create a new module named ``matrices.py`` and add the following two
-   functions introduced in the section on test-driven development:
-  
-   .. sourcecode:: python
-       
-        m = [[0, 0], [0, 0]]
-        q = add_row(m)
-        test(q, [[0, 0], [0, 0], [0, 0]])
-        n = [[3, 2, 5], [1, 4, 7]]
-        w = add_row(n)
-        test(w, [[3, 2, 5], [1, 4, 7], [0, 0, 0]])
-        test(n, [[3, 2, 5], [1, 4, 7]])
-        n[0][0] = 42
-        test(w, [[3, 2, 5], [1, 4, 7], [0, 0, 0]])
-    
-        m = [[0, 0], [0, 0]]
-        q = add_column(m)
-        test(q, [[0, 0, 0], [0, 0, 0]])
-        n = [[3, 2], [5, 1], [4, 7]]
-        w = add_column(n)
-        test(w, [[3, 2, 0], [5, 1, 0], [4, 7, 0]])
-        test( n, [[3, 2], [5, 1], [4, 7]])
-
-
-   Your new functions should pass the tests. Note that the last test in
-   each case assures that ``add_row`` and ``add_column`` are pure
-   functions. ( *hint:* Python has a ``copy`` module with a function named
-   ``deepcopy`` that could make your task easier here. We will talk more about
-   ``deepcopy`` in chapter 13, but google python copy module if you would like
-   to try it now.)
-   
-#. Write a function ``add_matrices(m1, m2)`` that adds ``m1`` and ``m2`` and
-   returns a new matrix containing their sum. You can assume that ``m1`` and
-   ``m2`` are the same size. You add two matrices by adding their corresponding 
-   values::
-
-     a = [[1, 2], [3, 4]]
-     b = [[2, 2], [2, 2]]
-     x = add_matrices(a, b)
-     test(x, [[3, 4], [5, 6]])
-     c = [[8, 2], [3, 4], [5, 7]]
-     d = [[3, 2], [9, 2], [10, 12]]
-     y = add_matrices(c, d)
-     test(y, [[11, 4], [12, 6], [15, 19]])
-     test(c, [[8, 2], [3, 4], [5, 7]])
-     test(d, [[3, 2], [9, 2], [10, 12]])
-          
-   The last two tests confirm that ``add_matrices`` is a pure
-   function.
-   
-#. Write a pure function ``scalar_mult(s, m)`` that multiplies a matrix, ``m``, by a 
-   scalar, ``s``::
-
-        a = [[1, 2], [3, 4]]
-        x = scalar_mult(3, a)
-        test(x, [[3, 6], [9, 12]])
-        b = [[3, 5, 7], [1, 1, 1], [0, 2, 0], [2, 2, 3]]
-        y = scalar_mult(10, b)
-        test(y, [[30, 50, 70], [10, 10, 10], [0, 20, 0], [20, 20, 30]])
-        test(b, [[3, 5, 7], [1, 1, 1], [0, 2, 0], [2, 2, 3]])
-
-#.  Let's create functions to make these tests pass::
-
-       test(row_times_column([[1, 2], [3, 4]], 0, [[5, 6], [7, 8]], 0), 19)
-       test(row_times_column([[1, 2], [3, 4]], 0, [[5, 6], [7, 8]], 1), 22)
-       test(row_times_column([[1, 2], [3, 4]], 1, [[5, 6], [7, 8]], 0), 43)
-       test(row_times_column([[1, 2], [3, 4]], 1, [[5, 6], [7, 8]], 1), 50)
-
-       test(matrix_mult([[1, 2], [3,  4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]])
-       test(matrix_mult([[1, 2, 3], [4,  5, 6]], [[7, 8], [9, 1], [2, 3]]), 
-                     [[31, 19], [85, 55]])
-       test(matrix_mult([[7, 8], [9, 1], [2, 3]], [[1, 2, 3], [4, 5, 6]]),
-             [[39, 54, 69], [13, 23, 33], [14, 19, 24]])
-
-#. Write functions to pass these tests: 
-
-   .. sourcecode:: python
-
-        test(only_evens([1, 3, 4, 6, 7, 8]), [4, 6, 8])
-        test(only_evens([2, 4, 6, 8, 10, 11, 0]), [2, 4, 6, 8, 10, 0])
-        test(only_evens([1, 3, 5, 7, 9, 11]), [])
-        test(only_evens([4, 0, -1, 2, 6, 7, -4]), [4, 0, 2, 6, -4])
-        nums = [1, 2, 3, 4]
-        test(only_evens(nums), [2, 4])
-        test(nums, [1, 2, 3, 4])
-
-        test(only_odds([1, 3, 4, 6, 7, 8]), [1, 3, 7])
-        test(only_odds([2, 4, 6, 8, 10, 11, 0]), [11])
-        test(only_odds([1, 3, 5, 7, 9, 11]), [1, 3, 5, 7, 9, 11])
-        test(only_odds([4, 0, -1, 2, 6, 7, -4]), [-1, 7])
-        nums = [1, 2, 3, 4]
-        test(only_odds(nums), [1, 3])
-        test(nums, [1, 2, 3, 4])
-   
-#. Add a function ``multiples_of(num, numlist)`` to ``numberlists.py`` that
-   takes an integer (``num``), and a list of integers (``numlist``) as
-   arguments and returns a list of those integers in ``numlist`` that are
-   multiples of ``num``.              
-             
+   write your own tests.       
              
 #. Describe the relationship between ``' '.join(song.split())`` and
    ``song`` in the fragment of code below. 

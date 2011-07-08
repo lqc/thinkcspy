@@ -13,19 +13,21 @@ Tuples
 
 .. index:: mutable, immutable, tuple
 
-Tuples and mutability
----------------------
+Tuples are used for grouping data
+---------------------------------
 
-So far, you have seen two compound types: strings, which are made up of
-characters; and lists, which are made up of elements of any type.  One of the
-differences we noted is that the elements of a list can be modified, but the
-characters in a string cannot. In other words, strings are **immutable** and
-lists are **mutable**.
+We've seen earlier that we can group together pairs of values by putting them 
+into parentheses.  Recall this example::
 
-A **tuple**, like a list, is a sequence of items of any type. Unlike lists,
-however, tuples are immutable. Syntactically, a tuple is a comma-separated
-sequence of values.  Although it is not necessary, it is conventional to 
-enclose tuples in parentheses:
+    >>> year_born = ("Paris Hilton", 1981) 
+
+This is an example of a **data structure** --- a mechanism for grouping and
+organizing data to make it easier to use.
+    
+The pair is an example of a **tuple**. Generalizing this, a tuple can
+be used to group any number of items into a single compound value.  
+Syntactically, a tuple is a comma-separated sequence of values.  
+Although it is not necessary, it is conventional to enclose tuples in parentheses:
 
 .. sourcecode:: python
     
@@ -33,11 +35,11 @@ enclose tuples in parentheses:
     
 Tuples are useful for representing what other languages often call *records* ---
 some related information that belongs together, like your student record.  There is
-no description of what each of these *fields* means, but we can guess.  A tuple
+no description of what each of these fields means, but we can guess.  A tuple
 lets us "chunk" together related information and use it as a single thing.
  
-Tuples support the same sequence operations as strings and
-lists. The index operator selects an element from a tuple.
+Tuples support the same sequence operations as strings. The index operator 
+selects an element from a tuple.
 
 .. sourcecode:: python
     
@@ -52,11 +54,16 @@ tuple, we get an error:
     >>> julia[0] = 'X'
     TypeError: 'tuple' object does not support item assignment
 
-Of course, even if we can't modify the elements of a tuple, we can make a variable
-reference a new tuple holding different information.  To construct the new tuple,
+So like strings, tuples are immutable.  Once Python has created a tuple
+in memory, it cannot be changed.  
+
+Of course, even if we can't modify the 
+elements of a tuple, we can always make the ``julia`` variable reference
+a new tuple holding different information.  To construct the new tuple,
 it is convenient that we can slice parts of the old tuple and join up the
-bits to make the new tuple.  So ``julia`` has a new recent film, and we might want
-to change her tuple:
+bits to make the new tuple.  So  if ``julia`` has a new recent film, we could 
+change her variable to reference a new tuple that used some information 
+from the old one:
 
 .. sourcecode:: python
     
@@ -77,7 +84,8 @@ the final comma, Python treats the ``(5)`` below as an integer in parentheses:
     >>> x = (5)
     >>> type(x)
     <class 'int'>     
-    
+          
+          
 .. index::
     single: assignment; tuple 
     single: tuple; assignment  
@@ -87,7 +95,7 @@ Tuple assignment
 
 Python has a very powerful **tuple assignment** feature that allows a tuple of variables 
 on the left of an assignment to be assigned values from a tuple
-on the right of the assignment.
+on the right of the assignment.   (We already saw this used for pairs, but it generalizes.)
 
 .. sourcecode:: python
     
@@ -132,12 +140,13 @@ right have to be the same:
 Tuples as return values
 -----------------------
 
-Functions can return tuples as return values. This is very useful --- we often want to
+Functions can always only return a single value, but by making that value a tuple, 
+we can effectively group together as many values 
+as we like, and return them together.   This is very useful --- we often want to
 know some batsman's highest and lowest score, or we want to find the mean and the standard 
 deviation, or we want to know the year, the month, and the day, or if we're doing some
 some ecological modelling we may want to know the number of rabbits and the number
-of wolves on an island at a given time.  In each case, a function (which 
-can only return a single value), can create a single tuple holding multiple elements. 
+of wolves on an island at a given time.  
 
 For example, we could write a function that returns both the area and the circumference
 of a circle of radius r:
@@ -149,7 +158,37 @@ of a circle of radius r:
         c = 2 * math.pi * r
         a = math.pi * r * r
         return (c, a)
+ 
+ 
+Composability of Data Structures
+--------------------------------
     
+We saw in an earlier chapter that we could make a list of pairs, and we had an example 
+where one of the items in the tuple was itself a list::
+
+    students = [
+            ("John", ["CompSci", "Physics"]),
+            ("Vusi", ["Maths", "CompSci", "Stats"]),
+            ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
+            ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
+            ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
+
+Tuples items can themselves be other tuples.  For example, we could improve
+the information about our movie stars to hold the full date of birth rather
+than just the year, and we could have a list of some of her movies and dates that they
+were made, and so on::
+
+   julia_more_info = ( ("Julia", "Roberts"), (8, "October", 1967), "Actress", ("Atlanta", "Georgia"),  
+                        [ ("Duplicity", 2009), 
+                          ("Notting Hill", 1999),
+                          ("Pretty Woman", 1990),
+                          ("Erin Brockovich", 2000),
+                          ("Eat Pray Love", 2010),
+                          ("Mona Lisa Smile", 2003),
+                          ("Oceans Twelve", 2004) ])
+                          
+Notice in this case the tuple has just five elements - but each of those in turn
+can be another tuple, a list, a string, or any other kind of Python value. 
 
 Glossary
 --------
@@ -166,14 +205,13 @@ Glossary
 
     mutable data type
         A data type which can be modified. All mutable types are compound
-        types.  Lists and dictionaries (see next chapter) are mutable data
+        types.  Lists and dictionaries (coming soon) are mutable data
         types; strings and tuples are not.
 
     tuple
         An immutable data type that contains related elements. Tuples are used
         to group together related data, such as a person's name, their age, 
-        and their gender.  Tuples can be used wherever an immutable type
-        is required, such as for a key in a dictionary (see the next chapter).
+        and their gender.  
 
     tuple assignment
         An assignment to all of the elements in a tuple using a single
@@ -184,5 +222,12 @@ Glossary
 Exercises
 ---------
    
+#.  We've said nothing in this chapter about whether you can pass tuples as 
+    arguments to a function. Construct a small Python example to test whether 
+    this is possible, and write up your findings.
+    
+#.  Is a pair a generalization of a tuple, or is a tuple a generalization of a pair?
+
+#.  Is a pair a kind of tuple, or is a tuple a kind of pair? 
 
    
