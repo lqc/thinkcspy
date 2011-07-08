@@ -7,18 +7,24 @@
     included in the section entitled "GNU Free Documentation License".
 
     
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
+  
  
 |     
 
 Classes and Objects - the Basics
 ================================
+
+.. Pete thinks:  this and the next chapter are too heavily biased towards geometry, and need 
+   some other non-overwhelming examples.  
+   In particular, the objects are stateless, rather than state machines.
+   We need another good sample or exercise that emphasizes that the object has state.  (like the
+   turtle that has a position and color, and methods like forward that change the state.)
+   Perhaps a prepaid phone account object, that allows top-up deposits, and SMS charges
+   or call charges, and querying of the balance.   But at the same time, if there was also
+   interesting algorithmic computation that could be encapsulated in the object, (and was natural 
+   for the object rather than contrived) that would be even better.   Subtracing 20c from your
+   SMS balance really sounds as boring as all hell!  In the chapter on PyGame we'll try to address
+   this with some sprites that have internal state. 
 
 
 .. index:: object-oriented programming
@@ -229,7 +235,7 @@ the ``__init__`` method, as shown in this example:
             self.x = x
             self.y = y 
 
-The ``x`` and ``y`` parameters here are both *optional*.  If the caller does not 
+The ``x`` and ``y`` parameters here are both optional.  If the caller does not 
 supply arguments, they'll get the default values of 0.  Here is our improved class 
 in action:
 
@@ -396,7 +402,7 @@ Let's re-do this again, now:
         class Point:
             # ...
         
-            def __str__(self):    # we have just renamed the method
+            def __str__(self):    # all we have done is renamed the method
                 return '({0}, {1})'.format(self.x, self.y)   
                 
 and now things are looking great! ::
@@ -491,6 +497,21 @@ of real-world objects tends to be tightly bound up inside the objects
 themselves.  OOP allows us to accurately mirror this when we
 organize our programs. 
 
+Objects can have state
+----------------------
+
+Objects are most useful when we also need to keep some state that is updated from 
+time to time.  Consider a turtle object.  Its state consists of things like
+its position, its heading, its color, and its shape.  A method like ``left(90)`` updates
+the turtle's heading, ``forward`` changes its position, and so on.
+
+For a bank account object, a main component of the state would be
+the current balance, and perhaps a log of all transactions.  The methods would
+allow us to query the current balance, deposit new funds, or make a payment.
+Making a payment would include an amount, and a description, so that this could
+be added to the transaction log.  We'd also want a methods to show the transaction
+log.
+
 Glossary
 --------
 
@@ -546,7 +567,7 @@ Glossary
 Exercises
 ---------
 
-#. Rewrite the ``distance`` function from chapter 5 so that it takes two
+#. Rewrite the ``distance`` function from the chapter titled *fruitful functions* so that it takes two
    ``Point``\ s as parameters instead of four numbers.
    
 #. Add a method ``reflect_x`` to Point which returns a new Point, one which is the 
@@ -580,6 +601,29 @@ Exercises
    know how to solve the geometry problem *before* you think of going anywhere near programming.
    You cannot program a solution to a problem if you don't understand what you want the computer to do! 
    
+#. Create a new class, SMS_store.  The class will instantiate SMS_store objects, like your inbox or your outbox
+   on your cellphone::
    
+       my_inbox = SMS_store()
    
+   This store can hold multiple SMS messages  (i.e. its internal state will just be a list of messages).  Each message
+   will be represented as a tuple::
 
+       (has_been_viewed, from_number, time_arrived, text_of_SMS) 
+       
+   Your inbox object should provide these methods::
+       
+       my_inbox.add_new_arrival(from, time, text)    
+                                        # Makes a new SMS tuple and inserts it after other messages in the store.
+                                        # When creating this message, its has_been_viewed status is set False.
+       my_inbox.message_count()         # returns the number of sms messages in my_inbox
+       my_inbox.get_unread_indexes()    # returns a list of indexes of all SMS messages that have not yet been viewed.
+       my_inbox.get_message(i)          # return (from_number, time_arrived, text_of_sms) for the message at index i.
+                                        # Also change the state of the message so that it now has been viewed.
+                                        # If there is no message at position i, return None
+       my_inbox.delete(i)               # delete the message at index i
+       my_inbox.clear()                 # delete all messages from inbox
+   
+   Write the class, create a message store object, write tests for these methods, and implement the methods.
+    
+    

@@ -129,7 +129,7 @@ second is the name of the new file:
         outfile.close()
 
 This functions continues looping, reading 50 characters from ``infile`` and
-writing the same 50 charaters to ``outfile`` until the end of ``infile`` is
+writing the same 50 characters to ``outfile`` until the end of ``infile`` is
 reached, at which point ``text`` is empty and the ``break`` statement is
 executed.
 
@@ -139,15 +139,14 @@ Text files
 ----------
 
 A **text file** is a file that contains printable characters and whitespace,
-organized into lines separated by newline characters.  Since Python is
-specifically designed to process text files, it provides methods that make the
-job easy.
+organized into lines separated by newline characters.  One of the Python
+design goals was to provide methods that made text file processing easy. 
 
 Notice the subtle difference in abstraction here: in the previous section, we
 simply regarded a file as containing many characters, and could read them one
-at a time, many at a time, or all at once.  In this section, specifically for
+at a time, many at a time, or all at once.  In this section, particularly for
 reading data, we're interested in files that are organized into lines, 
-and will process them line-at-a-time.
+and we will process them line-at-a-time.
 
 To demonstrate, we'll create a text file with three lines of text separated by
 newlines:
@@ -197,6 +196,7 @@ The following is an example of a line-processing program. ``filter`` makes a
 copy of ``oldfile``, omitting any lines that begin with ``#``:
 
 .. sourcecode:: python
+   :linenos:
     
     def filter(oldfile, newfile):
         infile = open(oldfile, 'r')
@@ -210,7 +210,6 @@ copy of ``oldfile``, omitting any lines that begin with ``#``:
             outfile.write(text)
         infile.close()
         outfile.close()
-        return
 
 The **continue statement** ends the current iteration of the loop, but
 continues looping. The flow of execution moves to the top of the loop, checks
@@ -219,6 +218,14 @@ the condition, and proceeds accordingly.
 Thus, if ``text`` is the empty string, the loop exits. If the first character
 of ``text`` is a hash mark, the flow of execution goes to the top of the loop.
 Only if both conditions fail do we copy ``text`` into the new file.
+
+Let's consider one more case: suppose your original file contained empty
+lines.  At line 6 above, would this program not find the first empty line in the
+file, and terminate immediately?   No!  Recall that ``readline`` always 
+includes the newline character in the string it returns, so even an empty line in
+your file would arrive in the ``text`` variable on line 5 containing its newline
+character.  It is only when we try to read `beyond` the end of the file that we
+we get back the empty string.  
 
 .. index:: directory
 
@@ -286,7 +293,7 @@ and prints the file contents using the techniques we've covered above.
     
 The ``urlretrieve`` function collects the resource at the url, and
 saves it to a local file.  You could use this to download any kind
-of content from Internet.
+of content from the Internet.
    
 You'll need to get a few things right before this works:  
  * The page you're trying to fetch must exist!  Check this using a browser.
@@ -419,73 +426,6 @@ Glossary
 Exercises
 ---------
    
-#. Give the Python interpreter's response to each of the following from a
-   continuous interpreter session:
-
-   .. sourcecode:: python
-    
-      >>> s = "If we took the bones out, it wouldn't be crunchy, would it?"
-      >>> s.split()
-      >>> type(s.split())
-      >>> s.split('o')
-      >>> s.split('i')
-      >>> '0'.join(s.split('o'))
-          
-   Be sure you understand why you get each result. Then apply what you have
-   learned to fill in the body of the function below using the ``split`` and
-   ``join`` methods of ``str`` objects:
-
-   .. sourcecode:: python
-    
-        def myreplace(old, new, s):
-            """ Replace all occurences of old with new in the string s. """
-            ...
-            
-            
-        test(myreplace(',', ';', 'this, that, and some other thing'),
-                                 'this; that; and some other thing')
-        test(myreplace(' ', '**', 'Words will now      be  separated by stars.'),
-                                  'Words**will**now**be**separated**by**stars.')
-    
-   Your solution should pass the tests.
-   
-#. Create a module named ``wordtools.py`` with our test scaffolding in place.
-
-   Now add functions to these tests pass::
-   
-        test(cleanword('what?'),  'what')
-        test(cleanword('"now!"'), 'now')
-        test(cleanword('?+="w-o-r-d!,@$()"'),  'word')
-    
-        test(has_dashdash('distance--but'), True)
-        test(has_dashdash('several'), False)
-        test(has_dashdash('spoke--'), True)
-        test(has_dashdash('distance--but'), True)
-        test(has_dashdash('-yo-yo-'), False)
-
-        test(extract_words('Now is the time!  "Now", is the time? Yes, now.'),
-              ['now', 'is', 'the', 'time', 'now', 'is', 'the', 'time', 'yes', 'now'])
-        test(extract_words('she tried to curtsey as she spoke--fancy'),
-              ['she', 'tried', 'to', 'curtsey', 'as', 'she', 'spoke', 'fancy'])
-    
-        test(wordcount('now', ['now', 'is', 'time', 'is', 'now', 'is', 'is']), 2)
-        test(wordcount('is', ['now', 'is', 'time', 'is', 'now', 'is', 'the', 'is']), 4)
-        test(wordcount('time', ['now', 'is', 'time', 'is', 'now', 'is', 'is']), 1)
-        test(wordcount('frog', ['now', 'is', 'time', 'is', 'now', 'is', 'is']), 0)
-    
-        test(wordset(['now', 'is', 'time', 'is', 'now', 'is', 'is']), 
-              ['is', 'now', 'time'])
-        test(wordset(['I', 'a', 'a', 'is', 'a', 'is', 'I', 'am']),
-              ['I', 'a', 'am', 'is'])
-        test(wordset(['or', 'a', 'am', 'is', 'are', 'be', 'but', 'am']),
-              ['a', 'am', 'are', 'be', 'but', 'is', 'or'])
-       
-        test(longestword(['a', 'apple', 'pear', 'grape']), 5)
-        test(longestword(['a', 'am', 'I', 'be']), 2)
-        test(longestword(['this', 'that', 'supercalifragilisticexpialidocious']), 34)
-        test(longestword([ ]), 0)
-
-   Save this module so you can use the tools it contains in future programs.
    
 #. `unsorted_fruits.txt <resources/ch10/unsorted_fruits.txt>`__ contains a
    list of 26 fruits, each one with a name that begins with a different letter
