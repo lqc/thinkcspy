@@ -196,7 +196,7 @@ We can access the value of an attribute using the same syntax:
 The expression ``p.x`` means, "Go to the object ``p`` refers to and get the
 value of ``x``". In this case, we assign that value to a variable named ``x``.
 There is no conflict between the variable ``x`` (in the global namespace here)
-and the attribute ``x`` (in the namespace belonging to the class). The
+and the attribute ``x`` (in the namespace belonging to the instance). The
 purpose of dot notation is to fully qualify which variable you are referring to
 unambiguously.
 
@@ -331,7 +331,7 @@ method on them:
     0.0   
 
 When defining a method, the first parameter refers to the instance being
-manipulated.  As already noted, it is customary to name this parameter **self**.  
+manipulated.  As already noted, it is customary to name this parameter ``self``.  
 
 Notice that the caller of ``distance_from_origin`` does not explicitly 
 supply an argument to match the ``self`` parameter --- this is done for
@@ -341,10 +341,14 @@ you, behind your back.
 Instances as arguments and parameters
 -------------------------------------
 
-You can pass an object as a argument in the usual way.  We've already seen
+You can pass an object as an argument in the usual way. We've already seen
 this in some of the turtle examples, where we passed the turtle to
-some function like ``draw_bar`` in chapter 5, so that the function could 
-control and use whatever turtle instance we passed to it.
+some function like ``draw_bar`` in the chapter titled ``Conditionals``, 
+so that the function could control and use whatever turtle instance we passed to it.  
+
+Be aware that your variable only holds a reference to an object, so passing ``tess``
+into a function creates an alias: both the caller and the called function
+now have a reference, but there is only one turtle! 
 
 Here is a simple function involving our new ``Point`` objects:
  
@@ -509,7 +513,7 @@ For a bank account object, a main component of the state would be
 the current balance, and perhaps a log of all transactions.  The methods would
 allow us to query the current balance, deposit new funds, or make a payment.
 Making a payment would include an amount, and a description, so that this could
-be added to the transaction log.  We'd also want a methods to show the transaction
+be added to the transaction log.  We'd also want a method to show the transaction
 log.
 
 Glossary
