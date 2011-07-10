@@ -185,8 +185,60 @@ this case? ::
 
    xs = make_random_ints_no_dups(10, 1, 6)
 
-The `math` module
------------------
+The ``time`` module
+-------------------   
+   
+As we start to work with more sophisticated algorithms and bigger programs, at natural
+concern is *"is our code efficient?"*  One way to experiment is to time how long various
+operations take.  The ``time`` module has a function called ``clock`` that is recommended 
+for this purpose.   Whenever ``clock`` is called, it returns a floating point number
+representing how many seconds have elapsed since your program started running. 
+
+The way to use it is to call ``clock`` and assign the result to a variable, say ``t0``, 
+just before you start executing the code you want to measure.  Then after execution, call
+``clock`` again, (this time we'll save the result in variable ``t1``).  The difference
+``t1-t0`` is the time elapsed, and is a measure of how fast your program is running.
+
+Let's try a small example.  Python has a built-in ``sum`` function that can sum the 
+elements in a list.  We can also write our own.  How do we think they would compare
+for speed?   We'll try to do the summation of a list [0, 1, 2 ...] in both cases, and 
+compare the results:
+
+.. sourcecode:: python
+
+    import time
+
+    def do_my_sum(xs):
+        sum = 0
+        for v in xs:
+            sum += v
+        return sum
+
+    sz = 10000000        # lets have 10 million elements in the list
+    testdata = range(sz)
+
+    t0 = time.clock()
+    my_result = do_my_sum(testdata)
+    t1 = time.clock()
+    print("my_result    = {0} (time taken = {1:.4f} seconds)".format(my_result, t1-t0))
+    
+    t2 = time.clock()
+    their_result = sum(testdata)
+    t3 = time.clock()
+    print("their_result = {0} (time taken = {1:.4f} seconds)".format(their_result, t3-t2))
+
+
+On a reasonably modest laptop, we get these results::
+
+    my_sum    = 49999995000000 (time taken = 1.5567 seconds)
+    their_sum = 49999995000000 (time taken = 0.9897 seconds)
+ 
+   
+So our function runs about 57% slower than their built-in one.  
+And summing up ten million elements in under a second is not too shabby!    
+   
+The ``math`` module
+-------------------
 
 The ``math`` module contains the kinds of mathematical functions you'd typically find on your
 calculator (`sin`, `cos`, `sqrt`, `asin`, `log`, `log10`) and some mathematical constants

@@ -6,14 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-        
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 | 
     
@@ -34,7 +26,7 @@ horizontally, never at an angle.
 There are a few possibilities: we could specify the center of the rectangle
 (two coordinates) and its size (width and height); or we could specify one of
 the corners and the size; or we could specify two opposing corners. A
-conventional choice is to specify the upper-left corner of the rectangle and
+conventional choice is to specify the upper-left corner of the rectangle, and
 the size.
 
 Again, we'll define a new class, and provide it with an initializer and
@@ -59,7 +51,8 @@ a string converter method:
     print("box: ", box)
     print("bomb: ", bomb)     
     
-To specify the upper-left corner, we have embedded an object within an object!
+To specify the upper-left corner, we have embedded a Point object (as we used
+it in the previous chapter) within our new Rectangle object!
 We create two new ``Rectangle`` objects, and then print them producing:: 
 
     box: ((0, 0), 100, 200)
@@ -305,7 +298,7 @@ Exercises
       r = Rectangle(Point(0, 0), 10, 5)
       test(r.perimeter(), 30)
 
-#. Write a ``transpose`` method in the Rectangle class that swaps the width
+#. Write a ``flip`` method in the Rectangle class that swaps the width
    and the height of any rectangle instance::
    
       r = Rectangle(Point(100, 50), 10, 5)
@@ -330,9 +323,10 @@ Exercises
       test(r.contains(Point(3, 4.99999)), True)
       test(r.contains(Point(-3, -3)), False)
    
-#. In games, we often put a rectangular "bounding box" around our sprites in
-   the game.  We can then do *collision detection* between, say, bombs and 
-   spaceships, by comparing whether their rectangles overlap anywhere. 
+#. In games, we often put a rectangular "bounding box" around our sprites. 
+   (A sprite is an object that can move about in the game, as we will see 
+   shortly.)  We can then do *collision detection* between, say, 
+   bombs and spaceships, by comparing whether their rectangles overlap anywhere. 
    
    Write a function to determine whether two rectangles collide. *Hint:
    this might be quite a tough exercise!  Think carefully about all the

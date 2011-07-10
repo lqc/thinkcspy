@@ -5,14 +5,6 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 |
 

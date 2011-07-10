@@ -335,6 +335,7 @@ This translates very directly into some Python:
 
 This is a particularly inefficient algorithm, and we'll show one way of fixing it in the next chapter::
 
+    import time
     t0 = time.time()
     n = 35
     result = fib(n)
