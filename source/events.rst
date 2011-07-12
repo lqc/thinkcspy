@@ -326,7 +326,7 @@ the function assigns to this variable at lines 50, 54, and 58).  Instead, in thi
 
 What the code in ``advance_state_machine`` does is advance from whatever
 the current state is, to the next state.  On the state change we move tess 
-to her new position, change her color, and, of course, we assign to `state num`` 
+to her new position, change her color, and, of course, we assign to ``state num`` 
 the number of the new state we've just entered. 
 
 Each time the space bar is pressed, the event handler causes the traffic light
