@@ -13,27 +13,760 @@
 PyGame
 ======
 
-Coming soon! 
- 
+PyGame is a package that is not part of the standard Python distribution, so if you do not
+already have it installed (i.e. ``import pygame`` fails), download and install a suitable version from http://pygame.org/download.shtml.
+These notes are based on PyGame 1.9.1, the most recent version at the time of writing.
 
+PyGame comes with a substantial set of tutorials and examples, so there is ample
+opportunity to stretch yourself on the code.
+
+The game loop
+-------------
+
+The structure of these games always follows this pattern: 
+
+.. image:: illustrations/pygame_structure.png  
+
+In every game, in the *setup* section we'll create a window, load and prepare some content, and then
+enter the **game loop**.  The game loop always polls for events, updates whatever
+data structures it must, and then draws the current state of the game.
+
+
+.. sourcecode:: python
+   :linenos:
+
+    import pygame     
+
+    def main():
+        """ Set up the game and run the main game loop """
+        pygame.init()     # prepare the pygame module for use
+        surfaceSz = 480   # Desired physical surface size, in pixels.
+                          # Create the surface of (width, height), and its window.
+        main_surface = pygame.display.set_mode((surfaceSz, surfaceSz))
+        light_blue = (0, 200, 255)   # A color is a mixture of (Red, Green, Blue)
+
+        while True:
+            ev = pygame.event.poll()     # look for an event from keyboard, mouse, etc.
+            if ev.type == pygame.QUIT:   # occurs if window close button is clicked
+                break                    # leave game loop 
+
+            # We usually draw everything from scratch each time around the game loop.
+            # So first draw a fresh background (a blank board)
+            main_surface.fill(light_blue, surface.get_rect())
+            # put a red rectangle somewhere in the window
+            main_surface.fill((255,0,0), (300, 200, 150, 90))
+
+            # Now the surface is fully drawn, tell pygame it can be displayed!
+            pygame.display.flip()
+
+        pygame.quit()     # once we leave the loop, close the window.
+                         
+    main()
+    
+This program pops up a window which stays there until we close it:
+
+.. image:: illustrations/pygame_screenshot01.png 
+
+PyGame does all its drawing onto rectangular *surfaces*. After initializing PyGame 
+at line 5, we create a window holding our main surface. The main loop of the game 
+extends from line 11 to 23, with the following key bits of logic:
+
+* First we poll to fetch the next event that might be ready for us.  This step will
+  always be followed by some conditional statements that will determine whether 
+  any event that we're interested in has happened.  Polling for the event consumes
+  it, as far as PyGame is concerned, so we only get one chance to fetch and use 
+  each event.   On line 13 we test whether the type of the event is the 
+  predefined constant called pygame.QUIT.  This is the event that we'll see
+  when the user clicks the close button on the PyGame window.   In response to
+  this event, we leave the loop.
+* Once we've left the loop, the code at line 26 closes window, and we'll return 
+  from function ``main``.  Your program could go on to do other things, or reinitialize
+  pygame and create another window, but it will usually just end too.
+* There are different kinds of events --- key presses, mouse motion, mouse
+  clicks, and so on.  It is usual that we test and handle all these cases
+  with new code squeezed in before line 16.  The general idea is "handle your events
+  first, then worry about the other stuff".   
+* A modern way to write games (now that we have fast computers and fast graphics
+  cards) is to redraw everything from scratch on every iteration of the loop.  So
+  the first thing that we do at line 18 is fill the entire surface with a background
+  color.  The ``fill`` method of a surface takes two arguments --- the color to 
+  use for filling, and the rectangle to be filled.  The rectangle is expressed as
+  a 4-element tuple, giving the (x, y, width, height).   Every surface has a method
+  to retrieve its rectangle, so the easiest way to fill "all of a surface" is shown
+  in line 18.
+* In line 20 we filled a second rectangle, this time 255 red, and zero green, zero blue.
+  The placement and size of the rectangle are ``(x,y,width,height)``.
+* It is important to understand that the origin of the PyGame's surface is at the top left
+  corner (unlike the turtle module that puts it's origin in the middle of the screen).
+  So, if you wanted the rectangle closer to the top of the window, you need to make its
+  y coordinate smaller.
+* If your graphics display hardware tries to read from memory at the 
+  same time as the program is writing to that memory, they will interfere with each other,
+  causing video noise and flicker.  To get around this, a PyGame display device 
+  keeps two buffers in the main surface --- the *back buffer* that the program draws into, 
+  while the *front buffer* is being shown to the user.  Each time the program has fully
+  prepared its back buffer, it flips the back/front role of the two buffers. 
+  So the drawing on lines 18 and 20 does does not change what is seen on the screen until 
+  we ``flip`` the buffers, on line 23.
+ 
+ 
+Displaying images and text
+--------------------------
+
+To draw an image on the main surface, we load the image, say a beach ball, into a new surface. 
+The main surface has a ``blit`` method that copies pixels from the beach ball surface into its
+own surface.  When we call ``blit``, we can specify where the beach ball should be placed
+on the main surface.  Thee term **blit** is widely used in computer graphics circles, and means
+*to make a fast copy of pixels from one area of memory to another*.
+
+So in the setup section, before we enter the game loop, we'd load the image, like this::
+
+      ball = pygame.image.load("ball.png")
+      
+and after line 20 in the program above, we'd add this code to display our image at position (100,200)::
+
+      main_surface.blit(ball, (100, 120))
+ 
+To display text, we need do do three things.  Before we enter the game loop, we
+instantiate a ``font`` object::
+
+      my_font = pygame.font.SysFont('Courier', 16)  # Draw text with a size 16 Courier font.
+      
+and after line 20, again, we use the font's ``render`` method to create a new surface 
+containing the pixels of the drawn text,
+and then, as in the case for images, we blit our new surface onto the main surface.  Notice that ``render``
+takes two extra parameters --- the second tells it whether to carefully smooth edges of the text
+while drawing (this process is called *anti-aliasing*), and the second is the color that 
+we want the text text be.  Here we've used ``(0,0,0)`` which is black::
+      
+       the_text = my_font.render('Hello, world!', True, (0,0,0))
+       surface.blit(the_text, (10, 10))
+       
+We'll demonstrate these two features by counting the frames --- the iterations of the game loop --- and keeping
+some timing information.  On each frame, we'll display the frame count, and the frame rate.  We will only update
+the frame rate after every 500 frames, when we'll look at the timing interval and can do the calculations.
+ 
+.. sourcecode:: python
+   :linenos:
+   
+    import pygame      # for graphics and GUI
+    import time
+
+    def main():
+
+        pygame.init()   # prepare the PyGame module for use
+        main_surface = pygame.display.set_mode((480, 240))
+        light_blue = (0, 200, 255)
+
+        # load an image to draw for the queens.
+        ball = pygame.image.load("ball.png")
+
+        my_font = pygame.font.SysFont('Courier', 16)
+
+        frame_count = 0
+        frame_rate = 0
+        t0 = time.clock()
+
+        while True:
+
+            # look for an event from keyboard, mouse, etc.
+            ev = pygame.event.poll()
+            if ev.type == pygame.QUIT:   # occurs if window close button is clicked
+                break     # leave game loop
+                
+            # do other bits of logic for the game here    
+            frame_count += 1
+            if frame_count % 500 == 0:
+                t1 = time.clock()
+                frame_rate = 500 / (t1-t0)
+                t0 = t1
+                
+            # now draw the new surface 
+            main_surface.fill(light_blue, whole_board)
+
+            # put a red rectangle somewhere in the window
+            main_surface.fill((255,0,0), (300, 100, 150, 90))
+
+            # copy the image to the surface, at this (x,y) posn
+            main_surface.blit(ball, (100, 120))
+
+            the_text = my_font.render('Frame = {0},  rate = {1:.2f} fps'.
+                                     format(frame_count, frame_rate), True, (0,0,0))
+            main_surface.blit(the_text, (10, 10))
+
+                                # Now the surface is fully drawn, put it on display!
+            pygame.display.flip()
+
+        pygame.quit() # once we leave the loop, close the window
+                      # and the function will return to its caller.
+
+    main()
+   
+
+The frame rate is close to ridiculous --- a lot faster than one's eye can process frames. (Commercial
+video games usually plan their action for 60 frames per second (fps).)  Of course, our rate will drop
+once we start doing something a little more strenuous inside our game loop.
+ 
+.. image:: illustrations/pygame_screenshot02.png 
+
+Drawing a board for the N queens puzzle
+---------------------------------------
+
+When we solved our N queens puzzle earlier, we output each solution as a list. For the 8x8 board, one
+of the solutions was ``[6,4,2,0,5,7,1,3]``.   Let's draw that chessboard with its queens.
+
+We begin with a background of black and red squares for the board. Perhaps we could create an image that we could
+load and draw, but that approach would need different background images for different size boards.  
+Just drawing our own red and black rectangles of the appropriate size sounds like much more fun!  
+
+.. sourcecode:: python
+    :linenos:
+
+    def draw_board(the_board):
+        """ Draw a chess board with queens, as determined by the the_board. """
+
+        pygame.init()                    # prepare the PyGame module for use
+        colors = [(255,0,0), (0,0,0)]    # set up colors [red, black]
+
+        n = len(the_board)         # n is the number of squares on one side of the board.
+        surfaceSz = 480            # Proposed physical surface size, in pixels.                          
+        sq_sz = surfaceSz // n     # sq_sz is the length of one side of a square.          
+        surfaceSz = n * sq_sz      # Adjust surface size to be an exact multiple of sq_sz.
+
+        # Create the surface of (width, height), and its window.
+        surface = pygame.display.set_mode((surfaceSz, surfaceSz))
+
+Here we precompute ``sq_sz``, the integer size that each square will be, so that we can fit the squares
+nicely into the available window.  So if we'd like the board to be 480x480, and we're drawing an 8x8 
+chessboard, then each square will need to have a size of 60 units.  But we notice that a 7x7 board cannot 
+fit nicely into 480 --- we're going to get some ugly border that our squares don't fill exactly.   
+So we recompute the surface size to exactly fit our squares before we create the window.
+        
+Now let's draw the squares, in the game loop.  We'll need a nested loop: the outer loop will
+run over the rows of the chessboard, the inner loop over the columns:
+
+.. sourcecode:: python
+   :linenos:
+
+    # Draw a fresh background (a blank chess board)
+    for row in range(n):             # Draw each row of the board.
+      c_indx = row % 2               # Alternate the starting color on every new row
+      for col in range(n):           # Run through cols drawing squares
+          the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
+          surface.fill(colors[c_indx], the_square)
+          c_indx = (c_indx + 1) % 2   # and flip the color index for the next square 
+        
+There are two important ideas in this code: firstly, we compute the rectangle to be filled
+from the ``row`` and ``col`` loop variables, multiplying them by the size of the square to
+get their position.  And, of course, each square is a fixed width and height.  So ``the_square``
+represents the rectangle to be filled on the current iteration of the loop.  The second idea
+is that we have to alternate colors on every square.  In the earlier setup code we created 
+a list containing two colors, here we manipulate ``c_indx``  (which will always either have
+the value 0 or 1) to start each row on a color that is different from the previous row's
+starting color, and to switch colors each time a square is filled.
+
+This (together with the other fragments not shown to flip the surface onto the display) leads
+to the pleasing backgrounds like this, for different size boards:
+
+.. image:: illustrations/pygame_screenshot03.png  
+
+Now, on to drawing the queens!  Recall that our solution ``[6,4,2,0,5,7,1,3]`` means that
+in column 0 of the board we want a queen at row 6, at column 1 we want a queen at row 4, 
+and so on. So we need a loop running over each queen::
+
+    for (col, row) in enumerate(the_board):
+        # draw a queen at col, row...
+
+In this chapter we already have a beach ball image, so we'll use that for our queens.  In the
+setup code before our game loop, we load the ball image (as we did before), and in the body of
+the loop, we add the line::
+
+    surface.blit(ball, (col * sq_sz, row * sq_sz))
+    
+.. image:: illustrations/pygame_screenshot04.png
+
+We're getting there, but those queens need to be centred in their squares!  Our problem arises from
+the fact that both the ball and the rectangle have their upper left corner as their reference points.
+If we're going to centre this ball in the square, we need to give it an extra offset in both the
+x and y direction.  (Since the ball is round and the square is square, the offset in the two directions
+will be the same, so we'll just compute a single offset value, and use it in both directions.)
+
+The offset we need is half the (size of the square less the size of the ball).  So we'll precompute
+this in the setup section, after we've loaded the ball and determined the square size::
+
+    ball_offset = (sq_sz - ball.get_rect()[2]) // 2
+    
+Notice that we used the ``get_rect`` method of the ball to get its rectangle, then used its 3'rd 
+component --- its width --- for this.
+
+Now we touch up the drawing code for the ball:: 
+ 
+    surface.blit(ball, (col * sq_sz + ball_offset, row * q_sz + ball_offset))    
+
+and we're done.  
+
+We might just want to think about what would happen if the ball was bigger than
+the square.  In that case, ``ball_offset`` would become negative.  So it would still be centered in
+the square - it would just spill over the boundaries, or perhaps obscure the square entirely! 
+
+Here is the complete program:
+
+.. sourcecode:: python
+    :linenos:
+
+    import pygame      
+
+    def draw_board(the_board):
+        """ Draw a chess board with queens, as determined by the the_board. """
+
+        pygame.init()                    # prepare the pygame module for use
+        colors = [(255,0,0), (0,0,0)]    # set up colors [red, black]
+
+        n = len(the_board)         # n is the number of squares on one side of the board.
+        surfaceSz = 480            # Proposed physical surface size, in pixels.
+        sq_sz = surfaceSz // n     # sq_sz is the length of one side of a square.
+        surfaceSz = n * sq_sz      # Adjust surface size to be an exact multiple of sz.
+
+        # Create the surface of (width, height), and its window.
+        surface = pygame.display.set_mode((surfaceSz, surfaceSz))
+
+        ball = pygame.image.load("ball.png")
+
+        # Use an extra offset to centre the ball in its square.
+        # If the square is too small, offset becomes negative,
+        # but it will still be centered :-)
+        ball_offset = (sq_sz-ball.get_rect()[2]) // 2
+
+        while True:
+
+            # look for an event from keyboard, mouse, etc.
+            ev = pygame.event.poll()
+            if ev.type == pygame.QUIT:
+                break;
+
+            # Draw a fresh background (a blank board)
+            for row in range(n):           # Draw each row of the board.
+              c_indx = row % 2             # Alternate starting color on every row
+              for col in range(n):         # Run through cols drawing squares
+                  the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
+                  surface.fill(colors[c_indx], the_square)
+                  c_indx = (c_indx + 1) % 2   # and flip color
+
+            # Now that squares are drawn, draw the queens.
+            for (col, row) in enumerate(the_board):
+                surface.blit(ball, (col*sq_sz+ball_offset, row*sq_sz+ball_offset))
+
+            pygame.display.flip()
+
+            
+        pygame.quit()
+
+    if __name__ == '__main__':
+        draw_board([0, 5, 3, 1, 6, 4, 2])      # 7 x 7 board to test window size
+        draw_board([6, 4, 2, 0, 5, 7, 1, 3])
+        draw_board([9, 6, 0, 3, 10, 7, 2, 4, 12, 8, 11, 5, 1])  # 13 x 13
+        draw_board([11, 4, 8, 12, 2, 7, 3, 15, 0, 14, 10, 6, 13, 1, 5, 9])
+
+There is one more thing requiring explanation here.  The conditional statement on line
+48 tests whether the name of the currently executing program is ``__main__``.
+This allows us to distinguish whether this module is being run as a main program, 
+or whether it has been imported elsewhere, and used as a module.  If we run this
+module in Python, the test cases in lines 49-52 will be executed.  However, if we
+import this module into another program (i.e. our N queens solver from earlier)
+the condition at line 50 will be false, and the statements on lines 49-52 won't run.
+
+
+In the chapter titled List Algorithms, our main program for the N queens solver looked like this:
+
+.. sourcecode:: python
+    :linenos:
+
+    def main():
+
+        bd = list(range(8))     # generate the initial permutation
+        numFound = 0
+        tries = 0
+        while numFound < 10:
+           random.shuffle(bd)
+           tries += 1
+           if not has_clashes(bd):
+               print('Found solution {0} in {1} tries.'.format(bd, tries))
+               tries = 0
+               numFound += 1
+
+    main()
+    
+Now we just need two changes.  At the top of that program, we import the module that
+we've been working on here (assume we called it ``draw_queens``).  (You'll have to ensure that the
+two modules are in the same folder.)  Then after line 10 here we add a call to draw the board
+that we've found::
+
+            draw_queens.draw_board(bd)
+            
+And that gives a very satisfying combination of program that can search for solutions to the N queens problem,
+and when it finds each, it pops up the board showing the solution.
+        
+Sprites
+-------
+
+A sprite is an object that can move about in a game, and has internal behaviour and state of its own.  For example,
+a spaceship would be a sprite, the player would be a sprite, and bullets and bombs would all be sprites.
+
+Object oriented programming (OOP) is ideally suited to a situation like this: each object can have its own attributes
+and internal state, and a couple of methods.   Let's have some fun with our N queens board.  Instead of placing
+the queen in its final position, we'd like to drop it from the top of the board, and let it fall into position,
+perhaps bouncing along the way.   
+
+The first encapsulation we need is to turn each of our queens into an object.  We'll keep a list of all the active
+sprites (i.e. a list of queen objects), and arrange two new things in our game loop:
+
+* After handling events, but before drawing, call an ``update`` method on every sprite.  This
+  will give each sprite a chance to modify its internal state in some way --- perhaps change its image, or change its
+  position, or rotate itself, or make itself grow a bit bigger or a bit smaller. 
+* Once all the sprites have updated themselves, the game loop can begin drawing - first the background, and then 
+  call a ``draw`` method on each sprite in turn, and delegate the task of drawing to the object itself.  This is 
+  in line with the OOP idea that we don't say "Hey, draw, show this queen!",  but we prefer to say 
+  "Hey, queen, draw youself!". 
+  
+We start with a simple object, and no movement or animation yet, just as scaffolding, and 
+to see how to fit all the pieces together:
+
+.. sourcecode:: python
+    :linenos:
+    
+    class Queen_sprite:
+
+        def __init__(self, img, target_posn):
+            """ Create and initialize a queen for the target position on the board """
+            self.image = img
+            self.target_posn = target_posn
+            self.posn = target_posn
+
+        def update(self):
+            return                # do nothing for the moment.
+
+        def draw(self, target_surface):
+            target_surface.blit(self.image, self.posn)    
+
+We've given the sprite three attributes: an image to be drawn, a target position, and a current position.  If we're going to
+move the spite about, the current position may need to be different from the target, which is where we want the queen
+finally to end up.   In this code at this time we've done nothing in the ``update`` method, and our ``draw`` method (which
+can probably remain this simple in future) simply draws itself at its current position on the surface that is provided
+by the caller. 
+
+With its class definition in place, we now instantiate our N queens, put them into a list of sprites, and arrange for the
+game loop to call the ``update`` and ``draw`` methods on each frame.   The new bits of code, and the revised game loop look
+like this:
+
+.. sourcecode:: python
+    :linenos:
+    
+        all_sprites = []                # Keep a list of all sprites in the game
+
+        # Create a sprite object for each queen on the board
+        for (col, row) in enumerate(the_board):
+            a_queen = Queen_sprite(ball, (col*sq_sz+ball_offset, row*sq_sz+ball_offset))
+            all_sprites.append(a_queen)
+
+        while True:
+            # look for an event from keyboard, mouse, etc.
+            ev = pygame.event.poll()
+            if ev.type == pygame.QUIT:
+                break;
+
+            # Update all the sprites.
+            for sprite in all_sprites:
+                sprite.update()
+
+            # Draw a fresh background (a blank chess board)
+            # ... same as before ...
+
+            # draw all sprites
+            for sprite in all_sprites:
+                sprite.draw(surface)
+
+            pygame.display.flip()
+
+This works just like it did before, but our extra work in making objects for the queens has prepared the 
+way for some more ambitious extensions.
+
+Let us begin with a falling object.  At any instant, it will have a velocity. (We are only working
+with movement in the y direction, but use your imagination!)  
+So in the object's ``update`` method, we want to change its current position by its velocity.
+If our N queens board is floating in space, velocity would stay constant, but hey, here on
+Earth we have gravity too! Gravity changes the velocity on each time interval, so we'll want a ball 
+that speeds up as it falls further.   Gravity will be constant for all queens, so we won't keep
+it in the instances --- we'll just make it a variable in our module.     We'll make one other 
+change too: we will start every queen at the top of the board, so that it can fall towards
+its target position.   With these changes, we now get the following
+
+.. sourcecode:: python
+    :linenos:
+    
+    gravity = 0.0001
+    
+    class Queen_sprite:
+
+        def __init__(self, img, target_posn):
+            self.image = img
+            self.target_posn = target_posn
+            (x, y) = target_posn
+            self.posn = (x, 0)               # start the ball at the top of its column
+            self.y_velocity = 0              # start the ball with zero initial velocity
+
+        def update(self):
+            self.y_velocity += gravity       # take gravity into account, to change velocity
+            (x, y) = self.posn
+            new_y_pos = y + self.y_velocity  # the ball moves according to its velocity
+            self.posn = (x, new_y_pos)       # so this becomes its new position.
+
+        def draw(self, target_surface):      # same as before.
+            target_surface.blit(self.image, self.posn)
+
+
+Making these changes gives us a new chessboard in which each queen starts at the top of its column,
+and speeds up, until it drops off the bottom of the board and disappears forever.  But we have movement!
+
+The next step is to get the ball to bounce when it reaches its own target position.  
+It is pretty easy to bounce something --- you just change the sign of its velocity, and it will
+move at the same speed in the opposite direction.  Of course, if it is travelling up towards the
+top of the board it will be slowed down by gravity. (Gravity always sucks down!)  And you'll
+find it bounces all the way up to where it began from, reaches zero velocity, and starts falling
+all over again.  So we'll have bouncing balls that never settle.  
+
+A realistic way to settle the object is to lose some energy (probably to friction) 
+each time it bounces --- so instead of simply reversing the sign of the velocity, 
+we multiply it by some fractional factor --- say -0.65.
+This means the ball only retains 65% of its energy on each bounce, so it will, as in real life, 
+stop bouncing after a short while, and settle on its "ground". 
+
+The only changes are in the ``update`` method, which now looks like this:
+
+.. sourcecode:: python
+    :linenos:
+
+    def update(self):
+        self.y_velocity += gravity
+        (x, y) = self.posn
+        new_y_pos = y + self.y_velocity
+        (target_x, target_y) = self.target_posn            # unpack the tuple 
+        dist_to_go = target_y - new_y_pos                  # how far are we from our own floor?
+        if dist_to_go < 0:                                 # Oops, we're beneath the floor
+            self.y_velocity = -0.65 * self.y_velocity      # reverse direction
+            new_y_pos = target_y + dist_to_go              # put the ball back above the floor
+        self.posn = (x, new_y_pos)                         # set our new position for ourself.
+            
+Heh, heh, heh!  We're not going to show animated screenshots, so copy the code into your
+Python environment and see for yourself.
+            
+            
+Events
+------
+
+The only kind of event we're handled so far has been the QUIT event.  But we can also detect keydown and keyup
+events, mouse motion, and mousebutton down or up events.  Consult the PyGame documentation and follow the link to Event.
+ 
+When your program polls for and receives an event object from PyGame, its event type will determine what secondary
+information is available.  Each event object carries a *dictionary* (which you may only cover in due course in these notes).
+The dictionary holds certain *keys* and *values* that make sense for the type of event.  
+
+For example, if the type of event is MOUSEMOTION, we'll be able to find the mouse position and information about 
+the state of the mouse buttons in the dictionary attached to the event.  Similarly, if the event is KEYDOWN, we
+can learn from the dictionary whick key went down, and whether any modifier keys (shift, control, alt, etc.) are also
+down.  You also get events when the game window becomes active (i.e. gets focus) or loses focus.
+
+The event object with type NOEVENT is returned if there are no events waiting.  Events can be printed, allowing you to
+experiment and play around.   So dropping these lines of code into the game loop directly after polling for any event is
+quite informative::
+
+    if ev.type != NOEVENT:     # only print if it is interesting, otherwise we'll be overwhelmed!
+        print(ev)
+
+With this is place, hit the space bar and the escape key, and watch the events you get.  Click your three
+mouse buttons.  Move your mouse over the window. (This causes a vast cascade of events, so you may also 
+need to filter those out of the printing.)   You'll get output that looks something like this::
+
+    <Event(17-VideoExpose {})>
+    <Event(1-ActiveEvent {'state': 1, 'gain': 0})>
+    <Event(2-KeyDown {'scancode': 57, 'key': 32, 'unicode': ' ', 'mod': 0})>
+    <Event(3-KeyUp {'scancode': 57, 'key': 32, 'mod': 0})>
+    <Event(2-KeyDown {'scancode': 1, 'key': 27, 'unicode': '\x1b', 'mod': 0})>
+    <Event(3-KeyUp {'scancode': 1, 'key': 27, 'mod': 0})>
+    ...
+    <Event(4-MouseMotion {'buttons': (0, 0, 0), 'pos': (323, 194), 'rel': (-3, -1)})>
+    <Event(4-MouseMotion {'buttons': (0, 0, 0), 'pos': (322, 193), 'rel': (-1, -1)})>
+    <Event(4-MouseMotion {'buttons': (0, 0, 0), 'pos': (321, 192), 'rel': (-1, -1)})>
+    <Event(4-MouseMotion {'buttons': (0, 0, 0), 'pos': (319, 192), 'rel': (-2, 0)})>
+    <Event(5-MouseButtonDown {'button': 1, 'pos': (319, 192)})>
+    <Event(6-MouseButtonUp {'button': 1, 'pos': (319, 192)})>
+    <Event(4-MouseMotion {'buttons': (0, 0, 0), 'pos': (319, 191), 'rel': (0, -1)})>
+    <Event(5-MouseButtonDown {'button': 2, 'pos': (319, 191)})>
+    <Event(5-MouseButtonDown {'button': 5, 'pos': (319, 191)})>
+    <Event(6-MouseButtonUp {'button': 5, 'pos': (319, 191)})>
+    <Event(6-MouseButtonUp {'button': 2, 'pos': (319, 191)})>
+    <Event(5-MouseButtonDown {'button': 3, 'pos': (319, 191)})>
+    <Event(6-MouseButtonUp {'button': 3, 'pos': (319, 191)})>
+     ...
+    <Event(1-ActiveEvent {'state': 1, 'gain': 0})>
+    <Event(12-Quit {})>
+
+So let us now make these changes to the code near the top of our game loop:
+
+.. sourcecode:: python
+   :linenos:
+   
+    while True:
+
+        # look for an event from keyboard, mouse, etc.
+        ev = pygame.event.poll()
+        if ev.type == pygame.QUIT:
+            break;
+        if ev.type == pygame.KEYDOWN:
+            key = ev.dict['key']
+            if key == 27:                  # on Escape key
+                break                      # leave the game loop
+            if key == ord('r'):
+                colors[0] = (255, 0, 0)    # change board color to red + black
+            elif key == ord('g'):
+                colors[0] = (0, 255, 0)    # change board color to green + black 
+            elif key == ord('b'):
+                colors[0] = (0, 0, 255)    # change board color to blue + black 
+
+        if ev.type == pygame.MOUSEBUTTONDOWN:    # detect mousedown
+            posn_of_click = ev.dict['pos']       # get the coordinates
+            print(posn_of_click)                 # and just print them for the moment
+    
+    
+Lines 8-16 show typical processing for a KEYDOWN event --- we test which key has gone down,
+and take some action.  With this in place, we have another way to quit our queens program ---
+by hitting the escape key.  Also, we can use keys to change the color of the board that is drawn.
+
+Finally, at line 18, we respond (pretty lamely) to the mouse button going down.
+
+As a final exercise in this section, we'll write a better response handler to mouse clicks.
+What we will do is figure out if the user has clicked the mouse on one of our sprites.
+If there is a sprite under the mouse when the click occurs, we'll send the click to the
+sprite and let it respond in some sensible way.  
+
+We'll begin with some code that finds out which sprite is under the clicked position, perhaps none! 
+We add a method to the class, ``contains_point``, which returns True if the point is within
+the rectangle of the sprite: 
+
+.. sourcecode:: python
+   :linenos:
+
+     def contains_point(self, pt):
+         """ Return True if my sprite rectangle contains point pt """
+         (my_x, my_y) = self.posn
+         my_width = self.image.get_rect()[2]
+         my_height = self.image.get_rect()[3]
+         (x, y) = pt
+         return ( x >= my_x and x < my_x + my_width and
+                  y >= my_y and y < my_y + my_height)
+                 
+Now in the game loop, once we've seen the mouse event, we determine which queen, if any,
+should be told to respond to the event:
+
+.. sourcecode:: python
+   :linenos:
+
+     if ev.type == pygame.MOUSEBUTTONDOWN:
+         posn_of_click = ev.dict['pos']
+         for sprite in all_sprites:
+             if sprite.contains_point(posn_of_click):
+                 sprite.handle_click()
+                 break
+                
+And the final thing is to write a new method called ``handle_click`` in the ``Queen_sprite`` class.  
+When a sprite is clicked, we'll just add some velocity in the up direction, 
+i.e. kick it back into the air.
+
+.. sourcecode:: python
+   :linenos:
+   
+    def handle_click(self):
+        self.y_velocity += -0.3   # kick it up 
+        
+With these changes we have a playable game!  See if you can keep all the balls on the move, not allowing any one to settle!
+
+ 
+Aliens - a case study
+--------------------- 
+ 
+Find the example games with the PyGame package, (On a windows system, something like C:\\Python3\\Lib\\site-packages\\pygame\\examples) and play the Aliens game.  Then read the code, in an editor
+or Python environment that shows line numbers.  
+
+It does a number of much more advanced things that we do, and relies on the PyGame framework
+for more of its logic.   Here are some of the points that you'll notice:
+
+* The frame rate is deliberately constrained near the bottom of the game loop at line 311.  If you
+  change that number you can make the game very slow or unplayably fast!
+* There are different kinds of sprites: Explosions, Shots, Bombs, Aliens and a Player.  Some
+  of these have more than one image --- by swapping the images, we get animation of the
+  sprites, i.e. the Alien spacecraft lights change, and this is done at line 112. 
+* Different kinds of objects are referenced in different groups of sprites, and PyGame helps
+  maintain these.  This lets the program check for collisions between, say, the list of shots fired by
+  the player, and the list of spaceships that are attacking.  PyGame does a lot of the
+  hard work for you.
+* Unlike our game, objects in the Aliens game have a limited lifetime, and have to get killed.  For example,
+  if you shoot, a Shot object is created --- if it reaches the top of the screen without
+  expoding against anything, it has to be removed from the game.  Lines 141-142 do this.  Similarly,
+  when a falling bomb gets close to the ground (line 156), it instantiates a new Explosion sprite, and
+  the bomb kills itself. 
+* There are random timings that add to the fun --- when to spawn the next Alien, when an Alien drops the
+  next bomb, etc.
+* The game plays sounds too: a less-than-relaxing loop sound, plus sounds for the shots and explosions.
+
+
+Reflections
+-----------
+
+Object oriented programming is a good organizational tool for software.  In the examples in this
+chapter, we've started to use (and hopefully appreciate) these benefits.  Here we had 
+N queens each with its own state, falling to its own floor level, bouncing, getting kicked, etc.
+We might have managed without the organizational power of objects --- perhaps we could have 
+kept lists of velocities for each queen, and lists of target positions, and so on --- our code
+would likely have been much more complicated, ugly, and a lot poorer! 
+
+ 
 Glossary
 --------
 
 .. glossary::
 
-
-    sequence
-        Any of the data types that consist of an ordered collection of elements, with
-        each element identified by an index.
+    blit
+        A verb used in computer graphics, meaning to make a fast copy of an image or pixels from
+        one image or surface to another surface or image.
         
-
+    game loop
+        A loop that drives the logic of a game.  It will usually poll for events, then update each
+        of the objects in the game, then get everything drawn, and then put the newly drawn frame on display.
+        
+    poll
+        To ask whether something like a keypress or mouse movement has happened.  Game loops usually
+        poll to discover what events have occured.  This is different from event-driven programs like
+        the ones seen in the chapter titled "Events".  In those cases, the button click or keypress
+        event triggers the call of a handler function in your program, but this happens behind your back.
+     
+    sprite
+        An active agent or element in a game, with its own state, position and behaviour.
+        
+    surface
+        This is PyGame's term for what the Turtle module calls a *canvas*.  A surface allows drawing
+        and displaying of shapes and images. 
+        
 
 Exercises
 ---------
 
+#. Have fun with Python, and with PyGame.
 
-#. What is the Python interpreter's response to the following?
-
-   blah blah.
+#. So the Aliens game is in outer space, without gravity. Shots fly away forever, and bombs don't speed up
+   when they fall.  Add some gravity to the game.   Decide if you're going to allow your own shots to 
+   fall back on your head and kill you.
    
+#. Those pesky Aliens seem to pass right through each other!  Change the game so that they collide, and 
+   destroy each other in a mighty explosion.  
+   
+  
  
