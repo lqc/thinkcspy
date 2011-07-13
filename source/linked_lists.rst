@@ -119,7 +119,7 @@ to the end:
         while node:
             print(node, end=' ')
             node = node.next
-        print
+        print()
 
 To invoke this method, we pass a reference to the first node:
 
@@ -168,7 +168,7 @@ natural base case is the empty list, represented by ``None``:
 
 The first line handles the base case by doing nothing. The next two lines split
 the list into ``head`` and ``tail``. The last two lines print the list. The
-comma at the end of the last line keeps Python from printing a newline after
+``end`` argument of the print statement keeps Python from printing a newline after
 each node.
 
 We invoke this method as we invoked ``print_list``:
@@ -209,7 +209,7 @@ fraction.
 
 Regardless, it is problematic that we cannot prove that ``print_list`` and
 ``print_backward`` terminate. The best we can do is the hypothetical statement,
-If the list contains no loops, then these methods will terminate. This sort of
+"If the list contains no loops, then these methods will terminate." This sort of
 claim is called a **precondition**. It imposes a constraint on one of the
 parameters and describes the behavior of the method if the constraint is
 satisfied. You will see more examples soon.

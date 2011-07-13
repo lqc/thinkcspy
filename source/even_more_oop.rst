@@ -365,18 +365,18 @@ in this case, a method on the first argument:
        
         def after(self, time2):
             """ Return True if I am strictly greater than time2 """
-            if self.hour > time2.hour:
+            if self.hours > time2.hours:
                 return True 
-            if self.hour < time2.hour:
+            if self.hours < time2.hours:
                 return False 
        
-            if self.minute > time2.minute:
+            if self.minutes > time2.minutes:
                 return True 
-            if self.minute < time2.minute:
+            if self.minutes < time2.minutes:
                 return False 
-       
-            if self.second > time2.second:
+            if self.seconds > time2.seconds:
                 return True
+                
             return False 
 
 We invoke this method on one object and pass the other as an argument:

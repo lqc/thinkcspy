@@ -269,7 +269,7 @@ contents of an object. To print a ``Deck``, we traverse the list and print each
         ...
         def print_deck(self):
             for card in self.cards:
-                print card
+                print(card)
 
 Here, and from now on, the ellipsis ( ``...``) indicates that we have omitted
 the other methods in the class.
