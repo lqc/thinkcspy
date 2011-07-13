@@ -395,7 +395,7 @@ CC-BY-SA on the same site at any time before August 1, 2009, provided the MMC
 is eligible for relicensing.
 
 ADDENDUM: How to use this License for your documents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To use this License in a document you have written, include a copy
 of the License in the document and put the following copyright and
