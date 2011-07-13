@@ -693,7 +693,7 @@ Exercises
     A closed interval includes the number, and open interval excludes it.   So 39.99999 gets grade F3, but 40 gets grade F2.
     Assume ::
     
-    xs = [83, 75, 74.9, 70, 69.9, 65, 60, 59.9, 55, 50, 
+       xs = [83, 75, 74.9, 70, 69.9, 65, 60, 59.9, 55, 50, 
                             49.9, 45, 44.9, 40, 39.9, 2, 0 
     
     Test your function by printing the mark and the grade for all the elements in this list.
