@@ -16,22 +16,23 @@
 .. |rle_close| image:: illustrations/rle_close.png
 
     
-The Rhodes Local Edition (RLE)
-==============================
+The Rhodes Local Edition (RLE) (Version of July, 2011)
+======================================================
 
 By Peter Wentworth
 
 .. admonition:: A word of thanks ... 
  
-    We switched from Java to Python in our introductory courses a year
-    ago, and so far we think the results look positive. More time will tell.
+    We switched from Java to Python in our introductory courses in 2010.
+    So far we think the results look positive. More time will tell.
 
-    This book was a great starting point for us, especially because of the liberal permission
+    This predecessor to this book was a great starting point for us, 
+    especially because of the liberal permission
     to change things.  Having our own in-house course notes or handouts
     allows us to adapt and stay fresh, rearrange, see what works, 
     and it gives us agility.  We can also ensure that every student in the course 
     gets a copy of the handouts --- something that doesn't always happen if we prescribe
-    costly textbooks in a developing country or third-world situation. 
+    costly textbooks. 
     
     Many thanks to all the contributors and the authors for making their hard 
     work available to the Python community and to our students.
@@ -58,7 +59,7 @@ together, and evaluated as a whole.
 
 I've made some quite deep changes to the original book to reflect
 this (and various other opinionated views that I hold), and I have no doubt
-that more changes will follow if we do get to RLE versions 2, or 3, or 4.
+that more changes will follow as we bed down our course.  
 
 Here are some of the key things I've approached differently:
 
@@ -74,8 +75,7 @@ Here are some of the key things I've approached differently:
   parts of these notes, with screenshots, etc.  
 * I've dropped GASP. 
 * For graphics we start with the Turtle module. As things
-  move along, we use PyGame for advanced graphics.  (At this revision, the
-  PyGame practicals and lessons are not included in the textbook yet.)
+  move along, we use PyGame for more advanced graphics.  
 * I have tried to push more object-oriented notions earlier, without asking
   students to synthesize objects or write their own classes.  So, for example,
   in the chapter about the turtle, we create multiple instances of turtles, 
@@ -150,17 +150,25 @@ Here are some of the key things I've approached differently:
   the instances from within the class.  So we've moved closer in philosophy 
   to C# / Java.
   
-* Our next intended move is to introduce more algorithms into the course.  Python
+* We're moving towards introducing more algorithms earlier into the course.  Python
   is an efficient teaching language --- we can make fast progress.  But the gains
   we make there we'd like to invest not in doing "more Python features", but in
-  doing deeper problem solving, and more complex algorithms with the basics. This
-  will likely be separated from the main text, perhaps in an addendum or appendix.  
+  doing deeper problem solving, and more complex algorithms with the basics. Some
+  of these changes have started to find their way in this version, and I'm sure we'll
+  see more in future.
+
+* We're interested in issues around teaching and learning. Some research indicates
+  that "intellectual playfulness" is important.  The study referenced in the Odds-and-ends
+  workbook at the end just didn't seem to have anywhere sensible to go in the book, yet
+  I wanted it included.  It is quite likely that we'll allow more issues like this to
+  creep into the book, to try to make it more than just about programming in Python.   
  
 Some markup in the document
 ---------------------------
 
 When I began the changes, I tried to keep "my modifications" separate 
-from the original, and delimited with some easy-to-see markers.
+from the original, and delimited with some easy-to-see markers.   I had the notion
+that I'd be able to restrain myself from fiddling and changing things too widely. 
 However, things soon got blurred.  
 
 I occasionally still use the markers, but mostly for emphasis that this is 
