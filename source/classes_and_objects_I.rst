@@ -43,7 +43,7 @@ of new software. It was developed as a way to handle the rapidly increasing
 size and complexity of software systems, and to make it easier to modify these
 large and complex systems over time.
 
-Up to now, some of the programs we have been writing programs use a `procedural programming
+Up to now, most of the programs we have been writing use a `procedural programming
 <http://en.wikipedia.org/wiki/Procedural_programming>`__ paradigm. In
 procedural programming the focus is on writing functions or *procedures* which
 operate on data. In object-oriented programming the focus is on the creation of

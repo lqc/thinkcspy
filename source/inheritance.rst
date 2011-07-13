@@ -140,13 +140,13 @@ The second parameter, ``num_cards``, is optional; the default is a large
 number, which effectively means that all of the cards in the deck will get
 dealt.
 
-The loop variable ``i`` goes from 0 to ``nCards-1``. Each time through the
+The loop variable ``i`` goes from 0 to ``num_cards-1``. Each time through the
 loop, a card is removed from the deck using the list method ``pop``, which
 removes and returns the last item in the list.
 
 The modulus operator ( ``%``) allows us to deal cards in a round robin (one
 card at a time to each hand). When ``i`` is equal to the number of hands in the
-list, the expression ``i % nHands`` wraps around to the beginning of the list
+list, the expression ``i % num_hands`` wraps around to the beginning of the list
 (index 0).
 
 
@@ -352,7 +352,7 @@ contains a new shuffled deck:
             self.printHands()
        
             # remove initial matches
-            matches = self.removeAllMatches()
+            matches = self.remove_all_matches()
             print("---------- Matches discarded, play begins")
             self.printHands()
        
@@ -360,7 +360,7 @@ contains a new shuffled deck:
             turn = 0
             numHands = len(self.hands)
             while matches < 25:
-                matches = matches + self.playOneTurn(turn)
+                matches = matches + self.play_one_turn(turn)
                 turn = (turn + 1) % numHands
        
             print("---------- Game is Over")
@@ -404,7 +404,7 @@ The return value is the number of matches made during this turn:
             if self.hands[i].is_empty():
                 return 0
             neighbor = self.find_neighbor(i)
-            pickedCard = self.hands[neighbor].popCard()
+            pickedCard = self.hands[neighbor].pop()
             self.hands[i].add(pickedCard)
             print("Hand", self.hands[i].name, "picked", pickedCard)
             count = self.hands[i].remove_matches()
