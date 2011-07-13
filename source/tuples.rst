@@ -31,7 +31,8 @@ Although it is not necessary, it is conventional to enclose tuples in parenthese
 
 .. sourcecode:: python
     
-    >>> julia = ("Julia", "Roberts", 1967, "Duplicity", 2009, "Actress", "Atlanta, Georgia")
+    >>> julia = ("Julia", "Roberts", 1967, 
+                       "Duplicity", 2009, "Actress", "Atlanta, Georgia")
     
 Tuples are useful for representing what other languages often call *records* ---
 some related information that belongs together, like your student record.  There is
@@ -99,7 +100,7 @@ on the right of the assignment.   (We already saw this used for pairs, but it ge
 
 .. sourcecode:: python
     
-    (name, surname, birth_year, movie, movie_year, profession, birth_place) = julia
+    (name, surname, b_year, movie, m_year, profession, b_place) = julia
     
 This does the equivalent of seven assignment statements, all on one easy line.  
 One requirement is that the number of variables on the left must match the number
@@ -167,18 +168,19 @@ We saw in an earlier chapter that we could make a list of pairs, and we had an e
 where one of the items in the tuple was itself a list::
 
     students = [
-            ("John", ["CompSci", "Physics"]),
-            ("Vusi", ["Maths", "CompSci", "Stats"]),
-            ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
-            ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
-            ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
+        ("John", ["CompSci", "Physics"]),
+        ("Vusi", ["Maths", "CompSci", "Stats"]),
+        ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
+        ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
+        ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
 
 Tuples items can themselves be other tuples.  For example, we could improve
 the information about our movie stars to hold the full date of birth rather
 than just the year, and we could have a list of some of her movies and dates that they
 were made, and so on::
 
-   julia_more_info = ( ("Julia", "Roberts"), (8, "October", 1967), "Actress", ("Atlanta", "Georgia"),  
+   julia_more_info = ( ("Julia", "Roberts"), (8, "October", 1967), 
+                        "Actress", ("Atlanta", "Georgia"),  
                         [ ("Duplicity", 2009), 
                           ("Notting Hill", 1999),
                           ("Pretty Woman", 1990),

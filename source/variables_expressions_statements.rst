@@ -453,7 +453,7 @@ the number line.  Let us see this in action:
     10
     >>> int("2345")             # parse a string to produce an int
     2345
-    >>> int(17)                 # int even works if its argument is already an int
+    >>> int(17)                 # even works if arg is already an int
     17
     >>> int("23 bottles")     
     Traceback (most recent call last):
@@ -517,9 +517,9 @@ is a useful way to remember the order of operations:
    
    .. sourcecode:: python
     
-      >>> 2 ** 3 ** 2        # the right-most ** operator gets done first!
+      >>> 2 ** 3 ** 2     # the right-most ** operator gets done first!
       512
-      >>> (2 ** 3) ** 2      # It is sensible to use parentheses to force the order you want!
+      >>> (2 ** 3) ** 2   # Use parentheses to force the order you want!
       64
 
 The immediate mode command prompt of Python is great for exploring and experimenting

@@ -7,14 +7,6 @@
     included in the section entitled "GNU Free Documentation License".
 
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
 |          
     
 Dictionaries
@@ -26,7 +18,7 @@ All of the compound data types we have studied in detail so far --- strings,
 lists, and tuples --- are sequence types, which use integers as indices to access
 the values they contain within them.
 
-**Dictionaries** are a different kind of compound type. They are Python's
+**Dictionaries** are yet another kind of compound type. They are Python's
 built-in **mapping type**. They map **keys**, which can be any immutable type,
 to values, which can be any type, just like the values of a list or tuple.
 
@@ -79,6 +71,10 @@ Here is how we use a key to look up the corresponding value:
 
 The key ``'two'`` yields the value ``'dos'``.
 
+Lists, tuples, and strings have been called *sequences*, because their items
+occur in order.  The dictionary is the first compound type that we've
+seen that is not a sequence, so we can't index or slice a dictionary. 
+
 .. index:: del statement, statement; del
 
 Dictionary operations
@@ -90,7 +86,7 @@ each fruit in stock:
 
 .. sourcecode:: python
     
-    >>> inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
+    >>> inventory={'apples':430,'bananas':312,'oranges':525,'pears':217}
     >>> print(inventory)
     {'pears': 217, 'apples': 430, 'oranges': 525, 'bananas': 312}
 
@@ -141,7 +137,7 @@ list like this:
 
 .. sourcecode:: python
     
-    for k in eng2sp.keys():     # the order in which we get the k's is not defined
+    for k in eng2sp.keys():   # the order of the k's is not defined
        print("Got key", k, "which maps to value", eng2sp[k])     
        
     ks = list(eng2sp.keys())
@@ -213,7 +209,7 @@ The ``in`` and ``not in`` operators can test if a key is in the dictionary:
     True
     >>> 'six' in eng2sp
     False
-    >>> 'tres' in eng2sp    # notice that 'in' tests against keys, not against values.
+    >>> 'tres' in eng2sp    # note that 'in' tests keys, not values.
     False
      
 
@@ -233,7 +229,8 @@ dictionary causes a runtime error:
 Aliasing and copying
 --------------------
 
-Because dictionaries are mutable, you need to be aware of aliasing.  Whenever
+As in the case of lists, because dictionaries are mutable, you need to be 
+aware of aliasing.  Whenever
 two variables refer to the same object, changes to one affect the other.
 
 If you want to modify a dictionary and keep a copy of the original, use the
@@ -339,7 +336,7 @@ about the syntax.
 Memos
 -----
 
-If you played around with the ``fibonacci`` function from the last chapter, you
+If you played around with the ``fibonacci`` function from the chapter on recursion, you
 might have noticed that the bigger the argument you provide, the longer the
 function takes to run. Furthermore, the run time increases very quickly. On one
 of our machines, ``fibonacci(20)`` finishes instantly, ``fibonacci(30)`` takes

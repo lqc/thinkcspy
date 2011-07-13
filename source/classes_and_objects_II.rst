@@ -38,13 +38,14 @@ a string converter method:
         """ A class to manufacture rectangle objects """
         
         def __init__(self, posn, w, h):
-            """ Initialize a rectangle at posn, with width w and height h """
+            """ Initialize rectangle at posn, with width w, height h """
             self.corner = posn
             self.width = w
             self.height = h
             
         def __str__(self):
-            return  "({0}, {1}, {2})".format(self.corner, self.width, self.height)
+            return  "({0}, {1}, {2})" 
+                      .format(self.corner, self.width, self.height)
             
     box = Rectangle(Point(0, 0), 100, 200)
     bomb = Rectangle(Point(100, 80), 5, 10)    # in my video game
@@ -188,11 +189,13 @@ shallow and deep equality.
     
         p = Point(4, 2)
         s = Point(4, 2)
-        print("== on Points returns", p == s)  # by default, == does a shallow equality test here
+        print("== on Points returns", p == s)  
+        # by default, == on Point objects does a shallow equality test
 
         a = [2,3]
         b = [2,3]
-        print("== on lists returns",  a == b)  # by default, == does a deep equality test on lists
+        print("== on lists returns",  a == b) 
+        # but by default, == does a deep equality test on lists
 
     This outputs::
     
@@ -221,7 +224,7 @@ object:
     
     >>> import copy
     >>> p1 = Point(3, 4)
-    >>> p2 = copy.copy(p1)   # ugly!  <module_name>.<function_name> are identical! 
+    >>> p2 = copy.copy(p1)    
     >>> p1 is p2
     False
     >>> same_coordinates(p1, p2)

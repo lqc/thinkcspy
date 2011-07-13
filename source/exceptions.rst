@@ -214,15 +214,17 @@ this (somewhat contrived) example:
 
     def show_poly():
         try:
-            win = turtle.Screen()   # Grab or create some resource - a window...
+            win = turtle.Screen()   # Grab/create a resource, eg a window 
             tess = turtle.Turtle()
-                # This dialog could be cancelled, or the conversion to int might fail.
+            
+            # This dialog could be cancelled, 
+            # or the conversion to int might fail.
             n = int(input("How many sides do you want in your polygon?"))
             angle = 360 / n
             for i in range(n):      # Draw the polygon 
                 tess.forward(10)
                 tess.left(angle)
-            time.sleep(3)           # make program wait for a few seconds
+            time.sleep(3)           # make program wait a few seconds
         finally:         
             win.bye()               # close the turtle's window.
 
@@ -231,12 +233,12 @@ this (somewhat contrived) example:
     show_poly()
     show_poly()
 
-In lines 18-20, ``show_poly`` is called three times.  Each one creates a new
+In lines 19-21, ``show_poly`` is called three times.  Each one creates a new
 window for its turtle, and draws a polygon with the number of sides
 input by the user.  But what if the user enters a string that cannot be
-converted to an int?  What if they close the dialog?  We'll get an exception, 
+converted to an ``int``?  What if they close the dialog?  We'll get an exception, 
 *but even though we've had an exception, we still want to close the turtle's window*.  
-Lines 14-15 does this for us.  Whether we complete the statements in the ``try`` 
+Lines 15-16 does this for us.  Whether we complete the statements in the ``try`` 
 clause successfully or not, the ``finally`` block will always be executed.
 
 Notice that the exception is still unhandled --- only an ``except`` clause can

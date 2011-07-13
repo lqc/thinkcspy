@@ -83,12 +83,12 @@ of this "building block":
             t.left(90)
       
       
-    wn = turtle.Screen()              # Set up the window and its attributes
+    wn = turtle.Screen()        # Set up the window and its attributes
     wn.bgcolor("lightgreen")
     wn.title("Alex meets a function")
 
-    alex = turtle.Turtle()            # create alex
-    draw_square(alex, 50)             # Call the function to draw the square
+    alex = turtle.Turtle()      # create alex
+    draw_square(alex, 50)       # Call the function to draw the square
     wn.mainloop()
 
         
@@ -142,18 +142,18 @@ function a little, and we get tess to draw 15 squares, with some variations.
             t.forward(sz)
             t.left(90)
  
-    wn = turtle.Screen()             # Set up the window and its attributes
+    wn = turtle.Screen()        # Set up the window and its attributes
     wn.bgcolor("lightgreen")
 
-    tess = turtle.Turtle()           # create tess and set some attributes
+    tess = turtle.Turtle()      # create tess and set some attributes
     tess.pensize(3)
 
-    size = 20                        # size of the smallest square
+    size = 20                   # size of the smallest square
     for i in range(15):
         draw_multicolour_square(tess, size)
-        size = size + 10             # increase the size for next time
-        tess.forward(10)             # move tess along a little
-        tess.right(18)               # and give her some extra turn
+        size = size + 10        # increase the size for next time
+        tess.forward(10)        # move tess along a little
+        tess.right(18)          # and give her some extra turn
 
     wn.mainloop()
 
@@ -398,7 +398,7 @@ the standard formula for compound interest, which we'll now write as a fruitful 
        """
        
        a = p * (1 + r/n) ** (n*t)
-       return a           # This is new, and makes the function fruitful.
+       return a         # This is new, and makes the function fruitful.
                      
    # now that we have the function above, let us call it.  
    toInvest = float(input("How much do you want to invest?"))
@@ -435,8 +435,10 @@ versions instead:
 
 .. sourcecode:: python
  
-   def final_amt_v2(principalAmount, nominalPercentageRate, numTimesPerYear, years):
-       a = principalAmount * (1 + nominalPercentageRate/numTimesPerYear) ** (numTimesPerYear*years)
+   def final_amt_v2(principalAmount, nominalPercentageRate, 
+                                       numTimesPerYear, years):
+       a = principalAmount * (1 + nominalPercentageRate / 
+                            numTimesPerYear) ** (numTimesPerYear*years)
        return a
        
    def final_amt_v3(amt, rate, compounded, years):

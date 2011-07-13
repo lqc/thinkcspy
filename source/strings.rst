@@ -738,10 +738,12 @@ do anything more esoteric, use *help* and read all the gory details.
     n2 = "Whitney"
     n3 = "Hilton"
 
-    print("The value of pi to three decimal places is {0:.3f}".format(3.1415926))
+    print("Ppi to three decimal places is {0:.3f}".format(3.1415926))
     print("123456789 123456789 123456789 123456789 123456789 123456789")
-    print("|||{0:<15}|||{1:^15}|||{2:>15}|||Born in {3}|||".format(n1,n2,n3,1981))
-    print("The decimal value {0} converts to hex value {0:x}".format(123456))
+    print("|||{0:<15}|||{1:^15}|||{2:>15}|||Born in {3}|||" 
+                                                 .format(n1,n2,n3,1981))
+    print("The decimal value {0} converts to hex value {0:x}"
+                                                 .format(123456))
 
 This script produces the output::
 
@@ -759,7 +761,8 @@ at all:
     letter = '''
     Dear {0} {2}.
      {0}, I have an interesting money-making proposition for you!
-     If you deposit $10 million into my bank account I can double your money ...
+     If you deposit $10 million into my bank account, I can 
+     double your money ...
     '''
 
     print(letter.format("Paris", "Whitney", "Hilton"))
@@ -769,11 +772,13 @@ This produces the following::
 
     Dear Paris Hilton.
          Paris, I have an interesting money-making proposition for you!
-         If you deposit $10 million into my bank account I can double your money ...
+         If you deposit $10 million into my bank account, I can 
+         double your money ...
 
     Dear Bill Gates.
          Bill, I have an interesting money-making proposition for you!
-         If you deposit $10 million into my bank account I can double your money ...
+         If you deposit $10 million into my bank account I can, 
+         double your money ...
 
 As you might expect, you'll get an index error if 
 your placeholders refer to arguments that you do not provide::
@@ -790,7 +795,8 @@ First, we'll try to print a table without using string formatting:
     
     print("i\ti**2\ti**3\ti**5\ti**10\ti**20")
     for i in range(1, 11):
-        print(i, '\t', i**2, '\t', i**3, '\t', i**5, '\t', i**10, '\t', i**20)
+        print(i, '\t', i**2, '\t', i**3, '\t', i**5, '\t', 
+                                                i**10, '\t', i**20)
 
 This program prints out a table of various powers of the numbers from 1 to 10.
 (This assumes that the tab width is 8.  You might see

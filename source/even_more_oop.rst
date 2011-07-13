@@ -6,13 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 | 
 
@@ -32,7 +25,7 @@ The class definition looks like this:
     class MyTime:
     
         def __init__(self, hrs=0, mins=0, secs=0):
-            """ Create a new MyTime object initialized to hrs, mins, secs """
+            """ Create a MyTime object initialized to hrs, mins, secs """
             self.hours = hrs
             self.minutes = mins
             self.seconds = secs     
@@ -236,7 +229,9 @@ a corresponding number of seconds:
         # ...
         
         def to_seconds(self):
-            """ Return the number of seconds represented by this instance """
+            """ Return the number of seconds represented 
+                by this instance 
+            """
             return self.hours * 3600 + self.minutes * 60 + self.seconds
  
 
@@ -274,8 +269,10 @@ Let's rewrite a more powerful initializer for ``MyTime``:
                 The values of mins and secs may be outside the range 0-59,
                 but the resulting MyTime object will be normalized.
             """
-            totalsecs = hrs*3600 + mins*60 + secs    # total seconds to represent
-            self.hours = totalsecs // 3600
+            
+            # calculate total seconds to represent
+            totalsecs = hrs*3600 + mins*60 + secs   
+            self.hours = totalsecs // 3600        # split in h, m, s
             leftoversecs = totalsecs % 3600
             self.minutes = leftoversecs // 60
             self.seconds = leftoversecs % 60   
@@ -353,7 +350,7 @@ time is strictly after the second, e.g.
     
     >>> t1 = MyTime(10, 55, 12)
     >>> t2 = MyTime(10, 48, 22)
-    >>> after(t1, t2)  # is t1 after t2
+    >>> after(t1, t2)             # is t1 after t2?
     True
     
 This is slightly more complicated because it operates on two ``MyTime`` 
@@ -367,7 +364,7 @@ in this case, a method on the first argument:
         #previous method definitions here...
        
         def after(self, time2):
-            """ Return True if this instance is strictly greater than time2 """
+            """ Return True if I am strictly greater than time2 """
             if self.hour > time2.hour:
                 return True 
             if self.hour < time2.hour:
@@ -405,7 +402,7 @@ and reducing both times to integers?   Yes, with spectacular results!
         #previous method definitions here...
        
         def after(self, time2):
-            """ Return True if this instance is strictly greater than time2 """
+            """ Return True if I am strictly greater than time2 """
             return self.to_seconds() > time2.to_seconds()
 
 This is a great way to code this: if you want to tell if the first time is
@@ -417,7 +414,7 @@ Operator overloading
 
 Some languages, including Python, make it possible to have different meanings for
 the same operator when applied to different types.  For example, ``+`` in Python
-means quite different things for integers than it does for strings.  This feature is called
+means quite different things for integers and for strings.  This feature is called
 **operator overloading**.
 
 It is especially useful when programmers can also overload the operators for their
@@ -455,7 +452,7 @@ more elegant.  As an exercise, add a method ``__sub__(self, other)`` that
 overloads the subtraction operator, and try it out.  
 
 For the next couple of exercises we'll go back to the Point class defined
-two chapters back, and overload some of its operators.   Firstly, adding
+in our first chapter about objects, and overload some of its operators.   Firstly, adding
 two points adds their respective (x, y) coordinates:
 
 .. sourcecode:: python
