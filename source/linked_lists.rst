@@ -5,15 +5,7 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-    
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
+     
 |
     
 Linked lists
@@ -86,6 +78,8 @@ To make it interesting, we need a list with more than one node:
 This code creates three nodes, but we don't have a list yet because the nodes
 are not **linked**. The state diagram looks like this:
 
+.. image:: illustrations/link1.png
+
 To link the nodes, we have to make the first node refer to the second and the
 second node refer to the third:
 
@@ -96,6 +90,8 @@ second node refer to the third:
 
 The reference of the third node is ``None``, which indicates that it is the end
 of the list. Now the state diagram looks like this:
+
+.. image:: illustrations/link2.png
 
 Now you know how to create nodes and link them into lists. What might be less
 clear at this point is why.
@@ -137,6 +133,7 @@ refer to each of the nodes in succession.
 
 This diagram shows the value of ``list`` and the values that ``node`` takes on:
 
+.. image:: illustrations/link3.png
 
 Lists and recursion
 -------------------
@@ -198,6 +195,7 @@ There is nothing to prevent a node from referring back to an earlier node in
 the list, including itself. For example, this figure shows a list with two
 nodes, one of which refers to itself:
 
+.. image:: illustrations/link4.png
 
 If we invoke ``print_list`` on this list, it will loop forever. If we invoke
 ``print_backward``, it will recurse infinitely. This sort of behavior makes
@@ -294,6 +292,8 @@ how to use this method:
     1 3
 
 This state diagram shows the effect of the operation:
+
+.. image:: illustrations/link5.png
 
 What happens if you invoke this method and pass a list with only one element (a
 **singleton**)? What happens if you pass the empty list as an argument? Is
