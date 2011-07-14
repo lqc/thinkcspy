@@ -617,7 +617,7 @@ Exercises
        
    Your inbox object should provide these methods::
        
-       my_inbox.add_new_arrival(from, time, text)    
+       my_inbox.add_new_arrival(from_number, time_arrived, text_of_SMS)    
                                         # Makes a new SMS tuple and inserts it after other messages in the store.
                                         # When creating this message, its has_been_viewed status is set False.
        my_inbox.message_count()         # returns the number of sms messages in my_inbox

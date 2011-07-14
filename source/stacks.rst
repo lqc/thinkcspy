@@ -190,14 +190,14 @@ and break it into operands and operators. This process is an example of
 **parsing**, and the results---the individual chunks of the string -- are
 called **tokens**. You might remember these words from Chapter 1.
 
-Python provides a ``split`` method in both the ``string`` and ``re`` (regular
-expression) modules. The function ``string.split`` splits a string into a list
+Python provides a ``split`` method in both string objects and the ``re`` (regular
+expression) module. A string's ``split`` method splits it into a list
 using a single character as a **delimiter**. For example:
 
 .. sourcecode:: python
     
     >>> import string
-    >>> string.split("Now is the time"," ")
+    >>> "Now is the time".split(" ")
     ['Now', 'is', 'the', 'time']
 
 In this case, the delimiter is the space character, so the string is split at
@@ -215,9 +215,6 @@ set we want to use to split up postfix expressions:
     >>> import re
     >>> re.split("([^0-9])", "123+456*/")
     ['123', '+', '456', '*', '', '/', '']
-
-Notice that the order of the arguments is different from ``string.split``; the
-delimiter comes before the string.
 
 The resulting list includes the operands ``123`` and ``456`` and the operators
 ``*`` and ``/``. It also includes two empty strings that are inserted after the
@@ -261,7 +258,7 @@ Let's test it by evaluating the postfix form of ``(56+47)*2``:
 
 .. sourcecode:: python
     
-    >>> print(eval_postfix ("56 47 + 2 \*"))
+    >>> print(eval_postfix ("56 47 + 2 *"))
     206
 
 That's close enough.
