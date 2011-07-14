@@ -90,7 +90,7 @@ so our first class definition looks like this:
     :linenos:
     
     class Point:
-        """ Point class for representing and manipulating x,y coordinates. """
+        """ Point class represents and manipulates x,y coords. """
         
         def __init__(self):
             """ Create a new point at the origin """
@@ -228,7 +228,7 @@ the ``__init__`` method, as shown in this example:
 .. sourcecode:: python
     
     class Point:
-        """ Point class for representing and manipulating x,y coordinates. """
+        """ Point class represents and manipulates x,y coords. """
         
         def __init__(self, x=0, y=0):
             """ Create a new point at x, y """
@@ -618,15 +618,23 @@ Exercises
    Your inbox object should provide these methods::
        
        my_inbox.add_new_arrival(from_number, time_arrived, text_of_SMS)    
-                                        # Makes a new SMS tuple and inserts it after other messages in the store.
-                                        # When creating this message, its has_been_viewed status is set False.
-       my_inbox.message_count()         # returns the number of sms messages in my_inbox
-       my_inbox.get_unread_indexes()    # returns a list of indexes of all SMS messages that have not yet been viewed.
-       my_inbox.get_message(i)          # return (from_number, time_arrived, text_of_sms) for the message at index i.
-                                        # Also change the state of the message so that it now has been viewed.
-                                        # If there is no message at position i, return None
-       my_inbox.delete(i)               # delete the message at index i
-       my_inbox.clear()                 # delete all messages from inbox
+         # Makes new SMS tuple, inserts it after other messages 
+         # in the store. When creating this message, its 
+         # has_been_viewed status is set False.
+            
+       my_inbox.message_count()         
+         # returns the number of sms messages in my_inbox
+          
+       my_inbox.get_unread_indexes()    
+         # returns list of indexes of all not-yet-viewed SMS messages
+         
+       my_inbox.get_message(i)          
+         # return (from_number, time_arrived, text_of_sms) for message[i]
+         # Also change its state to "has been viewed".
+         # If there is no message at position i, return None
+         
+       my_inbox.delete(i)     # delete the message at index i
+       my_inbox.clear()       # delete all messages from inbox
    
    Write the class, create a message store object, write tests for these methods, and implement the methods.
     

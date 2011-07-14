@@ -625,15 +625,15 @@ Continuing with this example, we show several other list methods:
 
 .. sourcecode:: python
     
-    >>> mylist.insert(1, 12)   # insert 12 at position 1, shifting other items up
+    >>> mylist.insert(1, 12)  # insert 12 at pos 1, shift other items up
     >>> mylist
     [5, 12, 27, 3, 12]
     >>> mylist.count(12)       # how many times is 12 in mylist?
     2
-    >>> mylist.extend([5, 9, 5, 11])   # put a whole list onto the end of mylist
+    >>> mylist.extend([5, 9, 5, 11])   # put whole list onto end of mylist
     >>> mylist
     [5, 12, 27, 3, 12, 5, 9, 5, 11])
-    >>> mylist.index(9)                # find the index of the first item 9 in mylist
+    >>> mylist.index(9)                # find index of first 9 in mylist
     6
     >>> mylist.reverse()
     >>> mylist
@@ -666,7 +666,9 @@ value. Here is ``double_stuff`` written as a pure function:
 .. sourcecode:: python
     
     def double_stuff(a_list):
-        """ Return a new list in which contains doubles of the elements in a_list. """
+        """ Return a new list in which contains 
+            doubles of the elements in a_list. 
+        """
         new_list = []
         for value in a_list:
             new_elem = 2 * value
@@ -810,7 +812,9 @@ to produce the values when they are needed.   This is very convenient if your
 computation is abandoned early, as in this case::
 
     def f(n):
-    """ Find the first positive integer between 101 and less than n that is divisible by 21 """
+        """ Find the first positive integer between 101 and less 
+            than n that is divisible by 21 
+        """
         for i in range(101, n):
            if (i % 21 == 0):
                return i
@@ -819,6 +823,13 @@ computation is abandoned early, as in this case::
     test(f(110), 105)
     test(f(1000000000), 105)
 
+In the second test, if range were to eagerly go about building a list 
+with all those elements, you would soon exhaust your computer's available
+memory and crash the program.  But it is cleverer than that!  This computation works
+just fine, because the ``range`` object is just a promise to produce the elements
+if and when they are needed.  Once the condition in the `if` becomes true, no
+further elements are generated, and the function returns.  (Note: Before Python 3,
+``range`` was not lazy. If you use an earlier versions of Python, YMMV!)
 
 .. sidebar:: YMMV: Your Mileage May Vary
 
@@ -829,14 +840,6 @@ computation is abandoned early, as in this case::
     idiomatically to mean "your results may differ", 
     e.g. *The battery life on this phone is 3 days, but YMMV.*     
     
-In the second test, if range were to eagerly go about building a list 
-with all those elements, you would soon exhaust your computer's available
-memory and crash the program.  But it is cleverer than that!  This computation works
-just fine, because the ``range`` object is just a promise to produce the elements
-if and when they are needed.  Once the condition in the `if` becomes true, no
-further elements are generated, and the function returns.  (Note: Before Python 3,
-``range`` was not lazy. If you use an earlier versions of Python, YMMV!)
-
 You'll sometimes find the lazy ``range`` wrapped in a call to ``list``.  This forces
 Python to turn the lazy promise into an actual list::
 
@@ -1089,11 +1092,116 @@ Exercises
 
       test(replace('Mississippi', 'i', 'I'), 'MIssIssIppI')
       
-      s = 'I love spom!  Spom is my favorite food.  Spom, spom, spom, yum!'
+      s = 'I love spom! Spom is my favorite food. Spom, spom, yum!'
       test(replace(s, 'om', 'am'),
-             'I love spam!  Spam is my favorite food.  Spam, spam, spam, yum!')
+            'I love spam! Spam is my favorite food. Spam, spam, yum!')
     
       test(replace(s, 'o', 'a'),
-             'I lave spam!  Spam is my favarite faad.  Spam, spam, spam, yum!')
+            'I lave spam! Spam is my favarite faad. Spam, spam, yum!')
 
    *Hint*: use the ``split`` and ``join`` methods.
+   
+#. Add each of the following functions to a script called ``seqtools.py``:
+
+   .. sourcecode:: python
+    
+        def make_empty(seq): pass  
+        def insert_at_end(val, seq): pass
+        def insert_in_front(val, seq): pass
+        def index_of(val, seq, start=0): pass
+        def remove_at(index, seq): pass            
+        def remove_val(val, seq): pass
+        def remove_all(val, seq): pass            
+        def count(val, seq): pass     
+        def reverse(seq): pass
+        def sort_sequence(seq): pass
+        
+        def testsuite():
+            test(make_empty([1, 2, 3, 4]), [])
+            test(make_empty(('a', 'b', 'c')), ())
+            test(make_empty("No, not me!"), '')
+            
+            test(insert_at_end(5, [1, 3, 4, 6]), [1, 3, 4, 6, 5])
+            test(insert_at_end('x', 'abc'),  'abcx')
+            test(insert_at_end(5, (1, 3, 4, 6)), (1, 3, 4, 6, 5))
+
+            test(insert_in_front(5, [1, 3, 4, 6]), [5, 1, 3, 4, 6])
+            test(insert_in_front(5, (1, 3, 4, 6)), (5, 1, 3, 4, 6))
+            test(insert_in_front('x', 'abc'),        'xabc')
+
+            test(index_of(9, [1, 7, 11, 9, 10]), 3)
+            test(index_of(5, (1, 2, 4, 5, 6, 10, 5, 5)), 3)
+            test(index_of(5, (1, 2, 4, 5, 6, 10, 5, 5), 4), 6)
+            test(index_of('y', 'happy birthday'), 4)
+            test(ndex_of('banana',['apple','banana','cherry','date']),1)
+            test(index_of(5, [2, 3, 4]), -1)
+            test(index_of('b', ['apple','banana','cherry','date']),-1)
+     
+            test(remove_at(3, [1, 7, 11, 9, 10]), [1, 7, 11, 10])
+            test(remove_at(5, (1,4,6,7,0,9,3,5)), (1,4,6,7,0,3,5))
+            test(remove_at(2, "Yomrktown"), 'Yorktown')
+          
+            test(remove_val(11, [1, 7, 11, 9, 10]), [1, 7, 9, 10])
+            test(remove_val(15, (1, 15, 11, 4, 9)), (1, 11, 4, 9))
+            test(remove_val('what',('who','what','when','why','how')),
+                                   ('who', 'when', 'why', 'how'))
+             
+            test(remove_all(11, [1,7,11,9,11,10,2,11]),[1,7,9,10,2])
+            test(remove_all('i', 'Mississippi'), 'Msssspp')
+             
+            test(count(5, (1, 5, 3, 7, 5, 8, 5)), 3)
+            test(count('s', 'Mississippi'), 4)
+            test(count((1, 2), [1, 5, (1, 2), 7, (1, 2), 8, 5]), 2)
+            
+            test(reverse([1, 2, 3, 4, 5]), [5, 4, 3, 2, 1])
+            test(reverse(('shoe','my','buckle',2,1)),
+                             (1,2,'buckle','my','shoe'))
+            test(reverse('Python'), 'nohtyP')         
+                
+            test(sort_sequence([3, 4, 6, 7, 8, 2]), [2, 3, 4, 6, 7, 8])
+            test(sort_sequence((3, 4, 6, 7, 8, 2)), (2, 3, 4, 6, 7, 8))
+            test(sort_sequence("nothappy"), 'ahnoppty')
+
+   As usual, add your test function and work on each of these one at a time until they pass all the tests.
+   
+   .. admonition::  But do you really want to do this? 
+   
+       Disclaimer.  These exercises illustrate nicely that the sequence abstraction is
+       general, (because slicing, indexing, and concatenation is so general), so it is possible to 
+       write general functions that work over all sequence types.  A nice lesson about generalization!
+       
+       Another view is that tuples are different from lists and strings precisely 
+       because you want to think about them very differently. 
+       It usually doesn't make sense to sort the fields of the `julia`
+       tuple we saw in the chapter on tuples, or to cut bits out or insert bits 
+       into the middle, *even if Python lets you do so!*  
+       Tuple fields get their meaning from their position in the tuple.  
+       Don't mess with that.
+       
+       Use lists for "many things of the same type", like an 
+       enrollment of many students for a course.
+       
+       Use tuples for "fields of different types that make up a compound record". 
+       
+       
+#. Suppose you want to swap around the values in two variables.  You decide
+   to factor this out into a reusable function, and write this code:
+
+    .. sourcecode:: python
+    
+        def swap(x, y):      # incorrect version
+             print("before swap statement: x:", x, "y:", y)
+             (x, y) = (y, x)
+             print("after swap statement: x:", x, "y:", y)
+    
+        a = ["This", "is", "fun"]
+        b = [2,3,4] 
+        print("before swap function call: a:", a, "b:", b)
+        swap(a, b)
+        print("after swap function call: a:", a, "b:", b)
+
+   Run this program and describe the results.  Oops!  So it didn't do what you intended!   
+   Explain why not. 
+   Using a Python visualizer like the one at http://netserv.ict.ru.ac.za/python3_viz 
+   may help you build a good conceptual model of what is going on.  
+   What will be the values of ``a`` and ``b`` after the call to ``swap``?

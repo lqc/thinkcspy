@@ -266,7 +266,9 @@ This Python function captures that algorithm:
 .. sourcecode:: python
     
     def seq3np1(n):
-        """ Print the 3n+1 sequence from n, terminating when it reaches 1."""
+        """ Print the 3n+1 sequence from n, 
+            terminating when it reaches 1.
+        """
         while n != 1:
             print(n, end=', ')
             if n % 2 == 0:        # n is even
@@ -294,7 +296,8 @@ Here are some examples::
     >>> seq3np1(3)
     3, 10, 5, 16, 8, 4, 2, 1.
     >>> seq3np1(19)
-    19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1.
+    19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 
+                        40, 20, 10, 5, 16, 8, 4, 2, 1.
     >>> seq3np1(21)
     21, 64, 32, 16, 8, 4, 2, 1.
     >>> seq3np1(16)
@@ -872,9 +875,9 @@ The following program implements a simple guessing game:
 .. sourcecode:: python
     :linenos:
     
-    import random                     # We cover random numbers in chapter 10
-    rng = random.Random()             # so you can peek ahead.
-    number = rng.randrange(1, 1000)   # Get a random number between [1 and 1000).
+    import random                   # We cover random numbers in chapter 10
+    rng = random.Random()           # so you can peek ahead.
+    number = rng.randrange(1, 1000) # Get random number between [1 and 1000).
 
     guesses = 0
     msg = ""
@@ -889,7 +892,7 @@ The following program implements a simple guessing game:
         else:
             break
 
-    input("\n\nCongratulations, you got it in {0} guesses!\n\n" .format(guesses))
+    input("\n\nGreat, you got it in {0} guesses!\n\n" .format(guesses))
     
 This program makes use of the mathematical law of **trichotomy** (given real
 numbers a and b, exactly one of these three must be true:  a > b, a < b, or a == b). 
@@ -1047,7 +1050,8 @@ like this::
    
 We can put many pairs into a list of pairs::
 
-    celebs =  [("Paris Hilton", 1981), ("Brad Pitt", 1963), ("Jack Nicholson", 1937), ("Justin Bieber", 1994)] 
+    celebs = [("Brad Pitt", 1963), ("Jack Nicholson", 1937), 
+                                        ("Justin Bieber", 1994)] 
  
 Here is a quick sample of things we can do with structured data like this.  First,
 print all the celebs::
@@ -1057,7 +1061,7 @@ print all the celebs::
    
 This prints the following::
    
-    [('Paris Hilton', 1981), ('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justin Bieber', 1994)]
+    [('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justin Bieber', 1994)]
     4
  
 Notice that the celebs list has just 4 elements, each of them pairs.  
@@ -1090,11 +1094,11 @@ we have a list of students.  Each student has a name which is paired up with ano
 of subjects that they are enrolled for::
 
     students = [
-            ("John", ["CompSci", "Physics"]),
-            ("Vusi", ["Maths", "CompSci", "Stats"]),
-            ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
-            ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
-            ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
+        ("John", ["CompSci", "Physics"]),
+        ("Vusi", ["Maths", "CompSci", "Stats"]),
+        ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
+        ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
+        ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
             
 Here we've assigned a list of five elements to the variable `students`.  Let's print
 out each student name, and the number of subjects they are enrolled for:
@@ -1506,18 +1510,22 @@ these building blocks.
    
    .. sourcecode:: python
    
-       def play_once(human_plays_first):  # your friend will complete this function
+       # your friend will complete this function
+       def play_once(human_plays_first):  
            """ 
-              Must play one round of the game. If the parameter is True, the
-              human gets to play first, else the computer gets to play first.   
-              When the round ends, the return value of the function is one of 
+              Must play one round of the game. If the parameter
+              is True, the human gets to play first, else the 
+              computer gets to play first.  When the round ends, 
+              the return value of the function is one of 
               -1 (human wins),  0 (game drawn),   1 (computer wins).
            """
            # This is all dummy scaffolding code right at the moment...
            import random                  # see ch 10 for details 
            rng = random.Random()
-           result = rng.randrange(-1,2)   # pick a random result between -1 and 1.
-           print("Human plays first={0},  winner={1} ".format(human_plays_first, result))
+           # pick a random result between -1 and 1.
+           result = rng.randrange(-1,2)   
+           print("Human plays first={0},  winner={1} " 
+                              .format(human_plays_first, result))
            return result
            
    a. Write the main program which repeatedly calls this function to play 

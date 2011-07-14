@@ -45,9 +45,10 @@ look it up using help, but here are the key things we'll do with it::
 
     import random
     
-    rng = random.Random()    # create a black box object that generates random numbers
+    # create a black box object that generates random numbers
+    rng = random.Random()    
     
-    dice_throw = rng.randrange(1,7)       # return an int, one of 1,2,3,4,5,6
+    dice_throw = rng.randrange(1,7)   # return an int, one of 1,2,3,4,5,6
     delay_in_seconds = rng.random() * 5.0
     
 The ``randrange`` method call generates generates an integer between its lower and upper
@@ -76,8 +77,9 @@ This example shows how to shuffle a list.  (`shuffle` cannot work directly
 with a lazy promise, so notice that we had to convert the range object
 using the ``list`` type converter first.) ::
 
-    cards = list(range(52))         # generate integers 0..51, representing a pack of cards
-    rng.shuffle(cards)              # shuffle the pack
+    cards = list(range(52))  # generate ints 0..51, 
+                             #    representing a pack of cards.
+    rng.shuffle(cards)       # shuffle the pack
 
 .. index:: deterministic algorithm,  algorithm; deterministic, unit tests   
     
@@ -97,7 +99,7 @@ a known seed every time.  (Often this is only wanted during testing --- playing 
 of cards where the shuffled deck was always in the same order as last time you played
 would get boring very rapidly!)   ::
 
-    drng = random.Random(123)  # create a generator with a known starting state 
+    drng = random.Random(123)  # create generator with known starting state 
      
 This alternative way of creating a random number generator gives an explicit seed
 value to the object. Without this argument, the system probably uses something based
@@ -136,7 +138,7 @@ But what if you don't want duplicates?  If you wanted 5 distinct months,
 then this algorithm is wrong.  In this case a good algorithm is to generate the 
 list of possibilities, shuffle it, and slice off the number of elements you want::
 
-    xs = list(range(1,13))  # make the list 1..12.  There are no duplicates
+    xs = list(range(1,13))  # make list 1..12.  There are no duplicates
     random.shuffle(xs)      # shuffle the list
     result = xs[:5]         # take the first five elements.
  
@@ -158,9 +160,9 @@ the first five would be a performance disaster!  So let us have another try:
 
     def make_random_ints_no_dups(num, lower_bound, upper_bound):
        """
-         Generate a list containing num random ints between lower_bound
-         and upper_bound. upper_bound is an open bound.  The result
-         list cannot contain duplicates.
+         Generate a list containing num random ints between 
+         lower_bound and upper_bound. upper_bound is an open bound.  
+         The result list cannot contain duplicates.
        """
        result = []
        rng = random.Random()
@@ -220,12 +222,14 @@ compare the results:
     t0 = time.clock()
     my_result = do_my_sum(testdata)
     t1 = time.clock()
-    print("my_result    = {0} (time taken = {1:.4f} seconds)".format(my_result, t1-t0))
+    print("my_result    = {0} (time taken = {1:.4f} seconds)"
+                                          .format(my_result, t1-t0))
     
     t2 = time.clock()
     their_result = sum(testdata)
     t3 = time.clock()
-    print("their_result = {0} (time taken = {1:.4f} seconds)".format(their_result, t3-t2))
+    print("their_result = {0} (time taken = {1:.4f} seconds)"
+                                      .format(their_result, t3-t2))
 
 
 On a reasonably modest laptop, we get these results::
@@ -246,17 +250,17 @@ like `pi` and `e`::
 
     >>> import math
     
-    >>> math.pi                     # constant attribute for pi
+    >>> math.pi                 # constant attribute for pi
     3.141592653589793
-    >>> math.e                      # constant natural log base
+    >>> math.e                  # constant natural log base
     2.718281828459045
-    >>> math.sqrt(2.0)              # square root function
+    >>> math.sqrt(2.0)          # square root function
     1.4142135623730951
-    >>> math.radians(90)            # convert 90 degrees to radians
+    >>> math.radians(90)        # convert 90 degrees to radians
     1.5707963267948966
     >>> math.sin(math.radians(90))  # find sin of 90 degrees.
     1.0
-    >>> math.asin(1.0) * 2          # find arcsin of 1, double it, to get pi
+    >>> math.asin(1.0) * 2      # Double arcsin of 1.0 to get pi
     3.141592653589793
 
 Like almost all other programming languages, angles are expressed in *radians*
@@ -688,7 +692,7 @@ Exercises
 
     d. Try this::
     
-         d = calendar.LocaleTextCalendar(6, "SPANISH")    # create an instance
+         d = calendar.LocaleTextCalendar(6, "SPANISH")     
          d.pryear(2011)   
         
        Try a few other languages, including one that doesn't work, and see what happens.
@@ -722,7 +726,8 @@ Exercises
 
    .. sourcecode:: python
     
-        print( (mymodule2.myage - mymodule1.myage) == (mymodule2.year - mymodule1.year))
+        print( (mymodule2.myage - mymodule1.myage) == 
+               (mymodule2.year - mymodule1.year)  )
 
    When you will run ``namespace_test.py`` you will see either ``True`` or
    ``False`` as output depending on whether or not you've already had your
@@ -774,14 +779,15 @@ Exercises
    .. sourcecode:: python
     
         def myreplace(old, new, s):
-            """ Replace all occurences of old with new in the string s. """
+            """ Replace all occurences of old with new in s. """
             ...
             
             
         test(myreplace(',', ';', 'this, that, and some other thing'),
                                  'this; that; and some other thing')
-        test(myreplace(' ', '**', 'Words will now      be  separated by stars.'),
-                                  'Words**will**now**be**separated**by**stars.')
+        test(myreplace(' ', '**', 
+                         'Words will now      be  separated by stars.'),
+                         'Words**will**now**be**separated**by**stars.')
     
    Your solution should pass the tests.
    
@@ -800,14 +806,14 @@ Exercises
         test(has_dashdash('-yo-yo-'), False)
 
         test(extract_words('Now is the time!  "Now", is the time? Yes, now.'),
-              ['now', 'is', 'the', 'time', 'now', 'is', 'the', 'time', 'yes', 'now'])
+              ['now','is','the','time','now','is','the','time','yes','now'])
         test(extract_words('she tried to curtsey as she spoke--fancy'),
-              ['she', 'tried', 'to', 'curtsey', 'as', 'she', 'spoke', 'fancy'])
+              ['she','tried','to','curtsey','as','she','spoke','fancy'])
     
-        test(wordcount('now', ['now', 'is', 'time', 'is', 'now', 'is', 'is']), 2)
-        test(wordcount('is', ['now', 'is', 'time', 'is', 'now', 'is', 'the', 'is']), 4)
-        test(wordcount('time', ['now', 'is', 'time', 'is', 'now', 'is', 'is']), 1)
-        test(wordcount('frog', ['now', 'is', 'time', 'is', 'now', 'is', 'is']), 0)
+        test(wordcount('now', ['now','is','time','is','now','is','is']), 2)
+        test(wordcount('is', ['now','is','time','is','now','the','is']), 3)
+        test(wordcount('time', ['now','is','time','is','now','is','is']), 1)
+        test(wordcount('frog', ['now','is','time','is','now','is','is']), 0)
     
         test(wordset(['now', 'is', 'time', 'is', 'now', 'is', 'is']), 
               ['is', 'now', 'time'])
@@ -818,7 +824,7 @@ Exercises
        
         test(longestword(['a', 'apple', 'pear', 'grape']), 5)
         test(longestword(['a', 'am', 'I', 'be']), 2)
-        test(longestword(['this', 'that', 'supercalifragilisticexpialidocious']), 34)
+        test(longestword(['this','supercalifragilisticexpialidocious']), 34)
         test(longestword([ ]), 0)
 
    Save this module so you can use the tools it contains in future programs.

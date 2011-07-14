@@ -38,11 +38,11 @@ turtle window opens, press the arrow keys and make tess move about!
 
     import turtle
 
-    turtle.setup(400,500)                   # determine the window size
-    wn = turtle.Screen()                    # get a reference to the window
-    wn.title("How to handle keypresses!")   # Change the window title
-    wn.bgcolor("lightgreen")                # Set the background color
-    tess = turtle.Turtle()                  # Create our favorite turtle
+    turtle.setup(400,500)                # determine the window size
+    wn = turtle.Screen()                 # get a reference to the window
+    wn.title("Handling keypresses!")     # Change the window title
+    wn.bgcolor("lightgreen")             # Set the background color
+    tess = turtle.Turtle()               # Create our favorite turtle
 
     # The next four functions are our "event handlers".
     def h1():
@@ -55,28 +55,29 @@ turtle window opens, press the arrow keys and make tess move about!
        tess.right(45)
 
     def h4():
-        wn.bye()                            # Close down the turtle window
+        wn.bye()                        # Close down the turtle window
 
-    # These four lines "wire up" certain keypresses to the handlers we've defined.
+    # These lines "wire up" keypresses to the handlers we've defined.
     wn.onkey(h1, "Up")
     wn.onkey(h2, "Left")
     wn.onkey(h3, "Right")
     wn.onkey(h4, "q")
 
-    # Now we need to tell the window to start listening for events,  If any of the
-    # keys that we're monitoring is pressed, its handler will be called.
+    # Now we need to tell the window to start listening for events,  
+    # If any of the keys that we're monitoring is pressed, its 
+    # handler will be called.
     wn.listen()
     wn.mainloop()    
     
     
 Here are some points to note:
 
-* You need the call to the window's ``listen`` method at line 30, otherwise it won't notice your keypresses.
+* You need the call to the window's ``listen`` method at line 31, otherwise it won't notice your keypresses.
 * We named our handler functions ``h1``, ``h2`` and so on, but you can choose better names.  The handlers can be
   arbitrarily complex functions that call other functions, etc. 
 * Pressing the ``q`` key on the keyboard calls function ``h4`` (because we `bound` the ``q`` key to ``h4`` on line 26). 
   While executing ``h4``, the window's ``bye`` method (line 24) closes the turtle window, which causes the window's 
-  mainloop call (line 31) to end its execution.  Since we did not write any more statements after line 31, this means
+  mainloop call (line 31) to end its execution.  Since we did not write any more statements after line 32, this means
   that our program has completed everything, so it too will terminate.  
 * You can refer to keys on the keyboard by their character code (as we did in line 26), or by their symbolic names.
   Some of the keybolic names you can try are Cancel (the Break key), BackSpace, Tab, Return(the Enter key), 
@@ -138,13 +139,13 @@ two handlers can do different things for their turtles.
      
     import turtle
 
-    turtle.setup(400,500)                   # determine the window size
-    wn = turtle.Screen()                    # get a reference to the window
-    wn.title("How to handle mouse clicks!") # Change the window title
-    wn.bgcolor("lightgreen")                # Set the background color
-    tess = turtle.Turtle()                  # Create two turtles
+    turtle.setup(400,500)              # determine the window size
+    wn = turtle.Screen()               # get a reference to the window
+    wn.title("Handling mouse clicks!") # Change the window title
+    wn.bgcolor("lightgreen")           # Set the background color
+    tess = turtle.Turtle()             # Create two turtles
     tess.color("purple")
-    alex = turtle.Turtle()                  # and move them apart
+    alex = turtle.Turtle()             # and move them apart
     alex.color("blue")
     alex.forward(100)
 

@@ -507,13 +507,16 @@ of the test, which will help when we want to fix any tests that fail.
 .. sourcecode:: python
 
     def test(actual, expected):
-        """ Compare the actual to the expected value, and print a suitable message. """
+        """ Compare the actual to the expected value, 
+            and print a suitable message. 
+        """
         import sys
-        linenum = sys._getframe(1).f_lineno         # get the caller's line number.
+        linenum = sys._getframe(1).f_lineno   # get the caller's line number.
         if (expected == actual):
             msg = "Test on line {0} passed.".format(linenum)
         else:
-            msg = "Test on line {0} failed. Expected '{1}', but got '{2}'.".format(linenum, expected, actual)
+            msg = ("Test on line {0} failed. Expected '{1}', but got '{2}'." 
+                                         . format(linenum, expected, actual))
         print(msg)
  
 There is also some slightly tricky string formatting using the ``format`` method 
@@ -523,7 +526,8 @@ But with this function written, we can proceed to construct our test suite:
 .. sourcecode:: python
     
     def test_suite():
-        """ Run the suite of tests for code in this module (this file) """
+        """ Run the suite of tests for code in this module (this file). 
+        """
         test(absolute_value(17), 17)  
         test(absolute_value(-17), 17) 
         test(absolute_value(0), 0) 

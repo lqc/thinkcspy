@@ -125,7 +125,8 @@ program for larger cases:
 
 .. sourcecode:: python
 
-    vocab = ['apple', 'boy', 'dog', 'down', 'fell', 'girl', 'grass', 'the', 'tree']
+    vocab = ['apple', 'boy', 'dog', 'down', 
+                              'fell', 'girl', 'grass', 'the', 'tree']
     book_words = 'the apple fell from the tree to the grass'.split()
     test(find_unknown_words(vocab, book_words), ['from', 'to'])
     test(find_unknown_words([], book_words), book_words)
@@ -160,7 +161,7 @@ to have available:
 .. sourcecode:: python
 
     def load_words_from_file(filename):
-        """ Read a file of words from filename, and return the words in a list """
+        """ Read words from filename, return list of words. """
         f = open(filename, 'r')
         file_content = f.read()
         f.close()
@@ -187,7 +188,8 @@ we'll want a more sophisticated way of converting text to words.
 .. sourcecode:: python 
 
     test(text_to_words("My name is Earl!"), ['my', 'name', 'is', 'earl'])
-    test(text_to_words('"Well, I never!", said Alice.'), ['well', 'i', 'never', 'said', 'alice'])
+    test(text_to_words('"Well, I never!", said Alice.'), 
+                                 ['well', 'i', 'never', 'said', 'alice'])
 
 There is a powerful ``translate`` method available for strings.  The idea is that one sets up
 a table of substitutions --- for every ascii character, you can give a corresponding substitution.
@@ -198,10 +200,14 @@ The ``translate`` method will apply these substitutions throughout the whole str
      import string 
      
      def text_to_words(the_text):
-        """ return a list of words with all punctuation removed, and all in lowercase """
+        """ return a list of words with all punctuation removed, 
+            and all in lowercase 
+        """
         my_substitutions = string.maketrans(
-          b'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', # if you find this
-          b'abcdefghijklmnopqrstuvwxyz                           ')  # replace it by this
+          # if you find any of these
+          b'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', 
+          # replace it by these substitutions
+          b'abcdefghijklmnopqrstuvwxyz                           ')  
 
         # Translate the text according to our translation table.
         cleaned_text = the_text.translate(my_substitutions)
@@ -233,15 +239,16 @@ Python prints the following (all on one line, we've cheated a bit for the textbo
     ['alice', 's', 'adventures', 'in', 'wonderland', 'lewis', 'carroll', 
         'chapter', 'i', 'down', 'the', 'rabbit', 'hole', 'alice', 'was', 
         'beginning', 'to', 'get', 'very', 'tired', 'of', 'sitting', 'by', 
-        'her', 'sister', 'on', 'the', 'bank', 'and', 'of', 'having', 'nothing', 
-        'to', 'do', 'once', 'or', 'twice', 'she', 'had', 'peeped', 'into', 'the', 
-        'book', 'her', 'sister', 'was', 'reading', 'but', 'it', 'had', 'no', 'pictures', 
-        'or', 'conversations', 'in', 'it', 'and', 'what', 'is', 'the', 'use', 'of', 
-        'a', 'book', 'thought', 'alice', 'without', 'pictures', 'or', 'conversation', 
-        'so', 'she', 'was', 'considering', 'in', 'her', 'own', 'mind', 'as', 'well', 
-        'as', 'she', 'could', 'for', 'the', 'hot', 'day', 'made', 'her', 'feel', 
-        'very', 'sleepy', 'and', 'stupid', 'whether', 'the', 'pleasure', 'of', 
-        'making', 'a']  
+        'her', 'sister', 'on', 'the', 'bank', 'and', 'of', 'having', 
+        'nothing', 'to', 'do', 'once', 'or', 'twice', 'she', 'had', 
+        'peeped', 'into', 'the', 'book', 'her', 'sister', 'was', 'reading', 
+        'but', 'it', 'had', 'no', 'pictures', 'or', 'conversations', 'in', 
+        'it', 'and', 'what', 'is', 'the', 'use', 'of', 'a', 'book', 
+        'thought', 'alice', 'without', 'pictures', 'or', 'conversation', 
+        'so', 'she', 'was', 'considering', 'in', 'her', 'own', 'mind', 
+        'as', 'well', 'as', 'she', 'could', 'for', 'the', 'hot', 'day', 
+        'made', 'her', 'feel', 'very', 'sleepy', 'and', 'stupid', 
+        'whether', 'the', 'pleasure', 'of', 'making', 'a']  
         
  
 Well now we have all the pieces ready.  Let us see what words in this book are not in
@@ -331,16 +338,16 @@ we end up with no more items in our region of interest.  We can code this as fol
             # fetch the item at that position
             item_at_mid = xs[mid_index]
 
-            # print("Region of interest ({0}, {1}), probed value = {2}, target={3}"
-            #       .format(lb, ub, item_at_mid, target))
+            # print("Roi[{0}:{1}](size={2}), probed='{3}', target='{4}'"
+            #       .format(lb, ub, ub-lb, item_at_mid, target))
 
             # how does the probed item compare to the target?
             if item_at_mid == target:
-                return mid_index            # found it!
+                return mid_index      # found it!
             if item_at_mid < target:
-                lb = mid_index + 1          # we must use the upper half of current roi for next probe
+                lb = mid_index + 1    # use upper half of roi next time
             else:
-                ub = mid_index              # use the lower half of current roi for next probe
+                ub = mid_index        # use lower half of roi next time
                 
 The region of interest is represented by two variables, a lower bound ``lb``
 and an upper bound ``ub``.  It is important to be precise about what values
@@ -372,20 +379,20 @@ the print statement on lines 15 and 16, we'll get a trace of the probes done dur
 search.  Let's go ahead, and try that::
 
     >>> search_binary(bigger_vocab, "magic")
-    Roi [0:19469] (roi size=19469), probed value = 'known', target = 'magic'
-    Roi [9735:19469] (roi size=9734), probed value = 'retailer', target = 'magic'
-    Roi [9735:14602] (roi size=4867), probed value = 'overthrow', target = 'magic'
-    Roi [9735:12168] (roi size=2433), probed value = 'mission', target = 'magic'
-    Roi [9735:10951] (roi size=1216), probed value = 'magnificent', target = 'magic'
-    Roi [9735:10343] (roi size=608), probed value = 'liken', target = 'magic'
-    Roi [10040:10343] (roi size=303), probed value = 'looks', target = 'magic'
-    Roi [10192:10343] (roi size=151), probed value = 'lump', target = 'magic'
-    Roi [10268:10343] (roi size=75), probed value = 'machete', target = 'magic'
-    Roi [10306:10343] (roi size=37), probed value = 'mafia', target = 'magic'
-    Roi [10325:10343] (roi size=18), probed value = 'magnanimous', target = 'magic'
-    Roi [10325:10334] (roi size=9), probed value = 'magical', target = 'magic'
-    Roi [10325:10329] (roi size=4), probed value = 'maggot', target = 'magic'
-    Roi [10328:10329] (roi size=1), probed value = 'magic', target = 'magic'
+    Roi[0:19469](size=19469), probed='known', target='magic'
+    Roi[9735:19469](size=9734), probed='retailer', target='magic'
+    Roi[9735:14602](size=4867), probed='overthrow', target='magic'
+    Roi[9735:12168](size=2433), probed='mission', target='magic'
+    Roi[9735:10951](size=1216), probed='magnificent', target='magic'
+    Roi[9735:10343](size=608), probed='liken', target='magic'
+    Roi[10040:10343](size=303), probed='looks', target='magic'
+    Roi[10192:10343](size=151), probed='lump', target='magic'
+    Roi[10268:10343](size=75), probed='machete', target='magic'
+    Roi[10306:10343](size=37), probed='mafia', target='magic'
+    Roi[10325:10343](size=18), probed='magnanimous', target='magic'
+    Roi[10325:10334](size=9), probed='magical', target='magic'
+    Roi[10325:10329](size=4), probed= maggot', target='magic'
+    Roi[10328:10329](size=1), probed='magic', target='magic'
     10328
     
 Here we see that finding the target word "magic" needed just 14 probes before it was found
@@ -471,7 +478,8 @@ with removing adjacent duplicates
 
     test(remove_adjacent_dups([1,2,3,3,3,3,5,6,9,9]), [1,2,3,5,6,9])
     test(remove_adjacent_dups([]), [])
-    test(remove_adjacent_dups(['a', 'big', 'big', 'bite', 'dog']), ['a', 'big', 'bite', 'dog'])
+    test(remove_adjacent_dups(['a', 'big', 'big', 'bite', 'dog']),
+                                       ['a', 'big', 'bite', 'dog'])
     
 The algorithm is easy and efficient.  We simply have to remember the most recent 
 item that was inserted into the result, and avoid inserting it again: 
@@ -480,7 +488,9 @@ item that was inserted into the result, and avoid inserting it again:
    :linenos:
 
     def remove_adjacent_dups(xs):
-        """ Return a new list in which all adjacent duplicates from xs have been removed """
+        """ Return a new list in which all adjacent 
+            duplicates from xs have been removed.
+        """
         result = []
         most_recent_elem = None
         for e in xs:
@@ -505,26 +515,34 @@ our new code looks like this:
     all_words = get_words_in_book("AliceInWonderland.txt")
     all_words.sort()
     book_words = remove_adjacent_dups(all_words)
-    print("There are {0} words in the book. Only {1} are unique. The first 100 words are\n{2}".  
-               format(len(all_words), len(book_words), book_words[:100]))
+    print("There are {0} words in the book. Only {1} are unique.".
+                          format(len(all_words), len(book_words))) 
+    print("The first 100 words are\n{0}".  
+               format(book_words[:100]))
 
 Almost magically, we get the following output:
 
 .. sourcecode:: python
 
-    There are 27336 words in the book. Only 2570 are unique. The first 100 words are
-    ['_i_', 'a', 'abide', 'able', 'about', 'above', 'absence', 'absurd', 'acceptance', 
-     'accident', 'accidentally', 'account', 'accounting', 'accounts', 'accusation', 
-     'accustomed', 'ache', 'across', 'act', 'actually', 'ada', 'added', 'adding', 
-     'addressed', 'addressing', 'adjourn', 'adoption', 'advance', 'advantage', 'adventures', 
-     'advice', 'advisable', 'advise', 'affair', 'affectionately', 'afford', 'afore', 
-     'afraid', 'after', 'afterwards', 'again', 'against', 'age', 'ago', 'agony', 'agree', 
-     'ah', 'ahem', 'air', 'airs', 'alarm', 'alarmed', 'alas', 'alice', 'alive', 'all', 
-     'allow', 'almost', 'alone', 'along', 'aloud', 'already', 'also', 'altered', 'alternately', 
-     'altogether', 'always', 'am', 'ambition', 'among', 'an', 'ancient', 'and', 'anger', 'angrily', 
-     'angry', 'animal', 'animals', 'ann', 'annoy', 'annoyed', 'another', 'answer', 'answered', 
-     'answers', 'antipathies', 'anxious', 'anxiously', 'any', 'anything', 'anywhere', 'appealed', 
-     'appear', 'appearance', 'appeared', 'appearing', 'applause', 'apple', 'apples', 'arch']
+    There are 27336 words in the book. Only 2570 are unique. 
+    The first 100 words are
+    ['_i_', 'a', 'abide', 'able', 'about', 'above', 'absence', 'absurd',
+     'acceptance', 'accident', 'accidentally', 'account', 'accounting', 
+     'accounts', 'accusation', 'accustomed', 'ache', 'across', 'act', 
+     'actually', 'ada', 'added', 'adding', 'addressed', 'addressing', 
+     'adjourn', 'adoption', 'advance', 'advantage', 'adventures', 
+     'advice', 'advisable', 'advise', 'affair', 'affectionately', 
+     'afford', 'afore', 'afraid', 'after', 'afterwards', 'again', 
+     'against', 'age', 'ago', 'agony', 'agree', 'ah', 'ahem', 'air', 
+     'airs', 'alarm', 'alarmed', 'alas', 'alice', 'alive', 'all', 
+     'allow', 'almost', 'alone', 'along', 'aloud', 'already', 'also', 
+     'altered', 'alternately', 'altogether', 'always', 'am', 'ambition',
+     'among', 'an', 'ancient', 'and', 'anger', 'angrily', 'angry', 
+     'animal', 'animals', 'ann', 'annoy', 'annoyed', 'another', 
+     'answer', 'answered', 'answers', 'antipathies', 'anxious', 
+     'anxiously', 'any', 'anything', 'anywhere', 'appealed', 'appear', 
+     'appearance', 'appeared', 'appearing', 'applause', 'apple', 
+     'apples', 'arch']
 
 It should surprise you that Lewis Carroll was able to write a classic piece of literature 
 using only 2570 different words!
@@ -571,21 +589,21 @@ Here is our merge algorithm:
    :linenos:
 
     def merge(xs, ys):
-        """ merge already sorted lists xs and ys, and return a sorted result """
+        """ merge sorted lists xs and ys. Return a sorted result """
         result = []
         xi = 0
         yi = 0
         
         while True:
-            if xi >= len(xs):           # if the first list is finished, 
-                result.extend(ys[yi:])  # add remaining items from the second list
-                return result;          # and we're done.
+            if xi >= len(xs):          # if xs list is finished, 
+                result.extend(ys[yi:]) # add remaining items from ys
+                return result;         # and we're done.
                 
-            if yi >= len(ys):           # Same again, with roles of the two lists swapped.
+            if yi >= len(ys):          # Same again, but swap roles
                 result.extend(xs[xi:])
                 return result;
                
-            # Both lists still have remaining items, copy the smaller one to the result.        
+            # Both lists still have items, copy smaller item to result.       
             if xs[xi] <= ys[yi]:
                 result.append(xs[xi])
                 xi += 1
@@ -634,9 +652,9 @@ the vocabulary.
 .. sourcecode:: python
    :linenos:
    
-        def find_unknown_words_using_merge_pattern(vocab, wds):
-            """ Both the vocab and wds must be sorted.  We return a new list of
-                words from wds that do not occur in vocab.
+        def find_unknowns_merge_pattern(vocab, wds):
+            """ Both the vocab and wds must be sorted.  Return a new 
+                list of words from wds that do not occur in vocab.
             """
 
             result = []
@@ -651,13 +669,13 @@ the vocabulary.
                 if yi >= len(wds):
                     return result
 
-                if vocab[xi] == wds[yi]:   # good, the word exists in the vocab
+                if vocab[xi] == wds[yi]:  # good, word exists in vocab
                     yi += 1
 
-                elif vocab[xi] < wds[yi]:  # move past this vocab word,
+                elif vocab[xi] < wds[yi]: # move past this vocab word,
                     xi += 1
 
-                else:                      # we have word that is not in vocab
+                else:                     # got word that is not in vocab
                     result.append(wds[yi])
                     yi += 1
 
@@ -670,7 +688,7 @@ Now we put it all together:
     t0 = time.clock()
     all_words.sort()
     book_words = remove_adjacent_dups(all_words)
-    missing_words = find_unknown_words_using_merge_pattern(bigger_vocab, book_words)
+    missing_words = find_unknowns_merge_pattern(bigger_vocab, book_words)
     t1 = time.clock()
     print("There are {0} unknown words.".format(len(missing_words)))
     print("That took {0:.4f} seconds.".format(t1-t0))                    
@@ -734,8 +752,14 @@ Let's brainstorm some ideas about how a chessboard and queens could be represent
   
    Our state for the solution above could then have this data representation::
  
-       bd1 = [[0,0,0,1,0,0,0,0], [0,0,0,0,0,0,1,0], [0,0,1,0,0,0,0,0], [0,0,0,0,0,0,0,1],
-              [0,1,0,0,0,0,0,0], [0,0,0,0,1,0,0,0], [1,0,0,0,0,0,0,0], [0,0,0,0,0,1,0,0]]
+       bd1 = [[0,0,0,1,0,0,0,0], 
+              [0,0,0,0,0,0,1,0], 
+              [0,0,1,0,0,0,0,0], 
+              [0,0,0,0,0,0,0,1], 
+              [0,1,0,0,0,0,0,0], 
+              [0,0,0,0,1,0,0,0], 
+              [1,0,0,0,0,0,0,0], 
+              [0,0,0,0,0,1,0,0]]
               
    You should also be able to see how the empty board would be represented, and you should start
    to imagine what operations or changes you'd need to make to the data to place another 
@@ -750,7 +774,7 @@ Let's brainstorm some ideas about how a chessboard and queens could be represent
    integer coordinates for both axes.  And being good computer scientists, we'd probably start numbering
    each axis from 0 instead of at 1. Now our representation could be::
       
-       bd3 = [ (0,6), (1,4), (2,2), (3,0), (4,5), (5,7), (6,1), (7,3) ]
+       bd3 = [(0,6), (1,4), (2,2), (3,0), (4,5), (5,7), (6,1), (7,3)]
    
 *  Looking at this representation, we can't help but notice that the first coordinates 
    are ``0,1,2,3,4,5,6,7`` and they correspond exactly to the index position of the 
@@ -823,8 +847,7 @@ in each direction:
 .. sourcecode:: python   
     
     def share_diagonal(x0, y0, x1, y1):
-        """ Is the (x0, y0) on a shared diagonal with (x1, y1) 
-        """
+        """ Is (x0, y0) on a shared diagonal with (x1, y1)? """ 
         dy = abs(y1 - y0)        # calc the absolute y distance 
         dx = abs(x1 - x0)        # calc the absolute x distance
         return dx == dy          # they clash if dx == dy
@@ -844,16 +867,17 @@ queens to its left, at columns 0,1,2,..c-1:
 
 .. sourcecode:: python
  
-    test(col_clashes([6,4,2,0,5], 4), False)       # a solution should never clash
-    test(col_clashes([6,4,2,0,5,7,1,3], 7), False) # a solution should never clash
-    # Now some problem cases that should clash
-    test(col_clashes([0,1], 1), True)
-    test(col_clashes([5,6], 1), True)
-    test(col_clashes([6,5], 1), True)
-    test(col_clashes([0,6,4,3], 3), True)
-    test(col_clashes([5,0,7], 2), True)
-    test(col_clashes([2,0,1,3], 1), False)
-    test(col_clashes([2,0,1,3], 2), True)   
+    # solutions should not have any clashes  
+      test(col_clashes([6,4,2,0,5], 4), False)   
+      test(col_clashes([6,4,2,0,5,7,1,3], 7), False)  
+    # Now some test cases that should mostly clash
+      test(col_clashes([0,1], 1), True)
+      test(col_clashes([5,6], 1), True)
+      test(col_clashes([6,5], 1), True)
+      test(col_clashes([0,6,4,3], 3), True)
+      test(col_clashes([5,0,7], 2), True)
+      test(col_clashes([2,0,1,3], 1), False)
+      test(col_clashes([2,0,1,3], 2), True)   
     
 Here is our function that makes them all pass:
 
@@ -875,10 +899,10 @@ the permutation have any diagonal clashes?
 
 .. sourcecode:: python
 
-    test(has_clashes([6,4,2,0,5,7,1,3]), False)  # the solution from the diagram
-    test(has_clashes([4,6,2,0,5,7,1,3]), True)   # swap rows of first two queens
-    test(has_clashes([0,1,2,3]), True)           # try small 4x4 board
-    test(has_clashes([2,0,3,1]), False)          # this is a solution to the 4x4 case
+    test(has_clashes([6,4,2,0,5,7,1,3]), False) # solution from above
+    test(has_clashes([4,6,2,0,5,7,1,3]), True)  # swap rows of first two
+    test(has_clashes([0,1,2,3]), True)          # try small 4x4 board
+    test(has_clashes([2,0,3,1]), False)         # solution to 4x4 case
 
 And the code to make the tests pass:
     
@@ -1044,8 +1068,10 @@ Exercises
        symmetries for that solution.   For example, the symmetries of ``[0,4,7,5,2,6,1,3]``
        are :: 
        
-        [[0,4,7,5,2,6,1,3],[7,1,3,0,6,4,2,5],[4,6,1,5,2,0,3,7],[2,5,3,1,7,4,6,0],
-         [3,1,6,2,5,7,4,0],[0,6,4,7,1,3,5,2],[7,3,0,2,5,1,6,4],[5,2,4,6,0,3,1,7]] 
+        [[0,4,7,5,2,6,1,3],[7,1,3,0,6,4,2,5],
+         [4,6,1,5,2,0,3,7],[2,5,3,1,7,4,6,0],
+         [3,1,6,2,5,7,4,0],[0,6,4,7,1,3,5,2],
+         [7,3,0,2,5,1,6,4],[5,2,4,6,0,3,1,7]] 
 
     e. Now adapt the queens program so it won't list solutions that are in the
        same family.  It only prints solutions from unique families.   
@@ -1068,12 +1094,12 @@ Exercises
    b. Write a function that returns compares a single ticket and a draw, and returns
       the number of correct picks on that ticket::
       
-        test(lotto_match([42, 4, 7, 11, 1, 13], [2, 5, 7, 11, 13, 17]), 3)
+        test(lotto_match([42,4,7,11,1,13], [2,5,7,11,13,17]), 3)
          
    c. Write a function that takes a list of tickets and a draw, and returns a list 
       telling how many picks were correct on each ticket::
       
-        test(lotto_matches([42, 4, 7, 11, 1, 13], my_tickets), [1, 2, 3, 1])
+        test(lotto_matches([42,4,7,11,1,13], my_tickets), [1,2,3,1])
       
    d. Write a function that takes a list of integers, and returns the number of primes in the list::
    

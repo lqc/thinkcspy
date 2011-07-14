@@ -6,14 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
 |
     
 Inheritance
@@ -268,7 +260,8 @@ inherits from ``Hand`` and provides an additional method called
                 if match in self.cards:
                     self.cards.remove(card)
                     self.cards.remove(match)
-                    print("Hand {0}: {1} matches {2}".format(self.name, card, match))
+                    print("Hand {0}: {1} matches {2}"
+                            .format(self.name, card, match))
                     count = count + 1
             return count
 

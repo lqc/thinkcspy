@@ -64,9 +64,9 @@ example of how you can send email to someone.
     
     import smtplib, email.mime.text
     
-    me = 'joe@my.org.com'                   # put your own email here
-    fred = 'fred@his.org.com'               # and fred's email address here
-    your_mail_server = 'mail.my.org.com'    # Ask your system administrator
+    me = 'joe@my.org.com'                # put your own email here
+    fred = 'fred@his.org.com'            # and fred's email address here
+    your_mail_server = 'mail.my.org.com' # Ask your system administrator
 
     # Create a text message containing the body of the email.
     # You could read this from a file, of course.
@@ -77,19 +77,19 @@ example of how you can send email to someone.
 
     Joe""" )
 
-    msg['From'] = me              # add some headers to the message object
+    msg['From'] = me               # add headers to the message object
     msg['To'] = fred
     msg['Subject'] = 'Party on Saturday 23rd'
 
     # create a connection to your mail server
     svr = smtplib.SMTP(your_mail_server)                
-    response = svr.sendmail(me, fred, msg.as_string())  # send the message
+    response = svr.sendmail(me, fred, msg.as_string()) # send message
     if response != {}:
         print("Sending failed for ", response)
     else:
         print("Message sent.")
 
-    svr.quit()                                         # close the connection
+    svr.quit()                                   # close the connection
 
 In the context of the course, notice how we use the two objects in
 this program: we create a message object on line 9, and set some attributes 

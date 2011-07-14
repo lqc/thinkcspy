@@ -48,10 +48,20 @@ turtle and start drawing a rectangle. (We'll call the variable that
 refers to our first turtle `alex`, but you can choose another 
 name if you follow the naming rules from the previous chapter).
 
-.. literalinclude:: resources/ch03/alex_01.py
+.. sourcecode:: python
    :linenos:
+   
+    import turtle             # allows us to use turtles
+    wn = turtle.Screen()      # creates a playground for turtles
+    alex = turtle.Turtle()    # create a turtle, assign to alex
+
+    alex.forward(50)          # tell alex to move forward by 50 units
+    alex.left(90)             # tell alex to turn by 90 degrees
+    alex.forward(30)          # complete the second side of a rectangle
+
+    wn.mainloop()             # Wait for user to close window
     
-When we run this program (which we've called :download:`alex_01.py <resources/ch03/alex_01.py>`), a new window pops up:
+When we run this program, a new window pops up:
 
 .. image:: illustrations/tess01.png  
     
@@ -93,16 +103,27 @@ some text in the title bar, and a size and position on the screen.  These are al
 part of the state of the window object. 
 
 Quite a number of methods exist that allow us to modify the turtle and the
-window objects.  We'll just show a couple. In this program :download:`tess_02.py <resources/ch03/alex_01.py>` we've only commented those
+window objects.  We'll just show a couple. In this program we've only commented those
 lines that are different from the previous example (and we've used a different
 variable name for this turtle):
     
-.. literalinclude:: resources/ch03/tess_02.py
+.. sourcecode:: python
    :linenos:
 
-    
-.. sourcecode:: python
-    
+    import turtle
+    wn = turtle.Screen()
+    wn.bgcolor("lightgreen")      # set the window background colour
+    wn.title("Hello, Tess!")      # set the window title
+
+    tess = turtle.Turtle()
+    tess.color("blue")            # tell tess to change her color
+    tess.pensize(3)               # tell tess to set her pen width
+
+    tess.forward(50)
+    tess.left(120)
+    tess.forward(50)
+
+    wn.mainloop()
 
   
 When we run this program, this new window pops up, and will remain on the 
@@ -134,11 +155,42 @@ Instances --- a herd of turtles
 Just like we can have many different integers in a program, we can have many turtles.
 Each of them is called an **instance**.  Each instance has its own attributes and 
 methods --- so alex might draw with a thin black pen and be at some position,
-while tess might be going in her own direction with a fat pink pen.  Our program is 
-:download:`tess_n_alex.py <resources/ch03/tess_n_alex.py>`:  
+while tess might be going in her own direction with a fat pink pen. 
 
-.. literalinclude:: resources/ch03/tess_n_alex.py
+.. sourcecode:: python
    :linenos:
+   
+    import turtle
+    wn = turtle.Screen()         # Set up the window and its attributes
+    wn.bgcolor("lightgreen")
+    wn.title("Tess & Alex")
+
+    tess = turtle.Turtle()       # create tess and set some attributes
+    tess.color("hotpink")
+    tess.pensize(5)
+
+    alex = turtle.Turtle()       # create alex
+
+    tess.forward(80)             # Make tess draw equilateral triangle
+    tess.left(120)
+    tess.forward(80)
+    tess.left(120)
+    tess.forward(80)
+    tess.left(120)               # complete the triangle
+
+    tess.right(180)              # turn tess around
+    tess.forward(80)             # and move her away from the origin
+
+    alex.forward(50)             # make alex draw a square
+    alex.left(90)
+    alex.forward(50)
+    alex.left(90)
+    alex.forward(50)
+    alex.left(90)
+    alex.forward(50)
+    alex.left(90)
+
+    wn.mainloop()
 
 Here is what happens when alex completes his rectangle, and tess completes her triangle:
 
@@ -186,9 +238,9 @@ quite know how to send email yet, so for the moment we'll just print a message f
 .. sourcecode:: python
     :linenos:
 
-    for f in ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]:
-        invitation = "Hi " + f + ".  Please come to my party on Saturday!"
-        print(invitation)
+    for f in ["Joe","Amy","Brad","Angelina","Zuki","Thandi","Paris"]:
+        invite = "Hi " + f + ".  Please come to my party on Saturday!"
+        print(invite)
     # more code can follow here ...            
       
 
@@ -298,7 +350,8 @@ tess can also use a ``for`` loop to draw her equilateral triangle.
  
    .. sourcecode:: python
 
-      clrs = ["yellow", "red", "purple", "blue"]   # make the variable refer to this list
+      # Assign a list to a variable
+      clrs = ["yellow", "red", "purple", "blue"]   
       for c in clrs:
           alex.color(c)
           alex.forward(50)
@@ -356,10 +409,28 @@ A few more turtle methods and tricks
   and this will remain after the turtle has moved somewhere else. 
   Stamping works, even when the pen is up. 
     
-Let's do an example, :download:`tess_n_alex.py <resources/ch03/tess_n_alex.py>`, that shows off some of these new features:
+Let's do an example that shows off some of these new features:
 
-.. literalinclude:: resources/ch03/tess_spiral.py
+.. sourcecode:: python
    :linenos:
+   
+    import turtle
+    wn = turtle.Screen()             
+    wn.bgcolor("lightgreen")
+    tess = turtle.Turtle()            
+    tess.shape("turtle")
+    tess.color("blue")
+
+    tess.penup()                 # this is new
+    size = 20
+    for i in range(30):
+       tess.stamp()             # leave an impression on the canvas
+       size = size + 3          # increase the size on every iteration
+       tess.forward(size)       # move tess along  
+       tess.right(24)           # and turn her
+
+    wn.mainloop()  
+   
    
 .. image:: illustrations/tess07.png   
 

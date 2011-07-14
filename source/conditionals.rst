@@ -63,8 +63,8 @@ some seconds, and we'll convert them into hours, minutes, and remaining seconds.
     minutes =  secs_still_remaining // 60 
     secs_finally_remaining = secs_still_remaining  % 60
     
-    print("Hrs=", hours, "  mins=", minutes,  "secs=", secs_finally_remaining)
-
+    print("Hrs=", hours, "  mins=", minutes,  
+                             "secs=", secs_finally_remaining)
 
 .. index::
     single: boolean value
@@ -170,7 +170,8 @@ statement:
         print("Did you know that 2 is the only even number that is prime?")
     else:
         print(x, " is odd.") 
-        print("Did you know that multiplying two odd numbers always gives an odd result?")
+        print("Did you know that multiplying two odd numbers " + 
+                                             "always gives an odd result?")
     
 
 The boolean expression after the ``if`` statement is called the **condition**.
@@ -483,16 +484,16 @@ Corresponding to each data measurement, we'll draw a simple rectangle of that he
     def draw_bar(t, height):
         """ Get turtle t to draw one bar, of height. """
         t.left(90)           
-        t.forward(height)        # Draw up the left side
+        t.forward(height)     # Draw up the left side
         t.right(90)
-        t.forward(40)            # width of bar, along the top
+        t.forward(40)         # width of bar, along the top
         t.right(90)
-        t.forward(height)        # And down again!
-        t.left(90)               # put the turtle facing the way we found it.
-        t.forward(10)            # leave small gap after each bar
+        t.forward(height)     # And down again!
+        t.left(90)            # put the turtle facing the way we found it.
+        t.forward(10)         # leave small gap after each bar
  
     ...    
-    for v in xs:                 # assume xs and tess are ready 
+    for v in xs:              # assume xs and tess are ready 
         draw_bar(tess, v)    
 
 .. image:: illustrations/tess_bar_1.png
@@ -514,8 +515,36 @@ The result looks a lot better now:
 
 And now we'll add two lines to fill each bar.  Our final program, at :download:`tess_barchart.py <resources/ch05/tess_barchart.py>`, now looks like this:
 
-.. literalinclude:: resources/ch05/tess_barchart.py
+.. sourcecode:: python
    :linenos:
+   
+    def draw_bar(t, height):
+        """ Get turtle t to draw one bar, of height. """
+        t.begin_fill()               # added this line
+        t.left(90)
+        t.forward(height)
+        t.write('  '+ str(height))   
+        t.right(90)
+        t.forward(40)
+        t.right(90)
+        t.forward(height)
+        t.left(90)
+        t.end_fill()             # added this line
+        t.forward(10)                 
+
+    wn = turtle.Screen()         # Set up the window and its attributes
+    wn.bgcolor("lightgreen")
+
+    tess = turtle.Turtle()       # create tess and set some attributes
+    tess.color("blue", "red")
+    tess.pensize(3)
+
+    xs = [48,117,200,240,160,260,220]
+
+    for a in xs:
+        draw_bar(tess, a)
+
+    wn.mainloop()
 
 It produces the following, which is more satisfying:
 
@@ -662,8 +691,10 @@ Exercises
     
     The square and round brackets denote closed and open intervals. 
     A closed interval includes the number, and open interval excludes it.   So 39.99999 gets grade F3, but 40 gets grade F2.
+    Assume ::
     
-    Let ``xs = [83, 75, 74.9, 70, 69.9, 65, 60, 59.9, 55, 50, 49.9, 45, 44.9, 40, 39.9, 2, 0]`` 
+       xs = [83, 75, 74.9, 70, 69.9, 65, 60, 59.9, 55, 50, 
+                            49.9, 45, 44.9, 40, 39.9, 2, 0 
     
     Test your function by printing the mark and the grade for all the elements in this list.
     
@@ -693,7 +724,7 @@ Exercises
     
     .. sourcecode:: python
     
-      if  abs(x-y) < 0.000001:      # if x is approximately equal to y
+      if  abs(x-y) < 0.000001:    # if x is approximately equal to y
           ...    
    
 #.  Extend the above program so that the sides can be given to the function in any order.

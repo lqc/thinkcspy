@@ -56,7 +56,7 @@ at order 0. This is very simple to code up in Python:
            Leave the turtle facing the same direction.
         """
 
-        if order == 0:                  # The base case is just a straight line
+        if order == 0:          # The base case is just a straight line
             t.forward(size)
         else:
             koch(t, order-1, size/3)   # go 1/3 of the way
@@ -244,11 +244,13 @@ A slightly more complicated problem is finding the largest value in our nested
 number list:
 
 .. sourcecode:: python
+    :linenos:
     
     def r_max(nxs):
         """ 
-          Find the maximum in a recursive structure of lists inside other lists.
-          Pre: No lists or sublists are empty. 
+          Find the maximum in a recursive structure of lists 
+          within other lists.
+          Precondition: No lists or sublists are empty. 
         """
         largest = None 
         first_time = True
@@ -376,8 +378,8 @@ The following program lists the contents of a directory and all its subdirectori
         dirlist = get_dirlist(path)
         for f in dirlist:
             print(prefix+f)                 # print the line 
-            fullE = os.path.join(path, f)   # turn the name into a full path
-            if os.path.isdir(fullE):        # if it is a directory, recurse. 
+            fullE = os.path.join(path, f)   # turn name into full path
+            if os.path.isdir(fullE):        # if a directory, recurse. 
                 print_files(fullE, prefix + "| ")
 
 Calling the function ``print_files`` with some folder name will produce output similar to this::       
@@ -462,88 +464,6 @@ Exercises
    .. image:: illustrations/sierpinski_colour.png
    
    
-#. Add each of the following functions to a script called ``seqtools.py``:
-
-   .. sourcecode:: python
-    
-        def make_empty(seq): pass  
-        def insert_at_end(val, seq): pass
-        def insert_in_front(val, seq): pass
-        def index_of(val, seq, start=0): pass
-        def remove_at(index, seq): pass            
-        def remove_val(val, seq): pass
-        def remove_all(val, seq): pass            
-        def count(val, seq): pass     
-        def reverse(seq): pass
-        def sort_sequence(seq): pass
-        
-        def testsuite():
-            test(make_empty([1, 2, 3, 4]), [])
-            test(make_empty(('a', 'b', 'c')), ())
-            test(make_empty("No, not me!"), '')
-            
-            test(insert_at_end(5, [1, 3, 4, 6]), [1, 3, 4, 6, 5])
-            test(insert_at_end('x', 'abc'),  'abcx')
-            test(insert_at_end(5, (1, 3, 4, 6)), (1, 3, 4, 6, 5))
-
-            test(insert_in_front(5, [1, 3, 4, 6]),   [5, 1, 3, 4, 6])
-            test(insert_in_front(5, (1, 3, 4, 6)),   (5, 1, 3, 4, 6))
-            test(insert_in_front('x', 'abc'),        'xabc')
-
-            test(index_of(9, [1, 7, 11, 9, 10]), 3)
-            test(index_of(5, (1, 2, 4, 5, 6, 10, 5, 5)), 3)
-            test(index_of(5, (1, 2, 4, 5, 6, 10, 5, 5), 4), 6)
-            test(index_of('y', 'happy birthday'), 4)
-            test(ndex_of('banana', ['apple', 'banana', 'cherry', 'date']), 1)
-            test(index_of(5, [2, 3, 4]), -1)
-            test(index_of('b', ['apple', 'banana', 'cherry', 'date']), -1)
-     
-            test(remove_at(3, [1, 7, 11, 9, 10]), [1, 7, 11, 10])
-            test(remove_at(5, (1, 4, 6, 7, 0, 9, 3, 5)), (1, 4, 6, 7, 0, 3, 5))
-            test(remove_at(2, "Yomrktown"), 'Yorktown')
-          
-            test(remove_val(11, [1, 7, 11, 9, 10]), [1, 7, 9, 10])
-            test(remove_val(15, (1, 15, 11, 4, 9)), (1, 11, 4, 9))
-            test(remove_val('what', ('who', 'what', 'when', 'where', 'why', 'how')),
-                  ('who', 'when', 'where', 'why', 'how'))
-             
-            test(remove_all(11, [1, 7, 11, 9, 11, 10, 2, 11]),  [1, 7, 9, 10, 2])
-            test(remove_all('i', 'Mississippi'), 'Msssspp')
-             
-            test(count(5, (1, 5, 3, 7, 5, 8, 5)), 3)
-            test(count('s', 'Mississippi'), 4)
-            test(count((1, 2), [1, 5, (1, 2), 7, (1, 2), 8, 5]), 2)
-            
-            test(reverse([1, 2, 3, 4, 5]), [5, 4, 3, 2, 1])
-            test(reverse(('shoe', 'my', 'buckle', 2, 1)), (1, 2, 'buckle', 'my', 'shoe'))
-            test(reverse('Python'), 'nohtyP')         
-                
-            test(sort_sequence([3, 4, 6, 7, 8, 2]),  [2, 3, 4, 6, 7, 8])
-            test(sort_sequence((3, 4, 6, 7, 8, 2)),  (2, 3, 4, 6, 7, 8))
-            test(sort_sequence("nothappy"), 'ahnoppty')
-
-   As usual, add your test function and work on each of these one at a time until they pass all the tests.
-   
-   .. admonition::  But do you really want to do this? 
-   
-       Disclaimer.  These exercises illustrate nicely that the sequence abstraction is
-       general, (because slicing, indexing, and concatenation is so general), so it is possible to 
-       write general functions that work over all sequence types.  A nice lesson about generalization!
-       
-       Another view is that tuples are different from lists and strings precisely 
-       because you want to think about them very differently. 
-       It usually doesn't make sense to sort the fields of the `julia`
-       tuple we saw earlier, or to cut bits out or insert bits into the middle, 
-       *even if Python lets you do so!*  
-       Tuple fields get their meaning from their position in the tuple.  
-       Don't mess with that.
-       
-       Use lists for "many things of the same type", like an 
-       enrollment of many students for a course.
-       
-       Use tuples for "fields of different types that make up a compound record". 
-  
-   
 #. Write a function, ``recursive_min``, that returns the smallest value in a
    nested number list.  Assume there are no empty lists or sublists:
 
@@ -564,18 +484,19 @@ Exercises
         test(count(7, [[9, [7, 1, 13, 2], 8], [7, 6]]), 2)
         test(count(15, [[9, [7, 1, 13, 2], 8], [2, 6]]), 0)
         test(count(5, [[5, [5, [1, 5], 5], 5], [5, 6]]), 6)
-        test(count('a', [['this', ['a', ['thing', 'a'], 'a'], 'is'], ['a', 'easy']]), 5)
+        test(count('a', 
+             [['this',['a',['thing','a'],'a'],'is'], ['a','easy']]), 5)
  
 #. Write a function ``flatten`` that returns a simple list  
    containing all the values in a nested list:
 
    .. sourcecode:: python
     
-       test(flatten([2, 9, [2, 1, 13, 2], 8, [2, 6]]), [2, 9, 2, 1, 13, 2, 8, 2, 6])
-       test(flatten([[9, [7, 1, 13, 2], 8], [7, 6]]), [9, 7, 1, 13, 2, 8, 7, 6])
-       test(flatten([[9, [7, 1, 13, 2], 8], [2, 6]]), [9, 7, 1, 13, 2, 8, 2, 6])
-       test(flatten([['this', ['a', ['thing'], 'a'], 'is'], ['a', 'easy']]), 
-                     ['this', 'a', 'thing', 'a', 'is', 'a', 'easy'])
+       test(flatten([2,9,[2,1,13,2],8,[2,6]]),[2,9,2,1,13,2,8,2,6])
+       test(flatten([[9,[7,1,13,2],8],[7,6]]),[9,7,1,13,2,8,7,6])
+       test(flatten([[9,[7,1,13,2],8],[2,6]]),[9,7,1,13,2,8,2,6])
+       test(flatten([['this',['a',['thing'],'a'],'is'],['a','easy']]),
+                     ['this','a','thing','a','is','a','easy'])
        test(flatten([]), [])
        
 #. Rewrite the fibonacci algorithm without using recursion. Can you find bigger
@@ -586,27 +507,6 @@ Exercises
    was done in `infinite_recursion.py`
    to test your understanding of how these module functions work.
  
-#. Suppose you want to swap around the values in two variables.  You decide
-   to factor this out into a reusable function, and write this code:
-
-    .. sourcecode:: python
-    
-        def swap(x, y):      # incorrect version
-             print("before swap statement: x:", x, "y:", y)
-             (x, y) = (y, x)
-             print("after swap statement: x:", x, "y:", y)
-    
-        a = ["This", "is", "fun"]
-        b = [2,3,4] 
-        print("before swap function call: a:", a, "b:", b)
-        swap(a, b)
-        print("after swap function call: a:", a, "b:", b)
-
-   Run this program and describe the results.  Oops!  So it didn't do what you intended!   
-   Explain why this version of ``swap`` does not work as intended. 
-   Using a Python visualizer like the one at http://netserv.ict.ru.ac.za/python3_viz 
-   may help you build a good conceptual model of what is going on.  
-   What will be the values of ``a`` and ``b`` after the call to ``swap``?  
    
 #. Write a program that walks a directory structure (as in the last section of
    this chapter), but instead of printing filenames, it returns a list of all
