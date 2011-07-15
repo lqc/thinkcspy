@@ -6,14 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
 |
     
 Queues
@@ -289,10 +281,10 @@ or alphabetical order, from highest to lowest. Python can find the biggest
 integer or string because it can compare them using the built-in comparison
 operators.
 
-If the queue contains an object type, it has to provide a ``__cmp__`` method.
+If the queue contains an object type, it has to provide a ``__gt__`` method.
 When ``remove`` uses the ``>`` operator to compare items, it invokes the
-``__cmp__`` for one of the items and passes the other as a parameter. As long
-as the ``__cmp__`` method works correctly, the Priority Queue will work.
+``__gt__`` for one of the items and passes the other as a parameter. As long
+as the ``__gt__`` method works correctly, the Priority Queue will work.
 
 
 The ``Golfer`` class
@@ -315,18 +307,16 @@ golfers. As usual, we start by defining ``__init__`` and ``__str__``:
 ``__str__`` uses the format method to put the names and scores in neat
 columns.
 
-Next we define a version of ``__cmp__`` where the lowest score gets highest
-priority. As always, ``__cmp__`` returns 1 if ``self`` is greater than
-``other``, -1 if ``self`` is less than other, and 0 if they are equal.
+Next we define a version of ``__gt__`` where the lowest score gets highest
+priority. As always, ``__gt__`` returns ``True`` if ``self`` is greater than
+``other``, and ``False`` otherwise.
 
 .. sourcecode:: python
     
     class Golfer:
         ...
-        def __cmp__(self, other):
-            if self.score < other.score: return  1   # less is more
-            if self.score > other.score: return -1
-            return 0
+        def __gt__(self, other):
+            return self.score < other.score    # less is more
 
 Now we are ready to test the priority queue with the ``Golfer`` class:
 
