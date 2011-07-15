@@ -376,9 +376,9 @@ There is one more thing requiring explanation here.  The conditional statement o
 48 tests whether the name of the currently executing program is ``__main__``.
 This allows us to distinguish whether this module is being run as a main program, 
 or whether it has been imported elsewhere, and used as a module.  If we run this
-module in Python, the test cases in lines 49-52 will be executed.  However, if we
+module in Python, the test cases in lines 51-54 will be executed.  However, if we
 import this module into another program (i.e. our N queens solver from earlier)
-the condition at line 50 will be false, and the statements on lines 49-52 won't run.
+the condition at line 50 will be false, and the statements on lines 51-54 won't run.
 
 
 In the chapter titled List Algorithms, our main program for the N queens solver looked like this:
@@ -700,6 +700,210 @@ i.e. kick it back into the air.
         
 With these changes we have a playable game!  See if you can keep all the balls on the move, not allowing any one to settle!
 
+A wave of animation
+-------------------
+
+Many games have sprites that are animated: they crouch, jump and shoot.  How do they do that?
+
+Consider this sequence of 10 images: if we display them in quick succession, Duke will wave at us.
+(Duke is a friendly visitor from the kingdom of Javaland.)
+
+.. image:: illustrations/duke_spritesheet.png
+
+A compound image containing smaller *patches* which are intended for animation is 
+called a **sprite sheet**.   Download this sprite sheet by right-clicking in your browser 
+and saving it in your working directory with the name 
+``duke_sprintesheet.png``.   
+
+The sprite sheet has been quite carefully prepared: each of the 10 patches are spaced exactly
+50 pixels apart.  So, assuming we want to draw patch number 4 (numbering from 0), we want to
+draw only the rectangle that starts at x position 200, and is 50 pixels wide, within the sprite sheet.
+
+The ``blit`` method we've been using --- for copying pixels from one surface to another ---
+can copy only a portion of the source surface.  So the grand idea here is that 
+each time we draw Duke, we won't blit the whole sprite sheet. Instead we'll provide an extra
+rectangle argument that determines which portion of the sprite sheet will be blitted.  
+
+We're going to add new code in this section to our existing N queens drawing game.  What we
+want is to put some instances of Duke on the chessboard somewhere.  If the user
+clicks on one of them, we'll get him to respond by waving back, for one cycle of his animation.
+
+But before we do that, we need another change.  Up until now, our game loop has been running
+at really fast frame rates that are unpredictable.  So we've chosen some
+*magic numbers* for gravity and for bouncing and kicking the ball on the basis of trial-and-error.
+If we're going to start animating more sprites, we need to tame our game loop to operate at 
+a fixed, known frame rate.  This will allow us to plan our animation better. 
+
+PyGame gives us the tools to do this in just two lines of code.  In the setup section of 
+the game, we instantiate a new ``Clock`` object:
+
+.. sourcecode:: python
+    
+    my_clock = pygame.time.Clock()
+
+and right at the bottom of the game loop, we call a method on this object that limits the
+frame rate to whatever we specify.  So let's plan our game and animation for 
+60 frames per second, by adding this line at the bottom of our game loop:
+
+.. sourcecode:: python
+    
+    my_clock.tick(60)  # Waste time so that frame rate becomes 60 fps 
+    
+You'll find that you have to go back and adjust the numbers for gravity and 
+kicking the ball now, to match this new game loop frame rate.  When we plan an
+animation so that it only works sensibly at a fixed frame rate, we say that we've
+*baked* the animation. In this case we're baking our animations for 60 frames per second. 
+
+To fit into the existing framework that we already have for our queens board, we want to create
+a ``Duke_sprite`` class that has all the same methods as the ``Queens_sprite`` class.  Then we can
+add one or more Duke instances onto our list of ``all_sprites``, and our existing game loop will then
+call methods of the Duke instance.  Let us start with skeleton scaffolding for the new class:
+
+.. sourcecode:: python
+   :linenos:
+
+    class Duke_sprite:
+
+        def __init__(self, img, target_posn):
+            self.image = img
+            self.posn = target_posn
+
+        def update(self):
+            return
+
+        def draw(self, target_surface):
+            return
+            
+        def handle_click(self):
+            return
+
+        def contains_point(self, pt):
+            # use code from Queens_sprite
+
+The only changes we'll need to the existing game are all in the setup section. 
+We load up the new sprite sheet and instantiate a couple of instances of Duke, 
+at the positions we want on the chessboard.  So before entering
+the game loop, we add this code:
+
+.. sourcecode:: python
+   :linenos:
+   
+    # Load the sprite sheet
+    duke_sprite_sheet = pygame.image.load("duke_spritesheet.png")
+    
+    # Instantiate two duke instances, put them on the chessboard
+    duke1 = Duke_sprite(duke_sprite_sheet,(sq_sz*2, 0))
+    duke2 = Duke_sprite(duke_sprite_sheet,(sq_sz*5, sq_sz)) 
+
+    # Add them to the list of sprites which our game loop manages
+    all_sprites.append(duke1)
+    all_sprites.append(duke2)
+   
+Now the game loop will test if each instance has been clicked, will call
+our click handler, will call update, and will call draw.  All the remaining
+changes we need to make will be made in the methods of the ``Duke_sprite`` class.  
+
+Let's begin with drawing one of the patches.  We'll introduce a new attribute ``curr_patch_num``
+into the class.  It holds a value between 0 and 9, and determines which patch to draw.  So
+the job of the ``draw`` method is to compute the sub-rectangle of the patch to be drawn, and
+to blit only that portion of the spritesheet:
+
+.. sourcecode:: python
+   :linenos:
+
+    def draw(self, target_surface):
+        patch_rect = (self.curr_patch_num * 50, 0,
+                        50, self.image.get_rect()[3])
+        target_surface.blit(self.image, self.posn, patch_rect)
+        
+Now on to getting the animation to work. We need to arrange logic in ``update``
+so that if we're busy animating, we change the ``curr_patch_num`` every so
+often, and we also decide when to bring Duke back to his rest position, and
+stop the animation.  An important issue is that the game loop frame rate ---
+in our case 60 fps --- is not the same as the *animation rate* --- 
+the rate at which we want to change
+Duke's animation patches.  So we'll plan Duke wave's animation cycle 
+for a duration of 1 second. In other words, we want to play out Duke's 
+10 animation patches over 60 calls to ``update``. (This is how the baking
+of the animation takes place!)  So we'll keep another animation frame 
+counter in the class, which will be zero when we're not animating, and
+each call to ``update`` will increment the counter up to 59, and then 
+back to 0.  We can then divide that animation counter by 6, to set the
+``curr_patch_num`` variable.  
+
+.. sourcecode:: python
+   :linenos:
+
+    def update(self):
+        if self.anim_frame_count > 0:
+           self.anim_frame_count = (self.anim_frame_count + 1 ) % 60
+           self.curr_patch_num = self.anim_frame_count // 6
+ 
+Notice that if ``anim_frame_count`` is zero, i.e. Duke is at rest, nothing
+happens here.  But if we start the counter running, it will count up
+to 59 before settling back to zero.   Notice also, that because ``anim_frame_count``
+can only be a value between 0 and 59, the ``curr_patch_num`` will
+always stay between 0 and 9.  Just what we require!
+
+Now how do we trigger the animation, and start it running?  On the mouse click.
+
+.. sourcecode:: python
+   :linenos:
+   
+    def handle_click(self):
+         if self.anim_frame_count == 0:
+            self.anim_frame_count = 5
+            
+Two things of interest here.  We only start the animation if Duke is at rest. 
+Clicks on Duke while he is already waving get ignored.  And when we do start the
+animation, we set the counter to 5 --- this means that on the very next call to 
+``update`` the counter becomes 6, and the image changes.  If
+we had set the counter to 1, we would have needed to wait for 5 more calls to
+``update`` before anything happened --- a slight lag, but enough to make things 
+feel sluggish.
+
+The final touch-up is to initialize our two new attributes when we instantiate the
+class.  Here is the code for the whole class now:
+
+.. sourcecode:: python
+   :linenos:
+   
+    class Duke_sprite:
+
+        def __init__(self, img, target_posn):
+            self.image = img
+            self.posn = target_posn
+            self.anim_frame_count = 0
+            self.curr_patch_num = 0
+
+        def update(self):
+            if self.anim_frame_count > 0:
+               self.anim_frame_count = (self.anim_frame_count + 1 ) % 60
+               self.curr_patch_num = self.anim_frame_count // 6
+
+        def draw(self, target_surface):
+            patch_rect = (self.curr_patch_num * 50, 0,
+                           50, self.image.get_rect()[3])
+            target_surface.blit(self.image, self.posn, patch_rect)
+
+        def contains_point(self, pt):
+             """ Return True if my sprite rectangle contains  pt """
+             (my_x, my_y) = self.posn
+             my_width = self.image.get_rect()[2]
+             my_height = self.image.get_rect()[3]
+             (x, y) = pt
+             return ( x >= my_x and x < my_x + my_width and
+                      y >= my_y and y < my_y + my_height)
+
+        def handle_click(self):
+             if self.anim_frame_count == 0:
+                self.anim_frame_count = 5 
+
+Now we have two extra Duke instances on our chessboard, and clicking on either
+causes that instance to wave.
+
+.. image:: illustrations/pygame_screenshot05.png
+ 
  
 Aliens - a case study
 --------------------- 
@@ -745,13 +949,29 @@ Glossary
 
 .. glossary::
 
+    animation rate
+        The rate at which we play back successive patches to create the illusion of movement.
+        In the sample we considered in this chapter, we played Duke's 10 patches over the 
+        duration of one second.  Not the same as the frame rate.
+
+    baked animation
+        An animation that is designed to look good at a predetermined fixed frame rate.  
+        This reduces the amount of computation that needs to be done when the game is running.
+        High-end commercial games usually bake their animations.
+        
     blit
         A verb used in computer graphics, meaning to make a fast copy of an image or pixels from
         one image or surface to another surface or image.
         
+    frame rate  
+        The rate at which the game loop executes.
+        
     game loop
         A loop that drives the logic of a game.  It will usually poll for events, then update each
         of the objects in the game, then get everything drawn, and then put the newly drawn frame on display.
+        
+    pixel
+        A single picture element, or dot, from which images are made.
         
     poll
         To ask whether something like a keypress or mouse movement has happened.  Game loops usually
@@ -763,8 +983,8 @@ Glossary
         An active agent or element in a game, with its own state, position and behaviour.
         
     surface
-        This is PyGame's term for what the Turtle module calls a *canvas*.  A surface allows drawing
-        and displaying of shapes and images. 
+        This is PyGame's term for what the Turtle module calls a *canvas*.  A surface is a rectangle 
+        of pixels used for displaying shapes and images. 
         
 
 Exercises
@@ -772,12 +992,20 @@ Exercises
 
 #. Have fun with Python, and with PyGame.
 
+#. We deliberately left a bug in the code for animating Duke.  If you click on one of the 
+   chessboard squares to the right of Duke, he waves anyway.  Why?  Find a one-line fix for the bug.
+
+#. Search Google for "sprite sheet playing cards".  Create a list [0..51] to represent an encoding of
+   the 52 cards in a deck. Shuffle the cards, slice off the top five as your hand in a poker deal. 
+   Display the hand you have been dealt.
+   
 #. So the Aliens game is in outer space, without gravity. Shots fly away forever, and bombs don't speed up
    when they fall.  Add some gravity to the game.   Decide if you're going to allow your own shots to 
    fall back on your head and kill you.
    
 #. Those pesky Aliens seem to pass right through each other!  Change the game so that they collide, and 
    destroy each other in a mighty explosion.  
+ 
    
   
  
