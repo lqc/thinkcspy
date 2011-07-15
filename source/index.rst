@@ -4,13 +4,6 @@ How to Think Like a Computer Scientist
 .. image:: _static/gasp_lessons.png
     :alt: GASP Logo
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png
 
 Learning with Python 3 (RLE)
 ---------------------------- 
@@ -24,7 +17,7 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 * `Copyright Notice <copyright.html>`__ 
 * `Foreword <foreword.html>`__
 * `Preface <preface.html>`__
-* `Preface-3 <preface3-rle.html>`__   *This Rhodes Local Edition (RLE) of the book* 
+* `Preface-3 <preface3-rle.html>`__ *This Rhodes Local Edition (RLE) of the book* 
 * `Contributor List <contrib.html>`__
 * `Chapter 1 <way_of_the_program.html>`__ *The way of the program*
 * `Chapter 2 <variables_expressions_statements.html>`__ *Variables, expressions, and statements*
@@ -47,8 +40,8 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 * `Chapter 19 <exceptions.html>`__ *Exceptions*
 * `Chapter 20 <dictionaries.html>`__ *Dictionaries*
 * `Chapter 21 <even_more_oop.html>`__ *Even more OOP*
-* `Chapter 22 <inheritance.html>`__ *Inheritance*
-* `Chapter 23 <sets.html>`__ *Sets of Objects*
+* `Chapter 22 <sets.html>`__ *Sets of Objects*
+* `Chapter 23 <inheritance.html>`__ *Inheritance*
 * `Chapter 24 <linked_lists.html>`__ *Linked Lists*
 * `Chapter 25 <stacks.html>`__ *Stacks*
 * `Chapter 26 <queues.html>`__ *Queues*
@@ -95,10 +88,9 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
     recursion.rst
     exceptions.rst
     dictionaries.rst
-
     even_more_oop.rst
-    inheritance.rst
     sets.rst
+    inheritance.rst
     linked_lists.rst
     stacks.rst
     queues.rst
