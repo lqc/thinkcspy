@@ -183,13 +183,16 @@ It is usually not a good idea to modify class attributes.
 Comparing cards
 ---------------
 
-For primitive types, there are conditional operators ( ``<``, ``>``, ``==``,
+For primitive types, there are six relational operators ( ``<``, ``>``, ``==``,
 etc.) that compare values and determine when one is greater than, less than, or
-equal to another. For user-defined types, we can override the behavior of the
-built-in operators by providing a method named ``__cmp__``. By convention,
-``__cmp__`` takes two parameters, ``self`` and ``other``, and returns 1 if the
-first object is greater, -1 if the second object is greater, and 0 if they are
-equal to each other.
+equal to another.   If you want your own types to be comparable using the syntax
+of these relational operators, you need to define six corresponding special methods
+in your class.
+
+We'd like to start with a single method named ``cmp`` that houses the logic of ordering.
+By convention, a comparison method takes two parameters, ``self`` and ``other``, 
+and returns 1 if the first object is greater, -1 if the second object is greater, 
+and 0 if they are equal to each other.
 
 Some types are completely ordered, which means that you can compare any two
 elements and tell which is bigger. For example, the integers and the
@@ -209,11 +212,11 @@ rank or suit. To be honest, the choice is arbitrary. For the sake of choosing,
 we will say that suit is more important, because a new deck of cards comes
 sorted with all the Clubs together, followed by all the Diamonds, and so on.
 
-With that decided, we can write ``__cmp__``:
+With that decided, we can write ``cmp``:
 
 .. sourcecode:: python
     
-    def __cmp__(self, other):
+    def cmp(self, other):
         # check the suits
         if self.suit > other.suit: return 1
         if self.suit < other.suit: return -1
@@ -224,6 +227,39 @@ With that decided, we can write ``__cmp__``:
         return 0
 
 In this ordering, Aces appear lower than Deuces (2s).
+
+Now, we can define the six special methods that do the
+overloading of each of the relational operators for us:
+
+.. sourcecode:: python
+    
+    def __eq__(self, other):
+        return self.cmp(other) == 0
+
+    def __le__(self, other):
+        return self.cmp(other) <= 0
+
+    def __ge__(self, other):
+        return self.cmp(other) >= 0
+
+    def __gt__(self, other):
+        return self.cmp(other) > 0
+
+    def __lt__(self, other):
+        return self.cmp(other) < 0
+
+    def __ne__(self, other):
+        return self.cmp(other) != 0        
+
+With this machinery in place, the relational operators now work as we'd like them to::
+
+   >>> card1 = Card(1, 11)
+   >>> card2 = Card(1, 3)
+   >>> card3 = Card(1, 11)
+   >>> card1 < card2
+   False
+   >>> card1 == card3
+   True
 
 
 Decks
@@ -364,12 +400,12 @@ order of the cards would be less than entirely random:
     class Deck:
         ...
         def shuffle(self):
-            import random
-            rng = random.Random()        # create a  random generator
+            import random      
+            rng = random.Random()        # create a random generator
             num_cards = len(self.cards)
             for i in range(num_cards):
                 j = rng.randrange(i, num_cards)
-                self.cards[i], self.cards[j] = self.cards[j], self.cards[i]
+                (self.cards[i], self.cards[j]) = (self.cards[j], self.cards[i])
 
 Rather than assume that there are fifty-two cards in the deck, we get the
 actual length of the list and store it in ``num_cards``.
@@ -380,7 +416,7 @@ selected card ( ``j``). To swap the cards we use a tuple assignment:
 
 .. sourcecode:: python
     
-    self.cards[i], self.cards[j] = self.cards[j], self.cards[i]
+    (self.cards[i], self.cards[j]) = (self.cards[j], self.cards[i])
     
 While this is a good shuffling method, the random number generator also
 has a ``shuffle`` method that can shuffle elements in a list, in place.
@@ -392,7 +428,7 @@ So we could rewrite this function to use the one provided for us:
         ...
         def shuffle(self):
             import random
-            rng = random.Random()        # create a  random generator
+            rng = random.Random()        # create a random generator
             rng.shuffle(self.cards)      # use its shuffle method
             
 
@@ -418,8 +454,8 @@ the card was in the deck and ``False`` otherwise:
 
 The ``in`` operator returns ``True`` if the first operand is in the second,
 which must be a list or a tuple. If the first operand is an object, Python uses
-the object's ``__cmp__`` method to determine equality with items in the list.
-Since the ``__cmp__`` in the ``Card`` class checks for deep equality, the
+the object's ``__eq__`` method to determine equality with items in the list.
+Since the ``__eq__`` in the ``Card`` class checks for deep equality, the
 ``remove`` method checks for deep equality.
 
 To deal cards, we want to remove and return the top card. The list method
@@ -468,4 +504,4 @@ Glossary
 Exercises
 ---------
 
-#. Modify ``__cmp__`` so that Aces are ranked higher than Kings.
+#. Modify ``cmp`` so that Aces are ranked higher than Kings.
