@@ -647,7 +647,7 @@ Exercises
     
         >>> print 5.2, "this", 4 - 2, "that", 5/2.0 
 
-   Can you think a general rule for what can follow the ``print``
+   Can you think of a general rule for what can follow the ``print``
    statement? What does the ``print`` statement return?
 #. Take the sentence: *All work and no play makes Jack a dull boy.*
    Store each word in a separate variable, then print out the sentence on
