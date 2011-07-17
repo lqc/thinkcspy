@@ -14,6 +14,9 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 
   (based on 2nd edition by Jeffrey Elkner, Allen B. Downey, and Chris Meyers)
 
+Other variations of this book may suit you better. See http://www.openbookproject.net/thinkcs
+  
+  
 * `Copyright Notice <copyright.html>`__ 
 * `Foreword <foreword.html>`__
 * `Preface <preface.html>`__
