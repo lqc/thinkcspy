@@ -16,6 +16,9 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 
 Other variations of this book may suit you better. See http://www.openbookproject.net/thinkcs
   
+Corresponding author: p.wentworth@ru.ac.za
+
+Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle
   
 * `Copyright Notice <copyright.html>`__ 
 * `Foreword <foreword.html>`__
