@@ -779,7 +779,7 @@ Exercises
    .. image:: illustrations/compoundInterest.png
       :alt: formula for compound interest
 
-   Write a Python program that assigns the principal amount of R10000 to variable `a`, 
+   Write a Python program that assigns the principal amount of R10000 to variable `p`, 
    assign to `n` the value 12, and assign to `r` the interest rate of 8%.
    Then have the program prompt the user for the number of months `t` that the money will
    be compounded for.  Calculate and print the final amount after `t` months.      
