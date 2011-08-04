@@ -1045,7 +1045,7 @@ Exercises
             """
 
    Your function should pass the doctests.
-#. Write a function ``recursive_count`` that returns the number of occurances
+#. Write a function ``recursive_count`` that returns the number of occurences
    of ``target`` in ``nested_number_list``:
 
    .. sourcecode:: python
