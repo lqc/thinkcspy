@@ -233,7 +233,7 @@ executed, otherwise the flow of execution continues to the statement after the `
 
       
 .. sourcecode:: python
-    
+
     if x < 0:
         print("The negative number ",  x, " is not valid here.")
         x = 42
@@ -242,7 +242,9 @@ executed, otherwise the flow of execution continues to the statement after the `
     print("The square root of ", x, "is", math.sqrt(x))
     
 In this case, the print function that outputs the square root is the one after the ``if`` - not
-because we left a blank line, but because of the way the code is indented.       
+because we left a blank line, but because of the way the code is indented.    Note too that
+the function call ``math.sqrt(x)`` will give an error unless you have an ``import math`` statement, 
+usually placed near the top of your script.  
 
 .. admonition:: Python terminology
     

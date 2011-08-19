@@ -11,7 +11,7 @@
 Files
 =====
 
-.. index:: file   
+.. index:: file, handle, file handle   
     
 Reading and writing files
 -------------------------
@@ -36,8 +36,9 @@ natural order or you can skip around.
 All of this applies to files as well. To open a file, you specify its name and
 indicate whether you want to read or write. 
 
-Opening a file creates a file object. In this example, the variable ``myfile``
-refers to the new object.
+Opening a file creates what we call a file **handle**. In this example, the variable ``myfile``
+refers to the new handle object.  Our program calls methods on the handle, and this makes
+changes to the actual file which is usually located on our disk.    
 
 .. sourcecode:: python
     
@@ -47,18 +48,18 @@ The open function takes two arguments. The first is the name of the file, and
 the second is the **mode**. Mode ``'w'`` means that we are opening the file for
 writing.
 
-If there is no file named ``test.dat``, it will be created. If there already is
+If there is no file named ``test.dat`` on the disk, it will be created. If there already is
 one, it will be replaced by the file we are writing.
 
-To put data in the file we invoke the ``write`` method on the object:
+To put data in the file we invoke the ``write`` method on the handle:
 
 .. sourcecode:: python
     
     myfile.write("Now is the time")
     myfile.write("to close the file")
 
-Closing the file tells the system that we are done writing and makes
-the file available for reading:
+Closing the file handle tells the system that we are done writing and makes
+the disk file available for reading by other programs (or by ourselves):
 
 .. sourcecode:: python
     
@@ -69,13 +70,13 @@ contents into a string. This time, the mode argument is ``'r'`` for reading:
 
 .. sourcecode:: python
     
-    >>> myfile = open('test.dat', 'r')
+    >>> mynewhandle = open('test.dat', 'r')
 
 If we try to open a file that doesn't exist, we get an error:
 
 .. sourcecode:: python
     
-    >>> myfile = open('test.cat', 'r')
+    >>> mynewhandle = open('test.cat', 'r')
     IOError: [Errno 2] No such file or directory: 'test.cat'
 
 Not surprisingly, the ``read`` method reads data from the file. With no
@@ -84,7 +85,7 @@ string:
 
 .. sourcecode:: python
     
-    >>> text = myfile.read()
+    >>> text = mynewhandle.read()
     >>> print(text)
     Now is the timeto close the file
 
@@ -118,20 +119,32 @@ second is the name of the new file:
 .. sourcecode:: python
     
     def copy_file(oldfile, newfile):
-        infile = open(oldfile, 'r')
-        outfile = open(newfile, 'w')
+        h_infile = open(oldfile, 'r')
+        h_outfile = open(newfile, 'w')
         while True:
-            text = infile.read(50)
+            text = h_infile.read(50)
             if text == "":
                 break
-            outfile.write(text)
-        infile.close()
-        outfile.close()
+            h_outfile.write(text)
+        h_infile.close()
+        h_outfile.close()
 
 This functions continues looping, reading 50 characters from ``infile`` and
 writing the same 50 characters to ``outfile`` until the end of ``infile`` is
 reached, at which point ``text`` is empty and the ``break`` statement is
 executed.
+
+.. admonition:: A handle is somewhat like a TV remote control
+
+    We're all familiar with a remote control for a TV.  You perform operations on
+    the remote control --- switch channels, change the volume, etc.  But the real action
+    happens on the TV.  So, by simple analogy, we'd call the remote control your `handle`
+    to the underlying TV.
+    
+    Sometimes we want to emphasize the difference --- the file handle is not the same
+    as the file, and the remote control is not the same as the TV it controls.  
+    But at other times we prefer to treat them as a single mental chunk, or abstraction, 
+    and we'll just say "close the file", or "flip the TV channel". 
 
 .. index:: file; text,  text file
 
@@ -153,17 +166,17 @@ newlines:
 
 .. sourcecode:: python
     
-    >>> outfile = open("test.dat","w")
-    >>> outfile.write("line one\nline two\nline three\n")
-    >>> outfile.close()
+    >>> h_outfile = open("test.dat","w")
+    >>> h_outfile.write("line one\nline two\nline three\n")
+    >>> h_outfile.close()
 
 The ``readline`` method reads all the characters up to and including the
 next newline character:
 
 .. sourcecode:: python
     
-    >>> infile = open("test.dat","r")
-    >>> print(infile.readline())
+    >>> h_infile = open("test.dat","r")
+    >>> print(h_infile.readline())
     line one
        
     >>>
@@ -174,7 +187,7 @@ next newline character:
 .. sourcecode:: python
 
     
-    >>> print(infile.readlines())
+    >>> print(h_infile.readlines())
     ['line two\n', 'line three\n']
 
 
@@ -187,9 +200,9 @@ At the end of the file, ``readline`` returns the empty string and
 
 .. sourcecode:: python
     
-    >>> print(infile.readline())
+    >>> print(h_infile.readline())
        
-    >>> print(infile.readlines())
+    >>> print(h_infile.readlines())
     []
 
 The following is an example of a line-processing program. ``filter`` makes a
@@ -273,35 +286,54 @@ What about fetching something from the web?
 -------------------------------------------
 
 The Python libraries are pretty messy in places.  But here is a very
-simple example that copies a web URL to a local file, and then opens
-and prints the file contents using the techniques we've covered above.
+simple example that copies the contents at some web URL to a local file.
 
 .. sourcecode:: python
     :linenos:
     
     import urllib.request
 
-    url = 'http://www.cs.ru.ac.za/courses/CSc102/pythons.txt' 
-    destination_filename = 'c:\\temp\\tempfile.txt'
+    url = 'http://xml.resource.org/public/rfc/txt/rfc793.txt' 
+    destination_filename = 'rfc793.txt'
     
-    wf = urllib.request.urlretrieve(url, destination_filename)
+    urllib.request.urlretrieve(url, destination_filename)
 
-    f = open(destination_filename)
-    s = f.read()
-    f.close()
-    print(s)
-    
-The ``urlretrieve`` function collects the resource at the url, and
-saves it to a local file.  You could use this to download any kind
-of content from the Internet.
+The ``urlretrieve`` function --- just one call --- could be used
+to download any kind of content from the Internet.
    
-You'll need to get a few things right before this works:  
- * The page you're trying to fetch must exist!  Check this using a browser.
- * You'll need permission to write to the destination filename.
- * If you are behind a proxy server, (as many students are), this may
-   require some more special handling to work around your proxy. 
-   Use a local text resource for the purpose of this demonstration! 
+We'll need to get a few things right before this works:  
+ * The resource we're trying to fetch must exist!  Check this using a browser.
+ * We'll need permission to write to the destination filename, and the file will
+   be created in the "current directory" - i.e. the same folder that the Python program is saved in.
+ * If we are behind a proxy server that requires authentication, 
+   (as some students are), this may require some more special handling to work around our proxy.  
+   Use a local resource for the purpose of this demonstration! 
   
+Here is a slightly different example.  Rather than save the web resource to
+our local disk, we read it directly into a string, and return it:
+
+.. sourcecode:: python
+    :linenos:
+    
+    import urllib.request
+
+    def retrieve_page(url):
+        ''' Retrieve the contents of a web page.
+            The contents is converted to a string before returning it.
+        '''
+        my_socket = urllib.request.urlopen(url)
+        dta = str(my_socket.readall())  
+        my_socket.close()
+        return dta        
+
+    the_text = retrieve_page("http://xml.resource.org/public/rfc/txt/rfc793.txt")
+    print(the_text)
+        
+Opening the remote url returns what we call a **socket**.  This is a handle to 
+our end of the connection between 
+our program and the remote web server.  We can call read, write, and close methods on
+the socket object in much the same way as we can work with a file handle.
+
 
 Counting Letters
 ----------------
@@ -395,6 +427,11 @@ Glossary
     file system
         A method for naming, accessing, and organizing files and the data they
         contain. 
+        
+    handle
+        An object in our program that is connected to an underlying resource (e.g. a file).
+        The file handle lets our program manipulate / read/ write / close the actual 
+        file that is on our disk.
             
     fully qualified name
         A name that is prefixed by some namespace identifier and the dot operator, or
@@ -417,6 +454,10 @@ Glossary
     text file
         A file that contains printable characters organized into lines
         separated by newline characters.
+        
+    socket
+        One end of a connection allowing one to read and write 
+        information to or from another computer.  
 
     volatile memory
         Memory which requires an electrical current to maintain state. The

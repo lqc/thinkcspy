@@ -20,7 +20,7 @@
 An odds-and-ends Workbook
 =========================
 
-*This workbook is still very much under construction.*
+*This workbook / cookbook of recipes is still very much under construction.*
 
 The Five Strands of Proficiency
 -------------------------------
@@ -93,7 +93,7 @@ example of how you can send email to someone.
 
 In the context of the course, notice how we use the two objects in
 this program: we create a message object on line 9, and set some attributes 
-at lines 16-18.  We then create a connection object at line 23, and ask it
+at lines 16-18.  We then create a connection object at line 21, and ask it
 to send our message.
     
     
