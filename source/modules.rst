@@ -700,7 +700,7 @@ Exercises
     e. Experiment with ``calendar.isleap``. What does it expect as an
        argument? What does it return as a result? What kind of a function is this?
 
-   Make detailed notes about what you learned from htese exercises.
+   Make detailed notes about what you learned from these exercises.
    
 #. Open help for the ``math`` module. 
 
@@ -757,7 +757,7 @@ Exercises
     
         >>> import this
 
-   What does Tim Peter's have to say about namespaces?
+   What does Tim Peters have to say about namespaces?
    
    
 #. Give the Python interpreter's response to each of the following from a

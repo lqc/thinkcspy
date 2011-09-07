@@ -58,7 +58,7 @@ Specifically, we'll return the index of the item if it is found, or we'll return
     friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
     test(search_linear(friends, 'Amy'), 1)
     test(search_linear(friends, 'Joe'), 0)
-    test(search_linear(friends, 'Paris'), 7)
+    test(search_linear(friends, 'Paris'), 6)
     test(search_linear(friends, 'Bill'), -1)
 
 Motivated by the fact that our tests don't even run, let alone pass, we now write
@@ -303,8 +303,8 @@ Lets start with some tests.  Remember, the list needs to be sorted:
     test(search_binary(xs, 20), -1)   
     test(search_binary(xs, 99), -1)
     test(search_binary(xs, 1), -1)
-    for (i, v) in xs:
-        test(search_binary(xs, i), v)
+    for (i, v) in enumerate(xs):
+        test(search_binary(xs, v), i)
         
 Even our test cases are interesting this time: notice that we start
 with items not in the list and look at boundary conditions ---- in the
@@ -485,7 +485,7 @@ The algorithm is easy and efficient.  We simply have to remember the most recent
 item that was inserted into the result, and avoid inserting it again: 
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     def remove_adjacent_dups(xs):
         """ Return a new list in which all adjacent 
@@ -586,7 +586,7 @@ Lets get some tests together first:
 Here is our merge algorithm: 
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     def merge(xs, ys):
         """ merge sorted lists xs and ys. Return a sorted result """
@@ -650,39 +650,39 @@ why not use a variant of the merge to return the words that occur in the book, b
 the vocabulary.
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
-        def find_unknowns_merge_pattern(vocab, wds):
-            """ Both the vocab and wds must be sorted.  Return a new 
-                list of words from wds that do not occur in vocab.
-            """
+    def find_unknowns_merge_pattern(vocab, wds):
+        """ Both the vocab and wds must be sorted.  Return a new 
+            list of words from wds that do not occur in vocab.
+        """
 
-            result = []
-            xi = 0
-            yi = 0
+        result = []
+        xi = 0
+        yi = 0
 
-            while True:
-                if xi >= len(vocab):
-                    result.extend(wds[yi:])
-                    return result
+        while True:
+            if xi >= len(vocab):
+                result.extend(wds[yi:])
+                return result
 
-                if yi >= len(wds):
-                    return result
+            if yi >= len(wds):
+                return result
 
-                if vocab[xi] == wds[yi]:  # good, word exists in vocab
-                    yi += 1
+            if vocab[xi] == wds[yi]:  # good, word exists in vocab
+                yi += 1
 
-                elif vocab[xi] < wds[yi]: # move past this vocab word,
-                    xi += 1
+            elif vocab[xi] < wds[yi]: # move past this vocab word,
+                xi += 1
 
-                else:                     # got word that is not in vocab
-                    result.append(wds[yi])
-                    yi += 1
+            else:                     # got word that is not in vocab
+                result.append(wds[yi])
+                yi += 1
 
 Now we put it all together:
                     
 .. sourcecode:: python
-   :linenos:                   
+    :linenos:                   
                     
     all_words = get_words_in_book("AliceInWonderland.txt")
     t0 = time.clock()

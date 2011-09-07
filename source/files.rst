@@ -366,40 +366,46 @@ argument and returns its character representation:
     F
     >>>
 
-The following program, ``countletters.py`` counts the number of times each
+The following program counts the number of times each
 character occurs in the book `Alice in Wonderland <./resources/ch10/alice_in_wonderland.txt>`__:
 
 .. sourcecode:: python
+    :linenos:
     
-    #
-    # countletters.py
-    #
-    
+    def count_letters(text):
+        ''' Perform frequency count of how many times
+            each ASCII character occurs in some txt.
+        '''
+        counts = 128 * [0]   
+        for letter in text:
+            counts[ord(letter)] += 1
+        return counts
+
     def display(i):
+        ''' Substitute some names of non-printable characters '''
         if i == 10: return 'LF'
-        if i == 13: return 'CR' 
-        if i == 32: return 'SPACE' 
+        if i == 13: return 'CR'
+        if i == 32: return 'SPACE'
         return chr(i)
-    
+
     infile = open('alice_in_wonderland.txt', 'r')
     text = infile.read()
     infile.close()
-    
-    counts = 128 * [0]
-    
-    for letter in text:
-        counts[ord(letter)] += 1
-    
+
+    freq_counts = count_letters(text)
+
     layout = "{0:>12} {1:>5}\n"
-    outfile = open('alice_counts.dat', 'w')
+    outfile = open('alice_counts.txt', 'w')
+
     outfile.write(layout.format("Character", "Count"))
     outfile.write("============ =====\n")
-    
-    for i in range(len(counts)):
-        if counts[i] > 0:
-            outfile.write(layout.format(display(i), counts[i]))
-    
+
+    for (i, v) in enumerate(freq_counts):
+        if v > 0:
+            outfile.write(layout.format(display(i), v))
+
     outfile.close()
+
 
 Run this program and look at the output file it generates using a text editor.
 You will be asked to analyze the program in the exercises below.
@@ -518,9 +524,9 @@ Exercises
 
       .. sourcecode:: python
         
-            for i in range(len(counts)):
-                if counts[i] > 0:
-                    outfile.write(layout.format(display(i), counts[i]))
+            for (i, v) in enumerate(freq_counts):
+                if v > 0:
+                    outfile.write(layout.format(display(i), v))
 
       does. 
 

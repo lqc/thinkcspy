@@ -358,12 +358,13 @@ Exercises
 
 
 #. Add some new key bindings to the first sample program:
-
-   * Pressing keys 1,2,3,4,5 should change the width of tess' pen to 1,2,3,4,5 respectively.
+   
    * Pressing keys 'R', 'G' or 'B' should change tess' color to Red, Green or Blue.
+   * Pressing keys '+' or '-' should increase or decrease the width of tess' pen.  
+     Ensure that the pen size stays between 1 and 20 (inclusive).  
    * Handle some other keys to change some attributes of tess, or attributes of the window, 
      or to give her new behaviour that can be controlled from the keyboard. 
-   
+
 #.  Change the traffic light program so that changes occur automatically, driven by a timer.
 
 #.  In an earlier chapter we saw two turtle methods, ``hideturtle`` and ``showturtle`` that 
