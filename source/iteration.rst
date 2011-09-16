@@ -1062,9 +1062,9 @@ print all the celebs::
 This prints the following::
    
     [('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justin Bieber', 1994)]
-    4
+    3
  
-Notice that the celebs list has just 4 elements, each of them pairs.  
+Notice that the celebs list has just 3 elements, each of them pairs.  
  
 Now print the names of those celebs born before 1980:
 
@@ -1081,7 +1081,7 @@ This prints the following::
     
 There is a new feature in the ``for`` loop: instead of using a single 
 loop control variable, we've put a pair of variable names, ``nm` and ``yr`` there instead. 
-The loop is executed four times - once for each pair, and on each iteration both the 
+The loop is executed three times - once for each pair, and on each iteration both the 
 variables are assigned values from the celeb that is being handled. 
   
 .. _nested_data:  
@@ -1139,7 +1139,7 @@ This results in the following::
 You should set up a list of your own data that interests you  --- 
 perhaps a list of your CDs, each containing a list of song titles on the CD,
 or a list of movie titles, each with a list of movie stars who acted in the movie. 
-You could then ask questions like "Which movies starred Angelina Jolie"?    
+You could then ask questions like "Which movies starred Angelina Jolie?"    
     
     
 .. index::

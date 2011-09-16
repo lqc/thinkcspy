@@ -415,7 +415,7 @@ write a function that removes all the vowels from a string:
 
 
 
-.. index:: traversal, eureka traversal, pattern of computation,
+.. index:: traversal, eureka traversal, short-circuit evaluation, pattern of computation,
            computation pattern
 
 A ``find`` function
@@ -455,8 +455,9 @@ the loop prematurely.
 If the character doesn't appear in the string, then the program exits the loop
 normally and returns ``-1``.
 
-This pattern of computation is sometimes called a `eureka traversal` because as
-soon as we find what we are looking for, we can cry "Eureka!"  and stop looking.
+This pattern of computation is sometimes called a `eureka traversal` or
+''short-circuit evaluation``,  because as soon as we find what we are looking for, 
+we can cry "Eureka!", take the short-circuit, and stop looking.
 
 
 .. index:: counting pattern
@@ -925,6 +926,12 @@ Glossary
         A parameter written in a function header with an assignment to a
         default value which it will receive if no corresponding argument is
         given for it in the function call.
+        
+    short-circuit evaluation
+        A style of programming that shortcuts extra work as soon as the 
+        outcome is know with certainty. In this chapter our ``find`` 
+        function returned as soon as it found what it was looking for: it
+        didn't traverse all the rest of the items in the string.
 
     slice
         A part of a string (substring) specified by a range of indices. More

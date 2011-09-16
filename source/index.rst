@@ -20,6 +20,8 @@ Corresponding author: p.wentworth@ru.ac.za
 
 Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle
   
+* :ref:`search`  
+  
 * `Copyright Notice <copyright.html>`__ 
 * `Foreword <foreword.html>`__
 * `Preface <preface.html>`__
@@ -56,6 +58,7 @@ Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thi
 * `Appendix B <app_b.html>`__ *An odds-and-ends Workbook*
 * `Appendix C <app_c.html>`__ *Configuring Ubuntu for Python Development*
 * `Appendix D <app_d.html>`__ *Customizing and Contributing to the Book*
+* `Appendix E <app_e.html>`__ *Some Tips, Tricks, and Common Errors*
 * `GNU Free Document License <fdl-1.3.html>`__ 
 
 
@@ -110,6 +113,7 @@ Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thi
     app_b.rst
     app_c.rst
     app_d.rst
+    app_e.rst
     fdl-1.3.rst
 
 * :ref:`search`
