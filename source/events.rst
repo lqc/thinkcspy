@@ -80,7 +80,7 @@ Here are some points to note:
   mainloop call (line 31) to end its execution.  Since we did not write any more statements after line 32, this means
   that our program has completed everything, so it too will terminate.  
 * You can refer to keys on the keyboard by their character code (as we did in line 26), or by their symbolic names.
-  Some of the keybolic names you can try are Cancel (the Break key), BackSpace, Tab, Return(the Enter key), 
+  Some of the symbolic names you can try are Cancel (the Break key), BackSpace, Tab, Return(the Enter key), 
   Shift_L (any Shift key), Control_L (any Control key), Alt_L (any Alt key), Pause, Caps_Lock, Escape, Prior (Page Up), 
   Next (Page Down), End, Home, Left, Up, Right, Down, Print, Insert, Delete, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, 
   F11, F12, Num_Lock, and Scroll_Lock.
