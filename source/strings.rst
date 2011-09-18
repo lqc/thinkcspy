@@ -243,13 +243,13 @@ Of course, that's not quite right because Ouack and Quack are misspelled.
 You'll fix this as an exercise below.
 
 
-.. index:: slice, string slice
+.. index:: slice, string slice, substring, sublist
 
 Slices
 ------
 
-A substring of a string (or a list) is called a **slice**. Selecting a slice is similar to
-selecting a character:
+A *substring* of a string is obtained by taking a **slice**.   Similarly, we can
+slice a list to refer to some sublist of the items in the list:
 
 .. sourcecode:: python
     
@@ -276,8 +276,8 @@ Now if you imagine this as a piece of paper, the slice operator ``[n:m]`` cuts
 the paper at the ``n`` and ``m`` positions.  
    
 Two tricks are added to this: if you omit the first index (before the colon), 
-the slice starts at the beginning of the string. If you omit the second index, 
-the slice extends to the end of the string. Thus:
+the slice starts at the beginning of the string (or list). If you omit the second index, 
+the slice extends to the end of the string (or list). Thus:
 
 .. sourcecode:: python
     

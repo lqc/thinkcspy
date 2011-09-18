@@ -224,10 +224,12 @@ The first example repeats ``[0]`` four times. The second example repeats the
 list ``[1, 2, 3]`` three times.
 
 
+.. index:: slice, sublist
+
 List slices
 -----------
 
-The slice operations we saw with strings also work on lists:
+The slice operations we saw previously with strings lets us work with sublists:
 
 .. sourcecode:: python
     
@@ -334,7 +336,7 @@ The ``del`` statement removes an element from a list:
 As you might expect, ``del`` causes a runtime
 error if the index is out of range.
 
-You can also use a slice as an index for ``del``:
+You can also use ``del`` with a slice to delete a sublist:
 
 .. sourcecode:: python
     
@@ -343,7 +345,7 @@ You can also use a slice as an index for ``del``:
     >>> a_list
     ['a', 'f']
 
-As usual, slices select all the elements up to, but not including, the second
+As usual, the sublist selected by slice contains all the elements up to, but not including, the second
 index.
 
 .. index:: is operator, objects and values
@@ -432,7 +434,10 @@ is **aliased**. Changes made with one alias affect the other:
 
 Although this behavior can be useful, it is sometimes unexpected or
 undesirable. In general, it is safer to avoid aliasing when you are working
-with mutable objects. Of course, for immutable objects, there's no problem - it is
+with mutable objects(i.e. lists at this point in our textbook, 
+but we'll meet more mutable objects
+as we cover classes and objects, dictionaries and sets). 
+Of course, for immutable objects (i.e. strings, tuples), there's no problem - it is
 just not possible to change something and get a surprise when you access an alias name.
 That's why Python is free to alias strings (and any other immutable kinds of data)
 when it sees an opportunity to economize.
