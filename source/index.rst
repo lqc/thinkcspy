@@ -13,8 +13,6 @@ Learning with Python 3 (RLE)
 by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 
   (based on 2nd edition by Jeffrey Elkner, Allen B. Downey, and Chris Meyers)
-
-Other variations of this book may suit you better. See http://www.openbookproject.net/thinkcs
   
 Corresponding author: p.wentworth@ru.ac.za
 
