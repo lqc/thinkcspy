@@ -8,7 +8,7 @@
 
 |
     
-.. index:: list, element, item, sequence, collection    
+.. index:: game loop, surface, PyGame, poll   
     
 PyGame
 ======
@@ -17,23 +17,32 @@ PyGame is a package that is not part of the standard Python distribution, so if 
 already have it installed (i.e. ``import pygame`` fails), download and install a suitable version from http://pygame.org/download.shtml.
 These notes are based on PyGame 1.9.1, the most recent version at the time of writing.
 
-PyGame comes with a substantial set of tutorials and examples, so there is ample
-opportunity to stretch yourself on the code.
+PyGame comes with a substantial set of tutorials, examples, and help, so there is ample
+opportunity to stretch yourself on the code. You may need to look around a bit to find 
+these resources, though: if you've installed PyGame on a Windows machine, for example,
+they'll end up in a folder like *C:\\Python31\\Lib\\site-packages\\pygame\\* where you 
+will find directories for *docs* and *examples*.
+ 
 
 The game loop
 -------------
 
-The structure of these games always follows this pattern: 
+The structure of the games we'll consider always follows this fixed pattern: 
 
 .. image:: illustrations/pygame_structure.png  
 
 In every game, in the *setup* section we'll create a window, load and prepare some content, and then
-enter the **game loop**.  The game loop always polls for events, updates whatever
-data structures it must, and then draws the current state of the game.
+enter the **game loop**.  The game loop continuously does four main things:
+
+* it **polls** for events --- i.e. asks the system whether
+  events have occurred --- and responds appropriately, 
+* it updates whatever internal data structures or objects need changing, 
+* it draws the current state of the game into a (non-visible) surface,
+* it puts the just-drawn surface on display. 
 
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     import pygame     
 
@@ -44,20 +53,26 @@ data structures it must, and then draws the current state of the game.
         
         # Create surface of (width, height), and its window.
         main_surface = pygame.display.set_mode((surfaceSz, surfaceSz))
-        light_blue = (0, 200, 255)   # A color is a mix of (Red, Green, Blue)
+        
+        # set up some data to describe a small rectangle and its color
+        small_rect = (300, 200, 150, 90)
+        some_color = (255, 0, 0)        # A color is a mix of (Red, Green, Blue)
 
         while True:
             ev = pygame.event.poll()    # look for any event
             if ev.type == pygame.QUIT:  # window close button clicked?
                 break                   #   ... leave game loop 
 
+            # Update your game objects and data structures here...    
+                
             # We draw everything from scratch on each frame.
-            # So first draw a fresh background (a blank board)
-            main_surface.fill(light_blue, surface.get_rect())
-            # put a red rectangle somewhere in the window
-            main_surface.fill((255,0,0), (300, 200, 150, 90))
+            # So first fill everything with the background color
+            main_surface.fill((0, 200, 255), surface.get_rect())
+            
+            # Overpaint a smaller rectangle on the main surface
+            main_surface.fill(some_color, small_rect)
 
-            # Now the surface is fully drawn, tell pygame it can be displayed!
+            # Now the surface is ready, tell pygame to display it!
             pygame.display.flip()
 
         pygame.quit()     # once we leave the loop, close the window.
@@ -70,61 +85,64 @@ This program pops up a window which stays there until we close it:
 
 PyGame does all its drawing onto rectangular *surfaces*. After initializing PyGame 
 at line 5, we create a window holding our main surface. The main loop of the game 
-extends from line 12 to 24, with the following key bits of logic:
+extends from line 15 to 30, with the following key bits of logic:
 
-* First we poll to fetch the next event that might be ready for us.  This step will
+* First (line 16) we poll to fetch the next event that might be ready for us.  This step will
   always be followed by some conditional statements that will determine whether 
   any event that we're interested in has happened.  Polling for the event consumes
   it, as far as PyGame is concerned, so we only get one chance to fetch and use 
-  each event.   On line 14 we test whether the type of the event is the 
+  each event.   On line 17 we test whether the type of the event is the 
   predefined constant called pygame.QUIT.  This is the event that we'll see
   when the user clicks the close button on the PyGame window.   In response to
   this event, we leave the loop.
-* Once we've left the loop, the code at line 26 closes window, and we'll return 
+* Once we've left the loop, the code at line 32 closes window, and we'll return 
   from function ``main``.  Your program could go on to do other things, or reinitialize
   pygame and create another window, but it will usually just end too.
 * There are different kinds of events --- key presses, mouse motion, mouse
-  clicks, and so on.  It is usual that we test and handle all these cases
-  with new code squeezed in before line 16.  The general idea is "handle your events
-  first, then worry about the other stuff".   
+  clicks, joystick movement, and so on.  It is usual that we test and handle all these cases
+  with new code squeezed in before line 19.  The general idea is "handle events
+  first, then worry about the other stuff".  
+* At line 20 we'd update objects or data --- for example, if we wanted to vary the
+  color, position, or size of the rectangle we're about to draw, we'd re-assign 
+  ``some_color``, and ``small_rect`` here.  
 * A modern way to write games (now that we have fast computers and fast graphics
-  cards) is to redraw everything from scratch on every iteration of the loop.  So
-  the first thing that we do at line 19 is fill the entire surface with a background
+  cards) is to redraw everything from scratch on every iteration of the game loop.  So
+  the first thing we do at line 24 is fill the entire surface with a background
   color.  The ``fill`` method of a surface takes two arguments --- the color to 
   use for filling, and the rectangle to be filled.  The rectangle is expressed as
-  a 4-element tuple, giving the (x, y, width, height).   Every surface has a method
+  a 4-element tuple, giving the ``(x, y, width, height)``.   Every surface has a method
   to retrieve its rectangle, so the easiest way to fill "all of a surface" is shown
-  in line 19.
-* In line 21 we filled a second rectangle, this time 255 red, and zero green, zero blue.
-  The placement and size of the rectangle are ``(x,y,width,height)``.
+  in line 24.
+* In line 27 we fill a second rectangle, this time using ``some_color``.
+  The placement and size of the rectangle are given by the tuple ``small_rect``.
 * It is important to understand that the origin of the PyGame's surface is at the top left
   corner (unlike the turtle module that puts it's origin in the middle of the screen).
   So, if you wanted the rectangle closer to the top of the window, you need to make its
   y coordinate smaller.
 * If your graphics display hardware tries to read from memory at the 
   same time as the program is writing to that memory, they will interfere with each other,
-  causing video noise and flicker.  To get around this, a PyGame display device 
-  keeps two buffers in the main surface --- the *back buffer* that the program draws into, 
+  causing video noise and flicker.  To get around this, PyGame keeps two 
+  buffers in the main surface --- the *back buffer* that the program draws to, 
   while the *front buffer* is being shown to the user.  Each time the program has fully
   prepared its back buffer, it flips the back/front role of the two buffers. 
-  So the drawing on lines 19 and 21 does does not change what is seen on the screen until 
-  we ``flip`` the buffers, on line 24.
+  So the drawing on lines 24 and 27 does does not change what is seen on the screen until 
+  we ``flip`` the buffers, on line 30.
  
  
 Displaying images and text
 --------------------------
 
-To draw an image on the main surface, we load the image, say a beach ball, into a new surface. 
+To draw an image on the main surface, we load the image, say a beach ball, into its own new surface. 
 The main surface has a ``blit`` method that copies pixels from the beach ball surface into its
 own surface.  When we call ``blit``, we can specify where the beach ball should be placed
-on the main surface.  Thee term **blit** is widely used in computer graphics circles, and means
+on the main surface.  The term **blit** is widely used in computer graphics, and means
 *to make a fast copy of pixels from one area of memory to another*.
 
 So in the setup section, before we enter the game loop, we'd load the image, like this::
 
       ball = pygame.image.load("ball.png")
       
-and after line 20 in the program above, we'd add this code to display our image at position (100,200)::
+and after line 28 in the program above, we'd add this code to display our image at position (100,120)::
 
       main_surface.blit(ball, (100, 120))
  
@@ -134,7 +152,7 @@ instantiate a ``font`` object::
       # Instantiate 16 point Courier font to draw text.
       my_font = pygame.font.SysFont('Courier', 16) 
       
-and after line 20, again, we use the font's ``render`` method to create a new surface 
+and after line 28, again, we use the font's ``render`` method to create a new surface 
 containing the pixels of the drawn text,
 and then, as in the case for images, we blit our new surface onto the main surface.  Notice that ``render``
 takes two extra parameters --- the second tells it whether to carefully smooth edges of the text
@@ -144,25 +162,26 @@ we want the text text be.  Here we've used ``(0,0,0)`` which is black::
        the_text = my_font.render('Hello, world!', True, (0,0,0))
        surface.blit(the_text, (10, 10))
        
-We'll demonstrate these two features by counting the frames --- the iterations of the game loop --- and keeping
+We'll demonstrate these two new features by counting the frames --- the iterations of the game loop --- and keeping
 some timing information.  On each frame, we'll display the frame count, and the frame rate.  We will only update
 the frame rate after every 500 frames, when we'll look at the timing interval and can do the calculations.
  
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
-    import pygame      # for graphics and GUI
+    import pygame        # for graphics 
     import time
 
     def main():
 
-        pygame.init()   # prepare the PyGame module for use
+        pygame.init()    # prepare the PyGame module for use
         main_surface = pygame.display.set_mode((480, 240))
-        light_blue = (0, 200, 255)
 
-        # load an image to draw for the queens.
-        ball = pygame.image.load("ball.png")
+        # Load an image to draw. Substitute your own.
+        # PyGame handles gif, jpg, png, etc. image types.
+        ball = pygame.image.load("ball.png")  
 
+        # Create a font for rendering text
         my_font = pygame.font.SysFont('Courier', 16)
 
         frame_count = 0
@@ -171,37 +190,39 @@ the frame rate after every 500 frames, when we'll look at the timing interval an
 
         while True:
 
-            # look for an event from keyboard, mouse, etc.
+            # look for an event from keyboard, mouse, joystick, etc.
             ev = pygame.event.poll()
             if ev.type == pygame.QUIT:   # window close button clicked?
-                break     # leave game loop
-                
-            # do other bits of logic for the game here    
+                break                    # leave game loop
+
+            # do other bits of logic for the game here
             frame_count += 1
             if frame_count % 500 == 0:
                 t1 = time.clock()
                 frame_rate = 500 / (t1-t0)
                 t0 = t1
-                
-            # now draw the new surface 
-            main_surface.fill(light_blue, whole_board)
 
-            # put a red rectangle somewhere in the window
+            # Completely redraw the surface, starting with background
+            main_surface.fill((0, 200, 255), main_surface.get_rect())
+
+            # Put a red rectangle somewhere on the surface
             main_surface.fill((255,0,0), (300, 100, 150, 90))
 
-            # copy the image to the surface, at this (x,y) posn
+            # Copy our image to the surface, at this (x,y) posn
             main_surface.blit(ball, (100, 120))
 
+            # Make a new surface with an image of the text
             the_text = my_font.render('Frame = {0},  rate = {1:.2f} fps'
-                         .format(frame_count, frame_rate), True, (0,0,0))
+                      .format(frame_count, frame_rate), True, (0,0,0))
+            # Copy the text surface to the main surface
             main_surface.blit(the_text, (10, 10))
 
-            # Now the surface is fully drawn, put it on display!
+            # Now that everything is drawn, put it on display!
             pygame.display.flip()
 
-        pygame.quit()  
-                      
+        pygame.quit()   
 
+        
     main()
    
 
@@ -214,8 +235,9 @@ once we start doing something a little more strenuous inside our game loop.
 Drawing a board for the N queens puzzle
 ---------------------------------------
 
-When we solved our N queens puzzle earlier, we output each solution as a list. For the 8x8 board, one
-of the solutions was ``[6,4,2,0,5,7,1,3]``.   Let's draw that chessboard with its queens.
+In section :ref:`eightqueenssolver` we solved our N queens puzzle.  
+For the 8x8 board, one of the solutions was the list ``[6,4,2,0,5,7,1,3]``.   
+Let's now use PyGame to draw that chessboard with its queens.
 
 We begin with a background of black and red squares for the board. Perhaps we could create an image that we could
 load and draw, but that approach would need different background images for different size boards.  
@@ -233,7 +255,7 @@ Just drawing our own red and black rectangles of the appropriate size sounds lik
         n = len(the_board)        # this is an NxN chess board.
         surfaceSz = 480           # Proposed physical surface size.                          
         sq_sz = surfaceSz // n    # sq_sz is length of a square.          
-        surfaceSz = n * sq_sz     # Adjust to exact multiple of sq_sz
+        surfaceSz = n * sq_sz     # Adjust to exactly fit n squares.
 
         # Create the surface of (width, height), and its window.
         surface = pygame.display.set_mode((surfaceSz, surfaceSz))
@@ -248,16 +270,16 @@ Now let's draw the squares, in the game loop.  We'll need a nested loop: the out
 run over the rows of the chessboard, the inner loop over the columns:
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     # Draw a fresh background (a blank chess board)
     for row in range(n):         # Draw each row of the board.
-      c_indx = row % 2           # Alternate starting color on each row
-      for col in range(n):       # Run through cols drawing squares
-          the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
-          surface.fill(colors[c_indx], the_square)
-          # now flip the color index for the next square 
-          c_indx = (c_indx + 1) % 2   
+        c_indx = row % 2           # Change starting color on each row
+        for col in range(n):       # Run through cols drawing squares
+            the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
+            surface.fill(colors[c_indx], the_square)
+            # now flip the color index for the next square 
+            c_indx = (c_indx + 1) % 2   
         
 There are two important ideas in this code: firstly, we compute the rectangle to be filled
 from the ``row`` and ``col`` loop variables, multiplying them by the size of the square to
@@ -295,7 +317,7 @@ x and y direction.  (Since the ball is round and the square is square, the offse
 will be the same, so we'll just compute a single offset value, and use it in both directions.)
 
 The offset we need is half the (size of the square less the size of the ball).  So we'll precompute
-this in the setup section, after we've loaded the ball and determined the square size::
+this in the game's setup section, after we've loaded the ball and determined the square size::
 
     ball_offset = (sq_sz - ball.get_rect()[2]) // 2
     
@@ -328,7 +350,7 @@ Here is the complete program:
         n = len(the_board)        # this is an NxN chess board.
         surfaceSz = 480           # Proposed physical surface size.                          
         sq_sz = surfaceSz // n    # sq_sz is length of a square.          
-        surfaceSz = n * sq_sz     # Adjust to exact multiple of sq_sz
+        surfaceSz = n * sq_sz     # Adjust to exactly fit n squares.
 
         # Create the surface of (width, height), and its window.
         surface = pygame.display.set_mode((surfaceSz, surfaceSz))
@@ -348,13 +370,13 @@ Here is the complete program:
                 break;
 
             # Draw a fresh background (a blank chess board)
-            for row in range(n):         # Draw each row of the board.
-              c_indx = row % 2           # Alternate starting color 
-              for col in range(n):       # Run through cols drawing squares
-                  the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
-                  surface.fill(colors[c_indx], the_square)
-                  # now flip the color index for the next square 
-                  c_indx = (c_indx + 1) % 2   
+            for row in range(n):           # Draw each row of the board.
+                c_indx = row % 2           # Alternate starting color 
+                for col in range(n):       # Run through cols drawing squares
+                    the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
+                    surface.fill(colors[c_indx], the_square)
+                    # now flip the color index for the next square 
+                    c_indx = (c_indx + 1) % 2   
 
             # Now that squares are drawn, draw the queens.
             for (col, row) in enumerate(the_board):
@@ -372,16 +394,15 @@ Here is the complete program:
         draw_board([9, 6, 0, 3, 10, 7, 2, 4, 12, 8, 11, 5, 1])  # 13 x 13
         draw_board([11, 4, 8, 12, 2, 7, 3, 15, 0, 14, 10, 6, 13, 1, 5, 9])
 
-There is one more thing requiring explanation here.  The conditional statement on line
-48 tests whether the name of the currently executing program is ``__main__``.
+There is one more thing worth reviewing here.  The conditional statement on line
+50 tests whether the name of the currently executing program is ``__main__``.
 This allows us to distinguish whether this module is being run as a main program, 
 or whether it has been imported elsewhere, and used as a module.  If we run this
 module in Python, the test cases in lines 51-54 will be executed.  However, if we
 import this module into another program (i.e. our N queens solver from earlier)
 the condition at line 50 will be false, and the statements on lines 51-54 won't run.
 
-
-In the chapter titled List Algorithms, our main program for the N queens solver looked like this:
+In the section :ref:`eightqueensmainprog` our main program looked like this:
 
 .. sourcecode:: python
     :linenos:
@@ -403,8 +424,8 @@ In the chapter titled List Algorithms, our main program for the N queens solver 
     
 Now we just need two changes.  At the top of that program, we import the module that
 we've been working on here (assume we called it ``draw_queens``).  (You'll have to ensure that the
-two modules are in the same folder.)  Then after line 10 here we add a call to draw the board
-that we've found::
+two modules are saved in the same folder.)  
+Then after line 10 here we add a call to draw the solution that we've just discovered::
 
             draw_queens.draw_board(bd)
             
@@ -419,7 +440,7 @@ a spaceship would be a sprite, the player would be a sprite, and bullets and bom
 
 Object oriented programming (OOP) is ideally suited to a situation like this: each object can have its own attributes
 and internal state, and a couple of methods.   Let's have some fun with our N queens board.  Instead of placing
-the queen in its final position, we'd like to drop it from the top of the board, and let it fall into position,
+the queen in her final position, we'd like to drop her in from the top of the board, and let her fall into position,
 perhaps bouncing along the way.   
 
 The first encapsulation we need is to turn each of our queens into an object.  We'll keep a list of all the active
@@ -429,11 +450,12 @@ sprites (i.e. a list of queen objects), and arrange two new things in our game l
   will give each sprite a chance to modify its internal state in some way --- perhaps change its image, or change its
   position, or rotate itself, or make itself grow a bit bigger or a bit smaller. 
 * Once all the sprites have updated themselves, the game loop can begin drawing - first the background, and then 
-  call a ``draw`` method on each sprite in turn, and delegate the task of drawing to the object itself.  This is 
-  in line with the OOP idea that we don't say "Hey, draw, show this queen!",  but we prefer to say 
-  "Hey, queen, draw youself!". 
+  call a ``draw`` method on each sprite in turn, and delegate (hand off) 
+  the task of drawing to the object itself.  This is 
+  in line with the OOP idea that we don't say "Hey, *draw*, show this queen!",  but we prefer to say 
+  "Hey, *queen*, draw youself!". 
   
-We start with a simple object, and no movement or animation yet, just as scaffolding, and 
+We start with a simple object, no movement or animation yet, just scaffolding, 
 to see how to fit all the pieces together:
 
 .. sourcecode:: python
@@ -443,7 +465,7 @@ to see how to fit all the pieces together:
 
         def __init__(self, img, target_posn):
             """ Create and initialize a queen for this 
-                target position  on the board 
+                target position on the board 
             """
             self.image = img
             self.target_posn = target_posn
@@ -482,14 +504,14 @@ like this:
             if ev.type == pygame.QUIT:
                 break;
 
-            # Update all the sprites.
+            # Ask every sprite to update itself.
             for sprite in all_sprites:
                 sprite.update()
 
             # Draw a fresh background (a blank chess board)
             # ... same as before ...
 
-            # draw all sprites
+            # Ask every sprite to draw itself. 
             for sprite in all_sprites:
                 sprite.draw(surface)
 
@@ -498,15 +520,16 @@ like this:
 This works just like it did before, but our extra work in making objects for the queens has prepared the 
 way for some more ambitious extensions.
 
-Let us begin with a falling object.  At any instant, it will have a velocity. (We are only working
-with movement in the y direction, but use your imagination!)  
+Let us begin with a falling queen object.  At any instant, it will have a 
+velocity i.e. a speed, in a certain direction. 
+(We are only working with movement in the y direction, but use your imagination!)  
 So in the object's ``update`` method, we want to change its current position by its velocity.
 If our N queens board is floating in space, velocity would stay constant, but hey, here on
-Earth we have gravity too! Gravity changes the velocity on each time interval, so we'll want a ball 
-that speeds up as it falls further.   Gravity will be constant for all queens, so we won't keep
-it in the instances --- we'll just make it a variable in our module.     We'll make one other 
+Earth we have gravity!  Gravity changes the velocity on each time interval, so we'll want a ball 
+that speeds up as it falls further.  Gravity will be constant for all queens, so we won't keep
+it in the instances --- we'll just make it a variable in our module.  We'll make one other 
 change too: we will start every queen at the top of the board, so that it can fall towards
-its target position.   With these changes, we now get the following
+its target position.   With these changes, we now get the following:
 
 .. sourcecode:: python
     :linenos:
@@ -533,7 +556,8 @@ its target position.   With these changes, we now get the following
 
 
 Making these changes gives us a new chessboard in which each queen starts at the top of its column,
-and speeds up, until it drops off the bottom of the board and disappears forever.  But we have movement!
+and speeds up, until it drops off the bottom of the board and disappears forever.  
+A good start --- we have movement!
 
 The next step is to get the ball to bounce when it reaches its own target position.  
 It is pretty easy to bounce something --- you just change the sign of its velocity, and it will
@@ -623,7 +647,7 @@ need to filter those out of the printing.)   You'll get output that looks someth
 So let us now make these changes to the code near the top of our game loop:
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
     while True:
 
@@ -679,7 +703,7 @@ Now in the game loop, once we've seen the mouse event, we determine which queen,
 should be told to respond to the event:
 
 .. sourcecode:: python
-   :linenos:
+     :linenos:
 
      if ev.type == pygame.MOUSEBUTTONDOWN:
          posn_of_click = ev.dict['pos']
@@ -693,7 +717,7 @@ When a sprite is clicked, we'll just add some velocity in the up direction,
 i.e. kick it back into the air.
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
     def handle_click(self):
         self.y_velocity += -0.3   # kick it up 
@@ -718,9 +742,12 @@ and saving it in your working directory with the name
 The sprite sheet has been quite carefully prepared: each of the 10 patches are spaced exactly
 50 pixels apart.  So, assuming we want to draw patch number 4 (numbering from 0), we want to
 draw only the rectangle that starts at x position 200, and is 50 pixels wide, within the sprite sheet.
+Here we've shown the patches and highlighted the patch we want to draw.
+
+.. image:: illustrations/duke_spritesheet_with_patch.png
 
 The ``blit`` method we've been using --- for copying pixels from one surface to another ---
-can copy only a portion of the source surface.  So the grand idea here is that 
+can copy a sub-rectangle of the source surface.  So the grand idea here is that 
 each time we draw Duke, we won't blit the whole sprite sheet. Instead we'll provide an extra
 rectangle argument that determines which portion of the sprite sheet will be blitted.  
 
@@ -750,7 +777,7 @@ frame rate to whatever we specify.  So let's plan our game and animation for
     my_clock.tick(60)  # Waste time so that frame rate becomes 60 fps 
     
 You'll find that you have to go back and adjust the numbers for gravity and 
-kicking the ball now, to match this new game loop frame rate.  When we plan an
+kicking the ball now, to match this much slower frame rate.  When we plan an
 animation so that it only works sensibly at a fixed frame rate, we say that we've
 *baked* the animation. In this case we're baking our animations for 60 frames per second. 
 
@@ -760,7 +787,7 @@ add one or more Duke instances onto our list of ``all_sprites``, and our existin
 call methods of the Duke instance.  Let us start with skeleton scaffolding for the new class:
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     class Duke_sprite:
 
@@ -779,6 +806,7 @@ call methods of the Duke instance.  Let us start with skeleton scaffolding for t
 
         def contains_point(self, pt):
             # use code from Queens_sprite
+            return
 
 The only changes we'll need to the existing game are all in the setup section. 
 We load up the new sprite sheet and instantiate a couple of instances of Duke, 
@@ -786,7 +814,7 @@ at the positions we want on the chessboard.  So before entering
 the game loop, we add this code:
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
     # Load the sprite sheet
     duke_sprite_sheet = pygame.image.load("duke_spritesheet.png")
@@ -800,8 +828,8 @@ the game loop, we add this code:
     all_sprites.append(duke2)
    
 Now the game loop will test if each instance has been clicked, will call
-our click handler, will call update, and will call draw.  All the remaining
-changes we need to make will be made in the methods of the ``Duke_sprite`` class.  
+the click handler for that instance.  It will also call update and draw for all sprites.  
+All the remaining changes we need to make will be made in the methods of the ``Duke_sprite`` class.  
 
 Let's begin with drawing one of the patches.  We'll introduce a new attribute ``curr_patch_num``
 into the class.  It holds a value between 0 and 9, and determines which patch to draw.  So
@@ -809,7 +837,7 @@ the job of the ``draw`` method is to compute the sub-rectangle of the patch to b
 to blit only that portion of the spritesheet:
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     def draw(self, target_surface):
         patch_rect = (self.curr_patch_num * 50, 0,
@@ -829,10 +857,10 @@ of the animation takes place!)  So we'll keep another animation frame
 counter in the class, which will be zero when we're not animating, and
 each call to ``update`` will increment the counter up to 59, and then 
 back to 0.  We can then divide that animation counter by 6, to set the
-``curr_patch_num`` variable.  
+``curr_patch_num`` variable to select the patch we want to show.  
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
 
     def update(self):
         if self.anim_frame_count > 0:
@@ -848,7 +876,7 @@ always stay between 0 and 9.  Just what we require!
 Now how do we trigger the animation, and start it running?  On the mouse click.
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
     def handle_click(self):
          if self.anim_frame_count == 0:
@@ -866,7 +894,7 @@ The final touch-up is to initialize our two new attributes when we instantiate t
 class.  Here is the code for the whole class now:
 
 .. sourcecode:: python
-   :linenos:
+    :linenos:
    
     class Duke_sprite:
 
@@ -961,10 +989,10 @@ Glossary
         
     blit
         A verb used in computer graphics, meaning to make a fast copy of an image or pixels from
-        one image or surface to another surface or image.
+        a sub-rectangle of one image or surface to another surface or image.
         
     frame rate  
-        The rate at which the game loop executes.
+        The rate at which the game loop executes and updates the display.
         
     game loop
         A loop that drives the logic of a game.  It will usually poll for events, then update each

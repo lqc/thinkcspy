@@ -710,7 +710,9 @@ faster than even the binary lookup algorithm.  At the end of the chapter our
 algorithm is more than a 1000 times faster than our first attempt! 
 
 That is what we can call a good day at the office! 
-                    
+  
+.. _eightqueenssolver: 
+  
 Eight queens puzzle, part 1
 ---------------------------
 
@@ -921,6 +923,9 @@ And the code to make the tests pass:
 Summary of what we've done so far:  we now have a powerful function called ``has_clashes`` that can
 tell if a configuration is a solution to the queens puzzle.   Let's get on now with generating
 lots of permutations and finding solutions! 
+ 
+ 
+.. _eightqueensmainprog: 
 
 Eight queens puzzle, part 2
 ---------------------------
