@@ -89,7 +89,7 @@ without further translation.
    :alt: Compile illustration
     
 Many modern languages use both processes. They are first compiled into a lower
-level language, called **byte code**, and then interpreted by a program called
+level language, called **bytecode**, and then interpreted by a program called
 a **virtual machine**. Python uses both processes, but because of the way
 programmers interact with it, it is usually considered an interpreted language.
 
@@ -454,10 +454,10 @@ Glossary
     bug
         An error in a program.
 
-    byte code
+    bytecode
         An intermediate language between source code and object code. Many
-        modern languages first compile source code into byte code and then
-        interpret the byte code with a program called a *virtual machine*.
+        modern languages first compile source code into bytecode and then
+        interpret the bytecode with a program called a *virtual machine*.
 
     comment
         Information in a program that is meant for other programmers (or anyone
