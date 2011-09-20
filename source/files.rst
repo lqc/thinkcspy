@@ -335,82 +335,6 @@ our program and the remote web server.  We can call read, write, and close metho
 the socket object in much the same way as we can work with a file handle.
 
 
-Counting Letters
-----------------
-
-The ``ord`` function returns the integer representation of a character:
-
-.. sourcecode:: python
-    
-    >>> ord('a')
-    97
-    >>> ord('A')
-    65
-    >>>
-
-This example explains why ``'Apple' < 'apple'`` evaluates to ``True``.
-
-The ``chr`` function is the inverse of ``ord``. It takes an integer as an
-argument and returns its character representation:
-
-.. sourcecode:: python
-    
-    >>> for i in range(65, 71):
-    ...     print(chr(i))
-    ...
-    A
-    B
-    C
-    D
-    E
-    F
-    >>>
-
-The following program counts the number of times each
-character occurs in the book `Alice in Wonderland <./resources/ch10/alice_in_wonderland.txt>`__:
-
-.. sourcecode:: python
-    :linenos:
-    
-    def count_letters(text):
-        ''' Perform frequency count of how many times
-            each ASCII character occurs in some txt.
-        '''
-        counts = 128 * [0]   
-        for letter in text:
-            counts[ord(letter)] += 1
-        return counts
-
-    def display(i):
-        ''' Substitute some names of non-printable characters '''
-        if i == 10: return 'LF'
-        if i == 13: return 'CR'
-        if i == 32: return 'SPACE'
-        return chr(i)
-
-    infile = open('alice_in_wonderland.txt', 'r')
-    text = infile.read()
-    infile.close()
-
-    freq_counts = count_letters(text)
-
-    layout = "{0:>12} {1:>5}\n"
-    outfile = open('alice_counts.txt', 'w')
-
-    outfile.write(layout.format("Character", "Count"))
-    outfile.write("============ =====\n")
-
-    for (i, v) in enumerate(freq_counts):
-        if v > 0:
-            outfile.write(layout.format(display(i), v))
-
-    outfile.close()
-
-
-Run this program and look at the output file it generates using a text editor.
-You will be asked to analyze the program in the exercises below.
-
-
 Glossary
 --------
 
@@ -472,61 +396,10 @@ Glossary
  
 Exercises
 ---------
-   
-   
+      
 #. `unsorted_fruits.txt <resources/ch10/unsorted_fruits.txt>`__ contains a
    list of 26 fruits, each one with a name that begins with a different letter
    of the alphabet. Write a program named ``sort_fruits.py`` that reads in the
    fruits from ``unsorted_fruits.txt`` and writes them out in alphabetical
    order to a file named ``sorted_fruits.txt``.
    
-#. Answer the following questions about ``countletters.py``:
-
-   a. Explain in detail what the three lines do:
-
-      .. sourcecode:: python
-        
-            infile = open('alice_in_wonderland.txt', 'r')
-            text = infile.read()
-            infile.close()
-
-      What would ``type(text)`` return after these lines have been executed?
-      
-   b. What does the expression ``128 * [0]`` evaluate to? Read about `ASCII
-      <http://en.wikipedia.org/wiki/ASCII>`__ in Wikipedia and explain why you 
-      think the variable, ``counts`` is assigned to ``128 * [0]`` in light of
-      what you read.
-      
-   c. What does
-
-      .. sourcecode:: python
-        
-            for letter in text:
-                counts[ord(letter)] += 1
-
-      do to ``counts``?
-      
-   d. Explain the purpose of the ``display`` function. Why does it check for
-      values ``10``, ``13``, and ``32``? What is special about those values?
-      
-   e. Describe in detail what the lines
-
-      .. sourcecode:: python
-        
-            layout = "{0:>9} {1:>5}\n"
-            outfile = open('alice_counts.dat', 'w')
-            outfile.write(layout.format("Character", "Count"))
-                          outfile.write("========= =====\n")
-
-      do. What will be in ``alice_counts.dat`` when they finish executing?
-      
-   f. Finally, explain in detail what
-
-      .. sourcecode:: python
-        
-            for (i, v) in enumerate(freq_counts):
-                if v > 0:
-                    outfile.write(layout.format(display(i), v))
-
-      does. 
-
