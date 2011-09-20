@@ -197,17 +197,16 @@ The ``translate`` method will apply these substitutions throughout the whole str
 
 .. sourcecode:: python
 
-     import string 
-     
      def text_to_words(the_text):
         """ return a list of words with all punctuation removed, 
             and all in lowercase 
         """
-        my_substitutions = string.maketrans(
+        
+        my_substitutions = the_text.maketrans(
           # if you find any of these
-          b'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', 
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', 
           # replace it by these substitutions
-          b'abcdefghijklmnopqrstuvwxyz                           ')  
+          'abcdefghijklmnopqrstuvwxyz                           ')  
 
         # Translate the text according to our translation table.
         cleaned_text = the_text.translate(my_substitutions)
