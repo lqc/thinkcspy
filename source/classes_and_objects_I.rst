@@ -98,10 +98,12 @@ so our first class definition looks like this:
             self.y = 0          
 
 Class definitions can appear anywhere in a program, but they are usually near
-the beginning (after the ``import`` statements). The syntax rules for a class
+the beginning (after the ``import`` statements). Some programmers and languages
+prefer to put every class in a module of its own --- we won't do that here.  
+The syntax rules for a class
 definition are the same as for other compound statements. There is a header
 which begins with the keyword, ``class``, followed by the name of the class,
-and ending with a colon.
+and ending with a colon.  You'll know where the class ends by looking at the indentation.
 
 If the first line after the class header is a string, it becomes
 the docstring of the class, and will be recognized by various tools.  (This
@@ -146,7 +148,7 @@ A function like ``Turtle`` or ``Point`` that creates a new object instance
 is called a **constructor**, and every class automatically provides a
 constructor function which is named the same as the class.
 
-It may be helpful to think of a class as a factory for making objects.  
+It may be helpful to think of a class as a *factory* for making objects.  
 The class itself isn't an instance of a point, but it contains the machinery 
 to make point instances.   Every time you call the constructor, you're asking
 the factory to make you a new object.  As the object comes off the 
@@ -226,6 +228,7 @@ We can make our class constructor more general by putting extra parameters into
 the ``__init__`` method, as shown in this example:
 
 .. sourcecode:: python
+    :linenos:
     
     class Point:
         """ Point class represents and manipulates x,y coords. """
@@ -234,6 +237,8 @@ the ``__init__`` method, as shown in this example:
             """ Create a new point at x, y """
             self.x = x
             self.y = y 
+            
+    # Other statements outside the class continue below here.
 
 The ``x`` and ``y`` parameters here are both optional.  If the caller does not 
 supply arguments, they'll get the default values of 0.  Here is our improved class 
