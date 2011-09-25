@@ -64,10 +64,11 @@ added.
 
 In the class definition, the name of the parent class appears in parentheses:
 
-.. sourcecode:: python
-    
-    class Hand(Deck):
-        pass
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Hand(Deck):
+            pass
 
 This statement indicates that the new ``Hand`` class inherits from the existing
 ``Deck`` class.
@@ -78,23 +79,25 @@ the name of the player that holds it. The name is an optional parameter with
 the empty string as a default value. ``cards`` is the list of cards in the
 hand, initialized to the empty list:
 
-.. sourcecode:: python
-    
-    class Hand(Deck):
-        def __init__(self, name=""):
-           self.cards = []
-           self.name = name
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Hand(Deck):
+            def __init__(self, name=""):
+               self.cards = []
+               self.name = name
 
 For just about any card game, it is necessary to add and remove cards from the
 deck. Removing cards is already taken care of, since ``Hand`` inherits
 ``remove`` from ``Deck``. But we have to write ``add``:
 
-.. sourcecode:: python
-    
-    class Hand(Deck):
-        ...
-        def add(self,card):
-            self.cards.append(card)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Hand(Deck):
+            ...
+            def add(self,card):
+                self.cards.append(card)
 
 Again, the ellipsis indicates that we have omitted other methods. The list
 ``append`` method adds the new card to the end of the list of cards.
@@ -116,17 +119,18 @@ to each hand.
 of cards to deal. If there are not enough cards in the deck, the method deals
 out all of the cards and stops:
 
-.. sourcecode:: python
-    
-    class Deck :
-        ...
-        def deal(self, hands, num_cards=999):
-            num_hands = len(hands)
-            for i in range(num_cards):
-                if self.is_empty(): break   # break if out of cards
-                card = self.pop()           # take the top card
-                hand = hands[i % num_hands] # whose turn is next?
-                hand.add(card)              # add the card to the hand
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck :
+            ...
+            def deal(self, hands, num_cards=999):
+                num_hands = len(hands)
+                for i in range(num_cards):
+                    if self.is_empty(): break   # break if out of cards
+                    card = self.pop()           # take the top card
+                    hand = hands[i % num_hands] # whose turn is next?
+                    hand.add(card)              # add the card to the hand
 
 The second parameter, ``num_cards``, is optional; the default is a large
 number, which effectively means that all of the cards in the deck will get
@@ -148,19 +152,19 @@ Printing a Hand
 To print the contents of a hand, we can take advantage of the ``printDeck`` and
 ``__str__`` methods inherited from ``Deck``. For example:
 
-.. sourcecode:: python
-    
-    >>> deck = Deck()
-    >>> deck.shuffle()
-    >>> hand = Hand("frank")
-    >>> deck.deal([hand], 5)
-    >>> print(hand)
-    Hand frank contains
-    2 of Spades
-     3 of Spades
-      4 of Spades
-       Ace of Hearts
-        9 of Clubs
+    .. sourcecode:: python3
+        
+        >>> deck = Deck()
+        >>> deck.shuffle()
+        >>> hand = Hand("frank")
+        >>> deck.deal([hand], 5)
+        >>> print(hand)
+        Hand frank contains
+        2 of Spades
+         3 of Spades
+          4 of Spades
+           Ace of Hearts
+            9 of Clubs
 
 It's not a great hand, but it has the makings of a straight flush.
 
@@ -169,17 +173,18 @@ information in a ``Hand`` object we might want to include when we print one. To
 do that, we can provide a ``__str__`` method in the ``Hand`` class that
 overrides the one in the ``Deck`` class:
 
-.. sourcecode:: python
-    
-    class Hand(Deck)
-        ...
-        def __str__(self):
-            s = "Hand " + self.name
-            if self.is_empty():
-                s = s + " is empty\n"
-            else:
-                s = s + " contains\n"
-            return s + Deck.__str__(self)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Hand(Deck)
+            ...
+            def __str__(self):
+                s = "Hand " + self.name
+                if self.is_empty():
+                    s = s + " is empty\n"
+                else:
+                    s = s + " contains\n"
+                return s + Deck.__str__(self)
 
 Initially, ``s`` is a string that identifies the hand. If the hand is empty,
 the program appends the words ``is empty`` and returns ``s``.
@@ -203,12 +208,13 @@ The ``CardGame`` class
 The ``CardGame`` class takes care of some basic chores common to all games,
 such as creating the deck and shuffling it:
 
-.. sourcecode:: python
-    
-    class CardGame:
-        def __init__(self):
-            self.deck = Deck()
-            self.deck.shuffle()
+    .. sourcecode:: python3
+        :linenos:
+        
+        class CardGame:
+            def __init__(self):
+                self.deck = Deck()
+                self.deck.shuffle()
 
 This is the first case we have seen where the initialization method performs a
 significant computation, beyond initializing attributes.
@@ -249,21 +255,22 @@ abilities of a ``Hand``. We will define a new class, ``OldMaidHand``, that
 inherits from ``Hand`` and provides an additional method called
 ``remove_matches``:
 
-.. sourcecode:: python
-    
-    class OldMaidHand(Hand):
-        def remove_matches(self):
-            count = 0
-            original_cards = self.cards[:]
-            for card in original_cards:
-                match = Card(3 - card.suit, card.rank)
-                if match in self.cards:
-                    self.cards.remove(card)
-                    self.cards.remove(match)
-                    print("Hand {0}: {1} matches {2}"
-                            .format(self.name, card, match))
-                    count = count + 1
-            return count
+    .. sourcecode:: python3
+        :linenos:
+        
+        class OldMaidHand(Hand):
+            def remove_matches(self):
+                count = 0
+                original_cards = self.cards[:]
+                for card in original_cards:
+                    match = Card(3 - card.suit, card.rank)
+                    if match in self.cards:
+                        self.cards.remove(card)
+                        self.cards.remove(match)
+                        print("Hand {0}: {1} matches {2}"
+                                .format(self.name, card, match))
+                        count = count + 1
+                return count
 
 We start by making a copy of the list of cards, so that we can traverse the
 copy while removing cards from the original. Since ``self.cards`` is modified
@@ -279,39 +286,39 @@ the hand, both cards are removed.
 
 The following example demonstrates how to use ``remove_matches``:
 
-.. sourcecode:: python
-    
-    >>> game = CardGame()
-    >>> hand = OldMaidHand("frank")
-    >>> game.deck.deal([hand], 13)
-    >>> print(hand)
-    Hand frank contains
-    Ace of Spades
-     2 of Diamonds
-      7 of Spades
-       8 of Clubs
-        6 of Hearts
-         8 of Spades
-          7 of Clubs
+    .. sourcecode:: python3
+        
+        >>> game = CardGame()
+        >>> hand = OldMaidHand("frank")
+        >>> game.deck.deal([hand], 13)
+        >>> print(hand)
+        Hand frank contains
+        Ace of Spades
+         2 of Diamonds
+          7 of Spades
+           8 of Clubs
+            6 of Hearts
+             8 of Spades
+              7 of Clubs
+               Queen of Clubs
+                7 of Diamonds
+                 5 of Clubs
+                  Jack of Diamonds
+                   10 of Diamonds
+                    10 of Hearts
+        >>> hand.remove_matches()
+        Hand frank: 7 of Spades matches 7 of Clubs
+        Hand frank: 8 of Spades matches 8 of Clubs
+        Hand frank: 10 of Diamonds matches 10 of Hearts
+        >>> print(hand)
+        Hand frank contains
+        Ace of Spades
+         2 of Diamonds
+          6 of Hearts
            Queen of Clubs
             7 of Diamonds
              5 of Clubs
               Jack of Diamonds
-               10 of Diamonds
-                10 of Hearts
-    >>> hand.remove_matches()
-    Hand frank: 7 of Spades matches 7 of Clubs
-    Hand frank: 8 of Spades matches 8 of Clubs
-    Hand frank: 10 of Diamonds matches 10 of Hearts
-    >>> print(hand)
-    Hand frank contains
-    Ace of Spades
-     2 of Diamonds
-      6 of Hearts
-       Queen of Clubs
-        7 of Diamonds
-         5 of Clubs
-          Jack of Diamonds
 
 Notice that there is no ``__init__`` method for the ``OldMaidHand`` class.  We
 inherit it from ``Hand``.
@@ -327,37 +334,38 @@ as a parameter.
 Since ``__init__`` is inherited from ``CardGame``, a new ``OldMaidGame`` object
 contains a new shuffled deck:
 
-.. sourcecode:: python
-    
-    class OldMaidGame(CardGame):
-        def play(self, names):
-            # remove Queen of Clubs
-            self.deck.remove(Card(0,12))
-       
-            # make a hand for each player
-            self.hands = []
-            for name in names:
-                self.hands.append(OldMaidHand(name))
-       
-            # deal the cards
-            self.deck.deal(self.hands)
-            print("---------- Cards have been dealt")
-            self.printHands()
-       
-            # remove initial matches
-            matches = self.remove_all_matches()
-            print("---------- Matches discarded, play begins")
-            self.printHands()
-       
-            # play until all 50 cards are matched
-            turn = 0
-            numHands = len(self.hands)
-            while matches < 25:
-                matches = matches + self.play_one_turn(turn)
-                turn = (turn + 1) % numHands
-       
-            print("---------- Game is Over")
-            self.printHands()
+    .. sourcecode:: python3
+        :linenos:
+        
+        class OldMaidGame(CardGame):
+            def play(self, names):
+                # remove Queen of Clubs
+                self.deck.remove(Card(0,12))
+           
+                # make a hand for each player
+                self.hands = []
+                for name in names:
+                    self.hands.append(OldMaidHand(name))
+           
+                # deal the cards
+                self.deck.deal(self.hands)
+                print("---------- Cards have been dealt")
+                self.printHands()
+           
+                # remove initial matches
+                matches = self.remove_all_matches()
+                print("---------- Matches discarded, play begins")
+                self.printHands()
+           
+                # play until all 50 cards are matched
+                turn = 0
+                numHands = len(self.hands)
+                while matches < 25:
+                    matches = matches + self.play_one_turn(turn)
+                    turn = (turn + 1) % numHands
+           
+                print("---------- Game is Over")
+                self.printHands()
 
 The writing of ``printHands()`` is left as an exercise.
 
@@ -365,15 +373,16 @@ Some of the steps of the game have been separated into methods.
 ``remove_all_matches`` traverses the list of hands and invokes
 ``remove_matches`` on each:
 
-.. sourcecode:: python
-    
-    class OldMaidGame(CardGame):
-        ...
-        def remove_all_matches(self):
-            count = 0
-            for hand in self.hands:
-                count = count + hand.remove_matches()
-            return count
+    .. sourcecode:: python3
+        :linenos:
+        
+        class OldMaidGame(CardGame):
+            ...
+            def remove_all_matches(self):
+                count = 0
+                for hand in self.hands:
+                    count = count + hand.remove_matches()
+                return count
 
 ``count`` is an accumulator that adds up the number of matches in each hand and
 returns the total.
@@ -389,20 +398,21 @@ operator wraps it back around to 0.
 The method ``playOneTurn`` takes a parameter that indicates whose turn it is.
 The return value is the number of matches made during this turn:
 
-.. sourcecode:: python
-    
-    class OldMaidGame(CardGame):
-        ...
-        def play_one_turn(self, i):
-            if self.hands[i].is_empty():
-                return 0
-            neighbor = self.find_neighbor(i)
-            pickedCard = self.hands[neighbor].pop()
-            self.hands[i].add(pickedCard)
-            print("Hand", self.hands[i].name, "picked", pickedCard)
-            count = self.hands[i].remove_matches()
-            self.hands[i].shuffle()
-            return count
+    .. sourcecode:: python3
+        :linenos:
+        
+        class OldMaidGame(CardGame):
+            ...
+            def play_one_turn(self, i):
+                if self.hands[i].is_empty():
+                    return 0
+                neighbor = self.find_neighbor(i)
+                pickedCard = self.hands[neighbor].pop()
+                self.hands[i].add(pickedCard)
+                print("Hand", self.hands[i].name, "picked", pickedCard)
+                count = self.hands[i].remove_matches()
+                self.hands[i].shuffle()
+                return count
 
 If a player's hand is empty, that player is out of the game, so he or she does
 nothing and returns 0.
@@ -415,16 +425,17 @@ is random.
 The method ``find_neighbor`` starts with the player to the immediate left and
 continues around the circle until it finds a player that still has cards:
 
-.. sourcecode:: python
-    
-    class OldMaidGame(CardGame):
-        ...
-        def find_neighbor(self, i):
-            numHands = len(self.hands)
-            for next in range(1,numHands):
-                neighbor = (i + next) % numHands
-                if not self.hands[neighbor].is_empty():
-                    return neighbor
+    .. sourcecode:: python3
+        :linenos:
+        
+        class OldMaidGame(CardGame):
+            ...
+            def find_neighbor(self, i):
+                numHands = len(self.hands)
+                for next in range(1,numHands):
+                    neighbor = (i + next) % numHands
+                    if not self.hands[neighbor].is_empty():
+                        return neighbor
 
 If ``find_neighbor`` ever went all the way around the circle without finding
 cards, it would return ``None`` and cause an error elsewhere in the program.
@@ -437,78 +448,78 @@ The following output is from a truncated form of the game where only the top
 fifteen cards (tens and higher) were dealt to three players.  With this small
 deck, play stops after seven matches instead of twenty-five.
 
-.. sourcecode:: python
-    
-    >>> import cards
-    >>> game = cards.OldMaidGame()
-    >>> game.play(["Allen","Jeff","Chris"])
-    ---------- Cards have been dealt
-    Hand Allen contains
-    King of Hearts
-     Jack of Clubs
-      Queen of Spades
-       King of Spades
-        10 of Diamonds
-       
-    Hand Jeff contains
-    Queen of Hearts
-     Jack of Spades
-      Jack of Hearts
-       King of Diamonds
-        Queen of Diamonds
-       
-    Hand Chris contains
-    Jack of Diamonds
-     King of Clubs
-      10 of Spades
-       10 of Hearts
-        10 of Clubs
-       
-    Hand Jeff: Queen of Hearts matches Queen of Diamonds
-    Hand Chris: 10 of Spades matches 10 of Clubs
-    ---------- Matches discarded, play begins
-    Hand Allen contains
-    King of Hearts
-     Jack of Clubs
-      Queen of Spades
-       King of Spades
-        10 of Diamonds
-       
-    Hand Jeff contains
-    Jack of Spades
-     Jack of Hearts
-      King of Diamonds
-       
-    Hand Chris contains
-    Jack of Diamonds
-     King of Clubs
-      10 of Hearts
-       
-    Hand Allen picked King of Diamonds
-    Hand Allen: King of Hearts matches King of Diamonds
-    Hand Jeff picked 10 of Hearts
-    Hand Chris picked Jack of Clubs
-    Hand Allen picked Jack of Hearts
-    Hand Jeff picked Jack of Diamonds
-    Hand Chris picked Queen of Spades
-    Hand Allen picked Jack of Diamonds
-    Hand Allen: Jack of Hearts matches Jack of Diamonds
-    Hand Jeff picked King of Clubs
-    Hand Chris picked King of Spades
-    Hand Allen picked 10 of Hearts
-    Hand Allen: 10 of Diamonds matches 10 of Hearts
-    Hand Jeff picked Queen of Spades
-    Hand Chris picked Jack of Spades
-    Hand Chris: Jack of Clubs matches Jack of Spades
-    Hand Jeff picked King of Spades
-    Hand Jeff: King of Clubs matches King of Spades
-    ---------- Game is Over
-    Hand Allen is empty
-      
-    Hand Jeff contains
-    Queen of Spades
-       
-    Hand Chris is empty
+    .. sourcecode:: python3
+        
+        >>> import cards
+        >>> game = cards.OldMaidGame()
+        >>> game.play(["Allen","Jeff","Chris"])
+        ---------- Cards have been dealt
+        Hand Allen contains
+        King of Hearts
+         Jack of Clubs
+          Queen of Spades
+           King of Spades
+            10 of Diamonds
+           
+        Hand Jeff contains
+        Queen of Hearts
+         Jack of Spades
+          Jack of Hearts
+           King of Diamonds
+            Queen of Diamonds
+           
+        Hand Chris contains
+        Jack of Diamonds
+         King of Clubs
+          10 of Spades
+           10 of Hearts
+            10 of Clubs
+           
+        Hand Jeff: Queen of Hearts matches Queen of Diamonds
+        Hand Chris: 10 of Spades matches 10 of Clubs
+        ---------- Matches discarded, play begins
+        Hand Allen contains
+        King of Hearts
+         Jack of Clubs
+          Queen of Spades
+           King of Spades
+            10 of Diamonds
+           
+        Hand Jeff contains
+        Jack of Spades
+         Jack of Hearts
+          King of Diamonds
+           
+        Hand Chris contains
+        Jack of Diamonds
+         King of Clubs
+          10 of Hearts
+           
+        Hand Allen picked King of Diamonds
+        Hand Allen: King of Hearts matches King of Diamonds
+        Hand Jeff picked 10 of Hearts
+        Hand Chris picked Jack of Clubs
+        Hand Allen picked Jack of Hearts
+        Hand Jeff picked Jack of Diamonds
+        Hand Chris picked Queen of Spades
+        Hand Allen picked Jack of Diamonds
+        Hand Allen: Jack of Hearts matches Jack of Diamonds
+        Hand Jeff picked King of Clubs
+        Hand Chris picked King of Spades
+        Hand Allen picked 10 of Hearts
+        Hand Allen: 10 of Diamonds matches 10 of Hearts
+        Hand Jeff picked Queen of Spades
+        Hand Chris picked Jack of Spades
+        Hand Chris: Jack of Clubs matches Jack of Spades
+        Hand Jeff picked King of Spades
+        Hand Jeff: King of Clubs matches King of Spades
+        ---------- Game is Over
+        Hand Allen is empty
+          
+        Hand Jeff contains
+        Queen of Spades
+           
+        Hand Chris is empty
 
 So Jeff loses.
 

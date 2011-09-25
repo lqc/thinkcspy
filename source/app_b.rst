@@ -5,15 +5,7 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-    
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
+
 |
  
 
@@ -59,37 +51,37 @@ five threads of proficiency included *efficacy* --- the sense of
 being able to accomplish something useful.  Here is a Python
 example of how you can send email to someone. 
 
-.. sourcecode:: python
-    :linenos:
-    
-    import smtplib, email.mime.text
-    
-    me = 'joe@my.org.com'                # put your own email here
-    fred = 'fred@his.org.com'            # and fred's email address here
-    your_mail_server = 'mail.my.org.com' # Ask your system administrator
+    .. sourcecode:: python3
+        :linenos:
+        
+        import smtplib, email.mime.text
+        
+        me = 'joe@my.org.com'                # put your own email here
+        fred = 'fred@his.org.com'            # and fred's email address here
+        your_mail_server = 'mail.my.org.com' # Ask your system administrator
 
-    # Create a text message containing the body of the email.
-    # You could read this from a file, of course.
-    msg = email.mime.text.MIMEText("""Hey Fred,
+        # Create a text message containing the body of the email.
+        # You could read this from a file, of course.
+        msg = email.mime.text.MIMEText("""Hey Fred,
 
-    I'm having a party, please come at 8pm.
-    Bring a plate of snacks and your own drinks.
+        I'm having a party, please come at 8pm.
+        Bring a plate of snacks and your own drinks.
 
-    Joe""" )
+        Joe""" )
 
-    msg['From'] = me               # add headers to the message object
-    msg['To'] = fred
-    msg['Subject'] = 'Party on Saturday 23rd'
+        msg['From'] = me               # add headers to the message object
+        msg['To'] = fred
+        msg['Subject'] = 'Party on Saturday 23rd'
 
-    # create a connection to your mail server
-    svr = smtplib.SMTP(your_mail_server)                
-    response = svr.sendmail(me, fred, msg.as_string()) # send message
-    if response != {}:
-        print("Sending failed for ", response)
-    else:
-        print("Message sent.")
+        # create a connection to your mail server
+        svr = smtplib.SMTP(your_mail_server)                
+        response = svr.sendmail(me, fred, msg.as_string()) # send message
+        if response != {}:
+            print("Sending failed for ", response)
+        else:
+            print("Message sent.")
 
-    svr.quit()                                   # close the connection
+        svr.quit()                                   # close the connection
 
 In the context of the course, notice how we use the two objects in
 this program: we create a message object on line 9, and set some attributes 

@@ -6,14 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png     
-    
 |
     
 Debugging
@@ -154,15 +146,16 @@ condition.
 
 For example:
 
-.. sourcecode:: python
-    
-    while x > 0 and y < 0:
-        # do something to x
-        # do something to y
-       
-        print("x: ", x)
-        print("y: ", y)
-        print("condition: ", (x > 0 and y < 0))
+    .. sourcecode:: python3
+        :linenos:
+        
+        while x > 0 and y < 0:
+            # do something to x
+            # do something to y
+           
+            print("x: ", x)
+            print("y: ", y)
+            print("condition: ", (x > 0 and y < 0))
 
 Now when you run the program, you will see three lines of output for each time
 through the loop. The last time through the loop, the condition should be
@@ -200,10 +193,10 @@ every time the function or method is invoked, and you will see the parameters.
 If the parameters are not moving toward the base case, you will get some ideas
 about why not.
 
-|rle_open| Once again, if you have an environment that supports easy single-stepping, 
+Once again, if you have an environment that supports easy single-stepping, 
 breakpoints, and inspection, learn to use them well. It is our opinion that walking 
 through code step-by-step builds the best and most accurate mental model of
-how computation happens. Use it if you have it! |rle_close|  
+how computation happens. Use it if you have it!    
 
 
 Flow of Execution
@@ -216,7 +209,7 @@ entering function ``foo``, where ``foo`` is the name of the function.
 Now when you run the program, it will print a trace of each function as it is
 invoked.
 
-|rle_open| If you're not sure, step through the program with your debugger. |rle_close| 
+If you're not sure, step through the program with your debugger. 
 
 When I run the program I get an exception.
 ------------------------------------------
@@ -225,7 +218,7 @@ If something goes wrong during runtime, Python prints a message that includes
 the name of the exception, the line of the program where the problem occurred,
 and a traceback.
 
-|rle_open| Put a breakpoint on the line causing the exception, and look around! |rle_close| 
+Put a breakpoint on the line causing the exception, and look around! 
 
 The traceback identifies the function that is currently running, and then the
 function that invoked it, and then the function that invoked *that*, and so on.
@@ -301,7 +294,7 @@ Similarly, rewriting a piece of code can help you find subtle bugs. If
 you make a change that you think doesn't affect the program, and it
 does, that can tip you off.
 
-|rle_open| You can also wrap your debugging print statements in some
+You can also wrap your debugging print statements in some
 condition, so that you suppress much of the output. For example, if
 you are trying to find an element using a binary search, and it is
 not working, you might code up a debugging print statement inside
@@ -310,7 +303,7 @@ then print debugging information, otherwise don't print.
 
 Similarly, breakpoints can be made conditional: you can set a breakpoint
 on a statement, then edit the breakpoint to say "only break if this
-expression becomes true".  |rle_close| 
+expression becomes true".
 
 Semantic errors
 ---------------
@@ -374,18 +367,19 @@ expression into a series of assignments to temporary variables.
 
 For example:
 
-.. sourcecode:: python
-    
-    self.hands[i].addCard (self.hands[self.findNeighbor(i)].popCard())
+    .. sourcecode:: python3
+        :linenos:
+        
+        self.hands[i].addCard (self.hands[self.findNeighbor(i)].popCard())
 
 This can be rewritten as:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    
-    neighbor = self.findNeighbor (i)
-    pickedCard = self.hands[neighbor].popCard()
-    self.hands[i].addCard (pickedCard)
+        neighbor = self.findNeighbor (i)
+        pickedCard = self.hands[neighbor].popCard()
+        self.hands[i].addCard (pickedCard)
 
 The explicit version is easier to read because the variable names provide
 additional documentation, and it is easier to debug because you can check the
@@ -395,9 +389,9 @@ Another problem that can occur with big expressions is that the order of
 evaluation may not be what you expect. For example, if you are translating the
 expression ``x/2pi`` into Python, you might write:
 
-.. sourcecode:: python
-    
-    y = x / 2 * math.pi;
+    .. sourcecode:: python3
+        
+        y = x / 2 * math.pi
 
 That is not correct because multiplication and division have the same
 precedence and are evaluated from left to right. So this expression computes
@@ -406,9 +400,9 @@ precedence and are evaluated from left to right. So this expression computes
 A good way to debug expressions is to add parentheses to make the order of
 evaluation explicit:
 
-.. sourcecode:: python
-    
-    y = x / (2 * math.pi);
+    .. sourcecode:: python3
+        
+        y = x / (2 * math.pi)
 
 Whenever you are not sure of the order of evaluation, use parentheses.  Not
 only will the program be correct (in the sense of doing what you intended), it
@@ -423,16 +417,16 @@ If you have a ``return`` statement with a complex expression, you don't have a
 chance to print the ``return`` value before returning. Again, you can use a
 temporary variable. For example, instead of:
 
-.. sourcecode:: python
-    
-    return self.hands[i].removeMatches()
+    .. sourcecode:: python3
+        
+        return self.hands[i].removeMatches()
 
 you could write:
 
-.. sourcecode:: python
-    
-    count = self.hands[i].removeMatches()
-    return count
+    .. sourcecode:: python3
+        
+        count = self.hands[i].removeMatches()
+        return count
 
 Now you have the opportunity to display or inspect the value of ``count`` before
 returning.
@@ -483,14 +477,14 @@ need:
    last lines of code that you wrote, or what is the new test case that fails?
 #. What have you tried so far, and what have you learned?
 
-|rle_open| Good instructors and helpers will also do something that should not 
+Good instructors and helpers will also do something that should not 
 offend you: they won't believe when you tell them *"I'm sure all the input
 routines are working just fine, and that I've set up the data correctly!"*.
 They will want to validate and check things for themselves.  
 After all, your program has a bug.  
 Your understanding and inspection of the code have not found it yet. So you
 should expect to have your assumptions challenged.  And as you gain skills
-and help others, you'll need to do the same for them.   |rle_close| 
+and help others, you'll need to do the same for them.
 
 When you find the bug, take a second to think about what you could have done to
 find it faster. Next time you see something similar, you will be able to find

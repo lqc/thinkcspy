@@ -5,14 +5,6 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 |    
     
@@ -33,8 +25,8 @@ Here's a program with some new features.  Copy it into your workspace, run it.  
 turtle window opens, press the arrow keys and make tess move about! 
 
 
-.. sourcecode:: python
-   :linenos:
+.. sourcecode:: python3
+    :linenos:
 
     import turtle
 
@@ -91,8 +83,8 @@ Mouse events
 A mouse event is a bit different from a keypress event because its handler needs two parameters
 to receive x,y coordinate information telling us where the mouse was when the event occurred. 
 
-.. sourcecode:: python
-   :linenos:
+.. sourcecode:: python3
+    :linenos:
    
     import turtle
 
@@ -134,8 +126,8 @@ have their own handlers for mouse clicks.  The turtle that
 two turtles.  Each will bind a handler to its onclick event.  And the
 two handlers can do different things for their turtles. 
 
-.. sourcecode:: python
-   :linenos:
+.. sourcecode:: python3
+    :linenos:
      
     import turtle
 
@@ -175,8 +167,8 @@ Alarm clocks, kitchen timers, and thermonuclear bombs in James Bond movies are s
 create an "automatic" event after a certain interval. The turtle module in Python has a 
 timer that can cause an event when its time is up.
 
-.. sourcecode:: python
-   :linenos:
+.. sourcecode:: python3
+    :linenos:
    
     import turtle
 
@@ -202,8 +194,8 @@ the handler is called, and tess springs into action.
 Unfortunately, when one sets a timer, it only goes off once. So a common idiom, or style, is to restart
 the timer inside the handler.  In this way the timer will keep on giving new events.  Try this program:
 
-.. sourcecode:: python
-   :linenos:
+.. sourcecode:: python3
+    :linenos:
    
     import turtle
 
@@ -240,7 +232,7 @@ A simple state machine that we encounter often is a traffic light.  Here
 is a state diagram which shows that the machine continually cycles through three different
 states, which we've numbered 0, 1 and 2.
 
-.. image::  illustrations/fsm_traffic_lights.png
+    .. image::  illustrations/fsm_traffic_lights.png
  
 We're going to build a program that uses a turtle to simulate the traffic lights.
 There are three lessons here. The first shows off some different ways to use our turtles.
@@ -252,8 +244,8 @@ The third lesson is to use events from the keyboard to trigger the state changes
 Copy and run this program.  Make sure you understand what each line does, consulting the 
 documentation as you need to.   
    
-.. sourcecode:: python
-  :linenos:
+.. sourcecode:: python3
+    :linenos:
   
     import turtle           # Tess becomes a traffic light.
 

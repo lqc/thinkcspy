@@ -37,25 +37,28 @@ As we have mentioned previously, it is legal to make more than one assignment to
 same variable. A new assignment makes an existing variable refer to a new value
 (and stop referring to the old value).
 
-.. sourcecode:: python
-    
-    bruce = 5
-    print(bruce)
-    bruce = 7
-    print(bruce)
+    .. sourcecode:: python3
+        :linenos:
+        
+        bruce = 5
+        print(bruce)
+        bruce = 7
+        print(bruce)
 
-The output of this program is::
+The output of this program is:
 
-    5
-    7
+    .. sourcecode:: pycon
+
+        5
+        7
 
 because the first time ``bruce`` is
 printed, its value is 5, and the second time, its value is 7.  
 
 Here is what **reassignment** looks like in a state snapshot:
 
-.. image:: illustrations/mult_assign.png
-   :alt: reassignment 
+    .. image:: illustrations/mult_assign.png
+       :alt: reassignment 
 
 With reassignment it is especially important to distinguish between an
 assignment statement and a boolean expression that tests for equality. 
@@ -73,11 +76,12 @@ now, then ``a`` will always equal ``b``. In Python, an assignment statement can 
 two variables equal, but because of the possibility of reassignment, 
 they don't have to stay that way:
 
-.. sourcecode:: python
-    
-    a = 5
-    b = a    # after executing this line, a and b are now equal
-    a = 3    # after executing this line, a and b are no longer equal
+    .. sourcecode:: python3
+        :linenos:
+        
+        a = 5
+        b = a    # after executing this line, a and b are now equal
+        a = 3    # after executing this line, a and b are no longer equal
 
 The third line changes the value of ``a`` but does not change the value of
 ``b``, so they are no longer equal. (In some programming languages, a different
@@ -96,31 +100,32 @@ that evaluation is written into the variable on the left hand side, thereby chan
 One of the most common forms of reassignment is an update, where the new
 value of the variable depends on its old value.
 
-.. sourcecode:: python
-    
-    n = 5
-    n = 3*n + 1
+    .. sourcecode:: python3
+        :linenos:
+        
+        n = 5
+        n = 3*n + 1
 
-The second line means `get the current value of n, multiply it by three and add one, 
+Line 2 means `get the current value of n, multiply it by three and add one, 
 and put the answer back into n as its new value`.  
 So after executing the two lines above, ``n`` will have the value 16.
 
 If you try to get the value of a variable that doesn't exist yet, you'll get an error:
 
-.. sourcecode:: python
-    
-    >>> w = x + 1
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in 
-    NameError: name 'x' is not defined
+    .. sourcecode:: python3
+        
+        >>> w = x + 1
+        Traceback (most recent call last):
+          File "<interactive input>", line 1, in 
+        NameError: name 'x' is not defined
 
 Before you can update a variable, you have to **initialize** it, usually with a
 simple assignment:
 
-.. sourcecode:: python
-    
-    >>> x = 0
-    >>> x = x + 1
+    .. sourcecode:: python3
+        
+        >>> x = 0
+        >>> x = x + 1
 
 This second statement --- updating a variable by adding 1 to it --- is very common.  
 It is called an **increment** of the variable; subtracting 1 is called a **decrement**.  
@@ -136,11 +141,12 @@ Recall that the ``for`` loop processes each item in a list.  Each item in
 turn is (re-)assigned to the loop variable, and the body of the loop is executed.
 We saw this example in an earlier chapter:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    for f in ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]:
-        invitation = "Hi " + f + ".  Please come to my party on Saturday!"
-        print(invitation) 
+        for f in ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]:
+            invitation = "Hi " + f + ".  Please come to my party on Saturday!"
+            print(invitation) 
         
 Running through all the items in a list is called **traversing** the list,
 or **traversal**.      
@@ -154,21 +160,22 @@ to remember the "running total".  It should be initialized with a value of zero,
 and then we need to traverse the items in the list.  For each item, we'll want
 to update the running total by adding the next number to it.
 
-.. sourcecode::  python
+    .. sourcecode::  python
+        :linenos:
 
-    def mysum(xs):
-        """ Sum all the numbers in the list xs, and return the total. """
-        running_total = 0
-        for x in xs:
-            running_total = running_total + x
-        return running_total
+        def mysum(xs):
+            """ Sum all the numbers in the list xs, and return the total. """
+            running_total = 0
+            for x in xs:
+                running_total = running_total + x
+            return running_total
 
-    #add tests like these to your test suite ...
-    test(mysum([1, 2, 3, 4]), 10)
-    test(mysum([1.25, 2.5, 1.75]), 5.5)
-    test(mysum([1, -2, 3]), 2)
-    test(mysum([ ]), 0)
-    test(mysum(range(11)), 55)    # Remember that 11 is not in the list that range generates.
+        #add tests like these to your test suite ...
+        test(mysum([1, 2, 3, 4]), 10)
+        test(mysum([1.25, 2.5, 1.75]), 5.5)
+        test(mysum([1, -2, 3]), 2)
+        test(mysum([ ]), 0)
+        test(mysum(range(11)), 55)    # 11 is not in the list.
       
         
 .. index:: while statement, while loop, iteration, loop, loop body,
@@ -179,20 +186,21 @@ The ``while`` statement
 
 Here is a fragment of code that demonstrates the use of the ``while`` statement:
 
-.. sourcecode:: python
-    
-    def sum_to(n):
-        """ Return the sum of 1+2+3 ... n """
-        ss  = 0
-        v = 1
-        while v <= n:
-            ss = ss + v
-            v = v + 1
-        return ss
+    .. sourcecode:: python3
+        :linenos:
         
-    # for your test suite
-    test(sum_to(4), 10) 
-    test(sum_to(1000), 500500)     
+        def sum_to(n):
+            """ Return the sum of 1+2+3 ... n """
+            ss  = 0
+            v = 1
+            while v <= n:
+                ss = ss + v
+                v = v + 1
+            return ss
+            
+        # for your test suite
+        test(sum_to(4), 10) 
+        test(sum_to(1000), 500500)     
 
 You can almost read the ``while`` statement as if it were English. It means,
 While ``v`` is less than or equal to ``n``, continue executing the body of the loop. Within
@@ -230,14 +238,15 @@ loop one has to control the loop variable yourself: give it an initial value, te
 for completion, and then make sure you change something in the body so that the loop
 terminates.  By comparison, here is an alternative function that uses ``for`` instead: 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def sum_to(n):
-        """ Return the sum of 1+2+3 ... n """
-        ss  = 0
-        for v in range(n+1):
-            ss = ss + v
-        return ss
+        def sum_to(n):
+            """ Return the sum of 1+2+3 ... n """
+            ss  = 0
+            for v in range(n+1):
+                ss = ss + v
+            return ss
 
 Notice the slightly tricky call to the ``range`` function --- we had to add one onto ``n``, 
 because ``range`` generates its list up to but not including the value you give it.  
@@ -263,19 +272,20 @@ terminates when ``n`` reaches 1.
 
 This Python function captures that algorithm:
 
-.. sourcecode:: python
-    
-    def seq3np1(n):
-        """ Print the 3n+1 sequence from n, 
-            terminating when it reaches 1.
-        """
-        while n != 1:
-            print(n, end=', ')
-            if n % 2 == 0:        # n is even
-                n = n // 2
-            else:                 # n is odd
-                n = n * 3 + 1
-        print(n, end='.\n')     
+    .. sourcecode:: python3
+        :linenos:
+        
+        def seq3np1(n):
+            """ Print the 3n+1 sequence from n, 
+                terminating when it reaches 1.
+            """
+            while n != 1:
+                print(n, end=', ')
+                if n % 2 == 0:        # n is even
+                    n = n // 2
+                else:                 # n is odd
+                    n = n * 3 + 1
+            print(n, end='.\n')     
 
 Notice first that the print function has an extra argument ``end=', '``.  This 
 tells the ``print`` function to follow the printed string with whatever the programmer
@@ -291,18 +301,20 @@ The condition for this loop is ``n != 1``, so the loop will continue running unt
 Each time through the loop, the program outputs the value of ``n`` and then
 checks whether it is even or odd. If it is even, the value of ``n`` is divided
 by 2 using integer division. If it is odd, the value is replaced by ``n * 3 + 1``.  
-Here are some examples::
+Here are some examples: 
 
-    >>> seq3np1(3)
-    3, 10, 5, 16, 8, 4, 2, 1.
-    >>> seq3np1(19)
-    19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 
-                        40, 20, 10, 5, 16, 8, 4, 2, 1.
-    >>> seq3np1(21)
-    21, 64, 32, 16, 8, 4, 2, 1.
-    >>> seq3np1(16)
-    16, 8, 4, 2, 1.
-    >>> 
+    .. sourcecode:: python3
+
+        >>> seq3np1(3)
+        3, 10, 5, 16, 8, 4, 2, 1.
+        >>> seq3np1(19)
+        19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 
+                            40, 20, 10, 5, 16, 8, 4, 2, 1.
+        >>> seq3np1(21)
+        21, 64, 32, 16, 8, 4, 2, 1.
+        >>> seq3np1(16)
+        16, 8, 4, 2, 1.
+        >>> 
     
 Since ``n`` sometimes increases and sometimes decreases, there is no obvious
 proof that ``n`` will ever reach 1, or that the program terminates. For some
@@ -337,8 +349,8 @@ and found to always converge!
 
 .. admonition:: Choosing between ``for`` and ``while``
 
-   Use a ``for`` loop if you know the maximum number of times that you'll
-   need to execute the body before you start the loop.  
+   Use a ``for`` loop if you know, before you start looping, 
+   the maximum number of times that you'll need to execute the body.  
    For example, if you're traversing a list of elements, you know that the maximum
    number of loop iterations you can possibly need is "all the elements in the list".
    Or if you need to print the 12 times table, we know right away how many times
@@ -352,7 +364,7 @@ and found to always converge!
    as we did in this 3n + 1 problem, you'll need a ``while`` loop. 
 
    We call the first case **definite iteration** --- we have some definite bounds for 
-   what is needed.   The latter case is called **indefinite iteration** --- we're not sure
+   what is needed.  The latter case is called **indefinite iteration** --- we're not sure
    how many iterations we'll need --- we cannot even establish an upper bound!    
 
 
@@ -376,27 +388,31 @@ Since it evaluates to ``False``, the ``else`` branch is executed and
 
 To keep track of all this as you hand trace a program, make a column heading on
 a piece of paper for each variable created as the program runs and another one
-for output. Our trace so far would look something like this::
-    
-    n               output printed so far
-    --              ---------------------
-    3               3, 
-    10
+for output. Our trace so far would look something like this:
+
+    .. sourcecode:: pycon
+        
+        n               output printed so far
+        --              ---------------------
+        3               3, 
+        10
 
 Since ``10 != 1`` evaluates to ``True``, the loop body is again executed,
 and 10 is printed. ``10 % 2 == 0`` is true, so the ``if`` branch is
-executed and ``n`` becomes 5. By the end of the trace we have::
+executed and ``n`` becomes 5. By the end of the trace we have:
 
-      n               output printed so far
-      --              ---------------------
-      3               3,
-      10              3, 10,
-      5               3, 10, 5,
-      16              3, 10, 5, 16,
-      8               3, 10, 5, 16, 8,
-      4               3, 10, 5, 16, 8, 4,
-      2               3, 10, 5, 16, 8, 4, 2,
-      1               3, 10, 5, 16, 8, 4, 2, 1.
+    .. sourcecode:: pycon
+
+          n               output printed so far
+          --              ---------------------
+          3               3,
+          10              3, 10,
+          5               3, 10, 5,
+          16              3, 10, 5, 16,
+          8               3, 10, 5, 16, 8,
+          4               3, 10, 5, 16, 8, 4,
+          2               3, 10, 5, 16, 8, 4, 2,
+          1               3, 10, 5, 16, 8, 4, 2, 1.
 
 Tracing can be a bit tedious and error prone (that's why we get computers to do
 this stuff in the first place!), but it is an essential skill for a programmer
@@ -435,14 +451,15 @@ Counting digits
 The following function counts the number of decimal digits in a positive
 integer:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def num_digits(n):
-        count = 0
-        while n != 0:
-            count = count + 1
-            n = n // 10
-        return count
+        def num_digits(n):
+            count = 0
+            while n != 0:
+                count = count + 1
+                n = n // 10
+            return count
     
 A call to ``print(num_digits(710))`` will display ``3``. Trace the execution of this
 function call (perhaps using the single step function in PyScripter, or the
@@ -457,16 +474,17 @@ number of digits.
 If we wanted to only count digits that are either 0 or 5, adding a conditional
 before incrementing the counter will do the trick:
 
-.. sourcecode:: python
-    
-    def num_zero_and_five_digits(n):
-        count = 0
-        while n > 0:
-            digit = n % 10
-            if digit == 0 or digit == 5:
-                count = count + 1
-            n = n // 10
-        return count
+    .. sourcecode:: python3
+        :linenos:
+        
+        def num_zero_and_five_digits(n):
+            count = 0
+            while n > 0:
+                digit = n % 10
+                if digit == 0 or digit == 5:
+                    count = count + 1
+                n = n // 10
+            return count
 
 Confirm that ``test(num_zero_and_five_digits(1055030250), 7)`` passes.
 
@@ -482,43 +500,43 @@ Abbreviated assignment
 Incrementing a variable is so common that Python provides an abbreviated syntax
 for it:
 
-.. sourcecode:: python
-    
-    >>> count = 0
-    >>> count += 1
-    >>> count
-    1
-    >>> count += 1
-    >>> count
-    2
+    .. sourcecode:: python3
+        
+        >>> count = 0
+        >>> count += 1
+        >>> count
+        1
+        >>> count += 1
+        >>> count
+        2
 
 ``count += 1`` is an abreviation for ``count = count + 1`` . We pronouce the operator
 as *"plus-equals"*.  The increment value does not have to be 1:
 
-.. sourcecode:: python
-    
-    >>> n = 2
-    >>> n += 5
-    >>> n
-    7
+    .. sourcecode:: python3
+        
+        >>> n = 2
+        >>> n += 5
+        >>> n
+        7
 
 There are similar abbreviations for ``-=``, ``*=``, ``/=``, ``//=`` and ``%=``:
 
-.. sourcecode:: python
-    
-    >>> n = 2
-    >>> n *= 5
-    >>> n
-    10
-    >>> n -= 4
-    >>> n
-    6
-    >>> n //= 2
-    >>> n
-    3
-    >>> n %= 2
-    >>> n
-    1
+    .. sourcecode:: python3
+        
+        >>> n = 2
+        >>> n *= 5
+        >>> n
+        10
+        >>> n -= 4
+        >>> n
+        6
+        >>> n //= 2
+        >>> n
+        3
+        >>> n %= 2
+        >>> n
+        1
 
 .. index:: help, meta-notation   
     
@@ -533,20 +551,27 @@ Different systems have different ways of accessing this help.  In PyScripter, cl
 .. image:: illustrations/help_range.png  
 
 Notice the square brackets in the description of the arguments. 
-These are examples of **meta-notation** --- notation that describes Python syntax, but is not part of it.
-The square brackets in this documentation mean that the argument is *optional* --- the programmer can
-omit it.  So what this first line of help tells us is that ``range`` must always have a ``stop`` argument,
-but it may have an optional ``start`` argument (which must be followed by a comma if it is present),
-and it can also have an optional ``step`` argument, preceded by a comma if it is present.
+These are examples of **meta-notation** --- notation that describes 
+Python syntax, but is not part of it.
+The square brackets in this documentation mean that the argument is 
+*optional* --- the programmer can
+omit it.  So what this first line of help tells us is that 
+``range`` must always have a ``stop`` argument,
+but it may have an optional ``start`` argument (which must be 
+followed by a comma if it is present),
+and it can also have an optional ``step`` argument, preceded by 
+a comma if it is present.
 
-The examples from help show that ``range`` can have either 1, 2 or 3 arguments.  The list can
-start at any starting value, and go up or down in increments other than 1.  The documentation
-here also says that the arguments must be integers.
+The examples from help show that ``range`` can have either 1, 2 or 3 arguments.  
+The list can
+start at any starting value, and go up or down in increments other than 1.  
+The documentation here also says that the arguments must be integers.
 
-Other meta-notation you'll frequently encounter is the use of bold and italics.  The bold
-means that these are tokens --- keywords or symbols --- typed into your Python code exactly as
-they are, whereas the
-italic terms stand for "something of this type".  So the syntax description
+Other meta-notation you'll frequently encounter is the use of bold 
+and italics.  The bold means that these are tokens 
+--- keywords or symbols --- typed into your Python code exactly as 
+they are, whereas the italic terms stand for "something of this type".  
+So the syntax description
 
     **for** *variable* **in** *list* **:** 
     
@@ -589,10 +614,11 @@ Although a log table is not as useful as it once was, it still makes a good
 example of iteration. The following program outputs a sequence of values in the
 left column and 2 raised to the power of that value in the right column:
 
-.. sourcecode:: python
-    
-    for x in range(13):   # generate numbers 0 to 12
-        print(x, '\t', 2**x)
+    .. sourcecode:: python3
+        :linenos:
+        
+        for x in range(13):   # generate numbers 0 to 12
+            print(x, '\t', 2**x)
 
 The string ``'\t'`` represents a **tab character**. The backslash character in
 ``'\t'`` indicates the beginning of an **escape sequence**.  Escape sequences
@@ -610,21 +636,23 @@ line.
 
 The tab character shifts the cursor to the right until it reaches one of the
 tab stops. Tabs are useful for making columns of text line up, as in the output
-of the previous program::
-    
-    0       1
-    1       2
-    2       4
-    3       8
-    4       16
-    5       32
-    6       64
-    7       128
-    8       256
-    9       512
-    10      1024
-    11      2048
-    12      4096
+of the previous program:
+
+    .. sourcecode:: pycon
+        
+        0       1
+        1       2
+        2       4
+        3       8
+        4       16
+        5       32
+        6       64
+        7       128
+        8       256
+        9       512
+        10      1024
+        11      2048
+        12      4096
 
 Because of the tab characters between the columns, the position of the second
 column does not depend on the number of digits in the first column.
@@ -642,11 +670,12 @@ want to print a multiplication table for the values from 1 to 6.
 A good way to start is to write a loop that prints the multiples of 2, all on
 one line:
 
-.. sourcecode:: python
-    
-    for i in range(1, 7):
-        print(2 * i, end='   ')
-    print()
+    .. sourcecode:: python3
+        :linenos:
+        
+        for i in range(1, 7):
+            print(2 * i, end='   ')
+        print()
 
 Here we've used the ``range`` function, but made it start its sequence at 1. 
 As the loop executes, the value of ``i`` changes from 1 to
@@ -658,9 +687,11 @@ Again, the extra ``end='   '`` argument in the ``print`` function suppresses the
 uses three spaces instead.  After the
 loop completes, the second call to ``print`` finishes the current line, and starts a new line.
 
-The output of the program is::
-    
-    2      4      6      8      10     12
+The output of the program is:
+
+    .. sourcecode:: pycon
+        
+        2      4      6      8      10     12
 
 So far, so good. The next step is to **encapsulate** and **generalize**.
 
@@ -681,46 +712,54 @@ integer.
 This function encapsulates the previous loop and generalizes it to print
 multiples of ``n``:
 
-.. sourcecode:: python
-    
-    def print_multiples(n):
-        for i in range(1, 7):
-            print(n * i, end='   ')
-        print()
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_multiples(n):
+            for i in range(1, 7):
+                print(n * i, end='   ')
+            print()
 
 To encapsulate, all we had to do was add the first line, which declares the
 name of the function and the parameter list. To generalize, all we had to do
 was replace the value 2 with the parameter ``n``.
 
 If we call this function with the argument 2, we get the same output as before.
-With the argument 3, the output is::
+With the argument 3, the output is:
 
-    3      6      9      12     15     18
+    .. sourcecode:: pycon
 
-With the argument 4, the output is::
+        3      6      9      12     15     18
 
-    4      8      12     16     20     24
+With the argument 4, the output is:
+
+    .. sourcecode:: pycon
+
+        4      8      12     16     20     24
 
 By now you can probably guess how to print a multiplication table --- by
 calling ``print_multiples`` repeatedly with different arguments. In fact, we
 can use another loop:
 
-.. sourcecode:: python
-    
-    for i in range(1, 7):
-        print_multiples(i)
+    .. sourcecode:: python3
+        :linenos:
+        
+        for i in range(1, 7):
+            print_multiples(i)
 
 Notice how similar this loop is to the one inside ``print_multiples``.  All we
 did was replace the ``print`` function with a function call.
 
-The output of this program is a multiplication table::
+The output of this program is a multiplication table:
 
-    1      2      3      4      5      6
-    2      4      6      8      10     12
-    3      6      9      12     15     18
-    4      8      12     16     20     24
-    5      10     15     20     25     30
-    6      12     18     24     30     36
+    .. sourcecode:: pycon
+
+        1      2      3      4      5      6
+        2      4      6      8      10     12
+        3      6      9      12     15     18
+        4      8      12     16     20     24
+        5      10     15     20     25     30
+        6      12     18     24     30     36
 
 
 .. index:: development plan
@@ -731,11 +770,12 @@ More encapsulation
 To demonstrate encapsulation again, let's take the code from the last section
 and wrap it up in a function:
 
-.. sourcecode:: python
-    
-    def print_mult_table():
-        for i in range(1, 7):
-            print_multiples(i)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_mult_table():
+            for i in range(1, 7):
+                print_multiples(i)
 
 This process is a common **development plan**. We develop code by writing lines
 of code outside any function, or typing them in to the interpreter. When we get
@@ -772,8 +812,8 @@ The stack diagram for this program shows that the two variables named ``i`` are
 not the same variable. They can refer to different values, and changing one
 does not affect the other.
 
-.. image:: illustrations/stack2.png
-   :alt: Stack 2 diagram 
+    .. image:: illustrations/stack2.png
+       :alt: Stack 2 diagram 
 
 The value of ``i`` in ``print_mult_table`` goes from 1 to 6. In the diagram it
 happens to be 3. The next time through the loop it will be 4. Each time through
@@ -796,103 +836,138 @@ to run this particular example all the way to the end.)
 
 .. index:: break statement,  statement: break
 
-The ``break`` statement, and flavours of loops
-----------------------------------------------
-
-.. sidebar::  A pre-test loop
-
-    .. image:: illustrations/pre_test_loop.png  
+The ``break`` statement 
+-----------------------
 
 The **break** statement is used to immediately leave the body of its loop.  The next
-statement to be executed is the first one after the body::
+statement to be executed is the first one after the body: 
 
-    for i in [12, 16, 17, 24, 29]: 
-        if i % 2 == 1:  # if the number is odd
-           break        # immediately exit the loop
-        print(i)
-    print("done")
+    .. sourcecode:: python3
+        :linenos:
+        
+        for i in [12, 16, 17, 24, 29]: 
+            if i % 2 == 1:  # if the number is odd
+               break        # immediately exit the loop
+            print(i)
+        print("done")
     
-This prints::
+This prints: 
 
-    12
-    16
-    done
+    .. sourcecode:: pycon
+
+        12
+        16
+        done
+
+.. admonition::  The pre-test loop - standard loop behaviour
+
+    ``for`` and ``while`` loops do their tests at the start, before executing
+    any part of the body.   They're called **pre-test** loops, because the test
+    happens before (pre) the body.    
+    ``break`` and ``return`` are our tools for adapting this standard behaviour.
+
+    .. image:: illustrations/pre_test_loop.png  
     
-
-    
-``for`` and ``while`` loops do their tests at the start, before executing
-any part of the body.  (They're called **pre-test** loops, because the test
-happens before (pre) the body.)  
-
-   
-.. sidebar::  A middle-test loop
-
-    .. image:: illustrations/mid_test_loop.png  
-    
+Other flavours of loops
+-----------------------  
+  
 Sometimes we'd like to have the **middle-test** loop with the exit test in the middle 
-of the body, rather than at the beginning.  Or a **post-test** loop that
-puts its exit test after the body.   Python doesn't provide different
-loops for these cases: but a combination of ``while`` and ``break`` are sufficient
-to get the job done.    
+of the body, rather than at the beginning or at the end.  Or a **post-test** loop that
+puts its exit test as the last thing in the body.   Other languages have different
+syntax amd keywords for these different flavours, but Python just uses 
+a combination of ``while`` and ``if condition: break`` to get the job done.    
 
 A typical example is a problem where the user has to input numbers to be summed.  
 To indicate that there are no more inputs, the user enters a special value, often
 the value -1, or the empty string.  This needs a middle-exit loop pattern: 
-input the next number, then test whether to exit, or else process the number::
+input the next number, then test whether to exit, or else process the number: 
 
-    total = 0
-    while True:
-        response = input("Enter the next number. (Leave blank to end)")
-        if response == "":
-            break 
-        total += int(response)
-    print("The total of the numbers you entered is ", total)
+    .. admonition::  The middle-test loop flowchart
 
-    
-A post-test loop would be useful,for example, if you were playing an
-interactive game against the user::
+        .. image:: illustrations/mid_test_loop.png 
+        
+    .. sourcecode:: python3
+        :linenos:
+        
+        total = 0
+        while True:
+            response = input("Enter the next number. (Leave blank to end)")
+            if response == "":
+                break 
+            total += int(response)
+        print("The total of the numbers you entered is ", total)
+        
+Convince yourself that this fits the middle-exit loop flowchart: line 3
+does some useful work, lines 4 and 5 can exit the loop, and if they don't
+line 6 does more useful work before the next iteration starts.
 
-    while True:
-        play_the_game_once()
-        response = input("Play again? (yes or no)")
-        if response != "yes":
-            break 
-    print("Goodbye!")
-    
-.. sidebar::  A post-test loop
+The ``while bool-expr:`` uses the boolean expression to determine whether to iterate again.
+``True`` is a trivial boolean expression, so ``while True:``  means *always do 
+the loop body again*.  This is a language *idiom* --- a convention that
+most programmers will recognize immediately. Since the expression on line 2
+will never terminate the loop, (it is a dummy test) the programmer must arrange to 
+break (or return) out of the loop body elsewhere, in some other way (i.e. in lines 4 and 5 in 
+this sample). A clever compiler or interpreter will understand that line 2 is a 
+fake test that must always succeed, so it won't even generate a test, and our flowchart 
+never even put the diamond-shape dummy test box at the top of the loop!  
 
-    .. image:: illustrations/post_test_loop.png        
-    
-The ``while True:`` in these cases is *idiomatic* --- a convention that
-most programmers will recognize immediately. The test in the ``while`` loop must
-always succeed. A clever compiler or interpreter will understand that
-and won't generate any unnecessary work!   
-    
-    
+Similarly, by just moving the ``if condition: break`` to the end of the loop body we
+create a pattern for a post-test loop.  Post-test loops are used when you want to
+be sure that the loop body always executes at least once (because the first test
+only happens at the end of the execution of the first loop body). 
+This is useful, for example, if we want to play an interactive game against 
+the user --- we always want to play at least one game:
+
+    .. sourcecode:: python3
+        :linenos:
+
+        while True:
+            play_the_game_once()
+            response = input("Play again? (yes or no)")
+            if response != "yes":
+                break 
+        print("Goodbye!")
+        
+  
+.. admonition::  Hint: think about where you want the exit test to happen
+
+    Once you've recognized that you need a loop to repeat something, think
+    about its terminating condition --- when will I want to stop iterating?
+    Then figure out whether you need to do the test before starting
+    the first (and every other) iteration, or at the end of 
+    the first (and every other) iteration, or perhaps in 
+    the middle of each iteration.  Iteractive programs that require input
+    from the user or read from files often need to exit their loops in the 
+    middle or at the end of an iteration, when it becomes clear that there is 
+    no more data to process, or the user doesn't want to play our game anymore. 
+  
+An example
+----------
+  
 The following program implements a simple guessing game:
 
 
-.. sourcecode:: python
-    :linenos:
-    
-    import random                   # We cover random numbers in chapter 10
-    rng = random.Random()           # so you can peek ahead.
-    number = rng.randrange(1, 1000) # Get random number between [1 and 1000).
+    .. sourcecode:: python3
+        :linenos:
+        
+        import random                   # We cover random numbers in chapter 10
+        rng = random.Random()           # so you can peek ahead.
+        number = rng.randrange(1, 1000) # Get random number between [1 and 1000).
 
-    guesses = 0
-    msg = ""
+        guesses = 0
+        msg = ""
 
-    while True:
-        guess = int(input(msg + "\nGuess my number between 1 and 1000: "))
-        guesses += 1
-        if guess > number:
-            msg += str(guess) + " is too high.\n"  
-        elif guess < number:
-            msg += str(guess) + " is too low.\n"  
-        else:
-            break
+        while True:
+            guess = int(input(msg + "\nGuess my number between 1 and 1000: "))
+            guesses += 1
+            if guess > number:
+                msg += str(guess) + " is too high.\n"  
+            elif guess < number:
+                msg += str(guess) + " is too low.\n"  
+            else:
+                break
 
-    input("\n\nGreat, you got it in {0} guesses!\n\n" .format(guesses))
+        input("\n\nGreat, you got it in {0} guesses!\n\n" .format(guesses))
     
 This program makes use of the mathematical law of **trichotomy** (given real
 numbers a and b, exactly one of these three must be true:  a > b, a < b, or a == b). 
@@ -907,7 +982,7 @@ Also notice the use of the ``msg`` variable, initially an empty string, on lines
 Each time through the loop we extend the message being displayed: this allows us to 
 display the program's feedback right at the same place as we're asking for the next guess. 
 
-.. image:: illustrations/python_input.png
+    .. image:: illustrations/python_input.png
 
 .. index:: continue statement,  statement; continue
 
@@ -916,21 +991,26 @@ The ``continue`` statement
 
 This is a control flow statement that causes the program to immediately skip the
 processing of the rest of the body of the loop, *for the current iteration*.  But
-the loop still carries on running for its remaining iterations::
+the loop still carries on running for its remaining iterations: 
 
-    for i in [12, 16, 17, 24, 29, 30]: 
-        if i % 2 == 1:      # if the number is odd
-           continue         # don't process it
-        print(i)
-    print("done")
+    .. sourcecode:: python3
+        :linenos:
 
-This prints::
+        for i in [12, 16, 17, 24, 29, 30]: 
+            if i % 2 == 1:      # if the number is odd
+               continue         # don't process it
+            print(i)
+        print("done")
 
-    12
-    16
-    24
-    30
-    done    
+This prints:
+
+    .. sourcecode:: pycon
+
+        12
+        16
+        24
+        30
+        done    
     
 More generalization
 -------------------
@@ -939,22 +1019,25 @@ As another example of generalization, imagine you wanted a program that would
 print a multiplication table of any size, not just the six-by-six table. You
 could add a parameter to ``print_mult_table``:
 
-.. sourcecode:: python
-    
-    def print_mult_table(high):
-        for i in range(1, high+1):
-            print_multiples(i)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_mult_table(high):
+            for i in range(1, high+1):
+                print_multiples(i)
 
 We replaced the value 1 with the expression ``high+1``. If we call
-``print_mult_table`` with the argument 7, it displays::
+``print_mult_table`` with the argument 7, it displays: 
+
+    .. sourcecode:: pycon
     
-    1      2      3      4      5      6
-    2      4      6      8      10     12
-    3      6      9      12     15     18
-    4      8      12     16     20     24
-    5      10     15     20     25     30
-    6      12     18     24     30     36
-    7      14     21     28     35     42
+        1      2      3      4      5      6
+        2      4      6      8      10     12
+        3      6      9      12     15     18
+        4      8      12     16     20     24
+        5      10     15     20     25     30
+        6      12     18     24     30     36
+        7      14     21     28     35     42
 
 This is fine, except that we probably want the table to be square --- with the
 same number of rows and columns. To do that, we add another parameter to
@@ -964,30 +1047,33 @@ Just to be annoying, we call this parameter ``high``, demonstrating that
 different functions can have parameters with the same name (just like local
 variables). Here's the whole program:
 
-.. sourcecode:: python
-    
-    def print_multiples(n, high):
-        for i in range(1, high+1):
-            print(n * i, end='   ')
-        print()
-       
-    def print_mult_table(high):
-        for i in range(1, high+1):
-            print_multiples(i, high)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_multiples(n, high):
+            for i in range(1, high+1):
+                print(n * i, end='   ')
+            print()
+           
+        def print_mult_table(high):
+            for i in range(1, high+1):
+                print_multiples(i, high)
 
 Notice that when we added a new parameter, we had to change the first line of
 the function (the function heading), and we also had to change the place where
 the function is called in ``print_mult_table``.
 
-Now, when we call ``print_mult_table(7)``::
+Now, when we call ``print_mult_table(7)``: 
 
-    1      2      3      4      5      6      7
-    2      4      6      8      10     12     14
-    3      6      9      12     15     18     21
-    4      8      12     16     20     24     28
-    5      10     15     20     25     30     35
-    6      12     18     24     30     36     42
-    7      14     21     28     35     42     49
+    .. sourcecode:: pycon
+
+        1      2      3      4      5      6      7
+        2      4      6      8      10     12     14
+        3      6      9      12     15     18     21
+        4      8      12     16     20     24     28
+        5      10     15     20     25     30     35
+        6      12     18     24     30     36     42
+        7      14     21     28     35     42     49
 
 When you generalize a function appropriately, you often get a program with
 capabilities you didn't plan. For example, you might notice that, because ab =
@@ -995,15 +1081,17 @@ ba, all the entries in the table appear twice. You could save ink by printing
 only half the table. To do that, you only have to change one line of
 ``print_mult_table``. Change
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
     
-            print_multiples(i, high+1)
+        print_multiples(i, high+1)
 
 to
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
     
-            print_multiples(i, i+1)
+        print_multiples(i, i+1)
 
 and you get::
     
@@ -1044,43 +1132,54 @@ Paired Data
 We've already seen lists of names and lists of numbers in Python. We're going to peek ahead in
 the textbook a little, and show a more advanced way of representing our data.
 Making a pair of things in Python is as simple as putting them into parentheses,
-like this::
+like this:
 
-    year_born = ("Paris Hilton", 1981) 
+    .. sourcecode:: python3
+        :linenos:
+        
+        year_born = ("Paris Hilton", 1981) 
    
-We can put many pairs into a list of pairs::
+We can put many pairs into a list of pairs:
 
-    celebs = [("Brad Pitt", 1963), ("Jack Nicholson", 1937), 
+    .. sourcecode:: python3
+        :linenos:
+        
+        celebs = [("Brad Pitt", 1963), ("Jack Nicholson", 1937), 
                                         ("Justin Bieber", 1994)] 
  
 Here is a quick sample of things we can do with structured data like this.  First,
-print all the celebs::
+print all the celebs: 
 
-    print(celebs)
-    print(len(celebs))    
+    .. sourcecode:: python3
+        :linenos:
+        
+        print(celebs)
+        print(len(celebs))    
    
-This prints the following::
    
-    [('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justin Bieber', 1994)]
-    3
+    .. sourcecode:: pycon
+              
+        [('Brad Pitt', 1963), ('Jack Nicholson', 1937), ('Justin Bieber', 1994)]
+        3
  
 Notice that the celebs list has just 3 elements, each of them pairs.  
  
 Now print the names of those celebs born before 1980:
 
-.. sourcecode:: python
-    
-    for (nm, yr) in celebs:
-       if yr < 1980:
-            print(nm)
+    .. sourcecode:: python3
+        :linenos:
+        
+        for (nm, yr) in celebs:
+           if yr < 1980:
+                print(nm)
 
-This prints the following::
+    .. sourcecode:: pycon
 
-    Brad Pitt
-    Jack Nicholson
+        Brad Pitt
+        Jack Nicholson
     
 There is a new feature in the ``for`` loop: instead of using a single 
-loop control variable, we've put a pair of variable names, ``nm` and ``yr`` there instead. 
+loop control variable, we've put a pair of variable names, ``nm`` and ``yr`` there instead. 
 The loop is executed three times - once for each pair, and on each iteration both the 
 variables are assigned values from the celeb that is being handled. 
   
@@ -1091,50 +1190,57 @@ Nested Loops for Nested Data
   
 Now we'll come up with an even more adventurous list of structured data.  In this case,
 we have a list of students.  Each student has a name which is paired up with another list
-of subjects that they are enrolled for::
+of subjects that they are enrolled for: 
 
-    students = [
-        ("John", ["CompSci", "Physics"]),
-        ("Vusi", ["Maths", "CompSci", "Stats"]),
-        ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
-        ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
-        ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
+    .. sourcecode:: python3
+        :linenos:
+        
+        students = [
+            ("John", ["CompSci", "Physics"]),
+            ("Vusi", ["Maths", "CompSci", "Stats"]),
+            ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
+            ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
+            ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
             
 Here we've assigned a list of five elements to the variable `students`.  Let's print
 out each student name, and the number of subjects they are enrolled for:
  
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    # print all students with a count of their courses.
-    for (name, subjects) in students:
-        print(name, "takes", len(subjects), "courses")
+        # print all students with a count of their courses.
+        for (name, subjects) in students:
+            print(name, "takes", len(subjects), "courses")
 
         
-Python agreeably responds with the following output:: 
+Python agreeably responds with the following output: 
 
-    John takes 2 courses
-    Vusi takes 3 courses
-    Jess takes 4 courses
-    Sarah takes 4 courses
-    Zuki takes 5 courses
+    .. sourcecode:: pycon
+    
+        John takes 2 courses
+        Vusi takes 3 courses
+        Jess takes 4 courses
+        Sarah takes 4 courses
+        Zuki takes 5 courses
 
 Now we'd like to ask how many students are taking CompSci. This needs a counter,
 and for each student we need a second loop that tests each of the subjects in turn:
 
-.. sourcecode:: python
-    
-    # Count how many students are taking CompSci
-    counter = 0
-    for (name, subjects) in students:
-        for s in subjects:                 # a nested loop!
-            if s == "CompSci" :
-               counter += 1
-               
-    print("The number of students taking CompSci is", counter)
-    
-This results in the following::
+    .. sourcecode:: python3
+        :linenos:
+        
+        # Count how many students are taking CompSci
+        counter = 0
+        for (name, subjects) in students:
+            for s in subjects:                 # a nested loop!
+                if s == "CompSci" :
+                   counter += 1
+                   
+        print("The number of students taking CompSci is", counter)
 
-    The number of students taking CompSci is 3
+    .. sourcecode:: pycon
+
+        The number of students taking CompSci is 3
 
 You should set up a list of your own data that interests you  --- 
 perhaps a list of your CDs, each containing a list of song titles on the CD,
@@ -1158,9 +1264,10 @@ Suppose that you want to know the square root of ``n``. If you start
 with almost any approximation, you can compute a better approximation (closer
 to the actual answer) with the following formula:
 
-.. sourcecode:: python
-    
-    better = (approx + n/approx)/2
+    .. sourcecode:: python3
+        :linenos:
+        
+        better = (approx + n/approx)/2
     
 Repeat this calculation a few times using your calculator.  Can you
 see why each iteration brings your estimate a little closer?  One of the amazing
@@ -1185,30 +1292,32 @@ square root of two has an infinite number of decimal places because it is irrati
 need to formulate the stopping test for the loop by asking "is `a` close enough to `b`"?
 This stopping condition can be coded like this:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    if abs(a-b) < 0.001:  # make this smaller for better accuracy
-          break   
+        if abs(a-b) < 0.001:  # make this smaller for better accuracy
+              break   
           
 Notice that we take the absolute value of the difference between ``a`` and ``b``! 
         
 This problem is also a good example of when a middle-exit loop is appropriate:
 
-.. sourcecode:: python
-    
-    def sqrt(n):
-        approx = n/2.0     # start with some or other guess at the answer
-        while True:
-            better = (approx + n/approx)/2.0
-            if abs(approx - better) < 0.001:
-                break;
-            approx = better
-        return better
+    .. sourcecode:: python3
+        :linenos:
         
-    # test cases
-    print(sqrt(25.0))
-    print(sqrt(49.0))
-    print(sqrt(81.0))
+        def sqrt(n):
+            approx = n/2.0     # start with some or other guess at the answer
+            while True:
+                better = (approx + n/approx)/2.0
+                if abs(approx - better) < 0.001:
+                    break;
+                approx = better
+            return better
+            
+        # test cases
+        print(sqrt(25.0))
+        print(sqrt(49.0))
+        print(sqrt(81.0))
 
 The output is::
 
@@ -1511,25 +1620,26 @@ these building blocks.
    program will fit together, and you come up with this simple 
    scaffolding (which your friend will improve later):
    
-   .. sourcecode:: python
-   
-       # your friend will complete this function
-       def play_once(human_plays_first):  
-           """ 
-              Must play one round of the game. If the parameter
-              is True, the human gets to play first, else the 
-              computer gets to play first.  When the round ends, 
-              the return value of the function is one of 
-              -1 (human wins),  0 (game drawn),   1 (computer wins).
-           """
-           # This is all dummy scaffolding code right at the moment...
-           import random                  # see ch 10 for details 
-           rng = random.Random()
-           # pick a random result between -1 and 1.
-           result = rng.randrange(-1,2)   
-           print("Human plays first={0},  winner={1} " 
-                              .format(human_plays_first, result))
-           return result
+       .. sourcecode:: python3
+           :linenos:
+       
+           # your friend will complete this function
+           def play_once(human_plays_first):  
+               """ 
+                  Must play one round of the game. If the parameter
+                  is True, the human gets to play first, else the 
+                  computer gets to play first.  When the round ends, 
+                  the return value of the function is one of 
+                  -1 (human wins),  0 (game drawn),   1 (computer wins).
+               """
+               # This is all dummy scaffolding code right at the moment...
+               import random                  # see ch 10 for details 
+               rng = random.Random()
+               # pick a random result between -1 and 1.
+               result = rng.randrange(-1,2)   
+               print("Human plays first={0},  winner={1} " 
+                                  .format(human_plays_first, result))
+               return result
            
    a. Write the main program which repeatedly calls this function to play 
       the game, and after each round it announces the outcome as "I win!", "You win!", or "Game drawn!".

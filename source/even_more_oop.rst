@@ -20,26 +20,28 @@ that records the time of day. We'll provide an ``__init__`` method to ensure
 that every instance is created with appropriate attributes and initialization.  
 The class definition looks like this:
 
-.. sourcecode:: python
-    
-    class MyTime:
-    
-        def __init__(self, hrs=0, mins=0, secs=0):
-            """ Create a MyTime object initialized to hrs, mins, secs """
-            self.hours = hrs
-            self.minutes = mins
-            self.seconds = secs     
+    .. sourcecode:: python3
+        :linenos:
+        
+        class MyTime:
+        
+            def __init__(self, hrs=0, mins=0, secs=0):
+                """ Create a MyTime object initialized to hrs, mins, secs """
+                self.hours = hrs
+                self.minutes = mins
+                self.seconds = secs     
 
 We can instantiate a new ``MyTime`` object:  
 
-.. sourcecode:: python
-    
-    tim1 = MyTime(11, 59, 30)
+    .. sourcecode:: python3
+        :linenos:
+        
+        tim1 = MyTime(11, 59, 30)
 
 
 The state diagram for the object looks like this:
 
-.. image:: illustrations/time.png 
+    .. image:: illustrations/time.png 
 
 We'll leave it as an exercise for the readers to add a ``__str__``
 method so that MyTime objects can print themselves decently.
@@ -55,14 +57,15 @@ two kinds of functions: pure functions and modifiers.
 
 The following is a rough version of ``add_time``:
 
-.. sourcecode:: python
-    
-    def add_time(t1, t2):
-        h = t1.hours + t2.hours
-        m = t1.minutes + t2.minutes
-        s = t1.seconds + t2.seconds
-        sum_t = MyTime(h, m, s)
-        return sum_t
+    .. sourcecode:: python3
+        :linenos:
+        
+        def add_time(t1, t2):
+            h = t1.hours + t2.hours
+            m = t1.minutes + t2.minutes
+            s = t1.seconds + t2.seconds
+            sum_t = MyTime(h, m, s)
+            return sum_t
 
 The function creates a new ``MyTime`` object and
 returns a reference to the new object. This is called a **pure function**
@@ -75,13 +78,13 @@ objects: ``current_time``, which contains the current time; and ``bread_time``,
 which contains the amount of time it takes for a breadmaker to make bread. Then
 we'll use ``add_time`` to figure out when the bread will be done.  
 
-.. sourcecode:: python
-    
-    >>> current_time = MyTime(9, 14, 30)
-    >>> bread_time = MyTime(3, 35, 0)
-    >>> done_time = add_time(current_time, bread_time)
-    >>> print(done_time)
-    12:49:30
+    .. sourcecode:: python3
+        
+        >>> current_time = MyTime(9, 14, 30)
+        >>> bread_time = MyTime(3, 35, 0)
+        >>> done_time = add_time(current_time, bread_time)
+        >>> print(done_time)
+        12:49:30
 
 The output of this program is ``12:49:30``, which is correct. On the other
 hand, there are cases where the result is not correct. Can you think of one?
@@ -93,24 +96,25 @@ hours column.
 
 Here's a better version of the function:
 
-.. sourcecode:: python
-    
-    def add_time(t1, t2):
+    .. sourcecode:: python3
+        :linenos:
         
-        h = t1.hours + t2.hours
-        m = t1.minutes + t2.minutes
-        s = t1.seconds + t2.seconds
-       
-        if s >= 60:
-            s -= 60
-            m += 1
-       
-        if m >= 60:
-            m -= 60
-            h += 1
+        def add_time(t1, t2):
             
-        sum_t = MyTime(h, m, s)
-        return sum_t
+            h = t1.hours + t2.hours
+            m = t1.minutes + t2.minutes
+            s = t1.seconds + t2.seconds
+           
+            if s >= 60:
+                s -= 60
+                m += 1
+           
+            if m >= 60:
+                m -= 60
+                h += 1
+                
+            sum_t = MyTime(h, m, s)
+            return sum_t
 
 This function is starting to get bigger, and still doesn't work
 for all possible cases.  Later we will
@@ -129,18 +133,19 @@ Functions that work this way are called **modifiers**.
 ``increment``, which adds a given number of seconds to a ``MyTime`` object, would
 be written most naturally as a modifier. A rough draft of the function looks like this:
 
-.. sourcecode:: python
-    
-    def increment(t, secs):
-        t.seconds += secs
-       
-        if t.seconds >= 60:
-            t.seconds -= 60
-            t.minutes += 1
-       
-        if t.minutes >= 60:
-            t.minutes -= 60
-            t.hours += 1
+    .. sourcecode:: python3
+        :linenos:
+        
+        def increment(t, secs):
+            t.seconds += secs
+           
+            if t.seconds >= 60:
+                t.seconds -= 60
+                t.minutes += 1
+           
+            if t.minutes >= 60:
+                t.minutes -= 60
+                t.hours += 1
 
 
 The first line performs the basic operation; the remainder deals with the
@@ -151,18 +156,19 @@ greater than sixty? In that case, it is not enough to carry once; we have to
 keep doing it until ``seconds`` is less than sixty. One solution is to replace
 the ``if`` statements with ``while`` statements:
 
-.. sourcecode:: python
-    
-    def increment(t, seconds):
-        t.seconds += seconds
-       
-        while t.seconds >= 60:
-            t.seconds -= 60
-            t.minutes += 1
-       
-        while t.minutes >= 60:
-            t.minutes -= 60
-            t.hours += 1
+    .. sourcecode:: python3
+        :linenos:
+        
+        def increment(t, seconds):
+            t.seconds += seconds
+           
+            while t.seconds >= 60:
+                t.seconds -= 60
+                t.minutes += 1
+           
+            while t.minutes >= 60:
+                t.minutes -= 60
+                t.hours += 1
 
 This function is now correct when seconds is not negative, and when
 hours does not exceed 23, but it is not a particularly good solution.
@@ -175,21 +181,22 @@ Once again, OOP programmers would prefer to put functions that work with
 to a method. To save space, we will leave out previously defined methods, 
 but you should keep them in your version:
 
-.. sourcecode:: python
-    
-    class MyTime:
-        #previous method definitions here...
-       
-        def increment(self, seconds):
-            self.seconds += seconds 
-       
-            while self.seconds >= 60:
-                self.seconds -= 60
-                self.minutes += 1
-       
-            while self.minutes >= 60:
-                self.minutes -= 60
-                self.hours += 1
+    .. sourcecode:: python3
+        :linenos:
+        
+        class MyTime:
+            #previous method definitions here...
+           
+            def increment(self, seconds):
+                self.seconds += seconds 
+           
+                while self.seconds >= 60:
+                    self.seconds -= 60
+                    self.minutes += 1
+           
+                while self.minutes >= 60:
+                    self.minutes -= 60
+                    self.hours += 1
 
 The transformation is purely mechanical - we move the definition into
 the class definition and (optionally) change the name of the first parameter to
@@ -197,9 +204,10 @@ the class definition and (optionally) change the name of the first parameter to
 
 Now we can invoke ``increment`` using the syntax for invoking a method.
 
-.. sourcecode:: python
-    
-    current_time.increment(500)
+    .. sourcecode:: python3
+        :linenos:
+        
+        current_time.increment(500)
 
 Again, the object on which the method is invoked gets assigned to the first
 parameter, ``self``. The second parameter, ``seconds`` gets the value ``500``.
@@ -223,28 +231,30 @@ that the computer knows how to do arithmetic with numbers.  The following
 method is added to the ``MyTime`` class to convert any instance into 
 a corresponding number of seconds:
 
-.. sourcecode:: python
-    
-    class MyTime:
-        # ...
+    .. sourcecode:: python3
+        :linenos:
         
-        def to_seconds(self):
-            """ Return the number of seconds represented 
-                by this instance 
-            """
-            return self.hours * 3600 + self.minutes * 60 + self.seconds
+        class MyTime:
+            # ...
+            
+            def to_seconds(self):
+                """ Return the number of seconds represented 
+                    by this instance 
+                """
+                return self.hours * 3600 + self.minutes * 60 + self.seconds
  
 
 Now, all we need is a way to convert from an integer back to a ``MyTime`` object.
 Supposing we have ``tsecs`` seconds, some integer division and mod operators
 can do this for us:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    hrs = tsecs // 3600
-    leftoversecs = tsecs % 3600
-    mins = leftoversecs // 60
-    secs = leftoversecs % 60  
+        hrs = tsecs // 3600
+        leftoversecs = tsecs % 3600
+        mins = leftoversecs // 60
+        secs = leftoversecs % 60  
 
 You might have to think a bit to convince yourself that this technique to
 convert from one base to another is correct. 
@@ -259,31 +269,33 @@ could be 2 hours 70 minutes and 140 seconds.)
 
 Let's rewrite a more powerful initializer for ``MyTime``:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+         :linenos:
 
-     class MyTime:
-        # ...
-        
-        def __init__(self, hrs=0, mins=0, secs=0):
-            """ Create a new MyTime object initialized to hrs, mins, secs.
-                The values of mins and secs may be outside the range 0-59,
-                but the resulting MyTime object will be normalized.
-            """
+         class MyTime:
+            # ...
             
-            # calculate total seconds to represent
-            totalsecs = hrs*3600 + mins*60 + secs   
-            self.hours = totalsecs // 3600        # split in h, m, s
-            leftoversecs = totalsecs % 3600
-            self.minutes = leftoversecs // 60
-            self.seconds = leftoversecs % 60   
+            def __init__(self, hrs=0, mins=0, secs=0):
+                """ Create a new MyTime object initialized to hrs, mins, secs.
+                    The values of mins and secs may be outside the range 0-59,
+                    but the resulting MyTime object will be normalized.
+                """
+                
+                # calculate total seconds to represent
+                totalsecs = hrs*3600 + mins*60 + secs   
+                self.hours = totalsecs // 3600        # split in h, m, s
+                leftoversecs = totalsecs % 3600
+                self.minutes = leftoversecs // 60
+                self.seconds = leftoversecs % 60   
 
 Now we can rewrite ``add_time`` like this:
 
-.. sourcecode:: python
-    
-    def add_time(t1, t2):
-        secs = t1.to_seconds() + t2.to_seconds()
-        return MyTime(0, 0, secs)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def add_time(t1, t2):
+            secs = t1.to_seconds() + t2.to_seconds()
+            return MyTime(0, 0, secs)
 
 This version is much shorter than the original, and it is much easier to
 demonstrate or reason that it is correct.
@@ -346,45 +358,46 @@ Another example
 The ``after`` function should compare two times, and tell us whether the first
 time is strictly after the second, e.g.
 
-.. sourcecode:: python
-    
-    >>> t1 = MyTime(10, 55, 12)
-    >>> t2 = MyTime(10, 48, 22)
-    >>> after(t1, t2)             # is t1 after t2?
-    True
+    .. sourcecode:: python3
+        
+        >>> t1 = MyTime(10, 55, 12)
+        >>> t2 = MyTime(10, 48, 22)
+        >>> after(t1, t2)             # is t1 after t2?
+        True
     
 This is slightly more complicated because it operates on two ``MyTime`` 
 objects, not just one.  But we'd prefer to write it as a method anyway --- 
 in this case, a method on the first argument:
 
-.. sourcecode:: python
-   :linenos:
-    
-    class MyTime:
-        #previous method definitions here...
-       
-        def after(self, time2):
-            """ Return True if I am strictly greater than time2 """
-            if self.hours > time2.hours:
-                return True 
-            if self.hours < time2.hours:
+    .. sourcecode:: python3
+        :linenos:
+        
+        class MyTime:
+            #previous method definitions here...
+           
+            def after(self, time2):
+                """ Return True if I am strictly greater than time2 """
+                if self.hours > time2.hours:
+                    return True 
+                if self.hours < time2.hours:
+                    return False 
+           
+                if self.minutes > time2.minutes:
+                    return True 
+                if self.minutes < time2.minutes:
+                    return False 
+                if self.seconds > time2.seconds:
+                    return True
+                    
                 return False 
-       
-            if self.minutes > time2.minutes:
-                return True 
-            if self.minutes < time2.minutes:
-                return False 
-            if self.seconds > time2.seconds:
-                return True
-                
-            return False 
 
 We invoke this method on one object and pass the other as an argument:
 
-.. sourcecode:: python
-    
-    if current_time.after(done_time):
-        print("The bread will be done before it starts!")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if current_time.after(done_time):
+            print("The bread will be done before it starts!")
 
 You can almost read the invocation like English: If the current time is after the
 done time, then...
@@ -396,14 +409,15 @@ line 16 is only executed if both times have the same hours and the same minutes.
 Could we make this easier by using our "Aha!" insight and extra work from earlier, 
 and reducing both times to integers?   Yes, with spectacular results!
 
-.. sourcecode:: python
-   
-    class MyTime:
-        #previous method definitions here...
+    .. sourcecode:: python3
+        :linenos:
        
-        def after(self, time2):
-            """ Return True if I am strictly greater than time2 """
-            return self.to_seconds() > time2.to_seconds()
+        class MyTime:
+            #previous method definitions here...
+           
+            def after(self, time2):
+                """ Return True if I am strictly greater than time2 """
+                return self.to_seconds() > time2.to_seconds()
 
 This is a great way to code this: if you want to tell if the first time is
 after the second time, turn them both into integers and compare the integers.
@@ -423,13 +437,14 @@ own user-defined types.
 For example, to override the addition operator ``+``, we can provide a method named
 ``__add__``:
 
-.. sourcecode:: python
-    
-    class MyTime:
-        # previously defined methods here...
-       
-        def __add__(self, other):
-            return MyTime(0, 0, self.to_seconds() + other.to_seconds())
+    .. sourcecode:: python3
+        :linenos:
+        
+        class MyTime:
+            # previously defined methods here...
+           
+            def __add__(self, other):
+                return MyTime(0, 0, self.to_seconds() + other.to_seconds())
 
 As usual, the first parameter is the object on which the method is invoked. The
 second parameter is conveniently named ``other`` to distinguish it from
@@ -439,13 +454,13 @@ that contains their sum.
 Now, when we apply the ``+`` operator to ``MyTime`` objects, Python invokes
 the ``__add__`` method that we have written:
 
-.. sourcecode:: python
-    
-    >>>  t1 = MyTime(1, 15, 42) 
-    >>>  t2 = MyTime(3, 50, 30)
-    >>>  t3 = t1 + t2
-    >>>  print(t3)
-    05:06:12
+    .. sourcecode:: python3
+        
+        >>>  t1 = MyTime(1, 15, 42) 
+        >>>  t2 = MyTime(3, 50, 30)
+        >>>  t3 = t1 + t2
+        >>>  print(t3)
+        05:06:12
 
 The expression ``t1 + t2`` is equivalent to ``t1.__add__(t2)``, but obviously
 more elegant.  As an exercise, add a method ``__sub__(self, other)`` that
@@ -455,13 +470,14 @@ For the next couple of exercises we'll go back to the Point class defined
 in our first chapter about objects, and overload some of its operators.   Firstly, adding
 two points adds their respective (x, y) coordinates:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    class Point:
-        # previously defined methods here...
-       
-        def __add__(self, other):
-            return Point(self.x + other.x,  self.y + other.y)
+        class Point:
+            # previously defined methods here...
+           
+            def __add__(self, other):
+                return Point(self.x + other.x,  self.y + other.y)
 
 There are several ways to
 override the behavior of the multiplication operator: by defining a method
@@ -472,19 +488,21 @@ assumes that the other operand is also a ``Point``. It computes the
 **dot product** of the two Points, defined according to the rules of linear
 algebra:
 
-.. sourcecode:: python
-    
-    def __mul__(self, other):
-        return self.x * other.x + self.y * other.y
+    .. sourcecode:: python3
+        :linenos:
+        
+        def __mul__(self, other):
+            return self.x * other.x + self.y * other.y
 
 If the left operand of ``*`` is a primitive type and the right operand is a
 ``Point``, Python invokes ``__rmul__``, which performs
 **scalar multiplication**:
 
-.. sourcecode:: python
-    
-    def __rmul__(self, other):
-        return Point(other * self.x,  other * self.y)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def __rmul__(self, other):
+            return Point(other * self.x,  other * self.y)
 
 The result is a new ``Point`` whose coordinates are a multiple of the original
 coordinates. If ``other`` is a type that cannot be multiplied by a
@@ -492,24 +510,24 @@ floating-point number, then ``__rmul__`` will yield an error.
 
 This example demonstrates both kinds of multiplication:
 
-.. sourcecode:: python
-    
-    >>> p1 = Point(3, 4)
-    >>> p2 = Point(5, 7)
-    >>> print(p1 * p2)
-    43
-    >>> print(2 * p2)
-    (10, 14)
+    .. sourcecode:: python3
+        
+        >>> p1 = Point(3, 4)
+        >>> p2 = Point(5, 7)
+        >>> print(p1 * p2)
+        43
+        >>> print(2 * p2)
+        (10, 14)
 
 What happens if we try to evaluate ``p2 * 2``? Since the first parameter is a
 ``Point``, Python invokes ``__mul__`` with ``2`` as the second argument. Inside
 ``__mul__``, the program tries to access the ``x`` coordinate of ``other``,
 which fails because an integer has no attributes:
 
-.. sourcecode:: python
-    
-    >>> print(p2 * 2)
-    AttributeError: 'int' object has no attribute 'x'
+    .. sourcecode:: python3
+        
+        >>> print(p2 * 2)
+        AttributeError: 'int' object has no attribute 'x'
 
 Unfortunately, the error message is a bit opaque. This example demonstrates
 some of the difficulties of object-oriented programming.  Sometimes it is hard
@@ -530,31 +548,32 @@ For example, the ``multadd`` operation (which is common in linear algebra)
 takes three parameters; it multiplies the first two and then adds the third. We
 can write it in Python like this:
 
-.. sourcecode:: python
-    
-    def multadd (x, y, z):
-        return x * y + z
+    .. sourcecode:: python3
+        :linenos:
+        
+        def multadd (x, y, z):
+            return x * y + z
 
 This function will work for any values of ``x`` and ``y`` that can be multiplied
 and for any value of ``z`` that can be added to the product.
 
 We can invoke it with numeric values:
 
-.. sourcecode:: python
-    
-    >>> multadd (3, 2, 1)
-    7
+    .. sourcecode:: python3
+        
+        >>> multadd (3, 2, 1)
+        7
 
 Or with ``Point``\s:
 
-.. sourcecode:: python
-    
-    >>> p1 = Point(3, 4)
-    >>> p2 = Point(5, 7)
-    >>> print(multadd (2, p1, p2))
-    (11, 15)
-    >>> print(multadd (p1, p2, 1))
-    44
+    .. sourcecode:: python3
+        
+        >>> p1 = Point(3, 4)
+        >>> p2 = Point(5, 7)
+        >>> print(multadd (2, p1, p2))
+        (11, 15)
+        >>> print(multadd (p1, p2, 1))
+        44
 
 In the first case, the ``Point`` is multiplied by a scalar and then added to
 another ``Point``. In the second case, the dot product yields a numeric value,
@@ -566,13 +585,14 @@ A function like this that can take arguments with different types is called
 As another example, consider the function``front_and_back``, which prints a list
 twice, forward and backward:
 
-.. sourcecode:: python
-    
-    def front_and_back(front):
-        import copy
-        back = copy.copy(front)
-        back.reverse()
-        print(str(front) + str(back))
+    .. sourcecode:: python3
+        :linenos:
+        
+        def front_and_back(front):
+            import copy
+            back = copy.copy(front)
+            back.reverse()
+            print(str(front) + str(back))
 
 Because the ``reverse`` method is a modifier, we make a copy of the list before
 reversing it. That way, this function doesn't modify the list it gets as a
@@ -580,11 +600,11 @@ parameter.
 
 Here's an example that applies ``front_and_back`` to a list:
 
-.. sourcecode:: python
-    
-    >>>   myList = [1, 2, 3, 4]
-    >>>   front_and_back(myList)
-    [1, 2, 3, 4][4, 3, 2, 1]
+    .. sourcecode:: python3
+        
+        >>>   myList = [1, 2, 3, 4]
+        >>>   front_and_back(myList)
+        [1, 2, 3, 4][4, 3, 2, 1]
 
 Of course, we intended to apply this function to lists, so it is not surprising
 that it works. What would be surprising is if we could apply it to a ``Point``.
@@ -601,18 +621,19 @@ Look up *duck typing*, and see if you can figure out why it has this name.
 ``copy`` works on any object, and we have already written a ``__str__`` method
 for ``Point`` objects, so all we need is a ``reverse`` method in the ``Point`` class:
 
-.. sourcecode:: python
-    
-    def reverse(self):
-        (self.x , self.y) = (self.y, self.x)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def reverse(self):
+            (self.x , self.y) = (self.y, self.x)
 
 Then we can pass ``Point``\s to ``front_and_back``:
 
-.. sourcecode:: python
-    
-    >>>   p = Point(3, 4)
-    >>>   front_and_back(p)
-    (3, 4)(4, 3)
+    .. sourcecode:: python3
+        
+        >>>   p = Point(3, 4)
+        >>>   front_and_back(p)
+        (3, 4)(4, 3)
 
 The most interesting polymorphism is the unintentional kind, where you discover
 that a function you have already written can be applied to a type for which you

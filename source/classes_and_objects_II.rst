@@ -32,32 +32,35 @@ the size.
 Again, we'll define a new class, and provide it with an initializer and
 a string converter method:
 
-.. sourcecode:: python
-    
-    class Rectangle:
-        """ A class to manufacture rectangle objects """
+    .. sourcecode:: python3
+        :linenos:
         
-        def __init__(self, posn, w, h):
-            """ Initialize rectangle at posn, with width w, height h """
-            self.corner = posn
-            self.width = w
-            self.height = h
+        class Rectangle:
+            """ A class to manufacture rectangle objects """
             
-        def __str__(self):
-            return  "({0}, {1}, {2})" 
-                      .format(self.corner, self.width, self.height)
-            
-    box = Rectangle(Point(0, 0), 100, 200)
-    bomb = Rectangle(Point(100, 80), 5, 10)    # in my video game
-    print("box: ", box)
-    print("bomb: ", bomb)     
+            def __init__(self, posn, w, h):
+                """ Initialize rectangle at posn, with width w, height h """
+                self.corner = posn
+                self.width = w
+                self.height = h
+                
+            def __str__(self):
+                return  "({0}, {1}, {2})" 
+                          .format(self.corner, self.width, self.height)
+                
+        box = Rectangle(Point(0, 0), 100, 200)
+        bomb = Rectangle(Point(100, 80), 5, 10)    # in my video game
+        print("box: ", box)
+        print("bomb: ", bomb)     
     
 To specify the upper-left corner, we have embedded a Point object (as we used
 it in the previous chapter) within our new Rectangle object!
-We create two new ``Rectangle`` objects, and then print them producing:: 
+We create two new ``Rectangle`` objects, and then print them producing:  
 
-    box: ((0, 0), 100, 200)
-    bomb: ((100, 80), 5, 10)
+    .. sourcecode:: python3
+
+        box: ((0, 0), 100, 200)
+        bomb: ((100, 80), 5, 10)
 
 The dot operator composes. The expression ``box.corner.x`` means, Go to the
 object that ``box`` refers to and select its attribute named ``corner``; then go to
@@ -65,7 +68,7 @@ that object and select its attribute named ``x``.
 
 The figure shows the state of this object:
 
-.. image:: illustrations/rectangle.png
+    .. image:: illustrations/rectangle.png
    
 .. index:: mutable data type
 
@@ -77,16 +80,17 @@ its attributes. For example, to grow the size of a rectangle without
 changing its position, we could modify the values of ``width`` and
 ``height``:
 
-.. sourcecode:: python
-    
-    box.width += 50
-    box.height += 100
+    .. sourcecode:: python3
+        
+        box.width += 50
+        box.height += 100
     
 Of course, we'd probably like to provide a method to encapsulate this
 inside the class.  We will also provide another method to move the 
 position of the rectangle elsewhere: 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
         class Rectangle:
             # ...
@@ -101,17 +105,19 @@ position of the rectangle elsewhere:
                 self.corner.x += dx
                 self.corner.y += dy
 
-Let us try this::
+Let us try this: 
 
-    >>> r = Rectangle(Point(10,5), 100, 50)
-    >>> print(r)
-    ((10, 5), 100, 50)
-    >>> r.grow(25, -10)
-    >>> print(r)
-    ((10, 5), 125, 40)
-    >>> r.move(-10, 10)
-    print(r)
-    ((0, 15), 125, 40)
+    .. sourcecode:: python3
+
+        >>> r = Rectangle(Point(10,5), 100, 50)
+        >>> print(r)
+        ((10, 5), 100, 50)
+        >>> r.grow(25, -10)
+        >>> print(r)
+        ((10, 5), 125, 40)
+        >>> r.move(-10, 10)
+        print(r)
+        ((0, 15), 125, 40)
       
 .. index:: equality, equality; deep, equality; shallow, shallow equality, deep equality      
 
@@ -134,22 +140,22 @@ We've already seen the ``is`` operator in the chapter on lists, where we
 talked about aliases:
 it allows us to find out if two references refer to the same object: 
 
-.. sourcecode:: python
-    
-    >>> p1 = Point(3, 4)
-    >>> p2 = Point(3, 4)
-    >>> p1 is p2
-    False
+    .. sourcecode:: python3
+        
+        >>> p1 = Point(3, 4)
+        >>> p2 = Point(3, 4)
+        >>> p1 is p2
+        False
 
 Even though ``p1`` and ``p2`` contain the same coordinates, they are not the
 same object. If we assign ``p1`` to ``p3``, then the two variables are aliases
 of the same object:
 
-.. sourcecode:: python
-    
-    >>> p3 = p1
-    >>> p1 is p3
-    True
+    .. sourcecode:: python3
+        
+        >>> p3 = p1
+        >>> p1 is p3
+        True
 
 This type of equality is called **shallow equality** because it compares only
 the references, not the contents of the objects.
@@ -157,20 +163,21 @@ the references, not the contents of the objects.
 To compare the contents of the objects --- **deep equality** --- we can write a
 function called ``same_coordinates``:
 
-.. sourcecode:: python
-    
-    def same_coordinates(p1, p2):
-        return (p1.x == p2.x) and (p1.y == p2.y)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def same_coordinates(p1, p2):
+            return (p1.x == p2.x) and (p1.y == p2.y)
 
 Now if we create two different objects that contain the same data, we can use
 ``same_point`` to find out if they represent points with the same coordinates.
 
-.. sourcecode:: python
-    
-    >>> p1 = Point(3, 4)
-    >>> p2 = Point(3, 4)
-    >>> same_coordinates(p1, p2)
-    True
+    .. sourcecode:: python3
+        
+        >>> p1 = Point(3, 4)
+        >>> p2 = Point(3, 4)
+        >>> same_coordinates(p1, p2)
+        True
 
 Of course, if the two variables refer to the same object, they have both
 shallow and deep equality.
@@ -185,25 +192,28 @@ shallow and deep equality.
     But sometimes the implementors will attach shallow equality semantics, and 
     sometimes deep equality, as shown in this little experiment:  
     
-    .. sourcecode:: python
-    
-        p = Point(4, 2)
-        s = Point(4, 2)
-        print("== on Points returns", p == s)  
-        # by default, == on Point objects does a shallow equality test
+        .. sourcecode:: python3
+            :linenos:
+        
+            p = Point(4, 2)
+            s = Point(4, 2)
+            print("== on Points returns", p == s)  
+            # by default, == on Point objects does a shallow equality test
 
-        a = [2,3]
-        b = [2,3]
-        print("== on lists returns",  a == b) 
-        # but by default, == does a deep equality test on lists
+            a = [2,3]
+            b = [2,3]
+            print("== on lists returns",  a == b) 
+            # but by default, == does a deep equality test on lists
 
-    This outputs::
+    This outputs:
     
-        == on Points returns False
-        == on lists returns True  
+            .. sourcecode:: python3
+        
+                == on Points returns False
+                == on lists returns True  
         
     So we conclude that even though the two lists (or tuples, etc.) are distinct objects
-    with different memory addresses, in one case the ``==`` operator tests for deep equality, 
+    with different memory addresses, for lists the ``==`` operator tests for deep equality, 
     while in the case of points it makes a shallow test. 
 
 .. index:: copy, copy; deep, copy; shallow 
@@ -219,16 +229,16 @@ Copying an object is often an alternative to aliasing. The ``copy``
 module contains a function called ``copy`` that can duplicate any
 object:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
 
-    
-    >>> import copy
-    >>> p1 = Point(3, 4)
-    >>> p2 = copy.copy(p1)    
-    >>> p1 is p2
-    False
-    >>> same_coordinates(p1, p2)
-    True
+        
+        >>> import copy
+        >>> p1 = Point(3, 4)
+        >>> p2 = copy.copy(p1)    
+        >>> p1 is p2
+        False
+        >>> same_coordinates(p1, p2)
+        True
 
 Once we import the ``copy`` module, we can use the ``copy`` function to make
 a new ``Point``. ``p1`` and ``p2`` are not the same point, but they contain
@@ -246,7 +256,7 @@ new one refer to a single ``Point``.
 If we create a box, ``b1``, in the usual way and then make a copy, ``b2``,
 using ``copy``, the resulting state diagram looks like this:
 
-.. image:: illustrations/rectangle2.png
+    .. image:: illustrations/rectangle2.png
 
 This is almost certainly not what we want. In this case, invoking
 ``grow`` on one of the ``Rectangles`` would not affect the other, but
@@ -258,9 +268,9 @@ Fortunately, the ``copy`` module contains a function named ``deepcopy`` that
 copies not only the object but also any embedded objects. You will not
 be surprised to learn that this operation is called a **deep copy**.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
 
-    >>> b2 = copy.deepcopy(b1)
+        >>> b2 = copy.deepcopy(b1)
 
 Now ``b1`` and ``b2`` are completely separate objects.
 

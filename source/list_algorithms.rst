@@ -53,25 +53,27 @@ We'd like to know the index where a specific item occurs within in a list of ite
 Specifically, we'll return the index of the item if it is found, or we'll return
 -1 if the item doesn't occur in the list.  Let us start with some tests:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
-    test(search_linear(friends, 'Amy'), 1)
-    test(search_linear(friends, 'Joe'), 0)
-    test(search_linear(friends, 'Paris'), 6)
-    test(search_linear(friends, 'Bill'), -1)
+        friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
+        test(search_linear(friends, 'Amy'), 1)
+        test(search_linear(friends, 'Joe'), 0)
+        test(search_linear(friends, 'Paris'), 6)
+        test(search_linear(friends, 'Bill'), -1)
 
 Motivated by the fact that our tests don't even run, let alone pass, we now write
 the function:
  
-.. sourcecode:: python 
+    .. sourcecode:: python3 
+        :linenos:
 
-    def search_linear(xs, target):
-        ''' Find and return the index of target in sequence xs '''
-        for (i, v) in enumerate(xs):
-           if v == target:
-               return i
-        return -1
+        def search_linear(xs, target):
+            ''' Find and return the index of target in sequence xs '''
+            for (i, v) in enumerate(xs):
+               if v == target:
+                   return i
+            return -1
       
 There are a some points to learn here: We've seen a similar algorithm in section 8.10 when
 we searched for a character in a string.  There we used a ``while`` loop, here we've used a 
@@ -80,7 +82,8 @@ There are other variants --- for example, we could have used ``range`` and made 
 run only over the indexes, or we could have used the idiom of returning ``None`` when the 
 item was not found in the list.  But the essential similarity in all these variations is 
 that we test every item in the list in turn, from first to last, using the pattern of 
-the `eureka traversal` that we introduced in section 8.10 --- that we return from the 
+the short-circuit `eureka traversal` that we introduced in section 8.10 --- 
+that we return from the 
 function as soon as we find the target that we're looking for.
 
 Searching all items of a sequence from first to last is called a **linear search**.  
@@ -123,14 +126,15 @@ of a book, and split it into words.  Let us write some tests for what we need to
 next.  Test data can usually be very small, even if we intend to finally use our 
 program for larger cases: 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    vocab = ['apple', 'boy', 'dog', 'down', 
-                              'fell', 'girl', 'grass', 'the', 'tree']
-    book_words = 'the apple fell from the tree to the grass'.split()
-    test(find_unknown_words(vocab, book_words), ['from', 'to'])
-    test(find_unknown_words([], book_words), book_words)
-    test(find_unknown_words(vocab, ['the', 'boy', 'fell']), [])
+        vocab = ['apple', 'boy', 'dog', 'down', 
+                                  'fell', 'girl', 'grass', 'the', 'tree']
+        book_words = 'the apple fell from the tree to the grass'.split()
+        test(find_unknown_words(vocab, book_words), ['from', 'to'])
+        test(find_unknown_words([], book_words), book_words)
+        test(find_unknown_words(vocab, ['the', 'boy', 'fell']), [])
     
 Notice we were a bit lazy, and used ``split`` to create our list of words ---
 it is easier than typing out the list, and very convenient if you want to input a
@@ -141,15 +145,16 @@ use of our linear search.  The basic strategy is to run through each of the word
 the book, look it up in the vocabulary, and if it is not in the vocabulary, save it
 into a new resulting list which we return from the function:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def find_unknown_words(vocab, wds):
-        """ Return a list of words in wds that do not occur in vocab """
-        result = []
-        for w in wds:
-            if (search_linear(vocab, w) < 0):
-                result.append(w)
-        return result
+        def find_unknown_words(vocab, wds):
+            """ Return a list of words in wds that do not occur in vocab """
+            result = []
+            for w in wds:
+                if (search_linear(vocab, w) < 0):
+                    result.append(w)
+            return result
                      
 We can happily report now that the tests all pass.
 
@@ -158,24 +163,27 @@ so let us read in the file (as a single string) and split it into a list of word
 convenience, we'll create a function to do this for us, and test it on a file we happen
 to have available:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def load_words_from_file(filename):
-        """ Read words from filename, return list of words. """
-        f = open(filename, 'r')
-        file_content = f.read()
-        f.close()
-        wds = file_content.split()
-        return wds
+        def load_words_from_file(filename):
+            """ Read words from filename, return list of words. """
+            f = open(filename, 'r')
+            file_content = f.read()
+            f.close()
+            wds = file_content.split()
+            return wds
 
-    bigger_vocab = load_words_from("vocab.txt")
-    print("There are {0} words in the vocab, starting with\n {1} "
-                  .format(len(bigger_vocab), bigger_vocab[:6]))
+        bigger_vocab = load_words_from("vocab.txt")
+        print("There are {0} words in the vocab, starting with\n {1} "
+                      .format(len(bigger_vocab), bigger_vocab[:6]))
 
-Python responds with:: 
+Python responds with:
 
-     There are 19469 words in the vocab, starting with 
-     ['a', 'aback', 'abacus', 'abandon', 'abandoned', 'abandonment'] 
+    .. sourcecode:: pycon
+
+         There are 19469 words in the vocab, starting with 
+         ['a', 'aback', 'abacus', 'abandon', 'abandoned', 'abandonment'] 
 
 So we've got a more sensible size vocabulary. Now let us load up a book.
 Loading a book is much like loading words from a file, but we're going
@@ -185,77 +193,84 @@ of the book.  This will involve removing punctuation, and converting everything
 to the same case (lowercase, because our vocabulary is all in lowercase).  So
 we'll want a more sophisticated way of converting text to words.
 
-.. sourcecode:: python 
+    .. sourcecode:: python3
+        :linenos:
 
-    test(text_to_words("My name is Earl!"), ['my', 'name', 'is', 'earl'])
-    test(text_to_words('"Well, I never!", said Alice.'), 
-                                 ['well', 'i', 'never', 'said', 'alice'])
+        test(text_to_words("My name is Earl!"), ['my', 'name', 'is', 'earl'])
+        test(text_to_words('"Well, I never!", said Alice.'), 
+                                     ['well', 'i', 'never', 'said', 'alice'])
 
 There is a powerful ``translate`` method available for strings.  The idea is that one sets up
-a table of substitutions --- for every ascii character, you can give a corresponding substitution.
-The ``translate`` method will apply these substitutions throughout the whole string.  So here we go: 
+desired substitutions --- for every character, we can give a 
+corresponding replacement character.  The ``translate`` method will apply 
+these replacements throughout the whole string.  So here we go: 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-     def text_to_words(the_text):
-        """ return a list of words with all punctuation removed, 
-            and all in lowercase 
-        """
-        
-        my_substitutions = the_text.maketrans(
-          # if you find any of these
-          'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', 
-          # replace it by these substitutions
-          'abcdefghijklmnopqrstuvwxyz                           ')  
+        def text_to_words(the_text):
+            """ return a list of words with all punctuation removed, 
+                and all in lowercase 
+            """
+            
+            my_substitutions = the_text.maketrans(
+              # if you find any of these
+              'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', 
+              # replace it by these 
+              'abcdefghijklmnopqrstuvwxyz                           ')  
 
-        # Translate the text according to our translation table.
-        cleaned_text = the_text.translate(my_substitutions)
-        wds = cleaned_text.split()
-        return wds
+            # Translate the text now.
+            cleaned_text = the_text.translate(my_substitutions)
+            wds = cleaned_text.split()
+            return wds
   
-The translation turns all punctuation characters into spaces. Then, of course, ``split``
+The translation turns all uppercase characters into lowercase, and all 
+punctuation characters and digits into spaces. Then, of course, ``split``
 will get rid of the spaces as it breaks the text into a list of words.  The tests pass.
 
 Now we're ready to read in our book:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def get_words_in_book(filename):
-        """ Read a book from filename, and return a list of its words. """
-        f = open(filename, 'r')
-        content = f.read()
-        f.close()
-        wds = text_to_words(content)
-        return wds
+        def get_words_in_book(filename):
+            """ Read a book from filename, and return a list of its words. """
+            f = open(filename, 'r')
+            content = f.read()
+            f.close()
+            wds = text_to_words(content)
+            return wds
 
-    book_words = get_words_in_book("AliceInWonderland.txt")
-    print("There are {0} words in the book, starting with \n{1} ".
-               format(len(book_words), book_words[:100]))
+        book_words = get_words_in_book("AliceInWonderland.txt")
+        print("There are {0} words in the book, starting with \n{1} ".
+                   format(len(book_words), book_words[:100]))
 
-Python prints the following (all on one line, we've cheated a bit for the textbook)::
+Python prints the following (all on one line, we've cheated a bit for the textbook):
 
-    There are 27336 words in the book, starting with 
-    ['alice', 's', 'adventures', 'in', 'wonderland', 'lewis', 'carroll', 
-        'chapter', 'i', 'down', 'the', 'rabbit', 'hole', 'alice', 'was', 
-        'beginning', 'to', 'get', 'very', 'tired', 'of', 'sitting', 'by', 
-        'her', 'sister', 'on', 'the', 'bank', 'and', 'of', 'having', 
-        'nothing', 'to', 'do', 'once', 'or', 'twice', 'she', 'had', 
-        'peeped', 'into', 'the', 'book', 'her', 'sister', 'was', 'reading', 
-        'but', 'it', 'had', 'no', 'pictures', 'or', 'conversations', 'in', 
-        'it', 'and', 'what', 'is', 'the', 'use', 'of', 'a', 'book', 
-        'thought', 'alice', 'without', 'pictures', 'or', 'conversation', 
-        'so', 'she', 'was', 'considering', 'in', 'her', 'own', 'mind', 
-        'as', 'well', 'as', 'she', 'could', 'for', 'the', 'hot', 'day', 
-        'made', 'her', 'feel', 'very', 'sleepy', 'and', 'stupid', 
-        'whether', 'the', 'pleasure', 'of', 'making', 'a']  
+    .. sourcecode:: pycon
+
+        There are 27336 words in the book, starting with 
+        ['alice', 's', 'adventures', 'in', 'wonderland', 'lewis', 'carroll', 
+            'chapter', 'i', 'down', 'the', 'rabbit', 'hole', 'alice', 'was', 
+            'beginning', 'to', 'get', 'very', 'tired', 'of', 'sitting', 'by', 
+            'her', 'sister', 'on', 'the', 'bank', 'and', 'of', 'having', 
+            'nothing', 'to', 'do', 'once', 'or', 'twice', 'she', 'had', 
+            'peeped', 'into', 'the', 'book', 'her', 'sister', 'was', 'reading', 
+            'but', 'it', 'had', 'no', 'pictures', 'or', 'conversations', 'in', 
+            'it', 'and', 'what', 'is', 'the', 'use', 'of', 'a', 'book', 
+            'thought', 'alice', 'without', 'pictures', 'or', 'conversation', 
+            'so', 'she', 'was', 'considering', 'in', 'her', 'own', 'mind', 
+            'as', 'well', 'as', 'she', 'could', 'for', 'the', 'hot', 'day', 
+            'made', 'her', 'feel', 'very', 'sleepy', 'and', 'stupid', 
+            'whether', 'the', 'pleasure', 'of', 'making', 'a']  
         
  
 Well now we have all the pieces ready.  Let us see what words in this book are not in
 the vocabulary: 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
 
-    >>> missing_words = find_unknown_words(bigger_vocab, book_words) 
+        >>> missing_words = find_unknown_words(bigger_vocab, book_words) 
  
 We wait a considerable time now, something like a minute, before Python finally
 works its way through this, and prints a list of 3398 words in the book that are
@@ -264,22 +279,23 @@ that is twenty times larger (you'll often find school dictionaries with 300 000 
 for example), and longer books, this is going to be slow.  So let us make some timing
 measurements while we think about how we can improve this in the next section.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+       :linenos:
 
-   import time
-   
-   t0 = time.clock()
-   missing_words = find_unknown_words(bigger_vocab, book_words) 
-   t1 = time.clock()
-   print("There are {0} unknown words.".format(len(missing_words)))
-   print("That took {0:.4f} seconds.".format(t1-t0))
+       import time
+       
+       t0 = time.clock()
+       missing_words = find_unknown_words(bigger_vocab, book_words) 
+       t1 = time.clock()
+       print("There are {0} unknown words.".format(len(missing_words)))
+       print("That took {0:.4f} seconds.".format(t1-t0))
 
 We get the results and some timing that we can refer back to later:
 
-.. sourcecode:: python
- 
-    There are 3398 unknown words.
-    That took 49.8014 seconds. 
+    .. sourcecode:: pycon
+     
+        There are 3398 unknown words.
+        That took 49.8014 seconds. 
     
 Binary Search
 -------------
@@ -296,14 +312,14 @@ the items are in order, we can improve our searching technique).
 
 Lets start with some tests.  Remember, the list needs to be sorted:
 
-.. sourcecode:: python
- 
-    xs = [2,3,5,7,11,13,17,23,29,31,37,43,47,53]
-    test(search_binary(xs, 20), -1)   
-    test(search_binary(xs, 99), -1)
-    test(search_binary(xs, 1), -1)
-    for (i, v) in enumerate(xs):
-        test(search_binary(xs, v), i)
+    .. sourcecode:: python3
+     
+        xs = [2,3,5,7,11,13,17,23,29,31,37,43,47,53]
+        test(search_binary(xs, 20), -1)   
+        test(search_binary(xs, 99), -1)
+        test(search_binary(xs, 1), -1)
+        for (i, v) in enumerate(xs):
+            test(search_binary(xs, v), i)
         
 Even our test cases are interesting this time: notice that we start
 with items not in the list and look at boundary conditions ---- in the
@@ -320,33 +336,33 @@ discard the top half of the roi, or we learn that we can discard the bottom half
 of the roi.  And we keep doing this repeatedly, until we find our target, or until
 we end up with no more items in our region of interest.  We can code this as follows:
 
-.. sourcecode:: python
-    :linenos:
+    .. sourcecode:: python3
+        :linenos:
 
-    def search_binary(xs, target):
-        """ Find and return the index of key in sequence xs """
-        lb = 0
-        ub = len(xs)
-        while True:
-            if lb == ub:   # if region of interest (roi) becomes empty
-               return -1
+        def search_binary(xs, target):
+            """ Find and return the index of key in sequence xs """
+            lb = 0
+            ub = len(xs)
+            while True:
+                if lb == ub:   # if region of interest (roi) becomes empty
+                   return -1
 
-            # next probe should be in the middle of the roi
-            mid_index = (lb + ub) // 2
+                # next probe should be in the middle of the roi
+                mid_index = (lb + ub) // 2
 
-            # fetch the item at that position
-            item_at_mid = xs[mid_index]
+                # fetch the item at that position
+                item_at_mid = xs[mid_index]
 
-            # print("Roi[{0}:{1}](size={2}), probed='{3}', target='{4}'"
-            #       .format(lb, ub, ub-lb, item_at_mid, target))
+                # print("Roi[{0}:{1}](size={2}), probed='{3}', target='{4}'"
+                #       .format(lb, ub, ub-lb, item_at_mid, target))
 
-            # how does the probed item compare to the target?
-            if item_at_mid == target:
-                return mid_index      # found it!
-            if item_at_mid < target:
-                lb = mid_index + 1    # use upper half of roi next time
-            else:
-                ub = mid_index        # use lower half of roi next time
+                # how does the probed item compare to the target?
+                if item_at_mid == target:
+                    return mid_index      # found it!
+                if item_at_mid < target:
+                    lb = mid_index + 1    # use upper half of roi next time
+                else:
+                    ub = mid_index        # use lower half of roi next time
                 
 The region of interest is represented by two variables, a lower bound ``lb``
 and an upper bound ``ub``.  It is important to be precise about what values
@@ -359,40 +375,44 @@ With this code in place, our tests pass.   Great.  Now if we substitute a call t
 search algorithm instead of calling the ``search_linear`` in ``find_unknown_words``, can we
 improve our performance?  Let's do that, and again run this test:
 
+    .. sourcecode:: python3
+        :linenos:
 
-.. sourcecode:: python
+        t0 = time.clock()
+        missing_words = find_unknown_words(bigger_vocab, book_words) 
+        t1 = time.clock()
+        print("There are {0} unknown words.".format(len(missing_words)))
+        print("That took {0:.4f} seconds.".format(t1-t0))
 
-   t0 = time.clock()
-   missing_words = find_unknown_words(bigger_vocab, book_words) 
-   t1 = time.clock()
-   print("There are {0} unknown words.".format(len(missing_words)))
-   print("That took {0:.4f} seconds.".format(t1-t0))
+What a spectacular difference! More than 200 times faster! 
 
-What a spectacular difference! More than 200 times faster! ::
+    .. sourcecode:: pycon
 
-    There are 3398 unknown words.
-    That took 0.2262 seconds.
+        There are 3398 unknown words.
+        That took 0.2262 seconds.
  
 Why is this binary search so much faster than the linear search?  If we uncomment
 the print statement on lines 15 and 16, we'll get a trace of the probes done during a
-search.  Let's go ahead, and try that::
+search.  Let's go ahead, and try that:
 
-    >>> search_binary(bigger_vocab, "magic")
-    Roi[0:19469](size=19469), probed='known', target='magic'
-    Roi[9735:19469](size=9734), probed='retailer', target='magic'
-    Roi[9735:14602](size=4867), probed='overthrow', target='magic'
-    Roi[9735:12168](size=2433), probed='mission', target='magic'
-    Roi[9735:10951](size=1216), probed='magnificent', target='magic'
-    Roi[9735:10343](size=608), probed='liken', target='magic'
-    Roi[10040:10343](size=303), probed='looks', target='magic'
-    Roi[10192:10343](size=151), probed='lump', target='magic'
-    Roi[10268:10343](size=75), probed='machete', target='magic'
-    Roi[10306:10343](size=37), probed='mafia', target='magic'
-    Roi[10325:10343](size=18), probed='magnanimous', target='magic'
-    Roi[10325:10334](size=9), probed='magical', target='magic'
-    Roi[10325:10329](size=4), probed= maggot', target='magic'
-    Roi[10328:10329](size=1), probed='magic', target='magic'
-    10328
+    .. sourcecode:: python3
+
+        >>> search_binary(bigger_vocab, "magic")
+        Roi[0:19469](size=19469), probed='known', target='magic'
+        Roi[9735:19469](size=9734), probed='retailer', target='magic'
+        Roi[9735:14602](size=4867), probed='overthrow', target='magic'
+        Roi[9735:12168](size=2433), probed='mission', target='magic'
+        Roi[9735:10951](size=1216), probed='magnificent', target='magic'
+        Roi[9735:10343](size=608), probed='liken', target='magic'
+        Roi[10040:10343](size=303), probed='looks', target='magic'
+        Roi[10192:10343](size=151), probed='lump', target='magic'
+        Roi[10268:10343](size=75), probed='machete', target='magic'
+        Roi[10306:10343](size=37), probed='mafia', target='magic'
+        Roi[10325:10343](size=18), probed='magnanimous', target='magic'
+        Roi[10325:10334](size=9), probed='magical', target='magic'
+        Roi[10325:10329](size=4), probed= maggot', target='magic'
+        Roi[10328:10329](size=1), probed='magic', target='magic'
+        10328
     
 Here we see that finding the target word "magic" needed just 14 probes before it was found
 at index 10328.  The important thing is that each probe more or less halves
@@ -434,25 +454,26 @@ Let us try this on a calculator, or in Python, which is the mother of all calcul
 suppose I have 1000 elements to be searched, what is the maximum number of probes I'll need?  
 (There is a pesky +1 in the formula, so let us not forget to add it on...):
 
-.. sourcecode:: python
+    .. sourcecode:: python3
 
-    >>> from math import log
-    >>> log(1000 + 1, 2)
-    9.967226258835993
+        >>> from math import log
+        >>> log(1000 + 1, 2)
+        9.967226258835993
 
 Telling us that we'll need 9.96 probes maximum, to search 1000 items is not quite what we want.
 We forgot to take the ceiling.  The ``ceil`` function in the math
 module does exactly this.  So more accurately, now:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    >>> from math import log, ceil
-    >>> ceil(log(1000 + 1, 2))
-    10
-    >>> ceil(log(1000000 + 1, 2))
-    20
-    >>> ceil(log(1000000000 + 1, 2))
-    30 
+        >>> from math import log, ceil
+        >>> ceil(log(1000 + 1, 2))
+        10
+        >>> ceil(log(1000000 + 1, 2))
+        20
+        >>> ceil(log(1000000000 + 1, 2))
+        30 
 
 This tells us that searching 1000 items needs 10 probes. (Well technically, with 10 
 probes we can search exactly 1023 items, but the easy and useful stuff to 
@@ -473,75 +494,77 @@ in the book, and it is not in our vocabulary!  How should we remove these duplic
 A good approach is to sort the list, then remove all adjacent duplicates.  Let us start
 with removing adjacent duplicates
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    test(remove_adjacent_dups([1,2,3,3,3,3,5,6,9,9]), [1,2,3,5,6,9])
-    test(remove_adjacent_dups([]), [])
-    test(remove_adjacent_dups(['a', 'big', 'big', 'bite', 'dog']),
-                                       ['a', 'big', 'bite', 'dog'])
+        test(remove_adjacent_dups([1,2,3,3,3,3,5,6,9,9]), [1,2,3,5,6,9])
+        test(remove_adjacent_dups([]), [])
+        test(remove_adjacent_dups(['a', 'big', 'big', 'bite', 'dog']),
+                                           ['a', 'big', 'bite', 'dog'])
     
 The algorithm is easy and efficient.  We simply have to remember the most recent 
 item that was inserted into the result, and avoid inserting it again: 
 
-.. sourcecode:: python
-    :linenos:
+    .. sourcecode:: python3
+        :linenos:
 
-    def remove_adjacent_dups(xs):
-        """ Return a new list in which all adjacent 
-            duplicates from xs have been removed.
-        """
-        result = []
-        most_recent_elem = None
-        for e in xs:
-            if e != most_recent_elem:
-                result.append(e)
-                most_recent_elem = e
+        def remove_adjacent_dups(xs):
+            """ Return a new list in which all adjacent 
+                duplicates from xs have been removed.
+            """
+            result = []
+            most_recent_elem = None
+            for e in xs:
+                if e != most_recent_elem:
+                    result.append(e)
+                    most_recent_elem = e
 
-        return result
+            return result
 
 The amount of work done in this algorithm is linear --- each item in ``xs`` causes the loop
 to execute exactly once, and there are no nested loops.  So doubling the number of elements in
-``xs`` should cause this program to run twice as long: the relationship between the size of the
-list and the time to run will be graphed as a straight (linear) line. 
+``xs`` should cause this program to run twice as long: the relationship between the size of
+the list and the time to run will be graphed as a straight (linear) line. 
 
 
 Let us go back now to our analysis of `Alice in Wonderland`.  Before checking the words in the
-book against the vocabulary, we'll sort those words into order, and eliminate duplicates.   So 
-our new code looks like this:
+book against the vocabulary, we'll sort those words into order, and eliminate duplicates.
+So our new code looks like this:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    all_words = get_words_in_book("AliceInWonderland.txt")
-    all_words.sort()
-    book_words = remove_adjacent_dups(all_words)
-    print("There are {0} words in the book. Only {1} are unique.".
-                          format(len(all_words), len(book_words))) 
-    print("The first 100 words are\n{0}".  
-               format(book_words[:100]))
+        all_words = get_words_in_book("AliceInWonderland.txt")
+        all_words.sort()
+        book_words = remove_adjacent_dups(all_words)
+        print("There are {0} words in the book. Only {1} are unique.".
+                              format(len(all_words), len(book_words))) 
+        print("The first 100 words are\n{0}".  
+                   format(book_words[:100]))
 
 Almost magically, we get the following output:
 
-.. sourcecode:: python
+    .. sourcecode:: pycon
 
-    There are 27336 words in the book. Only 2570 are unique. 
-    The first 100 words are
-    ['_i_', 'a', 'abide', 'able', 'about', 'above', 'absence', 'absurd',
-     'acceptance', 'accident', 'accidentally', 'account', 'accounting', 
-     'accounts', 'accusation', 'accustomed', 'ache', 'across', 'act', 
-     'actually', 'ada', 'added', 'adding', 'addressed', 'addressing', 
-     'adjourn', 'adoption', 'advance', 'advantage', 'adventures', 
-     'advice', 'advisable', 'advise', 'affair', 'affectionately', 
-     'afford', 'afore', 'afraid', 'after', 'afterwards', 'again', 
-     'against', 'age', 'ago', 'agony', 'agree', 'ah', 'ahem', 'air', 
-     'airs', 'alarm', 'alarmed', 'alas', 'alice', 'alive', 'all', 
-     'allow', 'almost', 'alone', 'along', 'aloud', 'already', 'also', 
-     'altered', 'alternately', 'altogether', 'always', 'am', 'ambition',
-     'among', 'an', 'ancient', 'and', 'anger', 'angrily', 'angry', 
-     'animal', 'animals', 'ann', 'annoy', 'annoyed', 'another', 
-     'answer', 'answered', 'answers', 'antipathies', 'anxious', 
-     'anxiously', 'any', 'anything', 'anywhere', 'appealed', 'appear', 
-     'appearance', 'appeared', 'appearing', 'applause', 'apple', 
-     'apples', 'arch']
+        There are 27336 words in the book. Only 2570 are unique. 
+        The first 100 words are
+        ['_i_', 'a', 'abide', 'able', 'about', 'above', 'absence', 'absurd',
+         'acceptance', 'accident', 'accidentally', 'account', 'accounting', 
+         'accounts', 'accusation', 'accustomed', 'ache', 'across', 'act', 
+         'actually', 'ada', 'added', 'adding', 'addressed', 'addressing', 
+         'adjourn', 'adoption', 'advance', 'advantage', 'adventures', 
+         'advice', 'advisable', 'advise', 'affair', 'affectionately', 
+         'afford', 'afore', 'afraid', 'after', 'afterwards', 'again', 
+         'against', 'age', 'ago', 'agony', 'agree', 'ah', 'ahem', 'air', 
+         'airs', 'alarm', 'alarmed', 'alas', 'alice', 'alive', 'all', 
+         'allow', 'almost', 'alone', 'along', 'aloud', 'already', 'also', 
+         'altered', 'alternately', 'altogether', 'always', 'am', 'ambition',
+         'among', 'an', 'ancient', 'and', 'anger', 'angrily', 'angry', 
+         'animal', 'animals', 'ann', 'annoy', 'annoyed', 'another', 
+         'answer', 'answered', 'answers', 'antipathies', 'anxious', 
+         'anxiously', 'any', 'anything', 'anywhere', 'appealed', 'appear', 
+         'appearance', 'appeared', 'appearing', 'applause', 'apple', 
+         'apples', 'arch']
 
 It should surprise you that Lewis Carroll was able to write a classic piece of literature 
 using only 2570 different words!
@@ -554,10 +577,11 @@ Suppose we have two sorted lists. Devise an algorithm to merge them together int
 A simple but inefficient algorithm could be to simply append the two lists together, 
 and sort the result:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    newlist = (xs + ys)
-    newlist.sort()
+        newlist = (xs + ys)
+        newlist.sort()
   
 But this doesn't take advantage of the fact that the two lists are
 already sorted, and is going to have poor scaleability and performance for very large lists.
@@ -565,50 +589,51 @@ already sorted, and is going to have poor scaleability and performance for very 
 Lets get some tests together first:
 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    xs = [1,3,5,7,9,11,13,15,17,19]
-    ys = [4,8,12,16,20,24]
-    zs = xs+ys
-    zs.sort()
-    test(merge(xs, []), xs)
-    test(merge([], ys), ys)
-    test(merge([], []), [])
-    test(merge(xs, ys), zs)
-    test(merge([1,2,3], [3,4,5]), [1,2,3,3,4,5])
-    test(merge(['a', 'big', 'cat'], ['big', 'bite', 'dog']),
-                   ['a', 'big', 'big', 'bite', 'cat', 'dog'])
+        xs = [1,3,5,7,9,11,13,15,17,19]
+        ys = [4,8,12,16,20,24]
+        zs = xs+ys
+        zs.sort()
+        test(merge(xs, []), xs)
+        test(merge([], ys), ys)
+        test(merge([], []), [])
+        test(merge(xs, ys), zs)
+        test(merge([1,2,3], [3,4,5]), [1,2,3,3,4,5])
+        test(merge(['a', 'big', 'cat'], ['big', 'bite', 'dog']),
+                       ['a', 'big', 'big', 'bite', 'cat', 'dog'])
  
 
 
  
 Here is our merge algorithm: 
 
-.. sourcecode:: python
-    :linenos:
+    .. sourcecode:: python3
+        :linenos:
 
-    def merge(xs, ys):
-        """ merge sorted lists xs and ys. Return a sorted result """
-        result = []
-        xi = 0
-        yi = 0
-        
-        while True:
-            if xi >= len(xs):          # if xs list is finished, 
-                result.extend(ys[yi:]) # add remaining items from ys
-                return result;         # and we're done.
-                
-            if yi >= len(ys):          # Same again, but swap roles
-                result.extend(xs[xi:])
-                return result;
-               
-            # Both lists still have items, copy smaller item to result.       
-            if xs[xi] <= ys[yi]:
-                result.append(xs[xi])
-                xi += 1
-            else:
-                result.append(ys[yi])
-                yi += 1
+        def merge(xs, ys):
+            """ merge sorted lists xs and ys. Return a sorted result """
+            result = []
+            xi = 0
+            yi = 0
+            
+            while True:
+                if xi >= len(xs):          # if xs list is finished, 
+                    result.extend(ys[yi:]) # add remaining items from ys
+                    return result;         # and we're done.
+                    
+                if yi >= len(ys):          # Same again, but swap roles
+                    result.extend(xs[xi:])
+                    return result;
+                   
+                # Both lists still have items, copy smaller item to result.       
+                if xs[xi] <= ys[yi]:
+                    result.append(xs[xi])
+                    xi += 1
+                else:
+                    result.append(ys[yi])
+                    yi += 1
 
  
 The algorithm works as follows: we create a result list, and keep two indexes,
@@ -648,56 +673,56 @@ Instead of searching for every word in the dictionary (either by linear or binar
 why not use a variant of the merge to return the words that occur in the book, but not in
 the vocabulary.
 
-.. sourcecode:: python
-    :linenos:
-   
-    def find_unknowns_merge_pattern(vocab, wds):
-        """ Both the vocab and wds must be sorted.  Return a new 
-            list of words from wds that do not occur in vocab.
-        """
+    .. sourcecode:: python3
+        :linenos:
+       
+        def find_unknowns_merge_pattern(vocab, wds):
+            """ Both the vocab and wds must be sorted.  Return a new 
+                list of words from wds that do not occur in vocab.
+            """
 
-        result = []
-        xi = 0
-        yi = 0
+            result = []
+            xi = 0
+            yi = 0
 
-        while True:
-            if xi >= len(vocab):
-                result.extend(wds[yi:])
-                return result
+            while True:
+                if xi >= len(vocab):
+                    result.extend(wds[yi:])
+                    return result
 
-            if yi >= len(wds):
-                return result
+                if yi >= len(wds):
+                    return result
 
-            if vocab[xi] == wds[yi]:  # good, word exists in vocab
-                yi += 1
+                if vocab[xi] == wds[yi]:  # good, word exists in vocab
+                    yi += 1
 
-            elif vocab[xi] < wds[yi]: # move past this vocab word,
-                xi += 1
+                elif vocab[xi] < wds[yi]: # move past this vocab word,
+                    xi += 1
 
-            else:                     # got word that is not in vocab
-                result.append(wds[yi])
-                yi += 1
+                else:                     # got word that is not in vocab
+                    result.append(wds[yi])
+                    yi += 1
 
 Now we put it all together:
                     
-.. sourcecode:: python
-    :linenos:                   
-                    
-    all_words = get_words_in_book("AliceInWonderland.txt")
-    t0 = time.clock()
-    all_words.sort()
-    book_words = remove_adjacent_dups(all_words)
-    missing_words = find_unknowns_merge_pattern(bigger_vocab, book_words)
-    t1 = time.clock()
-    print("There are {0} unknown words.".format(len(missing_words)))
-    print("That took {0:.4f} seconds.".format(t1-t0))                    
+    .. sourcecode:: python3
+        :linenos:                   
+                        
+        all_words = get_words_in_book("AliceInWonderland.txt")
+        t0 = time.clock()
+        all_words.sort()
+        book_words = remove_adjacent_dups(all_words)
+        missing_words = find_unknowns_merge_pattern(bigger_vocab, book_words)
+        t1 = time.clock()
+        print("There are {0} unknown words.".format(len(missing_words)))
+        print("That took {0:.4f} seconds.".format(t1-t0))                    
                     
 Even more stunning performance here:
 
-.. sourcecode:: python
+    .. sourcecode:: pycon
 
-    There are 828 unknown words.
-    That took 0.0410 seconds.    
+        There are 828 unknown words.
+        That took 0.0410 seconds.    
 
 Let's review what we've done. We started with a word-by-word linear lookup in the vocabulary
 that ran in about 50 seconds.  We implemented a clever binary search, 
@@ -719,7 +744,7 @@ As told by Wikipedia, *"The eight queens puzzle is the problem of placing eight 
 queens on an 8x8 chessboard so that no two queens attack each other. Thus, a 
 solution requires that no two queens share the same row, column, or diagonal."*
 
- .. image:: illustrations/eight_queens_01.png
+    .. image:: illustrations/eight_queens_01.png
  
 Please try this yourself, and find a few more solutions by hand. 
 
@@ -751,51 +776,67 @@ Let's brainstorm some ideas about how a chessboard and queens could be represent
    possible states for each square --- so perhaps each element in the lists could be True or False,
    or, more simply, 0 or 1.
   
-   Our state for the solution above could then have this data representation::
+   Our state for the solution above could then have this data representation:
+   
+        .. sourcecode:: python3
+           :linenos:   
  
-       bd1 = [[0,0,0,1,0,0,0,0], 
-              [0,0,0,0,0,0,1,0], 
-              [0,0,1,0,0,0,0,0], 
-              [0,0,0,0,0,0,0,1], 
-              [0,1,0,0,0,0,0,0], 
-              [0,0,0,0,1,0,0,0], 
-              [1,0,0,0,0,0,0,0], 
-              [0,0,0,0,0,1,0,0]]
+           bd1 = [[0,0,0,1,0,0,0,0], 
+                  [0,0,0,0,0,0,1,0], 
+                  [0,0,1,0,0,0,0,0], 
+                  [0,0,0,0,0,0,0,1], 
+                  [0,1,0,0,0,0,0,0], 
+                  [0,0,0,0,1,0,0,0], 
+                  [1,0,0,0,0,0,0,0], 
+                  [0,0,0,0,0,1,0,0]]
               
    You should also be able to see how the empty board would be represented, and you should start
    to imagine what operations or changes you'd need to make to the data to place another 
    queen somewhere on the board.   
               
-*  Another idea might be to keep a list of coordinates of where the queens are.  Using the notation in
-   the illustration, for example, we could represent the state of that solution as::
+*  Another idea might be to keep a list of coordinates of 
+   where the queens are.  Using the notation in
+   the illustration, for example, we could represent the state of that solution as: 
    
-       bd2 = [ 'a6', 'b4', 'c2', 'd0', 'e5', 'f7', 'g1', 'h3' ]
+        .. sourcecode:: python3
+            :linenos:   
+   
+            bd2 = [ 'a6', 'b4', 'c2', 'd0', 'e5', 'f7', 'g1', 'h3' ]
        
-*  We could make other tweaks to this --- perhaps each element in this list should rather be a tuple, with
+*  We could make other tweaks to this --- perhaps each 
+   element in this list should rather be a tuple, with
    integer coordinates for both axes.  And being good computer scientists, we'd probably start numbering
-   each axis from 0 instead of at 1. Now our representation could be::
+   each axis from 0 instead of at 1. Now our representation could be:
       
-       bd3 = [(0,6), (1,4), (2,2), (3,0), (4,5), (5,7), (6,1), (7,3)]
+        .. sourcecode:: python3
+            :linenos:      
+
+            bd3 = [(0,6), (1,4), (2,2), (3,0), (4,5), (5,7), (6,1), (7,3)]
    
 *  Looking at this representation, we can't help but notice that the first coordinates 
    are ``0,1,2,3,4,5,6,7`` and they correspond exactly to the index position of the 
    pairs in the list.  So we could discard them, and come up with this really compact
-   alternative representation of the solution::
+   alternative representation of the solution: 
     
-        bd4 = [6, 4, 2, 0, 5, 7, 1, 3]
+        .. sourcecode:: python3
+            :linenos:
+            
+            bd4 = [6, 4, 2, 0, 5, 7, 1, 3]
         
    This will be what we'll use, let's see where that takes us.
    
-.. admonition:: This representation is not general
+..
+   
+    .. admonition:: This representation is not general
 
-    We've come up with a great representation. But will it work for other puzzles? 
-    Our list representation has the constraint that one can only put
-    one queen in each column. But that is a puzzle constraint anyway --- no two queens are
-    allowed to share the same column.  So puzzle and data representation are well matched.
-    
-    But if we were trying to solve a different puzzle on a chessboard, perhaps 
-    play a game of checkers, where many pieces could occupy the same column, our 
-    representation would not work.  
+        We've come up with a great representation. But will it work for other puzzles? 
+        Our list representation has the constraint that one can only put
+        one queen in each column. But that is a puzzle constraint anyway --- no two queens are
+        allowed to share the same column.  So puzzle and data representation are well matched.
+        
+        But if we were trying to solve a different puzzle on a chessboard, perhaps 
+        play a game of checkers, where many pieces could occupy the same column, our 
+        representation would not work.  
  
 Let us now take some grand insight into the problem.  Do you think it is a coincidence
 that there are no repeated numbers in the solution?  The solution  ``[6,4,2,0,5,7,1,3]``
@@ -807,9 +848,9 @@ solution: the numbers represent the row on which the queen is placed, and becaus
 never permitted to put two queens in the same row, no solution will ever have 
 duplicate row numbers in it.   
 
-.. admonition:: Our key insight
+    .. admonition:: Our key insight
 
-    *In our representation, any solution to the N queens problem must therefore be a permutation of the numbers [0 .. N-1].*
+        *In our representation, any solution to the N queens problem must therefore be a permutation of the numbers [0 .. N-1].*
    
 Note that not all permutations are solutions.  For example, ``[0,1,2,3,4,5,6,7]`` has all 
 queens on the same diagonal.
@@ -831,12 +872,13 @@ share a diagonal.  Each queen is on some (x,y) position.
 So does the queen at (5,2) share a diagonal with the one at (2,0)?  
 Does (5,2) clash with (3,0)?   
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    test(share_diagonal(5,2,2,0), False)
-    test(share_diagonal(5,2,3,0), True)
-    test(share_diagonal(5,2,4,3), True)
-    test(share_diagonal(5,2,4,1), True)
+        test(share_diagonal(5,2,2,0), False)
+        test(share_diagonal(5,2,3,0), True)
+        test(share_diagonal(5,2,4,3), True)
+        test(share_diagonal(5,2,4,1), True)
 
 A little geometry will help us here.
 A diagonal has a slope of either 1 or -1.  The question we really want to
@@ -845,18 +887,19 @@ If it is, they share a diagnonal.   Because diagonals can be to the left
 or right, it will make sense for this program to use the absolute distance
 in each direction:
 
-.. sourcecode:: python   
-    
-    def share_diagonal(x0, y0, x1, y1):
-        """ Is (x0, y0) on a shared diagonal with (x1, y1)? """ 
-        dy = abs(y1 - y0)        # calc the absolute y distance 
-        dx = abs(x1 - x0)        # calc the absolute x distance
-        return dx == dy          # they clash if dx == dy
+    .. sourcecode:: python3 
+        :linenos:
+        
+        def share_diagonal(x0, y0, x1, y1):
+            """ Is (x0, y0) on a shared diagonal with (x1, y1)? """ 
+            dy = abs(y1 - y0)        # calc the absolute y distance 
+            dx = abs(x1 - x0)        # calc the absolute x distance
+            return dx == dy          # they clash if dx == dy
         
 If you copy the code and run it, you'll be happy to learn that the tests pass!
 
 Now let's consider how we construct a solution by hand.  We'll put a queen
-somewhere in the first column, then place one in the second column, only of it 
+somewhere in the first column, then place one in the second column, only if it 
 does not clash with the one already on the board.  And then we'll put a third
 one on, checking it against the two queens already to its left. When we consider
 the queen on column 6, we'll need to check for clashes against those in all
@@ -866,58 +909,62 @@ So the next building block is a function that, given a partially completed
 puzzle, can check whether the queen at column ``c`` clashes with any of the
 queens to its left, at columns 0,1,2,..c-1: 
 
-.. sourcecode:: python
- 
-    # solutions should not have any clashes  
-      test(col_clashes([6,4,2,0,5], 4), False)   
-      test(col_clashes([6,4,2,0,5,7,1,3], 7), False)  
-    # Now some test cases that should mostly clash
-      test(col_clashes([0,1], 1), True)
-      test(col_clashes([5,6], 1), True)
-      test(col_clashes([6,5], 1), True)
-      test(col_clashes([0,6,4,3], 3), True)
-      test(col_clashes([5,0,7], 2), True)
-      test(col_clashes([2,0,1,3], 1), False)
-      test(col_clashes([2,0,1,3], 2), True)   
+    .. sourcecode:: python3
+        :linenos:
+     
+        # solutions should not have any clashes  
+          test(col_clashes([6,4,2,0,5], 4), False)   
+          test(col_clashes([6,4,2,0,5,7,1,3], 7), False)  
+        # Now some test cases that should mostly clash
+          test(col_clashes([0,1], 1), True)
+          test(col_clashes([5,6], 1), True)
+          test(col_clashes([6,5], 1), True)
+          test(col_clashes([0,6,4,3], 3), True)
+          test(col_clashes([5,0,7], 2), True)
+          test(col_clashes([2,0,1,3], 1), False)
+          test(col_clashes([2,0,1,3], 2), True)   
     
 Here is our function that makes them all pass:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-   def col_clashes(bs, c):
-        """ Return True if the queen at column c clashes
-             with any queen to its left.
-        """
-        for i in range(c):     # look at all columns to the left of c
-              if share_diagonal(i, bs[i], c, bs[c]):
-                  return True
+        def col_clashes(bs, c):
+            """ Return True if the queen at column c clashes
+                 with any queen to its left.
+            """
+            for i in range(c):     # look at all columns to the left of c
+                  if share_diagonal(i, bs[i], c, bs[c]):
+                      return True
 
-        return False           # no clashes - col c has a safe placement.
+            return False           # no clashes - col c has a safe placement.
 
 Finally, we're going to give our program one of our permutations --- i.e.
 all queens placed somewhere, one on each row, one on each column.  But does
 the permutation have any diagonal clashes?    
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    test(has_clashes([6,4,2,0,5,7,1,3]), False) # solution from above
-    test(has_clashes([4,6,2,0,5,7,1,3]), True)  # swap rows of first two
-    test(has_clashes([0,1,2,3]), True)          # try small 4x4 board
-    test(has_clashes([2,0,3,1]), False)         # solution to 4x4 case
+        test(has_clashes([6,4,2,0,5,7,1,3]), False) # solution from above
+        test(has_clashes([4,6,2,0,5,7,1,3]), True)  # swap rows of first two
+        test(has_clashes([0,1,2,3]), True)          # try small 4x4 board
+        test(has_clashes([2,0,3,1]), False)         # solution to 4x4 case
 
 And the code to make the tests pass:
     
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def has_clashes(the_board):
-        """ Determine whether we have any queens clashing on the diagonals.
-            We're assuming here that the_board is a permutation of column
-            numbers, so we're not explicitly checking row or column clashes.
-        """
-        for col in range(1,len(the_board)):
-            if col_clashes(the_board, col):
-                return True
-        return False
+        def has_clashes(the_board):
+            """ Determine whether we have any queens clashing on the diagonals.
+                We're assuming here that the_board is a permutation of column
+                numbers, so we're not explicitly checking row or column clashes.
+            """
+            for col in range(1,len(the_board)):
+                if col_clashes(the_board, col):
+                    return True
+            return False
  
 Summary of what we've done so far:  we now have a powerful function called ``has_clashes`` that can
 tell if a configuration is a solution to the queens puzzle.   Let's get on now with generating
@@ -939,10 +986,10 @@ how long it would take to search all of them for all solutions.  Not too long at
 64 places to put eight queens.  If you
 do the sums for how many ways can you choose 8 of the 64 squares for your queens, the 
 formula (called *N choose k* where you're choosing k=8 squares of the available N=64)
-yieds a whopping 4426165368 (64! / (8! x 56!)). 
+yieds a whopping 4426165368, obtained from (64! / (8! x 56!)). 
 
-So our earlier key insight --- that we only need to consider permutations, --- 
-has reduced what we call the *problem space* from about 4 billion cases to just 40320!
+So our earlier key insight --- that we only need to consider permutations --- 
+has reduced what we call the *problem space* from about 4.4 billion cases to just 40320!
 
 We're not even going to explore all those, however.  When we introduced the random number
 module, we learnt that it had a ``shuffle`` method that randomly permuted a list of items.
@@ -952,36 +999,40 @@ the list, and test each to see if it works!  Along the way we'll count how many 
 we need before we find each solution, and we'll find 10 solutions  (we could hit the same
 solution more than once, because shuffle is random!): 
 
-.. sourcecode:: python
-    :linenos:
+    .. sourcecode:: python3
+        :linenos:
 
-    def main():
+        def main():
+            import random
+            rng = random.Random()   # instantiate a generator 
+            
+            bd = list(range(8))     # generate the initial permutation
+            numFound = 0
+            tries = 0
+            while numFound < 10:
+               rng.shuffle(bd)
+               tries += 1
+               if not has_clashes(bd):
+                   print('Found solution {0} in {1} tries.'.format(bd, tries))
+                   tries = 0
+                   numFound += 1
 
-        bd = list(range(8))     # generate the initial permutation
-        numFound = 0
-        tries = 0
-        while numFound < 10:
-           random.shuffle(bd)
-           tries += 1
-           if not has_clashes(bd):
-               print('Found solution {0} in {1} tries.'.format(bd, tries))
-               tries = 0
-               numFound += 1
+        main()
 
-    main()
+Almost magically, and at great speed, we get this:
 
-Almost magically, and at great speed, we get this::
+    .. sourcecode:: pycon
  
-    Found solution [3, 6, 2, 7, 1, 4, 0, 5] in 693 tries.
-    Found solution [5, 7, 1, 3, 0, 6, 4, 2] in 82 tries.
-    Found solution [3, 0, 4, 7, 1, 6, 2, 5] in 747 tries.
-    Found solution [1, 6, 4, 7, 0, 3, 5, 2] in 428 tries.
-    Found solution [6, 1, 3, 0, 7, 4, 2, 5] in 376 tries.
-    Found solution [3, 0, 4, 7, 5, 2, 6, 1] in 204 tries.
-    Found solution [4, 1, 7, 0, 3, 6, 2, 5] in 98 tries.
-    Found solution [3, 5, 0, 4, 1, 7, 2, 6] in 64 tries.
-    Found solution [5, 1, 6, 0, 3, 7, 4, 2] in 177 tries.
-    Found solution [1, 6, 2, 5, 7, 4, 0, 3] in 478 tries.
+        Found solution [3, 6, 2, 7, 1, 4, 0, 5] in 693 tries.
+        Found solution [5, 7, 1, 3, 0, 6, 4, 2] in 82 tries.
+        Found solution [3, 0, 4, 7, 1, 6, 2, 5] in 747 tries.
+        Found solution [1, 6, 4, 7, 0, 3, 5, 2] in 428 tries.
+        Found solution [6, 1, 3, 0, 7, 4, 2, 5] in 376 tries.
+        Found solution [3, 0, 4, 7, 5, 2, 6, 1] in 204 tries.
+        Found solution [4, 1, 7, 0, 3, 6, 2, 5] in 98 tries.
+        Found solution [3, 5, 0, 4, 1, 7, 2, 6] in 64 tries.
+        Found solution [5, 1, 6, 0, 3, 7, 4, 2] in 177 tries.
+        Found solution [1, 6, 2, 5, 7, 4, 0, 3] in 478 tries.
 
     
 Here is an interesting fact about this algorithm.  There are know to be 92 solutions to this puzzle,

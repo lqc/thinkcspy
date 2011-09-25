@@ -12,9 +12,6 @@ Modules
 =======
 
 
-Modules
--------
-
 A **module** is a file containing Python definitions and statements intended
 for use in other Python programs. There are many Python modules that come with
 Python as part of the **standard library**. We have seen at least two of these already,
@@ -41,24 +38,30 @@ We often want to use random numbers in programs: here are a few typical uses:
 * For encrypting your banking session on the Internet.
   
 Python provides a module ``random`` that helps with tasks like this.  You can
-look it up using help, but here are the key things we'll do with it::
+look it up using help, but here are the key things we'll do with it: 
 
-    import random
+    .. sourcecode:: python3
+        :linenos:
+        
+        import random
     
-    # create a black box object that generates random numbers
-    rng = random.Random()    
-    
-    dice_throw = rng.randrange(1,7)   # return an int, one of 1,2,3,4,5,6
-    delay_in_seconds = rng.random() * 5.0
+        # create a black box object that generates random numbers
+        rng = random.Random()    
+        
+        dice_throw = rng.randrange(1,7)   # return an int, one of 1,2,3,4,5,6
+        delay_in_seconds = rng.random() * 5.0
     
 The ``randrange`` method call generates generates an integer between its lower and upper
 argument, using the same semantics as ``range`` --- so the lower bound is included, but
 the upper bound is excluded.   All the values have an equal probability of occurring  
 (i.e. the results are *uniformly* distributed).   Like ``range``, ``randrange`` can 
 also take an optional step argument. So let's assume we needed a random odd number less
-than 100, we could say::
+than 100, we could say: 
 
-    r_odd = rng.randrange(1, 100, 2)  
+    .. sourcecode:: python3
+        :linenos:
+
+        r_odd = rng.randrange(1, 100, 2)  
 
 Other methods can also generate other distributions e.g. a bell-shaped, 
 or "normal" distribution might be more appropriate for estimating seasonal rainfall,
@@ -75,11 +78,14 @@ close to 0 are just as likely to occur as numbers close to 0.5, or numbers close
 
 This example shows how to shuffle a list.  (`shuffle` cannot work directly
 with a lazy promise, so notice that we had to convert the range object
-using the ``list`` type converter first.) ::
+using the ``list`` type converter first.)  
 
-    cards = list(range(52))  # generate ints 0..51, 
-                             #    representing a pack of cards.
-    rng.shuffle(cards)       # shuffle the pack
+    .. sourcecode:: python3
+        :linenos:
+
+        cards = list(range(52))  # generate ints 0..51, 
+                                 #    representing a pack of cards.
+        rng.shuffle(cards)       # shuffle the pack
 
 .. index:: deterministic algorithm,  algorithm; deterministic, unit tests   
     
@@ -97,9 +103,12 @@ to have repeatability --- programs that do the same thing every time they are ru
 We can arrange this by forcing the random number generator to be initialized with
 a known seed every time.  (Often this is only wanted during testing --- playing a game
 of cards where the shuffled deck was always in the same order as last time you played
-would get boring very rapidly!)   ::
+would get boring very rapidly!)  
 
-    drng = random.Random(123)  # create generator with known starting state 
+    .. sourcecode:: python3
+        :linenos:
+
+        drng = random.Random(123)  # create generator with known starting state 
      
 This alternative way of creating a random number generator gives an explicit seed
 value to the object. Without this argument, the system probably uses something based
@@ -112,23 +121,26 @@ Picking balls from bags, throwing dice, shuffling a pack of cards
 Here is an example to generate a list containing `n` random ints between a
 lower and an upper bound: 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    import random
+        import random
 
-    def make_random_ints(num, lower_bound, upper_bound): 
-       """ 
-         Generate a list containing num random ints between lower_bound
-         and upper_bound. upper_bound is an open bound.
-       """
-       result = []
-       rng = random.Random()
-       for i in range(num):
-          result.append(rng.randrange(lower_bound, upper_bound))
-       return result
+        def make_random_ints(num, lower_bound, upper_bound): 
+           """ 
+             Generate a list containing num random ints between lower_bound
+             and upper_bound. upper_bound is an open bound.
+           """
+           result = []
+           rng = random.Random()
+           for i in range(num):
+              result.append(rng.randrange(lower_bound, upper_bound))
+           return result
     
->>> make_random_ints(5, 1, 13)  # pick 5 random month numbers
-[8, 1, 8, 5, 6] 
+    .. sourcecode:: python3
+
+        >>> make_random_ints(5, 1, 13)  # pick 5 random month numbers
+        [8, 1, 8, 5, 6] 
 
 Notice that we got a duplicate in the result. Often this is
 wanted, e.g. if we throw a die five times, we would expect some
@@ -136,11 +148,14 @@ duplicates.
 
 But what if you don't want duplicates?  If you wanted 5 distinct months, 
 then this algorithm is wrong.  In this case a good algorithm is to generate the 
-list of possibilities, shuffle it, and slice off the number of elements you want::
+list of possibilities, shuffle it, and slice off the number of elements you want:
 
-    xs = list(range(1,13))  # make list 1..12.  There are no duplicates
-    random.shuffle(xs)      # shuffle the list
-    result = xs[:5]         # take the first five elements.
+    .. sourcecode:: python3
+        :linenos:
+
+        xs = list(range(1,13))  # make list 1..12.  There are no duplicates
+        random.shuffle(xs)      # shuffle the list
+        result = xs[:5]         # take the first five elements.
  
 In statistics courses, the first case --- allowing duplicates --- is usually 
 described as pulling balls out of a bag *with replacement* --- you put the drawn
@@ -154,38 +169,44 @@ Suppose I wanted five numbers between one and ten million, without duplicates.
 Generating a list of ten million items, shuffling it, and then slicing off 
 the first five would be a performance disaster!  So let us have another try:  
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    import random
+        import random
 
-    def make_random_ints_no_dups(num, lower_bound, upper_bound):
-       """
-         Generate a list containing num random ints between 
-         lower_bound and upper_bound. upper_bound is an open bound.  
-         The result list cannot contain duplicates.
-       """
-       result = []
-       rng = random.Random()
-       for i in range(num):
-            while True:
-                candidate = rng.randrange(lower_bound, upper_bound)
-                if candidate not in result:
-                    break;
+        def make_random_ints_no_dups(num, lower_bound, upper_bound):
+           """
+             Generate a list containing num random ints between 
+             lower_bound and upper_bound. upper_bound is an open bound.  
+             The result list cannot contain duplicates.
+           """
+           result = []
+           rng = random.Random()
+           for i in range(num):
+                while True:
+                    candidate = rng.randrange(lower_bound, upper_bound)
+                    if candidate not in result:
+                        break;
 
-            result.append(candidate)
-       return result
+                result.append(candidate)
+           return result
 
-    xs = make_random_ints_no_dups(5, 1, 10000000)
-    print(xs)
+        xs = make_random_ints_no_dups(5, 1, 10000000)
+        print(xs)
     
-This agreeably produces 5 random numbers, without duplicates:: 
+This agreeably produces 5 random numbers, without duplicates: 
 
-   [3344629, 1735163, 9433892, 1081511, 4923270]
+    .. sourcecode:: pycon
+
+        [3344629, 1735163, 9433892, 1081511, 4923270]
    
 Even this function has its pitfalls.  Can you spot what is going to happen in
-this case? ::
+this case?  
 
-   xs = make_random_ints_no_dups(10, 1, 6)
+    .. sourcecode:: python3
+        :linenos:
+        
+        xs = make_random_ints_no_dups(10, 1, 6)
 
 The ``time`` module
 -------------------   
@@ -206,36 +227,39 @@ elements in a list.  We can also write our own.  How do we think they would comp
 for speed?   We'll try to do the summation of a list [0, 1, 2 ...] in both cases, and 
 compare the results:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    import time
+        import time
 
-    def do_my_sum(xs):
-        sum = 0
-        for v in xs:
-            sum += v
-        return sum
+        def do_my_sum(xs):
+            sum = 0
+            for v in xs:
+                sum += v
+            return sum
 
-    sz = 10000000        # lets have 10 million elements in the list
-    testdata = range(sz)
+        sz = 10000000        # lets have 10 million elements in the list
+        testdata = range(sz)
 
-    t0 = time.clock()
-    my_result = do_my_sum(testdata)
-    t1 = time.clock()
-    print("my_result    = {0} (time taken = {1:.4f} seconds)"
-                                          .format(my_result, t1-t0))
-    
-    t2 = time.clock()
-    their_result = sum(testdata)
-    t3 = time.clock()
-    print("their_result = {0} (time taken = {1:.4f} seconds)"
-                                      .format(their_result, t3-t2))
+        t0 = time.clock()
+        my_result = do_my_sum(testdata)
+        t1 = time.clock()
+        print("my_result    = {0} (time taken = {1:.4f} seconds)"
+                                              .format(my_result, t1-t0))
+        
+        t2 = time.clock()
+        their_result = sum(testdata)
+        t3 = time.clock()
+        print("their_result = {0} (time taken = {1:.4f} seconds)"
+                                          .format(their_result, t3-t2))
 
 
-On a reasonably modest laptop, we get these results::
+On a reasonably modest laptop, we get these results: 
 
-    my_sum    = 49999995000000 (time taken = 1.5567 seconds)
-    their_sum = 49999995000000 (time taken = 0.9897 seconds)
+    .. sourcecode:: pycon
+
+        my_sum    = 49999995000000 (time taken = 1.5567 seconds)
+        their_sum = 49999995000000 (time taken = 0.9897 seconds)
  
    
 So our function runs about 57% slower than their built-in one.  
@@ -246,22 +270,24 @@ The ``math`` module
 
 The ``math`` module contains the kinds of mathematical functions you'd typically find on your
 calculator (`sin`, `cos`, `sqrt`, `asin`, `log`, `log10`) and some mathematical constants
-like `pi` and `e`::  
+like `pi` and `e`: 
 
-    >>> import math
-    
-    >>> math.pi                 # constant attribute for pi
-    3.141592653589793
-    >>> math.e                  # constant natural log base
-    2.718281828459045
-    >>> math.sqrt(2.0)          # square root function
-    1.4142135623730951
-    >>> math.radians(90)        # convert 90 degrees to radians
-    1.5707963267948966
-    >>> math.sin(math.radians(90))  # find sin of 90 degrees.
-    1.0
-    >>> math.asin(1.0) * 2      # Double arcsin of 1.0 to get pi
-    3.141592653589793
+    .. sourcecode:: python3
+
+        >>> import math
+        
+        >>> math.pi                 # constant attribute for pi
+        3.141592653589793
+        >>> math.e                  # constant natural log base
+        2.718281828459045
+        >>> math.sqrt(2.0)          # square root function
+        1.4142135623730951
+        >>> math.radians(90)        # convert 90 degrees to radians
+        1.5707963267948966
+        >>> math.sin(math.radians(90))  # find sin of 90 degrees.
+        1.0
+        >>> math.asin(1.0) * 2      # Double arcsin of 1.0 to get pi
+        3.141592653589793
 
 Like almost all other programming languages, angles are expressed in *radians*
 rather than degrees.  There are two functions ``radians`` and ``degrees`` to
@@ -284,20 +310,23 @@ Creating your own modules
 
 All we need to do to create our own modules is to save our script as 
 a file with a ``.py`` extension on the filename.  Suppose,
-for example, this script is saved as a file named ``seqtools.py``::
+for example, this script is saved as a file named ``seqtools.py``: 
 
-    def remove_at(pos, seq):
-        return seq[:pos] + seq[pos+1:]
+    .. sourcecode:: python3
+        :linenos:
+        
+        def remove_at(pos, seq):
+            return seq[:pos] + seq[pos+1:]
 
 We can now use our module, both in scripts we write, or in the interactive Python interpreter. To do so, we
 must first *import* the module.  
 
-.. sourcecode:: python
-    
-    >>> import seqtools
-    >>> s = "A string!"
-    >>> seqtools.remove_at(4, s)
-    'A sting!'
+    .. sourcecode:: python3
+        
+        >>> import seqtools
+        >>> s = "A string!"
+        >>> seqtools.remove_at(4, s)
+        'A sting!'
 
 
 We do not include the ``.py`` file extension when
@@ -312,33 +341,6 @@ managable sized parts, and to keep related parts together.
 Namespaces
 ----------
 
-.. sidebar:: How are namespaces, files and modules related?
-
-  Python has a convenient and simplifying one-to-one mapping, one module per file, 
-  giving rise to one namespace. Also, Python takes the module name from the file name,
-  and this becomes the name of the namespace.  ``math.py`` is a filename, the module
-  is called ``math``, and its namespace is ``math``.
-  So in Python the concepts are more or less interchangeable.
-  
-  But you will encounter other languages (e.g. C#), that allow one module 
-  to span multiple files, or one file to have multiple namespaces, 
-  or many files to all share the same namespace. So the name of the file doesn't
-  need to be the same as the namespace.   
-  
-  So a good idea is to try to keep the concepts distinct in your mind.  
-  
-  Files and directories organize *where* things are stored in our computer.  
-  On the other hand, namespaces and modules are a programming concept: 
-  they help us organize how we want to group related functions and attributes.  
-  They are not about "where" to store things, and should not have to 
-  coincide with the file and directory structures.
-  
-  So in Python, if you rename the file ``math.py``, its module name also changes, 
-  your ``import`` statements would need to change, and your code that refers to
-  functions or attributes inside that namespace would also need to change.  
-  
-  In other languages this is not necessarily the case.  So don't blur the concepts,
-  just because Python blurs them!
 
 A **namespace** is a collection of identifiers that belong to 
 a module, or to a function, (and as we will see soon, in classes too).  Generally,
@@ -348,67 +350,73 @@ the typical things we'd do with random numbers.
 Each module has its own namespace, so we can use the same identifier name in
 multiple modules without causing an identification problem.
 
-.. sourcecode:: python
-    
-    # module1.py
-    
-    question = "What is the meaning of Life, the Universe, and Everything?"
-    answer = 42
+    .. sourcecode:: python3
+        :linenos:
+        
+        # module1.py
+        
+        question = "What is the meaning of Life, the Universe, and Everything?"
+        answer = 42
 
-.. sourcecode:: python
-    
-    # module2.py
-    
-    question = "What is your quest?"
-    answer = "To seek the holy grail." 
+    .. sourcecode:: python3
+        :linenos:
+        
+        # module2.py
+        
+        question = "What is your quest?"
+        answer = "To seek the holy grail." 
 
 We can now import both modules and access ``question`` and ``answer`` in each:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
+        
+        import module1
+        import module2
+        
+        print(module1.question)
+        print(module2.question)
+        print(module1.answer)
+        print(module2.answer)
     
-    import module1
-    import module2
-    
-    print(module1.question)
-    print(module2.question)
-    print(module1.answer)
-    print(module2.answer)
-    
-will output the following::
+will output the following: 
 
-    What is the meaning of Life, the Universe, and Everything?
-    What is your quest?
-    42
-    To seek the holy grail.
+    .. sourcecode:: pycon
+
+        What is the meaning of Life, the Universe, and Everything?
+        What is your quest?
+        42
+        To seek the holy grail.
     
 Functions also have their own namespaces:
 
-.. sourcecode:: python
-    
-    def f():
-        n = 7
-        print("printing n inside of f:", n)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def f():
+            n = 7
+            print("printing n inside of f:", n)
 
-    def g():
-        n = 42
-        print("printing n inside of g:", n)
+        def g():
+            n = 42
+            print("printing n inside of g:", n)
 
-    n = 11
-    print("printing n before calling f:", n)
-    f()
-    print("printing n after calling f:", n)
-    g()
-    print("printing n after calling g:", n)
+        n = 11
+        print("printing n before calling f:", n)
+        f()
+        print("printing n after calling f:", n)
+        g()
+        print("printing n after calling g:", n)
 
 Running this program produces the following output:
 
-.. sourcecode:: python
-    
-    printing n before calling f: 11
-    printing n inside of f: 7
-    printing n after calling f: 11
-    printing n inside of g: 42
-    printing n after calling g: 11
+    .. sourcecode:: pycon
+        
+        printing n before calling f: 11
+        printing n inside of f: 7
+        printing n after calling f: 11
+        printing n inside of g: 42
+        printing n after calling g: 11
 
 The three ``n``'s here do not collide since they are each in a different
 namespace --- they are three names for three different variables, just like
@@ -416,6 +424,34 @@ there might be three different instances of people, all called "Bruce".
 
 Namespaces permit several programmers to work on the same project without
 having naming collisions.
+
+    .. admonition:: How are namespaces, files and modules related?
+
+      Python has a convenient and simplifying one-to-one mapping, one module per file, 
+      giving rise to one namespace. Also, Python takes the module name from the file name,
+      and this becomes the name of the namespace.  ``math.py`` is a filename, the module
+      is called ``math``, and its namespace is ``math``.
+      So in Python the concepts are more or less interchangeable.
+      
+      But you will encounter other languages (e.g. C#), that allow one module 
+      to span multiple files, or one file to have multiple namespaces, 
+      or many files to all share the same namespace. So the name of the file doesn't
+      need to be the same as the namespace.   
+      
+      So a good idea is to try to keep the concepts distinct in your mind.  
+      
+      Files and directories organize *where* things are stored in our computer.  
+      On the other hand, namespaces and modules are a programming concept: 
+      they help us organize how we want to group related functions and attributes.  
+      They are not about "where" to store things, and should not have to 
+      coincide with the file and directory structures.
+      
+      So in Python, if you rename the file ``math.py``, its module name also changes, 
+      your ``import`` statements would need to change, and your code that refers to
+      functions or attributes inside that namespace would also need to change.  
+      
+      In other languages this is not necessarily the case.  So don't blur the concepts,
+      just because Python blurs them!
 
 .. index:: scope, scope; global, scope; local, scope; builtin, builtin scope, global scope, local scope
     
@@ -438,12 +474,13 @@ more than one of these scopes, but the innermost, or local scope, will always ta
 precedence over the global scope, and the global scope always gets used in preference to the
 built-in scope.  Let's start with a simple example:
 
-.. sourcecode:: python
-    
-    def range(n):
-        return 123*n
+    .. sourcecode:: python3
+        :linenos:
         
-    print(range(10))
+        def range(n):
+            return 123*n
+            
+        print(range(10))
     
 What gets printed?  We've defined our own function called ``range``, so there
 is now a potential ambiguity.  When we use ``range``, do we mean our own one,
@@ -459,16 +496,16 @@ that you can do nasty things that will cause confusion, and then you avoid doing
 
 Now, a slightly more complex example:
 
-.. sourcecode:: python
-   :linenos:
+    .. sourcecode:: python3
+       :linenos:
 
-   n = 10
-   m = 3
-   def f(n):
-      m = 7
-      return 2*n+m
-      
-   print(f(5), n, m)
+       n = 10
+       m = 3
+       def f(n):
+          m = 7
+          return 2*n+m
+          
+       print(f(5), n, m)
     
 This prints 17 10 3.  The reason is that the two variables ``m`` and ``n`` in lines 1 and 2
 are outside the function in the global namespace.  Inside the function, new variables
@@ -509,39 +546,51 @@ because we're saying exactly which ``question`` attribute we mean.
 Three ``import`` statement variants
 -----------------------------------
     
-Here are three different ways to import names into the current namespace, and to use them::
+Here are three different ways to import names into the current namespace, and to use them:
 
-    import math
-    x = math.sqrt(10)
+    .. sourcecode:: python3
+        :linenos:
+        
+        import math
+        x = math.sqrt(10)
 
 Here just the single identifier ``math`` is added to the current namespace.  If you want to 
 access one of the functions in the module, you need to use the dot notation to get to it.
 
-Here is a different arrangement::
+Here is a different arrangement: 
 
-    from math import cos, sin, sqrt
-    x = sqrt(10)
+    .. sourcecode:: python3
+        :linenos:
+        
+        from math import cos, sin, sqrt
+        x = sqrt(10)
 
 The names are added directly to the current namespace, and can be used without qualification. The name
 ``math`` is not itself imported, so trying to use the qualified form ``math.sqrt`` would give an error.
  
-Then we have a convenient shorthand:: 
-    
-    from math import *   # import all the identifiers from math,
-                         # adding them to the current namespace.
-    x = sqrt(10)         # Use them without qualification.
+Then we have a convenient shorthand:  
+  
+    .. sourcecode:: python3
+        :linenos:
+        
+        from math import *   # import all the identifiers from math,
+                             # adding them to the current namespace.
+        x = sqrt(10)         # Use them without qualification.
     
 Of these three, the first method is generally preferred, even though it means
 a little more typing each time. (But hey, with nice editors that do auto-completion,
-and fast fingers, that is a small price.)
+and fast fingers, that's a small price!)
 
-Finally, observe this case::
+Finally, observe this case:
 
-    def area(radius):
-        import math
-        return math.pi * r * r
-         
-    x = math.sqrt(10)      # this gives an error
+    .. sourcecode:: python3
+        :linenos:
+        
+        def area(radius):
+            import math
+            return math.pi * r * r
+             
+        x = math.sqrt(10)      # this gives an error
     
 Here we imported ``math``, but we imported it into the local namespace of ``area``.
 So the name is usable within the function body, but not in the enclosing script,
@@ -553,9 +602,12 @@ Turn your unit tester into a module
 Near the end of Chapter 6 we introduced unit testing, and our own ``test``
 function, and you've had to copy this into each module for which you 
 wrote tests.   Now we can put that definition into a module of its
-own, say ``my_own_unit_tester.py``, and simply use one line in each new script instead::
+own, say ``my_own_unit_tester.py``, and simply use one line in each new script instead: 
 
-    from my_own_unit_tester import test
+    .. sourcecode:: python3
+        :linenos:
+
+        from my_own_unit_tester import test
 
 
 Glossary
@@ -603,35 +655,32 @@ Glossary
     import statement
         A statement which makes the objects contained in a module available for
         use within another module. There are two forms for the import
-        statement. Using a hypothetical module named ``mymod`` containing
+        statement. Using hypothetical modules named ``mymod1`` and ``mymod2`` 
+        each containing
         functions ``f1`` and ``f2``, and variables ``v1`` and ``v2``, examples
         of these two forms include:
 
-            .. sourcecode:: python
-            
-                import mymod 
+                .. sourcecode:: python3
+                    :linenos:
+                
+                    import mymod1 
+                    from mymod2 import f1, f2, v1, v2 
 
-            and
-
-            .. sourcecode:: python
-
-                from mymod import f1, f2, v1, v2 
-
-            The second form brings the imported objects into the namespace of
-            the importing module, while the first form preserves a seperate
-            namespace for the imported module, requiring ``mymod.v1`` to access
-            the ``v1`` variable.
+        The second form brings the imported objects into the namespace of
+        the importing module, while the first form preserves a seperate
+        namespace for the imported module, requiring ``mymod1.v1`` to access
+        the ``v1`` variable from that module.
 
     method
         Function-like attribute of an object. Methods are *invoked* (called) on
         an object using the dot operator. For example:
 
-        .. sourcecode:: python
-        
-            >>> s = "this is a string."
-            >>> s.upper()
-            'THIS IS A STRING.'
-            >>>
+            .. sourcecode:: python3
+            
+                >>> s = "this is a string."
+                >>> s.upper()
+                'THIS IS A STRING.'
+                >>>
 
         We say that the method, ``upper`` is invoked on the string, ``s``.
         ``s`` is implicitely the first argument to ``upper``.
@@ -650,15 +699,17 @@ Glossary
         A situation in which two or more names in a given namespace cannot be
         unambiguously resolved. Using
 
-        .. sourcecode:: python
+            .. sourcecode:: python3
+                :linenos:
 
-            import string
+                import string
 
         instead of
 
-        .. sourcecode:: python
-        
-            from string import *
+            .. sourcecode:: python3
+                :linenos:
+            
+                from string import *
 
         prevents naming collisions.
         
@@ -676,7 +727,8 @@ Exercises
 
     a. Try the following:
  
-         .. sourcecode:: python
+         .. sourcecode:: python3
+            :linenos:
             
             import calendar
             cal = calendar.TextCalendar()      # create an instance
@@ -690,10 +742,13 @@ Exercises
     
     c. Find a function to print just the month in which your birthday occurs this year.
 
-    d. Try this::
+    d. Try this: 
     
-         d = calendar.LocaleTextCalendar(6, "SPANISH")     
-         d.pryear(2011)   
+        .. sourcecode:: python3
+            :linenos:
+            
+            d = calendar.LocaleTextCalendar(6, "SPANISH")     
+            d.pryear(2011)   
         
        Try a few other languages, including one that doesn't work, and see what happens.
         
@@ -724,10 +779,11 @@ Exercises
    ``namespace_test.py``. Import both of the modules above and write the
    following statement:
 
-   .. sourcecode:: python
-    
-        print( (mymodule2.myage - mymodule1.myage) == 
-               (mymodule2.year - mymodule1.year)  )
+       .. sourcecode:: python3
+            :linenos:
+        
+            print( (mymodule2.myage - mymodule1.myage) == 
+                   (mymodule2.year - mymodule1.year)  )
 
    When you will run ``namespace_test.py`` you will see either ``True`` or
    ``False`` as output depending on whether or not you've already had your
@@ -736,26 +792,28 @@ Exercises
 #. Add the following statement to ``mymodule1.py``, ``mymodule2.py``, and
    ``namespace_test.py`` from the previous exercise:
 
-   .. sourcecode:: python
-    
-        print("My name is", __name__)
+       .. sourcecode:: python3
+            :linenos:
+        
+            print("My name is", __name__)
 
    Run ``namespace_test.py``. What happens? Why? Now add the following to the
    bottom of ``mymodule1.py``:
 
-   .. sourcecode:: python
-    
-        if __name__ == '__main__':
-            print("This won't run if I'm  imported.")
+       .. sourcecode:: python3
+            :linenos:
+        
+            if __name__ == '__main__':
+                print("This won't run if I'm  imported.")
 
    Run ``mymodule1.py`` and ``namespace_test.py`` again. In which case do you
    see the new print statement?
    
 #. In a Python shell / interactive interpreter, try the following:
 
-   .. sourcecode:: python
-    
-        >>> import this
+       .. sourcecode:: python3
+        
+            >>> import this
 
    What does Tim Peters have to say about namespaces?
    
@@ -763,31 +821,32 @@ Exercises
 #. Give the Python interpreter's response to each of the following from a
    continuous interpreter session:
 
-   .. sourcecode:: python
-    
-      >>> s = "If we took the bones out, it wouldn't be crunchy, would it?"
-      >>> s.split()
-      >>> type(s.split())
-      >>> s.split('o')
-      >>> s.split('i')
-      >>> '0'.join(s.split('o'))
+       .. sourcecode:: python3
+        
+          >>> s = "If we took the bones out, it wouldn't be crunchy, would it?"
+          >>> s.split()
+          >>> type(s.split())
+          >>> s.split('o')
+          >>> s.split('i')
+          >>> '0'.join(s.split('o'))
           
    Be sure you understand why you get each result. Then apply what you have
    learned to fill in the body of the function below using the ``split`` and
    ``join`` methods of ``str`` objects:
 
-   .. sourcecode:: python
-    
-        def myreplace(old, new, s):
-            """ Replace all occurences of old with new in s. """
-            ...
-            
-            
-        test(myreplace(',', ';', 'this, that, and some other thing'),
-                                 'this; that; and some other thing')
-        test(myreplace(' ', '**', 
-                         'Words will now      be  separated by stars.'),
-                         'Words**will**now**be**separated**by**stars.')
+       .. sourcecode:: python3
+            :linenos:
+        
+            def myreplace(old, new, s):
+                """ Replace all occurences of old with new in s. """
+                ...
+                
+                
+            test(myreplace(',', ';', 'this, that, and some other thing'),
+                                     'this; that; and some other thing')
+            test(myreplace(' ', '**', 
+                             'Words will now      be  separated by stars.'),
+                             'Words**will**now**be**separated**by**stars.')
     
    Your solution should pass the tests.
    

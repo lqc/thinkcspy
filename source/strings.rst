@@ -6,14 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
 |
     
 Strings
@@ -44,12 +36,14 @@ we could set the turtle's color, and we wrote ``tess.turn(90)``.
 Just like a turtle, a strings is also an object.  So each string instance 
 has its own attributes and methods.  
 
-For example::
+For example:
 
-    >>> ss = "Hello, World!"
-    >>> tt = ss.upper()
-    >>> tt
-    'HELLO, WORLD!'
+    .. sourcecode:: python3
+
+        >>> ss = "Hello, World!"
+        >>> tt = ss.upper()
+        >>> tt
+        'HELLO, WORLD!'
     
 `upper` is a method that can be invoked on any string object 
 to create a new string, in which all the 
@@ -59,22 +53,25 @@ There are also methods like `lower`, `capitalize`, and `swapcase` that do other 
 
 To learn what methods are available, you can consult the Help documentation, look for 
 the ``string`` module, and read the documentation.  Or, if you're a bit lazier, 
-simply type the following into a PyScripter script::
+simply type the following into a PyScripter script: 
 
-    ss = "Hello, World!"
-    tt = ss.
+    .. sourcecode:: python3
+        :linenos:
+        
+        ss = "Hello, World!"
+        tt = ss.
     
 When you type the period to select one of the methods of `ss`, PyScripter will pop up a 
 selection window showing all the methods (there are around 70 of them --- thank goodness we'll only
 use a few of those!) that could be used on your string. 
 
-.. image::  illustrations/string_methods.png
+    .. image::  illustrations/string_methods.png
  
 When you type the name of the method, some further help about it's parameter and return
 type, and its docstring, will be displayed.  This is a good example of a tool --- PyScripter ---
 using the meta-information --- the docstrings --- provided by the module programmers. 
 
-.. image::  illustrations/swapcase.png
+    .. image::  illustrations/swapcase.png
 
 Working with the parts of a string
 ----------------------------------
@@ -82,17 +79,20 @@ Working with the parts of a string
 The **indexing operator** (Python uses square brackets to enclose the index) 
 selects a single character substring from a string:
 
-.. sourcecode:: python
-    
-    >>> fruit = "banana"
-    >>> m = fruit[1]
-    >>> print(m)
+    .. sourcecode:: python3
+        
+        >>> fruit = "banana"
+        >>> m = fruit[1]
+        >>> print(m)
 
+        
 The expression ``fruit[1]`` selects character number 1 from ``fruit``, and creates a new
 string containing just this one character. The variable ``m`` refers to the result. 
-When we display ``m``, we could get a surprise::
+When we display ``m``, we could get a surprise: 
 
-    a
+    .. sourcecode:: pycon
+
+        a
 
 Computer scientists always start counting
 from zero! The letter at subscript position zero of ``"banana"`` is ``b``.  So at
@@ -101,11 +101,11 @@ position ``[1]`` we have the letter ``a``.
 If you want the zero-eth letter of a string, you just put 0, or any expression
 with the value 0, in the brackets:
 
-.. sourcecode:: python
-    
-    >>> m = fruit[0]
-    >>> print(m)
-    b
+    .. sourcecode:: python3
+        
+        >>> m = fruit[0]
+        >>> print(m)
+        b
 
 The expression in brackets is called an **index**. An index specifies a member
 of an ordered collection, in this case the collection of characters in the string. The index
@@ -116,14 +116,16 @@ Note that indexing returns a *string* --- Python has no special type for a singl
 It is just a string of length 1.
 
 We've also seen lists previously.  The same indexing notation works to extract elements from
-a list::
+a list: 
 
-    >>> prime_nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
-    >>> prime_nums[4]
-    11
-    >>> friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
-    >>> friends[3]
-    'Angelina'
+    .. sourcecode:: python3
+
+        >>> prime_nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
+        >>> prime_nums[4]
+        11
+        >>> friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
+        >>> friends[3]
+        'Angelina'
 
 
 .. index::
@@ -138,19 +140,20 @@ Length
 
 The ``len`` function, when applied to a string, returns the number of characters in a string:
 
-.. sourcecode:: python
-    
-    >>> fruit = "banana"
-    >>> len(fruit)
-    6
+    .. sourcecode:: python3
+        
+        >>> fruit = "banana"
+        >>> len(fruit)
+        6
 
 To get the last letter of a string, you might be tempted to try something like
 this:
 
-.. sourcecode:: python
-    
-    sz = len(fruit)
-    last = fruit[sz]       # ERROR!
+    .. sourcecode:: python3
+        :linenos:
+        
+        sz = len(fruit)
+        last = fruit[sz]       # ERROR!
 
 That won't work. It causes the runtime error
 ``IndexError: string index out of range``. The reason is that there is no
@@ -159,10 +162,11 @@ Since we started counting at zero, the six indexes are
 numbered 0 to 5. To get the last character, we have to subtract 1 from
 ``length``:
 
-.. sourcecode:: python
-    
-    sz = len(fruit)
-    last = fruit[sz-1]
+    .. sourcecode:: python3
+        :linenos:
+            
+        sz = len(fruit)
+        last = fruit[sz-1]
 
 Alternatively, we can use **negative indices**, which count backward from the
 end of the string. The expression ``fruit[-1]`` yields the last letter,
@@ -188,13 +192,14 @@ Often they start at the beginning, select each character in turn, do something
 to it, and continue until the end. This pattern of processing is called a
 **traversal**. One way to encode a traversal is with a ``while`` statement:
 
-.. sourcecode:: python
-    
-    ix = 0
-    while ix < len(fruit):
-        letter = fruit[ix]
-        print(letter)
-        ix += 1
+    .. sourcecode:: python3
+        :linenos:
+             
+        ix = 0
+        while ix < len(fruit):
+            letter = fruit[ix]
+            print(letter)
+            ix += 1
 
 This loop traverses the string and displays each letter on a line by itself.
 The loop condition is ``ix < len(fruit)``, so when ``ix`` is equal to the
@@ -205,10 +210,11 @@ executed. The last character accessed is the one with the index
 But we've previously seen how the ``for`` loop can easily iterate over lists: ``for``
 also works for strings:
 
-.. sourcecode:: python
-    
-    for c in fruit:
-        print(c)
+    .. sourcecode:: python3
+        :linenos:
+        
+        for c in fruit:
+            print(c)
 
 Each time through the loop, the next character in the string is assigned to the
 variable ``c``. The loop continues until no characters are left.
@@ -219,24 +225,27 @@ the elements appear in alphabetical order. For example, in Robert McCloskey's
 book *Make Way for Ducklings*, the names of the ducklings are Jack, Kack, Lack,
 Mack, Nack, Ouack, Pack, and Quack.  This loop outputs these names in order:
 
-.. sourcecode:: python
-    
-    prefixes = "JKLMNOPQ"
-    suffix = "ack"
-       
-    for p in prefixes:
-        print(p + suffix)
+    .. sourcecode:: python3
+        :linenos:
+        
+        prefixes = "JKLMNOPQ"
+        suffix = "ack"
+           
+        for p in prefixes:
+            print(p + suffix)
 
-The output of this program is::
-    
-    Jack
-    Kack
-    Lack
-    Mack
-    Nack
-    Oack
-    Pack
-    Qack
+The output of this program is: 
+ 
+    .. sourcecode:: pycon 
+
+            Jack
+            Kack
+            Lack
+            Mack
+            Nack
+            Oack
+            Pack
+            Qack
 
 
 Of course, that's not quite right because Ouack and Quack are misspelled.
@@ -251,26 +260,26 @@ Slices
 A *substring* of a string is obtained by taking a **slice**.   Similarly, we can
 slice a list to refer to some sublist of the items in the list:
 
-.. sourcecode:: python
-    
-    >>> s = "Peter, Paul, and Mary"
-    >>> print(s[0:5])
-    Peter
-    >>> print(s[7:11])
-    Paul
-    >>> print(s[17:21])
-    Mary
-    >>> friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
-    >>> print(friends[2:4])
-    ['Brad', 'Angelina']
+    .. sourcecode:: python3
+        
+        >>> s = "Peter, Paul, and Mary"
+        >>> print(s[0:5])
+        Peter
+        >>> print(s[7:11])
+        Paul
+        >>> print(s[17:21])
+        Mary
+        >>> friends = ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]
+        >>> print(friends[2:4])
+        ['Brad', 'Angelina']
 
 The operator ``[n:m]`` returns the part of the string from the n'th character
 to the m'th character, including the first but excluding the last. This
 behavior makes sense if you imagine the indices
 pointing *between* the characters, as in the following diagram:
 
-.. image:: illustrations/banana.png
-   :alt: 'banana' string
+    .. image:: illustrations/banana.png
+       :alt: 'banana' string
 
 Now if you imagine this as a piece of paper, the slice operator ``[n:m]`` cuts
 the paper at the ``n`` and ``m`` positions.  
@@ -279,13 +288,13 @@ Two tricks are added to this: if you omit the first index (before the colon),
 the slice starts at the beginning of the string (or list). If you omit the second index, 
 the slice extends to the end of the string (or list). Thus:
 
-.. sourcecode:: python
-    
-    >>> fruit = "banana"
-    >>> fruit[:3]
-    'ban'
-    >>> fruit[3:]
-    'ana'
+    .. sourcecode:: python3
+        
+        >>> fruit = "banana"
+        >>> fruit[:3]
+        'ban'
+        >>> fruit[3:]
+        'ana'
 
 What do you think ``s[:]`` means?   What about ``friends[4:]``? 
 
@@ -297,30 +306,32 @@ String comparison
 
 The comparison operators work on strings. To see if two strings are equal:
 
-.. sourcecode:: python
-    
-    if word == "banana":
-        print("Yes, we have no bananas!")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if word == "banana":
+            print("Yes, we have no bananas!")
 
 Other comparison operations are useful for putting words in
 `lexicographical` order:
 
-.. sourcecode:: python
-    
-    if word < "banana":
-        print("Your word, " + word + ", comes before banana.")
-    elif word > "banana":
-        print("Your word, " + word + ", comes after banana.")
-    else:
-        print("Yes, we have no bananas!")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if word < "banana":
+            print("Your word, " + word + ", comes before banana.")
+        elif word > "banana":
+            print("Your word, " + word + ", comes after banana.")
+        else:
+            print("Yes, we have no bananas!")
 
 This is similar to the alphabetical order you would use with a dictionary,
 except that all the uppercase letters come before all the lowercase letters. As
 a result:
 
-.. sourcecode:: python
-    
-    Your word, Zebra, comes before banana.
+    .. sourcecode:: pycon
+        
+        Your word, Zebra, comes before banana.
 
 A common way to address this problem is to convert strings to a standard
 format, such as all lowercase, before performing the comparison. A more
@@ -335,11 +346,12 @@ Strings are immutable
 It is tempting to use the ``[]`` operator on the left side of an assignment,
 with the intention of changing a character in a string.  For example:
 
-.. sourcecode:: python
-    
-    greeting = "Hello, world!"
-    greeting[0] = 'J'            # ERROR!
-    print(greeting)
+    .. sourcecode:: python3
+        :linenos:
+        
+        greeting = "Hello, world!"
+        greeting[0] = 'J'            # ERROR!
+        print(greeting)
 
 Instead of producing the output ``Jello, world!``, this code produces the
 runtime error ``TypeError: 'str' object does not support item assignment``.
@@ -347,11 +359,12 @@ runtime error ``TypeError: 'str' object does not support item assignment``.
 Strings are **immutable**, which means you can't change an existing string. The
 best you can do is create a new string that is a variation on the original:
 
-.. sourcecode:: python
-    
-    greeting = "Hello, world!"
-    newGreeting = 'J' + greeting[1:]
-    print(newGreeting)
+    .. sourcecode:: python3
+        :linenos:
+        
+        greeting = "Hello, world!"
+        newGreeting = 'J' + greeting[1:]
+        print(newGreeting)
 
 The solution here is to concatenate a new first letter onto a slice of
 ``greeting``. This operation has no effect on the original string.
@@ -366,52 +379,55 @@ The ``in`` and ``not in`` operators
 
 The ``in`` operator tests if one string is a substring of another:
 
-.. sourcecode:: python
-    
-    >>> 'p' in 'apple'
-    True
-    >>> 'i' in 'apple'
-    False
-    >>> 'ap' in 'apple'
-    True
-    >>> 'pa' in 'apple'
-    False
+    .. sourcecode:: python3
+        
+        >>> 'p' in 'apple'
+        True
+        >>> 'i' in 'apple'
+        False
+        >>> 'ap' in 'apple'
+        True
+        >>> 'pa' in 'apple'
+        False
 
 Note that a string is a substring of itself, and the empty string is a 
 substring of any other string. (Also note that computer scientists 
 like to think about these edge cases quite carefully!) 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        
+        >>> 'a' in 'a'
+        True
+        >>> 'apple' in 'apple'
+        True
+        >>> '' in 'a'
+        True
+        >>> '' in 'apple'
+        True
     
-    >>> 'a' in 'a'
-    True
-    >>> 'apple' in 'apple'
-    True
-    >>> '' in 'a'
-    True
-    >>> '' in 'apple'
-    True
-    
-The ``not in`` operator returns the logical opposite results of ``in``::
+The ``not in`` operator returns the logical opposite results of ``in``: 
 
-    >>> 'x' not in 'apple'
-    True
+    .. sourcecode:: python3
+        
+        >>> 'x' not in 'apple'
+        True
 
 Combining the ``in`` operator with string concatenation using ``+``, we can
 write a function that removes all the vowels from a string:
 
-.. sourcecode:: python
-    
-    def remove_vowels(s):
-        vowels = "aeiouAEIOU"
-        s_without_vowels = ""
-        for x in s:
-            if x not in vowels:
-                s_without_vowels += x
-        return s_without_vowels 
-       
-    test(remove_vowels("compsci"), "cmpsc")
-    test(remove_vowels("aAbEefIijOopUus"), "bfjps")
+    .. sourcecode:: python3
+        :linenos:
+        
+        def remove_vowels(s):
+            vowels = "aeiouAEIOU"
+            s_without_vowels = ""
+            for x in s:
+                if x not in vowels:
+                    s_without_vowels += x
+            return s_without_vowels 
+           
+        test(remove_vowels("compsci"), "cmpsc")
+        test(remove_vowels("aAbEefIijOopUus"), "bfjps")
 
 
 
@@ -423,24 +439,25 @@ A ``find`` function
 
 What does the following function do?
 
-.. sourcecode:: python
-    
-    def find(strng, ch):
-        """
-          Find and return the index of ch in strng.  
-          Return -1 if ch does not occur in strng.
-        """
-        ix = 0
-        while ix < len(strng):
-            if strng[ix] == ch:
-                return ix
-            ix += 1
-        return -1
+    .. sourcecode:: python3
+        :linenos:
         
-    test(find("Compsci", "p"), 3)
-    test(find("Compsci", "C"), 0)
-    test(find("Compsci", "i"), 6)
-    test(find("Compsci", "x"), -1)
+        def find(strng, ch):
+            """
+              Find and return the index of ch in strng.  
+              Return -1 if ch does not occur in strng.
+            """
+            ix = 0
+            while ix < len(strng):
+                if strng[ix] == ch:
+                    return ix
+                ix += 1
+            return -1
+            
+        test(find("Compsci", "p"), 3)
+        test(find("Compsci", "C"), 0)
+        test(find("Compsci", "i"), 6)
+        test(find("Compsci", "x"), -1)
     
 
 In a sense, ``find`` is the opposite of the indexing operator. Instead of taking
@@ -469,16 +486,17 @@ The following program counts the number of times the letter ``a`` appears in a
 string, and is another example of the counter pattern introduced in
 :ref:`counting`:
 
-.. sourcecode:: python
-    
-    def count_a(text): 
-        count = 0
-        for c in text:
-            if c == 'a':
-                count += 1
-        return(count)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def count_a(text): 
+            count = 0
+            for c in text:
+                if c == 'a':
+                    count += 1
+            return(count)
 
-    test(count_a("banana"), 3)    
+        test(count_a("banana"), 3)    
 
 .. index:: optional parameter, default value, parameter; optional
 
@@ -491,17 +509,18 @@ To find the locations of the second or third occurence of a character in a
 string, we can modify the ``find`` function, adding a third parameter for the
 starting postion in the search string:
 
-.. sourcecode:: python
-    
-    def find2(strng, ch, start):
-        ix = start 
-        while ix < len(strng):
-            if strng[ix] == ch:
-                return ix
-            ix += 1
-        return -1
+    .. sourcecode:: python3
+        :linenos:
         
-    test(find2('banana', 'a', 2), 3)
+        def find2(strng, ch, start):
+            ix = start 
+            while ix < len(strng):
+                if strng[ix] == ch:
+                    return ix
+                ix += 1
+            return -1
+            
+        test(find2('banana', 'a', 2), 3)
 
 The call ``find2('banana', 'a', 2)`` now returns ``3``, the index of the first
 occurrence of 'a' in 'banana' after index 2. What does
@@ -511,15 +530,16 @@ understand how ``find2`` works.
 Better still, we can combine ``find`` and ``find2`` using an
 **optional parameter**:
 
-.. sourcecode:: python
-    
-    def find(strng, ch, start=0):
-        ix = start 
-        while ix < len(strng):
-            if strng[ix] == ch:
-                return ix
-            ix += 1
-        return -1
+    .. sourcecode:: python3
+        :linenos:
+        
+        def find(strng, ch, start=0):
+            ix = start 
+            while ix < len(strng):
+                if strng[ix] == ch:
+                    return ix
+                ix += 1
+            return -1
 
 When a function has an optional parameter, the caller `may` provide a 
 matching argument. If the third argument is provided to ``find``, it gets assigned 
@@ -533,17 +553,18 @@ set to the **default value** of ``0``.
 Adding another optional parameter to ``find`` makes it search from a starting
 position, up to but not including the end position:
 
-.. sourcecode:: python
-    
-    def find(strng, ch, start=0, end=None):
-        ix = start 
-        if end == None:
-           end = len(strng)
-        while ix < end:
-            if strng[ix] == ch:
-                return ix
-            ix += 1 
-        return -1
+    .. sourcecode:: python3
+        :linenos:
+        
+        def find(strng, ch, start=0, end=None):
+            ix = start 
+            if end == None:
+               end = len(strng)
+            while ix < end:
+                if strng[ix] == ch:
+                    return ix
+                ix += 1 
+            return -1
 
 The optional value for ``end`` is interesting: we give it a default value ``None`` if the
 caller does not supply any argument.  In the body of the function we test what ``end`` is,
@@ -553,14 +574,17 @@ If the caller has supplied an argument for ``end``, however, the caller's value 
 The semantics of ``start`` and ``end`` in this function are precisely the same as they are in
 the ``range`` function.
 
-Here are some test cases that should pass:: 
+Here are some test cases that should pass:  
 
-    ss = "Python strings have some interesting methods."
-    test(find(ss, 's'), 7)
-    test(find(ss, 's', 7), 7)
-    test(find(ss, 's', 8), 13)
-    test(find(ss, 's', 8, 13), -1)
-    test(find(ss, '.'), len(ss)-1)
+    .. sourcecode:: python3
+        :linenos:
+        
+        ss = "Python strings have some interesting methods."
+        test(find(ss, 's'), 7)
+        test(find(ss, 's', 7), 7)
+        test(find(ss, 's', 8), 13)
+        test(find(ss, 's', 8, 13), -1)
+        test(find(ss, '.'), len(ss)-1)
 
 .. index:: module, string module, dir function, dot notation, function type,
            docstring
@@ -570,23 +594,26 @@ The built-in ``find`` method
  
 Now that we've done all this work to write a powerful ``find`` function, we can let on that
 strings already have their own built-in``find`` method.  It can do everything 
-that our one can do, and more! ::
+that our one can do, and more!  
 
-    test(ss.find('s'), 7)
-    test(ss.find('s', 7), 7)
-    test(ss.find('s', 8), 13)
-    test(ss.find('s', 8, 13), -1)
-    test(ss.find('.'), len(ss)-1)
+    .. sourcecode:: python3
+        :linenos:
+        
+        test(ss.find('s'), 7)
+        test(ss.find('s', 7), 7)
+        test(ss.find('s', 8), 13)
+        test(ss.find('s', 8, 13), -1)
+        test(ss.find('.'), len(ss)-1)
      
 The built-in ``find`` method is more general than our version. It can find
 substrings, not just single characters:
 
-.. sourcecode:: python
-    
-    >>> "banana".find("nan")
-    2
-    >>> "banana".find("na", 3)
-    4
+    .. sourcecode:: python3
+        
+        >>> "banana".find("nan")
+        2
+        >>> "banana".find("na", 3)
+        4
 
 Usually we'd prefer to use the methods that Python provides rather than reinvent
 our own equivalents. But many of the built-in functions and methods make good
@@ -601,11 +628,13 @@ it splits a single multi-word string into a list of individual words, removing
 all the whitespace between them.  (Whitespace means any tabs, newlines, or spaces.)
 This allows us to read input as a single string,
 and split it into words.
+
+    .. sourcecode:: python3 
     
-    >>> ss = 'Well I never did said Alice' 
-    >>> wds = ss.split()
-    >>> wds
-    ['Well', 'I', 'never', 'did', 'said', 'Alice']
+        >>> ss = 'Well I never did said Alice' 
+        >>> wds = ss.split()
+        >>> wds
+        ['Well', 'I', 'never', 'did', 'said', 'Alice']
     
 Cleaning up your strings
 ------------------------
@@ -620,37 +649,39 @@ Remember that strings are immutable, so we cannot change the string with the
 punctuation --- we need to traverse the original string and create a new string,
 omitting any punctuation:
 
-.. sourcecode:: python    
- 
-    punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
-    
-    def remove_punctuation(s):
-        s_without_punct = ""
-        for letter in s:
-            if letter not in punctuation:
-                s_without_punct += letter
-        return s_without_punct
+    .. sourcecode:: python3 
+        :linenos:   
+     
+        punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+        
+        def remove_punctuation(s):
+            s_without_punct = ""
+            for letter in s:
+                if letter not in punctuation:
+                    s_without_punct += letter
+            return s_without_punct
 
 Setting up that first assignment is messy and error-prone.  
 Fortunately, the Python ``string`` module already does it
 for us.  So we will make a slight improvement to this 
 program --- we'll import the ``string`` module and use its definition: 
 
-.. sourcecode:: python   
+    .. sourcecode:: python3 
+        :linenos:
 
-    import string
-    
-    def remove_punctuation(s):
-        s_without_punct = ""
-        for letter in s:
-            if letter not in string.punctuation:
-                s_without_punct += letter
-        return s_without_punct
- 
-    test(remove_punctuation('"Well, I never did!", said Alice.'),
-                                "Well I never did said Alice")
-    test(remove_punctuation("Are you very, very, sure?"),
-                                 "Are you very very sure")
+        import string
+        
+        def remove_punctuation(s):
+            s_without_punct = ""
+            for letter in s:
+                if letter not in string.punctuation:
+                    s_without_punct += letter
+            return s_without_punct
+     
+        test(remove_punctuation('"Well, I never did!", said Alice.'),
+                                    "Well I never did said Alice")
+        test(remove_punctuation("Are you very, very, sure?"),
+                                     "Are you very very sure")
 
 
 Composing together this function and the ``split`` method from the previous section
@@ -658,23 +689,26 @@ makes a useful combination --- we'll clean out the punctuation, and
 ``split`` will clean out the newlines and tabs while turning the string into
 a list of words:
 
-.. sourcecode:: python 
+    .. sourcecode:: python3 
+           :linenos:
 
-       my_story = '''
-       Pythons are constrictors, which means that they will 'squeeze' the life 
-       out of their prey. They coil themselves around their prey and with 
-       each breath the creature takes the snake will squeeze a little tighter 
-       until they stop breathing completely. Once the heart stops the prey 
-       is swallowed whole. The entire animal is digested in the snake's 
-       stomach except for fur or feathers. What do you think happens to the fur, 
-       feathers, beaks, and eggshells? The 'extra stuff' gets passed out as --- 
-       you guessed it --- snake POOP! '''
+           my_story = '''
+           Pythons are constrictors, which means that they will 'squeeze' the life 
+           out of their prey. They coil themselves around their prey and with 
+           each breath the creature takes the snake will squeeze a little tighter 
+           until they stop breathing completely. Once the heart stops the prey 
+           is swallowed whole. The entire animal is digested in the snake's 
+           stomach except for fur or feathers. What do you think happens to the fur, 
+           feathers, beaks, and eggshells? The 'extra stuff' gets passed out as --- 
+           you guessed it --- snake POOP! '''
+           
+           wds = remove_punctuation(my_story).split()
+           print(wds)
        
-       wds = remove_punctuation(my_story).split()
-       print(wds)
-       
-The output::
-                            
+The output: 
+
+    .. sourcecode:: pycon  
+    
        ['Pythons', 'are', 'constrictors', ... , 'it', 'snake', 'POOP']                            
   
 There are other useful functions in the ``string`` module, other ways to
@@ -692,27 +726,29 @@ The format method for strings
 The easiest and most powerful way to format a string in Python 3 is to use the
 *format* method.  To see how this works, let's start with a few examples:
 
-.. sourcecode:: python
-    :linenos:
+    .. sourcecode:: python3
+        :linenos:
+        
+        s1 = "His name is {0}!".format("Arthur")
+        print(s1)
+
+        name = "Alice"
+        age = 10
+        s2 = "I am {0} and I am {1} years old.".format(name, age)
+        print(s2)
+
+        n1 = 4
+        n2 = 5
+        s3 = "2**10 = {0} and {1} * {2} = {3:f}".format(2**10, n1, n2, n1 * n2)
+        print(s3)
     
-    s1 = "His name is {0}!".format("Arthur")
-    print(s1)
+Running the script produces: 
 
-    name = "Alice"
-    age = 10
-    s2 = "I am {0} and I am {1} years old.".format(name, age)
-    print(s2)
-
-    n1 = 4
-    n2 = 5
-    s3 = "2**10 = {0} and {1} * {2} = {3:f}".format(2**10, n1, n2, n1 * n2)
-    print(s3)
+    .. sourcecode:: pycon
     
-Running the script produces::
-
-    His name is Arthur!
-    I am Alice and I am 10 years old.
-    2**10 = 1024 and 4 * 5 = 20.000000
+        His name is Arthur!
+        I am Alice and I am 10 years old.
+        2**10 = 1024 and 4 * 5 = 20.000000
 
 The key idea is that one provides a *formatter string* which
 contains *placeholder fields*, ``... {0} ... {1} ... {2} ...`` etc.
@@ -733,118 +769,132 @@ it is always introduced by the ``:`` symbol.  This can control things like
 Let's do a few simple and common examples that should be enough for most needs.  If you need to
 do anything more esoteric, use *help* and read all the gory details.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    n1 = "Paris"
-    n2 = "Whitney"
-    n3 = "Hilton"
+        n1 = "Paris"
+        n2 = "Whitney"
+        n3 = "Hilton"
 
-    print("Ppi to three decimal places is {0:.3f}".format(3.1415926))
-    print("123456789 123456789 123456789 123456789 123456789 123456789")
-    print("|||{0:<15}|||{1:^15}|||{2:>15}|||Born in {3}|||" 
-                                                 .format(n1,n2,n3,1981))
-    print("The decimal value {0} converts to hex value {0:x}"
-                                                 .format(123456))
+        print("Ppi to three decimal places is {0:.3f}".format(3.1415926))
+        print("123456789 123456789 123456789 123456789 123456789 123456789")
+        print("|||{0:<15}|||{1:^15}|||{2:>15}|||Born in {3}|||" 
+                                                     .format(n1,n2,n3,1981))
+        print("The decimal value {0} converts to hex value {0:x}"
+                                                     .format(123456))
 
-This script produces the output::
+This script produces the output: 
 
-    The value of pi to three decimal places is 3.142
-    123456789 123456789 123456789 123456789 123456789 123456789
-    |||Paris          |||    Whitney    |||         Hilton|||Born in 1981|||
-    The decimal value 123456 converts to hex value 1e240
+    .. sourcecode:: pycon
+
+        The value of pi to three decimal places is 3.142
+        123456789 123456789 123456789 123456789 123456789 123456789
+        |||Paris          |||    Whitney    |||         Hilton|||Born in 1981|||
+        The decimal value 123456 converts to hex value 1e240
     
 You can have multiple placeholders indexing the
 same argument, or perhaps even have extra arguments that are not referenced
 at all:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    letter = '''
-    Dear {0} {2}.
-     {0}, I have an interesting money-making proposition for you!
-     If you deposit $10 million into my bank account, I can 
-     double your money ...
-    '''
-
-    print(letter.format("Paris", "Whitney", "Hilton"))
-    print(letter.format("Bill", "Henry", "Gates"))
-    
-This produces the following::
-
-    Dear Paris Hilton.
-         Paris, I have an interesting money-making proposition for you!
+        letter = '''
+        Dear {0} {2}.
+         {0}, I have an interesting money-making proposition for you!
          If you deposit $10 million into my bank account, I can 
          double your money ...
+        '''
 
-    Dear Bill Gates.
-         Bill, I have an interesting money-making proposition for you!
-         If you deposit $10 million into my bank account I can, 
-         double your money ...
+        print(letter.format("Paris", "Whitney", "Hilton"))
+        print(letter.format("Bill", "Henry", "Gates"))
+    
+This produces the following:
+
+    .. sourcecode:: pycon
+
+        Dear Paris Hilton.
+             Paris, I have an interesting money-making proposition for you!
+             If you deposit $10 million into my bank account, I can 
+             double your money ...
+
+        Dear Bill Gates.
+             Bill, I have an interesting money-making proposition for you!
+             If you deposit $10 million into my bank account I can, 
+             double your money ...
 
 As you might expect, you'll get an index error if 
-your placeholders refer to arguments that you do not provide::
+your placeholders refer to arguments that you do not provide: 
 
-    >>> "hello {3}".format("Dave")
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    IndexError: tuple index out of range
+    .. sourcecode:: python3
+    
+        >>> "hello {3}".format("Dave")
+        Traceback (most recent call last):
+          File "<interactive input>", line 1, in <module>
+        IndexError: tuple index out of range
     
 The following example illustrates the real utility of string formatting.
 First, we'll try to print a table without using string formatting:
 
-.. sourcecode:: python
-    
-    print("i\ti**2\ti**3\ti**5\ti**10\ti**20")
-    for i in range(1, 11):
-        print(i, '\t', i**2, '\t', i**3, '\t', i**5, '\t', 
-                                                i**10, '\t', i**20)
+    .. sourcecode:: python3
+        :linenos:
+        
+        print("i\ti**2\ti**3\ti**5\ti**10\ti**20")
+        for i in range(1, 11):
+            print(i, '\t', i**2, '\t', i**3, '\t', i**5, '\t', 
+                                                    i**10, '\t', i**20)
 
 This program prints out a table of various powers of the numbers from 1 to 10.
 (This assumes that the tab width is 8.  You might see
 something even worse than this if you tab width is set to 4.)
 In its current form it relies on the tab character ( ``\t``) to align the
 columns of values, but this breaks down when the values in the table get larger
-than the tab width::
-    
-    i       i**2    i**3    i**5    i**10   i**20
-    1       1       1       1       1       1
-    2       4       8       32      1024    1048576
-    3       9       27      243     59049   3486784401
-    4       16      64      1024    1048576         1099511627776
-    5       25      125     3125    9765625         95367431640625
-    6       36      216     7776    60466176        3656158440062976
-    7       49      343     16807   282475249       79792266297612001
-    8       64      512     32768   1073741824      1152921504606846976
-    9       81      729     59049   3486784401      12157665459056928801
-    10      100     1000    100000  10000000000     100000000000000000000
+than the tab width:
+
+    .. sourcecode:: pycon
+        
+        i       i**2    i**3    i**5    i**10   i**20
+        1       1       1       1       1       1
+        2       4       8       32      1024    1048576
+        3       9       27      243     59049   3486784401
+        4       16      64      1024    1048576         1099511627776
+        5       25      125     3125    9765625         95367431640625
+        6       36      216     7776    60466176        3656158440062976
+        7       49      343     16807   282475249       79792266297612001
+        8       64      512     32768   1073741824      1152921504606846976
+        9       81      729     59049   3486784401      12157665459056928801
+        10      100     1000    100000  10000000000     100000000000000000000
 
 One possible solution would be to change the tab width, but the first column
 already has more space than it needs. The best solution would be to set the
 width of each column independently. As you may have guessed by now, string
 formatting provides a much nicer solution.  We can also right-justify each field:
 
-.. sourcecode:: python
-        
-    layout = "{0:>4}{1:>6}{2:>6}{3:>8}{4:>13}{5:>24}"
+    .. sourcecode:: python3
+        :linenos:
+            
+        layout = "{0:>4}{1:>6}{2:>6}{3:>8}{4:>13}{5:>24}"
 
-    print(layout.format('i', 'i**2', 'i**3', 'i**5', 'i**10', 'i**20'))
-    for i in range(1, 11):
-        print(layout.format(i, i**2, i**3, i**5, i**10, i**20))
+        print(layout.format('i', 'i**2', 'i**3', 'i**5', 'i**10', 'i**20'))
+        for i in range(1, 11):
+            print(layout.format(i, i**2, i**3, i**5, i**10, i**20))
  
 
-Running this version produces the following (much more satisfying) output::
-    
-   i  i**2  i**3    i**5        i**10                   i**20
-   1     1     1       1            1                       1
-   2     4     8      32         1024                 1048576
-   3     9    27     243        59049              3486784401
-   4    16    64    1024      1048576           1099511627776
-   5    25   125    3125      9765625          95367431640625
-   6    36   216    7776     60466176        3656158440062976
-   7    49   343   16807    282475249       79792266297612001
-   8    64   512   32768   1073741824     1152921504606846976
-   9    81   729   59049   3486784401    12157665459056928801
-  10   100  1000  100000  10000000000   100000000000000000000
+Running this version produces the following (much more satisfying) output: 
+
+    .. sourcecode:: pycon
+        
+       i  i**2  i**3    i**5        i**10                   i**20
+       1     1     1       1            1                       1
+       2     4     8      32         1024                 1048576
+       3     9    27     243        59049              3486784401
+       4    16    64    1024      1048576           1099511627776
+       5    25   125    3125      9765625          95367431640625
+       6    36   216    7776     60466176        3656158440062976
+       7    49   343   16807    282475249       79792266297612001
+       8    64   512   32768   1073741824     1152921504606846976
+       9    81   729   59049   3486784401    12157665459056928801
+      10   100  1000  100000  10000000000   100000000000000000000
 
 
 Summary 
@@ -867,10 +917,10 @@ may prove helpful in remembering what you learned.
         *Traversing* a string means accessing each character in the string, one
         at a time.  For example, the following for loop:
 
-        .. sourcecode:: python
+            .. sourcecode:: python3
 
-            for ix in 'Example':
-                ...
+                for ix in 'Example':
+                    ...
 
         executes the body of the loop 7 times with different values of `ix` each time.
 
@@ -954,40 +1004,44 @@ Exercises
 We suggest you create a single file containing the test scaffolding from our previous chapters,
 and put all functions that require tests into that file. 
 
-#. What is the result of each of the following::
+#. What is the result of each of the following:
 
-    >>> 'Python'[1]
-    >>> "Strings are sequences of characters."[5]
-    >>> len("wonderful")
-    >>> 'Mystery'[:4]
-    >>> 'p' in 'Pineapple'
-    >>> 'apple' in 'Pineapple'
-    >>> 'pear' not in 'Pineapple'
-    >>> 'apple' > 'pineapple'
-    >>> 'pineapple' < 'Peach'
+    .. sourcecode:: python3
+    
+        >>> 'Python'[1]
+        >>> "Strings are sequences of characters."[5]
+        >>> len("wonderful")
+        >>> 'Mystery'[:4]
+        >>> 'p' in 'Pineapple'
+        >>> 'apple' in 'Pineapple'
+        >>> 'pear' not in 'Pineapple'
+        >>> 'apple' > 'pineapple'
+        >>> 'pineapple' < 'Peach'
     
 #. Modify:
 
-   .. sourcecode:: python
-    
-       prefixes = "JKLMNOPQ"
-       suffix = "ack"
-       
-       for letter in prefixes:
-           print(letter + suffix)
+       .. sourcecode:: python3
+           :linenos:
+        
+           prefixes = "JKLMNOPQ"
+           suffix = "ack"
+           
+           for letter in prefixes:
+               print(letter + suffix)
 
    so that ``Ouack`` and ``Quack`` are spelled correctly.
    
 #. Encapsulate
 
-   .. sourcecode:: python
-    
-       fruit = "banana"
-       count = 0
-       for char in fruit:
-           if char == 'a':
-               count += 1
-       print(count)
+       .. sourcecode:: python3
+           :linenos:
+        
+           fruit = "banana"
+           count = 0
+           for char in fruit:
+               if char == 'a':
+                   count += 1
+           print(count)
 
    in a function named ``count_letters``, and generalize it so that it accepts
    the string and the letter as arguments.  Make the function return the number
@@ -1003,66 +1057,89 @@ and put all functions that require tests into that file.
 
    Write a function which removes all punctuation from the string, breaks the string
    into a list of words, and counts the number of words in your text that contain
-   the letter 'e'.  Your program should print an analysis of the text like this::
+   the letter 'e'.  Your program should print an analysis of the text like this:
+   
+       .. sourcecode:: pycon
 
-       Your text contains 243 words, of which 109 (44.8%) contain an 'e'.      
+           Your text contains 243 words, of which 109 (44.8%) contain an 'e'.      
 
 #. Print out a neatly formatted multiplication table, up to 12 x 12.
 
-#. Write a function that reverses its string argument, and satisfies these tests::
+#. Write a function that reverses its string argument, and satisfies these tests:
 
-      test(reverse('happy'), 'yppah')
-      test(reverse('Python'), 'nohtyP')
-      test(reverse(''), '')
-      test(reverse('a'), 'a')
+       .. sourcecode:: python3
+           :linenos:
+           
+           test(reverse('happy'), 'yppah')
+           test(reverse('Python'), 'nohtyP')
+           test(reverse(''), '')
+           test(reverse('a'), 'a')
    
-#. Write a function that mirrors its argument:: 
+#. Write a function that mirrors its argument:
 
-       test(mirror('good'), 'gooddoog')
-       test(mirror('Python'), 'PythonnohtyP')
-       test(mirror(''), '')
-       test(mirror('a'), 'aa')
+       .. sourcecode:: python3
+           :linenos:
+          
+           test(mirror('good'), 'gooddoog')
+           test(mirror('Python'), 'PythonnohtyP')
+           test(mirror(''), '')
+           test(mirror('a'), 'aa')
 
-#. Write a function that removes all occurrences of a given letter from a string::
+#. Write a function that removes all occurrences of a given letter from a string:
     
-        test(remove_letter('a', 'apple'), 'pple')
-        test(remove_letter('a', 'banana'), 'bnn')
-        test(remove_letter('z', 'banana'), 'banana')
-        test(remove_letter('i', 'Mississippi'), 'Msssspp')
-        test(remove_letter('b', ''), '')
-        test(remove_letter('b', 'c'), 'c')
+        .. sourcecode:: python3
+            :linenos:   
+            
+            test(remove_letter('a', 'apple'), 'pple')
+            test(remove_letter('a', 'banana'), 'bnn')
+            test(remove_letter('z', 'banana'), 'banana')
+            test(remove_letter('i', 'Mississippi'), 'Msssspp')
+            test(remove_letter('b', ''), '')
+            test(remove_letter('b', 'c'), 'c')
 
-#. Write a function that recognizes palindromes. (Hint: use your ``reverse`` function to make this easy!)::
+#. Write a function that recognizes palindromes. (Hint: use your ``reverse`` function to make this easy!):
 
-       test(is_palindrome('abba'), True)
-       test(is_palindrome('abab'), False)
-       test(is_palindrome('tenet'), True)
-       test(is_palindrome('banana'), False)
-       test(is_palindrome('straw warts'), True)
-       test(is_palindrome('a'), True)
-       test(is_palindrome(''), ??)    # Is an empty string a palindrome?
+        .. sourcecode:: python3
+            :linenos:   
+            
+            test(is_palindrome('abba'), True)
+            test(is_palindrome('abab'), False)
+            test(is_palindrome('tenet'), True)
+            test(is_palindrome('banana'), False)
+            test(is_palindrome('straw warts'), True)
+            test(is_palindrome('a'), True)
+            #test(is_palindrome(''), ??)    # Is an empty string a palindrome?
 
-#. Write a function that counts how many times a substring occurs in a string::  
+#. Write a function that counts how many times a substring occurs in a string: 
    
-       test(count('is', 'Mississippi'), 2)
-       test(count('an', 'banana'), 2)
-       test(count('ana', 'banana'), 2)
-       test(count('nana', 'banana'), 1)
-       test(count('nanan', 'banana'), 0)
-       test(count('aaa', 'aaaaaa'), 4)
+        .. sourcecode:: python3
+            :linenos: 
+            
+            test(count('is', 'Mississippi'), 2)
+            test(count('an', 'banana'), 2)
+            test(count('ana', 'banana'), 2)
+            test(count('nana', 'banana'), 1)
+            test(count('nanan', 'banana'), 0)
+            test(count('aaa', 'aaaaaa'), 4)
    
-#. Write a function that removes the first occurrence of a string from another string::
+#. Write a function that removes the first occurrence of a string from another string: 
 
-        test(remove('an', 'banana'), 'bana')
-        test(remove('cyc', 'bicycle'), 'bile')
-        test(remove('iss', 'Mississippi'), 'Missippi')
-        test(remove('egg', 'bicycle'), 'bicycle')
+        .. sourcecode:: python3
+            :linenos: 
+            
+            test(remove('an', 'banana'), 'bana')
+            test(remove('cyc', 'bicycle'), 'bile')
+            test(remove('iss', 'Mississippi'), 'Missippi')
+            test(remove('egg', 'bicycle'), 'bicycle')
  
-#. Write a function that removes all occurrences of a string from another string::
- 
-        test(remove_all('an', 'banana'), 'ba')
-        test(remove_all('cyc', 'bicycle'), 'bile')
-        test(remove_all('iss', 'Mississippi'), 'Mippi')
-        test(remove_all('eggs', 'bicycle'), 'bicycle')
+#. Write a function that removes all occurrences of a string from another string: 
+
+        .. sourcecode:: python3
+            :linenos: 
+            
+            test(remove_all('an', 'banana'), 'ba')
+            test(remove_all('cyc', 'bicycle'), 'bile')
+            test(remove_all('iss', 'Mississippi'), 'Mippi')
+            test(remove_all('eggs', 'bicycle'), 'bicycle')
 
   

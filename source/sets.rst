@@ -5,14 +5,6 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 |
     
@@ -61,44 +53,46 @@ into a secret code. What a computer scientist means by encode is to define a
 mapping between a sequence of numbers and the items I want to represent. For
 example:
 
-.. sourcecode:: python
-    
-    Spades   -->  3
-    Hearts   -->  2
-    Diamonds -->  1
-    Clubs    -->  0
+    .. sourcecode:: python3
+        
+        Spades   -->  3
+        Hearts   -->  2
+        Diamonds -->  1
+        Clubs    -->  0
 
 An obvious feature of this mapping is that the suits map to integers in order,
 so we can compare suits by comparing integers. The mapping for ranks is fairly
 obvious; each of the numerical ranks maps to the corresponding integer, and for
 face cards:
 
-.. sourcecode:: python
-    
-    Jack   -->  11
-    Queen  -->  12
-    King   -->  13
+    .. sourcecode:: python3
+        
+        Jack   -->  11
+        Queen  -->  12
+        King   -->  13
 
 The reason we are using mathematical notation for these mappings is that they
 are not part of the Python program. They are part of the program design, but
 they never appear explicitly in the code. The class definition for the ``Card``
 type looks like this:
 
-.. sourcecode:: python
-    
-    class Card:
-        def __init__(self, suit=0, rank=0):
-            self.suit = suit
-            self.rank = rank
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Card:
+            def __init__(self, suit=0, rank=0):
+                self.suit = suit
+                self.rank = rank
 
 As usual, we provide an initialization method that takes an optional parameter
 for each attribute.
 
 To create an object that represents the 3 of Clubs, use this command:
 
-.. sourcecode:: python
-    
-    three_of_clubs = Card(0, 3)
+    .. sourcecode:: python3
+        :linenos:
+        
+        three_of_clubs = Card(0, 3)
 
 The first argument, ``0``, represents the suit Clubs.
 
@@ -111,19 +105,20 @@ want to map the integer codes onto words. A natural way to do that is with
 lists of strings. We assign these lists to **class attributes** at the top of
 the class definition:
 
-.. sourcecode:: python
-    
-    class Card:
-        suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
-        ranks = ["narf", "Ace", "2", "3", "4", "5", "6", "7",
-                 "8", "9", "10", "Jack", "Queen", "King"]
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Card:
+            suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
+            ranks = ["narf", "Ace", "2", "3", "4", "5", "6", "7",
+                     "8", "9", "10", "Jack", "Queen", "King"]
 
-        def __init__(self, suit=0, rank=0):
-            self.suit = suit
-            self.rank = rank
-       
-        def __str__(self):
-            return (self.ranks[self.rank] + " of " + self.suits[self.suit])
+            def __init__(self, suit=0, rank=0):
+                self.suit = suit
+                self.rank = rank
+           
+            def __str__(self):
+                return (self.ranks[self.rank] + " of " + self.suits[self.suit])
 
 A class attribute is defined outside of any method, and it can be accessed from
 any of the methods in the class.
@@ -142,40 +137,40 @@ We could have started at 0, as usual, but it is less confusing to encode 2 as
 
 With the methods we have so far, we can create and print cards:
 
-.. sourcecode:: python
-    
-    >>> card1 = Card(1, 11)
-    >>> print(card1)
-    Jack of Diamonds
+    .. sourcecode:: python3
+        
+        >>> card1 = Card(1, 11)
+        >>> print(card1)
+        Jack of Diamonds
 
 Class attributes like ``suits`` are shared by all ``Card`` objects. The
 advantage of this is that we can use any ``Card`` object to access the class
 attributes:
 
-.. sourcecode:: python
-    
-    >>> card2 = Card(1, 3)
-    >>> print(card2)
-    3 of Diamonds
-    >>> print(card2.suits[1])
-    Diamonds
+    .. sourcecode:: python3
+        
+        >>> card2 = Card(1, 3)
+        >>> print(card2)
+        3 of Diamonds
+        >>> print(card2.suits[1])
+        Diamonds
 
 The disadvantage is that if we modify a class attribute, it affects every
 instance of the class. For example, if we decide that Jack of Diamonds should
 really be called Jack of Swirly Whales, we could do this:
 
-.. sourcecode:: python
-    
-    >>> card1.suits[1] = "Swirly Whales"
-    >>> print(card1)
-    Jack of Swirly Whales
+    .. sourcecode:: python3
+        
+        >>> card1.suits[1] = "Swirly Whales"
+        >>> print(card1)
+        Jack of Swirly Whales
 
 The problem is that *all* of the Diamonds just became Swirly Whales:
 
-.. sourcecode:: python
-    
-    >>> print card2
-    3 of Swirly Whales
+    .. sourcecode:: python3
+        
+        >>> print card2
+        3 of Swirly Whales
 
 It is usually not a good idea to modify class attributes.
 
@@ -214,52 +209,56 @@ sorted with all the Clubs together, followed by all the Diamonds, and so on.
 
 With that decided, we can write ``cmp``:
 
-.. sourcecode:: python
-    
-    def cmp(self, other):
-        # check the suits
-        if self.suit > other.suit: return 1
-        if self.suit < other.suit: return -1
-        # suits are the same... check ranks
-        if self.rank > other.rank: return 1
-        if self.rank < other.rank: return -1
-        # ranks are the same... it's a tie
-        return 0
+    .. sourcecode:: python3
+        :linenos:
+        
+        def cmp(self, other):
+            # check the suits
+            if self.suit > other.suit: return 1
+            if self.suit < other.suit: return -1
+            # suits are the same... check ranks
+            if self.rank > other.rank: return 1
+            if self.rank < other.rank: return -1
+            # ranks are the same... it's a tie
+            return 0
 
 In this ordering, Aces appear lower than Deuces (2s).
 
 Now, we can define the six special methods that do the
 overloading of each of the relational operators for us:
 
-.. sourcecode:: python
-    
-    def __eq__(self, other):
-        return self.cmp(other) == 0
+    .. sourcecode:: python3
+        :linenos:
+        
+        def __eq__(self, other):
+            return self.cmp(other) == 0
 
-    def __le__(self, other):
-        return self.cmp(other) <= 0
+        def __le__(self, other):
+            return self.cmp(other) <= 0
 
-    def __ge__(self, other):
-        return self.cmp(other) >= 0
+        def __ge__(self, other):
+            return self.cmp(other) >= 0
 
-    def __gt__(self, other):
-        return self.cmp(other) > 0
+        def __gt__(self, other):
+            return self.cmp(other) > 0
 
-    def __lt__(self, other):
-        return self.cmp(other) < 0
+        def __lt__(self, other):
+            return self.cmp(other) < 0
 
-    def __ne__(self, other):
-        return self.cmp(other) != 0        
+        def __ne__(self, other):
+            return self.cmp(other) != 0        
 
-With this machinery in place, the relational operators now work as we'd like them to::
+With this machinery in place, the relational operators now work as we'd like them to:
 
-   >>> card1 = Card(1, 11)
-   >>> card2 = Card(1, 3)
-   >>> card3 = Card(1, 11)
-   >>> card1 < card2
-   False
-   >>> card1 == card3
-   True
+    .. sourcecode: pycon
+
+       >>> card1 = Card(1, 11)
+       >>> card2 = Card(1, 3)
+       >>> card3 = Card(1, 11)
+       >>> card1 < card2
+       False
+       >>> card1 == card3
+       True
 
 
 Decks
@@ -273,14 +272,15 @@ The following is a class definition for the ``Deck`` class. The initialization
 method creates the attribute ``cards`` and generates the standard set of
 fifty-two cards:
 
-.. sourcecode:: python
-    
-    class Deck:
-        def __init__(self):
-            self.cards = []
-            for suit in range(4):
-                for rank in range(1, 14):
-                    self.cards.append(Card(suit, rank))
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            def __init__(self):
+                self.cards = []
+                for suit in range(4):
+                    for rank in range(1, 14):
+                        self.cards.append(Card(suit, rank))
 
 The easiest way to populate the deck is with a nested loop. The outer loop
 enumerates the suits from 0 to 3. The inner loop enumerates the ranks from 1 to
@@ -299,13 +299,14 @@ As usual, when we define a new type of object we want a method that prints the
 contents of an object. To print a ``Deck``, we traverse the list and print each
 ``Card``:
 
-.. sourcecode:: python
-    
-    class Deck:
-        ...
-        def print_deck(self):
-            for card in self.cards:
-                print(card)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            ...
+            def print_deck(self):
+                for card in self.cards:
+                    print(card)
 
 Here, and from now on, the ellipsis ( ``...``) indicates that we have omitted
 the other methods in the class.
@@ -320,15 +321,16 @@ Here is a version of ``__str__`` that returns a string representation of a
 ``Deck``. To add a bit of pizzazz, it arranges the cards in a cascade where
 each card is indented one space more than the previous card:
 
-.. sourcecode:: python
-    
-    class Deck:
-        ...
-        def __str__(self):
-            s = ""
-            for i in range(len(self.cards)):
-                s = s + " " * i + str(self.cards[i]) + "\n"
-            return s
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            ...
+            def __str__(self):
+                s = ""
+                for i in range(len(self.cards)):
+                    s = s + " " * i + str(self.cards[i]) + "\n"
+                return s
 
 
 This example demonstrates several features. First, instead of traversing
@@ -349,24 +351,24 @@ generated and concatenated with the old value of ``s`` to get the new value.
 When the loop ends, ``s`` contains the complete string representation of the
 ``Deck``, which looks like this:
 
-.. sourcecode:: python
-    
-    >>> deck = Deck()
-    >>> print(deck)
-    Ace of Clubs
-     2 of Clubs
-      3 of Clubs
-       4 of Clubs
-         5 of Clubs
-           6 of Clubs
-            7 of Clubs
-             8 of Clubs
-              9 of Clubs
-               10 of Clubs
-                Jack of Clubs
-                 Queen of Clubs
-                  King of Clubs
-                   Ace of Diamonds
+    .. sourcecode:: python3
+        
+        >>> deck = Deck()
+        >>> print(deck)
+        Ace of Clubs
+         2 of Clubs
+          3 of Clubs
+           4 of Clubs
+             5 of Clubs
+               6 of Clubs
+                7 of Clubs
+                 8 of Clubs
+                  9 of Clubs
+                   10 of Clubs
+                    Jack of Clubs
+                     Queen of Clubs
+                      King of Clubs
+                       Ace of Diamonds
 
 And so on. Even though the result appears on 52 lines, it is one long string
 that contains newlines.
@@ -383,29 +385,32 @@ To shuffle the deck, we will use the ``randrange`` function from the ``random``
 module. With two integer arguments, ``a`` and ``b``, ``randrange`` chooses a
 random integer in the range ``a <= x < b``. Since the upper bound is strictly
 less than ``b``, we can use the length of a list as the second parameter, and
-we are guaranteed to get a legal index. For example, this expression chooses
+we are guaranteed to get a legal index. For example, if ``rng`` has already
+been instantiated as a random number source, this expression chooses
 the index of a random card in a deck:
 
-.. sourcecode:: python
-    
-    random.randrange(0, len(self.cards))
+    .. sourcecode:: python3
+        :linenos:
+        
+        rng.randrange(0, len(self.cards))
 
 An easy way to shuffle the deck is by traversing the cards and swapping each
 card with a randomly chosen one. It is possible that the card will be swapped
 with itself, but that is fine. In fact, if we precluded that possibility, the
 order of the cards would be less than entirely random:
 
-.. sourcecode:: python
-    
-    class Deck:
-        ...
-        def shuffle(self):
-            import random      
-            rng = random.Random()        # create a random generator
-            num_cards = len(self.cards)
-            for i in range(num_cards):
-                j = rng.randrange(i, num_cards)
-                (self.cards[i], self.cards[j]) = (self.cards[j], self.cards[i])
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            ...
+            def shuffle(self):
+                import random      
+                rng = random.Random()        # create a random generator
+                num_cards = len(self.cards)
+                for i in range(num_cards):
+                    j = rng.randrange(i, num_cards)
+                    (self.cards[i], self.cards[j]) = (self.cards[j], self.cards[i])
 
 Rather than assume that there are fifty-two cards in the deck, we get the
 actual length of the list and store it in ``num_cards``.
@@ -414,22 +419,24 @@ For each card in the deck, we choose a random card from among the cards that
 haven't been shuffled yet. Then we swap the current card ( ``i``) with the
 selected card ( ``j``). To swap the cards we use a tuple assignment:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
+        
+        (self.cards[i], self.cards[j]) = (self.cards[j], self.cards[i])
     
-    (self.cards[i], self.cards[j]) = (self.cards[j], self.cards[i])
-    
-While this is a good shuffling method, the random number generator also
+While this is a good shuffling method, a random number generator object also
 has a ``shuffle`` method that can shuffle elements in a list, in place.
 So we could rewrite this function to use the one provided for us:     
     
-.. sourcecode:: python
-    
-    class Deck:
-        ...
-        def shuffle(self):
-            import random
-            rng = random.Random()        # create a random generator
-            rng.shuffle(self.cards)      # use its shuffle method
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            ...
+            def shuffle(self):
+                import random
+                rng = random.Random()        # create a random generator
+                rng.shuffle(self.cards)      # use its shuffle method
             
 
 Removing and dealing cards
@@ -439,17 +446,18 @@ Another method that would be useful for the ``Deck`` class is ``remove``,
 which takes a card as a parameter, removes it, and returns ``True`` if
 the card was in the deck and ``False`` otherwise:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    
-    class Deck:
-        ...
-        def remove(self, card):
-            if card in self.cards:
-                self.cards.remove(card)
-                return True 
-            else:
-                return False 
+        
+        class Deck:
+            ...
+            def remove(self, card):
+                if card in self.cards:
+                    self.cards.remove(card)
+                    return True 
+                else:
+                    return False 
 
 
 The ``in`` operator returns ``True`` if the first operand is in the second,
@@ -461,12 +469,13 @@ Since the ``__eq__`` in the ``Card`` class checks for deep equality, the
 To deal cards, we want to remove and return the top card. The list method
 ``pop`` provides a convenient way to do that:
 
-.. sourcecode:: python
-    
-    class Deck:
-        ...
-        def pop(self):
-            return self.cards.pop()
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            ...
+            def pop(self):
+                return self.cards.pop()
 
 Actually, ``pop`` removes the *last* card in the list, so we are in effect
 dealing from the bottom of the deck.
@@ -474,12 +483,13 @@ dealing from the bottom of the deck.
 One more operation that we are likely to want is the boolean function
 ``is_empty``, which returns true if the deck contains no cards:
 
-.. sourcecode:: python
-    
-    class Deck:
-        ...
-        def is_empty(self):
-            return (len(self.cards) == 0)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Deck:
+            ...
+            def is_empty(self):
+                return (len(self.cards) == 0)
 
 
 Glossary

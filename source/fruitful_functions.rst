@@ -4,15 +4,7 @@
     or any later version published by the Free Software Foundation;
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
-    included in the section entitled "GNU Free Documentation License".
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
+    included in the section entitled "GNU Free Documentation License".  
  
 |
 
@@ -33,10 +25,11 @@ The built-in functions we have used, such as ``abs``, ``pow``, ``int``, ``max``,
 have produced results. Calling each of these functions generates a value, which
 we usually assign to a variable or use as part of an expression.
 
-.. sourcecode:: python
-    
-    biggest = max(3, 7, 2, 5)
-    x = abs(3 - 11) + 10 
+    .. sourcecode:: python3
+        :linenos:
+        
+        biggest = max(3, 7, 2, 5)
+        x = abs(3 - 11) + 10 
 
 We also wrote our own function to return the final amount for a compound interest calculation.
 
@@ -44,11 +37,12 @@ In this chapter, we are going to write more functions that return values, which 
 will call *fruitful functions*, for want of a better name.  The first example
 is ``area``, which returns the area of a circle with the given radius:
 
-.. sourcecode:: python
-    
-    def area(radius):
-        b = 3.14159 * radius**2
-        return b
+    .. sourcecode:: python3
+        :linenos:
+        
+        def area(radius):
+            b = 3.14159 * radius**2
+            return b
 
 We have seen the ``return`` statement before, but in a fruitful function the
 ``return`` statement includes a **return value**. This statement means: evaluate 
@@ -56,10 +50,11 @@ the return expression, and then return it immediately as the result (the fruit)
 of this function.  The expression provided can be arbitrarily complicated, 
 so we could have written this function like this:
 
-.. sourcecode:: python
-    
-    def area(radius):
-        return 3.14159 * radius * radius
+    .. sourcecode:: python3
+        :linenos:
+        
+        def area(radius):
+            return 3.14159 * radius * radius
 
 On the other hand, **temporary variables** like ``b`` above often make debugging
 easier.
@@ -68,25 +63,27 @@ Sometimes it is useful to have multiple return statements, one in each branch
 of a conditional. We have already seen the built-in ``abs``, now we see how to
 write our own: 
 
-.. sourcecode:: python
-    
-    def absolute_value(x):
-        if x < 0:
-            return -x
-        else:
-            return x
+    .. sourcecode:: python3
+        :linenos:
+        
+        def absolute_value(x):
+            if x < 0:
+                return -x
+            else:
+                return x
 
 
 
 Another way to write the above function is to leave out the ``else`` and just
 follow the ``if`` condition by the second ``return`` statement.
 
-.. sourcecode:: python
-    
-    def absolute_value(x):
-        if x < 0:
-            return -x
-        return x
+    .. sourcecode:: python3
+        :linenos:
+        
+        def absolute_value(x):
+            if x < 0:
+                return -x
+            return x
 
 Think about this version and convince yourself it works the same as the first
 one.
@@ -98,22 +95,23 @@ In a fruitful function, it is a good idea to ensure that every possible path
 through the program hits a ``return`` statement. The following version of
 ``absolute_value`` fails to do this:
 
-.. sourcecode:: python
-    
-    def bad_absolute_value(x):
-        if x < 0:
-            return -x
-        elif x > 0:
-            return x
+    .. sourcecode:: python3
+        :linenos:
+        
+        def bad_absolute_value(x):
+            if x < 0:
+                return -x
+            elif x > 0:
+                return x
 
 This version is not correct because if ``x`` happens to be 0, neither condition
 is true, and the function ends without hitting a ``return`` statement. In this
 case, the return value is a special value called **None**:
 
-.. sourcecode:: python
-    
-    >>> print(bad_absolute_value(0))
-    None
+    .. sourcecode:: python3
+        
+        >>> print(bad_absolute_value(0))
+        None
 
 All Python functions return ``None`` whenever they do not return another value.
 
@@ -123,20 +121,21 @@ a function which looks through a list of words.  It should return the
 first 2-letter word.  If there is not one, it should return the 
 empty string:
 
-.. sourcecode:: python
-    
-    def find_first_2_letter_word(xs):
-        for wd in xs:
-            if len(wd) == 2:
-               return wd
-        return ''
+    .. sourcecode:: python3
+        :linenos:
+        
+        def find_first_2_letter_word(xs):
+            for wd in xs:
+                if len(wd) == 2:
+                   return wd
+            return ''
 
-.. sourcecode:: python
-         
-    >>> find_first_2_letter_word(['This',  'is', 'a', 'dead', 'parrot'])
-    'is'    
-    >>> find_first_2_letter_word(["I",  "like",  "cheese"]) 
-    ''    
+    .. sourcecode:: python3
+             
+        >>> find_first_2_letter_word(['This',  'is', 'a', 'dead', 'parrot'])
+        'is'    
+        >>> find_first_2_letter_word(["I",  "like",  "cheese"]) 
+        ''    
 
 Single-step through this code and convince yourself that in the first test case
 that we've provided, the function returns while processing the second element
@@ -162,8 +161,8 @@ As an example, suppose you want to find the distance between two points, given
 by the coordinates (x\ :sub:`1`\ , y\ :sub:`1`\ ) and
 (x\ :sub:`2`\ , y\ :sub:`2`\ ).  By the Pythagorean theorem, the distance is:
 
-.. image:: illustrations/distance_formula.png
-   :alt: Distance formula 
+    .. image:: illustrations/distance_formula.png
+       :alt: Distance formula 
 
 The first step is to consider what a ``distance`` function should look like in
 Python. In other words, what are the inputs (parameters) and what is the output
@@ -174,10 +173,11 @@ parameters. The return value is the distance, which is a floating-point value.
 
 Already we can write an outline of the function that captures our thinking so far:
 
-.. sourcecode:: python
-    
-    def distance(x1, y1, x2, y2):
-        return 0.0
+    .. sourcecode:: python3
+        :linenos:
+        
+        def distance(x1, y1, x2, y2):
+            return 0.0
 
 Obviously, this version of the function doesn't compute distances; it always
 returns zero. But it is syntactically correct, and it will run, which means
@@ -185,10 +185,10 @@ that we can test it before we make it more complicated.
 
 To test the new function, we call it with sample values:
 
-.. sourcecode:: python
-    
-    >>> distance(1, 2, 4, 6)
-    0.0
+    .. sourcecode:: python3
+        
+        >>> distance(1, 2, 4, 6)
+        0.0
 
 We chose these values so that the horizontal distance equals 3 and the vertical
 distance equals 4; that way, the result is 5 (the hypotenuse of a 3-4-5
@@ -203,12 +203,13 @@ A logical first step in the computation is to find the differences
 x\ :sub:`2`\ - x\ :sub:`1`\  and y\ :sub:`2`\ - y\ :sub:`1`\ .  We will store
 those values in temporary variables named ``dx`` and ``dy``.
 
-.. sourcecode:: python
-    
-    def distance(x1, y1, x2, y2):
-        dx = x2 - x1
-        dy = y2 - y1
-        return 0.0
+    .. sourcecode:: python3
+        :linenos:
+        
+        def distance(x1, y1, x2, y2):
+            dx = x2 - x1
+            dy = y2 - y1
+            return 0.0
 
 If we call the function with the arguments shown above, when the flow of execution
 gets to the return statement, `dx` should be 3 and `dy` should be 4. 
@@ -221,13 +222,14 @@ computation correctly. If not, there are only a few lines to check.
 
 Next we compute the sum of squares of ``dx`` and ``dy``:
 
-.. sourcecode:: python
-    
-    def distance(x1, y1, x2, y2):
-        dx = x2 - x1
-        dy = y2 - y1
-        dsquared = dx*dx + dy*dy
-        return 0.0
+    .. sourcecode:: python3
+        :linenos:
+        
+        def distance(x1, y1, x2, y2):
+            dx = x2 - x1
+            dy = y2 - y1
+            dsquared = dx*dx + dy*dy
+            return 0.0
 
 Again, we could run the program at this stage and check the value of ``dsquared`` (which
 should be 25).
@@ -235,14 +237,15 @@ should be 25).
 Finally, using the fractional exponent ``0.5`` to find the square root,
 we compute and return the result:
 
-.. sourcecode:: python
-    
-    def distance(x1, y1, x2, y2):
-        dx = x2 - x1
-        dy = y2 - y1
-        dsquared = dx*dx + dy*dy
-        result = dsquared**0.5
-        return result
+    .. sourcecode:: python3
+        :linenos:
+        
+        def distance(x1, y1, x2, y2):
+            dx = x2 - x1
+            dy = y2 - y1
+            dsquared = dx*dx + dy*dy
+            result = dsquared**0.5
+            return result
 
 If that works correctly, you are done. Otherwise, you might want to inspect the
 value of ``result`` before the return statement.
@@ -275,17 +278,18 @@ that is in the ``math`` module (we'll learn about modules shortly).  Which do yo
 prefer?  Which looks "closer" to the Pythagorean formula we started out with?
 
 
-.. sourcecode:: python
-    
-    import math
-    
-    def distance(x1, y1, x2, y2):
-        return math.sqrt( (x2-x1)**2 + (y2-y1)**2 )  
+    .. sourcecode:: python3
+        :linenos:
+        
+        import math
+        
+        def distance(x1, y1, x2, y2):
+            return math.sqrt( (x2-x1)**2 + (y2-y1)**2 )  
    
-.. sourcecode:: python
-    
-    >>> distance(1, 2, 4, 6)
-    5.0   
+    .. sourcecode:: python3
+        
+        >>> distance(1, 2, 4, 6)
+        5.0   
       
 .. index:: debugging   
    
@@ -341,26 +345,29 @@ radius of the circle, which is the distance between the two points.
 Fortunately, we've just written a function, ``distance``, that does just that,
 so now all we have to do is use it:
 
-.. sourcecode:: python
-    
-    radius = distance(xc, yc, xp, yp)
+    .. sourcecode:: python3
+        :linenos:
+        
+        radius = distance(xc, yc, xp, yp)
 
 The second step is to find the area of a circle with that radius and return it.
 Again we will use one of our earlier functions:
 
-.. sourcecode:: python
-    
-    result = area(radius)
-    return result
+    .. sourcecode:: python3
+        :linenos:
+        
+        result = area(radius)
+        return result
 
 Wrapping that up in a function, we get:
 
-.. sourcecode:: python
-    
-    def area2(xc, yc, xp, yp):
-        radius = distance(xc, yc, xp, yp)
-        result = area(radius)
-        return result
+    .. sourcecode:: python3
+        :linenos:
+        
+        def area2(xc, yc, xp, yp):
+            radius = distance(xc, yc, xp, yp)
+            result = area(radius)
+            return result
 
 We called this function ``area2`` to distinguish it from the ``area`` function
 defined earlier. There can only be one function with a given name within a
@@ -371,10 +378,11 @@ debugging, and single-stepping through the code to inspect what is happening,
 but once the program is working, we can make it more concise by
 composing the function calls:
 
-.. sourcecode:: python
-    
-    def area2(xc, yc, xp, yp):
-        return area(distance(xc, yc, xp, yp))
+    .. sourcecode:: python3
+        :linenos:
+        
+        def area2(xc, yc, xp, yp):
+            return area(distance(xc, yc, xp, yp))
 
 
 .. index:: boolean function
@@ -385,13 +393,14 @@ Boolean functions
 Functions can return boolean values, which is often convenient for hiding
 complicated tests inside functions. For example:
 
-.. sourcecode:: python
-    
-    def is_divisible(x, y):
-        if x % y == 0:
-            return True 
-        else:
-            return False 
+    .. sourcecode:: python3
+        :linenos:
+        
+        def is_divisible(x, y):
+            if x % y == 0:
+                return True 
+            else:
+                return False 
 
 The name of this function is ``is_divisible``. It is common to give **boolean
 functions** names that sound like yes/no questions.  ``is_divisible`` returns
@@ -402,34 +411,37 @@ We can make the function more concise by taking advantage of the fact that the
 condition of the ``if`` statement is itself a boolean expression. We can return
 it directly, avoiding the ``if`` statement altogether:
 
-.. sourcecode:: python
-    
-    def is_divisible(x, y):
-        return x % y == 0
+    .. sourcecode:: python3
+        :linenos:
+        
+        def is_divisible(x, y):
+            return x % y == 0
 
 This session shows the new function in action:
 
-.. sourcecode:: python
-    
-    >>> is_divisible(6, 4)
-    False
-    >>> is_divisible(6, 3)
-    True
+    .. sourcecode:: python3
+        
+        >>> is_divisible(6, 4)
+        False
+        >>> is_divisible(6, 3)
+        True
 
 Boolean functions are often used in conditional statements:
 
-.. sourcecode:: python
-    
-    if is_divisible(x, y):
-        ... # do something ...
-    else:
-        ... # do something else ...
+    .. sourcecode:: python3
+        :linenos:
+        
+        if is_divisible(x, y):
+            ... # do something ...
+        else:
+            ... # do something else ...
 
 It might be tempting to write something like:
 
-.. sourcecode:: python
-    
-    if is_divisible(x, y) == True:
+    .. sourcecode:: python3
+        :linenos:
+        
+        if is_divisible(x, y) == True:
 
 
 but the extra comparison is unnecessary.
@@ -504,58 +516,63 @@ they import a module called ``sys``, and extract the caller's
 line number from the stack frame.  This allows us to print the line number
 of the test, which will help when we want to fix any tests that fail. 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def test(actual, expected):
-        """ Compare the actual to the expected value, 
-            and print a suitable message. 
-        """
-        import sys
-        linenum = sys._getframe(1).f_lineno   # get the caller's line number.
-        if (expected == actual):
-            msg = "Test on line {0} passed.".format(linenum)
-        else:
-            msg = ("Test on line {0} failed. Expected '{1}', but got '{2}'." 
-                                         . format(linenum, expected, actual))
-        print(msg)
+        def test(actual, expected):
+            """ Compare the actual to the expected value, 
+                and print a suitable message. 
+            """
+            import sys
+            linenum = sys._getframe(1).f_lineno   # get the caller's line number.
+            if (expected == actual):
+                msg = "Test on line {0} passed.".format(linenum)
+            else:
+                msg = ("Test on line {0} failed. Expected '{1}', but got '{2}'." 
+                                             . format(linenum, expected, actual))
+            print(msg)
  
 There is also some slightly tricky string formatting using the ``format`` method 
 which we will gloss over for the moment, and cover in detail in a future chapter.  
 But with this function written, we can proceed to construct our test suite:
 
-.. sourcecode:: python
-    
-    def test_suite():
-        """ Run the suite of tests for code in this module (this file). 
-        """
-        test(absolute_value(17), 17)  
-        test(absolute_value(-17), 17) 
-        test(absolute_value(0), 0) 
-        test(absolute_value(3.14), 3.14) 
-        test(absolute_value(-3.14), 3.14) 
-    
-    test_suite()        # and here is the call to run the tests
+    .. sourcecode:: python3
+        :linenos:
+        
+        def test_suite():
+            """ Run the suite of tests for code in this module (this file). 
+            """
+            test(absolute_value(17), 17)  
+            test(absolute_value(-17), 17) 
+            test(absolute_value(0), 0) 
+            test(absolute_value(3.14), 3.14) 
+            test(absolute_value(-3.14), 3.14) 
+        
+        test_suite()        # and here is the call to run the tests
     
 Here you'll see that we've constructed five tests in our test suite.  We could run this
 against the first or second versions (the correct versions) of ``absolute_value``, 
-and we'd get output similar to the following:: 
+and we'd get output similar to the following: 
 
-    Test on line 24 passed.
-    Test on line 25 passed.
-    Test on line 26 passed.
-    Test on line 27 passed.
-    Test on line 28 passed.
+    .. sourcecode:: pycon
+
+        Test on line 24 passed.
+        Test on line 25 passed.
+        Test on line 26 passed.
+        Test on line 27 passed.
+        Test on line 28 passed.
 
 But let's say you change the function to an incorrect version like this:
 
-.. sourcecode:: python
- 
-    def absolute_value(n):   # Buggy version
-        """ Compute the absolute value of n """  
-        if n < 0:
-            return 1
-        elif n > 0:
-            return n
+    .. sourcecode:: python3
+        :linenos:
+     
+        def absolute_value(n):   # Buggy version
+            """ Compute the absolute value of n """  
+            if n < 0:
+                return 1
+            elif n > 0:
+                return n
     
 Can you find at least two mistakes in this code?  Running our test suite we get::
 

@@ -6,9 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-    
-  
- 
 |     
 
 Classes and Objects - the Basics
@@ -86,16 +83,16 @@ bit more effort, but it has advantages that will be apparent soon.
 We'll want our points to each have an ``x`` and a ``y`` attribute,
 so our first class definition looks like this:
 
-.. sourcecode:: python
-    :linenos:
-    
-    class Point:
-        """ Point class represents and manipulates x,y coords. """
+    .. sourcecode:: python3
+        :linenos:
         
-        def __init__(self):
-            """ Create a new point at the origin """
-            self.x = 0
-            self.y = 0          
+        class Point:
+            """ Point class represents and manipulates x,y coords. """
+            
+            def __init__(self):
+                """ Create a new point at the origin """
+                self.x = 0
+                self.y = 0          
 
 Class definitions can appear anywhere in a program, but they are usually near
 the beginning (after the ``import`` statements). Some programmers and languages
@@ -119,16 +116,19 @@ the newly created object that needs to be initialized.
 
 So let's use our new Point class now...
 
-.. sourcecode:: python
-    
-    p = Point()         # Instantiate an object of type Point
-    q = Point()         # and make a second point
+    .. sourcecode:: python3
+        :linenos:
+        
+        p = Point()         # Instantiate an object of type Point
+        q = Point()         # and make a second point
 
-    print(p.x, p.y, q.x, q.y)  # Each point object has its own x and y
+        print(p.x, p.y, q.x, q.y)  # Each point object has its own x and y
     
-This program prints::
+This program prints: 
 
-   0 0 0 0
+    .. sourcecode:: python3
+    
+       0 0 0 0
    
 because during the initialization of the objects, we created two
 attributes called `x` and `y` for each, and gave them both the value 0.
@@ -136,12 +136,13 @@ attributes called `x` and `y` for each, and gave them both the value 0.
 This should look familiar --- we've used classes before to create
 more than one object:   
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    from turtle import Turtle    
-    
-    tess = Turtle()     # Instantiate objects of type Turtle   
-    alex = Turtle()  
+        from turtle import Turtle    
+        
+        tess = Turtle()     # Instantiate objects of type Turtle   
+        alex = Turtle()  
  
 The variables ``p`` and ``q`` are assigned references to two new ``Point`` objects. 
 A function like ``Turtle`` or ``Point`` that creates a new object instance 
@@ -167,10 +168,10 @@ Like real world objects, object instances have both attributes and methods.
 
 We can modify the attributes in an instance using dot notation:
 
-.. sourcecode:: python
-    
-    >>> p.x = 3
-    >>> p.y = 4
+    .. sourcecode:: python3
+        
+        >>> p.x = 3
+        >>> p.y = 4
 
 Both modules and instances create
 their own namespaces, and the syntax for accessing names contained in each,
@@ -179,21 +180,21 @@ is a data item from an instance.
 
 The following state diagram shows the result of these assignments:
 
-.. image:: illustrations/point.png
-   :alt: Point state diagram 
+    .. image:: illustrations/point.png
+       :alt: Point state diagram 
 
 The variable ``p`` refers to a Point object, which contains two attributes.
 Each attribute refers to a number.
 
 We can access the value of an attribute using the same syntax:
 
-.. sourcecode:: python
-    
-    >>> print(p.y)
-    4
-    >>> x = p.x
-    >>> print(x)
-    3
+    .. sourcecode:: python3
+        
+        >>> print(p.y)
+        4
+        >>> x = p.x
+        >>> print(x)
+        3
 
 The expression ``p.x`` means, "Go to the object ``p`` refers to and get the
 value of ``x``". In this case, we assign that value to a variable named ``x``.
@@ -205,10 +206,11 @@ unambiguously.
 You can use dot notation as part of any expression, so the following statements
 are legal:
 
-.. sourcecode:: python
-    
-    print('(x={0}, y={1})'.format(p.x, p.y))
-    distance_squared_from_origin = p.x * p.x + p.y * p.y
+    .. sourcecode:: python3
+        :linenos:
+        
+        print('(x={0}, y={1})'.format(p.x, p.y))
+        distance_squared_from_origin = p.x * p.x + p.y * p.y
 
 The first line outputs ``(x=3, y=4)``.  The second line calculates the value 25.
 
@@ -218,39 +220,40 @@ Improving our initializer
 
 To create a point at position (7, 6) currently needs three lines of code:
 
-.. sourcecode:: python
-    
-    p = Point()
-    p.x = 7
-    p.y = 6
+    .. sourcecode:: python3
+        :linenos:
+        
+        p = Point()
+        p.x = 7
+        p.y = 6
     
 We can make our class constructor more general by putting extra parameters into
 the ``__init__`` method, as shown in this example:
 
-.. sourcecode:: python
-    :linenos:
-    
-    class Point:
-        """ Point class represents and manipulates x,y coords. """
+    .. sourcecode:: python3
+        :linenos:
         
-        def __init__(self, x=0, y=0):
-            """ Create a new point at x, y """
-            self.x = x
-            self.y = y 
+        class Point:
+            """ Point class represents and manipulates x,y coords. """
             
-    # Other statements outside the class continue below here.
+            def __init__(self, x=0, y=0):
+                """ Create a new point at x, y """
+                self.x = x
+                self.y = y 
+                
+        # Other statements outside the class continue below here.
 
 The ``x`` and ``y`` parameters here are both optional.  If the caller does not 
 supply arguments, they'll get the default values of 0.  Here is our improved class 
 in action:
 
-.. sourcecode:: python
-    
-    >>> p = Point(4, 2)
-    >>> q = Point(6, 3)
-    >>> r = Point()       # r represents the origin (0, 0)
-    >>> print(p.x, q.y, r.x)
-    4 3 0 
+    .. sourcecode:: python3
+        
+        >>> p = Point(4, 2)
+        >>> q = Point(6, 3)
+        >>> r = Point()       # r represents the origin (0, 0)
+        >>> print(p.x, q.y, r.x)
+        4 3 0 
     
 
 .. admonition:: Technically speaking ...
@@ -294,46 +297,47 @@ attribute, methods are accessed using dot notation.
 Let's add another method, ``distance_from_origin``, to see better how methods
 work:
 
-.. sourcecode:: python
-    
-    class Point:
-        """ Create a new Point, at coordinates x, y """
+    .. sourcecode:: python3
+        :linenos:
         
-        def __init__(self, x=0, y=0):
-            """ Create a new point at x, y """
-            self.x = x
-            self.y = y 
+        class Point:
+            """ Create a new Point, at coordinates x, y """
+            
+            def __init__(self, x=0, y=0):
+                """ Create a new point at x, y """
+                self.x = x
+                self.y = y 
 
-        def distance_from_origin(self):
-            """ Compute my distance from the origin """
-            return ((self.x ** 2) + (self.y ** 2)) ** 0.5 
+            def distance_from_origin(self):
+                """ Compute my distance from the origin """
+                return ((self.x ** 2) + (self.y ** 2)) ** 0.5 
 
 Let's create a few point instances, look at their attributes, and call our new
 method on them:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
 
-    >>> p = Point(3, 4)
-    >>> p.x
-    3
-    >>> p.y
-    4
-    >>> p.distance_from_origin()
-    5.0
-    >>> q = Point(5, 12)
-    >>> q.x
-    5
-    >>> q.y
-    12
-    >>> q.distance_from_origin()
-    13.0
-    >>> r = Point()
-    >>> r.x
-    0
-    >>> r.y
-    0
-    >>> r.distance_from_origin()
-    0.0   
+        >>> p = Point(3, 4)
+        >>> p.x
+        3
+        >>> p.y
+        4
+        >>> p.distance_from_origin()
+        5.0
+        >>> q = Point(5, 12)
+        >>> q.x
+        5
+        >>> q.y
+        12
+        >>> q.distance_from_origin()
+        13.0
+        >>> r = Point()
+        >>> r.x
+        0
+        >>> r.y
+        0
+        >>> r.distance_from_origin()
+        0.0   
 
 When defining a method, the first parameter refers to the instance being
 manipulated.  As already noted, it is customary to name this parameter ``self``.  
@@ -357,10 +361,12 @@ now have a reference, but there is only one turtle!
 
 Here is a simple function involving our new ``Point`` objects:
  
-.. sourcecode:: python
-    
-    def print_point(pt):  
-        print('({0}, {1})'.format(pt.x, pt.y))
+    .. sourcecode:: python3
+        :linenos:
+        
+        
+        def print_point(pt):  
+            print('({0}, {1})'.format(pt.x, pt.y))
 
 ``print_point`` takes a point as an argument and formats the output in whichever
 way we choose.  If you call ``print_point(p)`` with point ``p`` as defined previously,
@@ -377,7 +383,8 @@ is to add a new method to the class.  And we don't like chatterbox methods that 
 can produce a string representation of itself.  Let's initially 
 call it ``to_string``:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
         class Point:
             # ...
@@ -385,41 +392,48 @@ call it ``to_string``:
             def to_string(self):
                 return '({0}, {1})'.format(self.x, self.y)
 
-Now we can say::
+Now we can say: 
 
-    >>> p = Point(3, 4)
-    >>> print(p.to_string())
-    (3, 4)
+    .. sourcecode:: python3
+    
+        >>> p = Point(3, 4)
+        >>> print(p.to_string())
+        (3, 4)
     
 But, you ask, don't we already have an ``str`` type converter that can 
 turn our object into a string?  Yes!  And doesn't ``print``
 automatically use this when printing things?  Yes again! 
-But these automatic mechanisms do not yet do exactly what we want::
+But these automatic mechanisms do not yet do exactly what we want: 
 
-   >>> str(p)    
-   '<__main__.Point object at 0x01F9AA10>'
-   >>> print(p)    
-   '<__main__.Point object at 0x01F9AA10>'
+    .. sourcecode:: python3
+    
+       >>> str(p)    
+       '<__main__.Point object at 0x01F9AA10>'
+       >>> print(p)    
+       '<__main__.Point object at 0x01F9AA10>'
    
 Python has a clever trick up its sleeve to fix this.  If we call our new 
 method ``__str__`` instead of ``to_string``, the Python interpreter
 will use our code whenever it needs to convert a ``Point`` to a string.  
 Let's re-do this again, now:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-        class Point:
-            # ...
-        
-            def __str__(self):    # all we have done is renamed the method
-                return '({0}, {1})'.format(self.x, self.y)   
+            class Point:
+                # ...
+            
+                def __str__(self):    # all we have done is renamed the method
+                    return '({0}, {1})'.format(self.x, self.y)   
                 
-and now things are looking great! ::
+and now things are looking great!  
 
-    >>> str(p)     # python now uses the __str__ method that we wrote.
-    (3, 4)
-    >>> print(p)
-    (3, 4)           
+    .. sourcecode:: python3
+
+        >>> str(p)     # python now uses the __str__ method that we wrote.
+        (3, 4)
+        >>> print(p)
+        (3, 4)           
               
 
 Instances as return values
@@ -428,45 +442,51 @@ Instances as return values
 Functions and methods can return instances. For example, given two Point objects,
 find their midpoint.  First we'll write this as a regular function:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def midpoint(p1, p2):
-        """ Return the midpoint of points p1 and p2 """        
-        mx = (p1.x + p2.x)/2
-        my = (p1.y + p2.y)/2
-        return Point(mx, my)
+        def midpoint(p1, p2):
+            """ Return the midpoint of points p1 and p2 """        
+            mx = (p1.x + p2.x)/2
+            my = (p1.y + p2.y)/2
+            return Point(mx, my)
 
-The function creates and returns a new ``Point`` object::
+The function creates and returns a new ``Point`` object:
 
-    >>> p = Point(3, 4)
-    >>> q = Point(5, 12)
-    >>> r = midpoint(p, q)
-    >>> r
-    (4.0, 8.0)
+    .. sourcecode:: python3
+
+        >>> p = Point(3, 4)
+        >>> q = Point(5, 12)
+        >>> r = midpoint(p, q)
+        >>> r
+        (4.0, 8.0)
 
     
 Now let us do this as a method instead.  Suppose you have a point object,
 and wish to find the midpoint halfway between it and some other target point:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    class Point:
-       # ...
-       
-       def halfway(self, target):
-            """ Return the halfway point between myself and the target """        
-            mx = (self.x + target.x)/2
-            my = (self.y + target.y)/2
-            return Point(mx, my)
+        class Point:
+           # ...
+           
+           def halfway(self, target):
+                """ Return the halfway point between myself and the target """        
+                mx = (self.x + target.x)/2
+                my = (self.y + target.y)/2
+                return Point(mx, my)
        
 This method is identical to the function, aside from some renaming.
-It's usage might be like this::
+It's usage might be like this:
 
-    >>> p = Point(3, 4)
-    >>> q = Point(5, 12)
-    >>> r = p.halfway(q)
-    >>> r
-    (4.0, 8.0)
+    .. sourcecode:: python3
+
+        >>> p = Point(3, 4)
+        >>> q = Point(5, 12)
+        >>> r = p.halfway(q)
+        >>> r
+        (4.0, 8.0)
 
 While this example assigns each point to a variable, this need not be done.
 Just as function calls are composable, method calls and object instantiation

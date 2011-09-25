@@ -75,16 +75,16 @@ Problems with logic and flow of control
 We often want to know if some condition holds for any item in a list, e.g. "does the list have any odd numbers?"
 This is a common mistake:
 
-.. sourcecode:: python
-   :linenos:
+    .. sourcecode:: python3
+       :linenos:
 
-   def anyOdd(xs):
-       ''' Return True if there is an odd number in xs, a list of integers. '''
-       for v in xs:
-          if v % 2 == 1:
-              return True
-          else:
-              return False
+       def anyOdd(xs):
+           ''' Return True if there is an odd number in xs, a list of integers. '''
+           for v in xs:
+              if v % 2 == 1:
+                  return True
+              else:
+                  return False
               
 Can we spot what's wrong here?  As soon as we execute a ``return``, we'll leave the function.  
 So the logic of saying "If I find an odd number I can return True" is fine.  However, we cannot
@@ -92,15 +92,15 @@ return False after only looking at one item --- we can only return False if we'v
 all the items, and none of them are odd.  So line 6 should not be there, and line 7 has to be
 outside the loop.  Here is a corrected version:
 
-.. sourcecode:: python
-   :linenos:
+    .. sourcecode:: python3
+       :linenos:
 
-   def anyOdd(xs):
-       ''' Return True if there is an odd number in xs, a list of integers. '''
-       for v in xs:
-          if v % 2 == 1:
-              return True
-       return False
+       def anyOdd(xs):
+           ''' Return True if there is an odd number in xs, a list of integers. '''
+           for v in xs:
+              if v % 2 == 1:
+                  return True
+           return False
 
 This "eureka", or "short-circuit" style of returning from a function as 
 soon as we are certain what the outcome will be
@@ -108,19 +108,19 @@ was first seen in Section 8.10, in the chapter on strings.
 
 It is preferred over this one, which also works correctly:
 
-.. sourcecode:: python
-   :linenos:
+    .. sourcecode:: python3
+       :linenos:
 
-   def anyOdd(xs):
-       ''' Return True if there is an odd number in xs, a list of integers. '''
-       count = 0
-       for v in xs:
-          if v % 2 == 1:
-             count += 1    # count the odd numbers
-       if count > 0:
-          return True
-       else:
-          return False
+       def anyOdd(xs):
+           ''' Return True if there is an odd number in xs, a list of integers. '''
+           count = 0
+           for v in xs:
+              if v % 2 == 1:
+                 count += 1    # count the odd numbers
+           if count > 0:
+              return True
+           else:
+              return False
        
 The performance disadvantage of this one is that it traverses the whole list, 
 even if it knows the outcome very early on.  
@@ -136,17 +136,17 @@ evaluates to a boolean value, either ``True`` or ``False``.  The value can be us
 directly in the ``return`` statement.   So we could cut out that code and simply 
 have the following:
 
-.. sourcecode:: python
-   :linenos:
+    .. sourcecode:: python3
+       :linenos:
 
-   def anyOdd(xs):
-       ''' Return True if there is an odd number in xs, a list of integers. '''
-       count = 0
-       for v in xs:
-          if v % 2 == 1:
-             count += 1   # count the odd numbers
-       return count > 0   # Aha! a programmer who understands that boolean
-                          # expressions are not just used in if statements! 
+       def anyOdd(xs):
+           ''' Return True if there is an odd number in xs, a list of integers. '''
+           count = 0
+           for v in xs:
+              if v % 2 == 1:
+                 count += 1   # count the odd numbers
+           return count > 0   # Aha! a programmer who understands that boolean
+                              # expressions are not just used in if statements! 
                           
 Although this code is tighter, it is not as nice as the one that did the short-circuit
 return as soon as the first odd number was found.
@@ -183,16 +183,16 @@ that are global.  Global variables will survive even after our function has exit
 correct way maintain information between calls. 
 
 
-.. sourcecode:: python
-   :linenos:
-   
-   sz = 2  
-   def h2():
-       ''' Draw the next step of a spiral on each call. '''
-       global sz
-       tess.turn(42)
-       tess.forward(sz)
-       sz = sz + 1
+    .. sourcecode:: python3
+       :linenos:
+       
+       sz = 2  
+       def h2():
+           ''' Draw the next step of a spiral on each call. '''
+           global sz
+           tess.turn(42)
+           tess.forward(sz)
+           sz = sz + 1
     
 This fragment assumes our turtle is ``tess``.  Each time we call ``h2()`` it turns, draws, and increases
 the global variable ``sz``.  Python always assumes that an assignment to a variable (as in line 7) means 
@@ -245,11 +245,11 @@ smoothly, we'll have a great grounding.
 
 So if we need to know if "snake" occurs as a substring within ``s``, we could write
 
-.. sourcecode:: python
-   :linenos:
-   
-   if s.find("snake") >= 0:  ...
-   if "snake" in s: ...           # also works, nice-to-know sugar coating!
+    .. sourcecode:: python3
+       :linenos:
+       
+       if s.find("snake") >= 0:  ...
+       if "snake" in s: ...           # also works, nice-to-know sugar coating!
    
 It would be wrong to split the string into words unless we were asked whether the *word* "snake"
 occurred in the string.  
@@ -257,15 +257,15 @@ occurred in the string.
 Suppose we're asked to read some lines of data and find function definitions, e.g.: ``def someFunctionName(x, y):``, 
 and we are further asked to isolate and work with the name of the function. (Let's say, print it.)
 
-.. sourcecode:: python
-   :linenos:
-   
-   s = "..."                         # somehow get the next line to work with 
-   defPos = s.find("def ")           # look for "def " in the line
-   if defPos == 0:                   # if it occurs at the left margin 
-     opIndex = s.find('(')           # find the index of the open parenthesis
-     fnname = s[4:opIndex]           # slice out the function name
-     print(fnname)                   # and work with it.
+    .. sourcecode:: python3
+       :linenos:
+       
+       s = "..."                         # somehow get the next line to work with 
+       defPos = s.find("def ")           # look for "def " in the line
+       if defPos == 0:                   # if it occurs at the left margin 
+         opIndex = s.find('(')           # find the index of the open parenthesis
+         fnname = s[4:opIndex]           # slice out the function name
+         print(fnname)                   # and work with it.
      
 One can extend these ideas:  
 
@@ -278,7 +278,7 @@ One can extend these ideas:
 * We have also assumed that there was exactly one space between the keyword ``def`` and
   the start of the function name.  It will not work nicely for ``def       f(x)``
   
-As we've already mentioned, there are many more "sugar-coated" methods that let's us
+As we've already mentioned, there are many more "sugar-coated" methods that let us
 work more easily with strings.  There is an ``rfind`` method, like ``find``, that searches from the 
 end of the string backwards.  It is useful if we want to find the last occurrence of something.
 The ``lower`` and ``upper`` methods can do case conversion.  And the ``split`` method is great for
@@ -313,32 +313,32 @@ So loops are going to be a central feature of almost all programs you encounter.
 Here are two functions that both generate ten million random numbers, and return
 the sum of the numbers.  They both work. 
 
-.. sourcecode:: python
-    :linenos:
+    .. sourcecode:: python3
+        :linenos:
 
-    import random
-    joe = random.Random()
-    
-    def sum1():
-       ''' Build a list of random numbers, then sum them '''
-       xs = []
-       for i in range(10000000):
-           num = joe.randrange(1000)  # generate one random number
-           xs.append(num)             # save it in our list
+        import random
+        joe = random.Random()
+        
+        def sum1():
+           ''' Build a list of random numbers, then sum them '''
+           xs = []
+           for i in range(10000000):
+               num = joe.randrange(1000)  # generate one random number
+               xs.append(num)             # save it in our list
+               
+           tot = sum(xs)
+           return tot     
            
-       tot = sum(xs)
-       return tot     
-       
-    def sum2():
-       ''' Sum the random numbers as we generate them '''
-       tot = 0
-       for i in range(10000000):
-           num = joe.randrange(1000)
-           tot += num
-       return tot
-       
-    print(sum1())
-    print(sum2())
+        def sum2():
+           ''' Sum the random numbers as we generate them '''
+           tot = 0
+           for i in range(10000000):
+               num = joe.randrange(1000)
+               tot += num
+           return tot
+           
+        print(sum1())
+        print(sum2())
     
 What reasons are there for preferring the second version here? 
 (Hint: open a tool like the Performance Monitor on your computer, and watch the memory

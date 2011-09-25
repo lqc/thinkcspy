@@ -7,14 +7,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png
     
 |    
     
@@ -76,8 +68,8 @@ and executes it, meaning that it does what the program says. It processes the
 program a little at a time, alternately reading lines and performing
 computations.
 
-.. image:: illustrations/interpret.png
-   :alt: Interpret illustration
+    .. image:: illustrations/interpret.png
+       :alt: Interpret illustration
 
 A compiler reads the program and translates it completely before the program
 starts running. In this case, the high-level program is called the **source
@@ -85,8 +77,8 @@ code**, and the translated program is called the **object code** or the
 **executable**. Once a program is compiled, you can execute it repeatedly
 without further translation.
 
-.. image:: illustrations/compile.png
-   :alt: Compile illustration
+    .. image:: illustrations/compile.png
+       :alt: Compile illustration
     
 Many modern languages use both processes. They are first compiled into a lower
 level language, called **bytecode**, and then interpreted by a program called
@@ -106,8 +98,6 @@ and on the next line it gave a new prompt, indicating that it is ready for more 
 
 Alternatively, you can write a program in a file and use the interpreter to
 execute the contents of the file. Such a file is called a **script**. 
-
-|rle_start|
    
 In this Rhodes Local Edition of the textbook, we use a program development environment called
 **PyScripter**. (It is available at http://code.google.com/p/pyscripter.)  There are various other
@@ -122,8 +112,7 @@ To execute the program, we can click the **Run** button in PyScripter:
 
 .. image:: illustrations/my_first_program.png
    :alt: first program screenshot
-   
-|rle_end|
+ 
 
 Most programs are more interesting than this one.
 
@@ -347,9 +336,9 @@ structure, syntax, and semantics --- there are many differences:
         Formal languages mean exactly what they say.  On the other hand, natural languages 
         are full of idiom and metaphor. If someone says, "The
         other shoe fell", there is probably no shoe and nothing falling.  
-        |rle_open| You'll need to find the 
+        You'll need to find the 
         original joke to understand the idiomatic meaning of the other shoe falling. 
-        *Yahoo! Answers* thinks it knows! |rle_close|
+        *Yahoo! Answers* thinks it knows!  
 
 People who grow up speaking a natural language---everyone---often have a hard
 time adjusting to formal languages. In some ways, the difference between formal
@@ -387,19 +376,21 @@ The first program
 
 Traditionally, the first program written in a new language is called *Hello,
 World!* because all it does is display the words, Hello, World!  In Python, the script
-looks like this:
+looks like this: (For scripts, we'll show line numbers to the left of the Python statements.)
 
-.. sourcecode:: python
-    
-    print("Hello, World!")
+    .. sourcecode:: python3
+        :linenos:
+        
+        print("Hello, World!")
 
 This is an example of using the **print function**, which doesn't actually print
-anything on paper. It displays a value on the screen. In this case, the result
-is the words
+anything on paper. It displays a value on the screen. In this case, the result shown
+is
 
-.. sourcecode:: python
-    
-    Hello, World!
+    .. sourcecode:: python3
+        :linenos:
+        
+        Hello, World!
 
 The quotation marks in the program mark the beginning and end of the value;
 they don't appear in the result.
@@ -428,15 +419,16 @@ only for the human reader - it is completely ignored by the interpreter.
 In Python, the `#` token starts a comment.  The rest of the line 
 is ignored.   Here is a new version of *Hello, World!*.
 
-.. sourcecode:: python
-    
-    #---------------------------------------------------
-    # This demo program shows off how elegant Python is!
-    # Written by Joe Soap, December 2010.
-    # Anyone may freely copy or modify this program.
-    #---------------------------------------------------
-    
-    print("Hello, World!")     # Isn't this easy! 
+    .. sourcecode:: python3
+        :linenos:
+        
+        #---------------------------------------------------
+        # This demo program shows off how elegant Python is!
+        # Written by Joe Soap, December 2010.
+        # Anyone may freely copy or modify this program.
+        #---------------------------------------------------
+        
+        print("Hello, World!")     # Isn't this easy! 
       
 You'll also notice that we've left a blank line in the program.  Blank lines
 are also ignored by the interpreter, but comments and blank lines can make your
@@ -528,9 +520,9 @@ Glossary
         An interactive user interface to the Python interpreter. The user of a
         Python shell types commands at the prompt (>>>), and presses the return
         key to send these commands immediately to the interpreter for
-        processing.  |rle_open| The word *shell* comes from Unix.  In the PyScripter 
+        processing.  The word *shell* comes from Unix.  In the PyScripter 
         used in this RLE version of the book, the Interpreter Window is where
-        we'd do the immediate mode interaction. |rle_close|
+        we'd do the immediate mode interaction.  
 
     runtime error
         An error that does not occur until the program has started to execute
@@ -574,12 +566,14 @@ Exercises
    recording what is displayed by the Python interpreter. 
 #. Type ``1 2`` and then hit return. Python tries to evaluate the expression,
    but it can't because the expression is not syntactically legal. Instead, it
-   shows the error message::
+   shows the error message:
+   
+        .. sourcecode:: python3
 
-          File "<interactive input>", line 1
-            1 2
-              ^
-        SyntaxError: invalid syntax
+              File "<interactive input>", line 1
+                1 2
+                  ^
+            SyntaxError: invalid syntax
 
    In many cases, Python indicates where the syntax error occurred, but it is
    not always right, and it doesn't give you much information about what is
@@ -614,17 +608,19 @@ Exercises
 #. Type ``6 + 4 * 9`` at the Python prompt and hit enter.  Record what
    happens.
    
-   Now create a python script named ``test1.py`` with the following contents:
+   Now create a python script with the following contents:
 
-   .. sourcecode:: python
-    
-       6 + 4 * 9
+       .. sourcecode:: python3
+          :linenos:
+        
+           6 + 4 * 9
 
-   What happens when you run this script? Now change the contents to:
+   What happens when you run this script? Now change the script contents to:
 
-   .. sourcecode:: python
-    
-       print(6 + 4 * 9)
+       .. sourcecode:: python3
+           :linenos:
+        
+           print(6 + 4 * 9)
 
    and run it again.
    

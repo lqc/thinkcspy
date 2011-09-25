@@ -128,7 +128,7 @@ process:
 
 #. Add this line as the first line in the script:
 
-   .. sourcecode:: python
+   .. sourcecode:: python3
     
        #!/usr/bin/env python
 

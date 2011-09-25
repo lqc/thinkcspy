@@ -6,18 +6,9 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
- 
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png
-
     
-The Rhodes Local Edition (RLE) (Version of July, 2011)
-======================================================
+The Rhodes Local Edition (RLE) (Version of October, 2011)
+=========================================================
 
 By Peter Wentworth
 
@@ -74,8 +65,9 @@ Here are some of the key things I've approached differently:
 * We're using PyScripter as our IDE, on Windows.  And it is hardwired into
   parts of these notes, with screenshots, etc.  
 * I've dropped GASP. 
-* For graphics we start with the Turtle module. As things
-  move along, we use PyGame for more advanced graphics.  
+* For graphics we start with the Turtle module.  
+  As things move along, we use PyGame for more advanced graphics. 
+* I've introduced some event-driven programming using the turtle.  
 * I have tried to push more object-oriented notions earlier, without asking
   students to synthesize objects or write their own classes.  So, for example,
   in the chapter about the turtle, we create multiple instances of turtles, 
@@ -88,12 +80,13 @@ Here are some of the key things I've approached differently:
   so rather than use the traditional command-line ``input`` for data, I've 
   favoured using loops and lists right up front, like this:
   
-  .. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
   
         friends = ["Amy", "Joe", "Bill"]
         for f in friends:
-           invitation = "Hi " + f + ".  Please come to my party on Saturday!"
-           print(invitation)
+            invitation = "Hi " + f + ".  Please come to my party on Saturday!"
+            print(invitation)
         
   This also means that I bumped ``range`` up for early exposure.  
   I envisage that over time we'll see more opportunities to exploit "early
@@ -102,22 +95,27 @@ Here are some of the key things I've approached differently:
   it fails a test if the spacing between list elements is not precisely the same
   as the output string, or if Python prints a string with single quotes, but
   you wrote up the test case with double quotes. 
-  Cases like this also confused students (and instructors) quite badly::
+  Cases like this also confused students (and instructors) quite badly: 
   
-      def sum(xs):
-         """
-         >>> xs = [2,3,4]
-         >>> sum(xs)
-         9
-         """
-        ...
+    .. sourcecode:: python3
+        :linenos:
+        
+        def addlist(xs):
+            """
+            >>> xs = [2,3,4]
+            >>> addlist(xs)
+            9
+            """
+            return
    
   If you can explain the difference in scope rules and lifetimes 
   between the parameter ``xs`` and the doctest variable ``xs`` elegantly, 
-  please let me know.  (Yes, I know doctest creates its own scope behind
-  our back, but this is confusing. It looks like the doctests are nested
-  inside the function scope, but they are not. Students thought that the parameter
-  had been given its value by the assignment in the doctest!)   
+  please let me know.  Yes, I know doctest creates its own scope behind
+  our back, but it is exactly this black magic that we're trying to avoid.  
+  From the usual indentation rules, also looks like the doctests are nested
+  inside the function scope, but they are not. 
+  Students thought that the parameter
+  had been given its value by the assignment to ``xs`` in the doctest!    
   
   I also think that keeping the test suite separate from the functions under test
   leads to a cleaner relationship between caller and callee, and gives a better
@@ -129,9 +127,11 @@ Here are some of the key things I've approached differently:
   
   So I've favoured my own test scaffolding in Chapter 6 (about 10 lines of code) 
   that the students must insert into whatever file they're working on.
+  
 * I've played down command-line input / process / output where possible.  Many
   of our students have never seen a command-line shell, and it is arguably
   quite intimidating.     
+  
 * We've gone back to a more "classic / static" approach to writing our own classes 
   and objects. Python (in company with languages like Javascript, Ruby, Perl,
   PHP, etc.) don't really emphasize notions of "sealed" classes or "private" members, 
@@ -148,14 +148,14 @@ Here are some of the key things I've approached differently:
   In our more conservative approach, we put an initializer into every class,
   we determine at object instantiation time what members we want, and we initialize 
   the instances from within the class.  So we've moved closer in philosophy 
-  to C# / Java.
+  to C# / Java on this one.
   
 * We're moving towards introducing more algorithms earlier into the course.  Python
   is an efficient teaching language --- we can make fast progress.  But the gains
-  we make there we'd like to invest not in doing "more Python features", but in
-  doing deeper problem solving, and more complex algorithms with the basics. Some
-  of these changes have started to find their way in this version, and I'm sure we'll
-  see more in future.
+  we make there we'd like to invest into deeper problem solving, and more complex 
+  algorithms with the basics, rather than cover  "more Python features". Some
+  of these changes have started to find their way in this version, 
+  and I'm sure we'll see more in future.
 
 * We're interested in issues around teaching and learning. Some research indicates
   that "intellectual playfulness" is important.  The study referenced in the Odds-and-ends
@@ -163,32 +163,7 @@ Here are some of the key things I've approached differently:
   I wanted it included.  It is quite likely that we'll allow more issues like this to
   creep into the book, to try to make it more than just about programming in Python.   
  
-Some markup in the document
----------------------------
 
-When I began the changes, I tried to keep "my modifications" separate 
-from the original, and delimited with some easy-to-see markers.   I had the notion
-that I'd be able to restrain myself from fiddling and changing things too widely. 
-However, things soon got blurred.  
-
-I occasionally still use the markers, but mostly for emphasis that this is 
-probably different from the original authors' philosophy. If a passage is 
-not marked up, it might still be quite extensively changed.  
-
-So don't blame the original authors for any of my mistakes, oversights, or bad advice!
-If you are in any doubt whatsoever, please consult the original, 
-unmodified version of their book, available at http://greenteapress.com/thinkpython/
-
-|rle_start|
- 
-These markers in the text show sections that have been added 
-specifically for this RLE version of the book.  
-
-
-|rle_end|
-
-Sometimes you'll also find text bracketed by |rle_open| symbols like this. |rle_close| 
-That also shows smaller local modifications or perhaps significant deviations from the original. 
 
 
 

@@ -114,20 +114,20 @@ important programming ideas easier to teach.
 The first example from the text illustrates this point. It is the traditional
 hello, world program, which in the Java version of the book looks like this:
 
-.. sourcecode:: java 
+    .. sourcecode:: java 
 
-    class Hello {
+        class Hello {
 
-      public static void main (String[] args) {
-          System.out.println ("Hello, world.");
-      }
-    }
+          public static void main (String[] args) {
+              System.out.println ("Hello, world.");
+          }
+        }
 
 in the Python version it becomes:
 
-.. sourcecode:: python
-    
-    print "Hello, World!"
+    .. sourcecode:: python3
+        
+        print("Hello, World!")
 
 Even though this is a trivial example, the advantages of Python stand out.
 Yorktown's Computer Science I course has no prerequisites, so many of the

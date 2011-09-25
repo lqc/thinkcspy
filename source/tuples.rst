@@ -17,9 +17,11 @@ Tuples are used for grouping data
 ---------------------------------
 
 We've seen earlier that we can group together pairs of values by putting them 
-into parentheses.  Recall this example::
+into parentheses.  Recall this example: 
 
-    >>> year_born = ("Paris Hilton", 1981) 
+    .. sourcecode:: python3
+
+        >>> year_born = ("Paris Hilton", 1981) 
 
 This is an example of a **data structure** --- a mechanism for grouping and
 organizing data to make it easier to use.
@@ -29,10 +31,10 @@ be used to group any number of items into a single compound value.
 Syntactically, a tuple is a comma-separated sequence of values.  
 Although it is not necessary, it is conventional to enclose tuples in parentheses:
 
-.. sourcecode:: python
-    
-    >>> julia = ("Julia", "Roberts", 1967, 
-                       "Duplicity", 2009, "Actress", "Atlanta, Georgia")
+    .. sourcecode:: python3
+        
+        >>> julia = ("Julia", "Roberts", 1967, 
+                           "Duplicity", 2009, "Actress", "Atlanta, Georgia")
     
 Tuples are useful for representing what other languages often call *records* ---
 some related information that belongs together, like your student record.  There is
@@ -42,18 +44,18 @@ lets us "chunk" together related information and use it as a single thing.
 Tuples support the same sequence operations as strings. The index operator 
 selects an element from a tuple.
 
-.. sourcecode:: python
-    
-    >>> julia[2]
-    1967
+    .. sourcecode:: python3
+        
+        >>> julia[2]
+        1967
 
 But if we try to use item assignment to modify one of the elements of the
 tuple, we get an error:
 
-.. sourcecode:: python
-    
-    >>> julia[0] = 'X'
-    TypeError: 'tuple' object does not support item assignment
+    .. sourcecode:: python3
+        
+        >>> julia[0] = 'X'
+        TypeError: 'tuple' object does not support item assignment
 
 So like strings, tuples are immutable.  Once Python has created a tuple
 in memory, it cannot be changed.  
@@ -66,25 +68,25 @@ bits to make the new tuple.  So  if ``julia`` has a new recent film, we could
 change her variable to reference a new tuple that used some information 
 from the old one:
 
-.. sourcecode:: python
-    
-    >>> julia = julia[:3] + ("Eat Pray Love", 2010) + julia[5:]
-    >>> julia
-    ('Julia', 'Roberts', 1967, 'Eat Pray Love', 2010, 'Actress', 'Atlanta, Georgia')
+    .. sourcecode:: python3
+        
+        >>> julia = julia[:3] + ("Eat Pray Love", 2010) + julia[5:]
+        >>> julia
+        ('Julia', 'Roberts', 1967, 'Eat Pray Love', 2010, 'Actress', 'Atlanta, Georgia')
 
 
 To create a tuple with a single element (but you're probably not likely
 to do that too often), we have to include the final comma, because without
 the final comma, Python treats the ``(5)`` below as an integer in parentheses:
 
-.. sourcecode:: python
-    
-    >>> tup = (5,)
-    >>> type(tup)
-    <class 'tuple'> 
-    >>> x = (5)
-    >>> type(x)
-    <class 'int'>     
+    .. sourcecode:: python3
+        
+        >>> tup = (5,)
+        >>> type(tup)
+        <class 'tuple'> 
+        >>> x = (5)
+        >>> type(x)
+        <class 'int'>     
           
           
 .. index::
@@ -98,9 +100,9 @@ Python has a very powerful **tuple assignment** feature that allows a tuple of v
 on the left of an assignment to be assigned values from a tuple
 on the right of the assignment.   (We already saw this used for pairs, but it generalizes.)
 
-.. sourcecode:: python
-    
-    (name, surname, b_year, movie, m_year, profession, b_place) = julia
+    .. sourcecode:: python3
+        
+        (name, surname, b_year, movie, m_year, profession, b_place) = julia
     
 This does the equivalent of seven assignment statements, all on one easy line.  
 One requirement is that the number of variables on the left must match the number
@@ -110,17 +112,19 @@ Once in a while, it is useful to swap the values of two variables.  With
 conventional assignment statements, we have to use a temporary variable. For
 example, to swap ``a`` and ``b``:
 
-.. sourcecode:: python
-    
-    temp = a
-    a = b
-    b = temp
+    .. sourcecode:: python3
+        :linenos:
+        
+        temp = a
+        a = b
+        b = temp
 
 Tuple assignment solves this problem neatly:
 
-.. sourcecode:: python
-    
-    (a, b) = (b, a)
+    .. sourcecode:: python3
+        :linenos:
+        
+        (a, b) = (b, a)
 
 The left side is a tuple of variables; the right side is a tuple of values.
 Each value is assigned to its respective variable. All the expressions on the
@@ -130,10 +134,10 @@ tuple assignment quite versatile.
 Naturally, the number of variables on the left and the number of values on the
 right have to be the same:
 
-.. sourcecode:: python
-    
-    >>> (a, b, c, d) = (1, 2, 3)
-    ValueError: need more than 3 values to unpack 
+    .. sourcecode:: python3
+        
+        >>> (a, b, c, d) = (1, 2, 3)
+        ValueError: need more than 3 values to unpack 
 
 .. index::
     single: tuple; return value 
@@ -152,42 +156,47 @@ of wolves on an island at a given time.
 For example, we could write a function that returns both the area and the circumference
 of a circle of radius r:
 
-.. sourcecode:: python
-    
-    def f(r):
-        """ Return (circumference, area) of a circle of radius r """
-        c = 2 * math.pi * r
-        a = math.pi * r * r
-        return (c, a)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def f(r):
+            """ Return (circumference, area) of a circle of radius r """
+            c = 2 * math.pi * r
+            a = math.pi * r * r
+            return (c, a)
  
  
 Composability of Data Structures
 --------------------------------
     
 We saw in an earlier chapter that we could make a list of pairs, and we had an example 
-where one of the items in the tuple was itself a list::
+where one of the items in the tuple was itself a list: 
 
-    students = [
-        ("John", ["CompSci", "Physics"]),
-        ("Vusi", ["Maths", "CompSci", "Stats"]),
-        ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
-        ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
-        ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
+    .. sourcecode:: python3
+    
+        students = [
+            ("John", ["CompSci", "Physics"]),
+            ("Vusi", ["Maths", "CompSci", "Stats"]),
+            ("Jess", ["CompSci", "Accounting", "Economics", "Management"]),
+            ("Sarah", ["InfSys", "Accounting", "Economics", "CommLaw"]),
+            ("Zuki", ["Sociology", "Economics", "Law", "Stats", "Music"])]
 
 Tuples items can themselves be other tuples.  For example, we could improve
 the information about our movie stars to hold the full date of birth rather
 than just the year, and we could have a list of some of her movies and dates that they
-were made, and so on::
+were made, and so on:
 
-   julia_more_info = ( ("Julia", "Roberts"), (8, "October", 1967), 
-                        "Actress", ("Atlanta", "Georgia"),  
-                        [ ("Duplicity", 2009), 
-                          ("Notting Hill", 1999),
-                          ("Pretty Woman", 1990),
-                          ("Erin Brockovich", 2000),
-                          ("Eat Pray Love", 2010),
-                          ("Mona Lisa Smile", 2003),
-                          ("Oceans Twelve", 2004) ])
+    .. sourcecode:: python3
+
+       julia_more_info = ( ("Julia", "Roberts"), (8, "October", 1967), 
+                            "Actress", ("Atlanta", "Georgia"),  
+                            [ ("Duplicity", 2009), 
+                              ("Notting Hill", 1999),
+                              ("Pretty Woman", 1990),
+                              ("Erin Brockovich", 2000),
+                              ("Eat Pray Love", 2010),
+                              ("Mona Lisa Smile", 2003),
+                              ("Oceans Twelve", 2004) ])
                           
 Notice in this case the tuple has just five elements - but each of those in turn
 can be another tuple, a list, a string, or any other kind of Python value. 

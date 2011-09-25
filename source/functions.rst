@@ -6,15 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-    
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
- 
 |
      
 
@@ -37,10 +28,10 @@ the problem.
  
 The syntax for a **function definition** is:
 
-.. sourcecode:: python
-    
-    def NAME( PARAMETERS ):
-        STATEMENTS
+    .. sourcecode:: python3
+        
+        def NAME( PARAMETERS ):
+            STATEMENTS
 
 You can make up any names you want for the functions you create, except that
 you can't use a name that is a Python keyword, and the names must follow the rules
@@ -70,29 +61,29 @@ squares.   "Draw a square* is an *abstraction*, or a mental
 chunk, of a number of smaller steps.  So let's write a function to capture the pattern
 of this "building block": 
 
-.. sourcecode:: python
-   :linenos:
-    
-    import turtle 
-
-    def draw_square(t, sz):
-        """Make turtle t draw a square of sz."""    
+    .. sourcecode:: python3
+       :linenos:
         
-        for i in range(4):
-            t.forward(sz)             
-            t.left(90)
-      
-      
-    wn = turtle.Screen()        # Set up the window and its attributes
-    wn.bgcolor("lightgreen")
-    wn.title("Alex meets a function")
+        import turtle 
 
-    alex = turtle.Turtle()      # create alex
-    draw_square(alex, 50)       # Call the function to draw the square
-    wn.mainloop()
+        def draw_square(t, sz):
+            """Make turtle t draw a square of sz."""    
+            
+            for i in range(4):
+                t.forward(sz)             
+                t.left(90)
+          
+          
+        wn = turtle.Screen()        # Set up the window and its attributes
+        wn.bgcolor("lightgreen")
+        wn.title("Alex meets a function")
+
+        alex = turtle.Turtle()      # create alex
+        draw_square(alex, 50)       # Call the function to draw the square
+        wn.mainloop()
 
         
-.. image:: illustrations/alex04.png 
+    .. image:: illustrations/alex04.png 
 
         
 This function is named ``draw_square``.  It has two parameters --- one to tell 
@@ -103,8 +94,8 @@ this purpose!
 
 .. admonition::  docstrings 
 
-    If the first thing after the function header is a string (some tools insist that
-    it must be a triple-quoted string), it is called a **docstring** 
+    If the first thing after the function header is a triple-quoted string, 
+    it is called a **docstring** 
     and gets special treatment in Python and in some of the programming tools.  
     For example, when using PyScripter, when you type a function name it will pop up a 
     tooltip showing the parameters of the function, and the text from the docstring.
@@ -131,33 +122,34 @@ statements will be executed each time we call it.  And we could use it to get
 any of our turtles to draw a square.   In the next example, we've changed the ``draw_square``
 function a little, and we get tess to draw 15 squares, with some variations.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    import turtle
+        import turtle
 
-    def draw_multicolour_square(t, sz):  
-        """Make turtle t draw a multi-colour square of sz."""
-        for i in ['red','purple','hotpink','blue']:
-            t.color(i)
-            t.forward(sz)
-            t.left(90)
- 
-    wn = turtle.Screen()        # Set up the window and its attributes
-    wn.bgcolor("lightgreen")
+        def draw_multicolour_square(t, sz):  
+            """Make turtle t draw a multi-colour square of sz."""
+            for i in ['red','purple','hotpink','blue']:
+                t.color(i)
+                t.forward(sz)
+                t.left(90)
+     
+        wn = turtle.Screen()        # Set up the window and its attributes
+        wn.bgcolor("lightgreen")
 
-    tess = turtle.Turtle()      # create tess and set some attributes
-    tess.pensize(3)
+        tess = turtle.Turtle()      # create tess and set some attributes
+        tess.pensize(3)
 
-    size = 20                   # size of the smallest square
-    for i in range(15):
-        draw_multicolour_square(tess, size)
-        size = size + 10        # increase the size for next time
-        tess.forward(10)        # move tess along a little
-        tess.right(18)          # and give her some extra turn
+        size = 20                   # size of the smallest square
+        for i in range(15):
+            draw_multicolour_square(tess, size)
+            size = size + 10        # increase the size for next time
+            tess.forward(10)        # move tess along a little
+            tess.right(18)          # and give her some extra turn
 
-    wn.mainloop()
+        wn.mainloop()
 
-.. image:: illustrations/tess05.png 
+    .. image:: illustrations/tess05.png 
 
 Functions can call other functions
 ----------------------------------
@@ -168,15 +160,16 @@ square, we cannot repeat the same thing 4 times, because the four sides are not 
 
 So we eventually come up with this rather nice code that can draw a rectangle.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def draw_rectangle(t, w, h):
-        """Get turtle t to draw a rectangle of width w and height h."""
-        for i in range(2):
-            t.forward(w)             
-            t.left(90)
-            t.forward(h)
-            t.left(90)
+        def draw_rectangle(t, w, h):
+            """Get turtle t to draw a rectangle of width w and height h."""
+            for i in range(2):
+                t.forward(w)             
+                t.left(90)
+                t.forward(h)
+                t.left(90)
             
 The parameter names are deliberately chosen as single letters to ensure they're not misunderstood.
 In real programs, once you've had more experience, we will insist on better variable names than this.
@@ -193,10 +186,11 @@ But now we might spot that a square is a special kind of rectangle.
 We already have a function that draws a rectangle, so we can use that to draw
 our square. 
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def draw_square(tx, sz):        # a new version of draw_square
-        draw_rectangle(tx, sz, sz)
+        def draw_square(tx, sz):        # a new version of draw_square
+            draw_rectangle(tx, sz, sz)
 
 There are some points worth noting here:
 
@@ -287,10 +281,10 @@ top to bottom. Instead, follow the flow of execution.
    much simpler, because it prevents stepping into the module containing 
    the turtle code.   
    
-   .. sourcecode:: python
+       .. sourcecode:: python3
 
-       import turtle
-       __import__('turtle').__traceable__ = False
+           import turtle
+           __import__('turtle').__traceable__ = False
 
    Now we're ready to begin.  Put the mouse cursor on the line of the program
    where we create the turtle screen, and press the *F4* key.  This will run the Python
@@ -334,12 +328,12 @@ job. For example, if you want to find the absolute value of a number, you have
 to indicate what the number is. Python has a built-in function for computing
 the absolute value:
 
-.. sourcecode:: python
-    
-    >>> abs(5)
-    5
-    >>> abs(-5)
-    5
+    .. sourcecode:: python3
+        
+        >>> abs(5)
+        5
+        >>> abs(-5)
+        5
 
 In this example, the arguments to the ``abs`` function are 5 and -5.
 
@@ -348,23 +342,23 @@ Some functions take more than one argument. For example the built-in function
 ``pow`` takes two arguments, the base and the exponent. Inside the function,
 the values that are passed get assigned to variables called **parameters**.
 
-.. sourcecode:: python
-    
-    >>> pow(2, 3)
-    8
-    >>> pow(7, 4)
-    2401
+    .. sourcecode:: python3
+        
+        >>> pow(2, 3)
+        8
+        >>> pow(7, 4)
+        2401
 
 Another built-in function that takes more than one argument is ``max``.
 
-.. sourcecode:: python
-    
-    >>> max(7, 11)
-    11
-    >>> max(4, 1, 17, 2, 12)
-    17
-    >>> max(3 * 11, 5**3, 512 - 9, 1024**0)
-    503
+    .. sourcecode:: python3
+        
+        >>> max(7, 11)
+        11
+        >>> max(4, 1, 17, 2, 12)
+        17
+        >>> max(3 * 11, 5**3, 512 - 9, 1024**0)
+        503
 
 ``max`` can be sent any number of arguments, separated by commas, and will
 return the maximum value sent. The arguments can be either simple values or
@@ -387,23 +381,24 @@ to stress it, a *non-fruitful* function.  (Would the term *barren function* be e
 How do we write our own fruitful function?  In the exercises at the end of chapter 2 we saw
 the standard formula for compound interest, which we'll now write as a fruitful function:   
 
-.. image:: illustrations/compoundInterest.png
+    .. image:: illustrations/compoundInterest.png
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+       :linenos: 
 
-   def final_amt(p, r, n, t):
-       """
-         Apply the compound interest formula to p
-          to produce the final amount.
-       """
-       
-       a = p * (1 + r/n) ** (n*t)
-       return a         # This is new, and makes the function fruitful.
+       def final_amt(p, r, n, t):
+           """
+             Apply the compound interest formula to p
+              to produce the final amount.
+           """
+           
+           a = p * (1 + r/n) ** (n*t)
+           return a         # This is new, and makes the function fruitful.
                      
-   # now that we have the function above, let us call it.  
-   toInvest = float(input("How much do you want to invest?"))
-   fnl = final_amt(toInvest, 0.08, 12, 5)
-   print("At the end of the period you'll have R", fnl)
+       # now that we have the function above, let us call it.  
+       toInvest = float(input("How much do you want to invest?"))
+       fnl = final_amt(toInvest, 0.08, 12, 5)
+       print("At the end of the period you'll have R", fnl)
 
 * The **return** statement is followed an expression which is evaluated.  Its
   result is returned to the caller as the "fruit" of calling this function.
@@ -433,17 +428,18 @@ the caller, in `final_amt` it's name is `p`.
 These short variable names are getting quite tricky, so perhaps you'd prefer one of these
 versions instead:       
 
-.. sourcecode:: python
- 
-   def final_amt_v2(principalAmount, nominalPercentageRate, 
-                                       numTimesPerYear, years):
-       a = principalAmount * (1 + nominalPercentageRate / 
-                            numTimesPerYear) ** (numTimesPerYear*years)
-       return a
-       
-   def final_amt_v3(amt, rate, compounded, years):
-       a = amt * (1 + rate/compounded) ** (componded*years)
-       return a                  
+    .. sourcecode:: python3
+       :linenos:
+     
+       def final_amt_v2(principalAmount, nominalPercentageRate, 
+                                           numTimesPerYear, years):
+           a = principalAmount * (1 + nominalPercentageRate / 
+                                numTimesPerYear) ** (numTimesPerYear*years)
+           return a
+           
+       def final_amt_v3(amt, rate, compounded, years):
+           a = amt * (1 + rate/compounded) ** (componded*years)
+           return a                  
 
 They all do the same thing.   Use your judgement to write code that can be best 
 understood by other humans!  
@@ -467,18 +463,19 @@ Variables and parameters are local
 When you create a **local variable** inside a function, it only exists inside
 the function, and you cannot use it outside. For example, consider again this function:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+       :linenos: 
 
-   def final_amt(p, r, n, t):
-       a = p * (1 + r/n) ** (n*t)
-       return a           
+       def final_amt(p, r, n, t):
+           a = p * (1 + r/n) ** (n*t)
+           return a           
  
 If we try to use `a`, outside the function, we'll get an error:
 
-.. sourcecode:: python
-    
-    >>> a
-    NameError: name 'a' is not defined
+    .. sourcecode:: python3
+        
+        >>> a
+        NameError: name 'a' is not defined
     
  
 The variable `a` is local to `final_amt`, and is not visible
@@ -512,34 +509,35 @@ Two things we're always going to want to do when working with turtles
 is to create the window for the turtle, and to create one or more turtles.
 We could write some functions to make these tasks easier in future:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+       :linenos: 
 
-   def make_window(colr, ttle):   
-       """
-         Set up the window with the given background colour and title. 
-         Returns the new window.
-       """
-       w = turtle.Screen()             
-       w.bgcolor(colr)
-       w.title(ttle)
-       return w
-       
-       
-   def make_turtle(colr, sz):      
-       """
-         Set up a turtle with the given colour and pensize.
-         Returns the new turtle.
-       """
-       t = turtle.Turtle()
-       t.color(colr)
-       t.pensize(sz)
-       return t
+       def make_window(colr, ttle):   
+           """
+             Set up the window with the given background colour and title. 
+             Returns the new window.
+           """
+           w = turtle.Screen()             
+           w.bgcolor(colr)
+           w.title(ttle)
+           return w
+           
+           
+       def make_turtle(colr, sz):      
+           """
+             Set up a turtle with the given colour and pensize.
+             Returns the new turtle.
+           """
+           t = turtle.Turtle()
+           t.color(colr)
+           t.pensize(sz)
+           return t
 
-       
-   wn = make_window("lightgreen", "Tess and Alex dancing")
-   tess = make_turtle("hotpink", 5)
-   alex = make_turtle("black", 1)
-   dave = make_turtle("yellow", 2)  
+           
+       wn = make_window("lightgreen", "Tess and Alex dancing")
+       tess = make_turtle("hotpink", 5)
+       alex = make_turtle("black", 1)
+       dave = make_turtle("yellow", 2)  
    
 The trick about refactoring code is to see which things you are likely to want to change
 each time you call the function: these should become the parameters, or changeable bits,
@@ -573,11 +571,11 @@ Glossary
 
         The syntax of a compound statement looks like this:
 
-        .. sourcecode:: python
-        
-            keyword expression:
-                statement
-                statement ...
+            .. sourcecode:: python3
+            
+                keyword expression:
+                    statement
+                    statement ...
                                                
     docstring
         If the first thing in a function body is a string (or, we'll see later, in other situations

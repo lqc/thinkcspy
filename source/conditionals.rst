@@ -6,15 +6,6 @@
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
 
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
-    
 |    
     
 Conditionals
@@ -32,14 +23,14 @@ the remainder when the first number is divided by the second. In Python, the
 modulus operator is a percent sign (``%``). The syntax is the same as for other
 operators:
 
-.. sourcecode:: python
-    
-    >>> q = 7 // 3     # This is integer division operator
-    >>> print(q)
-    2
-    >>> r  = 7 % 3
-    >>> print(r)
-    1
+    .. sourcecode:: python3
+        
+        >>> q = 7 // 3     # This is integer division operator
+        >>> print(q)
+        2
+        >>> r  = 7 % 3
+        >>> print(r)
+        1
 
 So 7 divided by 3 is 2 with a remainder of 1.
 
@@ -55,16 +46,17 @@ It is also extremely useful for doing conversions, say from seconds,
 to hours, minutes and seconds. So let's write a program to ask the user to enter
 some seconds, and we'll convert them into hours, minutes, and remaining seconds.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    total_secs = int(input("How many seconds, in total?"))
-    hours = total_secs // 3600      
-    secs_still_remaining = total_secs % 3600
-    minutes =  secs_still_remaining // 60 
-    secs_finally_remaining = secs_still_remaining  % 60
-    
-    print("Hrs=", hours, "  mins=", minutes,  
-                             "secs=", secs_finally_remaining)
+        total_secs = int(input("How many seconds, in total?"))
+        hours = total_secs // 3600      
+        secs_still_remaining = total_secs % 3600
+        minutes =  secs_still_remaining // 60 
+        secs_finally_remaining = secs_still_remaining  % 60
+        
+        print("Hrs=", hours, "  mins=", minutes,  
+                                 "secs=", secs_finally_remaining)
 
 .. index::
     single: boolean value
@@ -86,37 +78,37 @@ algebra*, which is the basis of all modern computer arithmetic.
 There are only two boolean values, ``True`` and ``False``.  Capitalization
 is important, since ``true`` and ``false`` are not boolean values.
 
-.. sourcecode:: python
-    
-    >>> type(True)
-    <class 'bool'> 
-    >>> type(true)
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    NameError: name 'true' is not defined
+    .. sourcecode:: python3
+        
+        >>> type(True)
+        <class 'bool'> 
+        >>> type(true)
+        Traceback (most recent call last):
+          File "<interactive input>", line 1, in <module>
+        NameError: name 'true' is not defined
 
 A **boolean expression** is an expression that evaluates to a boolean value.
 The operator ``==`` compares two values and produces a boolean value:
 
-.. sourcecode:: python
-    
-    >>> 5 == 5
-    True
-    >>> 5 == 6
-    False
+    .. sourcecode:: python3
+        
+        >>> 5 == 5
+        True
+        >>> 5 == 6
+        False
 
 In the first statement, the two operands are equal, so the expression evaluates
 to ``True``; in the second statement, 5 is not equal to 6, so we get ``False``.
 
 The ``==`` operator is one of six common **comparison operators**; the others are:
 
-.. sourcecode:: python
-    
-    x != y               # x is not equal to y
-    x > y                # x is greater than y
-    x < y                # x is less than y
-    x >= y               # x is greater than or equal to y
-    x <= y               # x is less than or equal to y
+    .. sourcecode:: python3
+        
+        x != y               # x is not equal to y
+        x > y                # x is greater than y
+        x < y                # x is less than y
+        x >= y               # x is greater than or equal to y
+        x <= y               # x is less than or equal to y
 
 Although these operations are probably familiar to you, the Python symbols are
 different from the mathematical symbols. A common error is to use a single
@@ -163,33 +155,35 @@ conditions and change the behavior of the program accordingly. **Conditional
 statements** give us this ability. The simplest form is the **if**
 statement:
 
-.. sourcecode:: python
-    
-    if x % 2 == 0:
-        print(x, " is even.")
-        print("Did you know that 2 is the only even number that is prime?")
-    else:
-        print(x, " is odd.") 
-        print("Did you know that multiplying two odd numbers " + 
-                                             "always gives an odd result?")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if x % 2 == 0:
+            print(x, " is even.")
+            print("Did you know that 2 is the only even number that is prime?")
+        else:
+            print(x, " is odd.") 
+            print("Did you know that multiplying two odd numbers " + 
+                                                 "always gives an odd result?")
     
 
 The boolean expression after the ``if`` statement is called the **condition**.
 If it is true, then all the indented statements get executed. If not, then all the statements
 indented under the `else` clause get executed. 
 
-.. sidebar::  Flowchart of a **if** statement with an **else** 
+.. admonition::  Flowchart of a **if** statement with an **else** 
 
    .. image:: illustrations/flowchart_if_else.png  
 
 The syntax for an ``if`` statement looks like this:
 
-.. sourcecode:: python
-    
-    if BOOLEAN EXPRESSION:
-        STATEMENTS_1        # executed if condition evaluates to True
-    else:
-        STATEMENTS_2        # executed if condition evaluates to False
+    .. sourcecode:: python3
+        :linenos:
+        
+        if BOOLEAN EXPRESSION:
+            STATEMENTS_1        # executed if condition evaluates to True
+        else:
+            STATEMENTS_2        # executed if condition evaluates to False
 
 As with the function definition from the last chapter and other compound
 statements like ``for``, the ``if`` statement consists of a header line and a body. The header
@@ -210,12 +204,13 @@ to have a section with no statements (usually as a place keeper, or scaffolding,
 for code you haven't written yet). In that case, you can use the ``pass`` statement, which
 does nothing except act as a placeholder.
 
-.. sourcecode:: python
-    
-    if True:          # This is always true
-        pass          # so this is always executed, but it does nothing
-    else:
-        pass 
+    .. sourcecode:: python3
+        :linenos:
+        
+        if True:          # This is always true
+            pass          # so this is always executed, but it does nothing
+        else:
+            pass 
 
 
 .. index:: alternative execution, branch, wrapping code in a function
@@ -223,7 +218,7 @@ does nothing except act as a placeholder.
 Omitting the `else` clause
 --------------------------
 
-.. sidebar::  Flowchart of an **if** with no **else** 
+.. admonition::  Flowchart of an **if** with no **else** 
 
    .. image:: illustrations/flowchart_if_only.png
 
@@ -232,14 +227,15 @@ In this case, when the condition evaluates to ``True``, the statements are
 executed, otherwise the flow of execution continues to the statement after the ``if``.
 
       
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    if x < 0:
-        print("The negative number ",  x, " is not valid here.")
-        x = 42
-        print("I've decided to use the number 42 instead.")
-        
-    print("The square root of ", x, "is", math.sqrt(x))
+        if x < 0:
+            print("The negative number ",  x, " is not valid here.")
+            x = 42
+            print("I've decided to use the number 42 instead.")
+            
+        print("The square root of ", x, "is", math.sqrt(x))
     
 In this case, the print function that outputs the square root is the one after the ``if`` - not
 because we left a blank line, but because of the way the code is indented.    Note too that
@@ -267,14 +263,15 @@ Sometimes there are more than two possibilities and we need more than two
 branches. One way to express a computation like that is a **chained
 conditional**:
    
-.. sourcecode:: python
-    
-    if x < y:
-        STATEMENTS_A
-    elif x > y:
-        STATEMENTS_B
-    else:
-        STATEMENTS_C
+    .. sourcecode:: python3
+        :linenos:
+        
+        if x < y:
+            STATEMENTS_A
+        elif x > y:
+            STATEMENTS_B
+        else:
+            STATEMENTS_C
 
 Flowchart of this chained conditional 
 
@@ -285,16 +282,17 @@ executed. There is no limit of the number of ``elif`` statements but only a
 single (and optional) final ``else`` statement is allowed and it must be the last
 branch in the statement:
 
-.. sourcecode:: python
-    
-    if choice == 'a':
-        function_a()
-    elif choice == 'b':
-        function_b()
-    elif choice == 'c':
-        function_c()
-    else:
-        print("Invalid choice.")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if choice == 'a':
+            function_a()
+        elif choice == 'b':
+            function_b()
+        elif choice == 'c':
+            function_c()
+        else:
+            print("Invalid choice.")
 
 Each condition is checked in order. If the first is false, the next is checked,
 and so on. If one of them is true, the corresponding branch executes, and the
@@ -313,19 +311,22 @@ One conditional can also be **nested** within another. (It is the same theme of
 composibility, again!)  We could have written
 the previous example as follows:
 
-.. sidebar:: Flowchart of this nested conditional
+.. admonition:: Flowchart of this nested conditional
 
    .. image:: illustrations/flowchart_nested_conditional.png
 
-.. sourcecode:: python
-    
-    if x < y:
-        STATEMENTS_A
-    else:
-        if x > y:
-            STATEMENTS_B
+..
+   
+    .. sourcecode:: python3
+        :linenos:
+        
+        if x < y:
+            STATEMENTS_A
         else:
-            STATEMENTS_C
+            if x > y:
+                STATEMENTS_B
+            else:
+                STATEMENTS_C
 
 The outer conditional contains two branches. 
 The second branch contains another ``if`` statement, which
@@ -340,19 +341,21 @@ Logical operators often provide a way to simplify nested conditional
 statements. For example, we can rewrite the following code using a single
 conditional:
 
-.. sourcecode:: python
-    
-    if 0 < x:            # assume x is an int here
-        if x < 10:
-            print("x is a positive single digit.")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if 0 < x:            # assume x is an int here
+            if x < 10:
+                print("x is a positive single digit.")
 
 The ``print`` function is called only if we make it past both the
 conditionals, so we can use the ``and`` operator:
 
-.. sourcecode:: python
-    
-    if 0 < x and x < 10:
-        print("x is a positive single digit.")
+    .. sourcecode:: python3
+        :linenos:
+        
+        if 0 < x and x < 10:
+            print("x is a positive single digit.")
 
 
 .. index::
@@ -367,15 +370,16 @@ function is fruitful or not, allows you to terminate the execution of a function
 before you reach the end. One reason to use it is if you detect an error
 condition:
 
-.. sourcecode:: python
-    
-    def print_square_root(x):
-        if x <= 0:
-            print("Positive numbers only, please.")
-            return
-    
-        result = x**0.5
-        print("The square root of", x, "is", result)
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_square_root(x):
+            if x <= 0:
+                print("Positive numbers only, please.")
+                return
+        
+            result = x**0.5
+            print("The square root of", x, "is", result)
 
 The function ``print_square_root`` has a parameter named ``x``. The first thing
 it does is check whether ``x`` is less than or equal to 0, in which case it
@@ -398,38 +402,38 @@ of another type into its own type. The ``int(ARGUMENT)`` function, for example,
 takes any value and converts it to an integer, if possible, or complains
 otherwise:
 
-.. sourcecode:: python
-    
-    >>> int("32")
-    32
-    >>> int("Hello")
-    ValueError: invalid literal for int() with base 10: 'Hello'
+    .. sourcecode:: python3
+        
+        >>> int("32")
+        32
+        >>> int("Hello")
+        ValueError: invalid literal for int() with base 10: 'Hello'
 
 ``int`` can also convert floating-point values to integers, but remember
 that it truncates the fractional part:
 
-.. sourcecode:: python
-    
-    >>> int(-2.3)
-    -2
-    >>> int(3.99999)
-    3
-    >>> int("42")
-    42
-    >>> int(1.0)
-    1
+    .. sourcecode:: python3
+        
+        >>> int(-2.3)
+        -2
+        >>> int(3.99999)
+        3
+        >>> int("42")
+        42
+        >>> int(1.0)
+        1
 
 The ``float(ARGUMENT)`` function converts integers and strings to floating-point
 numbers:
 
-.. sourcecode:: python
-    
-    >>> float(32)
-    32.0
-    >>> float("3.14159")
-    3.14159
-    >>> float(1)
-    1.0
+    .. sourcecode:: python3
+        
+        >>> float(32)
+        32.0
+        >>> float("3.14159")
+        3.14159
+        >>> float(1)
+        1.0
 
 It may seem odd that Python distinguishes the integer value ``1`` from the
 floating-point value ``1.0``. They may represent the same number, but they
@@ -439,18 +443,18 @@ inside the computer.
 The ``str(ARGUMENT)`` function converts any argument given to it to type
 ``string``:
 
-.. sourcecode:: python
-    
-    >>> str(32)
-    '32'
-    >>> str(3.14149)
-    '3.14149'
-    >>> str(True)
-    'True'
-    >>> str(true)
-    Traceback (most recent call last):
-      File "<interactive input>", line 1, in <module>
-    NameError: name 'true' is not defined
+    .. sourcecode:: python3
+        
+        >>> str(32)
+        '32'
+        >>> str(3.14149)
+        '3.14149'
+        >>> str(True)
+        'True'
+        >>> str(true)
+        Traceback (most recent call last):
+          File "<interactive input>", line 1, in <module>
+        NameError: name 'true' is not defined
 
 ``str(ARGUMENT)`` will work with any value and convert it into a string.  As
 mentioned earlier, ``True`` is boolean value; ``true`` is not.
@@ -481,24 +485,27 @@ Ok, so can we get tess to draw a bar chart?  Let us start with some data to be c
 
 Corresponding to each data measurement, we'll draw a simple rectangle of that height, with a fixed width.
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def draw_bar(t, height):
-        """ Get turtle t to draw one bar, of height. """
-        t.left(90)           
-        t.forward(height)     # Draw up the left side
-        t.right(90)
-        t.forward(40)         # width of bar, along the top
-        t.right(90)
-        t.forward(height)     # And down again!
-        t.left(90)            # put the turtle facing the way we found it.
-        t.forward(10)         # leave small gap after each bar
- 
-    ...    
-    for v in xs:              # assume xs and tess are ready 
-        draw_bar(tess, v)    
+        def draw_bar(t, height):
+            """ Get turtle t to draw one bar, of height. """
+            t.left(90)           
+            t.forward(height)     # Draw up the left side
+            t.right(90)
+            t.forward(40)         # width of bar, along the top
+            t.right(90)
+            t.forward(height)     # And down again!
+            t.left(90)            # put the turtle facing the way we found it.
+            t.forward(10)         # leave small gap after each bar
+     
+        ...    
+        for v in xs:              # assume xs and tess are ready 
+            draw_bar(tess, v)    
 
-.. image:: illustrations/tess_bar_1.png
+..
+        
+    .. image:: illustrations/tess_bar_1.png
 
 Ok, not fantasically impressive, but it is a nice start!  The important thing here
 was the mental chunking, or how we broke the problem into smaller pieces. Our chunk
@@ -513,44 +520,44 @@ number into a string.  Without this extra space we tend
 to cramp our text awkwardly against the bar to the left.   
 The result looks a lot better now:
 
-.. image:: illustrations/tess_bar_2.png
+    .. image:: illustrations/tess_bar_2.png
 
-And now we'll add two lines to fill each bar.  Our final program, at :download:`tess_barchart.py <resources/ch05/tess_barchart.py>`, now looks like this:
+And now we'll add two lines to fill each bar.  Our final program now looks like this:
 
-.. sourcecode:: python
-   :linenos:
-   
-    def draw_bar(t, height):
-        """ Get turtle t to draw one bar, of height. """
-        t.begin_fill()               # added this line
-        t.left(90)
-        t.forward(height)
-        t.write('  '+ str(height))   
-        t.right(90)
-        t.forward(40)
-        t.right(90)
-        t.forward(height)
-        t.left(90)
-        t.end_fill()             # added this line
-        t.forward(10)                 
+    .. sourcecode:: python3
+        :linenos:
+       
+        def draw_bar(t, height):
+            """ Get turtle t to draw one bar, of height. """
+            t.begin_fill()               # added this line
+            t.left(90)
+            t.forward(height)
+            t.write('  '+ str(height))   
+            t.right(90)
+            t.forward(40)
+            t.right(90)
+            t.forward(height)
+            t.left(90)
+            t.end_fill()             # added this line
+            t.forward(10)                 
 
-    wn = turtle.Screen()         # Set up the window and its attributes
-    wn.bgcolor("lightgreen")
+        wn = turtle.Screen()         # Set up the window and its attributes
+        wn.bgcolor("lightgreen")
 
-    tess = turtle.Turtle()       # create tess and set some attributes
-    tess.color("blue", "red")
-    tess.pensize(3)
+        tess = turtle.Turtle()       # create tess and set some attributes
+        tess.color("blue", "red")
+        tess.pensize(3)
 
-    xs = [48,117,200,240,160,260,220]
+        xs = [48,117,200,240,160,260,220]
 
-    for a in xs:
-        draw_bar(tess, a)
+        for a in xs:
+            draw_bar(tess, a)
 
-    wn.mainloop()
+        wn.mainloop()
 
 It produces the following, which is more satisfying:
 
-.. image:: illustrations/tess_bar_3.png
+    .. image:: illustrations/tess_bar_3.png
 
 
 Mmm.  Perhaps the bars should not be joined to each other at the bottom.  We'll need to pick up the pen while making the gap between the bars.  We'll leave that as an exercise for you!
@@ -724,7 +731,7 @@ Exercises
     If a good programmer wants to know whether
     ``x`` is equal or close enough to ``y``, they would probably code it up as
     
-    .. sourcecode:: python
+    .. sourcecode:: python3
     
       if  abs(x-y) < 0.000001:    # if x is approximately equal to y
           ...    

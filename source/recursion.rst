@@ -47,8 +47,8 @@ in turn needs four order 1 Koch fractals, and each of those in turn needs four
 order 0 fractals.  Ultimately, the only drawing that will take place is 
 at order 0. This is very simple to code up in Python:
 
-.. sourcecode:: python
-   :linenos: 
+.. sourcecode:: python3
+    :linenos: 
    
     def koch(t, order, size):
         """
@@ -74,8 +74,8 @@ Let's make a simple observation and tighten up this code.  Remember that
 turning right by 120 is the same as turning left by -120.  So with a 
 bit of clever rearrangement, we can use a loop instead of lines 10-16:
 
-.. sourcecode:: python
-   :linenos:
+.. sourcecode:: python3
+    :linenos:
 
     def koch(t, order, size):
         if order == 0:                  
@@ -118,9 +118,9 @@ things easier for our next observations.
     Another way of trying to understand recursion is to get rid of it! If we
     had separate functions to draw a level 3 fractal, a level 2 fractal, a level 1
     fractal and a level 0 fractal, we could simplify the above code, quite mechanically,
-    to code where there was no longer any recursion, like this:
+    to a situation where there was no longer any recursion, like this:
     
-    .. sourcecode:: python
+    .. sourcecode:: python3
         :linenos:
         
         def koch_0(t, size):
@@ -186,14 +186,14 @@ Now suppose our job is to write a function that will sum all of the values in a
 nested number list. Python has a built-in function which finds the sum of a
 sequence of numbers:
 
-.. sourcecode:: python
+.. sourcecode:: python3
     
     >>> sum([1, 2, 8])
     11
 
 For our *nested number list*, however, ``sum`` will not work:
 
-.. sourcecode:: python
+.. sourcecode:: python3
     
     >>> sum([1, 2, [11, 13], 8])
     Traceback (most recent call last):
@@ -219,20 +219,21 @@ functions can *call themselves* within their definitions.  Thanks to recursion,
 the Python code needed to sum the values of a nested number list is
 surprisingly short:
 
-.. sourcecode:: python
+.. sourcecode:: python3
+    :linenos: 
     
     def r_sum(nested_num_list):
-        sum = 0
+        tot = 0
         for element in nested_num_list:
             if type(element) == type([]):
-                sum += r_sum(element)
+                tot += r_sum(element)
             else:
-                sum += element
-        return sum
+                tot += element
+        return tot
 
 The body of ``r_sum`` consists mainly of a ``for`` loop that traverses
 ``nested_num_list``. If ``element`` is a numerical value (the ``else`` branch),
-it is simply added to ``sum``. If ``element`` is a list, then ``recursive_sum``
+it is simply added to ``tot``. If ``element`` is a list, then ``r_sum``
 is called again, with the element as an argument.  The statement inside the
 function definition in which the function calls itself is known as the
 **recursive call**.
@@ -243,7 +244,7 @@ science.
 A slightly more complicated problem is finding the largest value in our nested
 number list:
 
-.. sourcecode:: python
+.. sourcecode:: python3
     :linenos:
     
     def r_max(nxs):
@@ -263,7 +264,7 @@ number list:
                 largest = val
                 first_time = False
 
-    return largest
+        return largest
         
     test(r_max([2, 9, [1, 13], 8, 6]), 13)
     test(r_max([2, [[100, 7], 90], [1, 13], 8, 6]), 100)
@@ -285,12 +286,13 @@ a base case, you'll have **infinite recursion**, and your program will not work.
 Python stops after reaching a maximum recursion depth and returns a runtime
 error.   See how this happens, by running this little script which we will call `infinite_recursion.py`: 
 
-.. sourcecode:: python
+.. sourcecode:: python3
+    :linenos:
     
     def recursion_depth(number):
-        print("{0}, ".format(number), end="")
+        print("{0}, ".format(number), end='')
         recursion_depth(number + 1)
-    
+
     recursion_depth(0)
 
 After watching the messages flash by, you will be presented with the end of a
@@ -327,7 +329,8 @@ as the sum of the previous two terms::
 
 This translates very directly into some Python: 
 
-.. sourcecode:: python
+.. sourcecode:: python3
+    :linenos:
 
     def fib(n):
         if n <= 1:
@@ -335,13 +338,16 @@ This translates very directly into some Python:
         t = fib(n-1) + fib(n-2)
         return t
 
-This is a particularly inefficient algorithm, and we'll show one way of fixing it in the next chapter::
+This is a particularly inefficient algorithm, and we'll show one way of fixing it when we learn about dictionaries:
 
+.. sourcecode:: python3
+    :linenos:
+    
     import time
-    t0 = time.time()
+    t0 = time.clock()
     n = 35
     result = fib(n)
-    t1 = time.time()
+    t1 = time.clock()
     
     print('fib({0}) = {1}, ({2:.2f} secs)'.format(n, result, t1-t0))
     
@@ -356,7 +362,8 @@ Example with recursive directories and files
 
 The following program lists the contents of a directory and all its subdirectories.
 
-.. sourcecode:: python
+.. sourcecode:: python3
+    :linenos:
     
     import os
 
@@ -467,7 +474,7 @@ Exercises
 #. Write a function, ``recursive_min``, that returns the smallest value in a
    nested number list.  Assume there are no empty lists or sublists:
 
-   .. sourcecode:: python
+   .. sourcecode:: python3
     
         test(recursive_min([2, 9, [1, 13], 8, 6]), 1)
         test(recursive_min([2, [[100, 1], 90], [10, 13], 8, 6]), 1)
@@ -477,7 +484,7 @@ Exercises
 #. Write a function ``count`` that returns the number of occurences
    of ``target`` in  a nested list:
 
-   .. sourcecode:: python
+   .. sourcecode:: python3
     
         test(count(2, []), 0)
         test(count(2, [2, 9, [2, 1, 13, 2], 8, [2, 6]]), 4)
@@ -490,7 +497,7 @@ Exercises
 #. Write a function ``flatten`` that returns a simple list  
    containing all the values in a nested list:
 
-   .. sourcecode:: python
+   .. sourcecode:: python3
     
        test(flatten([2,9,[2,1,13,2],8,[2,6]]),[2,9,2,1,13,2,8,2,6])
        test(flatten([[9,[7,1,13,2],8],[7,6]]),[9,7,1,13,2,8,7,6])

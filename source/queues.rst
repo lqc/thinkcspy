@@ -58,35 +58,36 @@ The first implementation of the Queue ADT we will look at is called a **linked
 queue** because it is made up of linked ``Node`` objects. Here is the class
 definition:
 
-.. sourcecode:: python
-    
-    class Queue:
-        def __init__(self):
-            self.length = 0
-            self.head = None
-     
-        def is_empty(self):
-            return (self.length == 0)
-     
-        def insert(self, cargo):
-            node = Node(cargo)
-            node.next = None
-            if self.head == None:
-                # if list is empty the new node goes first
-                self.head = node
-            else:
-                # find the last node in the list
-                last = self.head
-                while last.next: last = last.next
-                # append the new node
-                last.next = node
-            self.length = self.length + 1
-     
-        def remove(self):
-            cargo = self.head.cargo
-            self.head = self.head.next
-            self.length = self.length - 1
-            return cargo
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Queue:
+            def __init__(self):
+                self.length = 0
+                self.head = None
+         
+            def is_empty(self):
+                return (self.length == 0)
+         
+            def insert(self, cargo):
+                node = Node(cargo)
+                node.next = None
+                if self.head == None:
+                    # if list is empty the new node goes first
+                    self.head = node
+                else:
+                    # find the last node in the list
+                    last = self.head
+                    while last.next: last = last.next
+                    # append the new node
+                    last.next = node
+                self.length = self.length + 1
+         
+            def remove(self):
+                cargo = self.head.cargo
+                self.head = self.head.next
+                self.length = self.length - 1
+                return cargo
 
 The methods ``is_empty`` and ``remove`` are identical to the ``LinkedList``
 methods ``is_empty`` and ``remove_first``. The ``insert`` method is new and a
@@ -136,37 +137,39 @@ the figure:
 
 The ``ImprovedQueue`` implementation looks like this:
 
-.. sourcecode:: python
-    
-    class ImprovedQueue:
-        def __init__(self):
-            self.length = 0
-            self.head   = None
-            self.last   = None
-     
-        def is_empty(self):
-            return (self.length == 0)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class ImprovedQueue:
+            def __init__(self):
+                self.length = 0
+                self.head   = None
+                self.last   = None
+         
+            def is_empty(self):
+                return (self.length == 0)
 
 So far, the only change is the attribute ``last``. It is used in ``insert`` and
 ``remove`` methods:
 
-.. sourcecode:: python
-    
-    class ImprovedQueue:
-        ...
-        def insert(self, cargo):
-            node = Node(cargo)
-            node.next = None
-            if self.length == 0:
-                # if list is empty, the new node is head and last
-                self.head = self.last = node
-            else:
-                # find the last node
-                last = self.last
-                # append the new node
-                last.next = node
-                self.last = node
-            self.length = self.length + 1
+    .. sourcecode:: python3
+        :linenos:
+        
+        class ImprovedQueue:
+            ...
+            def insert(self, cargo):
+                node = Node(cargo)
+                node.next = None
+                if self.length == 0:
+                    # if list is empty, the new node is head and last
+                    self.head = self.last = node
+                else:
+                    # find the last node
+                    last = self.last
+                    # append the new node
+                    last.next = node
+                    self.last = node
+                self.length = self.length + 1
 
 Since ``last`` keeps track of the last node, we don't have to search for it. As
 a result, this method is constant time.
@@ -174,17 +177,18 @@ a result, this method is constant time.
 There is a price to pay for that speed. We have to add a special case to
 ``remove`` to set ``last`` to ``None`` when the last node is removed:
 
-.. sourcecode:: python
-    
-    class ImprovedQueue:
-        ...
-        def remove(self):
-            cargo = self.head.cargo
-            self.head = self.head.next
-            self.length = self.length - 1
-            if self.length == 0:
-                self.last = None
-            return cargo
+    .. sourcecode:: python3
+        :linenos:
+        
+        class ImprovedQueue:
+            ...
+            def remove(self):
+                cargo = self.head.cargo
+                self.head = self.head.next
+                self.length = self.length - 1
+                if self.length == 0:
+                    self.last = None
+                return cargo
 
 This implementation is more complicated than the Linked Queue implementation,
 and it is more difficult to demonstrate that it is correct. The advantage is
@@ -226,32 +230,34 @@ with the highest priority.
 This implementation of Priority Queue has as an attribute a Python list that
 contains the items in the queue.
 
-.. sourcecode:: python
-    
-    class PriorityQueue:
-        def __init__(self):
-            self.items = []
-     
-        def is_empty(self):
-            return self.items == []
-     
-        def insert(self, item):
-            self.items.append(item)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class PriorityQueue:
+            def __init__(self):
+                self.items = []
+         
+            def is_empty(self):
+                return self.items == []
+         
+            def insert(self, item):
+                self.items.append(item)
 
 The initialization method, ``is_empty``, and ``insert`` are all veneers on list
 operations. The only interesting method is ``remove``:
 
-.. sourcecode:: python
-    
-    class PriorityQueue:
-        ...
-        def remove(self):
-            maxi = 0
-            for i in range(1, len(self.items)):
-                if self.items[i] > self.items[maxi]: maxi = i
-            item = self.items[maxi]
-            self.items[maxi:maxi+1] = []
-            return item
+    .. sourcecode:: python3
+        :linenos:
+        
+        class PriorityQueue:
+            ...
+            def remove(self):
+                maxi = 0
+                for i in range(1, len(self.items)):
+                    if self.items[i] > self.items[maxi]: maxi = i
+                item = self.items[maxi]
+                self.items[maxi:maxi+1] = []
+                return item
 
 At the beginning of each iteration, ``maxi`` holds the index of the biggest
 item (highest priority) we have seen *so far*. Each time through the loop, the
@@ -263,18 +269,18 @@ item. This item is removed from the list and returned.
 
 Let's test the implementation:
 
-.. sourcecode:: python
-    
-    >>> q = PriorityQueue()
-    >>> q.insert(11)
-    >>> q.insert(12)
-    >>> q.insert(14)
-    >>> q.insert(13)
-    >>> while not q.is_empty(): print(q.remove())
-    14
-    13
-    12
-    11
+    .. sourcecode:: python3
+        
+        >>> q = PriorityQueue()
+        >>> q.insert(11)
+        >>> q.insert(12)
+        >>> q.insert(14)
+        >>> q.insert(13)
+        >>> while not q.is_empty(): print(q.remove())
+        14
+        13
+        12
+        11
 
 If the queue contains simple numbers or strings, they are removed in numerical
 or alphabetical order, from highest to lowest. Python can find the biggest
@@ -294,15 +300,16 @@ As an example of an object with an unusual definition of priority, let's
 implement a class called ``Golfer`` that keeps track of the names and scores of
 golfers. As usual, we start by defining ``__init__`` and ``__str__``:
 
-.. sourcecode:: python
-    
-    class Golfer:
-        def __init__(self, name, score):
-            self.name = name
-            self.score= score
-     
-        def __str__(self):
-            return "{0:16}: {1}".format(self.name, self.score)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Golfer:
+            def __init__(self, name, score):
+                self.name = name
+                self.score= score
+         
+            def __str__(self):
+                return "{0:16}: {1}".format(self.name, self.score)
 
 ``__str__`` uses the format method to put the names and scores in neat
 columns.
@@ -311,29 +318,30 @@ Next we define a version of ``__gt__`` where the lowest score gets highest
 priority. As always, ``__gt__`` returns ``True`` if ``self`` is greater than
 ``other``, and ``False`` otherwise.
 
-.. sourcecode:: python
-    
-    class Golfer:
-        ...
-        def __gt__(self, other):
-            return self.score < other.score    # less is more
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Golfer:
+            ...
+            def __gt__(self, other):
+                return self.score < other.score    # less is more
 
 Now we are ready to test the priority queue with the ``Golfer`` class:
 
-.. sourcecode:: python
-    
-    >>> tiger = Golfer("Tiger Woods",    61)
-    >>> phil  = Golfer("Phil Mickelson", 72)
-    >>> hal   = Golfer("Hal Sutton",     69)
-    >>>
-    >>> pq = PriorityQueue()
-    >>> pq.insert(tiger)
-    >>> pq.insert(phil)
-    >>> pq.insert(hal)
-    >>> while not pq.is_empty(): print(pq.remove())
-       Tiger Woods    : 61
-       Hal Sutton     : 69
-       Phil Mickelson : 72
+    .. sourcecode:: python3
+        
+        >>> tiger = Golfer("Tiger Woods",    61)
+        >>> phil  = Golfer("Phil Mickelson", 72)
+        >>> hal   = Golfer("Hal Sutton",     69)
+        >>>
+        >>> pq = PriorityQueue()
+        >>> pq.insert(tiger)
+        >>> pq.insert(phil)
+        >>> pq.insert(hal)
+        >>> while not pq.is_empty(): print(pq.remove())
+           Tiger Woods    : 61
+           Hal Sutton     : 69
+           Phil Mickelson : 72
 
 
 Glossary

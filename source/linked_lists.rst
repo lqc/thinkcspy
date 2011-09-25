@@ -42,15 +42,16 @@ As usual when writing a new class, we'll start with the initialization and
 ``__str__`` methods so that we can test the basic mechanism of creating and
 displaying the new type:
 
-.. sourcecode:: python
-    
-    class Node:
-        def __init__(self, cargo=None, next=None):
-            self.cargo = cargo
-            self.next  = next
-       
-        def __str__(self):
-            return str(self.cargo)
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Node:
+            def __init__(self, cargo=None, next=None):
+                self.cargo = cargo
+                self.next  = next
+           
+            def __str__(self):
+                return str(self.cargo)
 
 As usual, the parameters for the initialization method are optional.  By
 default, both the cargo and the link, ``next``, are set to ``None``.
@@ -61,37 +62,37 @@ value in a list.
 
 To test the implementation so far, we can create a ``Node`` and print it:
 
-.. sourcecode:: python
-    
-    >>> node = Node("test")
-    >>> print(node)
-    test
+    .. sourcecode:: python3
+        
+        >>> node = Node("test")
+        >>> print(node)
+        test
 
 To make it interesting, we need a list with more than one node:
 
-.. sourcecode:: python
-    
-    >>> node1 = Node(1)
-    >>> node2 = Node(2)
-    >>> node3 = Node(3)
+    .. sourcecode:: python3
+        
+        >>> node1 = Node(1)
+        >>> node2 = Node(2)
+        >>> node3 = Node(3)
 
 This code creates three nodes, but we don't have a list yet because the nodes
 are not **linked**. The state diagram looks like this:
 
-.. image:: illustrations/link1.png
+    .. image:: illustrations/link1.png
 
 To link the nodes, we have to make the first node refer to the second and the
 second node refer to the third:
 
-.. sourcecode:: python
-    
-    >>> node1.next = node2
-    >>> node2.next = node3
+    .. sourcecode:: python3
+        
+        >>> node1.next = node2
+        >>> node2.next = node3
 
 The reference of the third node is ``None``, which indicates that it is the end
 of the list. Now the state diagram looks like this:
 
-.. image:: illustrations/link2.png
+    .. image:: illustrations/link2.png
 
 Now you know how to create nodes and link them into lists. What might be less
 clear at this point is why.
@@ -109,20 +110,21 @@ node. For example, the function ``print_list`` takes a single node as an
 argument. Starting with the head of the list, it prints each node until it gets
 to the end:
 
-.. sourcecode:: python
-    
-    def print_list(node):
-        while node:
-            print(node, end=' ')
-            node = node.next
-        print()
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_list(node):
+            while node != None:
+                print(node, end=' ')
+                node = node.next
+            print()
 
 To invoke this method, we pass a reference to the first node:
 
-.. sourcecode:: python
-    
-    >>> print_list(node1)
-    1 2 3
+    .. sourcecode:: python3
+        
+        >>> print_list(node1)
+        1 2 3
 
 Inside ``print_list`` we have a reference to the first node of the list, but
 there is no variable that refers to the other nodes. We have to use the
@@ -133,7 +135,7 @@ refer to each of the nodes in succession.
 
 This diagram shows the value of ``list`` and the values that ``node`` takes on:
 
-.. image:: illustrations/link3.png
+    .. image:: illustrations/link3.png
 
 Lists and recursion
 -------------------
@@ -154,14 +156,15 @@ All we need are a base case and a way of proving that for any list, we will
 eventually get to the base case. Given the recursive definition of a list, a
 natural base case is the empty list, represented by ``None``:
 
-.. sourcecode:: python
-    
-    def print_backward(list):
-        if list == None: return
-        head = list
-        tail = list.next
-        print_backward(tail)
-        print(head,end=' ')
+    .. sourcecode:: python3
+        :linenos:
+        
+        def print_backward(list):
+            if list == None: return
+            head = list
+            tail = list.next
+            print_backward(tail)
+            print(head,end=' ')
 
 The first line handles the base case by doing nothing. The next two lines split
 the list into ``head`` and ``tail``. The last two lines print the list. The
@@ -170,10 +173,10 @@ each node.
 
 We invoke this method as we invoked ``print_list``:
 
-.. sourcecode:: python
-    
-    >>> print_backward(node1)
-    3 2 1
+    .. sourcecode:: python3
+        
+        >>> print_backward(node1)
+        3 2 1
 
 The result is a backward list.
 
@@ -195,7 +198,7 @@ There is nothing to prevent a node from referring back to an earlier node in
 the list, including itself. For example, this figure shows a list with two
 nodes, one of which refers to itself:
 
-.. image:: illustrations/link4.png
+    .. image:: illustrations/link4.png
 
 If we invoke ``print_list`` on this list, it will loop forever. If we invoke
 ``print_backward``, it will recurse infinitely. This sort of behavior makes
@@ -218,10 +221,11 @@ The fundamental ambiguity theorem
 
 One part of ``print_backward`` might have raised an eyebrow:
 
-.. sourcecode:: python
-    
-    head = list
-    tail = list.next
+    .. sourcecode:: python3
+        :linenos:
+        
+        head = list
+        tail = list.next
 
 After the first assignment, ``head`` and ``list`` have the same type and the
 same value. So why did we create a new variable?
@@ -240,12 +244,13 @@ disambiguate.
 We could have written ``print_backward`` without ``head`` and ``tail``, which
 makes it more concise but possibly less clear:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    def print_backward(list) :
-        if list == None : return
-        print_backward(list.next)
-        print(list,end=' ')
+        def print_backward(list) :
+            if list == None : return
+            print_backward(list.next)
+            print(list,end=' ')
 
 Looking at the two function calls, we have to remember that ``print_backward``
 treats its argument as a collection and ``print`` treats its argument as a
@@ -266,34 +271,35 @@ remove, or reorder the nodes.
 As an example, let's write a method that removes the second node in the list
 and returns a reference to the removed node:
 
-.. sourcecode:: python
-    
-    def removeSecond(list):
-        if list == None: return
-        first = list
-        second = list.next
-        # make the first node refer to the third
-        first.next = second.next
-        # separate the second node from the rest of the list
-        second.next = None
-        return second
+    .. sourcecode:: python3
+        :linenos:
+        
+        def removeSecond(list):
+            if list == None: return
+            first = list
+            second = list.next
+            # make the first node refer to the third
+            first.next = second.next
+            # separate the second node from the rest of the list
+            second.next = None
+            return second
 
 Again, we are using temporary variables to make the code more readable. Here is
 how to use this method:
 
-.. sourcecode:: python
-    
-    >>> print_list(node1)
-    1 2 3
-    >>> removed = removeSecond(node1)
-    >>> print_list(removed)
-    2
-    >>> print_list(node1)
-    1 3
+    .. sourcecode:: python3
+        
+        >>> print_list(node1)
+        1 2 3
+        >>> removed = removeSecond(node1)
+        >>> print_list(removed)
+        2
+        >>> print_list(node1)
+        1 3
 
 This state diagram shows the effect of the operation:
 
-.. image:: illustrations/link5.png
+    .. image:: illustrations/link5.png
 
 What happens if you invoke this method and pass a list with only one element (a
 **singleton**)? What happens if you pass the empty list as an argument? Is
@@ -310,17 +316,17 @@ the ``print_backward`` method to print ``3, 2,`` but we need a separate method
 to print the brackets and the first node. Let's call it
 ``print_backward_nicely``:
 
-.. sourcecode:: python
+    .. sourcecode:: python3
+        :linenos:
 
-    
-    def print_backward_nicely(list) :
-        print("[", end=' ')
-        if list != None :
-            head = list
-            tail = list.next
-            print_backward(tail)
-            print(head, end=' ')
-        print("]", end=' ')
+        def print_backward_nicely(list) :
+            print("[", end=' ')
+            if list != None :
+                head = list
+                tail = list.next
+                print_backward(tail)
+                print(head, end=' ')
+            print("]", end=' ')
 
 Again, it is a good idea to check methods like this to see if they work with
 special cases like an empty list or a singleton.
@@ -343,34 +349,36 @@ integer that contains the length of the list and a reference to the first node.
 ``LinkedList`` objects serve as handles for manipulating lists of ``Node``
 objects:
 
-.. sourcecode:: python
-    
-    class LinkedList:
-        def __init__(self):
-            self.length = 0
-            self.head   = None
+    .. sourcecode:: python3
+        :linenos:
+        
+        class LinkedList:
+            def __init__(self):
+                self.length = 0
+                self.head   = None
 
 One nice thing about the ``LinkedList`` class is that it provides a natural
 place to put wrapper functions like ``print_backward_nicely``, which we can
 make a method of the ``LinkedList`` class:
 
-.. sourcecode:: python
-    
-    class LinkedList:
-        ...
-        def print_backward(self):
-            print("[", end=' ')
-            if self.head != None:
-                self.head.print_backward()
-            print("]", end=' ')
-       
-    class Node:
-        ...
-        def print_backward(self):
-        if self.next != None:
-            tail = self.next
-            tail.print_backward()
-        print(self.cargo, end=' ')
+    .. sourcecode:: python3
+        :linenos:
+        
+        class LinkedList:
+            ...
+            def print_backward(self):
+                print("[", end=' ')
+                if self.head != None:
+                    self.head.print_backward()
+                print("]", end=' ')
+           
+        class Node:
+            ...
+            def print_backward(self):
+            if self.next != None:
+                tail = self.next
+                tail.print_backward()
+            print(self.cargo, end=' ')
 
 Just to make things confusing, we renamed ``print_backward_nicely``. Now there
 are two methods named ``print_backward``: one in the ``Node`` class (the
@@ -383,15 +391,16 @@ or remove the first element of a list. For example, ``addFirst`` is a method
 for ``LinkedList``\s; it takes an item of cargo as an argument and puts it at
 the beginning of the list:
 
-.. sourcecode:: python
-    
-    class LinkedList:
-        ...
-        def addFirst(self, cargo):
-            node = Node(cargo)
-            node.next = self.head
-            self.head = node
-            self.length = self.length + 1
+    .. sourcecode:: python3
+        :linenos:
+        
+        class LinkedList:
+            ...
+            def addFirst(self, cargo):
+                node = Node(cargo)
+                node.next = self.head
+                self.head = node
+                self.length = self.length + 1
 
 As usual, you should check code like this to see if it handles the special
 cases. For example, what happens if the list is initially empty?

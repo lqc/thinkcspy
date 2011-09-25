@@ -5,14 +5,6 @@
     with Invariant Sections being Foreword, Preface, and Contributor List, no
     Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is
     included in the section entitled "GNU Free Documentation License".
-
-.. |rle_start| image:: illustrations/rle_start.png
-   
-.. |rle_end| image:: illustrations/rle_end.png
- 
-.. |rle_open| image:: illustrations/rle_open.png
-   
-.. |rle_close| image:: illustrations/rle_close.png    
  
 |
     
@@ -92,20 +84,21 @@ requirements of an interface.
 
 Here is an implementation of the Stack ADT that uses a Python list:
 
-.. sourcecode:: python
-    
-    class Stack :
-        def __init__(self):
-            self.items = []
-       
-        def push(self, item):
-            self.items.append(item)
-       
-        def pop(self):
-            return self.items.pop()
-       
-        def is_empty(self):
-            return (self.items == [])
+    .. sourcecode:: python3
+        :linenos:
+        
+        class Stack :
+            def __init__(self):
+                self.items = []
+           
+            def push(self, item):
+                self.items.append(item)
+           
+            def pop(self):
+                return self.items.pop()
+           
+            def is_empty(self):
+                return (self.items == [])
 
 A ``Stack`` object contains an attribute named ``items`` that is a list of
 items in the stack. The initialization method sets ``items`` to the empty list.
@@ -132,20 +125,21 @@ A stack is a **generic data structure**, which means that we can add any type
 of item to it. The following example pushes two integers and a string onto the
 stack:
 
-.. sourcecode:: python
-    
-    >>> s = Stack()
-    >>> s.push(54)
-    >>> s.push(45)
-    >>> s.push("+")
+    .. sourcecode:: python3
+        
+        >>> s = Stack()
+        >>> s.push(54)
+        >>> s.push(45)
+        >>> s.push("+")
 
 We can use ``is_empty`` and ``pop`` to remove and print all of the items on
 the stack:
 
-.. sourcecode:: python
-    
-    while not s.is_empty():
-        print(s.pop(), end=' ')
+    .. sourcecode:: python3
+        :linenos:
+        
+        while not s.is_empty():
+            print(s.pop(), end=' ')
 
 The output is ``+ 45 54``. In other words, we just used a stack to print the
 items backward! Granted, it's not the standard format for printing a list, but
@@ -194,11 +188,11 @@ Python provides a ``split`` method in both string objects and the ``re`` (regula
 expression) module. A string's ``split`` method splits it into a list
 using a single character as a **delimiter**. For example:
 
-.. sourcecode:: python
-    
-    >>> import string
-    >>> "Now is the time".split(" ")
-    ['Now', 'is', 'the', 'time']
+    .. sourcecode:: python3
+        
+        >>> import string
+        >>> "Now is the time".split(" ")
+        ['Now', 'is', 'the', 'time']
 
 In this case, the delimiter is the space character, so the string is split at
 each space.
@@ -210,11 +204,11 @@ a set of strings. For example, ``[A-z]`` is the set of all letters and
 ``[^0-9]`` is the set of everything that is not a number, which is exactly the
 set we want to use to split up postfix expressions:
 
-.. sourcecode:: python
-    
-    >>> import re
-    >>> re.split("([^0-9])", "123+456*/")
-    ['123', '+', '456', '*', '', '/', '']
+    .. sourcecode:: python3
+        
+        >>> import re
+        >>> re.split("([^0-9])", "123+456*/")
+        ['123', '+', '456', '*', '', '/', '']
 
 The resulting list includes the operands ``123`` and ``456`` and the operators
 ``*`` and ``/``. It also includes two empty strings that are inserted after the
@@ -229,24 +223,25 @@ section and the algorithm from the section before that. To keep things simple,
 we'll start with an evaluator that only implements the operators ``+`` and
 ``*``:
 
-.. sourcecode:: python
-    
-    def eval_postfix(expr):
-        import re
-        token_list = re.split("([^0-9])", expr)
-        stack = Stack()
-        for token in token_list:
-            if  token == '' or token == ' ':
-                continue
-            if  token == '+':
-                sum = stack.pop() + stack.pop()
-                stack.push(sum)
-            elif token == '*':
-                product = stack.pop() * stack.pop()
-                stack.push(product)
-            else:
-                stack.push(int(token))
-        return stack.pop()
+    .. sourcecode:: python3
+        :linenos:
+        
+        def eval_postfix(expr):
+            import re
+            token_list = re.split("([^0-9])", expr)
+            stack = Stack()
+            for token in token_list:
+                if  token == '' or token == ' ':
+                    continue
+                if  token == '+':
+                    sum = stack.pop() + stack.pop()
+                    stack.push(sum)
+                elif token == '*':
+                    product = stack.pop() * stack.pop()
+                    stack.push(product)
+                else:
+                    stack.push(int(token))
+            return stack.pop()
 
 
 The first condition takes care of spaces and empty strings. The next two
@@ -256,10 +251,10 @@ an error message, but we'll get to that later.
 
 Let's test it by evaluating the postfix form of ``(56+47)*2``:
 
-.. sourcecode:: python
-    
-    >>> print(eval_postfix ("56 47 + 2 *"))
-    206
+    .. sourcecode:: python3
+        
+        >>> print(eval_postfix ("56 47 + 2 *"))
+        206
 
 That's close enough.
 
