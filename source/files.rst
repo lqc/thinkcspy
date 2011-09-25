@@ -13,8 +13,8 @@ Files
 
 .. index:: file, handle, file handle   
     
-Reading and writing files
--------------------------
+About files
+-----------
 
 While a program is running, its data is stored in *random access memory* (RAM).
 RAM is fast and inexpensive, but it is also **volatile**, which means that when
@@ -29,216 +29,270 @@ between program runs.
 
 Working with files is a lot like working with a notebook. To use a notebook,
 you have to open it. When you're done, you have to close it.  While the
-notebook is open, you can either write in it or read from it. In either case,
+notebook is open, you can either write to it or read from it. In either case,
 you know where you are in the notebook. You can read the whole notebook in its
 natural order or you can skip around.
 
 All of this applies to files as well. To open a file, you specify its name and
 indicate whether you want to read or write. 
 
+Writing our first file
+----------------------
+
+Let's begin with a simple program that writes three lines of text into a file:   
+
+    .. sourcecode:: python3
+        :linenos:
+        
+        myfile = open('test.txt', 'w')
+        myfile.write("My first file written from Python\n")
+        myfile.write("---------------------------------\n")
+        myfile.write("Hello, world!\n")
+        myfile.close()
+
 Opening a file creates what we call a file **handle**. In this example, the variable ``myfile``
 refers to the new handle object.  Our program calls methods on the handle, and this makes
-changes to the actual file which is usually located on our disk.    
+changes to the actual file which is usually located on our disk.  
 
-.. sourcecode:: python
-    
-    myfile = open('test.dat', 'w')
-
-The open function takes two arguments. The first is the name of the file, and
+On line 1, the open function takes two arguments. The first is the name of the file, and
 the second is the **mode**. Mode ``'w'`` means that we are opening the file for
 writing.
 
-If there is no file named ``test.dat`` on the disk, it will be created. If there already is
+If there is no file named ``test.txt`` on the disk, it will be created. If there already is
 one, it will be replaced by the file we are writing.
 
-To put data in the file we invoke the ``write`` method on the handle:
+To put data in the file we invoke the ``write`` method on the handle, shown
+in lines 2, 3 and 4 above.  In bigger programs, lines 2-4 will usually be
+replaced by a loop that writes many more lines into the file.
 
-.. sourcecode:: python
-    
-    myfile.write("Now is the time")
-    myfile.write("to close the file")
+Closing the file handle (line 5) tells the system that we are done writing and makes
+the disk file available for reading by other programs (or by our own program).    
 
-Closing the file handle tells the system that we are done writing and makes
-the disk file available for reading by other programs (or by ourselves):
 
-.. sourcecode:: python
-    
-    myfile.close()
+    .. admonition:: A handle is somewhat like a TV remote control
 
-Now we can open the file again, this time for reading, and read the
-contents into a string. This time, the mode argument is ``'r'`` for reading:
+        We're all familiar with a remote control for a TV.  You perform operations on
+        the remote control --- switch channels, change the volume, etc.  But the real action
+        happens on the TV.  So, by simple analogy, we'd call the remote control your `handle`
+        to the underlying TV.
+        
+        Sometimes we want to emphasize the difference --- the file handle is not the same
+        as the file, and the remote control is not the same as the TV.  
+        But at other times we prefer to treat them as a single mental chunk, or abstraction, 
+        and we'll just say "close the file", or "flip the TV channel". 
 
-.. sourcecode:: python
-    
-    >>> mynewhandle = open('test.dat', 'r')
 
+
+Reading a file line-at-a-time
+-----------------------------
+
+Now that the file exists on our disk, we can open it, this time for reading, and read all
+the lines in the file, one at a time. This time, the mode argument is ``'r'`` for reading:
+
+    .. sourcecode:: python3
+        :linenos:
+              
+        mynewhandle = open('test.txt', 'r')
+        while True                             # keep reading forever
+            theline = mynewhandle.readline()   # try to read next line
+            if len(theline) == 0:              # if there are no more lines 
+                break                          #     leave the loop 
+             
+            # Now process the line we've just read 
+            print(theline, end='')
+            
+        mynewhandle.close()
+        
+This is a handy pattern for our toolbox. In bigger programs, we'd
+squeeze more extensive logic into the body of the loop at line 8 ---
+for example, if each line of the file contained the name and email address
+of one of our friends, perhaps we'd split the line into some pieces and 
+call a function to send the friend a party invitation. 
+
+On line 8 we suppress the newline character that ``print``
+usually appends to our strings.  Why?  This is because the string already
+has its own newline:  the ``readline`` method in line 3 returns everything
+up to *and including* the newline character.  This also explains the
+end-of-file detection logic: when there are no more lines to be
+read from the file, ``readline`` returns an empty string --- one that does not
+even have a newline at the end, hence it's length is 0.
+
+    .. admonition::  Bump your head first ...
+
+        In our sample case here, we have three lines in the file, yet
+        we enter the loop *four* times.  In Python, you only learn that
+        the file has no more lines by bumping your head against
+        the end of file, i.e. when you try to read a line
+        that doesn't exist.  In some other programming languages 
+        (e.g. Pascal), things are different: there you read three lines,
+        but you have what is called *look ahead* --- after reading the third 
+        line you already know that there are no more lines in the file.  
+        You're not even allowed to try to read the fourth line. 
+        
+        So the templates for working line-at-a-time in Pascal and Python are
+        subtly different!   
+
+        When you transfer your Python skills to your next computer language,
+        be sure to ask how you'll know when the file has ended: is the style
+        in the language "try, and when you bump your head you'll know", or is
+        it "look ahead"?
+ 
+     
 If we try to open a file that doesn't exist, we get an error:
 
-.. sourcecode:: python
-    
-    >>> mynewhandle = open('test.cat', 'r')
-    IOError: [Errno 2] No such file or directory: 'test.cat'
+    .. sourcecode:: python3
+        
+        >>> mynewhandle = open('wharrah.txt', 'r')
+        IOError: [Errno 2] No such file or directory: 'wharrah.txt'
 
-Not surprisingly, the ``read`` method reads data from the file. With no
-arguments, it reads the entire contents of the file into a single
-string:
+Turning a file into a list of lines
+-----------------------------------
 
-.. sourcecode:: python
-    
-    >>> text = mynewhandle.read()
-    >>> print(text)
-    Now is the timeto close the file
+It is often useful to fetch data from
+a disk file and turn it into a list of lines.  Suppose we have a
+file containing our friends and their email addresses, one per line
+in the file.  But we'd like the lines sorted into
+alphabetical order.  A good plan is to read everything into a
+list of lines, then sort the list, and then write the sorted list 
+back to another file:
 
-There is no space between time and to because we did not write a space
-between the strings.
+    .. sourcecode:: python3
+        :linenos:
+              
+        f = open('friends.txt', 'r')
+        xs = f.readlines() 
+        f.close()
+        
+        xs.sort()
+        
+        g = open('sortedfriends.txt', 'w')
+        for v in xs:
+            g.write(v)
+        g.close()
+        
+The ``readlines`` method in line 2 reads all the lines and
+returns a list of the strings.  
 
-``read`` can also take an argument that indicates how many characters to read:
+We could have used the template from the previous section to read each line
+one-at-a-time, and to build up the list ourselves, but it is a lot easier
+to use the method that the Python implementors gave us! 
+        
+        
+Reading the whole file at once
+------------------------------        
+        
+Another way of working with text files is to read the complete
+contents of the file into a string, and then to use our string-processing
+skills to work with the contents.   
 
-.. sourcecode:: python
-    
-    >>> myfile = open('test.dat', 'r')
-    >>> print(myfile.read(5))
-    Now i
+We'd normally use this method of processing files if we were not
+interested in the line structure of the file.   For example, we've
+seen the ``split`` method on strings which can break a string into 
+words.  So here is how we might count the number of words in a
+file:
 
-If not enough characters are left in the file, ``read`` returns the remaining
-characters. When we get to the end of the file, ``read`` returns the empty
-string:
+    .. sourcecode:: python3
+        :linenos:
+              
+        f = open('somefile.txt')
+        content = f.read() 
+        f.close()
+        
+        words = content.split()    
+        print("There are {0} words in the file.".format(len(words)))
+        
+You will notice here that we left out the ``'r'`` mode in line 1.
+By default, if you don't supply the mode, Python opens the file for reading.       
 
-.. sourcecode:: python
-    
-    >>> print(myfile.read(1000006))
-    s the timeto close the file
-    >>> print(myfile.read())
-       
-    >>>
+ 
+Working with binary files
+-------------------------
 
-The following function copies a file, reading and writing up to fifty
-characters at a time. The first argument is the name of the original file; the
-second is the name of the new file:
+Files that hold photographs, videos, zip files, executable programs, etc. are called
+**binary** files: they're not organized into lines, and cannot be opened with a
+normal text editor.  Python works just as easily with binary files, but
+when you read from the file you're going to get bytes back rather than 
+a string.  Here we'll copy one binary file to another:
 
-.. sourcecode:: python
-    
-    def copy_file(oldfile, newfile):
-        h_infile = open(oldfile, 'r')
-        h_outfile = open(newfile, 'w')
+    .. sourcecode:: python3
+        :linenos:
+        
+        f = open('somefile.zip', 'rb')
+        g = open('thecopy.zip', 'wb')
+
         while True:
-            text = h_infile.read(50)
-            if text == "":
-                break
-            h_outfile.write(text)
-        h_infile.close()
-        h_outfile.close()
+            buf = f.read(1024)
+            if len(buf) == 0:
+                 break
+            g.write(buf)
 
-This functions continues looping, reading 50 characters from ``infile`` and
-writing the same 50 characters to ``outfile`` until the end of ``infile`` is
-reached, at which point ``text`` is empty and the ``break`` statement is
-executed.
+        f.close()
+        g.close()
 
-.. admonition:: A handle is somewhat like a TV remote control
+There are a few new things here.  In lines 1 and 2 we added a ``'b'``
+to the mode to tell Python that the files are binary rather than
+text files.  In line 5, we see ``read`` can take an argument which
+tells it how many bytes to attempt to read from the file.  Here we
+chose to read and write up to 1024 bytes on each iteration of the loop.  When
+we get back an empty buffer from our attempt to read, we know we can
+break out of the loop and close both the files.
 
-    We're all familiar with a remote control for a TV.  You perform operations on
-    the remote control --- switch channels, change the volume, etc.  But the real action
-    happens on the TV.  So, by simple analogy, we'd call the remote control your `handle`
-    to the underlying TV.
-    
-    Sometimes we want to emphasize the difference --- the file handle is not the same
-    as the file, and the remote control is not the same as the TV it controls.  
-    But at other times we prefer to treat them as a single mental chunk, or abstraction, 
-    and we'll just say "close the file", or "flip the TV channel". 
+If you set a breakpoint at line 6, (or print  ``type(buf)`` there) you'll 
+see that the type of ``buf`` is ``bytes``.  We don't do any detailed
+work with ``bytes`` objects in this textbook.  
 
 .. index:: file; text,  text file
 
-Text files
+An example
 ----------
 
-A **text file** is a file that contains printable characters and whitespace,
-organized into lines separated by newline characters.  One of the Python
-design goals was to provide methods that made text file processing easy. 
+Many useful line-processing programs will read a text file line-at-a-time and do some minor
+processing as they write the lines to an output file.  They might number the
+lines in the output file, or insert extra blank lines after every 60 lines to
+make it convenient for printing on sheets of paper, or extract some specific
+columns only from each line in the source file, or only print lines that 
+contain a specific substring.  We call this kind of program a **filter**. 
 
-Notice the subtle difference in abstraction here: in the previous section, we
-simply regarded a file as containing many characters, and could read them one
-at a time, many at a time, or all at once.  In this section, particularly for
-reading data, we're interested in files that are organized into lines, 
-and we will process them line-at-a-time.
+Here is a filter that copies one file to another, 
+omitting any lines that begin with ``#``:
 
-To demonstrate, we'll create a text file with three lines of text separated by
-newlines:
+    .. sourcecode:: python3
+       :linenos:
+        
+        def filter(oldfile, newfile):
+            infile = open(oldfile, 'r')
+            outfile = open(newfile, 'w')
+            while True:
+                text = infile.readline()
+                if len(text) == 0: 
+                   break
+                if text[0] == '#':
+                   continue
+                   
+                # put any more processing logic here
+                outfile.write(text)
+                
+            infile.close()
+            outfile.close()
 
-.. sourcecode:: python
-    
-    >>> h_outfile = open("test.dat","w")
-    >>> h_outfile.write("line one\nline two\nline three\n")
-    >>> h_outfile.close()
-
-The ``readline`` method reads all the characters up to and including the
-next newline character:
-
-.. sourcecode:: python
-    
-    >>> h_infile = open("test.dat","r")
-    >>> print(h_infile.readline())
-    line one
-       
-    >>>
-
-
-``readlines`` returns all of the remaining lines as a list of strings:
-
-.. sourcecode:: python
-
-    
-    >>> print(h_infile.readlines())
-    ['line two\n', 'line three\n']
-
-
-In this case, the output is in list format, which means that the
-strings appear with quotation marks and the newline character appears
-at the end of each.
-
-At the end of the file, ``readline`` returns the empty string and
-``readlines`` returns the empty list:
-
-.. sourcecode:: python
-    
-    >>> print(h_infile.readline())
-       
-    >>> print(h_infile.readlines())
-    []
-
-The following is an example of a line-processing program. ``filter`` makes a
-copy of ``oldfile``, omitting any lines that begin with ``#``:
-
-.. sourcecode:: python
-   :linenos:
-    
-    def filter(oldfile, newfile):
-        infile = open(oldfile, 'r')
-        outfile = open(newfile, 'w')
-        while True:
-            text = infile.readline()
-            if text == "":
-               break
-            if text[0] == '#':
-               continue
-            outfile.write(text)
-        infile.close()
-        outfile.close()
-
-The **continue statement** ends the current iteration of the loop, but
-continues looping. The flow of execution moves to the top of the loop, checks
-the condition, and proceeds accordingly.
+The ``continue`` statement at line 9 skips over the remaining lines in
+the current iteration of the loop, but the loop will still iterate.  This
+style looks a bit contrived here, but it is often useful to say *"get the
+lines we're not concerned with out of the way early, so that we have
+cleaner more focussed logic in the meaty part of the loop that might be
+written around line 11."* 
 
 Thus, if ``text`` is the empty string, the loop exits. If the first character
-of ``text`` is a hash mark, the flow of execution goes to the top of the loop.
-Only if both conditions fail do we copy ``text`` into the new file.
+of ``text`` is a hash mark, the flow of execution goes to the top of the loop, ready
+to start processing the next line. 
+Only if both conditions fail do we fall through to do the processing at line 11, in this 
+example, writing the line into the new file.
 
 Let's consider one more case: suppose your original file contained empty
-lines.  At line 6 above, would this program not find the first empty line in the
+lines.  At line 6 above, would this program find the first empty line in the
 file, and terminate immediately?   No!  Recall that ``readline`` always 
-includes the newline character in the string it returns, so even an empty line in
-your file would arrive in the ``text`` variable on line 5 containing its newline
-character.  It is only when we try to read `beyond` the end of the file that we
-we get back the empty string.  
+includes the newline character in the string it returns.  It is only when we 
+try to read *beyond* the end of the file that we get back the empty string of length 0.  
 
 .. index:: directory
 
@@ -257,12 +311,12 @@ If you want to open a file somewhere else, you have to specify the **path** to
 the file, which is the name of the directory (or folder) where the file is
 located:
 
-.. sourcecode:: python
-    
-    >>> wordsfile = open('/usr/share/dict/words', 'r')
-    >>> wordlist = wordsfile.readlines()
-    >>> print(wordlist[:6])
-    ['\n', 'A\n', "A's\n", 'AOL\n', "AOL's\n", 'Aachen\n']
+    .. sourcecode:: python3
+        
+        >>> wordsfile = open('/usr/share/dict/words', 'r')
+        >>> wordlist = wordsfile.readlines()
+        >>> print(wordlist[:6])
+        ['\n', 'A\n', "A's\n", 'AOL\n', "AOL's\n", 'Aachen\n']
 
 This (unix) example opens a file named ``words`` that resides in a directory named
 ``dict``, which resides in ``share``, which resides in ``usr``, which resides
@@ -288,15 +342,15 @@ What about fetching something from the web?
 The Python libraries are pretty messy in places.  But here is a very
 simple example that copies the contents at some web URL to a local file.
 
-.. sourcecode:: python
-    :linenos:
-    
-    import urllib.request
+    .. sourcecode:: python3
+        :linenos:
+        
+        import urllib.request
 
-    url = 'http://xml.resource.org/public/rfc/txt/rfc793.txt' 
-    destination_filename = 'rfc793.txt'
-    
-    urllib.request.urlretrieve(url, destination_filename)
+        url = 'http://xml.resource.org/public/rfc/txt/rfc793.txt' 
+        destination_filename = 'rfc793.txt'
+        
+        urllib.request.urlretrieve(url, destination_filename)
 
 The ``urlretrieve`` function --- just one call --- could be used
 to download any kind of content from the Internet.
@@ -312,22 +366,22 @@ We'll need to get a few things right before this works:
 Here is a slightly different example.  Rather than save the web resource to
 our local disk, we read it directly into a string, and return it:
 
-.. sourcecode:: python
-    :linenos:
-    
-    import urllib.request
+    .. sourcecode:: python3
+        :linenos:
+        
+        import urllib.request
 
-    def retrieve_page(url):
-        ''' Retrieve the contents of a web page.
-            The contents is converted to a string before returning it.
-        '''
-        my_socket = urllib.request.urlopen(url)
-        dta = str(my_socket.readall())  
-        my_socket.close()
-        return dta        
+        def retrieve_page(url):
+            ''' Retrieve the contents of a web page.
+                The contents is converted to a string before returning it.
+            '''
+            my_socket = urllib.request.urlopen(url)
+            dta = str(my_socket.readall())  
+            my_socket.close()
+            return dta        
 
-    the_text = retrieve_page("http://xml.resource.org/public/rfc/txt/rfc793.txt")
-    print(the_text)
+        the_text = retrieve_page("http://xml.resource.org/public/rfc/txt/rfc793.txt")
+        print(the_text)
         
 Opening the remote url returns what we call a **socket**.  This is a handle to 
 our end of the connection between 
@@ -396,10 +450,25 @@ Glossary
  
 Exercises
 ---------
-      
-#. `unsorted_fruits.txt <resources/ch10/unsorted_fruits.txt>`__ contains a
-   list of 26 fruits, each one with a name that begins with a different letter
-   of the alphabet. Write a program named ``sort_fruits.py`` that reads in the
-   fruits from ``unsorted_fruits.txt`` and writes them out in alphabetical
-   order to a file named ``sorted_fruits.txt``.
+         
+#. Write a program that reads a file and writes out a new file 
+   with the lines in reversed order
+   (i.e. the first line in the old file becomes the last one in the new file.)
+   
+#. Write a program that reads a file and prints only those lines that contain the 
+   substring ``snake``.
+   
+#. Write a program that reads a text file and produces an output file which is a 
+   copy of the file, except the first five columns of each line contain a four
+   digit line number, followed by a space. 
+   Start numbering the first line in the output file at 1.  Ensure that
+   every line number is formatted to the same width in the output file.  Use one
+   of your Python programs as test data for this exercise: your output should be 
+   a printed and numbered listing of the Python program. 
+
+#. Write a program that undoes the numbering of the previous exercise: it should
+   read a file with numbered lines and produce another file without line numbers. 
+
+   
+
    
