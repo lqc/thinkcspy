@@ -733,7 +733,7 @@ mouse buttons.  Move your mouse over the window.
 need to filter those out of the printing.)   
 You'll get output that looks something like this:
 
-.. sourcecode: pycon
+.. sourcecode:: pycon
 
     <Event(17-VideoExpose {})>
     <Event(1-ActiveEvent {'state': 1, 'gain': 0})>

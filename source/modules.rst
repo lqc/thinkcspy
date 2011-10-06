@@ -67,13 +67,13 @@ Other methods can also generate other distributions e.g. a bell-shaped,
 or "normal" distribution might be more appropriate for estimating seasonal rainfall,
 or the concentration of a compound in the body after taking a dose of medicine. 
 
-The ``random()`` method returns a floating point number in the range [0.0, 1.0) --- the
+The ``random()`` method returns a floating point number in the interval [0.0, 1.0) --- the
 square bracket means "closed interval on the left" and the round parenthesis means
 "open interval on the right".  In other words, 0.0 is possible, but all returned
 numbers will be strictly less than 1.0.  It is usual to *scale* the results after
-calling this method, to get them into a range suitable for your application.  In the
+calling this method, to get them into an interval suitable for your application.  In the
 case shown here, we've converted the result of the method call to a number in
-the range [0.0, 5.0).  Once more, these are uniformly distributed numbers --- numbers
+the interval [0.0, 5.0).  Once more, these are uniformly distributed numbers --- numbers
 close to 0 are just as likely to occur as numbers close to 0.5, or numbers close to 1.0.
 
 This example shows how to shuffle a list.  (`shuffle` cannot work directly
@@ -83,7 +83,7 @@ using the ``list`` type converter first.)
     .. sourcecode:: python3
         :linenos:
 
-        cards = list(range(52))  # generate ints 0..51, 
+        cards = list(range(52))  # generate ints [0 .. 51] 
                                  #    representing a pack of cards.
         rng.shuffle(cards)       # shuffle the pack
 
@@ -485,7 +485,7 @@ built-in scope.  Let's start with a simple example:
 What gets printed?  We've defined our own function called ``range``, so there
 is now a potential ambiguity.  When we use ``range``, do we mean our own one,
 or the built-in one?  Using the scope lookup rules determines this: our own
-range function, not the built-in one, is called, because our function ``range``
+``range`` function, not the built-in one, is called, because our function ``range``
 is in the global namespace, which takes precedence over the built-in names.
 
 So although names likes ``range`` and ``min`` are built-in, they can be "hidden"
