@@ -343,13 +343,13 @@ about the syntax.
 Memos
 -----
 
-If you played around with the ``fibonacci`` function from the chapter on recursion, you
+If you played around with the ``fibo`` function from the chapter on recursion, you
 might have noticed that the bigger the argument you provide, the longer the
 function takes to run. Furthermore, the run time increases very quickly. On one
-of our machines, ``fibonacci(20)`` finishes instantly, ``fibonacci(30)`` takes
-about a second, and ``fibonacci(40)`` takes roughly forever.
+of our machines, ``fib(20)`` finishes instantly, ``fib(30)`` takes
+about a second, and ``fib(40)`` takes roughly forever.
 
-To understand why, consider this **call graph** for ``fibonacci`` with
+To understand why, consider this **call graph** for ``fib`` with
 ``n = 4``:
 
     .. image:: illustrations/fibonacci.png
@@ -357,18 +357,18 @@ To understand why, consider this **call graph** for ``fibonacci`` with
 
 A call graph shows some function frames (instances when the function has
 been invoked), with lines connecting each frame to
-the frames of the functions it calls. At the top of the graph, ``fibonacci``
-with ``n = 4`` calls ``fibonacci`` with ``n = 3`` and ``n = 2``. In turn,
-``fibonacci`` with ``n = 3`` calls ``fibonacci`` with ``n = 2`` and ``n = 1``.
+the frames of the functions it calls. At the top of the graph, ``fib``
+with ``n = 4`` calls ``fib`` with ``n = 3`` and ``n = 2``. In turn,
+``fib`` with ``n = 3`` calls ``fib`` with ``n = 2`` and ``n = 1``.
 And so on.
 
-Count how many times ``fibonacci(0)`` and ``fibonacci(1)`` are called.  This is
+Count how many times ``fib(0)`` and ``fib(1)`` are called.  This is
 an inefficient solution to the problem, and it gets far worse as the argument
 gets bigger.
 
 A good solution is to keep track of values that have already been computed by
 storing them in a dictionary. A previously computed value that is stored for
-later use is called a **memo**. Here is an implementation of ``fibonacci``
+later use is called a **memo**. Here is an implementation of ``fib``
 using memos:
 
     .. sourcecode:: python3
@@ -376,28 +376,28 @@ using memos:
         
         previous = {0: 0, 1: 1}
            
-        def fibonacci(n):
+        def fib(n):
             if n in previous:
                 return previous[n]
             else:
-                new_value = fibonacci(n-1) + fibonacci(n-2)
+                new_value = fib(n-1) + fib(n-2)
                 previous[n] = new_value
                 return new_value
 
 The dictionary named ``previous`` keeps track of the Fibonacci numbers we
 already know. We start with only two pairs: 0 maps to 1; and 1 maps to 1.
 
-Whenever ``fibonacci`` is called, it checks the dictionary to determine if it
+Whenever ``fib`` is called, it checks the dictionary to determine if it
 contains the result. If it's there, the function can return immediately without
 making any more recursive calls. If not, it has to compute the new value. The
 new value is added to the dictionary before the function returns.
 
-Using this version of ``fibonacci``, our machines can compute
-``fibonacci(100)`` in an eyeblink.
+Using this version of ``fib``, our machines can compute
+``fib(100)`` in an eyeblink.
 
     .. sourcecode:: python3
         
-        >>> fibonacci(100)
+        >>> fib(100)
         354224848179261915075
 
 Counting letters
