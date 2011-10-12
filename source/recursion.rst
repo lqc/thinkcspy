@@ -443,25 +443,37 @@ Exercises
 
    .. image:: illustrations/koch_snowflake.png
    
+   |
    
    .. index:: fractal; Cesaro torn square
    
-#. Draw a Cesaro torn square fractal, of the order given by the user.  A torn square 
-   consists of four torn lines.   We show four different squares of orders 0,1,2,3.     
-   In this example, the angle of the tear is 10 degrees.   
-   Varying the angle gives interesting effects --- experiment a bit, 
-   or perhaps let the user input the angle of the tear. 
+#. a.  Draw a Cesaro torn line fractal, of the order given by the user.  
+       We show four different lines of orders 0,1,2,3.     
+       In this example, the angle of the tear is 10 degrees.   
+      
+       .. image:: illustrations/cesaro_torn_line.png
+       
+   b.  Four lines make a square.  Use the code in part a) to draw cesaro squares.
+       Varying the angle gives interesting effects --- experiment a bit, 
+       or perhaps let the user input the angle of the tear. 
 
-   .. image:: illustrations/cesaro_torn_square.png
+       .. image:: illustrations/cesaro_torn_square.png
    
    .. index:: fractal; Sierpinski triangle
+   
+   c. (For the mathematically inclined). In the squares shown here, the higher-order drawings
+      become a little larger. (Look at the bottom lines of each square - they're not aligned.)
+      This is because we just halved the drawn part of the line for each recursive subproblem.  
+      So we've "grown" the overall square by the width of the tear(s).  
+      Can you solve the geometry problem so that the total size of the subproblem case 
+      (including the tear) remains exactly the same size as the original?
+   |
    
 #. A Sierpinski triangle of order 0 is an equilateral triangle.  
    An order 1 triangle can be drawn by drawing 3 smaller triangles 
    (shown slightly disconnected here, just to help our understanding).   
    Higher order 2 and 3 triangles are also shown.  
-   Adapt the Koch snowflake program to draw Sierpinski triangles of any order 
-   input by the user.   
+   Draw Sierpinski triangles of any order input by the user.   
    
    .. image:: illustrations/sierpinski.png
   
