@@ -467,6 +467,7 @@ Exercises
       So we've "grown" the overall square by the width of the tear(s).  
       Can you solve the geometry problem so that the total size of the subproblem case 
       (including the tear) remains exactly the same size as the original?
+ 
    |
    
 #. A Sierpinski triangle of order 0 is an equilateral triangle.  
@@ -477,8 +478,13 @@ Exercises
    
    .. image:: illustrations/sierpinski.png
   
-#. Adapt the above program to draw its three major sub-triangles in different colours, 
-   as shown here in this order 4 case:
+#. Adapt the above program to change the color of its three sub-triangles at some depth
+   of recursion. The illustration below shows two cases where the color is changed at depth 0
+   (the outmost level of recursion), and again at depth 2. If the user supplies a negative
+   depth, the color never changes.
+   (Hint: add a new optional parameter ``colorChangeDepth`` (which defaults to -1), and make this one
+   smaller on each recursive subcall. Then, in the section of code before you recurse, test
+   whether the parameter is zero, and change color.)
 
    .. image:: illustrations/sierpinski_colour.png
    
