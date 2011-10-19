@@ -479,8 +479,8 @@ Exercises
    .. image:: illustrations/sierpinski.png
   
 #. Adapt the above program to change the color of its three sub-triangles at some depth
-   of recursion. The illustration below shows two cases where the color is changed at depth 0
-   (the outmost level of recursion), and again at depth 2. If the user supplies a negative
+   of recursion. The illustration below shows two cases: on the left, the color is changed at depth 0
+   (the outmost level of recursion), on the right, at depth 2. If the user supplies a negative
    depth, the color never changes.
    (Hint: add a new optional parameter ``colorChangeDepth`` (which defaults to -1), and make this one
    smaller on each recursive subcall. Then, in the section of code before you recurse, test

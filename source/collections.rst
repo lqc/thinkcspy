@@ -8,8 +8,8 @@
  
 |
     
-Sets of objects
-===============
+Collections of objects
+======================
 
 
 Composition
@@ -38,7 +38,8 @@ fifty-two cards in a deck, each of which belongs to one of four suits and one
 of thirteen ranks. The suits are Spades, Hearts, Diamonds, and Clubs (in
 descending order in bridge). The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 Jack, Queen, and King. Depending on the game that you are playing, the rank of
-Ace may be higher than King or lower than 2.
+Ace may be higher than King or lower than 2.  
+The rank is sometimes called the face-value of the card.
 
 If we want to define a new object to represent a playing card, it is obvious
 what the attributes should be: ``rank`` and ``suit``. It is not as obvious what
@@ -121,7 +122,7 @@ the class definition:
                 return (self.ranks[self.rank] + " of " + self.suits[self.suit])
 
 A class attribute is defined outside of any method, and it can be accessed from
-any of the methods in the class.
+any of the methods in the class. 
 
 Inside ``__str__``, we can use ``suits`` and ``ranks`` to map the numerical
 values of ``suit`` and ``rank`` to strings. For example, the expression
@@ -132,8 +133,8 @@ appropriate string.
 The reason for the ``"narf"`` in the first element in ``ranks`` is to act as a
 place keeper for the zero-eth element of the list, which will never be used.
 The only valid ranks are 1 to 13. This wasted item is not entirely necessary.
-We could have started at 0, as usual, but it is less confusing to encode 2 as
-2, 3 as 3, and so on.
+We could have started at 0, as usual, but it is less confusing to encode the
+rank 2 as integer 2, 3 as 3, and so on.
 
 With the methods we have so far, we can create and print cards:
 
@@ -155,7 +156,8 @@ attributes:
         >>> print(card2.suits[1])
         Diamonds
 
-The disadvantage is that if we modify a class attribute, it affects every
+Because every ``Card`` instance references the same class attribute, we have an
+aliasing situation.  The disadvantage is that if we modify a class attribute, it affects every
 instance of the class. For example, if we decide that Jack of Diamonds should
 really be called Jack of Swirly Whales, we could do this:
 
@@ -169,7 +171,7 @@ The problem is that *all* of the Diamonds just became Swirly Whales:
 
     .. sourcecode:: python3
         
-        >>> print card2
+        >>> print(card2)
         3 of Swirly Whales
 
 It is usually not a good idea to modify class attributes.
@@ -191,12 +193,13 @@ and 0 if they are equal to each other.
 
 Some types are completely ordered, which means that you can compare any two
 elements and tell which is bigger. For example, the integers and the
-floating-point numbers are completely ordered. Some sets are unordered, which
+floating-point numbers are completely ordered. Some types are unordered, which
 means that there is no meaningful way to say that one element is bigger than
 another. For example, the fruits are unordered, which is why you cannot compare
-apples and oranges.
+apples and oranges, and you cannot meaningfully order a collection of images, 
+or a collection of cellphones.
 
-The set of playing cards is partially ordered, which means that sometimes you
+Playing cards are partially ordered, which means that sometimes you
 can compare cards and sometimes not. For example, you know that the 3 of Clubs
 is higher than the 2 of Clubs, and the 3 of Diamonds is higher than the 3 of
 Clubs. But which is better, the 3 of Clubs or the 2 of Diamonds? One has a
@@ -250,7 +253,7 @@ overloading of each of the relational operators for us:
 
 With this machinery in place, the relational operators now work as we'd like them to:
 
-    .. sourcecode: pycon
+    .. sourcecode:: pycon
 
        >>> card1 = Card(1, 11)
        >>> card2 = Card(1, 3)
@@ -269,7 +272,7 @@ define a class to represent a ``Deck``. Of course, a deck is made up of cards,
 so each ``Deck`` object will contain a list of cards as an attribute.
 
 The following is a class definition for the ``Deck`` class. The initialization
-method creates the attribute ``cards`` and generates the standard set of
+method creates the attribute ``cards`` and generates the standard oack of
 fifty-two cards:
 
     .. sourcecode:: python3
@@ -288,8 +291,6 @@ enumerates the suits from 0 to 3. The inner loop enumerates the ranks from 1 to
 thirteen times, the total number of times the body is executed is fifty-two
 (thirteen times four). Each iteration creates a new instance of ``Card`` with
 the current suit and rank, and appends that card to the ``cards`` list.
-
-The ``append`` method works on lists but not, of course, tuples.
 
 
 Printing the deck
@@ -481,7 +482,7 @@ Actually, ``pop`` removes the *last* card in the list, so we are in effect
 dealing from the bottom of the deck.
 
 One more operation that we are likely to want is the boolean function
-``is_empty``, which returns true if the deck contains no cards:
+``is_empty``, which returns ``True`` if the deck contains no cards:
 
     .. sourcecode:: python3
         :linenos:
@@ -489,7 +490,7 @@ One more operation that we are likely to want is the boolean function
         class Deck:
             ...
             def is_empty(self):
-                return (len(self.cards) == 0)
+                return len(self.cards) == 0 
 
 
 Glossary
@@ -498,7 +499,7 @@ Glossary
 .. glossary::
 
     encode
-        To represent one set of values using another set of values by
+        To represent one type of value using another type of value by
         constructing a mapping between them.
 
     class attribute

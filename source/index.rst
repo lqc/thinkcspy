@@ -46,7 +46,7 @@ Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thi
 * `Chapter 19 <exceptions.html>`__ *Exceptions*
 * `Chapter 20 <dictionaries.html>`__ *Dictionaries*
 * `Chapter 21 <even_more_oop.html>`__ *Even more OOP*
-* `Chapter 22 <sets.html>`__ *Sets of Objects*
+* `Chapter 22 <collections.html>`__ *Collections of Objects*
 * `Chapter 23 <inheritance.html>`__ *Inheritance*
 * `Chapter 24 <linked_lists.html>`__ *Linked Lists*
 * `Chapter 25 <stacks.html>`__ *Stacks*
@@ -96,7 +96,7 @@ Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thi
     exceptions.rst
     dictionaries.rst
     even_more_oop.rst
-    sets.rst
+    collections.rst
     inheritance.rst
     linked_lists.rst
     stacks.rst
