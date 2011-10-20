@@ -88,14 +88,15 @@ type looks like this:
 As usual, we provide an initialization method that takes an optional parameter
 for each attribute.
 
-To create an object that represents the 3 of Clubs, use this command:
+To create some objects, representing say the 3 of Clubs and the Jack of Diamonds, use these commands:
 
     .. sourcecode:: python3
         :linenos:
         
         three_of_clubs = Card(0, 3)
+        card1 = Card(1, 11)
 
-The first argument, ``0``, represents the suit Clubs.
+In the first case above, for example, the first argument, ``0``, represents the suit Clubs.
 
 
 Class attributes and the ``__str__`` method
@@ -269,10 +270,11 @@ Decks
 
 Now that we have objects to represent ``Card``\s, the next logical step is to
 define a class to represent a ``Deck``. Of course, a deck is made up of cards,
-so each ``Deck`` object will contain a list of cards as an attribute.
+so each ``Deck`` object will contain a list of cards as an attribute.  Many card
+games will need at least two different decks --- a red deck and a blue deck.
 
 The following is a class definition for the ``Deck`` class. The initialization
-method creates the attribute ``cards`` and generates the standard oack of
+method creates the attribute ``cards`` and generates the standard pack of
 fifty-two cards:
 
     .. sourcecode:: python3
@@ -292,12 +294,20 @@ thirteen times, the total number of times the body is executed is fifty-two
 (thirteen times four). Each iteration creates a new instance of ``Card`` with
 the current suit and rank, and appends that card to the ``cards`` list.
 
+With this in place, we can instantiate some decks:
+
+    .. sourcecode:: python3
+        :linenos:
+        
+        redDeck = Deck()
+        blueDeck = Deck()
+
 
 Printing the deck
 -----------------
 
-As usual, when we define a new type of object we want a method that prints the
-contents of an object. To print a ``Deck``, we traverse the list and print each
+As usual, when we define a new type we want a method that prints the
+contents of an instance. To print a ``Deck``, we traverse the list and print each
 ``Card``:
 
     .. sourcecode:: python3
@@ -354,8 +364,8 @@ When the loop ends, ``s`` contains the complete string representation of the
 
     .. sourcecode:: python3
         
-        >>> deck = Deck()
-        >>> print(deck)
+        >>> redDeck = Deck()
+        >>> print(redDeck)
         Ace of Clubs
          2 of Clubs
           3 of Clubs
@@ -370,6 +380,9 @@ When the loop ends, ``s`` contains the complete string representation of the
                      Queen of Clubs
                       King of Clubs
                        Ace of Diamonds
+                        2 of Diamonds
+                         ...
+                          
 
 And so on. Even though the result appears on 52 lines, it is one long string
 that contains newlines.
@@ -461,10 +474,10 @@ the card was in the deck and ``False`` otherwise:
                     return False 
 
 
-The ``in`` operator returns ``True`` if the first operand is in the second,
-which must be a list or a tuple. If the first operand is an object, Python uses
+The ``in`` operator returns ``True`` if the first operand is in the second. 
+If the first operand is an object, Python uses
 the object's ``__eq__`` method to determine equality with items in the list.
-Since the ``__eq__`` in the ``Card`` class checks for deep equality, the
+Since the ``__eq__`` we provided in the ``Card`` class checks for deep equality, the
 ``remove`` method checks for deep equality.
 
 To deal cards, we want to remove and return the top card. The list method
