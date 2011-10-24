@@ -68,7 +68,7 @@ enter the **game loop**.  The game loop continuously does four main things:
                     
                 # We draw everything from scratch on each frame.
                 # So first fill everything with the background color
-                main_surface.fill((0, 200, 255), main_surface.get_rect())
+                main_surface.fill((0, 200, 255))
                 
                 # Overpaint a smaller rectangle on the main surface
                 main_surface.fill(some_color, small_rect)
@@ -110,12 +110,11 @@ extends from line 15 to 30, with the following key bits of logic:
   cards) is to redraw everything from scratch on every iteration of the game loop.  So
   the first thing we do at line 24 is fill the entire surface with a background
   color.  The ``fill`` method of a surface takes two arguments --- the color to 
-  use for filling, and the rectangle to be filled.  The rectangle is expressed as
-  a 4-element tuple, giving the ``(x, y, width, height)``.   Every surface has a method
-  to retrieve its rectangle, so the easiest way to fill "all of a surface" is shown
-  in line 24.
+  use for filling, and the rectangle to be filled.  But the second argument is 
+  optional, and if it is left out the entire surface is filled.  
 * In line 27 we fill a second rectangle, this time using ``some_color``.
-  The placement and size of the rectangle are given by the tuple ``small_rect``.
+  The placement and size of the rectangle are given by the tuple ``small_rect``, 
+  a 4-element tuple ``(x, y, width, height)``.   
 * It is important to understand that the origin of the PyGame's surface is at the top left
   corner (unlike the turtle module that puts it's origin in the middle of the screen).
   So, if you wanted the rectangle closer to the top of the window, you need to make its
@@ -229,7 +228,7 @@ look at the timing interval and can do the calculations.
                     t0 = t1
 
                 # Completely redraw the surface, starting with background
-                main_surface.fill((0, 200, 255), main_surface.get_rect())
+                main_surface.fill((0, 200, 255))
 
                 # Put a red rectangle somewhere on the surface
                 main_surface.fill((255,0,0), (300, 100, 150, 90))
@@ -387,10 +386,8 @@ and determined the square size:
     .. sourcecode:: python3
         :linenos:
 
-        ball_offset = (sq_sz - ball.get_rect()[2]) // 2
+        ball_offset = (sq_sz - ball.get_width()) // 2
     
-Notice that we used the ``get_rect`` method of the ball to get its rectangle, then used its 3'rd 
-component --- its width --- for this.
 
 Now we touch up the drawing code for the ball and we're done:  
 
@@ -431,7 +428,7 @@ Here is the complete program:
             # Use an extra offset to centre the ball in its square.
             # If the square is too small, offset becomes negative,
             # but it will still be centered :-)
-            ball_offset = (sq_sz-ball.get_rect()[2]) // 2
+            ball_offset = (sq_sz-ball.get_width()) // 2
 
             while True:
 
@@ -808,8 +805,8 @@ the rectangle of the sprite:
          def contains_point(self, pt):
              """ Return True if my sprite rectangle contains point pt """
              (my_x, my_y) = self.posn
-             my_width = self.image.get_rect()[2]
-             my_height = self.image.get_rect()[3]
+             my_width = self.image.get_width()
+             my_height = self.image.get_height()
              (x, y) = pt
              return ( x >= my_x and x < my_x + my_width and
                       y >= my_y and y < my_y + my_height)
@@ -962,7 +959,7 @@ to blit only that portion of the spritesheet:
 
         def draw(self, target_surface):
             patch_rect = (self.curr_patch_num * 50, 0,
-                            50, self.image.get_rect()[3])
+                            50, self.image.get_height())
             target_surface.blit(self.image, self.posn, patch_rect)
         
 Now on to getting the animation to work. We need to arrange logic in ``update``
@@ -1032,14 +1029,14 @@ class.  Here is the code for the whole class now:
 
             def draw(self, target_surface):
                 patch_rect = (self.curr_patch_num * 50, 0,
-                               50, self.image.get_rect()[3])
+                               50, self.image.get_height())
                 target_surface.blit(self.image, self.posn, patch_rect)
 
             def contains_point(self, pt):
                  """ Return True if my sprite rectangle contains  pt """
                  (my_x, my_y) = self.posn
-                 my_width = self.image.get_rect()[2]
-                 my_height = self.image.get_rect()[3]
+                 my_width = self.image.get_width()
+                 my_height = self.image.get_height()
                  (x, y) = pt
                  return ( x >= my_x and x < my_x + my_width and
                           y >= my_y and y < my_y + my_height)
