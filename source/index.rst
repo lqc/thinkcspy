@@ -8,7 +8,7 @@ How to Think Like a Computer Scientist
 Learning with Python 3 (RLE)
 ---------------------------- 
 
-Version date: October 2011 
+Version date: November 2011 
 
 by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 
