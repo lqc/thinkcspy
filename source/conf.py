@@ -175,7 +175,7 @@ latex_font_size = '12pt'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'thinkcspy3.tex', u'How to Think Like a Computer Scientist: Learning with Python 3 Documentation',
-   u'Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers', 'manual'),
+   u'Peter Wentworth, Jeffrey Elkner, \\\\ Allen B. Downey and Chris Meyers', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
