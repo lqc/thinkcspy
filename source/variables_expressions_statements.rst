@@ -645,7 +645,53 @@ If you're ever in doubt about whether to compose code or fragment it into smalle
 try to make it as simple as you can for the human to follow.  My choice would
 be the first case above, with four separate steps.  
 
+.. index::
+    single: modulus operator
+    single: operator; modulus
 
+The modulus operator
+--------------------
+
+The **modulus operator** works on integers (and integer expressions) and gives
+the remainder when the first number is divided by the second. In Python, the
+modulus operator is a percent sign (``%``). The syntax is the same as for other
+operators. It has the same precedence as the multiplication operator.
+
+    .. sourcecode:: python3
+        
+        >>> q = 7 // 3     # This is integer division operator
+        >>> print(q)
+        2
+        >>> r  = 7 % 3
+        >>> print(r)
+        1
+
+So 7 divided by 3 is 2 with a remainder of 1.
+
+The modulus operator turns out to be surprisingly useful. For example, you can
+check whether one number is divisible by another---if ``x % y`` is zero, then
+``x`` is divisible by ``y``.
+
+Also, you can extract the right-most digit or digits from a number.  For
+example, ``x % 10`` yields the right-most digit of ``x`` (in base 10).
+Similarly ``x % 100`` yields the last two digits.
+
+It is also extremely useful for doing conversions, say from seconds,
+to hours, minutes and seconds. So let's write a program to ask the user to enter
+some seconds, and we'll convert them into hours, minutes, and remaining seconds.
+
+    .. sourcecode:: python3
+        :linenos:
+
+        total_secs = int(input("How many seconds, in total?"))
+        hours = total_secs // 3600      
+        secs_still_remaining = total_secs % 3600
+        minutes =  secs_still_remaining // 60 
+        secs_finally_remaining = secs_still_remaining  % 60
+        
+        print("Hrs=", hours, "  mins=", minutes,  
+                                 "secs=", secs_finally_remaining)
+                                 
 Glossary
 --------
 
@@ -717,6 +763,11 @@ Glossary
         A reserved word that is used by the compiler to parse program; you
         cannot use keywords like ``if``, ``def``, and ``while`` as variable
         names.
+    
+    modulus operator
+        An operator, denoted with a percent sign ( ``%``), that works on
+        integers and yields the remainder when one number is divided by
+        another.
 
     operand
         One of the values on which an operator operates.
@@ -786,3 +837,27 @@ Exercises
    Then have the program prompt the user for the number of months `t` that the money will
    be compounded for.  Calculate and print the final amount after `t` months.      
  
+#. Evaluate the following numerical expressions in your head, then use
+   the Python interpreter to check your results:
+
+    #. ``>>> 5 % 2``
+    #. ``>>> 9 % 5``
+    #. ``>>> 15 % 12``
+    #. ``>>> 12 % 15``
+    #. ``>>> 6 % 6``
+    #. ``>>> 0 % 7``
+    #. ``>>> 7 % 0``
+
+   What happened with the last example? Why? If you were able to correctly
+   anticipate the computer's response in all but the last one, it is time to
+   move on. If not, take time now to make up examples of your own. Explore the
+   modulus operator until you are confident you understand how it works.
+   
+#. You look at the clock and it is exactly 2pm.  You set an alarm to go off
+   in 51 hours.  At what time does the alarm go off?  (Hint: you could count on
+   your fingers, but this is not what we're after.  If you are tempted
+   to count on your fingers, change the 51 to 5100.)
+   
+#. Write a Python program to solve the general version of the above problem.
+   Ask the user for the time now (in hours), and ask for the number of hours to wait.  
+   Your program should output what the time will be on the clock when the alarm goes off.

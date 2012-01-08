@@ -12,53 +12,6 @@ Conditionals
 ============
 
 .. index::
-    single: modulus operator
-    single: operator; modulus
-
-The modulus operator
---------------------
-
-The **modulus operator** works on integers (and integer expressions) and gives
-the remainder when the first number is divided by the second. In Python, the
-modulus operator is a percent sign (``%``). The syntax is the same as for other
-operators:
-
-    .. sourcecode:: python3
-        
-        >>> q = 7 // 3     # This is integer division operator
-        >>> print(q)
-        2
-        >>> r  = 7 % 3
-        >>> print(r)
-        1
-
-So 7 divided by 3 is 2 with a remainder of 1.
-
-The modulus operator turns out to be surprisingly useful. For example, you can
-check whether one number is divisible by another---if ``x % y`` is zero, then
-``x`` is divisible by ``y``.
-
-Also, you can extract the right-most digit or digits from a number.  For
-example, ``x % 10`` yields the right-most digit of ``x`` (in base 10).
-Similarly ``x % 100`` yields the last two digits.
-
-It is also extremely useful for doing conversions, say from seconds,
-to hours, minutes and seconds. So let's write a program to ask the user to enter
-some seconds, and we'll convert them into hours, minutes, and remaining seconds.
-
-    .. sourcecode:: python3
-        :linenos:
-
-        total_secs = int(input("How many seconds, in total?"))
-        hours = total_secs // 3600      
-        secs_still_remaining = total_secs % 3600
-        minutes =  secs_still_remaining // 60 
-        secs_finally_remaining = secs_still_remaining  % 60
-        
-        print("Hrs=", hours, "  mins=", minutes,  
-                                 "secs=", secs_finally_remaining)
-
-.. index::
     single: boolean value
     single: value; boolean
     single: boolean expression
@@ -71,12 +24,13 @@ some seconds, and we'll convert them into hours, minutes, and remaining seconds.
 Boolean values and expressions
 ------------------------------
 
-The Python type for storing true and false values is called ``bool``, named
-after the British mathematician, George Boole. He created *Boolean
-algebra*, which is the basis of all modern computer arithmetic.
+A *boolean* value is either true or false.  It is named
+after the British mathematician, George Boole, who first formulated *boolean
+algebra* --- some rules for reasoning about and combining these values.
+This is the basis of all modern computer logic.
 
-There are only two boolean values, ``True`` and ``False``.  Capitalization
-is important, since ``true`` and ``false`` are not boolean values.
+In Python, the two boolean values are ``True`` and ``False`` (the
+capitalization must be exactly as shown), and the Python type is called ``bool``.
 
     .. sourcecode:: python3
         
@@ -87,34 +41,53 @@ is important, since ``true`` and ``false`` are not boolean values.
           File "<interactive input>", line 1, in <module>
         NameError: name 'true' is not defined
 
-A **boolean expression** is an expression that evaluates to a boolean value.
-The operator ``==`` compares two values and produces a boolean value:
+A **boolean expression** is an expression that evaluates to produce a result which is
+a boolean value.  For example, the operator ``==`` tests if two values are equal.  
+It produces (or *yields*) a boolean value:
 
     .. sourcecode:: python3
         
-        >>> 5 == 5
+        >>> 5 == (3 + 2)   # is five equal 5 to the result of 3 + 2? 
         True
         >>> 5 == 6
         False
+        >>> j = "hel"
+        >>> j + "lo" == "hello"
+        True
 
-In the first statement, the two operands are equal, so the expression evaluates
+In the first statement, the two operands evaluate to equal values, so the expression evaluates
 to ``True``; in the second statement, 5 is not equal to 6, so we get ``False``.
 
-The ``==`` operator is one of six common **comparison operators**; the others are:
+The ``==`` operator is one of six common **comparison operators** which all produce 
+a ``bool`` result; here are all six:
 
     .. sourcecode:: python3
         
+        x == y               # produce True if ... x is equal to y
         x != y               # x is not equal to y
         x > y                # x is greater than y
         x < y                # x is less than y
         x >= y               # x is greater than or equal to y
         x <= y               # x is less than or equal to y
-
+ 
 Although these operations are probably familiar to you, the Python symbols are
 different from the mathematical symbols. A common error is to use a single
 equal sign (``=``) instead of a double equal sign (``==``). Remember that ``=``
 is an assignment operator and ``==`` is a comparison operator. Also, there is
 no such thing as ``=<`` or ``=>``.
+
+Like any other types we've seen so far, boolean values can be assigned to 
+variables, printed, etc.
+
+
+    .. sourcecode:: python3
+    
+        >>> oldEnoughToGetDrivingLicence = age >= 17
+        >>> print(oldEnoughToGetDrivingLicence)
+        True
+        >>> type(oldEnoughToGetDrivingLicence)
+        <class 'bool'> 
+    
 
 .. index::
     single: logical operator
@@ -123,19 +96,103 @@ no such thing as ``=<`` or ``=>``.
 Logical operators
 -----------------
 
-There are three **logical operators**: ``and``, ``or``, and ``not``. The
+There are three **logical operators**,  ``and``, ``or``, and ``not``,
+that allow us to build more complex
+boolean expressions from simpler boolean expressions. The
 semantics (meaning) of these operators is similar to their meaning in English.
-For example, ``x > 0 and x < 10`` is true only if ``x`` is greater than 0 *and*
+For example, ``x > 0 and x < 10`` produces ``True`` only if ``x`` is greater than 0 *and*
 at the same time, x is less than 10.
 
-``n % 2 == 0 or n % 3 == 0`` is true if *either* of the conditions is true,
-that is, if the number is divisible by 2 *or* divisible by 3.
+``n % 2 == 0 or n % 3 == 0`` is ``True`` if *either* of the conditions is ``True``,
+that is, if the number ``n`` is divisible by 2 *or* it is divisible by 3.  (What do
+you think happens if ``n`` is divisible by both 2 and by 3 at the same time?
+Will the expression yield ``True`` or ``False``?  Try it in your Python interpreter.)
 
-Finally, the ``not`` operator negates a boolean expression, so ``not(x > y)``
-is true if ``(x > y)`` is false, that is, if ``x`` is less than or equal to
+Finally, the ``not`` operator negates a boolean value, so ``not(x > y)``
+is ``True`` if ``(x > y)`` is ``False``, that is, if ``x`` is less than or equal to
 ``y``.
 
+Truth Tables
+------------
 
+A truth table is a small table that allows us to list all the possible inputs,
+and to give the results for the logical operators.  Because the ``and`` and ``or``
+operators each have two operands, there are only four rows in a truth table that
+describes the semantics of ``and``.
+
+
+  =====  ========  =======
+    a      b       a and b
+  =====  ========  =======
+  False  False     False
+  False  True      False
+  True   False     False
+  True   True      True
+  =====  ========  =======
+
+In a Truth Table, we sometimes use T and F as shorthand for the two 
+boolean values: here is the truth table describing ``or``:
+
+  ===  ======  =======
+  a    b       a or b
+  ===  ======  =======
+  F    F        F
+  F    T        T
+  T    F        T
+  T    T        T
+  ===  ======  =======
+
+The third logical operator, ``not``, only takes a single operand, so its truth table
+only has two rows:
+
+  ======  =======
+  a       not a
+  ======  =======
+  F        T
+  T        F
+  ======  =======
+
+
+Simplifying Boolean Expressions
+-------------------------------
+
+An algebra gives us some rules for simplifying and rearranging expressions. For example,
+we are all familiar in school algebra with rules like:
+
+    .. sourcecode:: python3
+    
+        n * 0 == 0
+
+Here are some boolean algebra rules for working with the ``and`` operator:
+
+      .. sourcecode:: pycon
+    
+        x and False == False
+        False and x == False
+        y and x == x and y
+        x and True == x
+        True and x == x
+        x and x == x
+
+Here are some corresponding rules for the ``or`` operator:
+
+      .. sourcecode:: pycon
+    
+        x or False == x
+        False or x == x
+        y or x == x or y
+        x or True == True
+        True or x == True
+        x or x == x    
+        
+Two ``not`` operators cancel each other:
+
+      .. sourcecode:: pycon
+    
+        not (not x) == x
+ 
+ 
+ 
 .. index:: conditional branching, conditional execution, if, elif, else,
            if statement, compound statement, statement block, block, body,
            pass statement
@@ -357,6 +414,8 @@ conditionals, so we can use the ``and`` operator:
         if 0 < x and x < 10:
             print("x is a positive single digit.")
 
+          
+            
 
 .. index::
     single: return statement
@@ -387,6 +446,96 @@ displays an error message and then uses ``return`` to exit the function. The
 flow of execution immediately returns to the caller, and the remaining lines of
 the function are not executed.
 
+
+                 
+Logical opposites
+-----------------
+
+Each of the six relational operators has a logical opposite: for example,
+suppose you can get a driving licence when your age is greater or equal to 17,
+you can *not* get the driving licence when you are less than 17.
+
+Notice that the opposite of ``>=`` is ``<``.  
+
+  ========  ================
+  operator  logical opposite     
+  ========  ================
+  ==        !=
+  !=        ==
+  <         >=
+  <=        >
+  >         <=
+  >=        <
+  ========  ================
+  
+Understanding these logical opposites allows you to sometimes get rid of ``not``
+operators.  ``not`` operators are often quite difficult to read in computer code, and
+your intentions will usually be clearer if you can eliminate them. 
+
+For example, if you wrote this Python:
+
+    .. sourcecode:: python3
+        :linenos:
+        
+        if not (age >= 17):
+            print("Hey, you're too young to get a driving licence!")
+            return
+          
+it would probably be clearer to use the simplification laws, and to 
+write instead:
+
+    .. sourcecode:: python3
+        :linenos:
+        
+        if age < 17:
+            print("Hey, you're too young to get a driving licence!")
+            return
+
+
+Two powerful simplification laws (called de Morgan's laws) that are often
+helpful when you are dealing with complicated boolean expressions are:
+
+      .. sourcecode:: pycon
+    
+          not (x and y)  ==  (not x) or (not y) 
+          not (x or y)   ==  (not x) and (not y)
+          
+For example, suppose you can slay the dragon only if your magic 
+lightsabre sword is charged to 90% or higher, 
+and you have 100 or more energy units in your protective shield.  
+You find this fragment of Python code in the game:
+
+      .. sourcecode:: python3
+        :linenos:
+        
+        if not ((swordCharge >= 0.90) and (shieldEnergy >= 100)):
+            print("Your attack has no effect, the dragon fries you to a crisp!")
+        else:
+            print("The dragon crumples in a heap. You rescue the gorgeous princess!")
+
+de Morgan's laws together with the logical opposites would let you 
+rework the condition in a (perhaps) easier to understand way like this:
+
+    .. sourcecode:: python3
+        :linenos:
+        
+        if (swordCharge < 0.90) or (shieldEnergy < 100):
+            print("Your attack has no effect, the dragon fries you to a crisp!")
+        else:
+            print("The dragon crumples in a heap. You rescue the gorgeous princess!")
+
+You could also get rid of the ``not`` by swapping around the ``then`` and
+``else`` parts of the conditional.  So here is a third version, also equivalent:
+
+    .. sourcecode:: python3
+        :linenos:
+        
+        if (swordCharge >= 0.90) and (shieldEnergy >= 100):
+            print("The dragon crumples in a heap. You rescue the gorgeous princess!")   
+        else:
+            print("Your attack has no effect, the dragon fries you to a crisp!")
+ 
+                   
 
 .. index::
     single: type conversion
@@ -458,6 +607,7 @@ The ``str(ARGUMENT)`` function converts any argument given to it to type
 
 ``str(ARGUMENT)`` will work with any value and convert it into a string.  As
 mentioned earlier, ``True`` is boolean value; ``true`` is not.
+
 
 .. index:: bar chart
 
@@ -573,6 +723,9 @@ Glossary
     body
         The block of statements in a compound statement that follows the
         header.
+              
+    boolean algebra
+        Some rules for rearranging and reasoning about boolean expressions.
 
     boolean expression
         An expression that is either true or false.
@@ -592,8 +745,8 @@ Glossary
         statements.
 
     comparison operator
-        One of the operators that compares two values: ``==``, ``!=``, ``>``,
-        ``<``, ``>=``, and ``<=``.
+        One of the six operators that compares two values: ``==``, ``!=``, ``>``,
+        ``<``, ``>=``, and ``<=``.  
 
     condition
         The boolean expression in a conditional statement that determines which
@@ -608,17 +761,16 @@ Glossary
         One of the operators that combines boolean expressions: ``and``,
         ``or``, and ``not``.
 
-    modulus operator
-        An operator, denoted with a percent sign ( ``%``), that works on
-        integers and yields the remainder when one number is divided by
-        another.
-
     nesting
         One program structure within another, such as a conditional statement
         inside a branch of another conditional statement.
 
     prompt
         A visual cue that tells the user to input data.
+        
+    truth table
+        A concise table of boolean values that can describe the semantics
+        of an operator. 
 
     type conversion
         An explicit function call that takes a value of one type and computes a
@@ -635,29 +787,6 @@ Glossary
 
 Exercises
 ---------
-
-#. Evaluate the following numerical expressions in your head, then use
-   the Python interpreter to check your results:
-
-    #. ``>>> 5 % 2``
-    #. ``>>> 9 % 5``
-    #. ``>>> 15 % 12``
-    #. ``>>> 12 % 15``
-    #. ``>>> 6 % 6``
-    #. ``>>> 0 % 7``
-    #. ``>>> 7 % 0``
-
-   What happened with the last example? Why? If you were able to correctly
-   anticipate the computer's response in all but the last one, it is time to
-   move on. If not, take time now to make up examples of your own. Explore the
-   modulus operator until you are confident you understand how it works.
-   
-#. You look at the clock and it is exactly 2pm.  You set an alarm to go off
-   in 51 hours.  At what time does the alarm go off?  
-   
-#. Write a Python program to solve the general version of the above problem.
-   Ask the user for the time now (in hours), and ask for the number of hours to wait.  
-   Your program should output what the time will be on the clock when the alarm goes off.
    
 #. Assume the days of the week are numbered 0,1,2,3,4,5,6 from Sunday to Saturday.
    Write a function which is given the day number, and it returns the day name (a string).
@@ -676,34 +805,49 @@ Exercises
     
 #.  What do these expressions evaluate to?
 
-    #.  ``3 == 3``
-    #.  ``3 != 3``
-    #.  ``3 >= 4``
-    #.  ``not (3 < 4)``
+        #.  ``3 == 3``
+        #.  ``3 != 3``
+        #.  ``3 >= 4``
+        #.  ``not (3 < 4)``
     
-#.  Write a function which is given an exam mark, and it returns a string --- the grade for that mark --- according to this 
-    scheme:   
+#.  Complete this truth table:
+
+
+          === === ======  =======
+          p   q   r       (not (p and q)) or r
+          === === ======  =======
+          F   F   F        ?
+          F   F   T        ?
+          F   T   F        ?
+          F   T   T        ?
+          T   F   F        ?
+          T   F   T        ?
+          T   T   F        ?
+          T   T   T        ?
+          === === ======  ======= 
+  
+   
+#.  Write a function which is given an exam mark, and it returns a string --- 
+    the grade for that mark --- according to this scheme:   
     
-    .. table::  
-    
-       =======   =====
-       Mark      Grade
-       =======   =====
-       >= 75     First   
-       [70-75)   Upper Second   
-       [60-70)   Second   
-       [50-60)   Third 
-       [45-50)   F1 Supp   
-       [40-45)   F2   
-       < 40      F3   
-       =======   =====    
+           =======   =====
+           Mark      Grade
+           =======   =====
+           >= 75     First   
+           [70-75)   Upper Second   
+           [60-70)   Second   
+           [50-60)   Third 
+           [45-50)   F1 Supp   
+           [40-45)   F2   
+           < 40      F3   
+           =======   =====    
     
     The square and round brackets denote closed and open intervals. 
     A closed interval includes the number, and open interval excludes it.   So 39.99999 gets grade F3, but 40 gets grade F2.
     Assume ::
     
        xs = [83, 75, 74.9, 70, 69.9, 65, 60, 59.9, 55, 50, 
-                            49.9, 45, 44.9, 40, 39.9, 2, 0 
+                            49.9, 45, 44.9, 40, 39.9, 2, 0] 
     
     Test your function by printing the mark and the grade for all the elements in this list.
     
