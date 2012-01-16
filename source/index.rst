@@ -8,7 +8,7 @@ How to Think Like a Computer Scientist
 Learning with Python 3 (RLE)
 ---------------------------- 
 
-Version date: November 2011 
+Version date: January 2012 
 
 by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 
@@ -16,7 +16,10 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
   
 Corresponding author: p.wentworth@ru.ac.za
 
-Source for this RLE version:  https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle
+Source respository is at at https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle
+
+For offline use, download a zip file of the html or a pdf version (updated less often) 
+from http://www.cs.ru.ac.za/csc102/thinkcspy3 
   
 * :ref:`search`  
   
