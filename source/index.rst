@@ -11,6 +11,8 @@ Learning with Python
 
 by Jeffrey Elkner, Allen B. Downey, and Chris Meyers
 
+Last Updated: February 1, 2012
+
 * `Copyright Notice <copyright.html>`__ 
 * `Foreword <foreword.html>`__
 * `Preface <preface.html>`__

@@ -506,7 +506,7 @@ Glossary
     import
         A statement which permits functions and variables defined in a Python
         script to be brought into the environment of another script or a
-        running Python shell.For example, assume the following is in a script
+        running Python shell. For example, assume the following is in a script
         named ``tryme.py``:
 
         .. sourcecode:: python

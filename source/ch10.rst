@@ -725,7 +725,7 @@ We can now run the program from the command prompt like this:
 .. sourcecode:: python
     
     $ python sum.py 3 4 5 11
-    23
+    23.0
     $ python sum.py 3.5 5 11 100
     119.5
 
