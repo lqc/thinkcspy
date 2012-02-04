@@ -38,7 +38,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'How to Think Like a Computer Scientist: Learning with Python'
-copyright = u'2011, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers'
+copyright = u'2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

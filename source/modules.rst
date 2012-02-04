@@ -732,7 +732,7 @@ Exercises
             
             import calendar
             cal = calendar.TextCalendar()      # create an instance
-            cal.pryear(2011)                   # What happens here?
+            cal.pryear(2012)                   # What happens here?
 
     b. Observe that the week starts on Monday. An adventurous CompSci student
        believes that it is better mental chunking to have his week start on
@@ -748,7 +748,7 @@ Exercises
             :linenos:
             
             d = calendar.LocaleTextCalendar(6, "SPANISH")     
-            d.pryear(2011)   
+            d.pryear(2012)   
         
        Try a few other languages, including one that doesn't work, and see what happens.
         

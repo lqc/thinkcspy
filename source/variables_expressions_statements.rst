@@ -69,7 +69,7 @@ They're strings!
 Strings in Python can be enclosed in either single quotes (``'``) or double quotes
 (``"``), or three of each (``'''`` or ``"""``)
 
-    .. sourcecode:: python3
+    .. sourcecode:: pycon
         
         >>> type('This is a string.')
         <class 'str'>
@@ -116,7 +116,7 @@ value is identical in all cases, and the surrounding quotes are not part of
 the value. But when the interpreter wants to display a string, it has to 
 decide which quotes to use to make it look like a string. 
 
-    .. sourcecode:: python3
+    .. sourcecode:: pycon
 
         >>> 'This is a string.'
         'This is a string.'
@@ -173,10 +173,12 @@ the token `==`.  The assignment statement links a *name*,
 on the left hand side of the operator, with a *value*, on the right hand side.
 This is why you will get an error if you enter:
 
-    .. sourcecode:: python3
+    .. sourcecode:: pycon
         
         >>> 17 = n
-    
+        File "<interactive input>", line 1
+        SyntaxError: can't assign to literal
+
     .. tip::
        When reading or writing code, say to yourself "n is assigned 17"
        or "n gets the value 17".  Don't say "n equals 17".
@@ -449,17 +451,18 @@ the number line.  Let us see this in action:
         17
         >>> int("23 bottles") 
 
+This last case doesn't look like a number --- what do we expect?
+        
     .. sourcecode:: python3
     
         Traceback (most recent call last):
         File "<interactive input>", line 1, in <module>
         ValueError: invalid literal for int() with base 10: '23 bottles'
 
-The last case shows that a string has to be a syntactically legal number,
-otherwise you'll get one of those pesky runtime errors.
+
 
 The type converter `float` can turn an integer, a float, or a syntactically legal
-string into a float.
+string into a float:
 
     .. sourcecode:: python3
         
@@ -533,7 +536,10 @@ has type string):
 
     .. sourcecode:: python3
         
-        message-1   "Hello"/123   message*"Hello"   "15"+2
+        >>> message-1        # Error
+        >>> "Hello"/123      # Error
+        >>> message*"Hello"  # Error 
+        >>> "15"+2           # Error
 
 Interestingly, the ``+`` operator does work with strings, but for strings, 
 the ``+`` operator represents **concatenation**, not addition.  
@@ -717,11 +723,6 @@ Glossary
     assignment token
         ``=`` is Python's assignment token, which should not be confused
         with the mathematical comparison operator using the same symbol.    
-
-    comment
-        Information in a program that is meant for other programmers (or anyone
-        reading the source code) and has no effect on the execution of the
-        program.
 
     composition
         The ability to combine simple expressions and statements into compound

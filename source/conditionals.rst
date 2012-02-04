@@ -11,6 +11,10 @@
 Conditionals
 ============
 
+Programs get really interesting when we can test conditions and change the 
+program behaviour depending on the outcome of the tests.  That's what this
+chapter is about. 
+
 .. index::
     single: boolean value
     single: value; boolean
@@ -70,7 +74,7 @@ a ``bool`` result; here are all six:
         x >= y               # x is greater than or equal to y
         x <= y               # x is less than or equal to y
  
-Although these operations are probably familiar to you, the Python symbols are
+Although these operations are probably familiar, the Python symbols are
 different from the mathematical symbols. A common error is to use a single
 equal sign (``=``) instead of a double equal sign (``==``). Remember that ``=``
 is an assignment operator and ``==`` is a comparison operator. Also, there is
@@ -258,7 +262,7 @@ all the statements under the ``else`` clause are executed.
 There is no limit on the number of statements that can appear under the two clauses of an
 ``if`` statement, but there has to be at least one statement in each block.  Occasionally, it is useful
 to have a section with no statements (usually as a place keeper, or scaffolding, 
-for code you haven't written yet). In that case, you can use the ``pass`` statement, which
+for code we haven't written yet). In that case, we can use the ``pass`` statement, which
 does nothing except act as a placeholder.
 
     .. sourcecode:: python3
@@ -294,10 +298,10 @@ executed, otherwise the flow of execution continues to the statement after the `
             
         print("The square root of ", x, "is", math.sqrt(x))
     
-In this case, the print function that outputs the square root is the one after the ``if`` - not
+In this case, the print function that outputs the square root is the one after the ``if`` --- not
 because we left a blank line, but because of the way the code is indented.    Note too that
-the function call ``math.sqrt(x)`` will give an error unless you have an ``import math`` statement, 
-usually placed near the top of your script.  
+the function call ``math.sqrt(x)`` will give an error unless we have an ``import math`` statement, 
+usually placed near the top of our script.  
 
 .. admonition:: Python terminology
     
@@ -392,7 +396,7 @@ conditional statements as well.
 
 Although the indentation of the statements makes the structure apparent, nested
 conditionals very quickly become difficult to read.  In general, it is a good
-idea to avoid them when you can.
+idea to avoid them when we can.
 
 Logical operators often provide a way to simplify nested conditional
 statements. For example, we can rewrite the following code using a single
@@ -406,7 +410,9 @@ conditional:
                 print("x is a positive single digit.")
 
 The ``print`` function is called only if we make it past both the
-conditionals, so we can use the ``and`` operator:
+conditionals, so instead of the above which uses two ``if`` statements each with
+a simple condition, we could make a more complex condition using the ``and`` operator.  Now we only
+need a single ``if`` statement:
 
     .. sourcecode:: python3
         :linenos:
@@ -425,8 +431,8 @@ The ``return`` statement
 ------------------------
 
 The ``return`` statement, with or without a value, depending on whether the 
-function is fruitful or not, allows you to terminate the execution of a function
-before you reach the end. One reason to use it is if you detect an error
+function is fruitful or not, allows us to terminate the execution of a function
+before (or when) we reach the end. One reason to use an *early return* is if we detect an error
 condition:
 
     .. sourcecode:: python3
@@ -452,8 +458,8 @@ Logical opposites
 -----------------
 
 Each of the six relational operators has a logical opposite: for example,
-suppose you can get a driving licence when your age is greater or equal to 17,
-you can *not* get the driving licence when you are less than 17.
+suppose we can get a driving licence when our age is greater or equal to 17,
+we can *not* get the driving licence when we are less than 17.
 
 Notice that the opposite of ``>=`` is ``<``.  
 
@@ -468,11 +474,11 @@ Notice that the opposite of ``>=`` is ``<``.
   >=        <
   ========  ================
   
-Understanding these logical opposites allows you to sometimes get rid of ``not``
+Understanding these logical opposites allows us to sometimes get rid of ``not``
 operators.  ``not`` operators are often quite difficult to read in computer code, and
-your intentions will usually be clearer if you can eliminate them. 
+our intentions will usually be clearer if we can eliminate them. 
 
-For example, if you wrote this Python:
+For example, if we wrote this Python:
 
     .. sourcecode:: python3
         :linenos:
@@ -493,17 +499,17 @@ write instead:
 
 
 Two powerful simplification laws (called de Morgan's laws) that are often
-helpful when you are dealing with complicated boolean expressions are:
+helpful when dealing with complicated boolean expressions are:
 
       .. sourcecode:: pycon
     
           not (x and y)  ==  (not x) or (not y) 
           not (x or y)   ==  (not x) and (not y)
           
-For example, suppose you can slay the dragon only if your magic 
+For example, suppose we can slay the dragon only if our magic 
 lightsabre sword is charged to 90% or higher, 
-and you have 100 or more energy units in your protective shield.  
-You find this fragment of Python code in the game:
+and we have 100 or more energy units in our protective shield.  
+We find this fragment of Python code in the game:
 
       .. sourcecode:: python3
         :linenos:
@@ -513,7 +519,7 @@ You find this fragment of Python code in the game:
         else:
             print("The dragon crumples in a heap. You rescue the gorgeous princess!")
 
-de Morgan's laws together with the logical opposites would let you 
+de Morgan's laws together with the logical opposites would let us
 rework the condition in a (perhaps) easier to understand way like this:
 
     .. sourcecode:: python3
@@ -524,7 +530,7 @@ rework the condition in a (perhaps) easier to understand way like this:
         else:
             print("The dragon crumples in a heap. You rescue the gorgeous princess!")
 
-You could also get rid of the ``not`` by swapping around the ``then`` and
+We could also get rid of the ``not`` by swapping around the ``then`` and
 ``else`` parts of the conditional.  So here is a third version, also equivalent:
 
     .. sourcecode:: python3
@@ -535,7 +541,26 @@ You could also get rid of the ``not`` by swapping around the ``then`` and
         else:
             print("Your attack has no effect, the dragon fries you to a crisp!")
  
-                   
+This version is probably the best of the three, because it very closely matches  
+the initial English statement. Clarity of our code (for other humans), 
+and making it easy to see that the code does what was expected should always
+be a high priority.  
+
+As our programming skills grow we'll find we have 
+more than one way to solve any problem.  So good programs are *designed*. 
+We make choices that favour clarity, simplicity, and elegance.  The job 
+title *software architect* says a lot about what we do --- we are *architects*
+who engineer our products to balance beauty, functionality, simplicity and 
+clarity in our creations.  
+
+.. tip::
+
+    Once our program works, we should play around a bit trying to polish it up.
+    Write good comments.  Think about whether the code would be clearer with 
+    different variable names.  Could we have done it more elegantly?  Should
+    we rather use a function?  Can we simplify the conditionals? 
+    
+    We think of our code as our creation, our work of art!  We make it great.
 
 .. index::
     single: type conversion
@@ -546,7 +571,7 @@ Type conversion
 
 We've had a first look at this in an earlier chapter.  Seeing it again won't hurt! 
 
-Many Python types comes with a built-in function that attempts to convert values
+Many Python types come with a built-in function that attempts to convert values
 of another type into its own type. The ``int(ARGUMENT)`` function, for example,
 takes any value and converts it to an integer, if possible, or complains
 otherwise:
@@ -606,7 +631,8 @@ The ``str(ARGUMENT)`` function converts any argument given to it to type
         NameError: name 'true' is not defined
 
 ``str(ARGUMENT)`` will work with any value and convert it into a string.  As
-mentioned earlier, ``True`` is boolean value; ``true`` is not.
+mentioned earlier, ``True`` is boolean value; ``true`` is just an ordinary variable name,
+and is not defined here, so we get an error.
 
 
 .. index:: bar chart
@@ -622,10 +648,10 @@ Here are a couple of new tricks for our turtles:
 
 * We can get a turtle to display text on the canvas at the turtle's current position.  The method is
   ``alex.write("Hello")``.
-* One can fill a shape (circle, semicircle, triangle, etc.) with a fill colour.  It is a two-step process.
-  First you call the method ``alex.begin_fill()``, then you draw the shape, then call ``alex.end_fill()``. 
-* We've previously set the color of our turtle - we can now also set it's fillcolour, which need not
-  be the same as the turtle and the pen colour.  We use ``alex.color("blue","red")`` to set the turtle
+* We can fill a shape (circle, semicircle, triangle, etc.) with a color.  It is a two-step process.
+  First we call the method ``alex.begin_fill()``, then we draw the shape, then we call ``alex.end_fill()``. 
+* We've previously set the color of our turtle - we can now also set it's fill color, which need not
+  be the same as the turtle and the pen color.  We use ``alex.color("blue","red")`` to set the turtle
   to draw in blue, and fill in red. 
   
   
@@ -679,7 +705,7 @@ And now we'll add two lines to fill each bar.  Our final program now looks like 
        
         def draw_bar(t, height):
             """ Get turtle t to draw one bar, of height. """
-            t.begin_fill()               # added this line
+            t.begin_fill()           # added this line
             t.left(90)
             t.forward(height)
             t.write('  '+ str(height))   

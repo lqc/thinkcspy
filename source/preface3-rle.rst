@@ -71,7 +71,7 @@ Here are some of the key things I've approached differently:
 * I have tried to push more object-oriented notions earlier, without asking
   students to synthesize objects or write their own classes.  So, for example,
   in the chapter about the turtle, we create multiple instances of turtles, 
-  talk about their attributes and state (colour, position, etc), and favour 
+  talk about their attributes and state (color, position, etc), and favour 
   method-call style to move them around, i.e.  ``tess.forward(100)``.  Similarly,
   when we use random numbers, we avoid the "hidden singleton generator"
   in the random module --- we rather create an instance of a generator, and 

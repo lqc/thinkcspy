@@ -41,52 +41,24 @@ The Python programming language
 
 The programming language you will be learning is Python. Python is an example
 of a **high-level language**; other high-level languages you might have heard
-of are C++, PHP, and Java.
+of are C++, PHP, Pascal, C#, and Java.
 
 As you might infer from the name high-level language, there are also
 **low-level languages**, sometimes referred to as machine languages or assembly
 languages. Loosely speaking, computers can only execute programs written in
 low-level languages. Thus, programs written in a high-level language have to be
-processed before they can run. This extra processing takes some time, which is
-a small disadvantage of high-level languages.
+translated into something more suitable before they can run. 
 
-But the advantages are enormous. First, it is much easier to program in a
-high-level language. Programs written in a high-level language take less time
+Almost all programs are written in high-level languages because of their advantages.
+It is much easier to program in a
+high-level language so programs take less time
 to write, they are shorter and easier to read, and they are more likely to be
 correct. Second, high-level languages are **portable**, meaning that they can
-run on different kinds of computers with few or no modifications. Low-level
-programs can run on only one kind of computer and have to be rewritten to run
-on another.
+run on different kinds of computers with few or no modifications.  
 
-Due to these advantages, almost all programs are written in high-level
-languages. Low-level languages are used only for a few specialized
-applications.
-
-Two kinds of programs process high-level languages into low-level languages:
-**interpreters** and **compilers**. An interpreter reads a high-level program
-and executes it, meaning that it does what the program says. It processes the
-program a little at a time, alternately reading lines and performing
-computations.
-
-    .. image:: illustrations/interpret.png
-       :alt: Interpret illustration
-
-A compiler reads the program and translates it completely before the program
-starts running. In this case, the high-level program is called the **source
-code**, and the translated program is called the **object code** or the
-**executable**. Once a program is compiled, you can execute it repeatedly
-without further translation.
-
-    .. image:: illustrations/compile.png
-       :alt: Compile illustration
-    
-Many modern languages use both processes. They are first compiled into a lower
-level language, called **bytecode**, and then interpreted by a program called
-a **virtual machine**. Python uses both processes, but because of the way
-programmers interact with it, it is usually considered an interpreted language.
-
-There are two ways to use the Python interpreter: *immediate mode* and *script
-mode*. In immediate mode, you type Python expressions into the **Python Interpreter** window, 
+The engine that translates and runs Python is called the **Python Interpreter**: 
+There are two ways to use it: *immediate mode* and *script
+mode*. In immediate mode, you type Python expressions into the Python Interpreter window, 
 and the interpreter immediately shows the result:
 
 .. image:: illustrations/interpreter_sshot.png
@@ -94,10 +66,11 @@ and the interpreter immediately shows the result:
 
 The ``>>>`` is called the **Python prompt**. The interpreter uses the prompt to indicate that it is ready for
 instructions. We typed ``2 + 2``, and the interpreter evaluated our expression, and replied ``4``, 
-and on the next line it gave a new prompt, indicating that it is ready for more input.
+and on the next line it gave a new prompt, indicating that it is ready for more input.   
 
 Alternatively, you can write a program in a file and use the interpreter to
-execute the contents of the file. Such a file is called a **script**. 
+execute the contents of the file. Such a file is called a **script**.   Scripts have the
+advantage that they can be saved to disk, printed, and so on. 
    
 In this Rhodes Local Edition of the textbook, we use a program development environment called
 **PyScripter**. (It is available at http://code.google.com/p/pyscripter.)  There are various other
@@ -413,7 +386,7 @@ For this reason, it is a good idea to add notes to your programs to explain in
 natural language what the program is doing.  
 
 A **comment** in a computer program is text that is intended
-only for the human reader - it is completely ignored by the interpreter.
+only for the human reader --- it is completely ignored by the interpreter.
 
 In Python, the `#` token starts a comment.  The rest of the line 
 is ignored.   Here is a new version of *Hello, World!*.
@@ -440,24 +413,15 @@ Glossary
 .. glossary::
 
     algorithm
-        A general process for solving a category of problems.
+        A set of specific steps for solving a category of problems.
 
     bug
         An error in a program.
-
-    bytecode
-        An intermediate language between source code and object code. Many
-        modern languages first compile source code into bytecode and then
-        interpret the bytecode with a program called a *virtual machine*.
 
     comment
         Information in a program that is meant for other programmers (or anyone
         reading the source code) and has no effect on the execution of the
         program.    
-        
-    compile
-        To translate a program written in a high-level language into a
-        low-level language all at once, in preparation for later execution.
 
     debugging
         The process of finding and removing any of the three kinds of
@@ -465,9 +429,6 @@ Glossary
 
     exception
         Another name for a runtime error.
-
-    executable
-        Another name for object code that is ready to be executed.
 
     formal language
         Any one of the languages that people have designed for specific
@@ -483,10 +444,9 @@ Glossary
         the results are shown immediately.  Contrast with **script**, and see the
         entry under **Python shell**.
     
-    interpret
-        To execute a program in a high-level language by translating it one
-        line at a time.
-
+    interpreter
+        The engine that executes your Python scripts or expressions.
+        
     low-level language
         A programming language that is designed to be easy for a computer to
         execute; also called machine language or assembly language.
@@ -588,7 +548,7 @@ Exercises
    at the prompt and the last line of the error message that Python reports
    back to you. 
    
-#. Type `print('hello')`. Python executes this, which has the effect
+#. Type  ``print('hello')``. Python executes this, which has the effect
    of printing the letters h-e-l-l-o. Notice that the quotation marks that you
    used to enclose the string are not part of the output.  Now type ``"hello"``
    and describe your result.  Make notes of when you see the quotation marks
@@ -634,4 +594,4 @@ Exercises
    so it is necessary to use the **print** function to make the answer
    show up.  
    
-   It is hardly ever necessary to use the print function in immediate mode / at the command prompt.  
+   It is hardly ever necessary to use the print function in immediate mode at the command prompt.  

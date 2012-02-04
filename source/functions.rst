@@ -33,10 +33,9 @@ The syntax for a **function definition** is:
         def NAME( PARAMETERS ):
             STATEMENTS
 
-You can make up any names you want for the functions you create, except that
-you can't use a name that is a Python keyword, and the names must follow the rules
-for legal identifiers. The parameters specifies
-what information, if any, you have to provide in order to use the new function.
+We can make up any names we want for the functions we create, except that
+we can't use a name that is a Python keyword, and the names must follow the rules
+for legal identifiers. 
 
 There can be any number of statements inside the function, but they have to be
 indented from the ``def``. In the examples in this book, we will use the
@@ -51,10 +50,11 @@ pattern:
 
 We've already seen the `for` loop which follows this pattern.   
    
-In a function definition, the keyword in the header is ``def``, which is
+So looking again at the function definition, the keyword in the header is ``def``, which is
 followed by the name of the function and some *parameters* enclosed in
 parentheses. The parameter list may be empty, or it may contain any number of
 parameters separated from one another by commas. In either case, the parentheses are required.
+The parameters specifies what information, if any, we have to provide in order to use the new function.
 
 Suppose we're working with turtles, and a common operation we need is to draw
 squares.   "Draw a square* is an *abstraction*, or a mental
@@ -97,13 +97,11 @@ this purpose!
     If the first thing after the function header is a triple-quoted string, 
     it is called a **docstring** 
     and gets special treatment in Python and in some of the programming tools.  
-    For example, when using PyScripter, when you type a function name it will pop up a 
+    For example, when using PyScripter, when we type a function name it will pop up a 
     tooltip showing the parameters of the function, and the text from the docstring.
 
-    Another way to retrieve this information is to use the interactive
-    interpreter, and enter the expression ``<function_name>.__doc__``, which will retrieve the
-    docstring for the function.  So the string you write as documentation at the start of a function is
-    retrievable by python tools *at runtime*.  This is different from comments in your code,
+    So the string we write as documentation at the start of a function is
+    retrievable by python tools *at runtime*.  This is different from comments in our code,
     which are completely eliminated when the program is parsed. 
     
     By convention, Python programmers use docstrings for the key documentation of
@@ -115,7 +113,9 @@ Defining a new function does not make the function run. To do that we need a
 executed followed by a list of values, called *arguments*, which are assigned
 to the parameters in the function definition.  So in the second last line of
 the program, we call the function, and pass alex as the turtle to be manipulated,
-and 50 as the size of the square we want. 
+and 50 as the size of the square we want. While the function is executing, then, the 
+variable ``sz`` refers to the value 50, and the variable ``t`` refers to the same
+turtle instance that the variable ``alex`` refers to. 
 
 Once we've defined a function, we can call it as often as we like, and its 
 statements will be executed each time we call it.  And we could use it to get
@@ -127,8 +127,8 @@ function a little, and we get tess to draw 15 squares, with some variations.
 
         import turtle
 
-        def draw_multicolour_square(t, sz):  
-            """Make turtle t draw a multi-colour square of sz."""
+        def draw_multicolor_square(t, sz):  
+            """Make turtle t draw a multi-color square of sz."""
             for i in ['red','purple','hotpink','blue']:
                 t.color(i)
                 t.forward(sz)
@@ -142,7 +142,7 @@ function a little, and we get tess to draw 15 squares, with some variations.
 
         size = 20                   # size of the smallest square
         for i in range(15):
-            draw_multicolour_square(tess, size)
+            draw_multicolor_square(tess, size)
             size = size + 10        # increase the size for next time
             tess.forward(10)        # move tess along a little
             tess.right(18)          # and give her some extra turn
@@ -172,8 +172,8 @@ So we eventually come up with this rather nice code that can draw a rectangle.
                 t.left(90)
             
 The parameter names are deliberately chosen as single letters to ensure they're not misunderstood.
-In real programs, once you've had more experience, we will insist on better variable names than this.
-But the point is that the program doesn't "understand" that you're drawing a rectangle, or that the
+In real programs, once we've had more experience, we will insist on better variable names than this.
+But the point is that the program doesn't "understand" that we're drawing a rectangle, or that the
 parameters represent the width and the height.  Concepts like rectangle, width, and height are 
 the meaning we humans have, not concepts that the program or the computer understands.    
 
@@ -196,7 +196,7 @@ There are some points worth noting here:
 
 * Functions can call other functions.
 * Rewriting `draw_square` like this captures the relationship
-  that we've spotted.  
+  that we've spotted between squares and rectangles.  
 * A caller of this function might say `draw_square(tess, 50)`.  The parameters
   of this function, ``tx`` and ``sz``, are assigned the values of the tess object, and
   the int 50 respectively.
@@ -210,14 +210,14 @@ So far, it may not be clear why it is worth the trouble to create all of these
 new functions. Actually, there are a lot of reasons, but this example
 demonstrates two:
 
-#. Creating a new function gives you an opportunity to name a group of
+#. Creating a new function gives us an opportunity to name a group of
    statements. Functions can simplify a program by hiding a complex computation 
-   behind a single command. The function (including its name) can capture your 
+   behind a single command. The function (including its name) can capture our 
    mental chunking, or *abstraction*, of the problem.  
 #. Creating a new function can make a program smaller by eliminating repetitive 
    code.  
 
-As you might expect, you have to create a function before you can execute it.
+As we might expect, we have to create a function before we can execute it.
 In other words, the function definition has to be executed before the first
 time it is called.
 
@@ -226,7 +226,7 @@ time it is called.
 Flow of execution
 -----------------
 
-In order to ensure that a function is defined before its first use, you have to
+In order to ensure that a function is defined before its first use, we have to
 know the order in which statements are executed, which is called the **flow of
 execution**.   We've already talked about this a little in the previous chapter.
 
@@ -235,7 +235,7 @@ executed one at a time, in order from top to bottom.
 
 Function definitions do not alter the flow of execution of the program, but
 remember that statements inside the function are not executed until the
-function is called. Although it is not common, you can define one function
+function is called. Although it is not common, we can define one function
 inside another. In this case, the inner definition isn't executed until the
 outer function is called.
 
@@ -244,7 +244,7 @@ the next statement, the flow jumps to the first line of the called function,
 executes all the statements there, and then comes back to pick up where it left
 off.
 
-That sounds simple enough, until you remember that one function can call
+That sounds simple enough, until we remember that one function can call
 another. While in the middle of one function, the program might have to execute
 the statements in another function. But while executing that new function, the
 program might have to execute yet another function!
@@ -253,18 +253,18 @@ Fortunately, Python is adept at keeping track of where it is, so each time a
 function completes, the program picks up where it left off in the function that
 called it. When it gets to the end of the program, it terminates.
 
-What's the moral of this sordid tale? When you read a program, don't read from
+What's the moral of this sordid tale? When we read a program, don't read from
 top to bottom. Instead, follow the flow of execution.
 
 .. index:: PyScripter; single stepping
 
 .. admonition:: Watch the flow of execution in action
 
-   In PyScripter, you can watch the flow of execution by "single-stepping" through
+   In PyScripter, we can watch the flow of execution by "single-stepping" through
    any program.  PyScripter will highlight each line of code just before it is about to
    be executed.  
    
-   PyScripter also lets you hover the mouse over any
+   PyScripter also lets us hover the mouse over any
    variable in the program, and it will pop up the current value of that variable. 
    So this makes it easy to inspect the "state snapshot" of the program --- the
    current values that are assigned to the program's variables.
@@ -276,7 +276,7 @@ top to bottom. Instead, follow the flow of execution.
    any variables in the program?"* and *"Where will flow of execution go next?"* 
 
    Let us go back and see how this works with the program above that draws 15 
-   multicolour squares.  First, we're going to add one line of magic below
+   multicolor squares.  First, we're going to add one line of magic below
    the import statement --- not strictly necessary, but it will make our lives
    much simpler, because it prevents stepping into the module containing 
    the turtle code.   
@@ -288,26 +288,26 @@ top to bottom. Instead, follow the flow of execution.
 
    Now we're ready to begin.  Put the mouse cursor on the line of the program
    where we create the turtle screen, and press the *F4* key.  This will run the Python
-   program up to, but not including, the line where you have the cursor.   Your program 
+   program up to, but not including, the line where we have the cursor.   Our program 
    will "break" now, and provide a highlight on the next line to be executed, something like this:
 
    .. image:: illustrations/breakpoint.png
  
-   At this point you can press the *F7* key (*step into*) repeatedly to single step through
-   the code.  Observe as you execute lines 10, 11, 12, ... how the turtle window gets 
-   created, how its canvas colour is changed, how the title
+   At this point we can press the *F7* key (*step into*) repeatedly to single step through
+   the code.  Observe as we execute lines 10, 11, 12, ... how the turtle window gets 
+   created, how its canvas color is changed, how the title
    gets changed, how the turtle is created on the canvas, and then how the flow of execution gets into the loop, and from there into the function, 
    and into the function's loop, and then repeatedly through the body of that loop.
    
-   While you do this, also hover your mouse over some of the variables in the program, and confirm that
-   their values match your conceptual model of what is happening.
+   While we do this, we can also hover your mouse over some of the variables in the program, and confirm that
+   their values match our conceptual model of what is happening.
    
-   After a few loops, when you're about to execute line 20 and you're starting to get bored, you can use the key *F8*
-   to "step over" the function you are calling.  This executes all the statements in the function, but without
-   having to step through each one.   You always have the choice to either 
+   After a few loops, when we're about to execute line 20 and we're starting to get bored, we can use the key *F8*
+   to "step over" the function we are calling.  This executes all the statements in the function, but without
+   having to step through each one.   We always have the choice to either 
    "go for the detail", or to "take the high-level view" and execute the function as a single chunk.
    
-   There are some other options, including one that allow you to *resume* execution without further stepping.
+   There are some other options, including one that allow us to *resume* execution without further stepping.
    Find them under the *Run* menu of PyScripter.
 
 .. index::
@@ -324,7 +324,7 @@ Functions that return values
 ----------------------------
 
 Most functions require arguments, values that control how the function does its
-job. For example, if you want to find the absolute value of a number, you have
+job. For example, if we want to find the absolute value of a number, we have
 to indicate what the number is. Python has a built-in function for computing
 the absolute value:
 
@@ -411,8 +411,8 @@ the standard formula for compound interest, which we'll now write as a fruitful 
       *At the end of the period you'll have R 14898.457083*
  
   This is a bit messy with all these decimal places, but remember that
-  Python doesn't understand that you're working with money: it just does the calculation to
-  the best of its ability, without rounding.  Later we'll show you how to format the string that
+  Python doesn't understand that we're working with money: it just does the calculation to
+  the best of its ability, without rounding.  Later we'll see how to format the string that
   is printed in such a way that it does get nicely rounded to two decimal places before printing. 
 * The line `toInvest = float(input("How much do you want to invest?"))` 
   also shows yet another example
@@ -425,7 +425,7 @@ argument --- `toInvest` --- has nothing to do with the name of the parameter
 It doesn't matter what the value was named in 
 the caller, in `final_amt` it's name is `p`.  
          
-These short variable names are getting quite tricky, so perhaps you'd prefer one of these
+These short variable names are getting quite tricky, so perhaps we'd prefer one of these
 versions instead:       
 
     .. sourcecode:: python3
@@ -460,8 +460,8 @@ about what the variables are used for.
 Variables and parameters are local
 ----------------------------------
 
-When you create a **local variable** inside a function, it only exists inside
-the function, and you cannot use it outside. For example, consider again this function:
+When we create a **local variable** inside a function, it only exists inside
+the function, and we cannot use it outside. For example, consider again this function:
 
     .. sourcecode:: python3
        :linenos: 
@@ -514,7 +514,7 @@ We could write some functions to make these tasks easier in future:
 
        def make_window(colr, ttle):   
            """
-             Set up the window with the given background colour and title. 
+             Set up the window with the given background color and title. 
              Returns the new window.
            """
            w = turtle.Screen()             
@@ -525,7 +525,7 @@ We could write some functions to make these tasks easier in future:
            
        def make_turtle(colr, sz):      
            """
-             Set up a turtle with the given colour and pensize.
+             Set up a turtle with the given color and pensize.
              Returns the new turtle.
            """
            t = turtle.Turtle()
@@ -539,9 +539,9 @@ We could write some functions to make these tasks easier in future:
        alex = make_turtle("black", 1)
        dave = make_turtle("yellow", 2)  
    
-The trick about refactoring code is to see which things you are likely to want to change
-each time you call the function: these should become the parameters, or changeable bits,
-of the functions you write.
+The trick about refactoring code is to anticipate which things we are likely to want to change
+each time we call the function: these should become the parameters, or changeable bits,
+of the functions we write.
 
 Glossary
 --------
@@ -631,7 +631,7 @@ Glossary
         to it as an argument.
            
     refactor
-        A fancy word to describe reorganizing your program code, usually to make 
+        A fancy word to describe reorganizing our program code, usually to make 
         it more understandable.  Typically, we have a program that is already working,
         then we go back to "tidy it up".  It often involves choosing better variable
         names, or spotting repeated patterns and moving that code into a function.    
