@@ -163,16 +163,6 @@ a dictionary implicitly iterates over its keys:
         for k in eng2sp:     
            print("Got key", k)     
        
- 
-As we saw earlier with strings and lists, dictionary methods use dot notation,
-which specifies the name of the method to the right of the dot and the name of
-the object on which to apply the method immediately to the left of the dot. The
-parentheses indicate that this method takes no parameters.
-
-A method call is called an **invocation**; in this case, we would say that we
-are invoking the ``keys`` method on the object ``eng2sp``. As we will see in a
-few chapters when we talk about object oriented programming, the object on
-which a method is invoked is actually the first argument to the method.
 
 The ``values`` method is similar; it returns a view object which can be turned
 into a list:  
@@ -246,7 +236,7 @@ of opposites:
 
     .. sourcecode:: python3
         
-        >>> opposites = {'up': 'down', 'right': 'wrong', 'true': 'false'}
+        >>> opposites = {'up': 'down', 'right': 'wrong', 'yes': 'no'}
         >>> alias = opposites
         >>> copy = opposites.copy()
 
@@ -374,17 +364,17 @@ using memos:
     .. sourcecode:: python3
         :linenos:
         
-        previous = {0: 0, 1: 1}
+        alreadyknown = {0: 0, 1: 1}
            
         def fib(n):
-            if n in previous:
-                return previous[n]
+            if n in alreadyknown:
+                return alreadyknown[n]
             else:
                 new_value = fib(n-1) + fib(n-2)
-                previous[n] = new_value
+                alreadyknown[n] = new_value
                 return new_value
 
-The dictionary named ``previous`` keeps track of the Fibonacci numbers we
+The dictionary named ``alreadyknown`` keeps track of the Fibonacci numbers we
 already know. We start with only two pairs: 0 maps to 1; and 1 maps to 1.
 
 Whenever ``fib`` is called, it checks the dictionary to determine if it
@@ -504,7 +494,6 @@ Exercises
        t  5
        u  1
        w  2
-       $
 
 #. Give the Python interpreter's response to each of the following from a
    continuous interpreter session:
@@ -513,7 +502,7 @@ Exercises
       .. sourcecode:: python3
         
           >>> d = {'apples': 15, 'bananas': 35, 'grapes': 12} 
-          >>> d['banana'] 
+          >>> d['bananas'] 
 
    b.
       .. sourcecode:: python3
@@ -539,7 +528,7 @@ Exercises
    f.
       .. sourcecode:: python3
         
-          >>> fruits = d.keys()
+          >>> fruits = list(d.keys())
           >>> fruits.sort()
           >>> print(fruits)
           
@@ -557,7 +546,7 @@ Exercises
            :linenos:
         
            def add_fruit(inventory, fruit, quantity=0): 
-                pass
+                return
            
            # make these tests work...
            new_inventory = {}

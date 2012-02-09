@@ -301,7 +301,7 @@ long traceback that ends with a message like the following::
     RuntimeError: maximum recursion depth exceeded ...
 
 We would certainly never want something like this to happen to a user of one of
-our programs, so before finishing the recursion discussion, let's see how
+our programs, so in the next chapter we'll see how
 errors, any kinds of errors, are handled in Python.
 
 .. index:: fibonacci numbers

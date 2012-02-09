@@ -148,9 +148,9 @@ number is non-negative:
             return age
   
 
-Line 4 creates an exception object, in this case, a ValueError 
+Line 5 creates an exception object, in this case, a ValueError 
 object, which encapsulates your specific information about the error. The ``raise`` 
-statement on line 5 carries this object out as a kind of "return value", and 
+statement on line 6 carries this object out as a kind of "return value", and 
 immediately exits from the function, and its caller, and its caller, until it 
 encounters a ``try ... except`` that can handle the exception.   We call this 
 "unwinding the call stack".
@@ -183,7 +183,7 @@ carry on running; otherwise, Python prints the traceback and exits:
 The error message includes the exception type and the additional information
 that was provided when the exception object was first created.
 
-It is often the case that lines 4 and 5 (creating the exception object, then raising
+It is often the case that lines 5 and 6 (creating the exception object, then raising
 the exception) are combined into a single statement, but there are really two different
 and independent things happening, so perhaps it makes sense to keep the two
 steps separate when we first learn to work with exceptions.   
