@@ -93,7 +93,7 @@ the lines in the file, one at a time. This time, the mode argument is ``'r'`` fo
         :linenos:
               
         mynewhandle = open('test.txt', 'r')
-        while True                             # keep reading forever
+        while True:                            # keep reading forever
             theline = mynewhandle.readline()   # try to read next line
             if len(theline) == 0:              # if there are no more lines 
                 break                          #     leave the loop 
@@ -115,7 +115,7 @@ has its own newline:  the ``readline`` method in line 3 returns everything
 up to *and including* the newline character.  This also explains the
 end-of-file detection logic: when there are no more lines to be
 read from the file, ``readline`` returns an empty string --- one that does not
-even have a newline at the end, hence it's length is 0.
+even have a newline at the end, hence its length is 0.
 
     .. admonition::  Bump your head first ...
 

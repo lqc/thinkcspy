@@ -650,7 +650,7 @@ Here are a couple of new tricks for our turtles:
   ``alex.write("Hello")``.
 * We can fill a shape (circle, semicircle, triangle, etc.) with a color.  It is a two-step process.
   First we call the method ``alex.begin_fill()``, then we draw the shape, then we call ``alex.end_fill()``. 
-* We've previously set the color of our turtle - we can now also set it's fill color, which need not
+* We've previously set the color of our turtle - we can now also set its fill color, which need not
   be the same as the turtle and the pen color.  We use ``alex.color("blue","red")`` to set the turtle
   to draw in blue, and fill in red. 
   

@@ -588,7 +588,7 @@ Finally, observe this case:
         
         def area(radius):
             import math
-            return math.pi * r * r
+            return math.pi * radius * radius
              
         x = math.sqrt(10)      # this gives an error
     
@@ -838,7 +838,7 @@ Exercises
             :linenos:
         
             def myreplace(old, new, s):
-                """ Replace all occurences of old with new in s. """
+                """ Replace all occurrences of old with new in s. """
                 ...
                 
                 

@@ -116,7 +116,7 @@ extends from line 15 to 30, with the following key bits of logic:
   The placement and size of the rectangle are given by the tuple ``small_rect``, 
   a 4-element tuple ``(x, y, width, height)``.   
 * It is important to understand that the origin of the PyGame's surface is at the top left
-  corner (unlike the turtle module that puts it's origin in the middle of the screen).
+  corner (unlike the turtle module that puts its origin in the middle of the screen).
   So, if you wanted the rectangle closer to the top of the window, you need to make its
   y coordinate smaller.
 * If your graphics display hardware tries to read from memory at the 

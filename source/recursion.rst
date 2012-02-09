@@ -19,7 +19,7 @@ Drawing Fractals
 smaller scale, perhaps multiple times, to achieve your objective.  
 For example, we might say "A human being is someone whose mother is a human being."   
 
-For our purposes, a **fractal** is drawing which also has *self-similar* structure,
+For our purposes, a **fractal** is a drawing which also has *self-similar* structure,
 where it can be defined in terms of itself.
 
 Let us start by looking at the famous Koch fractal.  An order 0 Koch fractal is simply
@@ -499,7 +499,7 @@ Exercises
         test(recursive_min([2, [[13, -7], 90], [1, 100], 8, 6]), -7)
         test(recursive_min([[[-13, 7], 90], 2, [1, 100], 8, 6]), -13)
  
-#. Write a function ``count`` that returns the number of occurences
+#. Write a function ``count`` that returns the number of occurrences
    of ``target`` in  a nested list:
 
    .. sourcecode:: python3
@@ -510,7 +510,7 @@ Exercises
         test(count(15, [[9, [7, 1, 13, 2], 8], [2, 6]]), 0)
         test(count(5, [[5, [5, [1, 5], 5], 5], [5, 6]]), 6)
         test(count('a', 
-             [['this',['a',['thing','a'],'a'],'is'], ['a','easy']]), 5)
+             [['this',['a',['thing','a'],'a'],'is'], ['a','easy']]), 4)
  
 #. Write a function ``flatten`` that returns a simple list  
    containing all the values in a nested list:

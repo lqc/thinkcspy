@@ -1129,7 +1129,7 @@ Exercises
 
             song = "The rain in Spain..."
    
-#. Write a function ``replace(s, old, new)`` that replaces all occurences of
+#. Write a function ``replace(s, old, new)`` that replaces all occurrences of
    ``old`` with ``new`` in a string ``s``: 
    
         .. sourcecode:: python3

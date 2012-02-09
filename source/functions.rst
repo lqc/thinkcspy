@@ -423,7 +423,7 @@ Notice something else very important here. The name of the variable we pass as a
 argument --- `toInvest` --- has nothing to do with the name of the parameter
 --- `p`.  It is as if  `p = toInvest` is executed when `final_amt` is called. 
 It doesn't matter what the value was named in 
-the caller, in `final_amt` it's name is `p`.  
+the caller, in `final_amt` its name is `p`.  
          
 These short variable names are getting quite tricky, so perhaps we'd prefer one of these
 versions instead:       

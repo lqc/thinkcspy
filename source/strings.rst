@@ -67,7 +67,7 @@ use a few of those!) that could be used on your string.
 
     .. image::  illustrations/string_methods.png
  
-When you type the name of the method, some further help about it's parameter and return
+When you type the name of the method, some further help about its parameter and return
 type, and its docstring, will be displayed.  This is a good example of a tool --- PyScripter ---
 using the meta-information --- the docstrings --- provided by the module programmers. 
 
@@ -714,7 +714,7 @@ The output:
 There are other useful functions in the ``string`` module, other ways to
 classify characters, and other methods on string instances, but this book isn't
 intended to be a reference manual. On the other hand, the *Python Library
-Reference* is. Along with a wealth of other documentation, it's available from
+Reference* is. Along with a wealth of other documentation, it is available from
 the Python website, `http://www.python.org <http://www.python.org>`__.
 
 
@@ -1049,7 +1049,7 @@ and put all functions that require tests into that file.
      
 #. Now rewrite the ``count_letters`` function so that instead of traversing the 
    string, it repeatedly calls the ``find`` method, with the optional third parameter 
-   to locate new occurences of the letter being counted.
+   to locate new occurrences of the letter being counted.
    
 #. Assign to a variable in your program a triple-quoted string that contains 
    your favourite paragraph of text - perhaps a poem, a speech, instructions

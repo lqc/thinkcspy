@@ -105,15 +105,14 @@ and returns true if the file exists, false if it doesn't:
         program already happens to have the file open, or if your permissions 
         settings don't allow you to open the file.
 
-        Python provides a module called ``os.path`` (this is the first
-        time we've seen a dotted module name with two namespace components). It
+        Python provides a module called ``os.path`` within the ``os`` module. It
         provides a number of useful functions to work with paths, files and directories,
         so you should check out the help.  
         
             .. sourcecode:: python3
                 :linenos:
             
-                import os.path
+                import os
                 
                 # This is the preferred way to check if a file exists.
                 if os.path.isfile("c:/temp/testdata.txt"):
@@ -149,9 +148,13 @@ number is non-negative:
   
 
 Line 5 creates an exception object, in this case, a ValueError 
-object, which encapsulates your specific information about the error. The ``raise`` 
-statement on line 6 carries this object out as a kind of "return value", and 
-immediately exits from the function, and its caller, and its caller, until it 
+object, which encapsulates your specific information about the error. 
+Assume that in this case function ``A`` called ``B`` which called ``C`` 
+which called ``D`` which called ``get_age``.
+The ``raise`` statement on line 6 carries this object out as a kind of "return value", and 
+immediately exits from ``get_age()`` to its caller ``D``.  
+Then ``D`` again exits to its caller ``C``, and  ``C`` exits to ``B`` and so on, each 
+returning the exception object to their caller, until it 
 encounters a ``try ... except`` that can handle the exception.   We call this 
 "unwinding the call stack".
 
@@ -267,7 +270,7 @@ Lines 16-17 does this for us.  Whether we complete the statements in the ``try``
 clause successfully or not, the ``finally`` block will always be executed.
 
 Notice that the exception is still unhandled --- only an ``except`` clause can
-handle an exception, so your program will still crash.  But at least it's turtle 
+handle an exception, so your program will still crash.  But at least its turtle 
 window will be closed before it crashes! 
 
 

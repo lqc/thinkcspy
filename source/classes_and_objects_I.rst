@@ -154,7 +154,7 @@ The class itself isn't an instance of a point, but it contains the machinery
 to make point instances.   Every time you call the constructor, you're asking
 the factory to make you a new object.  As the object comes off the 
 production line, its initialization method is executed to 
-get the object properly set up with it's factory default settings.
+get the object properly set up with its factory default settings.
 
 The combined process of "make me a new object" and "get its settings initialized
 to the factory default settings" is called **instantiation**.  

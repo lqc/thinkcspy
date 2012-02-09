@@ -174,7 +174,7 @@ to have available:
             wds = file_content.split()
             return wds
 
-        bigger_vocab = load_words_from("vocab.txt")
+        bigger_vocab = load_words_from_file("vocab.txt")
         print("There are {0} words in the vocab, starting with\n {1} "
                       .format(len(bigger_vocab), bigger_vocab[:6]))
 
@@ -207,18 +207,18 @@ these replacements throughout the whole string.  So here we go:
 
     .. sourcecode:: python3
         :linenos:
-
+          
         def text_to_words(the_text):
-            """ return a list of words with all punctuation removed, 
-                and all in lowercase 
+            """ return a list of words with all punctuation removed,
+                and all in lowercase.
             """
-            
+
             my_substitutions = the_text.maketrans(
               # if you find any of these
-              'ABCDEFGHIJKLMNOPQRSTUVWXYZ,.!?"-*+/>()0123456789[]:;\'', 
-              # replace it by these 
-              'abcdefghijklmnopqrstuvwxyz                           ')  
-
+              'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&()*+,-./:;<=>?@[]^_`{|}~\'\\',
+              # replace them by these
+              'abcdefghijklmnopqrstuvwxyz                                          ')
+                     
             # Translate the text now.
             cleaned_text = the_text.translate(my_substitutions)
             wds = cleaned_text.split()
@@ -323,7 +323,7 @@ Lets start with some tests.  Remember, the list needs to be sorted:
         
 Even our test cases are interesting this time: notice that we start
 with items not in the list and look at boundary conditions ---- in the
-middle of the list, less that all items in the list, bigger than the biggest.
+middle of the list, less than all items in the list, bigger than the biggest.
 Then we use a loop to use every list item as a target, and to confirm that our
 binary search returns the corresponding index of that item in the list.
      
