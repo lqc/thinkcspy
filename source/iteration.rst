@@ -1558,7 +1558,7 @@ these building blocks.
    
        test(is_prime(11), True)
        test(is_prime(35), False)
-       test(is_prime(19911129), True)
+       test(is_prime(19911121), True)
    
    The last case could represent your birth date.  Were you born on a prime day?
    In a class of 100 students, how many do you think would have prime birth dates?
