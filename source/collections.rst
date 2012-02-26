@@ -430,8 +430,8 @@ Rather than assume that there are fifty-two cards in the deck, we get the
 actual length of the list and store it in ``num_cards``.
 
 For each card in the deck, we choose a random card from among the cards that
-haven't been shuffled yet. Then we swap the current card ( ``i``) with the
-selected card ( ``j``). To swap the cards we use a tuple assignment:
+haven't been shuffled yet. Then we swap the current card (``i``) with the
+selected card (``j``). To swap the cards we use a tuple assignment:
 
     .. sourcecode:: python3
         :linenos:

@@ -87,7 +87,7 @@ Here is an implementation of the Stack ADT that uses a Python list:
     .. sourcecode:: python3
         :linenos:
         
-        class Stack :
+        class Stack:
             def __init__(self):
                 self.items = []
            
@@ -150,7 +150,7 @@ in the last chapter. There is a natural parallel between the recursive version
 of ``print_backward`` and the stack algorithm here. The difference is that
 ``print_backward`` uses the runtime stack to keep track of the nodes while it
 traverses the list, and then prints them on the way back from the recursion.
-The stack algorithm does the same thing, except that is use a ``Stack`` object
+The stack algorithm does the same thing, except that it uses a ``Stack`` object
 instead of the runtime stack.
 
 
@@ -190,7 +190,6 @@ using a single character as a **delimiter**. For example:
 
     .. sourcecode:: python3
         
-        >>> import string
         >>> "Now is the time".split(" ")
         ['Now', 'is', 'the', 'time']
 
@@ -253,7 +252,7 @@ Let's test it by evaluating the postfix form of ``(56+47)*2``:
 
     .. sourcecode:: python3
         
-        >>> print(eval_postfix ("56 47 + 2 *"))
+        >> eval_postfix("56 47 + 2 *")
         206
 
 That's close enough.

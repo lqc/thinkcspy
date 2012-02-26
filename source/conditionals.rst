@@ -431,7 +431,7 @@ The ``return`` statement
 ------------------------
 
 The ``return`` statement, with or without a value, depending on whether the 
-function is fruitful or not, allows us to terminate the execution of a function
+function is fruitful or void, allows us to terminate the execution of a function
 before (or when) we reach the end. One reason to use an *early return* is if we detect an error
 condition:
 

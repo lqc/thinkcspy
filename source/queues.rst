@@ -71,7 +71,6 @@ definition:
          
             def insert(self, cargo):
                 node = Node(cargo)
-                node.next = None
                 if self.head == None:
                     # if list is empty the new node goes first
                     self.head = node
@@ -81,12 +80,12 @@ definition:
                     while last.next: last = last.next
                     # append the new node
                     last.next = node
-                self.length = self.length + 1
+                self.length += 1
          
             def remove(self):
                 cargo = self.head.cargo
                 self.head = self.head.next
-                self.length = self.length - 1
+                self.length -= 1
                 return cargo
 
 The methods ``is_empty`` and ``remove`` are identical to the ``LinkedList``
@@ -169,7 +168,7 @@ So far, the only change is the attribute ``last``. It is used in ``insert`` and
                     # append the new node
                     last.next = node
                     self.last = node
-                self.length = self.length + 1
+                self.length += 1
 
 Since ``last`` keeps track of the last node, we don't have to search for it. As
 a result, this method is constant time.
@@ -254,15 +253,16 @@ operations. The only interesting method is ``remove``:
             def remove(self):
                 maxi = 0
                 for i in range(1, len(self.items)):
-                    if self.items[i] > self.items[maxi]: maxi = i
+                    if self.items[i] > self.items[maxi]:
+                        maxi = i
                 item = self.items[maxi]
-                self.items[maxi:maxi+1] = []
+                del self.items[maxi]
                 return item
 
 At the beginning of each iteration, ``maxi`` holds the index of the biggest
 item (highest priority) we have seen *so far*. Each time through the loop, the
-program compares the ``i``-eth item to the champion. If the new item is bigger,
-the value of ``maxi`` if set to ``i``.
+program compares the ``i``'th item to the champion. If the new item is bigger,
+the value of ``maxi`` is set to ``i``.
 
 When the ``for`` statement completes, ``maxi`` is the index of the biggest
 item. This item is removed from the list and returned.

@@ -295,7 +295,7 @@ containing the number; otherwise, it returns ``None``.
             x = token_list[0]
             if type(x) != type(0): return None
             del token_list[0]
-            return Tree (x, None, None)
+            return Tree(x, None, None)
 
 Before continuing, we should test ``get_number`` in isolation. We assign a list
 of numbers to ``token_list``, extract the first, print the result, and print
@@ -323,7 +323,7 @@ Here is a version of ``get_product`` that handles simple products.
             a = get_number(token_list)
             if get_token(token_list, '*'):
                 b = get_number(token_list)
-                return Tree ('*', a, b)
+                return Tree('*', a, b)
             else:
                 return a
 
@@ -367,7 +367,7 @@ product:
             a = get_number(token_list)
             if get_token(token_list, '*'):
                 b = get_product(token_list)       # this line changed
-                return Tree ('*', a, b)
+                return Tree('*', a, b)
             else:
                 return a
 
@@ -403,7 +403,7 @@ the right. But if it doesn't find a ``+``, it just builds a product.
             a = get_product(token_list)
             if get_token(token_list, '+'):
                 b = get_sum(token_list)
-                return Tree ('+', a, b)
+                return Tree('+', a, b)
             else:
                 return a
 
@@ -433,7 +433,7 @@ enclosed in parentheses. We just need to modify ``get_number`` to handle
                 x = token_list[0]
                 if type(x) != type(0): return None
                 token_list[0:1] = []
-                return Tree (x, None, None)
+                return Tree(x, None, None)
 
 Let's test this code with ``9 * (11 + 5) * 7``:
 
@@ -466,13 +466,15 @@ is something else, we should deal with it.
             if get_token(token_list, '('):
                 x = get_sum(token_list)
                 if not get_token(token_list, ')'):
-                    raise 'BadExpressionError', 'missing parenthesis'
+                    raise ValueError('Missing close parenthesis") 
                 return x
             else:
                 # the rest of the function omitted
 
-The ``raise`` statement creates an exception; in this case we create a new kind
-of exception, called a ``BadExpressionError``. If the function that called
+The ``raise`` statement throws the exception object which we create. 
+In this case we simply used the most appropriate type of built-in exception
+that we could find, but you should be aware that you can create your own
+more specific user-defined exceptions if you need to. If the function that called
 ``get_number``, or one of the other functions in the traceback, handles the
 exception, then the program can continue.  Otherwise, Python will print an
 error message and quit.
@@ -535,7 +537,7 @@ Here is the code:
          
             # loop until the user quits
             while True:
-                print
+                print()
                 if not yes("Are you thinking of an animal? "): break
          
                 # walk the tree

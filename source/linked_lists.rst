@@ -375,10 +375,10 @@ make a method of the ``LinkedList`` class:
         class Node:
             ...
             def print_backward(self):
-            if self.next != None:
-                tail = self.next
-                tail.print_backward()
-            print(self.cargo, end=' ')
+                if self.next != None:
+                    tail = self.next
+                    tail.print_backward()
+                print(self.cargo, end=' ')
 
 Just to make things confusing, we renamed ``print_backward_nicely``. Now there
 are two methods named ``print_backward``: one in the ``Node`` class (the
@@ -387,7 +387,7 @@ invokes ``self.head.print_backward``, it is invoking the helper, because
 ``self.head`` is a ``Node`` object.
 
 Another benefit of the ``LinkedList`` class is that it makes it easier to add
-or remove the first element of a list. For example, ``addFirst`` is a method
+or remove the first element of a list. For example, ``add_first`` is a method
 for ``LinkedList``\s; it takes an item of cargo as an argument and puts it at
 the beginning of the list:
 
@@ -396,7 +396,7 @@ the beginning of the list:
         
         class LinkedList:
             ...
-            def addFirst(self, cargo):
+            def add_first(self, cargo):
                 node = Node(cargo)
                 node.next = self.head
                 self.head = node
@@ -409,7 +409,7 @@ cases. For example, what happens if the list is initially empty?
 Invariants
 ----------
 
-Some lists are well formed ; others are not. For example, if a list contains a
+Some lists are well formed; others are not. For example, if a list contains a
 loop, it will cause many of our methods to crash, so we might want to require
 that lists contain no loops. Another requirement is that the ``length`` value
 in the ``LinkedList`` object should be equal to the actual number of nodes in
@@ -421,7 +421,7 @@ useful programming practice because it makes it easier to prove the correctness
 of code, check the integrity of data structures, and detect errors.
 
 One thing that is sometimes confusing about invariants is that there are times
-when they are violated. For example, in the middle of ``addFirst``, after we
+when they are violated. For example, in the middle of ``add_first``, after we
 have added the node but before we have incremented ``length``, the invariant is
 violated. This kind of violation is acceptable; in fact, it is often impossible
 to modify an object without violating an invariant for at least a little while.

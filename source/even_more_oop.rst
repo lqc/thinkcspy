@@ -456,10 +456,10 @@ the ``__add__`` method that we have written:
 
     .. sourcecode:: python3
         
-        >>>  t1 = MyTime(1, 15, 42) 
-        >>>  t2 = MyTime(3, 50, 30)
-        >>>  t3 = t1 + t2
-        >>>  print(t3)
+        >>> t1 = MyTime(1, 15, 42) 
+        >>> t2 = MyTime(3, 50, 30)
+        >>> t3 = t1 + t2
+        >>> print(t3)
         05:06:12
 
 The expression ``t1 + t2`` is equivalent to ``t1.__add__(t2)``, but obviously
@@ -582,7 +582,7 @@ so the third parameter also has to be a numeric value.
 A function like this that can take arguments with different types is called
 **polymorphic**.
 
-As another example, consider the function``front_and_back``, which prints a list
+As another example, consider the function ``front_and_back``, which prints a list
 twice, forward and backward:
 
     .. sourcecode:: python3
@@ -602,8 +602,8 @@ Here's an example that applies ``front_and_back`` to a list:
 
     .. sourcecode:: python3
         
-        >>>   myList = [1, 2, 3, 4]
-        >>>   front_and_back(myList)
+        >>> myList = [1, 2, 3, 4]
+        >>> front_and_back(myList)
         [1, 2, 3, 4][4, 3, 2, 1]
 
 Of course, we intended to apply this function to lists, so it is not surprising
@@ -631,8 +631,8 @@ Then we can pass ``Point``\s to ``front_and_back``:
 
     .. sourcecode:: python3
         
-        >>>   p = Point(3, 4)
-        >>>   front_and_back(p)
+        >>> p = Point(3, 4)
+        >>> front_and_back(p)
         (3, 4)(4, 3)
 
 The most interesting polymorphism is the unintentional kind, where you discover
@@ -649,13 +649,12 @@ Glossary
         An operation defined in linear algebra that multiplies two ``Point``\s
         and yields a numeric value.
 
-
     functional programming style
         A style of program design in which the majority of functions are pure.
         
     modifier
         A function or method that changes one or more of the objects it receives as
-        parameters. Most modifiers are void.
+        parameters. Most modifier functions are void (do not return a value).
         
     normalized
         Data is said to be normalized if it fits into some reduced range or set of rules. 
@@ -678,7 +677,7 @@ Glossary
         
     pure function
         A function that does not modify any of the objects it receives as
-        parameters. Most pure functions are fruitful.
+        parameters. Most pure functions are fruitful rather than void.
 
     scalar multiplication
         An operation defined in linear algebra that multiplies each of the
@@ -690,10 +689,9 @@ Exercises
    
 #. Write a boolean function ``between`` that takes two ``MyTime`` objects, ``t1``
    and ``t2``, as arguments, and returns ``True`` if the invoking object
-   falls between the two times.  Assume t1 <= t2, and make the test closed
-   at the lower bound and open at the upper bound, i.e. return True if
-     
-       t1 <= obj < t2
+   falls between the two times.  Assume ``t1 <= t2``, and make the test closed
+   at the lower bound and open at the upper bound, i.e. return True if   
+   ``t1 <= obj < t2``.
        
 #. Turn the above function into a method in the ``MyTime`` class.
 

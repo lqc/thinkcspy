@@ -23,8 +23,8 @@ for a high-level purpose, e.g. a function to sort a list of items, a function to
 the turtle draw a spiral, or a function to compute the mean and standard deviation of some
 measurements.  
 
-There are two kinds of functions: fruitful functions *calculate and return a value*, and we use them
-because we're primarily interested in the value they'll return.  Non-fruitful functions
+There are two kinds of functions: fruitful, or value-returning functions *calculate and return a value*, and we use them
+because we're primarily interested in the value they'll return.  Void (non-fruitful) functions
 are used because they *perform actions* that we want done --- e.g. make a turtle draw a rectangle, or
 print the first thousand prime numbers.  They always return ``None`` --- a special dummy value.
 
@@ -38,7 +38,7 @@ print the first thousand prime numbers.  They always return ``None`` --- a speci
     variable or function called ``len``, but we'd be silly to do so!)
     
 
-Along with the fruitful/non-fruitful division, there are two flavours of the 
+Along with the fruitful/void division, there are two flavours of the 
 ``return`` statement in Python - one that returns
 a useful value, and the other that returns nothing, or ``None``.   And if we get to the end of
 any function and we have not explicitly executed any ``return`` statement, Python automatically 
@@ -216,7 +216,7 @@ Event handler functions
 Our chapter on event handling showed three different kinds of events that we could handle.  
 They each have their own subtle points that can trip us up.
 
-* Event handlers are non-fruitful functions --- they don't return any values. 
+* Event handlers are void functions --- they don't return any values. 
 * They're automatically called by the Python interpreter in response to an event, 
   so we don't get to see the code that calls them.
 * A mouse-click event passes two coordinate arguments to its handler, so when we write this handler

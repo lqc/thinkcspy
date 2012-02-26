@@ -621,11 +621,11 @@ Here is our merge algorithm:
             while True:
                 if xi >= len(xs):          # if xs list is finished, 
                     result.extend(ys[yi:]) # add remaining items from ys
-                    return result;         # and we're done.
+                    return result          # and we're done.
                     
                 if yi >= len(ys):          # Same again, but swap roles
                     result.extend(xs[xi:])
-                    return result;
+                    return result
                    
                 # Both lists still have items, copy smaller item to result.       
                 if xs[xi] <= ys[yi]:

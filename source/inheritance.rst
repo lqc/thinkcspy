@@ -122,35 +122,35 @@ out all of the cards and stops:
     .. sourcecode:: python3
         :linenos:
         
-        class Deck :
+        class Deck:
             ...
-            def deal(self, hands, num_cards=999):
-                num_hands = len(hands)
-                for i in range(num_cards):
+            def deal(self, hands, numCards=999):
+                numHands = len(hands)
+                for i in range(numCards):
                     if self.is_empty(): break   # break if out of cards
                     card = self.pop()           # take the top card
-                    hand = hands[i % num_hands] # whose turn is next?
+                    hand = hands[i % numHands]  # whose turn is next?
                     hand.add(card)              # add the card to the hand
 
-The second parameter, ``num_cards``, is optional; the default is a large
+The second parameter, ``numCards``, is optional; the default is a large
 number, which effectively means that all of the cards in the deck will get
 dealt.
 
-The loop variable ``i`` goes from 0 to ``num_cards-1``. Each time through the
+The loop variable ``i`` goes from 0 to ``numCards-1``. Each time through the
 loop, a card is removed from the deck using the list method ``pop``, which
 removes and returns the last item in the list.
 
-The modulus operator ( ``%``) allows us to deal cards in a round robin (one
+The modulus operator (``%``) allows us to deal cards in a round robin (one
 card at a time to each hand). When ``i`` is equal to the number of hands in the
-list, the expression ``i % num_hands`` wraps around to the beginning of the list
+list, the expression ``i % numHands`` wraps around to the beginning of the list
 (index 0).
 
 
 Printing a Hand
 ---------------
 
-To print the contents of a hand, we can take advantage of the ``printDeck`` and
-``__str__`` methods inherited from ``Deck``. For example:
+To print the contents of a hand, we can take advantage of the 
+``__str__`` method inherited from ``Deck``. For example:
 
     .. sourcecode:: python3
         
@@ -181,9 +181,9 @@ overrides the one in the ``Deck`` class:
             def __str__(self):
                 s = "Hand " + self.name
                 if self.is_empty():
-                    s = s + " is empty\n"
+                    s += " is empty\n"
                 else:
-                    s = s + " contains\n"
+                    s += " contains\n"
                 return s + Deck.__str__(self)
 
 Initially, ``s`` is a string that identifies the hand. If the hand is empty,
@@ -269,7 +269,7 @@ inherits from ``Hand`` and provides an additional method called
                         self.cards.remove(match)
                         print("Hand {0}: {1} matches {2}"
                                 .format(self.name, card, match))
-                        count = count + 1
+                        count += 1
                 return count
 
 We start by making a copy of the list of cards, so that we can traverse the
@@ -361,7 +361,7 @@ contains a new shuffled deck:
                 turn = 0
                 numHands = len(self.hands)
                 while matches < 25:
-                    matches = matches + self.play_one_turn(turn)
+                    matches += self.play_one_turn(turn)
                     turn = (turn + 1) % numHands
            
                 print("---------- Game is Over")
@@ -381,7 +381,7 @@ Some of the steps of the game have been separated into methods.
             def remove_all_matches(self):
                 count = 0
                 for hand in self.hands:
-                    count = count + hand.remove_matches()
+                    count += hand.remove_matches()
                 return count
 
 ``count`` is an accumulator that adds up the number of matches in each hand and
@@ -442,7 +442,7 @@ cards, it would return ``None`` and cause an error elsewhere in the program.
 Fortunately, we can prove that that will never happen (as long as the end of
 the game is detected correctly).
 
-We have omitted the ``print_hands`` method. You can write that one yourself.
+We have omitted the ``printHands`` method. You can write that one yourself.
 
 The following output is from a truncated form of the game where only the top
 fifteen cards (tens and higher) were dealt to three players.  With this small
@@ -544,7 +544,7 @@ Glossary
 Exercises
 ---------
 
-#. Add a method, ``print_hands``, to the ``OldMaidGame`` class which traverses
+#. Add a method, ``printHands``, to the ``OldMaidGame`` class which traverses
    ``self.hands`` and prints each hand.
    
 #. Define a new kind of Turtle, ``TurtleGTX``,  that comes with some extra features:

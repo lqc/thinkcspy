@@ -473,7 +473,7 @@ If the character doesn't appear in the string, then the program exits the loop
 normally and returns ``-1``.
 
 This pattern of computation is sometimes called a `eureka traversal` or
-''short-circuit evaluation``,  because as soon as we find what we are looking for, 
+"short-circuit evaluation",  because as soon as we find what we are looking for, 
 we can cry "Eureka!", take the short-circuit, and stop looking.
 
 
@@ -776,7 +776,7 @@ do anything more esoteric, use *help* and read all the gory details.
         n2 = "Whitney"
         n3 = "Hilton"
 
-        print("Ppi to three decimal places is {0:.3f}".format(3.1415926))
+        print("Pi to three decimal places is {0:.3f}".format(3.1415926))
         print("123456789 123456789 123456789 123456789 123456789 123456789")
         print("|||{0:<15}|||{1:^15}|||{2:>15}|||Born in {3}|||" 
                                                      .format(n1,n2,n3,1981))
@@ -787,7 +787,7 @@ This script produces the output:
 
     .. sourcecode:: pycon
 
-        The value of pi to three decimal places is 3.142
+        Pi to three decimal places is 3.142
         123456789 123456789 123456789 123456789 123456789 123456789
         |||Paris          |||    Whitney    |||         Hilton|||Born in 1981|||
         The decimal value 123456 converts to hex value 1e240

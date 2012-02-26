@@ -373,10 +373,11 @@ So an important difference between these functions and one like ``draw_square`` 
 we wrote ``draw_square`` because we wanted it to execute a sequence of steps that caused
 the turtle to draw.  
 
-Functions that return values are called **fruitful functions** in this course.
-In many other languages, a chunk that doesn't return a value is called a **procedure**,
-but we will stick here with the Python way of also calling it a function, or if we want
-to stress it, a *non-fruitful* function.  (Would the term *barren function* be easier?)  
+A function that returns a value is called a **fruitful function** in this book.
+The opposite of a fruitful function is **void function** --- one that is not executed
+for its resulting value, but is executed because it does something useful. (Languages
+like Java, C#, C and C++ use the term "void function", other languages like Pascal 
+call it a **procedure**.)
 
 How do we write our own fruitful function?  In the exercises at the end of chapter 2 we saw
 the standard formula for compound interest, which we'll now write as a fruitful function:   
@@ -546,7 +547,6 @@ of the functions we write.
 Glossary
 --------
 
-
 .. glossary::
 
     argument
@@ -646,13 +646,17 @@ Glossary
         *stack trace*, since it lists the functions in the order in which they
         are stored in the
         `runtime stack <http://en.wikipedia.org/wiki/Runtime_stack>`__.
+        
+    void function
+        The opposite of a fruitful function: one that does not return a value.  It is
+        executed for the work it does, rather than for the value it returns.
 
 
 
 Exercises
 ---------
 
-#.  Write a non-fruitful function to draw a square.  Use it in a program to draw the image shown below. 
+#.  Write a void (non-fruitful) function to draw a square.  Use it in a program to draw the image shown below. 
     Assume each side is 20 units.
     (Hint: notice that the turtle has already moved away from the ending point of the last 
     square when the program ends.)
@@ -664,7 +668,7 @@ Exercises
     
     .. image:: illustrations/nested_squares.png
 
-#.  Write a non-fruitful function `draw_poly(t, n, sz)` which makes a turtle 
+#.  Write a void function `draw_poly(t, n, sz)` which makes a turtle 
     draw a regular polygon. 
     When called with `draw_poly(tess, 8, 50)`, it will draw a shape like this:
     
@@ -679,7 +683,7 @@ Exercises
     .. image:: illustrations/tess_spirals.png
        :height: 240
        
-#.  Write a non-fruitful function `draw_equitriangle(t, sz)` which calls `draw_poly` from the 
+#.  Write a void function `draw_equitriangle(t, sz)` which calls `draw_poly` from the 
     previous question to have its turtle draw a equilateral triangle. 
     
 #.  Write a fruitful function `sum_to(n)` that returns the sum of all integer numbers up to and 
@@ -687,7 +691,7 @@ Exercises
     
 #.  Write a function `area_of_circle(r)` which returns the area of a circle of radius `r`.
 
-#.  Write a non-fruitful function to draw a star, where the length of each side is 100 units.
+#.  Write a void function to draw a star, where the length of each side is 100 units.
     (Hint: You should turn the turtle by 144 degrees at each point.)  
     
      .. image:: illustrations/star.png
