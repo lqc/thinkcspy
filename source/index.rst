@@ -16,7 +16,7 @@ by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers
   
 Corresponding author: p.wentworth@ru.ac.za
 
-Source respository is at at https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle
+Source repository is at https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle
 
 For offline use, download a zip file of the html or a pdf version (updated less often) 
 from http://www.ict.ru.ac.za/Resources/cspw/thinkcspy3/ 

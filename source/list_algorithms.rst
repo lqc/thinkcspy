@@ -274,7 +274,7 @@ the vocabulary:
  
 We wait a considerable time now, something like a minute, before Python finally
 works its way through this, and prints a list of 3398 words in the book that are
-not in the vocabulary.  Mmm...  This is not particularly scaleable.  For a vocabularly
+not in the vocabulary.  Mmm...  This is not particularly scaleable.  For a vocabulary
 that is twenty times larger (you'll often find school dictionaries with 300 000 words,
 for example), and longer books, this is going to be slow.  So let us make some timing
 measurements while we think about how we can improve this in the next section.
@@ -322,7 +322,7 @@ Lets start with some tests.  Remember, the list needs to be sorted:
             test(search_binary(xs, v), i)
         
 Even our test cases are interesting this time: notice that we start
-with items not in the list and look at boundary conditions ---- in the
+with items not in the list and look at boundary conditions --- in the
 middle of the list, less than all items in the list, bigger than the biggest.
 Then we use a loop to use every list item as a target, and to confirm that our
 binary search returns the corresponding index of that item in the list.
@@ -420,7 +420,7 @@ the remaining region of interest. By contrast, the linear search would have need
 10329 probes. 
 
 The word *binary* means *two*.  Binary search gets its name from the fact that each
-probe splits the list into two pieces and discards the one half from the region of interst.
+probe splits the list into two pieces and discards the one half from the region of interest.
 
 The beauty of the algorithm is that we could double the size of the vocabulary, and
 it would only need one more probe!  And after another doubling, just another one probe.
@@ -666,7 +666,7 @@ the merging algorithm pattern for each of these cases:
    matching item in the first list.  This operation is sometimes called *bagdiff*.
    For example  ``bagdiff([5,7,11,11,11,12,13], [7,8,11])`` would return  ``[5,11,11,12,13]``
 
-In the previous section we sorted the words from the book, and elimated duplicates.
+In the previous section we sorted the words from the book, and eliminated duplicates.
 Our vocabulary is also sorted.  So third case above --- find all items in the second list
 that are not in the first list, would be another way to implement ``find_unknown_words``. 
 Instead of searching for every word in the dictionary (either by linear or binary search),
@@ -748,7 +748,7 @@ solution requires that no two queens share the same row, column, or diagonal."*
  
 Please try this yourself, and find a few more solutions by hand. 
 
-We'd like to write a program to find solutions to the this puzzle.  In fact,
+We'd like to write a program to find solutions to this puzzle.  In fact,
 the puzzle generalizes to placing N queens on an NxN board, so we're going to
 think about the general case, not just the 8x8 case.  Perhaps we can find solutions
 for 12 queens on a 12x12 board, or 20 queens on a 20x20 board.
@@ -883,7 +883,7 @@ Does (5,2) clash with (3,0)?
 A little geometry will help us here.
 A diagonal has a slope of either 1 or -1.  The question we really want to
 ask is *is their distance between them the same in the x and the y direction?*
-If it is, they share a diagnonal.   Because diagonals can be to the left
+If it is, they share a diagonal.   Because diagonals can be to the left
 or right, it will make sense for this program to use the absolute distance
 in each direction:
 
@@ -913,16 +913,17 @@ queens to its left, at columns 0,1,2,..c-1:
         :linenos:
      
         # solutions should not have any clashes  
-          test(col_clashes([6,4,2,0,5], 4), False)   
-          test(col_clashes([6,4,2,0,5,7,1,3], 7), False)  
+        test(col_clashes([6,4,2,0,5], 4), False)   
+        test(col_clashes([6,4,2,0,5,7,1,3], 7), False)  
+        
         # Now some test cases that should mostly clash
-          test(col_clashes([0,1], 1), True)
-          test(col_clashes([5,6], 1), True)
-          test(col_clashes([6,5], 1), True)
-          test(col_clashes([0,6,4,3], 3), True)
-          test(col_clashes([5,0,7], 2), True)
-          test(col_clashes([2,0,1,3], 1), False)
-          test(col_clashes([2,0,1,3], 2), True)   
+        test(col_clashes([0,1], 1), True)
+        test(col_clashes([5,6], 1), True)
+        test(col_clashes([6,5], 1), True)
+        test(col_clashes([0,6,4,3], 3), True)
+        test(col_clashes([5,0,7], 2), True)
+        test(col_clashes([2,0,1,3], 1), False)
+        test(col_clashes([2,0,1,3], 2), True)   
     
 Here is our function that makes them all pass:
 
@@ -986,7 +987,7 @@ how long it would take to search all of them for all solutions.  Not too long at
 64 places to put eight queens.  If you
 do the sums for how many ways can you choose 8 of the 64 squares for your queens, the 
 formula (called *N choose k* where you're choosing k=8 squares of the available N=64)
-yieds a whopping 4426165368, obtained from (64! / (8! x 56!)). 
+yields a whopping 4426165368, obtained from (64! / (8! x 56!)). 
 
 So our earlier key insight --- that we only need to consider permutations --- 
 has reduced what we call the *problem space* from about 4.4 billion cases to just 40320!
@@ -1131,7 +1132,7 @@ Exercises
     e. Now adapt the queens program so it won't list solutions that are in the
        same family.  It only prints solutions from unique families.   
    
-#. Every week a computer scientist buys four lotto tickets. He always choses the 
+#. Every week a computer scientist buys four lotto tickets. He always chooses the 
    same prime numbers, with the hope that he ever hits the jackpot, he will be able
    to go on TV and tell everyone his secret --- and this will suddenly create widespread
    public interest in prime numbers.  He represents his weekly tickets

@@ -414,7 +414,7 @@ left on the number line).
         >>> hours
         10
     
-Take care that you choose the correct falvour of the division operator.  If you're
+Take care that you choose the correct flavour of the division operator.  If you're
 working with expressions where you need floating point values, use the division operator
 that does the division accurately.
 
