@@ -66,7 +66,7 @@ notation ``turtle.Turtle`` means *"The Turtle type that is defined within
 the turtle module"*.   (Remember that Python is case sensitive, so the 
 module name, with a lowercase `t`, is different from the type Turtle.)
  
-We then create and open what it calls a screen (we would perfer to call it 
+We then create and open what it calls a screen (we would prefer to call it 
 a window), which we assign to variable `wn`. Every window contains 
 a **canvas**, which is the area inside the window on which we can draw. 
 
@@ -202,7 +202,7 @@ Here are some *How to think like a computer scientist* observations:
   same direction as it started in.  
   This makes reasoning about the program and composing chunks of code into bigger programs
   easier for us humans! 
-* We did the same with tess: she drew her triangle, and turned through a full 360 degress.
+* We did the same with tess: she drew her triangle, and turned through a full 360 degrees.
   Then we turned her around and moved her aside.  Even the blank line 18 
   is a hint about how the programmer's *mental chunking* is working:
   in big terms, tess' movements were chunked as "draw the triangle"  

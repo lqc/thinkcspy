@@ -505,9 +505,9 @@ string, and is another example of the counter pattern introduced in
 Optional parameters
 -------------------
 
-To find the locations of the second or third occurence of a character in a
+To find the locations of the second or third occurrence of a character in a
 string, we can modify the ``find`` function, adding a third parameter for the
-starting postion in the search string:
+starting position in the search string:
 
     .. sourcecode:: python3
         :linenos:
@@ -930,7 +930,7 @@ may prove helpful in remembering what you learned.
         cream'[1:4]``).
 
     string comparison (``>, <, >=, <=, ==, !=``)
-        The six common comparision operators work with strings, evaluating according to
+        The six common comparison operators work with strings, evaluating according to
         `lexicographical` order.  Examples:
         ``'apple' < 'banana'`` evaluates to ``True``.  ``'Zeta' < 'Appricot'``
         evaluates to ``False``.  ``'Zebra' <= 'aardvark'`` evaluates to
@@ -959,7 +959,7 @@ Glossary
     docstring
         A string constant on the first line of a function or module definition
         (and as we will see later, in class and method definitions as well).
-        Docstrings provide a convinient way to associate documentation with
+        Docstrings provide a convenient way to associate documentation with
         code. Docstrings are also used by programming tools to provide interactive help.
 
     dot notation

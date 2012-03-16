@@ -510,7 +510,7 @@ for it:
         >>> count
         2
 
-``count += 1`` is an abreviation for ``count = count + 1`` . We pronouce the operator
+``count += 1`` is an abreviation for ``count = count + 1`` . We pronounce the operator
 as *"plus-equals"*.  The increment value does not have to be 1:
 
     .. sourcecode:: python3
@@ -873,8 +873,8 @@ Other flavours of loops
   
 Sometimes we'd like to have the **middle-test** loop with the exit test in the middle 
 of the body, rather than at the beginning or at the end.  Or a **post-test** loop that
-puts its exit test as the last thing in the body.   Other languages have different
-syntax amd keywords for these different flavours, but Python just uses 
+puts its exit test as the last thing in the body. Other languages have different
+syntax and keywords for these different flavours, but Python just uses 
 a combination of ``while`` and ``if condition: break`` to get the job done.    
 
 A typical example is a problem where the user has to input numbers to be summed.  
@@ -936,7 +936,7 @@ the user --- we always want to play at least one game:
     Then figure out whether you need to do the test before starting
     the first (and every other) iteration, or at the end of 
     the first (and every other) iteration, or perhaps in 
-    the middle of each iteration.  Iteractive programs that require input
+    the middle of each iteration.  Interactive programs that require input
     from the user or read from files often need to exit their loops in the 
     middle or at the end of an iteration, when it becomes clear that there is 
     no more data to process, or the user doesn't want to play our game anymore. 

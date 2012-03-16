@@ -584,7 +584,7 @@ and sort the result:
         newlist.sort()
   
 But this doesn't take advantage of the fact that the two lists are
-already sorted, and is going to have poor scaleability and performance for very large lists.
+already sorted, and is going to have poor scalability and performance for very large lists.
 
 Lets get some tests together first:
 

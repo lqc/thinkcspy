@@ -358,7 +358,7 @@ If we execute these assignment statements,
         a = "banana"
         b = "banana"
 
-we know that ``a`` and ``b`` will refer to a string ojbect with the letters
+we know that ``a`` and ``b`` will refer to a string object with the letters
 ``"banana"``. But we don't know yet whether they point to the *same* string object.
 
 There are two possible ways the Python interpreter could arrange its memory:
@@ -1072,7 +1072,7 @@ Exercises
            that = this
            print("Test 2: {0}".format(this is that))
 
-   Provide a *detailed* explaination of the results.
+   Provide a *detailed* explanation of the results.
      
 #. Lists can be used to represent mathematical *vectors*.  In this exercise
    and several that follow you will write functions to perform standard

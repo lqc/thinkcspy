@@ -43,13 +43,13 @@ value of the dictionary in the usual way:
         >>> print(eng2sp)
         {'two': 'dos', 'one': 'uno'}
 
-The key-value pairs of the dictionary are seperated by commas. Each pair
+The key-value pairs of the dictionary are separated by commas. Each pair
 contains a key and a value separated by a colon.
 
 The order of the pairs may not be what you expected. Python uses complex
 algorithms, designed for very fast access, to determine where the 
 key-value pairs are stored in a dictionary.
-For our purposes we can think of this ordering as unpredicatable.
+For our purposes we can think of this ordering as unpredictable.
 
 Another way to create a dictionary is to provide a list of key-value pairs
 using the same syntax as the previous output:

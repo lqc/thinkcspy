@@ -331,10 +331,10 @@ must first *import* the module.
 
 We do not include the ``.py`` file extension when
 importing. Python expects the file names of Python modules to end in ``.py``,
-so the file extention is not included in the **import statement**.
+so the file extension is not included in the **import statement**.
 
 The use of modules makes it possible to break up very large programs into
-managable sized parts, and to keep related parts together.
+manageable sized parts, and to keep related parts together.
 
 .. index:: namespace
 
@@ -667,7 +667,7 @@ Glossary
                     from mymod2 import f1, f2, v1, v2 
 
         The second form brings the imported objects into the namespace of
-        the importing module, while the first form preserves a seperate
+        the importing module, while the first form preserves a separate
         namespace for the imported module, requiring ``mymod1.v1`` to access
         the ``v1`` variable from that module.
 
@@ -764,7 +764,7 @@ Exercises
       ``floor`` and ``ceil`` expect floating point arguments.)
    c. Describe how we have been computing the same value as ``math.sqrt``
       without using the ``math`` module.
-   d. What are the two data contstants in the ``math`` module?
+   d. What are the two data constants in the ``math`` module?
 
    Record detailed notes of your investigation in this exercise.
    

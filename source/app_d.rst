@@ -13,7 +13,7 @@ Customizing and Contributing to the Book
     the Internet and that you have both the ``main`` and ``universe``
     package repositories enabled.  All unix shell commands are assumed to
     be running from your home directory ($HOME).  Finally, any command that
-    begins with ``sudo`` assums that you have administrative rights on your
+    begins with ``sudo`` assumes that you have administrative rights on your
     machine.  If you do not --- please ask your system administrator about
     installing the software you need.
 

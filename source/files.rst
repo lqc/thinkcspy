@@ -279,7 +279,7 @@ The ``continue`` statement at line 9 skips over the remaining lines in
 the current iteration of the loop, but the loop will still iterate.  This
 style looks a bit contrived here, but it is often useful to say *"get the
 lines we're not concerned with out of the way early, so that we have
-cleaner more focussed logic in the meaty part of the loop that might be
+cleaner more focused logic in the meaty part of the loop that might be
 written around line 11."* 
 
 Thus, if ``text`` is the empty string, the loop exits. If the first character
@@ -401,7 +401,7 @@ Glossary
 
     directory
         A named collection of files, also called a folder.  Directories can
-        contain files and other directories, which are refered to as
+        contain files and other directories, which are referred to as
         *subdirectories* of the directory that contains them.
 
     file
@@ -423,7 +423,7 @@ Glossary
 
     mode
         A distinct method of operation within a computer program.  Files in
-        Python can be openned in one of three modes: read (``'r'``), write
+        Python can be opened in one of three modes: read (``'r'``), write
         (``'w'``), and append (``'a'``).
      
     non-volatile memory

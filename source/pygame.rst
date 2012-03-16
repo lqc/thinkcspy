@@ -533,7 +533,7 @@ things in our game loop:
   the task of drawing to the object itself.  This is 
   in line with the OOP idea that we don't say "Hey, *draw*, 
   show this queen!",  but we prefer to say 
-  "Hey, *queen*, draw youself!". 
+  "Hey, *queen*, draw yourself!". 
   
 We start with a simple object, no movement or animation yet, just scaffolding, 
 to see how to fit all the pieces together:
@@ -706,7 +706,7 @@ For example, if the type of event is MOUSEMOTION,
 we'll be able to find the mouse position and information about 
 the state of the mouse buttons in the dictionary 
 attached to the event.  Similarly, if the event is KEYDOWN, we
-can learn from the dictionary whick key went down, and 
+can learn from the dictionary which key went down, and 
 whether any modifier keys (shift, control, alt, etc.) are also
 down.  You also get events when the game window becomes 
 active (i.e. gets focus) or loses focus.
@@ -1121,7 +1121,7 @@ Glossary
         
     poll
         To ask whether something like a keypress or mouse movement has happened.  Game loops usually
-        poll to discover what events have occured.  This is different from event-driven programs like
+        poll to discover what events have occurred.  This is different from event-driven programs like
         the ones seen in the chapter titled "Events".  In those cases, the button click or keypress
         event triggers the call of a handler function in your program, but this happens behind your back.
      

@@ -349,7 +349,7 @@ If the next character is anything else, then we just return the leaf node with
         9
 
 The second example implies that we consider a single operand to be a kind of
-product. This definition of product is counterintuitive, but it turns out to be
+product. This definition of product is counter-intuitive, but it turns out to be
 useful.
 
 Now we have to deal with compound products, like like ``3 * 5 * 13``. We treat
@@ -385,7 +385,7 @@ Let's test the new version with a compound product:
         2 3 5 7 * * *
 
 Next we will add the ability to parse sums. Again, we use a slightly
-counterintuitive definition of sum. For us, a sum can be a tree with ``+`` at
+counter-intuitive definition of sum. For us, a sum can be a tree with ``+`` at
 the root, a product on the left, and a sum on the right. Or, a sum can be just
 a product.
 

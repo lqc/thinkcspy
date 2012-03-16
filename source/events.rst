@@ -369,7 +369,7 @@ Exercises
     the other?  Which one more closely resembles reality --- i.e. the traffic lights in your town?    
     
 #.  Now that you've got a traffic light program with different turtles for each light, perhaps
-    the visibility / invisibilty trick wasn't such a great idea. If you watch the traffic lights, they 
+    the visibility / invisibility trick wasn't such a great idea. If you watch the traffic lights, they 
     turn on and off --- but when they're off they are still there, perhaps just a darker color.
     Modify the program now so that the lights don't disappear: they are either on, or off. But when
     they're off, they're still visible.

@@ -34,7 +34,7 @@ print the first thousand prime numbers.  They always return ``None`` --- a speci
     in Python, and are in the list of keywords we gave in chapter 2.  Keywords are special
     in the language: they are part of the syntax. So we cannot create our own 
     variable or function with a name ``True`` --- we'll get a syntax error.  
-    (Built-in functions are not priviledged like keywords: we can define our own 
+    (Built-in functions are not privileged like keywords: we can define our own 
     variable or function called ``len``, but we'd be silly to do so!)
     
 
@@ -176,7 +176,7 @@ Local variables
 Functions are called, or activated, and while they're busy they create their own stack frame which holds local
 variables.  A local variable is one that belongs to the current activation.  As soon as the function returns
 (whether from an explicit return statement or because Python reached the last statement), the stack frame
-and its local variables are all destroyed.  The important consquence of this is that a function cannot use
+and its local variables are all destroyed.  The important consequence of this is that a function cannot use
 its own variables to remember any kind of state between different activations.  It cannot count how many
 times it has been called, or remember to switch colours between red and blue UNLESS it makes use of variables
 that are global.  Global variables will survive even after our function has exited, so they are the 
@@ -205,7 +205,7 @@ leaving out the global declaration means this does not work.
     strong understanding of function calls, stack frames, local variables, and function returns.
 
 
-.. admonition:: Tip: Assigment in a function creates a local variable
+.. admonition:: Tip: Assignment in a function creates a local variable
 
     Any assignment to a variable within a function means Python will make a local variable,
     unless we override with ``global``.

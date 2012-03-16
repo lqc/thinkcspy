@@ -253,11 +253,11 @@ value of ``result`` before the return statement.
 When you start out, you might add only a line or two of code at a time. As you
 gain more experience, you might find yourself writing and debugging bigger
 conceptual chunks. Either way, stepping through your code one line at a time and 
-veryifying that each step matches your expectations can save you a lot of
+verifying that each step matches your expectations can save you a lot of
 debugging time.  As you improve your programming skills you should find yourself
 managing bigger and bigger chunks: this is very similar to the way we learnt to read
 letters, syllables, words, phrases, sentences, paragraphs, etc., or the way we learn
-to chunk music --- from indvidual notes to chords, bars, phrases, and so on.  
+to chunk music --- from individual notes to chords, bars, phrases, and so on.  
 
 The key aspects of the process are:
 
@@ -832,7 +832,7 @@ After completing each exercise, confirm that all the tests pass.
    Can you find a way to use ``is_factor`` in your definition of ``is_multiple``?
 
 #. Write the function ``f2c(t)`` designed to return the
-   integer value of the nearest degree Celsius for given tempurature in
+   integer value of the nearest degree Celsius for given temperature in
    Fahrenheit. (*hint:* you may want to make use of the built-in function,
    ``round``. Try printing ``round.__doc__`` in a Python shell or looking up
    help for the ``round`` function, and
