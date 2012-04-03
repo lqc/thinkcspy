@@ -169,7 +169,7 @@ up, Doc?"`` to a new variable named ``message``. The second gives the integer
 a variable called ``pi``.
 
 The **assignment token**, ``=``, should not be confused with *equals*, which uses
-the token `==`.  The assignment statement links a *name*,
+the token ``==``.  The assignment statement links a *name*,
 on the left hand side of the operator, with a *value*, on the right hand side.
 This is why you will get an error if you enter:
 
@@ -237,7 +237,7 @@ cannot change to link to a different value half-way through your calculations!*)
         >>> day
         21
 
-You'll notice we changed the value of `day` three times, and on the third assignment we even gave it a value
+You'll notice we changed the value of ``day`` three times, and on the third assignment we even gave it a value
 that was of a different type.   
 
 A great deal of programming is about having the computer remember things, e.g. *The number of missed calls on your phone*, and then arranging to update or change the variable when you miss another call. 
@@ -392,14 +392,14 @@ Example: so let us convert 645 minutes into hours:
     .. sourcecode:: python3
         
         >>> minutes = 645
-        >>> hours = minutes/60
+        >>> hours = minutes / 60
         >>> hours
         10.75
 
-Oops! In Python 3, the division operator `/` always yields a floating point result. 
+Oops! In Python 3, the division operator ``/`` always yields a floating point result. 
 What we might have wanted to know was how many *whole* hours there are, and how many minutes remain.
 Python gives us two different flavours of the division operator.  
-The second, called **integer division** uses the token `//`.  
+The second, called **integer division** uses the token ``//``.  
 It always *truncates* its result down to the next smallest integer (to the
 left on the number line).  
 
@@ -410,7 +410,7 @@ left on the number line).
         >>> 7 // 4
         1
         >>> minutes = 645
-        >>> hours = minutes//60
+        >>> hours = minutes // 60
         >>> hours
         10
     
@@ -424,13 +424,13 @@ that does the division accurately.
 Type converter functions
 ------------------------
     
-Here we'll look at three more Python functions, `int`, `float` and `str`, which will (attempt to)
-convert their arguments into types `int`, `float` and `str` respectively.  We call these
+Here we'll look at three more Python functions, ``int``, ``float`` and ``str``, which will (attempt to)
+convert their arguments into types ``int``, ``float`` and ``str`` respectively.  We call these
 **type converter** functions.  
 
-The `int` function can take a floating point number or a string, and turn
+The ``int`` function can take a floating point number or a string, and turn
 it into an int. For floating point numbers, it *discards* the decimal portion 
-of the number - a process we call *truncation towards zero* on
+of the number --- a process we call *truncation towards zero* on
 the number line.  Let us see this in action:
 
     .. sourcecode:: python3
@@ -443,11 +443,11 @@ the number line.  Let us see this in action:
         3
         >>> int(-3.999)             # Note that the result is closer to zero
         -3
-        >>> int(minutes/60)
+        >>> int(minutes / 60)
         10
-        >>> int("2345")             # parse a string to produce an int
+        >>> int("2345")             # Parse a string to produce an int
         2345
-        >>> int(17)                 # even works if arg is already an int
+        >>> int(17)                 # It even works if arg is already an int
         17
         >>> int("23 bottles") 
 
@@ -461,7 +461,7 @@ This last case doesn't look like a number --- what do we expect?
 
 
 
-The type converter `float` can turn an integer, a float, or a syntactically legal
+The type converter ``float`` can turn an integer, a float, or a syntactically legal
 string into a float:
 
     .. sourcecode:: python3
@@ -471,7 +471,7 @@ string into a float:
         >>> float("123.45")
         123.45
 
-The type converter `str` turns its argument into a string:
+The type converter ``str`` turns its argument into a string:
 
     .. sourcecode:: python3  
     
@@ -512,12 +512,12 @@ is a useful way to remember the order of operations:
    Subtraction and addition are at the same precedence, and the left-to-right rule applies.)
    
    - Due to some historical quirk, an exception to the left-to-right left-associative rule 
-     is the exponentiation operator `**`, so a useful hint is to always use 
+     is the exponentiation operator ``**``, so a useful hint is to always use 
      parentheses to force exactly the order you want when exponentiation is involved:
    
        .. sourcecode:: python3
         
-          >>> 2 ** 3 ** 2     # the right-most ** operator gets done first!
+          >>> 2 ** 3 ** 2     # The right-most ** operator gets done first!
           512
           >>> (2 ** 3) ** 2   # Use parentheses to force the order you want!
           64
@@ -536,10 +536,10 @@ has type string):
 
     .. sourcecode:: python3
         
-        >>> message-1        # Error
-        >>> "Hello"/123      # Error
-        >>> message*"Hello"  # Error 
-        >>> "15"+2           # Error
+        >>> message - 1        # Error
+        >>> "Hello" / 123      # Error
+        >>> message * "Hello"  # Error 
+        >>> "15" + 2           # Error
 
 Interestingly, the ``+`` operator does work with strings, but for strings, 
 the ``+`` operator represents **concatenation**, not addition.  
@@ -590,12 +590,12 @@ A sample run of this script in PyScripter would pop up a dialog window like this
 
 
 The user of the program can enter the name and click `OK`, and when this happens
-the text that has been entered is returned from the `input` function, and in this
-case assigned to the variable `n`.
+the text that has been entered is returned from the ``input`` function, and in this
+case assigned to the variable ``n``.
 
 Even if you asked the user to enter their age, you would get back a string like ``"17"``.
 It would be your job, as the programmer, to convert that string into a int or a float,
-using the `int` or `float` converter functions we saw earlier.
+using the ``int`` or ``float`` converter functions we saw earlier.
 
 .. index:: composition of functions
 

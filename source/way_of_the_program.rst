@@ -165,7 +165,7 @@ in English, a sentence must begin with a capital letter and end with a period.
 this sentence contains a **syntax error**. So does this one  
 
 For most readers, a few syntax errors are not a significant problem, which is
-why we can read the poetry of e. e. cummings without problems.
+why we can read the poetry of E. E. Cummings without problems.
 Python is not so forgiving. If there is a single syntax error anywhere in your
 program, Python will display an error message and quit, and you will not be able
 to run your program. During the first few weeks of your programming career, you
