@@ -1,0 +1,826 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>21. Even more OOP &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/translations.js"></script>
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="22. Collections of objects" href="collections.html" />
+    <link rel="prev" title="20. Dictionaries" href="dictionaries.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Nawigacja</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indeks ogólny"
+             accesskey="I">indeks</a></li>
+        <li class="right" >
+          <a href="collections.html" title="22. Collections of objects"
+             accesskey="N">dalej</a> |</li>
+        <li class="right" >
+          <a href="dictionaries.html" title="20. Dictionaries"
+             accesskey="P">wstecz</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="even-more-oop">
+<h1>21. Even more OOP<a class="headerlink" href="#even-more-oop" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="section" id="mytime">
+<h2>21.1. MyTime<a class="headerlink" href="#mytime" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>As another example of a user-defined type, we&#8217;ll define a class called <tt class="docutils literal"><span class="pre">MyTime</span></tt>
+that records the time of day. We&#8217;ll provide an <tt class="docutils literal"><span class="pre">__init__</span></tt> method to ensure
+that every instance is created with appropriate attributes and initialization.
+The class definition looks like this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hrs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mins</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">secs</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Create a MyTime object initialized to hrs, mins, secs &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">=</span> <span class="n">hrs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">=</span> <span class="n">mins</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">secs</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>We can instantiate a new <tt class="docutils literal"><span class="pre">MyTime</span></tt> object:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">tim1</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The state diagram for the object looks like this:</p>
+<blockquote>
+<div><img alt="images/time.png" src="images/time.png" />
+</div></blockquote>
+<p>We&#8217;ll leave it as an exercise for the readers to add a <tt class="docutils literal"><span class="pre">__str__</span></tt>
+method so that MyTime objects can print themselves decently.</p>
+</div>
+<div class="section" id="pure-functions">
+<span id="index-0"></span><h2>21.2. Pure functions<a class="headerlink" href="#pure-functions" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>In the next few sections, we&#8217;ll write two versions of a function called
+<tt class="docutils literal"><span class="pre">add_time</span></tt>, which calculates the sum of two <tt class="docutils literal"><span class="pre">MyTime</span></tt> objects. They will demonstrate
+two kinds of functions: pure functions and modifiers.</p>
+<p>The following is a rough version of <tt class="docutils literal"><span class="pre">add_time</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">add_time</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">hours</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">hours</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">minutes</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">seconds</span>
+    <span class="n">sum_t</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sum_t</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The function creates a new <tt class="docutils literal"><span class="pre">MyTime</span></tt> object and
+returns a reference to the new object. This is called a <strong>pure function</strong>
+because it does not modify any of the objects passed to it as parameters and it
+has no side effects, such as updating global variables,
+displaying a value, or getting user input.</p>
+<p>Here is an example of how to use this function. We&#8217;ll create two <tt class="docutils literal"><span class="pre">MyTime</span></tt>
+objects: <tt class="docutils literal"><span class="pre">current_time</span></tt>, which contains the current time; and <tt class="docutils literal"><span class="pre">bread_time</span></tt>,
+which contains the amount of time it takes for a breadmaker to make bread. Then
+we&#8217;ll use <tt class="docutils literal"><span class="pre">add_time</span></tt> to figure out when the bread will be done.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">current_time</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bread_time</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">done_time</span> <span class="o">=</span> <span class="n">add_time</span><span class="p">(</span><span class="n">current_time</span><span class="p">,</span> <span class="n">bread_time</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">done_time</span><span class="p">)</span>
+<span class="go">12:49:30</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The output of this program is <tt class="docutils literal"><span class="pre">12:49:30</span></tt>, which is correct. On the other
+hand, there are cases where the result is not correct. Can you think of one?</p>
+<p>The problem is that this function does not deal with cases where the number of
+seconds or minutes adds up to more than sixty. When that happens, we have to
+carry the extra seconds into the minutes column or the extra minutes into the
+hours column.</p>
+<p>Here&#8217;s a better version of the function:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">add_time</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">):</span>
+
+    <span class="n">h</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">hours</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">hours</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">minutes</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">seconds</span>
+
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="n">h</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sum_t</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sum_t</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This function is starting to get bigger, and still doesn&#8217;t work
+for all possible cases.  Later we will
+suggest an alternative approach that yields better code.</p>
+</div>
+<div class="section" id="modifiers">
+<span id="index-1"></span><h2>21.3. Modifiers<a class="headerlink" href="#modifiers" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>There are times when it is useful for a function to modify one or more of the
+objects it gets as parameters. Usually, the caller keeps a reference to the
+objects it passes, so any changes the function makes are visible to the caller.
+Functions that work this way are called <strong>modifiers</strong>.</p>
+<p><tt class="docutils literal"><span class="pre">increment</span></tt>, which adds a given number of seconds to a <tt class="docutils literal"><span class="pre">MyTime</span></tt> object, would
+be written most naturally as a modifier. A rough draft of the function looks like this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">secs</span><span class="p">):</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+=</span> <span class="n">secs</span>
+
+    <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">seconds</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">seconds</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">minutes</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">minutes</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">hours</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The first line performs the basic operation; the remainder deals with the
+special cases we saw before.</p>
+<p>Is this function correct? What happens if the parameter <tt class="docutils literal"><span class="pre">seconds</span></tt> is much
+greater than sixty? In that case, it is not enough to carry once; we have to
+keep doing it until <tt class="docutils literal"><span class="pre">seconds</span></tt> is less than sixty. One solution is to replace
+the <tt class="docutils literal"><span class="pre">if</span></tt> statements with <tt class="docutils literal"><span class="pre">while</span></tt> statements:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+=</span> <span class="n">seconds</span>
+
+    <span class="k">while</span> <span class="n">t</span><span class="o">.</span><span class="n">seconds</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">seconds</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">t</span><span class="o">.</span><span class="n">minutes</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">minutes</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">hours</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This function is now correct when seconds is not negative, and when
+hours does not exceed 23, but it is not a particularly good solution.</p>
+</div>
+<div class="section" id="converting-increment-to-a-method">
+<h2>21.4. Converting <tt class="docutils literal"><span class="pre">increment</span></tt> to a method<a class="headerlink" href="#converting-increment-to-a-method" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Once again, OOP programmers would prefer to put functions that work with
+<tt class="docutils literal"><span class="pre">MyTime</span></tt> objects into the <tt class="docutils literal"><span class="pre">MyTime</span></tt> class, so let&#8217;s convert <tt class="docutils literal"><span class="pre">increment</span></tt>
+to a method. To save space, we will leave out previously defined methods,
+but you should keep them in your version:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+    <span class="c">#previous method definitions here...</span>
+
+    <span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+=</span> <span class="n">seconds</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">-=</span> <span class="mi">60</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">-=</span> <span class="mi">60</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The transformation is purely mechanical - we move the definition into
+the class definition and (optionally) change the name of the first parameter to
+<tt class="docutils literal"><span class="pre">self</span></tt>, to fit with Python style conventions.</p>
+<p>Now we can invoke <tt class="docutils literal"><span class="pre">increment</span></tt> using the syntax for invoking a method.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">current_time</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Again, the object on which the method is invoked gets assigned to the first
+parameter, <tt class="docutils literal"><span class="pre">self</span></tt>. The second parameter, <tt class="docutils literal"><span class="pre">seconds</span></tt> gets the value <tt class="docutils literal"><span class="pre">500</span></tt>.</p>
+</div>
+<div class="section" id="an-aha-insight">
+<h2>21.5. An &#8220;Aha!&#8221; insight<a class="headerlink" href="#an-aha-insight" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Often a high-level insight into the problem can make the programming much easier.</p>
+<p>In this case, the insight is that a <tt class="docutils literal"><span class="pre">MyTime</span></tt> object is really a
+three-digit number in base 60! The <tt class="docutils literal"><span class="pre">second</span></tt>
+component is the ones column, the <tt class="docutils literal"><span class="pre">minute</span></tt> component is the sixties column,
+and the <tt class="docutils literal"><span class="pre">hour</span></tt> component is the thirty-six hundreds column.</p>
+<p>When we wrote <tt class="docutils literal"><span class="pre">add_time</span></tt> and <tt class="docutils literal"><span class="pre">increment</span></tt>, we were effectively doing
+addition in base 60, which is why we had to carry from one column to the next.</p>
+<p>This observation suggests another approach to the whole problem &#8212; we can
+convert a <tt class="docutils literal"><span class="pre">MyTime</span></tt> object into a single number and take advantage of the fact
+that the computer knows how to do arithmetic with numbers.  The following
+method is added to the <tt class="docutils literal"><span class="pre">MyTime</span></tt> class to convert any instance into
+a corresponding number of seconds:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+    <span class="c"># ...</span>
+
+    <span class="k">def</span> <span class="nf">to_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return the number of seconds represented</span>
+<span class="sd">            by this instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Now, all we need is a way to convert from an integer back to a <tt class="docutils literal"><span class="pre">MyTime</span></tt> object.
+Supposing we have <tt class="docutils literal"><span class="pre">tsecs</span></tt> seconds, some integer division and mod operators
+can do this for us:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">hrs</span> <span class="o">=</span> <span class="n">tsecs</span> <span class="o">//</span> <span class="mi">3600</span>
+<span class="n">leftoversecs</span> <span class="o">=</span> <span class="n">tsecs</span> <span class="o">%</span> <span class="mi">3600</span>
+<span class="n">mins</span> <span class="o">=</span> <span class="n">leftoversecs</span> <span class="o">//</span> <span class="mi">60</span>
+<span class="n">secs</span> <span class="o">=</span> <span class="n">leftoversecs</span> <span class="o">%</span> <span class="mi">60</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>You might have to think a bit to convince yourself that this technique to
+convert from one base to another is correct.</p>
+<p>In OOP we&#8217;re really trying to wrap together the data and the operations
+that apply to it.  So we&#8217;d like to have this logic inside the <tt class="docutils literal"><span class="pre">MyTime</span></tt>
+class.  A good solution is to rewrite the class initializer so that it can
+cope with initial values of seconds or minutes that are outside the
+<strong>normalized</strong> values.  (A normalized time would be something
+like 3 hours 12 minutes and 20 seconds.  The same time, but unnormalized
+could be 2 hours 70 minutes and 140 seconds.)</p>
+<p>Let&#8217;s rewrite a more powerful initializer for <tt class="docutils literal"><span class="pre">MyTime</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+   <span class="c"># ...</span>
+
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hrs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mins</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">secs</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; Create a new MyTime object initialized to hrs, mins, secs.</span>
+<span class="sd">           The values of mins and secs may be outside the range 0-59,</span>
+<span class="sd">           but the resulting MyTime object will be normalized.</span>
+<span class="sd">       &quot;&quot;&quot;</span>
+
+       <span class="c"># calculate total seconds to represent</span>
+       <span class="n">totalsecs</span> <span class="o">=</span> <span class="n">hrs</span><span class="o">*</span><span class="mi">3600</span> <span class="o">+</span> <span class="n">mins</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="n">secs</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">=</span> <span class="n">totalsecs</span> <span class="o">//</span> <span class="mi">3600</span>        <span class="c"># split in h, m, s</span>
+       <span class="n">leftoversecs</span> <span class="o">=</span> <span class="n">totalsecs</span> <span class="o">%</span> <span class="mi">3600</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">=</span> <span class="n">leftoversecs</span> <span class="o">//</span> <span class="mi">60</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">leftoversecs</span> <span class="o">%</span> <span class="mi">60</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Now we can rewrite <tt class="docutils literal"><span class="pre">add_time</span></tt> like this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">add_time</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">):</span>
+    <span class="n">secs</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">to_seconds</span><span class="p">()</span> <span class="o">+</span> <span class="n">t2</span><span class="o">.</span><span class="n">to_seconds</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">secs</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This version is much shorter than the original, and it is much easier to
+demonstrate or reason that it is correct.</p>
+</div>
+<div class="section" id="generalization">
+<span id="index-2"></span><h2>21.6. Generalization<a class="headerlink" href="#generalization" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>In some ways, converting from base 60 to base 10 and back is harder than just
+dealing with times. Base conversion is more abstract; our intuition for dealing
+with times is better.</p>
+<p>But if we have the insight to treat times as base 60 numbers and make the
+investment of writing the conversions, we get a program that is shorter,
+easier to read and debug, and more reliable.</p>
+<p>It is also easier to add features later. For example, imagine subtracting two
+<tt class="docutils literal"><span class="pre">MyTime</span></tt> objects to find the duration between them. The naive approach would be to
+implement subtraction with borrowing. Using the conversion functions would be
+easier and more likely to be correct.</p>
+<p>Ironically, sometimes making a problem harder (or more general) makes the
+programming easier, because there are fewer special cases and fewer opportunities
+for error.</p>
+<div class="admonition-specialization-versus-generalization admonition">
+<p class="first admonition-title">Specialization versus Generalization</p>
+<p>Computer Scientists are generally fond of specializing their types, while mathematicians
+often take the opposite approach, and generalize everything.</p>
+<p>What do we mean by this?</p>
+<p>If you ask a mathematician to solve a problem involving weekdays, days of the century,
+playing cards, time, or dominoes, their most likely response is
+to observe that all these objects can be represented by integers. Playing cards, for example,
+can be numbered from 0 to 51.  Days within the century can be numbered. Mathematicians will say
+<em>&#8220;These things are enumerable &#8212; the elements can be uniquely numbered (and we can
+reverse this numbering to get back to the original concept). So let&#8217;s number
+them, and confine our thinking to integers.  Luckily, we have powerful techniques and a
+good understanding of integers, and so our abstractions &#8212; the way we tackle and simplify
+these problems &#8212; is to try to reduce them to problems about integers.&#8221;</em></p>
+<p>Computer Scientists tend to do the opposite.  We will argue that there are many integer
+operations that are simply not meaningful for dominoes, or for days of the century.  So
+we&#8217;ll often define new specialized types, like <tt class="docutils literal"><span class="pre">MyTime</span></tt>, because we can restrict,
+control, and specialize the operations that are possible.  Object-oriented programming
+is particularly popular because it gives us a good way to bundle methods and specialized data
+into a new type.</p>
+<p class="last">Both approaches are powerful problem-solving techniques. Often it may help to try to
+think about the problem from both points of view &#8212; <em>&#8220;What would happen if I tried to reduce
+everything to very few primitive types?&#8221;</em>, versus
+<em>&#8220;What would happen if this thing had its own specialized type?&#8221;</em></p>
+</div>
+</div>
+<div class="section" id="another-example">
+<h2>21.7. Another example<a class="headerlink" href="#another-example" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">after</span></tt> function should compare two times, and tell us whether the first
+time is strictly after the second, e.g.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t2</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">after</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>             <span class="c"># is t1 after t2?</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This is slightly more complicated because it operates on two <tt class="docutils literal"><span class="pre">MyTime</span></tt>
+objects, not just one.  But we&#8217;d prefer to write it as a method anyway &#8212;
+in this case, a method on the first argument:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+    <span class="c">#previous method definitions here...</span>
+
+    <span class="k">def</span> <span class="nf">after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return True if I am strictly greater than time2 &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">&gt;</span> <span class="n">time2</span><span class="o">.</span><span class="n">hours</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">&lt;</span> <span class="n">time2</span><span class="o">.</span><span class="n">hours</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">&gt;</span> <span class="n">time2</span><span class="o">.</span><span class="n">minutes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">&lt;</span> <span class="n">time2</span><span class="o">.</span><span class="n">minutes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">&gt;</span> <span class="n">time2</span><span class="o">.</span><span class="n">seconds</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">True</span>
+
+        <span class="k">return</span> <span class="k">False</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>We invoke this method on one object and pass the other as an argument:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">current_time</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">done_time</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;The bread will be done before it starts!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>You can almost read the invocation like English: If the current time is after the
+done time, then...</p>
+<p>The logic of the <tt class="docutils literal"><span class="pre">if</span></tt> statements deserve special attention here.   Lines 11-18
+will only be reached if the two hour fields are the same.  Similarly, the test at
+line 16 is only executed if both times have the same hours and the same minutes.</p>
+<p>Could we make this easier by using our &#8220;Aha!&#8221; insight and extra work from earlier,
+and reducing both times to integers?   Yes, with spectacular results!</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+    <span class="c">#previous method definitions here...</span>
+
+    <span class="k">def</span> <span class="nf">after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return True if I am strictly greater than time2 &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_seconds</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">time2</span><span class="o">.</span><span class="n">to_seconds</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This is a great way to code this: if you want to tell if the first time is
+after the second time, turn them both into integers and compare the integers.</p>
+</div>
+<div class="section" id="operator-overloading">
+<h2>21.8. Operator overloading<a class="headerlink" href="#operator-overloading" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Some languages, including Python, make it possible to have different meanings for
+the same operator when applied to different types.  For example, <tt class="docutils literal"><span class="pre">+</span></tt> in Python
+means quite different things for integers and for strings.  This feature is called
+<strong>operator overloading</strong>.</p>
+<p>It is especially useful when programmers can also overload the operators for their
+own user-defined types.</p>
+<p>For example, to override the addition operator <tt class="docutils literal"><span class="pre">+</span></tt>, we can provide a method named
+<tt class="docutils literal"><span class="pre">__add__</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTime</span><span class="p">:</span>
+    <span class="c"># previously defined methods here...</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_seconds</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">to_seconds</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>As usual, the first parameter is the object on which the method is invoked. The
+second parameter is conveniently named <tt class="docutils literal"><span class="pre">other</span></tt> to distinguish it from
+<tt class="docutils literal"><span class="pre">self</span></tt>.  To add two <tt class="docutils literal"><span class="pre">MyTime</span></tt> objects, we create and return a new <tt class="docutils literal"><span class="pre">MyTime</span></tt> object
+that contains their sum.</p>
+<p>Now, when we apply the <tt class="docutils literal"><span class="pre">+</span></tt> operator to <tt class="docutils literal"><span class="pre">MyTime</span></tt> objects, Python invokes
+the <tt class="docutils literal"><span class="pre">__add__</span></tt> method that we have written:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t2</span> <span class="o">=</span> <span class="n">MyTime</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t3</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">t3</span><span class="p">)</span>
+<span class="go">05:06:12</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The expression <tt class="docutils literal"><span class="pre">t1</span> <span class="pre">+</span> <span class="pre">t2</span></tt> is equivalent to <tt class="docutils literal"><span class="pre">t1.__add__(t2)</span></tt>, but obviously
+more elegant.  As an exercise, add a method <tt class="docutils literal"><span class="pre">__sub__(self,</span> <span class="pre">other)</span></tt> that
+overloads the subtraction operator, and try it out.</p>
+<p>For the next couple of exercises we&#8217;ll go back to the Point class defined
+in our first chapter about objects, and overload some of its operators.   Firstly, adding
+two points adds their respective (x, y) coordinates:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="c"># previously defined methods here...</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>There are several ways to
+override the behavior of the multiplication operator: by defining a method
+named <tt class="docutils literal"><span class="pre">__mul__</span></tt>, or <tt class="docutils literal"><span class="pre">__rmul__</span></tt>, or both.</p>
+<p>If the left operand of <tt class="docutils literal"><span class="pre">*</span></tt> is a <tt class="docutils literal"><span class="pre">Point</span></tt>, Python invokes <tt class="docutils literal"><span class="pre">__mul__</span></tt>, which
+assumes that the other operand is also a <tt class="docutils literal"><span class="pre">Point</span></tt>. It computes the
+<strong>dot product</strong> of the two Points, defined according to the rules of linear
+algebra:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>If the left operand of <tt class="docutils literal"><span class="pre">*</span></tt> is a primitive type and the right operand is a
+<tt class="docutils literal"><span class="pre">Point</span></tt>, Python invokes <tt class="docutils literal"><span class="pre">__rmul__</span></tt>, which performs
+<strong>scalar multiplication</strong>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">other</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>  <span class="n">other</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The result is a new <tt class="docutils literal"><span class="pre">Point</span></tt> whose coordinates are a multiple of the original
+coordinates. If <tt class="docutils literal"><span class="pre">other</span></tt> is a type that cannot be multiplied by a
+floating-point number, then <tt class="docutils literal"><span class="pre">__rmul__</span></tt> will yield an error.</p>
+<p>This example demonstrates both kinds of multiplication:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p1</span> <span class="o">*</span> <span class="n">p2</span><span class="p">)</span>
+<span class="go">43</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p2</span><span class="p">)</span>
+<span class="go">(10, 14)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>What happens if we try to evaluate <tt class="docutils literal"><span class="pre">p2</span> <span class="pre">*</span> <span class="pre">2</span></tt>? Since the first parameter is a
+<tt class="docutils literal"><span class="pre">Point</span></tt>, Python invokes <tt class="docutils literal"><span class="pre">__mul__</span></tt> with <tt class="docutils literal"><span class="pre">2</span></tt> as the second argument. Inside
+<tt class="docutils literal"><span class="pre">__mul__</span></tt>, the program tries to access the <tt class="docutils literal"><span class="pre">x</span></tt> coordinate of <tt class="docutils literal"><span class="pre">other</span></tt>,
+which fails because an integer has no attributes:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p2</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">AttributeError: &#39;int&#39; object has no attribute &#39;x&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Unfortunately, the error message is a bit opaque. This example demonstrates
+some of the difficulties of object-oriented programming.  Sometimes it is hard
+enough just to figure out what code is running.</p>
+</div>
+<div class="section" id="polymorphism">
+<h2>21.9. Polymorphism<a class="headerlink" href="#polymorphism" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Most of the methods we have written only work for a specific type.  When you
+create a new object, you write methods that operate on that type.</p>
+<p>But there are certain operations that you will want to apply to many types,
+such as the arithmetic operations in the previous sections. If many types
+support the same set of operations, you can write functions that work on any of
+those types.</p>
+<p>For example, the <tt class="docutils literal"><span class="pre">multadd</span></tt> operation (which is common in linear algebra)
+takes three parameters; it multiplies the first two and then adds the third. We
+can write it in Python like this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">multadd</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This function will work for any values of <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">y</span></tt> that can be multiplied
+and for any value of <tt class="docutils literal"><span class="pre">z</span></tt> that can be added to the product.</p>
+<p>We can invoke it with numeric values:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">multadd</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Or with <tt class="docutils literal"><span class="pre">Point</span></tt>s:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multadd</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">))</span>
+<span class="go">(11, 15)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multadd</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">44</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In the first case, the <tt class="docutils literal"><span class="pre">Point</span></tt> is multiplied by a scalar and then added to
+another <tt class="docutils literal"><span class="pre">Point</span></tt>. In the second case, the dot product yields a numeric value,
+so the third parameter also has to be a numeric value.</p>
+<p>A function like this that can take arguments with different types is called
+<strong>polymorphic</strong>.</p>
+<p>As another example, consider the function <tt class="docutils literal"><span class="pre">front_and_back</span></tt>, which prints a list
+twice, forward and backward:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">front_and_back</span><span class="p">(</span><span class="n">front</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">copy</span>
+    <span class="n">back</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">front</span><span class="p">)</span>
+    <span class="n">back</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">front</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">back</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Because the <tt class="docutils literal"><span class="pre">reverse</span></tt> method is a modifier, we make a copy of the list before
+reversing it. That way, this function doesn&#8217;t modify the list it gets as a
+parameter.</p>
+<p>Here&#8217;s an example that applies <tt class="docutils literal"><span class="pre">front_and_back</span></tt> to a list:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">myList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">front_and_back</span><span class="p">(</span><span class="n">myList</span><span class="p">)</span>
+<span class="go">[1, 2, 3, 4][4, 3, 2, 1]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Of course, we intended to apply this function to lists, so it is not surprising
+that it works. What would be surprising is if we could apply it to a <tt class="docutils literal"><span class="pre">Point</span></tt>.</p>
+<p>To determine whether a function can be applied to a new type, we apply Python&#8217;s
+fundamental rule of polymorphism, called the <strong>duck typing rule</strong>: <em>If all of
+the operations inside the function
+can be applied to the type, the function can be applied to the type.</em> The
+operations in the <tt class="docutils literal"><span class="pre">front_and_back</span></tt> function include <tt class="docutils literal"><span class="pre">copy</span></tt>, <tt class="docutils literal"><span class="pre">reverse</span></tt>, and <tt class="docutils literal"><span class="pre">print</span></tt>.</p>
+<p>Not all programming languages define polymorphism in this way.
+Look up <em>duck typing</em>, and see if you can figure out why it has this name.</p>
+<p><tt class="docutils literal"><span class="pre">copy</span></tt> works on any object, and we have already written a <tt class="docutils literal"><span class="pre">__str__</span></tt> method
+for <tt class="docutils literal"><span class="pre">Point</span></tt> objects, so all we need is a <tt class="docutils literal"><span class="pre">reverse</span></tt> method in the <tt class="docutils literal"><span class="pre">Point</span></tt> class:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Then we can pass <tt class="docutils literal"><span class="pre">Point</span></tt>s to <tt class="docutils literal"><span class="pre">front_and_back</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">front_and_back</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">(3, 4)(4, 3)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The most interesting polymorphism is the unintentional kind, where you discover
+that a function you have already written can be applied to a type for which you
+never planned.</p>
+</div>
+<div class="section" id="glossary">
+<h2>21.10. Glossary<a class="headerlink" href="#glossary" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-dot-product">dot product</dt>
+<dd>An operation defined in linear algebra that multiplies two <tt class="docutils literal"><span class="pre">Point</span></tt>s
+and yields a numeric value.</dd>
+<dt id="term-functional-programming-style">functional programming style</dt>
+<dd>A style of program design in which the majority of functions are pure.</dd>
+<dt id="term-modifier">modifier</dt>
+<dd>A function or method that changes one or more of the objects it receives as
+parameters. Most modifier functions are void (do not return a value).</dd>
+<dt id="term-normalized">normalized</dt>
+<dd>Data is said to be normalized if it fits into some reduced range or set of rules.
+We usually normalize our angles to values in the range [0..360). We normalize
+minutes and seconds to be values in the range [0..60).  And we&#8217;d
+be surprised if the local store advertised its cold drinks at &#8220;One dollar,
+two hundred and fifty cents&#8221;.</dd>
+<dt id="term-operator-overloading">operator overloading</dt>
+<dd>Extending built-in operators ( <tt class="docutils literal"><span class="pre">+</span></tt>, <tt class="docutils literal"><span class="pre">-</span></tt>, <tt class="docutils literal"><span class="pre">*</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;</span></tt>, etc.)
+so that they do different things for different types of arguments. We&#8217;ve
+seen early in the book how <tt class="docutils literal"><span class="pre">+</span></tt> is overloaded for numbers and strings,
+and here we&#8217;ve shown how to further overload it for user-defined types.</dd>
+<dt id="term-polymorphic">polymorphic</dt>
+<dd>A function that can operate on more than one type.  Notice the subtle
+distinction: overloading has different functions (all with the same name)
+for different types, whereas a polymorphic function is a single function
+that can work for a range of types.</dd>
+<dt id="term-pure-function">pure function</dt>
+<dd>A function that does not modify any of the objects it receives as
+parameters. Most pure functions are fruitful rather than void.</dd>
+<dt id="term-scalar-multiplication">scalar multiplication</dt>
+<dd>An operation defined in linear algebra that multiplies each of the
+coordinates of a <tt class="docutils literal"><span class="pre">Point</span></tt> by a numeric value.</dd>
+</dl>
+</div>
+<div class="section" id="exercises">
+<h2>21.11. Exercises<a class="headerlink" href="#exercises" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Write a boolean function <tt class="docutils literal"><span class="pre">between</span></tt> that takes two <tt class="docutils literal"><span class="pre">MyTime</span></tt> objects, <tt class="docutils literal"><span class="pre">t1</span></tt>
+and <tt class="docutils literal"><span class="pre">t2</span></tt>, as arguments, and returns <tt class="docutils literal"><span class="pre">True</span></tt> if the invoking object
+falls between the two times.  Assume <tt class="docutils literal"><span class="pre">t1</span> <span class="pre">&lt;=</span> <span class="pre">t2</span></tt>, and make the test closed
+at the lower bound and open at the upper bound, i.e. return True if
+<tt class="docutils literal"><span class="pre">t1</span> <span class="pre">&lt;=</span> <span class="pre">obj</span> <span class="pre">&lt;</span> <span class="pre">t2</span></tt>.</p>
+</li>
+<li><p class="first">Turn the above function into a method in the <tt class="docutils literal"><span class="pre">MyTime</span></tt> class.</p>
+</li>
+<li><p class="first">Overload the necessary operator(s) so that instead of having to write</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">t1</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">t2</span><span class="p">):</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>we can use the more convenient</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">t1</span> <span class="o">&gt;</span> <span class="n">t2</span><span class="p">:</span> <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Rewrite <tt class="docutils literal"><span class="pre">increment</span></tt> as a method that uses our &#8220;Aha&#8221; insight.</p>
+</li>
+<li><p class="first">Create some test cases for the <tt class="docutils literal"><span class="pre">increment</span></tt> method.   Consider specifically the case
+where the number of seconds to add to the time is negative.  Fix up <tt class="docutils literal"><span class="pre">increment</span></tt> so
+that it handles this case if it does not do so already.
+(You may assume that you will never subtract more seconds
+than are in the time object.)</p>
+</li>
+<li><p class="first">Can physical time be negative, or must time always move in the forward direction?
+Some serious physicists think this is not such a dumb question. See what you
+can find on the Internet about this.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Nawigacja</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indeks ogólny"
+             >indeks</a></li>
+        <li class="right" >
+          <a href="collections.html" title="22. Collections of objects"
+             >dalej</a> |</li>
+        <li class="right" >
+          <a href="dictionaries.html" title="20. Dictionaries"
+             >wstecz</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; <a href="copyright.html">Copyright</a> 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers.
+      Utworzone przy pomocy <a href="http://sphinx.pocoo.org/">Sphinx</a>'a 1.1.3.
+    </div>
+  </body>
+</html>

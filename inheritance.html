@@ -1,0 +1,666 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>23. Inheritance &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/translations.js"></script>
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="24. Linked lists" href="linked_lists.html" />
+    <link rel="prev" title="22. Collections of objects" href="collections.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Nawigacja</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indeks ogólny"
+             accesskey="I">indeks</a></li>
+        <li class="right" >
+          <a href="linked_lists.html" title="24. Linked lists"
+             accesskey="N">dalej</a> |</li>
+        <li class="right" >
+          <a href="collections.html" title="22. Collections of objects"
+             accesskey="P">wstecz</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="inheritance">
+<h1>23. Inheritance<a class="headerlink" href="#inheritance" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="section" id="id1">
+<h2>23.1. Inheritance<a class="headerlink" href="#id1" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>The language feature most often associated with object-oriented programming is
+<strong>inheritance</strong>. Inheritance is the ability to define a new class that is a
+modified version of an existing class.</p>
+<p>The primary advantage of this feature is that you can add new methods to a
+class without modifying the existing class. It is called inheritance because
+the new class inherits all of the methods of the existing class. Extending this
+metaphor, the existing class is sometimes called the <strong>parent</strong> class. The new
+class may be called the <strong>child</strong> class or sometimes subclass.</p>
+<p>Inheritance is a powerful feature. Some programs that would be complicated
+without inheritance can be written concisely and simply with it. Also,
+inheritance can facilitate code reuse, since you can customize the behavior of
+parent classes without having to modify them. In some cases, the inheritance
+structure reflects the natural structure of the problem, which makes the
+program easier to understand.</p>
+<p>On the other hand, inheritance can make programs difficult to read.  When a
+method is invoked, it is sometimes not clear where to find its definition. The
+relevant code may be scattered among several modules.  Also, many of the things
+that can be done using inheritance can be done as elegantly (or more so)
+without it. If the natural structure of the problem does not lend itself to
+inheritance, this style of programming can do more harm than good.</p>
+<p>In this chapter we will demonstrate the use of inheritance as part of a program
+that plays the card game Old Maid. One of our goals is to write code that could
+be reused to implement other card games.</p>
+</div>
+<div class="section" id="a-hand-of-cards">
+<h2>23.2. A hand of cards<a class="headerlink" href="#a-hand-of-cards" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>For almost any card game, we need to represent a hand of cards. A hand is
+similar to a deck, of course. Both are made up of a set of cards, and both
+require operations like adding and removing cards. Also, we might like the
+ability to shuffle both decks and hands.</p>
+<p>A hand is also different from a deck. Depending on the game being played, we
+might want to perform some operations on hands that don&#8217;t make sense for a
+deck. For example, in poker we might classify a hand (straight, flush, etc.) or
+compare it with another hand. In bridge, we might want to compute a score for a
+hand in order to make a bid.</p>
+<p>This situation suggests the use of inheritance. If <tt class="docutils literal"><span class="pre">Hand</span></tt> is a subclass of
+<tt class="docutils literal"><span class="pre">Deck</span></tt>, it will have all the methods of <tt class="docutils literal"><span class="pre">Deck</span></tt>, and new methods can be
+added.</p>
+<p>In the class definition, the name of the parent class appears in parentheses:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Hand</span><span class="p">(</span><span class="n">Deck</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This statement indicates that the new <tt class="docutils literal"><span class="pre">Hand</span></tt> class inherits from the existing
+<tt class="docutils literal"><span class="pre">Deck</span></tt> class.</p>
+<p>The <tt class="docutils literal"><span class="pre">Hand</span></tt> constructor initializes the attributes for the hand, which are
+<tt class="docutils literal"><span class="pre">name</span></tt> and <tt class="docutils literal"><span class="pre">cards</span></tt>. The string <tt class="docutils literal"><span class="pre">name</span></tt> identifies this hand, probably by
+the name of the player that holds it. The name is an optional parameter with
+the empty string as a default value. <tt class="docutils literal"><span class="pre">cards</span></tt> is the list of cards in the
+hand, initialized to the empty list:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Hand</span><span class="p">(</span><span class="n">Deck</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[]</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>For just about any card game, it is necessary to add and remove cards from the
+deck. Removing cards is already taken care of, since <tt class="docutils literal"><span class="pre">Hand</span></tt> inherits
+<tt class="docutils literal"><span class="pre">remove</span></tt> from <tt class="docutils literal"><span class="pre">Deck</span></tt>. But we have to write <tt class="docutils literal"><span class="pre">add</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Hand</span><span class="p">(</span><span class="n">Deck</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">card</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Again, the ellipsis indicates that we have omitted other methods. The list
+<tt class="docutils literal"><span class="pre">append</span></tt> method adds the new card to the end of the list of cards.</p>
+</div>
+<div class="section" id="dealing-cards">
+<h2>23.3. Dealing cards<a class="headerlink" href="#dealing-cards" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Now that we have a <tt class="docutils literal"><span class="pre">Hand</span></tt> class, we want to deal cards from the <tt class="docutils literal"><span class="pre">Deck</span></tt> into
+hands. It is not immediately obvious whether this method should go in the
+<tt class="docutils literal"><span class="pre">Hand</span></tt> class or in the <tt class="docutils literal"><span class="pre">Deck</span></tt> class, but since it operates on a single deck
+and (possibly) several hands, it is more natural to put it in <tt class="docutils literal"><span class="pre">Deck</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">deal</span></tt> should be fairly general, since different games will have different
+requirements. We may want to deal out the entire deck at once or add one card
+to each hand.</p>
+<p><tt class="docutils literal"><span class="pre">deal</span></tt> takes two parameters, a list (or tuple) of hands and the total number
+of cards to deal. If there are not enough cards in the deck, the method deals
+out all of the cards and stops:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Deck</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hands</span><span class="p">,</span> <span class="n">numCards</span><span class="o">=</span><span class="mi">999</span><span class="p">):</span>
+        <span class="n">numHands</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hands</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numCards</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span> <span class="k">break</span>   <span class="c"># break if out of cards</span>
+            <span class="n">card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>           <span class="c"># take the top card</span>
+            <span class="n">hand</span> <span class="o">=</span> <span class="n">hands</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">numHands</span><span class="p">]</span>  <span class="c"># whose turn is next?</span>
+            <span class="n">hand</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>              <span class="c"># add the card to the hand</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The second parameter, <tt class="docutils literal"><span class="pre">numCards</span></tt>, is optional; the default is a large
+number, which effectively means that all of the cards in the deck will get
+dealt.</p>
+<p>The loop variable <tt class="docutils literal"><span class="pre">i</span></tt> goes from 0 to <tt class="docutils literal"><span class="pre">numCards-1</span></tt>. Each time through the
+loop, a card is removed from the deck using the list method <tt class="docutils literal"><span class="pre">pop</span></tt>, which
+removes and returns the last item in the list.</p>
+<p>The modulus operator (<tt class="docutils literal"><span class="pre">%</span></tt>) allows us to deal cards in a round robin (one
+card at a time to each hand). When <tt class="docutils literal"><span class="pre">i</span></tt> is equal to the number of hands in the
+list, the expression <tt class="docutils literal"><span class="pre">i</span> <span class="pre">%</span> <span class="pre">numHands</span></tt> wraps around to the beginning of the list
+(index 0).</p>
+</div>
+<div class="section" id="printing-a-hand">
+<h2>23.4. Printing a Hand<a class="headerlink" href="#printing-a-hand" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>To print the contents of a hand, we can take advantage of the
+<tt class="docutils literal"><span class="pre">__str__</span></tt> method inherited from <tt class="docutils literal"><span class="pre">Deck</span></tt>. For example:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hand</span> <span class="o">=</span> <span class="n">Hand</span><span class="p">(</span><span class="s">&quot;frank&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deck</span><span class="o">.</span><span class="n">deal</span><span class="p">([</span><span class="n">hand</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span>
+<span class="go">Hand frank contains</span>
+<span class="go">2 of Spades</span>
+<span class="go"> 3 of Spades</span>
+<span class="go">  4 of Spades</span>
+<span class="go">   Ace of Hearts</span>
+<span class="go">    9 of Clubs</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>It&#8217;s not a great hand, but it has the makings of a straight flush.</p>
+<p>Although it is convenient to inherit the existing methods, there is additional
+information in a <tt class="docutils literal"><span class="pre">Hand</span></tt> object we might want to include when we print one. To
+do that, we can provide a <tt class="docutils literal"><span class="pre">__str__</span></tt> method in the <tt class="docutils literal"><span class="pre">Hand</span></tt> class that
+overrides the one in the <tt class="docutils literal"><span class="pre">Deck</span></tt> class:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Hand</span><span class="p">(</span><span class="n">Deck</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Hand &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot; is empty</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot; contains</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="n">Deck</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Initially, <tt class="docutils literal"><span class="pre">s</span></tt> is a string that identifies the hand. If the hand is empty,
+the program appends the words <tt class="docutils literal"><span class="pre">is</span> <span class="pre">empty</span></tt> and returns <tt class="docutils literal"><span class="pre">s</span></tt>.</p>
+<p>Otherwise, the program appends the word <tt class="docutils literal"><span class="pre">contains</span></tt> and the string
+representation of the <tt class="docutils literal"><span class="pre">Deck</span></tt>, computed by invoking the <tt class="docutils literal"><span class="pre">__str__</span></tt> method in
+the <tt class="docutils literal"><span class="pre">Deck</span></tt> class on <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
+<p>It may seem odd to send <tt class="docutils literal"><span class="pre">self</span></tt>, which refers to the current <tt class="docutils literal"><span class="pre">Hand</span></tt>, to a
+<tt class="docutils literal"><span class="pre">Deck</span></tt> method, until you remember that a <tt class="docutils literal"><span class="pre">Hand</span></tt> is a kind of <tt class="docutils literal"><span class="pre">Deck</span></tt>.
+<tt class="docutils literal"><span class="pre">Hand</span></tt> objects can do everything <tt class="docutils literal"><span class="pre">Deck</span></tt> objects can, so it is legal to send
+a <tt class="docutils literal"><span class="pre">Hand</span></tt> to a <tt class="docutils literal"><span class="pre">Deck</span></tt> method.</p>
+<p>In general, it is always legal to use an instance of a subclass in place of an
+instance of a parent class.</p>
+</div>
+<div class="section" id="the-cardgame-class">
+<h2>23.5. The <tt class="docutils literal"><span class="pre">CardGame</span></tt> class<a class="headerlink" href="#the-cardgame-class" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">CardGame</span></tt> class takes care of some basic chores common to all games,
+such as creating the deck and shuffling it:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CardGame</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This is the first case we have seen where the initialization method performs a
+significant computation, beyond initializing attributes.</p>
+<p>To implement specific games, we can inherit from <tt class="docutils literal"><span class="pre">CardGame</span></tt> and add features
+for the new game. As an example, we&#8217;ll write a simulation of Old Maid.</p>
+<p>The object of Old Maid is to get rid of cards in your hand. You do this by
+matching cards by rank and color. For example, the 4 of Clubs matches the 4 of
+Spades since both suits are black. The Jack of Hearts matches the Jack of
+Diamonds since both are red.</p>
+<p>To begin the game, the Queen of Clubs is removed from the deck so that the
+Queen of Spades has no match. The fifty-one remaining cards are dealt to the
+players in a round robin. After the deal, all players match and discard as many
+cards as possible.</p>
+<p>When no more matches can be made, play begins. In turn, each player picks a
+card (without looking) from the closest neighbor to the left who still has
+cards. If the chosen card matches a card in the player&#8217;s hand, the pair is
+removed. Otherwise, the card is added to the player&#8217;s hand. Eventually all
+possible matches are made, leaving only the Queen of Spades in the loser&#8217;s
+hand.</p>
+<p>In our computer simulation of the game, the computer plays all hands.
+Unfortunately, some nuances of the real game are lost. In a real game, the
+player with the Old Maid goes to some effort to get their neighbor to pick that
+card, by displaying it a little more prominently, or perhaps failing to display
+it more prominently, or even failing to fail to display that card more
+prominently. The computer simply picks a neighbor&#8217;s card at random.</p>
+</div>
+<div class="section" id="oldmaidhand-class">
+<h2>23.6. <tt class="docutils literal"><span class="pre">OldMaidHand</span></tt> class<a class="headerlink" href="#oldmaidhand-class" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>A hand for playing Old Maid requires some abilities beyond the general
+abilities of a <tt class="docutils literal"><span class="pre">Hand</span></tt>. We will define a new class, <tt class="docutils literal"><span class="pre">OldMaidHand</span></tt>, that
+inherits from <tt class="docutils literal"><span class="pre">Hand</span></tt> and provides an additional method called
+<tt class="docutils literal"><span class="pre">remove_matches</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OldMaidHand</span><span class="p">(</span><span class="n">Hand</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">remove_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">original_cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">[:]</span>
+        <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">original_cards</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">card</span><span class="o">.</span><span class="n">suit</span><span class="p">,</span> <span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Hand {0}: {1} matches {2}&quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">card</span><span class="p">,</span> <span class="n">match</span><span class="p">))</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>We start by making a copy of the list of cards, so that we can traverse the
+copy while removing cards from the original. Since <tt class="docutils literal"><span class="pre">self.cards</span></tt> is modified
+in the loop, we don&#8217;t want to use it to control the traversal. Python can get
+quite confused if it is traversing a list that is changing!</p>
+<p>For each card in the hand, we figure out what the matching card is and go
+looking for it. The match card has the same rank and the other suit of the same
+color. The expression <tt class="docutils literal"><span class="pre">3</span> <span class="pre">-</span> <span class="pre">card.suit</span></tt> turns a Club (suit 0) into a Spade
+(suit 3) and a Diamond (suit 1) into a Heart (suit 2).  You should satisfy
+yourself that the opposite operations also work. If the match card is also in
+the hand, both cards are removed.</p>
+<p>The following example demonstrates how to use <tt class="docutils literal"><span class="pre">remove_matches</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">game</span> <span class="o">=</span> <span class="n">CardGame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hand</span> <span class="o">=</span> <span class="n">OldMaidHand</span><span class="p">(</span><span class="s">&quot;frank&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">game</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">deal</span><span class="p">([</span><span class="n">hand</span><span class="p">],</span> <span class="mi">13</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span>
+<span class="go">Hand frank contains</span>
+<span class="go">Ace of Spades</span>
+<span class="go"> 2 of Diamonds</span>
+<span class="go">  7 of Spades</span>
+<span class="go">   8 of Clubs</span>
+<span class="go">    6 of Hearts</span>
+<span class="go">     8 of Spades</span>
+<span class="go">      7 of Clubs</span>
+<span class="go">       Queen of Clubs</span>
+<span class="go">        7 of Diamonds</span>
+<span class="go">         5 of Clubs</span>
+<span class="go">          Jack of Diamonds</span>
+<span class="go">           10 of Diamonds</span>
+<span class="go">            10 of Hearts</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hand</span><span class="o">.</span><span class="n">remove_matches</span><span class="p">()</span>
+<span class="go">Hand frank: 7 of Spades matches 7 of Clubs</span>
+<span class="go">Hand frank: 8 of Spades matches 8 of Clubs</span>
+<span class="go">Hand frank: 10 of Diamonds matches 10 of Hearts</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span>
+<span class="go">Hand frank contains</span>
+<span class="go">Ace of Spades</span>
+<span class="go"> 2 of Diamonds</span>
+<span class="go">  6 of Hearts</span>
+<span class="go">   Queen of Clubs</span>
+<span class="go">    7 of Diamonds</span>
+<span class="go">     5 of Clubs</span>
+<span class="go">      Jack of Diamonds</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Notice that there is no <tt class="docutils literal"><span class="pre">__init__</span></tt> method for the <tt class="docutils literal"><span class="pre">OldMaidHand</span></tt> class.  We
+inherit it from <tt class="docutils literal"><span class="pre">Hand</span></tt>.</p>
+</div>
+<div class="section" id="oldmaidgame-class">
+<h2>23.7. <tt class="docutils literal"><span class="pre">OldMaidGame</span></tt> class<a class="headerlink" href="#oldmaidgame-class" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Now we can turn our attention to the game itself. <tt class="docutils literal"><span class="pre">OldMaidGame</span></tt> is a subclass
+of <tt class="docutils literal"><span class="pre">CardGame</span></tt> with a new method called <tt class="docutils literal"><span class="pre">play</span></tt> that takes a list of players
+as a parameter.</p>
+<p>Since <tt class="docutils literal"><span class="pre">__init__</span></tt> is inherited from <tt class="docutils literal"><span class="pre">CardGame</span></tt>, a new <tt class="docutils literal"><span class="pre">OldMaidGame</span></tt> object
+contains a new shuffled deck:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OldMaidGame</span><span class="p">(</span><span class="n">CardGame</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+        <span class="c"># remove Queen of Clubs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">Card</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+
+        <span class="c"># make a hand for each player</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hands</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">OldMaidHand</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="c"># deal the cards</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">deal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;---------- Cards have been dealt&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printHands</span><span class="p">()</span>
+
+        <span class="c"># remove initial matches</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_all_matches</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;---------- Matches discarded, play begins&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printHands</span><span class="p">()</span>
+
+        <span class="c"># play until all 50 cards are matched</span>
+        <span class="n">turn</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">numHands</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">matches</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">play_one_turn</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span>
+            <span class="n">turn</span> <span class="o">=</span> <span class="p">(</span><span class="n">turn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">numHands</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;---------- Game is Over&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printHands</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The writing of <tt class="docutils literal"><span class="pre">printHands()</span></tt> is left as an exercise.</p>
+<p>Some of the steps of the game have been separated into methods.
+<tt class="docutils literal"><span class="pre">remove_all_matches</span></tt> traverses the list of hands and invokes
+<tt class="docutils literal"><span class="pre">remove_matches</span></tt> on each:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OldMaidGame</span><span class="p">(</span><span class="n">CardGame</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">remove_all_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="n">hand</span><span class="o">.</span><span class="n">remove_matches</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">count</span></tt> is an accumulator that adds up the number of matches in each hand and
+returns the total.</p>
+<p>When the total number of matches reaches twenty-five, fifty cards have been
+removed from the hands, which means that only one card is left and the game is
+over.</p>
+<p>The variable <tt class="docutils literal"><span class="pre">turn</span></tt> keeps track of which player&#8217;s turn it is. It starts at 0
+and increases by one each time; when it reaches <tt class="docutils literal"><span class="pre">numHands</span></tt>, the modulus
+operator wraps it back around to 0.</p>
+<p>The method <tt class="docutils literal"><span class="pre">playOneTurn</span></tt> takes a parameter that indicates whose turn it is.
+The return value is the number of matches made during this turn:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OldMaidGame</span><span class="p">(</span><span class="n">CardGame</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">play_one_turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">neighbor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_neighbor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">pickedCard</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pickedCard</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Hand&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&quot;picked&quot;</span><span class="p">,</span> <span class="n">pickedCard</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">remove_matches</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>If a player&#8217;s hand is empty, that player is out of the game, so he or she does
+nothing and returns 0.</p>
+<p>Otherwise, a turn consists of finding the first player on the left that has
+cards, taking one card from the neighbor, and checking for matches. Before
+returning, the cards in the hand are shuffled so that the next player&#8217;s choice
+is random.</p>
+<p>The method <tt class="docutils literal"><span class="pre">find_neighbor</span></tt> starts with the player to the immediate left and
+continues around the circle until it finds a player that still has cards:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OldMaidGame</span><span class="p">(</span><span class="n">CardGame</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">find_neighbor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">numHands</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">)</span>
+        <span class="k">for</span> <span class="nb">next</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numHands</span><span class="p">):</span>
+            <span class="n">neighbor</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="nb">next</span><span class="p">)</span> <span class="o">%</span> <span class="n">numHands</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">hands</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">neighbor</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>If <tt class="docutils literal"><span class="pre">find_neighbor</span></tt> ever went all the way around the circle without finding
+cards, it would return <tt class="docutils literal"><span class="pre">None</span></tt> and cause an error elsewhere in the program.
+Fortunately, we can prove that that will never happen (as long as the end of
+the game is detected correctly).</p>
+<p>We have omitted the <tt class="docutils literal"><span class="pre">printHands</span></tt> method. You can write that one yourself.</p>
+<p>The following output is from a truncated form of the game where only the top
+fifteen cards (tens and higher) were dealt to three players.  With this small
+deck, play stops after seven matches instead of twenty-five.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cards</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">game</span> <span class="o">=</span> <span class="n">cards</span><span class="o">.</span><span class="n">OldMaidGame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">game</span><span class="o">.</span><span class="n">play</span><span class="p">([</span><span class="s">&quot;Allen&quot;</span><span class="p">,</span><span class="s">&quot;Jeff&quot;</span><span class="p">,</span><span class="s">&quot;Chris&quot;</span><span class="p">])</span>
+<span class="go">---------- Cards have been dealt</span>
+<span class="go">Hand Allen contains</span>
+<span class="go">King of Hearts</span>
+<span class="go"> Jack of Clubs</span>
+<span class="go">  Queen of Spades</span>
+<span class="go">   King of Spades</span>
+<span class="go">    10 of Diamonds</span>
+
+<span class="go">Hand Jeff contains</span>
+<span class="go">Queen of Hearts</span>
+<span class="go"> Jack of Spades</span>
+<span class="go">  Jack of Hearts</span>
+<span class="go">   King of Diamonds</span>
+<span class="go">    Queen of Diamonds</span>
+
+<span class="go">Hand Chris contains</span>
+<span class="go">Jack of Diamonds</span>
+<span class="go"> King of Clubs</span>
+<span class="go">  10 of Spades</span>
+<span class="go">   10 of Hearts</span>
+<span class="go">    10 of Clubs</span>
+
+<span class="go">Hand Jeff: Queen of Hearts matches Queen of Diamonds</span>
+<span class="go">Hand Chris: 10 of Spades matches 10 of Clubs</span>
+<span class="go">---------- Matches discarded, play begins</span>
+<span class="go">Hand Allen contains</span>
+<span class="go">King of Hearts</span>
+<span class="go"> Jack of Clubs</span>
+<span class="go">  Queen of Spades</span>
+<span class="go">   King of Spades</span>
+<span class="go">    10 of Diamonds</span>
+
+<span class="go">Hand Jeff contains</span>
+<span class="go">Jack of Spades</span>
+<span class="go"> Jack of Hearts</span>
+<span class="go">  King of Diamonds</span>
+
+<span class="go">Hand Chris contains</span>
+<span class="go">Jack of Diamonds</span>
+<span class="go"> King of Clubs</span>
+<span class="go">  10 of Hearts</span>
+
+<span class="go">Hand Allen picked King of Diamonds</span>
+<span class="go">Hand Allen: King of Hearts matches King of Diamonds</span>
+<span class="go">Hand Jeff picked 10 of Hearts</span>
+<span class="go">Hand Chris picked Jack of Clubs</span>
+<span class="go">Hand Allen picked Jack of Hearts</span>
+<span class="go">Hand Jeff picked Jack of Diamonds</span>
+<span class="go">Hand Chris picked Queen of Spades</span>
+<span class="go">Hand Allen picked Jack of Diamonds</span>
+<span class="go">Hand Allen: Jack of Hearts matches Jack of Diamonds</span>
+<span class="go">Hand Jeff picked King of Clubs</span>
+<span class="go">Hand Chris picked King of Spades</span>
+<span class="go">Hand Allen picked 10 of Hearts</span>
+<span class="go">Hand Allen: 10 of Diamonds matches 10 of Hearts</span>
+<span class="go">Hand Jeff picked Queen of Spades</span>
+<span class="go">Hand Chris picked Jack of Spades</span>
+<span class="go">Hand Chris: Jack of Clubs matches Jack of Spades</span>
+<span class="go">Hand Jeff picked King of Spades</span>
+<span class="go">Hand Jeff: King of Clubs matches King of Spades</span>
+<span class="go">---------- Game is Over</span>
+<span class="go">Hand Allen is empty</span>
+
+<span class="go">Hand Jeff contains</span>
+<span class="go">Queen of Spades</span>
+
+<span class="go">Hand Chris is empty</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>So Jeff loses.</p>
+</div>
+<div class="section" id="glossary">
+<h2>23.8. Glossary<a class="headerlink" href="#glossary" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-inheritance">inheritance</dt>
+<dd>The ability to define a new class that is a modified version of a
+previously defined class.</dd>
+<dt id="term-parent-class">parent class</dt>
+<dd>The class from which a child class inherits.</dd>
+<dt id="term-child-class">child class</dt>
+<dd>A new class created by inheriting from an existing class; also called a
+subclass.</dd>
+</dl>
+</div>
+<div class="section" id="exercises">
+<h2>23.9. Exercises<a class="headerlink" href="#exercises" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li>Add a method, <tt class="docutils literal"><span class="pre">printHands</span></tt>, to the <tt class="docutils literal"><span class="pre">OldMaidGame</span></tt> class which traverses
+<tt class="docutils literal"><span class="pre">self.hands</span></tt> and prints each hand.</li>
+<li>Define a new kind of Turtle, <tt class="docutils literal"><span class="pre">TurtleGTX</span></tt>,  that comes with some extra features:
+it can jump forward a given distance, and it has an odometer that keeps track of
+how far the turtle has travelled since it came off the production line. (The parent
+class has a number of synonyms like <tt class="docutils literal"><span class="pre">fd</span></tt>, <tt class="docutils literal"><span class="pre">forward</span></tt>, <tt class="docutils literal"><span class="pre">back</span></tt>,
+<tt class="docutils literal"><span class="pre">backward</span></tt>, and <tt class="docutils literal"><span class="pre">bk</span></tt>: for this exercise, just focus on putting
+this functionality on the <tt class="docutils literal"><span class="pre">forward</span></tt> method.)  Think carefully about how
+to count the distance if the turtle is asked to move forward
+by a negative amount.  (We would not want
+to buy a second-hand turtle whose odometer reading was faked because its previous
+owner drove it backwards around the block too often. Try this in a car near you, and see
+if the car&#8217;s odometer counts up or down when you reverse.)</li>
+<li>After travelling some random distance, your turtle should break down with a flat tyre.
+After this happens, raise an exception whenever <tt class="docutils literal"><span class="pre">forward</span></tt> is called.
+Also provide a <tt class="docutils literal"><span class="pre">changeTyre</span></tt> method that can fix the flat.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Nawigacja</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indeks ogólny"
+             >indeks</a></li>
+        <li class="right" >
+          <a href="linked_lists.html" title="24. Linked lists"
+             >dalej</a> |</li>
+        <li class="right" >
+          <a href="collections.html" title="22. Collections of objects"
+             >wstecz</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; <a href="copyright.html">Copyright</a> 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers.
+      Utworzone przy pomocy <a href="http://sphinx.pocoo.org/">Sphinx</a>'a 1.1.3.
+    </div>
+  </body>
+</html>

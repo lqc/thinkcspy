@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6. Fruitful functions &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/translations.js"></script>
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="7. Iteration" href="iteration.html" />
+    <link rel="prev" title="5. Conditionals" href="conditionals.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Nawigacja</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indeks ogólny"
+             accesskey="I">indeks</a></li>
+        <li class="right" >
+          <a href="iteration.html" title="7. Iteration"
+             accesskey="N">dalej</a> |</li>
+        <li class="right" >
+          <a href="conditionals.html" title="5. Conditionals"
+             accesskey="P">wstecz</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="fruitful-functions">
+<h1>6. Fruitful functions<a class="headerlink" href="#fruitful-functions" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<span class="target" id="index-0"></span><div class="section" id="return-values">
+<span id="index-1"></span><h2>6.1. Return values<a class="headerlink" href="#return-values" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>The built-in functions we have used, such as <tt class="docutils literal"><span class="pre">abs</span></tt>, <tt class="docutils literal"><span class="pre">pow</span></tt>, <tt class="docutils literal"><span class="pre">int</span></tt>, <tt class="docutils literal"><span class="pre">max</span></tt>, and <tt class="docutils literal"><span class="pre">range</span></tt>,
+have produced results. Calling each of these functions generates a value, which
+we usually assign to a variable or use as part of an expression.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">biggest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">11</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>We also wrote our own function to return the final amount for a compound interest calculation.</p>
+<p>In this chapter, we are going to write more functions that return values, which we
+will call <em>fruitful functions</em>, for want of a better name.  The first example
+is <tt class="docutils literal"><span class="pre">area</span></tt>, which returns the area of a circle with the given radius:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>We have seen the <tt class="docutils literal"><span class="pre">return</span></tt> statement before, but in a fruitful function the
+<tt class="docutils literal"><span class="pre">return</span></tt> statement includes a <strong>return value</strong>. This statement means: evaluate
+the return expression, and then return it immediately as the result (the fruit)
+of this function.  The expression provided can be arbitrarily complicated,
+so we could have written this function like this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>On the other hand, <strong>temporary variables</strong> like <tt class="docutils literal"><span class="pre">b</span></tt> above often make debugging
+easier.</p>
+<p>Sometimes it is useful to have multiple return statements, one in each branch
+of a conditional. We have already seen the built-in <tt class="docutils literal"><span class="pre">abs</span></tt>, now we see how to
+write our own:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">absolute_value</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Another way to write the above function is to leave out the <tt class="docutils literal"><span class="pre">else</span></tt> and just
+follow the <tt class="docutils literal"><span class="pre">if</span></tt> condition by the second <tt class="docutils literal"><span class="pre">return</span></tt> statement.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">absolute_value</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Think about this version and convince yourself it works the same as the first
+one.</p>
+<p>Code that appears after a <tt class="docutils literal"><span class="pre">return</span></tt> statement, or any other place the flow of
+execution can never reach, is called <strong>dead code</strong>, or <strong>unreachable code</strong>.</p>
+<p>In a fruitful function, it is a good idea to ensure that every possible path
+through the program hits a <tt class="docutils literal"><span class="pre">return</span></tt> statement. The following version of
+<tt class="docutils literal"><span class="pre">absolute_value</span></tt> fails to do this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">bad_absolute_value</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This version is not correct because if <tt class="docutils literal"><span class="pre">x</span></tt> happens to be 0, neither condition
+is true, and the function ends without hitting a <tt class="docutils literal"><span class="pre">return</span></tt> statement. In this
+case, the return value is a special value called <strong>None</strong>:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bad_absolute_value</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>All Python functions return <tt class="docutils literal"><span class="pre">None</span></tt> whenever they do not return another value.</p>
+<p>It is also possible to use a return statement in the middle of a <tt class="docutils literal"><span class="pre">for</span></tt> loop,
+in which case control immediately returns from the function.  Let us assume that we want
+a function which looks through a list of words.  It should return the
+first 2-letter word.  If there is not one, it should return the
+empty string:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">find_first_2_letter_word</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">wd</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">wd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+           <span class="k">return</span> <span class="n">wd</span>
+    <span class="k">return</span> <span class="s">&#39;&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">find_first_2_letter_word</span><span class="p">([</span><span class="s">&#39;This&#39;</span><span class="p">,</span>  <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;dead&#39;</span><span class="p">,</span> <span class="s">&#39;parrot&#39;</span><span class="p">])</span>
+<span class="go">&#39;is&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find_first_2_letter_word</span><span class="p">([</span><span class="s">&quot;I&quot;</span><span class="p">,</span>  <span class="s">&quot;like&quot;</span><span class="p">,</span>  <span class="s">&quot;cheese&quot;</span><span class="p">])</span>
+<span class="go">&#39;&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Single-step through this code and convince yourself that in the first test case
+that we&#8217;ve provided, the function returns while processing the second element
+in the list: it does not have to traverse the whole list.</p>
+</div>
+<div class="section" id="program-development">
+<span id="index-2"></span><h2>6.2. Program development<a class="headerlink" href="#program-development" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>At this point, you should be able to look at complete functions and tell what
+they do. Also, if you have been doing the exercises, you have written some
+small functions. As you write larger functions, you might start to have more
+difficulty, especially with runtime and semantic errors.</p>
+<p>To deal with increasingly complex programs, we are going to suggest a technique
+called <strong>incremental development</strong>. The goal of incremental development is to
+avoid long debugging sessions by adding and testing only a small amount of code
+at a time.</p>
+<p>As an example, suppose you want to find the distance between two points, given
+by the coordinates (x<sub>1</sub>, y<sub>1</sub>) and
+(x<sub>2</sub>, y<sub>2</sub>).  By the Pythagorean theorem, the distance is:</p>
+<blockquote>
+<div><img alt="Distance formula" src="images/distance_formula.png" />
+</div></blockquote>
+<p>The first step is to consider what a <tt class="docutils literal"><span class="pre">distance</span></tt> function should look like in
+Python. In other words, what are the inputs (parameters) and what is the output
+(return value)?</p>
+<p>In this case, the two points are the inputs, which we can represent using four
+parameters. The return value is the distance, which is a floating-point value.</p>
+<p>Already we can write an outline of the function that captures our thinking so far:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Obviously, this version of the function doesn&#8217;t compute distances; it always
+returns zero. But it is syntactically correct, and it will run, which means
+that we can test it before we make it more complicated.</p>
+<p>To test the new function, we call it with sample values:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>We chose these values so that the horizontal distance equals 3 and the vertical
+distance equals 4; that way, the result is 5 (the hypotenuse of a 3-4-5
+triangle). When testing a function, it is useful to know the right answer.</p>
+<p>At this point we have confirmed that the function is syntactically correct, and
+we can start adding lines of code. After each incremental change, we test the
+function again. If an error occurs at any point, we know where it must be &#8212; in
+the last line we added.</p>
+<p>A logical first step in the computation is to find the differences
+x<sub>2</sub>- x<sub>1</sub> and y<sub>2</sub>- y<sub>1</sub>.  We will store
+those values in temporary variables named <tt class="docutils literal"><span class="pre">dx</span></tt> and <tt class="docutils literal"><span class="pre">dy</span></tt>.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>If we call the function with the arguments shown above, when the flow of execution
+gets to the return statement, <cite>dx</cite> should be 3 and <cite>dy</cite> should be 4.
+We can check that this is the case in <strong>PyScripter</strong> by putting the cursor on
+the return statement, and running the program to break execution
+when it gets to the cursor (using the <cite>F4</cite> key).
+Then we inspect the variables <tt class="docutils literal"><span class="pre">dx</span></tt> and <tt class="docutils literal"><span class="pre">dy</span></tt> by hovering the mouse above
+them, to confirm that the function is getting the right parameters and performing the first
+computation correctly. If not, there are only a few lines to check.</p>
+<p>Next we compute the sum of squares of <tt class="docutils literal"><span class="pre">dx</span></tt> and <tt class="docutils literal"><span class="pre">dy</span></tt>:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="n">dsquared</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Again, we could run the program at this stage and check the value of <tt class="docutils literal"><span class="pre">dsquared</span></tt> (which
+should be 25).</p>
+<p>Finally, using the fractional exponent <tt class="docutils literal"><span class="pre">0.5</span></tt> to find the square root,
+we compute and return the result:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="n">dsquared</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">dsquared</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>If that works correctly, you are done. Otherwise, you might want to inspect the
+value of <tt class="docutils literal"><span class="pre">result</span></tt> before the return statement.</p>
+<p>When you start out, you might add only a line or two of code at a time. As you
+gain more experience, you might find yourself writing and debugging bigger
+conceptual chunks. Either way, stepping through your code one line at a time and
+verifying that each step matches your expectations can save you a lot of
+debugging time.  As you improve your programming skills you should find yourself
+managing bigger and bigger chunks: this is very similar to the way we learnt to read
+letters, syllables, words, phrases, sentences, paragraphs, etc., or the way we learn
+to chunk music &#8212; from individual notes to chords, bars, phrases, and so on.</p>
+<p>The key aspects of the process are:</p>
+<ol class="arabic simple">
+<li>Start with a working skeleton program and make small incremental changes. At any
+point, if there is an error, you will know exactly where it is.</li>
+<li>Use temporary variables to hold intermediate values so that you can easily inspect
+and check them.</li>
+<li>Once the program is working, relax, sit back, and play around with your options.
+(There is interesting research that links &#8220;playfulness&#8221; to better understanding,
+better learning, more enjoyment, and a more positive mindset about
+what you can achieve &#8212; so spend some time fiddling around!)
+You might want to consolidate multiple statements into one bigger compound expression,
+or rename the variables you&#8217;ve used, or see if you can make the function shorter.
+A good guideline is to aim for making code as easy as possible for others to read.</li>
+</ol>
+<p>Here is another version of the function.  It makes use of a square root function
+that is in the <tt class="docutils literal"><span class="pre">math</span></tt> module (we&#8217;ll learn about modules shortly).  Which do you
+prefer?  Which looks &#8220;closer&#8221; to the Pythagorean formula we started out with?</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="debugging-with-print">
+<span id="index-3"></span><h2>6.3. Debugging with <tt class="docutils literal"><span class="pre">print</span></tt><a class="headerlink" href="#debugging-with-print" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Another powerful technique for debugging (an alternative to single-stepping and
+inspection of program variables), is to insert extra <tt class="docutils literal"><span class="pre">print</span></tt> functions
+in carefully selected places in your code.  Then, by inspecting the output
+of the program, you can check whether the algorithm is doing what you expect
+it to.  Be clear about the following, however:</p>
+<ul>
+<li><p class="first">You must have a clear solution to the problem, and must know what should
+happen before you can debug a program.  Work on <em>solving</em> the problem
+on a piece of paper (perhaps using a flowchart to record the steps you take)
+<em>before</em> you concern yourself with
+writing code.  Writing a program doesn&#8217;t solve the problem &#8212; it simply <em>automates</em>
+the manual steps you would take. So first make sure you have
+a pen-and-paper manual solution that works.
+Programming then is about making those manual steps happen automatically.</p>
+</li>
+<li><p class="first">Do not write <strong>chatterbox</strong> functions.  A chatterbox is a fruitful
+function that, in addition to its primary task, also asks the user for input,
+or prints output, when it would be more useful
+if it simply shut up and did its work quietly.</p>
+<p>For example, we&#8217;ve seen built-in functions like <tt class="docutils literal"><span class="pre">range</span></tt>,
+<tt class="docutils literal"><span class="pre">max</span></tt> and <tt class="docutils literal"><span class="pre">abs</span></tt>.  None of these would be useful building blocks for other
+programs if they prompted the user for input, or printed their results while
+they performed their tasks.</p>
+<p>So a good tip is to avoid calling <tt class="docutils literal"><span class="pre">print</span></tt> and <tt class="docutils literal"><span class="pre">input</span></tt> functions inside
+fruitful functions, <em>unless the primary purpose of your function is to
+perform input and output</em>.  The one exception
+to this rule might be to temporarily sprinkle some calls to <tt class="docutils literal"><span class="pre">print</span></tt> into
+your code to help debug and understand what is happening when the code runs,
+but these will then be removed once you get things working.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="composition">
+<span id="index-4"></span><h2>6.4. Composition<a class="headerlink" href="#composition" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>As you should expect by now, you can call one function from within another.
+This ability is called <strong>composition</strong>.</p>
+<p>As an example, we&#8217;ll write a function that takes two points, the center of the
+circle and a point on the perimeter, and computes the area of the circle.</p>
+<p>Assume that the center point is stored in the variables <tt class="docutils literal"><span class="pre">xc</span></tt> and <tt class="docutils literal"><span class="pre">yc</span></tt>, and
+the perimeter point is in <tt class="docutils literal"><span class="pre">xp</span></tt> and <tt class="docutils literal"><span class="pre">yp</span></tt>. The first step is to find the
+radius of the circle, which is the distance between the two points.
+Fortunately, we&#8217;ve just written a function, <tt class="docutils literal"><span class="pre">distance</span></tt>, that does just that,
+so now all we have to do is use it:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">radius</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The second step is to find the area of a circle with that radius and return it.
+Again we will use one of our earlier functions:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">area</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Wrapping that up in a function, we get:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">area2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">):</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">area</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>We called this function <tt class="docutils literal"><span class="pre">area2</span></tt> to distinguish it from the <tt class="docutils literal"><span class="pre">area</span></tt> function
+defined earlier. There can only be one function with a given name within a
+module.</p>
+<p>The temporary variables <tt class="docutils literal"><span class="pre">radius</span></tt> and <tt class="docutils literal"><span class="pre">result</span></tt> are useful for development,
+debugging, and single-stepping through the code to inspect what is happening,
+but once the program is working, we can make it more concise by
+composing the function calls:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">area2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">area</span><span class="p">(</span><span class="n">distance</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="boolean-functions">
+<span id="index-5"></span><h2>6.5. Boolean functions<a class="headerlink" href="#boolean-functions" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Functions can return boolean values, which is often convenient for hiding
+complicated tests inside functions. For example:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">is_divisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">False</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The name of this function is <tt class="docutils literal"><span class="pre">is_divisible</span></tt>. It is common to give <strong>boolean
+functions</strong> names that sound like yes/no questions.  <tt class="docutils literal"><span class="pre">is_divisible</span></tt> returns
+either <tt class="docutils literal"><span class="pre">True</span></tt> or <tt class="docutils literal"><span class="pre">False</span></tt> to indicate whether the <tt class="docutils literal"><span class="pre">x</span></tt> is or is not
+divisible by <tt class="docutils literal"><span class="pre">y</span></tt>.</p>
+<p>We can make the function more concise by taking advantage of the fact that the
+condition of the <tt class="docutils literal"><span class="pre">if</span></tt> statement is itself a boolean expression. We can return
+it directly, avoiding the <tt class="docutils literal"><span class="pre">if</span></tt> statement altogether:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">is_divisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This session shows the new function in action:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">is_divisible</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_divisible</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Boolean functions are often used in conditional statements:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">is_divisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="o">...</span> <span class="c"># do something ...</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="o">...</span> <span class="c"># do something else ...</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>It might be tempting to write something like:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">is_divisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="k">True</span><span class="p">:</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>but the extra comparison is unnecessary.</p>
+</div>
+<div class="section" id="programming-with-style">
+<span id="index-6"></span><h2>6.6. Programming with style<a class="headerlink" href="#programming-with-style" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Readability is very important to programmers, since in practice programs are
+read and modified far more often then they are written.  All the code examples
+in this book will be consistent with the <em>Python Enhancement Proposal 8</em>
+(<a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP 8</a>), a style guide developed by the Python community.</p>
+<p>We&#8217;ll have more to say about style as our programs become more complex, but a
+few pointers will be helpful already:</p>
+<ul class="simple">
+<li>use 4 spaces for indentation</li>
+<li>imports should go at the top of the file</li>
+<li>separate function definitions with two blank lines</li>
+<li>keep function definitions together</li>
+<li>keep top level statements, including function calls, together at the
+bottom of the program</li>
+</ul>
+</div>
+<div class="section" id="unit-testing">
+<h2>6.7. Unit testing<a class="headerlink" href="#unit-testing" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>It is a common best practice in software development these days to include
+automatic <strong>unit testing</strong> of source code. Unit testing provides a way to
+automatically verify that individual pieces of code, such as functions, are
+working properly. This makes it possible to change the implementation of a
+function at a later time and quickly test that it still does what it was
+intended to do.</p>
+<p>Unit testing also forces the programmer to think about the different cases
+that the function needs to handle.  You also only have to type the tests once
+into the script, rather than having to keep entering the same test data over
+and over as you develop your code.</p>
+<p>Extra code in your program which is there because it makes debugging or testing
+easier is called <strong>scaffolding</strong>.</p>
+<p>A collection of tests for some code is called its <strong>test suite</strong>.</p>
+<p>There are a few different preferred ways to do unit testing in Python &#8212;
+but at this stage we&#8217;re going to ignore what the Python community usually does,
+and we&#8217;re going to start with two functions that we&#8217;ll write ourselves.
+We&#8217;ll use these for writing our unit tests.</p>
+<p>Let&#8217;s start with the <tt class="docutils literal"><span class="pre">absolute_value</span></tt> function that we wrote earlier in this
+chapter.  Recall that we wrote a few different versions, the last of which was
+incorrect, and had a bug. Would tests have caught this bug?</p>
+<p>First we plan our tests.  We&#8217;d like to know
+if the function returns the correct value when its argument is negative,
+or when its argument is positive, or when its argument is zero.  When
+planning your tests, you&#8217;ll always want to think carefully about the &#8220;edge&#8221; cases &#8212;
+here, an argument of 0 to <tt class="docutils literal"><span class="pre">absolute_value</span></tt> is on the edge of where the function
+behaviour changes, and as we saw at the beginning of the chapter, it is an easy
+spot for the programmer to make a mistake!  So it is a good case to include in
+our test suite.</p>
+<p>We&#8217;re going to write a helper function for checking the results of one test.  It
+takes two arguments &#8212; the actual value that was
+returned from the computation, and the value we expected to get.
+It compares these, and will either print
+a message telling us that the test passed, or it will print a message to
+inform us that the test failed.  The first two lines of the body (after
+the function&#8217;s docstring) can be copied to your own code as they are here:
+they import a module called <tt class="docutils literal"><span class="pre">sys</span></tt>, and extract the caller&#8217;s
+line number from the stack frame.  This allows us to print the line number
+of the test, which will help when we want to fix any tests that fail.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Compare the actual to the expected value,</span>
+<span class="sd">        and print a suitable message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">linenum</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">f_lineno</span>   <span class="c"># get the caller&#39;s line number.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">expected</span> <span class="o">==</span> <span class="n">actual</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Test on line {0} passed.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">linenum</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Test on line {0} failed. Expected &#39;{1}&#39;, but got &#39;{2}&#39;.&quot;</span>
+                                     <span class="o">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">linenum</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>There is also some slightly tricky string formatting using the <tt class="docutils literal"><span class="pre">format</span></tt> method
+which we will gloss over for the moment, and cover in detail in a future chapter.
+But with this function written, we can proceed to construct our test suite:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_suite</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Run the suite of tests for code in this module (this file).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">absolute_value</span><span class="p">(</span><span class="mi">17</span><span class="p">),</span> <span class="mi">17</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">absolute_value</span><span class="p">(</span><span class="o">-</span><span class="mi">17</span><span class="p">),</span> <span class="mi">17</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">absolute_value</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">absolute_value</span><span class="p">(</span><span class="mf">3.14</span><span class="p">),</span> <span class="mf">3.14</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">absolute_value</span><span class="p">(</span><span class="o">-</span><span class="mf">3.14</span><span class="p">),</span> <span class="mf">3.14</span><span class="p">)</span>
+
+<span class="n">test_suite</span><span class="p">()</span>        <span class="c"># and here is the call to run the tests</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Here you&#8217;ll see that we&#8217;ve constructed five tests in our test suite.  We could run this
+against the first or second versions (the correct versions) of <tt class="docutils literal"><span class="pre">absolute_value</span></tt>,
+and we&#8217;d get output similar to the following:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">Test on line 24 passed.</span>
+<span class="go">Test on line 25 passed.</span>
+<span class="go">Test on line 26 passed.</span>
+<span class="go">Test on line 27 passed.</span>
+<span class="go">Test on line 28 passed.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>But let&#8217;s say you change the function to an incorrect version like this:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">absolute_value</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>   <span class="c"># Buggy version</span>
+    <span class="sd">&quot;&quot;&quot; Compute the absolute value of n &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Can you find at least two mistakes in this code?  Running our test suite we get:</p>
+<div class="highlight-python"><pre>Test on line 24 passed.
+Test on line 25 failed. Expected '17', but got '1'.
+Test on line 26 failed. Expected '0', but got 'None'.
+Test on line 27 passed.
+Test on line 28 failed. Expected '3.14', but got '1'.</pre>
+</div>
+<p>These are three examples of <em>failing tests</em>.</p>
+</div>
+<div class="section" id="glossary">
+<h2>6.8. Glossary<a class="headerlink" href="#glossary" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-boolean-function">boolean function</dt>
+<dd>A function that returns a boolean value.  The only possible
+values of the <tt class="docutils literal"><span class="pre">bool</span></tt> type are <tt class="docutils literal"><span class="pre">False</span></tt> and <tt class="docutils literal"><span class="pre">True</span></tt>.</dd>
+<dt id="term-chatterbox-function">chatterbox function</dt>
+<dd>A function which interacts with the user (using <tt class="docutils literal"><span class="pre">input</span></tt> or <tt class="docutils literal"><span class="pre">print</span></tt>) when
+it should not. Silent functions that just convert their input arguments into
+their output results are usually the most useful ones.</dd>
+<dt id="term-composition-of-functions">composition (of functions)</dt>
+<dd>Calling one function from within the body of another, or using the
+return value of one function as an argument to the call of another.</dd>
+<dt id="term-dead-code">dead code</dt>
+<dd>Part of a program that can never be executed, often because it appears
+after a <tt class="docutils literal"><span class="pre">return</span></tt> statement.</dd>
+<dt id="term-fruitful-function">fruitful function</dt>
+<dd>A function that yields a return value instead of <tt class="docutils literal"><span class="pre">None</span></tt>.</dd>
+<dt id="term-incremental-development">incremental development</dt>
+<dd>A program development plan intended to simplify debugging by adding and
+testing only a small amount of code at a time.</dd>
+<dt id="term-none">None</dt>
+<dd>A special Python value. One use in Python is that it is returned
+by functions that do not execute a return statement with a return argument.</dd>
+<dt id="term-return-value">return value</dt>
+<dd>The value provided as the result of a function call.</dd>
+<dt id="term-scaffolding">scaffolding</dt>
+<dd>Code that is used during program development to assist with development
+and debugging. The unit test code that we added in this chapter are
+examples of scaffolding.</dd>
+<dt id="term-temporary-variable">temporary variable</dt>
+<dd>A variable used to store an intermediate value in a complex
+calculation.</dd>
+<dt id="term-test-suite">test suite</dt>
+<dd>A collection of tests for some code you have written.</dd>
+<dt id="term-unit-testing">unit testing</dt>
+<dd>An automatic procedure used to validate that individual units of code
+are working properly.</dd>
+</dl>
+</div>
+<div class="section" id="exercises">
+<h2>6.9. Exercises<a class="headerlink" href="#exercises" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>All of the exercises below should be added to a single file.  In that file, you should
+also add the <tt class="docutils literal"><span class="pre">test</span></tt> and <tt class="docutils literal"><span class="pre">test_suite</span></tt> scaffolding functions shown above, and then,
+as you work through the exercises, add the new tests to your test suite.
+(If you open the online version of the textbook,
+you can easily cut and paste the tests and the fragments of code into your Python editor.)</p>
+<p>After completing each exercise, confirm that all the tests pass.</p>
+<ol class="arabic">
+<li><p class="first">The four compass points can be abbreviated by single-letter strings as &#8220;N&#8221;, &#8220;E&#8221;, &#8220;S&#8221;, and &#8220;W&#8221;.
+Write a function <tt class="docutils literal"><span class="pre">turn_clockwise</span></tt> that takes one of these four compass points as
+its parameter, and returns the next compass point in the clockwise direction.
+Here are some tests that should pass:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">turn_clockwise</span><span class="p">(</span><span class="s">&quot;N&quot;</span><span class="p">),</span> <span class="s">&quot;E&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">turn_clockwise</span><span class="p">(</span><span class="s">&quot;W&quot;</span><span class="p">),</span> <span class="s">&quot;N&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You might ask <cite>&#8220;What if the argument to the function is some other value?&#8221;</cite>  For all
+other cases, the function should return the value <tt class="docutils literal"><span class="pre">None</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">turn_clockwise</span><span class="p">(</span><span class="mi">42</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">turn_clockwise</span><span class="p">(</span><span class="s">&quot;rubbish&quot;</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write a function <tt class="docutils literal"><span class="pre">day_name</span></tt> that converts an integer number 0 to 6 into the name of
+a day.  Assume day 0 is &#8220;Sunday&#8221;.  Once again, return None if the arguments to the function
+are not valid.  Here are some tests that should pass:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">day_name</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="s">&quot;Wednesday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_name</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="s">&quot;Saturday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_name</span><span class="p">(</span><span class="mi">42</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write the inverse function <tt class="docutils literal"><span class="pre">day_num</span></tt> which is given a day name, and returns its number:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">day_num</span><span class="p">(</span><span class="s">&quot;Friday&quot;</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_num</span><span class="p">(</span><span class="s">&quot;Sunday&quot;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_num</span><span class="p">(</span><span class="n">day_name</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_name</span><span class="p">(</span><span class="n">day_num</span><span class="p">(</span><span class="s">&quot;Thursday&quot;</span><span class="p">)),</span> <span class="s">&quot;Thursday&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once again, if this function is given an invalid argument, it should return <tt class="docutils literal"><span class="pre">None</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">day_num</span><span class="p">(</span><span class="s">&quot;Halloween&quot;</span><span class="p">),</span> <span class="bp">None</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write a function that helps answer questions like &#8216;&#8220;Today is Wednesday.  I leave on holiday
+in 19 days time.  What day will that be?&#8221;&#8217; So the function must take a day name and
+a <tt class="docutils literal"><span class="pre">delta</span></tt> argument &#8212; the number of days to add &#8212; and should return the resulting day name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Monday&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>  <span class="s">&quot;Friday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Tuesday&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&quot;Tuesday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Tuesday&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="s">&quot;Tuesday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Sunday&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s">&quot;Tuesday&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>Hint: use the first two functions written above to help you write this one.</cite></p>
+</li>
+<li><p class="first">Can your <tt class="docutils literal"><span class="pre">day_add</span></tt> function already work with negative deltas? For example,
+-1 would be yesterday, or -7 would be a week ago:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Sunday&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s">&quot;Saturday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Sunday&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">),</span> <span class="s">&quot;Sunday&quot;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">day_add</span><span class="p">(</span><span class="s">&quot;Tuesday&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">),</span> <span class="s">&quot;Sunday&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If your function already works, explain why.  If it does not work, make it work.</p>
+<p><cite>Hint:</cite> Play with some cases of using the modulus function <cite>%</cite>
+(introduced at the beginning of the previous chapter).  Specifically, explore
+what happens to  <tt class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">7</span></tt>  when x is negative.</p>
+</li>
+<li><p class="first">Write a function <tt class="docutils literal"><span class="pre">days_in_month</span></tt> which takes the name of a month, and returns the number
+of days in the month.  Ignore leap years:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">(</span><span class="s">&quot;February&quot;</span><span class="p">),</span> <span class="mi">28</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">(</span><span class="s">&quot;December&quot;</span><span class="p">),</span> <span class="mi">31</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the function is given invalid arguments, it should return <tt class="docutils literal"><span class="pre">None</span></tt>.</p>
+</li>
+<li><p class="first">Write a function <tt class="docutils literal"><span class="pre">to_secs</span></tt> that converts hours, minutes and seconds to
+a total number of seconds.  Here are some tests that should pass:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">9010</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">7200</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="o">-</span><span class="mi">590</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Extend <tt class="docutils literal"><span class="pre">to_secs</span></tt> so that it can cope with real values as inputs.  It
+should always return an integer number of seconds (truncated towards zero):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.71</span><span class="p">),</span> <span class="mi">9010</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">to_secs</span><span class="p">(</span><span class="mf">2.433</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="mi">8758</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write three functions that are the &#8220;inverses&#8221; of <tt class="docutils literal"><span class="pre">to_secs</span></tt>:</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">hours_in</span></tt> returns the whole integer number of hours
+represented by a total number of seconds.</li>
+<li><tt class="docutils literal"><span class="pre">minutes_in</span></tt> returns the whole integer number of left over minutes
+in a total number of seconds, once the hours
+have been taken out.</li>
+<li><tt class="docutils literal"><span class="pre">seconds_in</span></tt> returns the left over seconds
+represented by a total number of seconds.</li>
+</ol>
+<p>You may assume that the total number of seconds passed to these functions is an integer.
+Here are some test cases:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">hours_in</span><span class="p">(</span><span class="mi">9010</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">minutes_in</span><span class="p">(</span><span class="mi">9010</span><span class="p">),</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">seconds_in</span><span class="p">(</span><span class="mi">9010</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Which of these tests fail?  Explain why.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="mi">3</span> <span class="o">%</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="mi">3</span> <span class="o">%</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="mi">3</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span>  <span class="o">*</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s">&quot;hello, world!&quot;</span><span class="p">),</span> <span class="mi">13</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write a <tt class="docutils literal"><span class="pre">compare</span></tt> function that returns <tt class="docutils literal"><span class="pre">1</span></tt> if <tt class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span></tt>, <tt class="docutils literal"><span class="pre">0</span></tt> if
+<tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></tt>, and <tt class="docutils literal"><span class="pre">-1</span></tt> if <tt class="docutils literal"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">b</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write a function called <tt class="docutils literal"><span class="pre">hypotenuse</span></tt> that
+returns the length of the hypotenuse of a right triangle given the lengths
+of the two legs as parameters:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mf">13.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mf">25.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="mf">15.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write a function <tt class="docutils literal"><span class="pre">slope(x1,</span> <span class="pre">y1,</span> <span class="pre">x2,</span> <span class="pre">y2)</span></tt> that returns the slope of
+the line through the points (x1, y1) and (x2, y2). Be sure your
+implementation of <tt class="docutils literal"><span class="pre">slope</span></tt> can pass the following tests:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">slope</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">slope</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">slope</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">slope</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">2.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then use a call to <tt class="docutils literal"><span class="pre">slope</span></tt> in a new function named
+<tt class="docutils literal"><span class="pre">intercept(x1,</span> <span class="pre">y1,</span> <span class="pre">x2,</span> <span class="pre">y2)</span></tt> that returns the y-intercept of the line
+through the points <tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">y1)</span></tt> and <tt class="docutils literal"><span class="pre">(x2,</span> <span class="pre">y2)</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">intercept</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">intercept</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="mf">7.0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">intercept</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write a function called <tt class="docutils literal"><span class="pre">is_even(n)</span></tt> that takes an integer as an argument
+and returns <tt class="docutils literal"><span class="pre">True</span></tt> if the argument is an <strong>even number</strong> and <tt class="docutils literal"><span class="pre">False</span></tt> if
+it is <strong>odd</strong>.</p>
+<p>Add your own tests to the test suite.</p>
+</li>
+<li><p class="first">Now write the function <tt class="docutils literal"><span class="pre">is_odd(n)</span></tt> that returns <tt class="docutils literal"><span class="pre">True</span></tt> when <tt class="docutils literal"><span class="pre">n</span></tt> is odd
+and <tt class="docutils literal"><span class="pre">False</span></tt> otherwise. Include unit tests for this function too.</p>
+<p>Finally, modify it so that it uses a call to <tt class="docutils literal"><span class="pre">is_even</span></tt> to determine if its
+argument is an odd integer, and ensure that its test still pass.</p>
+</li>
+<li><p class="first">Write a function <tt class="docutils literal"><span class="pre">is_factor(f,</span> <span class="pre">n)</span></tt> that passes these tests:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_factor</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An important role of unit tests is that they can also
+act as unambiguous &#8220;specifications&#8221; of what is expected.  These test
+cases answer the question <em>Do we treat 1 and 15 as factors of 15?</em></p>
+</li>
+<li><p class="first">Write <tt class="docutils literal"><span class="pre">is_multiple</span></tt> to satisfy these unit tests:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">is_multiple</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_multiple</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_multiple</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_multiple</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">is_multiple</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Can you find a way to use <tt class="docutils literal"><span class="pre">is_factor</span></tt> in your definition of <tt class="docutils literal"><span class="pre">is_multiple</span></tt>?</p>
+</li>
+<li><p class="first">Write the function <tt class="docutils literal"><span class="pre">f2c(t)</span></tt> designed to return the
+integer value of the nearest degree Celsius for given temperature in
+Fahrenheit. (<em>hint:</em> you may want to make use of the built-in function,
+<tt class="docutils literal"><span class="pre">round</span></tt>. Try printing <tt class="docutils literal"><span class="pre">round.__doc__</span></tt> in a Python shell or looking up
+help for the <tt class="docutils literal"><span class="pre">round</span></tt> function, and
+experimenting with it until you are comfortable with how it works.)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="mi">212</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>     <span class="c"># boiling point of water</span>
+<span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>        <span class="c"># freezing point of water</span>
+<span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">),</span> <span class="o">-</span><span class="mi">40</span><span class="p">)</span>     <span class="c"># Wow, what an interesting case!</span>
+<span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="mi">36</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="mi">37</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="mi">38</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">f2c</span><span class="p">(</span><span class="mi">39</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now do the opposite: write the function <tt class="docutils literal"><span class="pre">c2f</span></tt> which converts Celcius to Fahrenheit:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">c2f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">32</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">c2f</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="mi">212</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">c2f</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">),</span> <span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">c2f</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="mi">54</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">c2f</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="mi">64</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">c2f</span><span class="p">(</span><span class="o">-</span><span class="mi">48</span><span class="p">),</span> <span class="o">-</span><span class="mi">54</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Nawigacja</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Indeks ogólny"
+             >indeks</a></li>
+        <li class="right" >
+          <a href="iteration.html" title="7. Iteration"
+             >dalej</a> |</li>
+        <li class="right" >
+          <a href="conditionals.html" title="5. Conditionals"
+             >wstecz</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; <a href="copyright.html">Copyright</a> 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers.
+      Utworzone przy pomocy <a href="http://sphinx.pocoo.org/">Sphinx</a>'a 1.1.3.
+    </div>
+  </body>
+</html>
