@@ -1,0 +1,618 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/way_of_the_program.rst:14
+# a17dcf1cb37a40febd43f16c7aa81050
+msgid "The way of the program"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:16
+# 5659f7d3bd1e4d35a74685279a86838d
+msgid "The goal of this book is to teach you to think like a computer scientist. This way of thinking combines some of the best features of mathematics, engineering, and natural science. Like mathematicians, computer scientists use formal languages to denote ideas (specifically computations). Like engineers, they design things, assembling components into systems and evaluating tradeoffs among alternatives.  Like scientists, they observe the behavior of complex systems, form hypotheses, and test predictions."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:24
+# fd0088236a574964a690828aa4a7b672
+msgid "The single most important skill for a computer scientist is **problem solving**. Problem solving means the ability to formulate problems, think creatively about solutions, and express a solution clearly and accurately. As it turns out, the process of learning to program is an excellent opportunity to practice problem-solving skills. That's why this chapter is called, The way of the program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:31
+# 1432b967aecf485081cf6b15a308fcc9
+msgid "On one level, you will be learning to program, a useful skill by itself. On another level, you will use programming as a means to an end. As we go along, that end will become clearer."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:40
+# 23e4669f8f11449b8139ea5cf6a35b5b
+msgid "The Python programming language"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:42
+# 2ded4275866f4a279ceb196af222fe64
+msgid "The programming language you will be learning is Python. Python is an example of a **high-level language**; other high-level languages you might have heard of are C++, PHP, Pascal, C#, and Java."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:46
+# 746448b372e342f591f973098eea1e8b
+msgid "As you might infer from the name high-level language, there are also **low-level languages**, sometimes referred to as machine languages or assembly languages. Loosely speaking, computers can only execute programs written in low-level languages. Thus, programs written in a high-level language have to be translated into something more suitable before they can run."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:52
+# f8047d8ef81d474ca9f249f24b439b9b
+msgid "Almost all programs are written in high-level languages because of their advantages. It is much easier to program in a high-level language so programs take less time to write, they are shorter and easier to read, and they are more likely to be correct. Second, high-level languages are **portable**, meaning that they can run on different kinds of computers with few or no modifications."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:59
+# 13788e238bc4479496131dadac78ba66
+msgid "The engine that translates and runs Python is called the **Python Interpreter**: There are two ways to use it: *immediate mode* and *script mode*. In immediate mode, you type Python expressions into the Python Interpreter window, and the interpreter immediately shows the result:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:67
+# f6bf477b09794092a0d7dd4b7aa0b951
+msgid "The ``>>>`` is called the **Python prompt**. The interpreter uses the prompt to indicate that it is ready for instructions. We typed ``2 + 2``, and the interpreter evaluated our expression, and replied ``4``, and on the next line it gave a new prompt, indicating that it is ready for more input."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:71
+# 2f1e65af70964b388ee1f0c2beae52f4
+msgid "Alternatively, you can write a program in a file and use the interpreter to execute the contents of the file. Such a file is called a **script**.   Scripts have the advantage that they can be saved to disk, printed, and so on."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:75
+# 01142a0ee74b48b69c74a09f30df4a23
+msgid "In this Rhodes Local Edition of the textbook, we use a program development environment called **PyScripter**. (It is available at http://code.google.com/p/pyscripter.)  There are various other development environments. If you're using one of the others, you might be better off working with the authors' original book rather than this edition."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:80
+# 4df13b82c31649eca64ff7b3fd273465
+msgid "For example, we created a file named ``firstprogram.py`` using PyScripter. By convention, files that contain Python programs have names that end with ``.py``"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:84
+# 5fc36fbab5ad4fedb6f77b322eb41d03
+msgid "To execute the program, we can click the **Run** button in PyScripter:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:90
+# 31442b53be774273ab9a70b42c1ff93b
+msgid "Most programs are more interesting than this one."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:92
+# ff6d1930202e46c495f6626ef1a00370
+msgid "Working directly in the interpreter is convenient for testing short bits of code because you get immediate feedback. Think of it as scratch paper used to help you work out problems. Anything longer than a few lines should be put into a script."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:100
+# ce22c2fb52fc457dbb650e71208384e1
+msgid "What is a program?"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:102
+# 3b2745900c2c41d2b007216165aeaba3
+msgid "A **program** is a sequence of instructions that specifies how to perform a computation. The computation might be something mathematical, such as solving a system of equations or finding the roots of a polynomial, but it can also be a symbolic computation, such as searching and replacing text in a document or (strangely enough) compiling a program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:108
+# 149d6f2f7f36497e9299063c280aec92
+msgid "The details look different in different languages, but a few basic instructions appear in just about every language:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:112
+# 43f0eac3895d4533bf29b5969e0beb8a
+msgid "Get data from the keyboard, a file, or some other device."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:115
+# 7602318d3c174513a701382d4e5dbd8a
+msgid "Display data on the screen or send data to a file or other device."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:118
+# 066c26d8e4214fb78ca6b0a3d4b5e0b0
+msgid "Perform basic mathematical operations like addition and multiplication."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:121
+# 85ed55086c1e4700afe1e960d66bf832
+msgid "Check for certain conditions and execute the appropriate sequence of statements."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:125
+# 14b2069f69584a0fa33a4199c09b90da
+msgid "Perform some action repeatedly, usually with some variation."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:127
+# b8102481c1d045068f4bd43b651eaa07
+msgid "Believe it or not, that's pretty much all there is to it. Every program you've ever used, no matter how complicated, is made up of instructions that look more or less like these. Thus, we can describe programming as the process of breaking a large, complex task into smaller and smaller subtasks until the subtasks are simple enough to be performed with sequences of these basic instructions."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:134
+# 65f51f260d754e89bb33f95df0ce860f
+msgid "That may be a little vague, but we will come back to this topic later when we talk about **algorithms**."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:141
+# 4b59998990834a9b984e32302f5e266f
+msgid "What is debugging?"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:143
+# 72cb0c2769ba4fd6b82fdf991c3aa3d6
+msgid "Programming is a complex process, and because it is done by human beings, it often leads to errors. Programming errors are called **bugs** and the process of tracking them down and correcting them is called **debugging**.  Use of the term *bug* to describe small engineering difficulties dates back to at least 1889, when Thomas Edison had a bug with his phonograph."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:149
+# 984fce5007524d059a56d331258ad219
+msgid "Three kinds of errors can occur in a program: `syntax errors <http://en.wikipedia.org/wiki/Syntax_error>`__, `runtime errors <http://en.wikipedia.org/wiki/Runtime_error>`__, and `semantic errors <http://en.wikipedia.org/wiki/Logic_error>`__.  It is useful to distinguish between them in order to track them down more quickly."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:159
+# a106d0c45c2f4d419ae1c005a0cef982
+msgid "Syntax errors"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:161
+# bd7e35ab038443738e35fa763ee0f83d
+msgid "Python can only execute a program if the program is syntactically correct; otherwise, the process fails and returns an error message.  **Syntax** refers to the structure of a program and the rules about that structure. For example, in English, a sentence must begin with a capital letter and end with a period. this sentence contains a **syntax error**. So does this one"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:167
+# 11d727191da644da9388d63b18e8717f
+msgid "For most readers, a few syntax errors are not a significant problem, which is why we can read the poetry of E. E. Cummings without problems. Python is not so forgiving. If there is a single syntax error anywhere in your program, Python will display an error message and quit, and you will not be able to run your program. During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors. As you gain experience, though, you will make fewer errors and find them faster."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:179
+# 2dd3d74e12034e609f14939ecae3146a
+msgid "Runtime errors"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:181
+# 2abd5d90efa043a1a3ad9e4cd1ad1603
+msgid "The second type of error is a runtime error, so called because the error does not appear until you run the program. These errors are also called **exceptions** because they usually indicate that something exceptional (and bad) has happened."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:186
+# 8c007678ead44987bc5315193daac655
+msgid "Runtime errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:193
+# 2ea7cff3fdff459f89218cac2b459be3
+msgid "Semantic errors"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:195
+# a2ac76c6d70549e69afb7ef084bf1933
+msgid "The third type of error is the **semantic error**. If there is a semantic error in your program, it will run successfully, in the sense that the computer will not generate any error messages, but it will not do the right thing. It will do something else. Specifically, it will do what you told it to do."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:200
+# 0a202fd4bf1a4f1db4145029ef3fc456
+msgid "The problem is that the program you wrote is not the program you wanted to write. The meaning of the program (its semantics) is wrong.  Identifying semantic errors can be tricky because it requires you to work backward by looking at the output of the program and trying to figure out what it is doing."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:212
+# 41e42a869f144dcfa4321652cedc1ea1
+msgid "Experimental debugging"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:214
+# 2aaeaa63401845dba5830bca57a4ed82
+msgid "One of the most important skills you will acquire is debugging.  Although it can be frustrating, debugging is one of the most intellectually rich, challenging, and interesting parts of programming."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:218
+# 20b4d86c7cb3415b99bcec681518ef99
+msgid "In some ways, debugging is like detective work. You are confronted with clues, and you have to infer the processes and events that led to the results you see."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:221
+# 89bd7a95fa1141149dd4e0fb67a48b0e
+msgid "Debugging is also like an experimental science. Once you have an idea what is going wrong, you modify your program and try again. If your hypothesis was correct, then you can predict the result of the modification, and you take a step closer to a working program. If your hypothesis was wrong, you have to come up with a new one. As Sherlock Holmes pointed out, When you have eliminated the impossible, whatever remains, however improbable, must be the truth. (A. Conan Doyle, *The Sign of Four*)"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:229
+# 88ad18c53b9740efafd35f8e6fadf519
+msgid "For some people, programming and debugging are the same thing. That is, programming is the process of gradually debugging a program until it does what you want. The idea is that you should start with a program that does *something* and make small modifications, debugging them as you go, so that you always have a working program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:235
+# 974cf573f6b24d06bd3b9a6de482301f
+msgid "For example, Linux is an operating system kernel that contains millions of lines of code, but it started out as a simple program Linus Torvalds used to explore the Intel 80386 chip. According to Larry Greenfield, one of Linus's earlier projects was a program that would switch between displaying AAAA and BBBB. This later evolved to Linux (*The Linux Users' Guide* Beta Version 1)."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:241
+# 1c4627dd01bd4bdfbb0fde37a78aaf3b
+msgid "Later chapters will make more suggestions about debugging and other programming practices."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:248
+# e93ba125d78d49f2b20cbbdfd78d479c
+msgid "Formal and natural languages"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:250
+# 1be4c153432243589927c9b055eb46b3
+msgid "**Natural languages** are the languages that people speak, such as English, Spanish, and French. They were not designed by people (although people try to impose some order on them); they evolved naturally."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:254
+# 378544df8c1f4f8b9537a5269c5805e4
+msgid "**Formal languages** are languages that are designed by people for specific applications. For example, the notation that mathematicians use is a formal language that is particularly good at denoting relationships among numbers and symbols. Chemists use a formal language to represent the chemical structure of molecules. And most importantly:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:260
+# 4ec86d46634b4b81bca00278dc06382a
+msgid "*Programming languages are formal languages that have been designed to express computations.*"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:263
+# 40f2007f23f54ffda257a6b859c9dd5d
+msgid "Formal languages tend to have strict rules about syntax. For example, ``3+3=6`` is a syntactically correct mathematical statement, but ``3=+6$`` is not. H\\ :sub:`2`\\ O is a syntactically correct chemical name, but :sub:`2`\\ Zz is not."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:268
+# 6da5fe07a30d438a8ff7fe5402bf05d8
+msgid "Syntax rules come in two flavors, pertaining to **tokens** and structure. Tokens are the basic elements of the language, such as words, numbers, and chemical elements. One of the problems with ``3=+6$`` is that ``$`` is not a legal token in mathematics (at least as far as we know). Similarly, :sub:`2`\\ Zz is not legal because there is no element with the abbreviation ``Zz``."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:275
+# 92599718942345b88042814c925b0d18
+msgid "The second type of syntax rule pertains to the **structure** of a statement--- that is, the way the tokens are arranged. The statement ``3=+6$`` is structurally illegal because you can't place a plus sign immediately after an equal sign. Similarly, molecular formulas have to have subscripts after the element name, not before."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:281
+# f3765ad76d3b462e81f3edaddd0df002
+msgid "When you read a sentence in English or a statement in a formal language, you have to figure out what the structure of the sentence is (although in a natural language you do this subconsciously). This process is called **parsing**."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:285
+# 4139aaf75ce9464e839b3fcb362c58c6
+msgid "For example, when you hear the sentence, \"The other shoe fell\", you understand that the other shoe is the subject and fell is the verb.  Once you have parsed a sentence, you can figure out what it means, or the **semantics** of the sentence. Assuming that you know what a shoe is and what it means to fall, you will understand the general implication of this sentence."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:291
+# 0768d5b6b5ae4757a4145f9e06600d26
+msgid "Although formal and natural languages have many features in common --- tokens, structure, syntax, and semantics --- there are many differences:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:297
+# e57e0b6897ce438c877d8cd0cc0c3252
+msgid "Natural languages are full of ambiguity, which people deal with by using contextual clues and other information. Formal languages are designed to be nearly or completely unambiguous, which means that any statement has exactly one meaning, regardless of context."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:303
+# 3eed15c528474483a50a2c0b244298fc
+msgid "In order to make up for ambiguity and reduce misunderstandings, natural languages employ lots of redundancy. As a result, they are often verbose.  Formal languages are less redundant and more concise."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:308
+# 47532fbf72b84aa490b7f191b02d02b1
+msgid "Formal languages mean exactly what they say.  On the other hand, natural languages are full of idiom and metaphor. If someone says, \"The other shoe fell\", there is probably no shoe and nothing falling. You'll need to find the original joke to understand the idiomatic meaning of the other shoe falling. *Yahoo! Answers* thinks it knows!"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:315
+# d548fa81e1774881a9356903c40df828
+msgid "People who grow up speaking a natural language---everyone---often have a hard time adjusting to formal languages. In some ways, the difference between formal and natural language is like the difference between poetry and prose, but more so:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:323
+# 8136a750a87f4bab9acf46554f88a97a
+msgid "Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response. Ambiguity is not only common but often deliberate."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:328
+# 0ca748eee9604d3eaf1b56a0118121c4
+msgid "The literal meaning of words is more important, and the structure contributes more meaning. Prose is more amenable to analysis than poetry but still often ambiguous."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:333
+# 1aa9ceb1801a417d8a95011ea58646f0
+msgid "The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and structure."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:336
+# 81df5b568a28490c941a05532eece31c
+msgid "Here are some suggestions for reading programs (and other formal languages). First, remember that formal languages are much more dense than natural languages, so it takes longer to read them. Also, the structure is very important, so it is usually not a good idea to read from top to bottom, left to right. Instead, learn to parse the program in your head, identifying the tokens and interpreting the structure.  Finally, the details matter. Little things like spelling errors and bad punctuation, which you can get away with in natural languages, can make a big difference in a formal language."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:347
+# 5dd130d08c4a482888c00b506ed4d61e
+msgid "The first program"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:349
+# 4e3335bc8fc149a9bb827a3d95a4aac8
+msgid "Traditionally, the first program written in a new language is called *Hello, World!* because all it does is display the words, Hello, World!  In Python, the script looks like this: (For scripts, we'll show line numbers to the left of the Python statements.)"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:358
+# fb452c7450ee42faa040b04e6fa72d9c
+msgid "This is an example of using the **print function**, which doesn't actually print anything on paper. It displays a value on the screen. In this case, the result shown is"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:367
+# 8ce825abbfa44dc0bc0b2ae1469ab412
+msgid "The quotation marks in the program mark the beginning and end of the value; they don't appear in the result."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:370
+# 1df30ea9fefb45938bf7f3b12485c48f
+msgid "Some people judge the quality of a programming language by the simplicity of the Hello, World! program. By this standard, Python does about as well as possible."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:379
+# 3f6c0a0d1c6648739f8812e53a205ffb
+msgid "Comments"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:381
+# b333593703f645f68a34313b9bc25228
+msgid "As programs get bigger and more complicated, they get more difficult to read. Formal languages are dense, and it is often difficult to look at a piece of code and figure out what it is doing, or why."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:385
+# d3b2b6fbe9374da6929ad74ad033d5b5
+msgid "For this reason, it is a good idea to add notes to your programs to explain in natural language what the program is doing."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:388
+# 3028cdb7361446649ed901256a375b36
+msgid "A **comment** in a computer program is text that is intended only for the human reader --- it is completely ignored by the interpreter."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:391
+# 8a4592d581034cab8d097593e51ccfe7
+msgid "In Python, the `#` token starts a comment.  The rest of the line is ignored.   Here is a new version of *Hello, World!*."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:405
+# 3bc0b29035484cc09f89530c6fdbf6e0
+msgid "You'll also notice that we've left a blank line in the program.  Blank lines are also ignored by the interpreter, but comments and blank lines can make your programs much easier for humans to parse.  Use them liberally!"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:411
+# 5b2fd18399584cb7a6c5274140ec84d1
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:416
+# 59b994ec6e0e421c85c250c3bf7151d6
+msgid "A set of specific steps for solving a category of problems."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:419
+# afc1188094ea4d1293de944a236667af
+msgid "An error in a program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:422
+# a26bbf8da6cf4e6298f0d09c53f1c548
+msgid "Information in a program that is meant for other programmers (or anyone reading the source code) and has no effect on the execution of the program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:427
+# 4ffd637a65bc4275bace050e9347d4a1
+msgid "The process of finding and removing any of the three kinds of programming errors."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:431
+# e96dc19400dc4263b9802bf58d297da3
+msgid "Another name for a runtime error."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:434
+# de1245ee84ef4b88aac2246bfab50208
+msgid "Any one of the languages that people have designed for specific purposes, such as representing mathematical ideas or computer programs; all programming languages are formal languages."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:439
+# b8880adfd9304be88f16769135ec0cb8
+msgid "A programming language like Python that is designed to be easy for humans to read and write."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:443
+# e1f49be0ebdd4c9da3bc1b7b67d2d74e
+msgid "A style of using Python where we type expressions at the command prompt, and the results are shown immediately.  Contrast with **script**, and see the entry under **Python shell**."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:448
+# 5b89f3361576419881b9351669cf1567
+msgid "The engine that executes your Python scripts or expressions."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:451
+# 04b8487e5ca5402198e48bb1f7018aad
+msgid "A programming language that is designed to be easy for a computer to execute; also called machine language or assembly language."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:455
+# 301f56b54017452c919ad8e974a7bf43
+msgid "Any one of the languages that people speak that evolved naturally."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:458
+# e62980d3ed3a4e49a0d1a5579bc29259
+msgid "The output of the compiler after it translates the program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:461
+# 968f5bf8109c466483a454e664ccc8c7
+msgid "To examine a program and analyze the syntactic structure."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:464
+# f0440ab43b9248679052c3b1081c3d67
+msgid "A property of a program that can run on more than one kind of computer."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:467
+# 4dbef62cfd1b44d8b2a0e329c29607d1
+msgid "A function used in a program or script that causes the Python interpreter to display a value on its output device."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:471
+# 4f3cb9259b73406aa80518e2c1faeecc
+msgid "The process of formulating a problem, finding a solution, and expressing the solution."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:475
+# 015edfb8753b4504bf396c826b4008d8
+msgid "a sequence of instructions that specifies to a computer actions and computations to be performed."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:479
+# bc2aeb547e704199808bbc8f00df62ac
+msgid "An interactive user interface to the Python interpreter. The user of a Python shell types commands at the prompt (>>>), and presses the return key to send these commands immediately to the interpreter for processing.  The word *shell* comes from Unix.  In the PyScripter used in this RLE version of the book, the Interpreter Window is where we'd do the immediate mode interaction."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:487
+# d7aacca2ef53452bb754a10edaf2648d
+msgid "An error that does not occur until the program has started to execute but that prevents the program from continuing."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:491
+# e3ae7f3e874245dbba092ed3508db0d8
+msgid "A program stored in a file (usually one that will be interpreted)."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:494
+# f783a8b6ee044fa88d7d92480e741457
+msgid "An error in a program that makes it do something other than what the programmer intended."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:498
+# 8433a918812a4144b60e3fe6ba8df375
+msgid "The meaning of a program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:501
+# a951cf0f43a240a88e0ff3af48fe50f5
+msgid "A program in a high-level language before being compiled."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:504
+# 0454aecf9ed14072b19fd0040fdf0dee
+msgid "The structure of a program."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:507
+# b572bd6455c44dfdb07343c6453d9695
+msgid "An error in a program that makes it impossible to parse --- and therefore impossible to interpret."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:511
+# 8bd02038c13b434f946c5dd9d486a326
+msgid "One of the basic elements of the syntactic structure of a program, analogous to a word in a natural language."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:516
+# bdbb1e64622c4b57bd17aea95611bcf4
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:518
+# 7fb4b6a3d2664838b6b7b6e1811c7377
+msgid "Write an English sentence with understandable semantics but incorrect syntax. Write another English sentence which has correct syntax but has semantic errors."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:521
+# 4b9e79b4cd0f45cfb0e4259d162f5c87
+msgid "Using the Python interpreter, type ``1 + 2`` and then hit return. Python *evaluates* this *expression*, displays the result, and then shows another prompt. ``*`` is the *multiplication operator*, and ``**`` is the *exponentiation operator*. Experiment by entering different expressions and recording what is displayed by the Python interpreter."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:526
+# 6c0e723b24e04aedb2e01a45e0a4b616
+msgid "Type ``1 2`` and then hit return. Python tries to evaluate the expression, but it can't because the expression is not syntactically legal. Instead, it shows the error message:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:537
+# d90ffcb5cf9943a5ab26e0b7e3bbffca
+msgid "In many cases, Python indicates where the syntax error occurred, but it is not always right, and it doesn't give you much information about what is wrong."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:541
+# 34a450d656d347d29946700a42a23fe6
+msgid "So, for the most part, the burden is on you to learn the syntax rules."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:543
+# b43946e09eb4434eacc6ce413f4c6549
+msgid "In this case, Python is complaining because there is no operator between the numbers."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:546
+# a18783d270174fbfbc0086554ccdffec
+msgid "See if you can find a few more examples of things that will produce error messages when you enter them at the Python prompt. Write down what you enter at the prompt and the last line of the error message that Python reports back to you."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:551
+# f4a8dd8f37dc4e4faabe01579556ec38
+msgid "Type  ``print('hello')``. Python executes this, which has the effect of printing the letters h-e-l-l-o. Notice that the quotation marks that you used to enclose the string are not part of the output.  Now type ``\"hello\"`` and describe your result.  Make notes of when you see the quotation marks and when you don't."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:557
+# 03910271eef74468bcecc0a7a51d8e2a
+msgid "Type ``cheese`` without the quotation marks. The output will look something like this::"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:564
+# f522e6822ee4496d8e2b888cca062fbe
+msgid "This is a run-time error; specifically, it is a NameError, and even more specifically, it is an error because the name `cheese` is not defined. If you don't know what that means yet, you will soon."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:567
+# b505e883927d4b8fae9eb017078de109
+msgid "Type ``6 + 4 * 9`` at the Python prompt and hit enter.  Record what happens."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:570
+# 52137b897a68436592a8760d57b1c27a
+msgid "Now create a python script with the following contents:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:577
+# 5427946a507941249fe977099718dac9
+msgid "What happens when you run this script? Now change the script contents to:"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:584
+# 3d6d32b0ce6b4057bf06a71694b28281
+msgid "and run it again."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:586
+# 44e73997f10f4fca82d3d45662fd9247
+msgid "What happened this time?"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:588
+# 53fabb58332544d1a62f982c556166dc
+msgid "Whenever an *expression* is typed at the Python prompt, it is evaluated and the result is *automatically* shown on the line below.  (Like on your calculator, if you type this expression you'll get the result 42.)"
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:592
+# 9829af3608684e5fa8630ac69cee4e41
+msgid "A script is different, however.  Evaluations of expressions are not automatically displayed, so it is necessary to use the **print** function to make the answer show up."
+msgstr ""
+
+#: ../../source/way_of_the_program.rst:597
+# c6bc3104768f488dadfa9380d810cecb
+msgid "It is hardly ever necessary to use the print function in immediate mode at the command prompt."
+msgstr ""
+

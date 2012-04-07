@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/app_b.rst:13
+# 3d4138735630473ca003f69aa8d5feee
+msgid "An odds-and-ends Workbook"
+msgstr ""
+
+#: ../../source/app_b.rst:15
+# 70258659a50343b2a3f83e250dda6d9d
+msgid "*This workbook / cookbook of recipes is still very much under construction.*"
+msgstr ""
+
+#: ../../source/app_b.rst:18
+# 3f05b68acfaf451e973005a070bc8911
+msgid "The Five Strands of Proficiency"
+msgstr ""
+
+#: ../../source/app_b.rst:20
+# 947bd73eea4341e5a35e85478254f65b
+msgid "This was an important study commissioned by the President in the USA. It looked at what was needed for students to become proficient in maths."
+msgstr ""
+
+#: ../../source/app_b.rst:23
+# 51ebbb812e6842349c548fe15c0cc409
+msgid "But it is also an amazingly accurate fit for what we need for proficiency in Computer Science, or even for proficiency in playing Jazz!"
+msgstr ""
+
+#: ../../source/app_b.rst:28
+# 806c0513f73746ed8413398d26d4e376
+msgid "**Procedural Fluency:**  Learn the syntax.  Learn to type.  Learn your way around your tools. Learn and practice your scales.  Learn to rearrange formulae."
+msgstr ""
+
+#: ../../source/app_b.rst:30
+# 7795297934e54945974aa6374f8b291d
+msgid "**Conceptual Understanding:**  Understand why the bits fit together like they do."
+msgstr ""
+
+#: ../../source/app_b.rst:31
+# 2df460e753a944df999c138ce81a1dc6
+msgid "**Strategic Competence:**  Can you see what to do next? Can you formulate this word problem into your notation?  Can you take the music where you want it to go?"
+msgstr ""
+
+#: ../../source/app_b.rst:34
+# 39373f9ce79e406e8b51aff8dc9ec65d
+msgid "**Adaptive Reasoning:** Can you see how to change what you've learnt for this new problem?"
+msgstr ""
+
+#: ../../source/app_b.rst:36
+# 1ee0eaf1b145429b95020836b637e0c3
+msgid "You habitually think it is worthwhile studying this stuff."
+msgstr ""
+
+#: ../../source/app_b.rst:37
+# 02d6ecd175a348c0946579b9e2816fc7
+msgid "You are diligent and disciplined enough to grind through the tough stuff, and to put in your practice hours."
+msgstr ""
+
+#: ../../source/app_b.rst:39
+# 813d56eeb7e143ebb21b30e41ce6f767
+msgid "You develop a sense of *efficacy* --- that you can make things happen!"
+msgstr ""
+
+#: ../../source/app_b.rst:41
+# 5191956b452945c0ae599c7339f98cca
+msgid "Check out http://mason.gmu.edu/~jsuh4/teaching/strands.htm, or Kilpatrick's book at http://www.nap.edu/openbook.php?isbn=0309069955"
+msgstr ""
+
+#: ../../source/app_b.rst:46
+# 0745ef8264954c38b3773ddd93cc8874
+msgid "Sending Email"
+msgstr ""
+
+#: ../../source/app_b.rst:48
+# ab756c0609d845c8993c42528e32bb69
+msgid "Sometimes it is fun to do powerful things with Python --- remember that part of the \"productive disposition\" we saw under the five threads of proficiency included *efficacy* --- the sense of being able to accomplish something useful.  Here is a Python example of how you can send email to someone."
+msgstr ""
+
+#: ../../source/app_b.rst:86
+# 4df64542a83244bca042d9ab22960327
+msgid "In the context of the course, notice how we use the two objects in this program: we create a message object on line 9, and set some attributes at lines 16-18.  We then create a connection object at line 21, and ask it to send our message."
+msgstr ""
+

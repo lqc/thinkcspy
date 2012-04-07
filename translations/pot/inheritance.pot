@@ -1,0 +1,360 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/inheritance.rst:12
+#: ../../source/inheritance.rst:16
+# 254483b76f554b9da84309e8710b968a
+# e8f5661442e743eca5807c17bdd7cb38
+msgid "Inheritance"
+msgstr ""
+
+#: ../../source/inheritance.rst:18
+# 41d58898949d42ee8341146f7048fee2
+msgid "The language feature most often associated with object-oriented programming is **inheritance**. Inheritance is the ability to define a new class that is a modified version of an existing class."
+msgstr ""
+
+#: ../../source/inheritance.rst:22
+# 8260aedd702040faaba9b5c07b676615
+msgid "The primary advantage of this feature is that you can add new methods to a class without modifying the existing class. It is called inheritance because the new class inherits all of the methods of the existing class. Extending this metaphor, the existing class is sometimes called the **parent** class. The new class may be called the **child** class or sometimes subclass."
+msgstr ""
+
+#: ../../source/inheritance.rst:28
+# 0e5aa167692c4934af901ff3a0a3f54c
+msgid "Inheritance is a powerful feature. Some programs that would be complicated without inheritance can be written concisely and simply with it. Also, inheritance can facilitate code reuse, since you can customize the behavior of parent classes without having to modify them. In some cases, the inheritance structure reflects the natural structure of the problem, which makes the program easier to understand."
+msgstr ""
+
+#: ../../source/inheritance.rst:35
+# 3997847bf9a24c71b4d43b8a8ddd166c
+msgid "On the other hand, inheritance can make programs difficult to read.  When a method is invoked, it is sometimes not clear where to find its definition. The relevant code may be scattered among several modules.  Also, many of the things that can be done using inheritance can be done as elegantly (or more so) without it. If the natural structure of the problem does not lend itself to inheritance, this style of programming can do more harm than good."
+msgstr ""
+
+#: ../../source/inheritance.rst:42
+# 1c5a8937b4f346289d286d374a2ebbd0
+msgid "In this chapter we will demonstrate the use of inheritance as part of a program that plays the card game Old Maid. One of our goals is to write code that could be reused to implement other card games."
+msgstr ""
+
+#: ../../source/inheritance.rst:48
+# 94a441855e3846d0bbd8c44a8f632e3e
+msgid "A hand of cards"
+msgstr ""
+
+#: ../../source/inheritance.rst:50
+# 7e4fef61dd4a4c27845a6aa4e10d2e12
+msgid "For almost any card game, we need to represent a hand of cards. A hand is similar to a deck, of course. Both are made up of a set of cards, and both require operations like adding and removing cards. Also, we might like the ability to shuffle both decks and hands."
+msgstr ""
+
+#: ../../source/inheritance.rst:55
+# 6bf8b8fea1694db09b72936c1c54878f
+msgid "A hand is also different from a deck. Depending on the game being played, we might want to perform some operations on hands that don't make sense for a deck. For example, in poker we might classify a hand (straight, flush, etc.) or compare it with another hand. In bridge, we might want to compute a score for a hand in order to make a bid."
+msgstr ""
+
+#: ../../source/inheritance.rst:61
+# 7c1ba642a3c74608bc4b5965708c61ff
+msgid "This situation suggests the use of inheritance. If ``Hand`` is a subclass of ``Deck``, it will have all the methods of ``Deck``, and new methods can be added."
+msgstr ""
+
+#: ../../source/inheritance.rst:65
+# 3bd2aad519ad4ff0872a5e3c1779d1a8
+msgid "In the class definition, the name of the parent class appears in parentheses:"
+msgstr ""
+
+#: ../../source/inheritance.rst:73
+# 100d5c0a231f4636882511b96a311452
+msgid "This statement indicates that the new ``Hand`` class inherits from the existing ``Deck`` class."
+msgstr ""
+
+#: ../../source/inheritance.rst:76
+# 6fff17894e3944e6a37bf9d12f566d3e
+msgid "The ``Hand`` constructor initializes the attributes for the hand, which are ``name`` and ``cards``. The string ``name`` identifies this hand, probably by the name of the player that holds it. The name is an optional parameter with the empty string as a default value. ``cards`` is the list of cards in the hand, initialized to the empty list:"
+msgstr ""
+
+#: ../../source/inheritance.rst:90
+# dd5cdca18b68462e80fc5934faa70036
+msgid "For just about any card game, it is necessary to add and remove cards from the deck. Removing cards is already taken care of, since ``Hand`` inherits ``remove`` from ``Deck``. But we have to write ``add``:"
+msgstr ""
+
+#: ../../source/inheritance.rst:102
+# 45a7e684dd444f8db19276948e515cb1
+msgid "Again, the ellipsis indicates that we have omitted other methods. The list ``append`` method adds the new card to the end of the list of cards."
+msgstr ""
+
+#: ../../source/inheritance.rst:107
+# 56f07c693e4a423696a1e76544b01935
+msgid "Dealing cards"
+msgstr ""
+
+#: ../../source/inheritance.rst:109
+# dd3f7675654b493c83887fb05f89a0cb
+msgid "Now that we have a ``Hand`` class, we want to deal cards from the ``Deck`` into hands. It is not immediately obvious whether this method should go in the ``Hand`` class or in the ``Deck`` class, but since it operates on a single deck and (possibly) several hands, it is more natural to put it in ``Deck``."
+msgstr ""
+
+#: ../../source/inheritance.rst:114
+# d559c159c74041319d00f7045c21d90d
+msgid "``deal`` should be fairly general, since different games will have different requirements. We may want to deal out the entire deck at once or add one card to each hand."
+msgstr ""
+
+#: ../../source/inheritance.rst:118
+# 4c1b2ae9054e4bad838748ca472e2845
+msgid "``deal`` takes two parameters, a list (or tuple) of hands and the total number of cards to deal. If there are not enough cards in the deck, the method deals out all of the cards and stops:"
+msgstr ""
+
+#: ../../source/inheritance.rst:135
+# 39f626fb8b3146ada653e456c764c95c
+msgid "The second parameter, ``numCards``, is optional; the default is a large number, which effectively means that all of the cards in the deck will get dealt."
+msgstr ""
+
+#: ../../source/inheritance.rst:139
+# 84ae709b4744499fb19d6358c73ffb1c
+msgid "The loop variable ``i`` goes from 0 to ``numCards-1``. Each time through the loop, a card is removed from the deck using the list method ``pop``, which removes and returns the last item in the list."
+msgstr ""
+
+#: ../../source/inheritance.rst:143
+# 0fdbd804fdf242668631945ac9c13260
+msgid "The modulus operator (``%``) allows us to deal cards in a round robin (one card at a time to each hand). When ``i`` is equal to the number of hands in the list, the expression ``i % numHands`` wraps around to the beginning of the list (index 0)."
+msgstr ""
+
+#: ../../source/inheritance.rst:150
+# 686ba1a8c6884ad689cbf541ad506f5e
+msgid "Printing a Hand"
+msgstr ""
+
+#: ../../source/inheritance.rst:152
+# 8140c60500bc4b20b44eeb883be07964
+msgid "To print the contents of a hand, we can take advantage of the ``__str__`` method inherited from ``Deck``. For example:"
+msgstr ""
+
+#: ../../source/inheritance.rst:169
+# fcd432a58545411999b81ee7db1e85cd
+msgid "It's not a great hand, but it has the makings of a straight flush."
+msgstr ""
+
+#: ../../source/inheritance.rst:171
+# b9654b40699b45be8d43e89e2d0d43b1
+msgid "Although it is convenient to inherit the existing methods, there is additional information in a ``Hand`` object we might want to include when we print one. To do that, we can provide a ``__str__`` method in the ``Hand`` class that overrides the one in the ``Deck`` class:"
+msgstr ""
+
+#: ../../source/inheritance.rst:189
+# f81eae586367432fb3564795f09ebdb2
+msgid "Initially, ``s`` is a string that identifies the hand. If the hand is empty, the program appends the words ``is empty`` and returns ``s``."
+msgstr ""
+
+#: ../../source/inheritance.rst:192
+# 27cddc860ccc421e8b883b24bbed576a
+msgid "Otherwise, the program appends the word ``contains`` and the string representation of the ``Deck``, computed by invoking the ``__str__`` method in the ``Deck`` class on ``self``."
+msgstr ""
+
+#: ../../source/inheritance.rst:196
+# 1d81407ae6734a91a086cb001a9a4e77
+msgid "It may seem odd to send ``self``, which refers to the current ``Hand``, to a ``Deck`` method, until you remember that a ``Hand`` is a kind of ``Deck``. ``Hand`` objects can do everything ``Deck`` objects can, so it is legal to send a ``Hand`` to a ``Deck`` method."
+msgstr ""
+
+#: ../../source/inheritance.rst:201
+# 0d077ae10cb24277b3603775419d71f0
+msgid "In general, it is always legal to use an instance of a subclass in place of an instance of a parent class."
+msgstr ""
+
+#: ../../source/inheritance.rst:206
+# fdfb21f1060e47b18af7ee4b424fe26f
+msgid "The ``CardGame`` class"
+msgstr ""
+
+#: ../../source/inheritance.rst:208
+# 5031ba4a48114aa68fa5b4a2b7e6c92d
+msgid "The ``CardGame`` class takes care of some basic chores common to all games, such as creating the deck and shuffling it:"
+msgstr ""
+
+#: ../../source/inheritance.rst:219
+# b3451b18087a4955b7e874cf87b8db1f
+msgid "This is the first case we have seen where the initialization method performs a significant computation, beyond initializing attributes."
+msgstr ""
+
+#: ../../source/inheritance.rst:222
+# e3a6cb4cb51348b78463c59b4b086d4e
+msgid "To implement specific games, we can inherit from ``CardGame`` and add features for the new game. As an example, we'll write a simulation of Old Maid."
+msgstr ""
+
+#: ../../source/inheritance.rst:225
+# 44b85579a8444be98b818c2368c93250
+msgid "The object of Old Maid is to get rid of cards in your hand. You do this by matching cards by rank and color. For example, the 4 of Clubs matches the 4 of Spades since both suits are black. The Jack of Hearts matches the Jack of Diamonds since both are red."
+msgstr ""
+
+#: ../../source/inheritance.rst:230
+# 7bc1104e5e7742f08ba96e92450fc8c8
+msgid "To begin the game, the Queen of Clubs is removed from the deck so that the Queen of Spades has no match. The fifty-one remaining cards are dealt to the players in a round robin. After the deal, all players match and discard as many cards as possible."
+msgstr ""
+
+#: ../../source/inheritance.rst:235
+# 9e3e69f13eb9448784cac11d980385df
+msgid "When no more matches can be made, play begins. In turn, each player picks a card (without looking) from the closest neighbor to the left who still has cards. If the chosen card matches a card in the player's hand, the pair is removed. Otherwise, the card is added to the player's hand. Eventually all possible matches are made, leaving only the Queen of Spades in the loser's hand."
+msgstr ""
+
+#: ../../source/inheritance.rst:242
+# dbd2847e4b0b446f924eebde5f0bb0b5
+msgid "In our computer simulation of the game, the computer plays all hands. Unfortunately, some nuances of the real game are lost. In a real game, the player with the Old Maid goes to some effort to get their neighbor to pick that card, by displaying it a little more prominently, or perhaps failing to display it more prominently, or even failing to fail to display that card more prominently. The computer simply picks a neighbor's card at random."
+msgstr ""
+
+#: ../../source/inheritance.rst:251
+# 5a620f70848a4dacbfc1c0251caa97d7
+msgid "``OldMaidHand`` class"
+msgstr ""
+
+#: ../../source/inheritance.rst:253
+# 19294a9c3240402d9c009f6968e382a3
+msgid "A hand for playing Old Maid requires some abilities beyond the general abilities of a ``Hand``. We will define a new class, ``OldMaidHand``, that inherits from ``Hand`` and provides an additional method called ``remove_matches``:"
+msgstr ""
+
+#: ../../source/inheritance.rst:275
+# cdf61ea437d64e30acbe0ee8b5b2bdec
+msgid "We start by making a copy of the list of cards, so that we can traverse the copy while removing cards from the original. Since ``self.cards`` is modified in the loop, we don't want to use it to control the traversal. Python can get quite confused if it is traversing a list that is changing!"
+msgstr ""
+
+#: ../../source/inheritance.rst:280
+# 3e5fe570c33a4b33bd0c8d93fd5f12dd
+msgid "For each card in the hand, we figure out what the matching card is and go looking for it. The match card has the same rank and the other suit of the same color. The expression ``3 - card.suit`` turns a Club (suit 0) into a Spade (suit 3) and a Diamond (suit 1) into a Heart (suit 2).  You should satisfy yourself that the opposite operations also work. If the match card is also in the hand, both cards are removed."
+msgstr ""
+
+#: ../../source/inheritance.rst:287
+# 74b7ef52602a427380d738e0cab17d9b
+msgid "The following example demonstrates how to use ``remove_matches``:"
+msgstr ""
+
+#: ../../source/inheritance.rst:323
+# 1c17f694eb664fe6af9d32e7f5ea6653
+msgid "Notice that there is no ``__init__`` method for the ``OldMaidHand`` class.  We inherit it from ``Hand``."
+msgstr ""
+
+#: ../../source/inheritance.rst:328
+# 51f523767829477d96deff47bc06e4a0
+msgid "``OldMaidGame`` class"
+msgstr ""
+
+#: ../../source/inheritance.rst:330
+# 24ed437228ff471d91ef19c85efc371e
+msgid "Now we can turn our attention to the game itself. ``OldMaidGame`` is a subclass of ``CardGame`` with a new method called ``play`` that takes a list of players as a parameter."
+msgstr ""
+
+#: ../../source/inheritance.rst:334
+# bf5892bb60b6495cb02cfd9064145322
+msgid "Since ``__init__`` is inherited from ``CardGame``, a new ``OldMaidGame`` object contains a new shuffled deck:"
+msgstr ""
+
+#: ../../source/inheritance.rst:370
+# 0136b029677441ecb46910329f7f948c
+msgid "The writing of ``printHands()`` is left as an exercise."
+msgstr ""
+
+#: ../../source/inheritance.rst:372
+# eb81bc67c95a4ec4ba84869ce0b9e0ff
+msgid "Some of the steps of the game have been separated into methods. ``remove_all_matches`` traverses the list of hands and invokes ``remove_matches`` on each:"
+msgstr ""
+
+#: ../../source/inheritance.rst:387
+# 184c767682c64b5fb1c0abeacee7d581
+msgid "``count`` is an accumulator that adds up the number of matches in each hand and returns the total."
+msgstr ""
+
+#: ../../source/inheritance.rst:390
+# 8ccf30825b9b494396f07a3c817ef402
+msgid "When the total number of matches reaches twenty-five, fifty cards have been removed from the hands, which means that only one card is left and the game is over."
+msgstr ""
+
+#: ../../source/inheritance.rst:394
+# 6e4d735b1d31409c965bd2c801c252f9
+msgid "The variable ``turn`` keeps track of which player's turn it is. It starts at 0 and increases by one each time; when it reaches ``numHands``, the modulus operator wraps it back around to 0."
+msgstr ""
+
+#: ../../source/inheritance.rst:398
+# 377cfd165d104e0d81602741c43d602e
+msgid "The method ``playOneTurn`` takes a parameter that indicates whose turn it is. The return value is the number of matches made during this turn:"
+msgstr ""
+
+#: ../../source/inheritance.rst:417
+# 5df5ce8e63ad4d7d98940c640ebbaeef
+msgid "If a player's hand is empty, that player is out of the game, so he or she does nothing and returns 0."
+msgstr ""
+
+#: ../../source/inheritance.rst:420
+# 78c4011d79fd4e71b6de8b22d4cb988f
+msgid "Otherwise, a turn consists of finding the first player on the left that has cards, taking one card from the neighbor, and checking for matches. Before returning, the cards in the hand are shuffled so that the next player's choice is random."
+msgstr ""
+
+#: ../../source/inheritance.rst:425
+# 6185b18d0fc649d09837bd306db9c530
+msgid "The method ``find_neighbor`` starts with the player to the immediate left and continues around the circle until it finds a player that still has cards:"
+msgstr ""
+
+#: ../../source/inheritance.rst:440
+# 27cca04856094f04a88c99af3d955755
+msgid "If ``find_neighbor`` ever went all the way around the circle without finding cards, it would return ``None`` and cause an error elsewhere in the program. Fortunately, we can prove that that will never happen (as long as the end of the game is detected correctly)."
+msgstr ""
+
+#: ../../source/inheritance.rst:445
+# 38704d911e7b43b9bee05e5d9a756fb9
+msgid "We have omitted the ``printHands`` method. You can write that one yourself."
+msgstr ""
+
+#: ../../source/inheritance.rst:447
+# 7811d6dc0a714ad8aa133926e30b87d1
+msgid "The following output is from a truncated form of the game where only the top fifteen cards (tens and higher) were dealt to three players.  With this small deck, play stops after seven matches instead of twenty-five."
+msgstr ""
+
+#: ../../source/inheritance.rst:524
+# 8b3108fe2e7f4b07958be628681e6313
+msgid "So Jeff loses."
+msgstr ""
+
+#: ../../source/inheritance.rst:528
+# ef37086c2e544603b5da6f77203ac0ba
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/inheritance.rst:533
+# 8b33274c663b4efd99754a84a9ce5613
+msgid "The ability to define a new class that is a modified version of a previously defined class."
+msgstr ""
+
+#: ../../source/inheritance.rst:537
+# f64bc717c3824d93b2aae70a32416411
+msgid "The class from which a child class inherits."
+msgstr ""
+
+#: ../../source/inheritance.rst:540
+# 07fe9f0402ad4bd4bd08c22a4a3f404d
+msgid "A new class created by inheriting from an existing class; also called a subclass."
+msgstr ""
+
+#: ../../source/inheritance.rst:545
+# 8de896947007478c8b21a39c5af1ff54
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/inheritance.rst:547
+# 3512412af7f74af8a87047af7a4d3bd5
+msgid "Add a method, ``printHands``, to the ``OldMaidGame`` class which traverses ``self.hands`` and prints each hand."
+msgstr ""
+
+#: ../../source/inheritance.rst:550
+# 1a9a94bfca4940efa63d666a67b7c764
+msgid "Define a new kind of Turtle, ``TurtleGTX``,  that comes with some extra features: it can jump forward a given distance, and it has an odometer that keeps track of how far the turtle has travelled since it came off the production line. (The parent class has a number of synonyms like ``fd``, ``forward``, ``back``, ``backward``, and ``bk``: for this exercise, just focus on putting this functionality on the ``forward`` method.)  Think carefully about how to count the distance if the turtle is asked to move forward by a negative amount.  (We would not want to buy a second-hand turtle whose odometer reading was faked because its previous owner drove it backwards around the block too often. Try this in a car near you, and see if the car's odometer counts up or down when you reverse.)"
+msgstr ""
+
+#: ../../source/inheritance.rst:562
+# 957950b963844aa4941119f932d46085
+msgid "After travelling some random distance, your turtle should break down with a flat tyre. After this happens, raise an exception whenever ``forward`` is called. Also provide a ``changeTyre`` method that can fix the flat."
+msgstr ""
+

@@ -1,0 +1,318 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/app_e.rst:13
+# f8399475b59744898ecaa1a044cbac07
+msgid "Some Tips, Tricks, and Common Errors"
+msgstr ""
+
+#: ../../source/app_e.rst:15
+# 9a9a4b1c53e4493caaaa1b51a453b994
+msgid "These are small summaries of ideas, tips, and commonly seen errors that might be helpful to those beginning Python."
+msgstr ""
+
+#: ../../source/app_e.rst:19
+# aa993ccfc6d64282981f86c0b3df1abe
+msgid "Functions"
+msgstr ""
+
+#: ../../source/app_e.rst:21
+# 2010f15a8cea48d6a9ec67669dee5d5d
+msgid "Functions help us with our mental chunking: they allow us to group together statements for a high-level purpose, e.g. a function to sort a list of items, a function to make the turtle draw a spiral, or a function to compute the mean and standard deviation of some measurements."
+msgstr ""
+
+#: ../../source/app_e.rst:26
+# 4e1e5c510e4c458ca5edc2d7acdca66c
+msgid "There are two kinds of functions: fruitful, or value-returning functions *calculate and return a value*, and we use them because we're primarily interested in the value they'll return.  Void (non-fruitful) functions are used because they *perform actions* that we want done --- e.g. make a turtle draw a rectangle, or print the first thousand prime numbers.  They always return ``None`` --- a special dummy value."
+msgstr ""
+
+#: ../../source/app_e.rst:33
+# c1265d5b3b4940fab71e383d9f1b87d7
+msgid "Values like ``None``, ``True`` and ``False`` are not strings: they are special values in Python, and are in the list of keywords we gave in chapter 2.  Keywords are special in the language: they are part of the syntax. So we cannot create our own variable or function with a name ``True`` --- we'll get a syntax error. (Built-in functions are not privileged like keywords: we can define our own variable or function called ``len``, but we'd be silly to do so!)"
+msgstr ""
+
+#: ../../source/app_e.rst:41
+# 8686b951fd0e45e783a6c21302538b01
+msgid "Along with the fruitful/void division, there are two flavours of the ``return`` statement in Python - one that returns a useful value, and the other that returns nothing, or ``None``.   And if we get to the end of any function and we have not explicitly executed any ``return`` statement, Python automatically returns the value ``None``."
+msgstr ""
+
+#: ../../source/app_e.rst:49
+# ebf25af3b5e8458aa22e6bab4493fc18
+msgid "Perhaps nothing --- some functions exists purely to perform actions rather than to calculate and return a result."
+msgstr ""
+
+#: ../../source/app_e.rst:52
+# 4205787586984940a253cf3731c0dd59
+msgid "To make functions more useful, they are given *parameters*.  So a function to make a turtle draw a square might have two parameters --- one for the turtle that needs to do the drawing, and another for the size of the square.  See the first example in Chapter 4 --- that function can be used with any turtle, and for any size square.  So it is much more general than a function that always uses a specific turtle, say ``tess`` to draw a square of a specific size, say 30."
+msgstr ""
+
+#: ../../source/app_e.rst:60
+# d1bafe7745de4607aa43292ca6f4aff0
+msgid "Understand which parts of the function will be hard-coded and unchangeable, and which parts should become parameters so that they can be customized by the caller of the function."
+msgstr ""
+
+#: ../../source/app_e.rst:65
+# c6299995f1cc468fa18b6c8faea1cf40
+msgid "In math, we're familiar with functions like  ``f(x) = 3x + 5``.  We already understand that when we call the function ``f(3)`` we make some association between the parameter x and the argument 3. Try to draw parallels to argument passing in Python."
+msgstr ""
+
+#: ../../source/app_e.rst:69
+# f65224f86dab44888055e77b83fd144e
+msgid "Quiz:  Is the function ``f(z) = 3z + 5`` the same as function ``f`` above?"
+msgstr ""
+
+#: ../../source/app_e.rst:73
+# 5979439e2337416ebcc72ddbfa97744a
+msgid "Problems with logic and flow of control"
+msgstr ""
+
+#: ../../source/app_e.rst:75
+# 0e4e108e9cae430e8eb78839ecb41520
+msgid "We often want to know if some condition holds for any item in a list, e.g. \"does the list have any odd numbers?\" This is a common mistake:"
+msgstr ""
+
+#: ../../source/app_e.rst:89
+# 453dee45ab5a41d1a9c3af00973478a4
+msgid "Can we spot what's wrong here?  As soon as we execute a ``return``, we'll leave the function. So the logic of saying \"If I find an odd number I can return True\" is fine.  However, we cannot return False after only looking at one item --- we can only return False if we've been through all the items, and none of them are odd.  So line 6 should not be there, and line 7 has to be outside the loop.  Here is a corrected version:"
+msgstr ""
+
+#: ../../source/app_e.rst:105
+# 08bab1792ee3439aa2bd2ef2c2fc8ee0
+msgid "This \"eureka\", or \"short-circuit\" style of returning from a function as soon as we are certain what the outcome will be was first seen in Section 8.10, in the chapter on strings."
+msgstr ""
+
+#: ../../source/app_e.rst:109
+# 71bc4b6738dc4c0486c045885b328ef6
+msgid "It is preferred over this one, which also works correctly:"
+msgstr ""
+
+#: ../../source/app_e.rst:125
+# 952ea4ae6e47401fbf784cef06204d3c
+msgid "The performance disadvantage of this one is that it traverses the whole list, even if it knows the outcome very early on."
+msgstr ""
+
+#: ../../source/app_e.rst:130
+# 30182a5f6a5148d3a8b4868155e4469a
+msgid "Do I need to look at all elements in all cases?  Can I shortcut and take an early exit?  Under what conditions?  When will I have to examine all the items in the list?"
+msgstr ""
+
+#: ../../source/app_e.rst:134
+# 48766f43fdb642f2b0db48c86d55c120
+msgid "The code in lines 7-10 can also be tightened up.  The expression ``count > 0`` evaluates to a boolean value, either ``True`` or ``False``.  The value can be used directly in the ``return`` statement.   So we could cut out that code and simply have the following:"
+msgstr ""
+
+#: ../../source/app_e.rst:151
+# 0e593d0a42e6468392f3a42905b42e1d
+msgid "Although this code is tighter, it is not as nice as the one that did the short-circuit return as soon as the first odd number was found."
+msgstr ""
+
+#: ../../source/app_e.rst:156
+# f7074709e83a473296c8c9e7b891801e
+msgid "Mature programmers won't write ``if isPrime(n) == True:`` when they could say instead   ``if isPrime(n):``    Think more generally about boolean values, not just in the context of ``if`` or ``while`` statements.  Like arithmetic expressions, they have their own set of operators (``and``, ``or``, ``not``) and values (``True``, ``False``) and can be assigned to variables, put into lists, etc. A good resource for improving your use of booleans is http://en.wikibooks.org/wiki/Non-Programmer%27s_Tutorial_for_Python_3/Boolean_Expressions"
+msgstr ""
+
+#: ../../source/app_e.rst:164
+# 9bee11b885a7481eb77628dd679b8290
+msgid "Exercise time:"
+msgstr ""
+
+#: ../../source/app_e.rst:166
+# da3d6f2cd38d4c4f9f4f877c73e8001d
+msgid "How would we adapt this to make another function which returns ``True`` if *all* the numbers are odd? Can you still use a short-circuit style?"
+msgstr ""
+
+#: ../../source/app_e.rst:168
+# 845822cba38e4726878400a4ae6b38f4
+msgid "How would we adapt it to return ``True`` if at least three of the numbers are odd?  Short-circuit the traversal when the third odd number is found --- don't traverse the whole list unless we have to."
+msgstr ""
+
+#: ../../source/app_e.rst:174
+# 6f67b66b1340402a8ece603e4dbd5b80
+msgid "Local variables"
+msgstr ""
+
+#: ../../source/app_e.rst:176
+# 95a4357757af4d36bac5d2a3878209e8
+msgid "Functions are called, or activated, and while they're busy they create their own stack frame which holds local variables.  A local variable is one that belongs to the current activation.  As soon as the function returns (whether from an explicit return statement or because Python reached the last statement), the stack frame and its local variables are all destroyed.  The important consequence of this is that a function cannot use its own variables to remember any kind of state between different activations.  It cannot count how many times it has been called, or remember to switch colours between red and blue UNLESS it makes use of variables that are global.  Global variables will survive even after our function has exited, so they are the correct way maintain information between calls."
+msgstr ""
+
+#: ../../source/app_e.rst:197
+# 7a42bea973f7400eab67d70cd7b67b4a
+msgid "This fragment assumes our turtle is ``tess``.  Each time we call ``h2()`` it turns, draws, and increases the global variable ``sz``.  Python always assumes that an assignment to a variable (as in line 7) means that we want a new local variable, unless we've provided a ``global`` declaration (on line 4).  So leaving out the global declaration means this does not work."
+msgstr ""
+
+#: ../../source/app_e.rst:204
+# ab5869997c2a43bb86dce6a048da653a
+msgid "Use a Python visualizer like the one at http://netserv.ict.ru.ac.za/python3_viz to build a strong understanding of function calls, stack frames, local variables, and function returns."
+msgstr ""
+
+#: ../../source/app_e.rst:210
+# 0b025e9b63104950ae34f02fe237f98b
+msgid "Any assignment to a variable within a function means Python will make a local variable, unless we override with ``global``."
+msgstr ""
+
+#: ../../source/app_e.rst:214
+# bf8439310c3b4c749a423b1a170b8485
+msgid "Event handler functions"
+msgstr ""
+
+#: ../../source/app_e.rst:216
+# 881a2650835f4c78841aea8eb5850ff8
+msgid "Our chapter on event handling showed three different kinds of events that we could handle. They each have their own subtle points that can trip us up."
+msgstr ""
+
+#: ../../source/app_e.rst:219
+# 876c149bcbde4609b117aa5b67e40b58
+msgid "Event handlers are void functions --- they don't return any values."
+msgstr ""
+
+#: ../../source/app_e.rst:220
+# f43136aae9ad475a8db26d282d846767
+msgid "They're automatically called by the Python interpreter in response to an event, so we don't get to see the code that calls them."
+msgstr ""
+
+#: ../../source/app_e.rst:222
+# f334cdae58604b3293d1f2c8573592f9
+msgid "A mouse-click event passes two coordinate arguments to its handler, so when we write this handler we have to provide for two parameters (usually named ``x`` and ``y``). This is how the handler knows where the mouse click occurred."
+msgstr ""
+
+#: ../../source/app_e.rst:225
+# 3d42bb2002d547e797f9b5e558593bf5
+msgid "A keypress event handler has to be bound to the key it responds to.  There is a messy extra step when using keypresses - we have to remember to issue a ``wn.listen()`` before our program will receive any keypresses.  But if the user presses the key 10 times, the handler will be called ten times."
+msgstr ""
+
+#: ../../source/app_e.rst:228
+# 1060464738374c0c85221e792cb55b9a
+msgid "Using a timer to create a future-dated event only causes one call to the handler.  If we want repeated periodic handler activations, then from within the handler we call ``wn.ontimer(....)`` to set up the next event."
+msgstr ""
+
+#: ../../source/app_e.rst:233
+# 196aeedee8bc489db01ac2b76f24b044
+msgid "String handling"
+msgstr ""
+
+#: ../../source/app_e.rst:235
+# 3473ae61dcb8420d9b5135dd9004ee21
+msgid "There are only four *really* important operations on strings, and we'll be able to do just about anything.  There are many more nice-to-have methods (we'll call them sugar coating) that can make life easier, but if we can work with the basic four operations smoothly, we'll have a great grounding."
+msgstr ""
+
+#: ../../source/app_e.rst:241
+# cbf6b96f8e044b538fd503fc5d0b7c5d
+msgid "len(str)  finds the length of a string."
+msgstr ""
+
+#: ../../source/app_e.rst:242
+# e04f6e0fff2046e6bf91eb65a28c391f
+msgid "str[i]    the subscript operation extracts the i'th character of the string, as a new string."
+msgstr ""
+
+#: ../../source/app_e.rst:243
+# d4da1ca119084dea8bc34d8e24012b65
+msgid "str[i:j]  the slice operation extracts a substring out of a string."
+msgstr ""
+
+#: ../../source/app_e.rst:244
+# 3d7dfb98788c4ab39830e170d3f29443
+msgid "str.find(target) returns the index where target occurs within the string, or -1 if it is not found."
+msgstr ""
+
+#: ../../source/app_e.rst:246
+# e5736918a8b4498fb8c41f408a640912
+msgid "So if we need to know if \"snake\" occurs as a substring within ``s``, we could write"
+msgstr ""
+
+#: ../../source/app_e.rst:254
+# a818a7b841b041b797df4953de21fb36
+msgid "It would be wrong to split the string into words unless we were asked whether the *word* \"snake\" occurred in the string."
+msgstr ""
+
+#: ../../source/app_e.rst:257
+# 4c161221739e47498da5c9c480af78f4
+msgid "Suppose we're asked to read some lines of data and find function definitions, e.g.: ``def someFunctionName(x, y):``, and we are further asked to isolate and work with the name of the function. (Let's say, print it.)"
+msgstr ""
+
+#: ../../source/app_e.rst:270
+# 395f487878a645efb212cd5c2ef054fa
+msgid "One can extend these ideas:"
+msgstr ""
+
+#: ../../source/app_e.rst:272
+# 2e736777d67c4d0099701860d6bb1904
+msgid "What if the function def was indented, and didn't start at column 0? The code would need a bit of adjustment, and we'd probably want to be sure that all the characters in front of the defpos were spaces. We would not want to do the wrong thing on data like this:  ``   # I def initely like Python!"
+msgstr ""
+
+#: ../../source/app_e.rst:276
+# 83c43d021d094a1ca26d5c7d7b127e98
+msgid "We've assumed on line 3 that we will find an open parenthesis.  It may need to be checked that we did!"
+msgstr ""
+
+#: ../../source/app_e.rst:278
+# 1a46dd32ef12499da67e47041efd6dd6
+msgid "We have also assumed that there was exactly one space between the keyword ``def`` and the start of the function name.  It will not work nicely for ``def       f(x)``"
+msgstr ""
+
+#: ../../source/app_e.rst:281
+# 3212946190f54dcfb6ac7f73615d24d1
+msgid "As we've already mentioned, there are many more \"sugar-coated\" methods that let us work more easily with strings.  There is an ``rfind`` method, like ``find``, that searches from the end of the string backwards.  It is useful if we want to find the last occurrence of something. The ``lower`` and ``upper`` methods can do case conversion.  And the ``split`` method is great for breaking a string into a list of words, or into a list of lines.  We've also made extensive use in this book of the ``format`` method. In fact, if we want to practice reading the python documentation and learning some new methods on our own, the string methods are an excellent resource."
+msgstr ""
+
+#: ../../source/app_e.rst:291
+# 087d3b194d414bc48dce0288a1491f7c
+msgid "Exercises:"
+msgstr ""
+
+#: ../../source/app_e.rst:293
+# e8017af2d71a45d38c588d5a0d1e448f
+msgid "Suppose any line of text can contain at most one url that starts with \"http://\" and ends at the next space in the line.  Write a fragment of code to extract and print the full url if it is present.  (Hint: read the documentation for ``find``.  It takes some extra arguments, so you can set a starting point from which it will search.)"
+msgstr ""
+
+#: ../../source/app_e.rst:298
+# 64b2b523967341fbb7698d5e050ed206
+msgid "Suppose a string contains at most one substring \"< ... >\".  Write a fragment of code to extract and print the portion of the string between the angle brackets."
+msgstr ""
+
+#: ../../source/app_e.rst:303
+# 4a0a384f8d7c4417974395a16dedaaad
+msgid "Looping and lists"
+msgstr ""
+
+#: ../../source/app_e.rst:305
+# a211179c2cc349a88ef387b70496eb44
+msgid "Computers are useful because they can repeat computation, accurately and fast. So loops are going to be a central feature of almost all programs you encounter."
+msgstr ""
+
+#: ../../source/app_e.rst:310
+# f2e0c4c8ed914112936f3add5148a658
+msgid "Lists are useful if you need to keep data for later computation.  But if you don't need lists, it is probably better not to generate them."
+msgstr ""
+
+#: ../../source/app_e.rst:313
+# 715a15b7127c42d388d876cc03926a98
+msgid "Here are two functions that both generate ten million random numbers, and return the sum of the numbers.  They both work."
+msgstr ""
+
+#: ../../source/app_e.rst:343
+# 21411775377d4598b6a02db2600996ef
+msgid "What reasons are there for preferring the second version here? (Hint: open a tool like the Performance Monitor on your computer, and watch the memory usage. How big can you make the list before you get a fatal memory error in ``sum1``?)"
+msgstr ""
+
+#: ../../source/app_e.rst:347
+# f077cd2301914ea1a886b6f4f42c035d
+msgid "In a similar way, when working with files, we often have an option to read the whole file contents into a single string, or we can read one line at a time and process each line as we read it. Line-at-a-time is the more traditional and perhaps safer way to do things --- you'll be able to work comfortably no matter how large the file is.  But you may find whole-file-at-once is sometimes more convenient!"
+msgstr ""
+

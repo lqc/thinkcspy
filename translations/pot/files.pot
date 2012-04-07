@@ -1,0 +1,393 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/files.rst:12
+# 8b052383536047aaad694bb66d18d7f1
+msgid "Files"
+msgstr ""
+
+#: ../../source/files.rst:17
+# f5897e80ac2c41288abd471a4099f4c1
+msgid "About files"
+msgstr ""
+
+#: ../../source/files.rst:19
+# c646dc5fd23a4b3da3b46b08fa5df7e3
+msgid "While a program is running, its data is stored in *random access memory* (RAM). RAM is fast and inexpensive, but it is also **volatile**, which means that when the program ends, or the computer shuts down, data in RAM disappears. To make data available the next time you turn on your computer and start your program, you have to write it to a **non-volatile** storage medium, such a hard drive, usb drive, or CD-RW."
+msgstr ""
+
+#: ../../source/files.rst:26
+# 04c674a4fd874903a59f477ae2fd1ed9
+msgid "Data on non-volatile storage media is stored in named locations on the media called **files**. By reading and writing files, programs can save information between program runs."
+msgstr ""
+
+#: ../../source/files.rst:30
+# 165b00911dd8401eb17741b7c1225165
+msgid "Working with files is a lot like working with a notebook. To use a notebook, you have to open it. When you're done, you have to close it.  While the notebook is open, you can either write to it or read from it. In either case, you know where you are in the notebook. You can read the whole notebook in its natural order or you can skip around."
+msgstr ""
+
+#: ../../source/files.rst:36
+# fbbbc25e869241218a6c56ee2b52eae7
+msgid "All of this applies to files as well. To open a file, you specify its name and indicate whether you want to read or write."
+msgstr ""
+
+#: ../../source/files.rst:40
+# ab51cc3eede74171aa6d695a62e792b0
+msgid "Writing our first file"
+msgstr ""
+
+#: ../../source/files.rst:42
+# 18f02d41bb9e4cd5a13a808d09440ae8
+msgid "Let's begin with a simple program that writes three lines of text into a file:"
+msgstr ""
+
+#: ../../source/files.rst:53
+# 2172d8262bef474faf3b3fbe8130dce9
+msgid "Opening a file creates what we call a file **handle**. In this example, the variable ``myfile`` refers to the new handle object.  Our program calls methods on the handle, and this makes changes to the actual file which is usually located on our disk."
+msgstr ""
+
+#: ../../source/files.rst:57
+# 731d54518dad4ce4a5cd8b0c7bdc443e
+msgid "On line 1, the open function takes two arguments. The first is the name of the file, and the second is the **mode**. Mode ``'w'`` means that we are opening the file for writing."
+msgstr ""
+
+#: ../../source/files.rst:61
+# 98f82b3462d5456d91b4199aa9cafed0
+msgid "If there is no file named ``test.txt`` on the disk, it will be created. If there already is one, it will be replaced by the file we are writing."
+msgstr ""
+
+#: ../../source/files.rst:64
+# ac0868330fc34e51a39c72c0cc14a352
+msgid "To put data in the file we invoke the ``write`` method on the handle, shown in lines 2, 3 and 4 above.  In bigger programs, lines 2-4 will usually be replaced by a loop that writes many more lines into the file."
+msgstr ""
+
+#: ../../source/files.rst:68
+# fab02b695a6c443cbc578f77a31f0d88
+msgid "Closing the file handle (line 5) tells the system that we are done writing and makes the disk file available for reading by other programs (or by our own program)."
+msgstr ""
+
+#: ../../source/files.rst:74
+# 8a6dfd995ba34405ad53c42e5ee33ac4
+msgid "We're all familiar with a remote control for a TV.  You perform operations on the remote control --- switch channels, change the volume, etc.  But the real action happens on the TV.  So, by simple analogy, we'd call the remote control your `handle` to the underlying TV."
+msgstr ""
+
+#: ../../source/files.rst:79
+# f97c6e30545a4b2e9a67da30e68ce718
+msgid "Sometimes we want to emphasize the difference --- the file handle is not the same as the file, and the remote control is not the same as the TV. But at other times we prefer to treat them as a single mental chunk, or abstraction, and we'll just say \"close the file\", or \"flip the TV channel\"."
+msgstr ""
+
+#: ../../source/files.rst:87
+# 441035888c6f466486a75d6e4f54d582
+msgid "Reading a file line-at-a-time"
+msgstr ""
+
+#: ../../source/files.rst:89
+# 7b475395b8944485a4580a1cf2cd31c5
+msgid "Now that the file exists on our disk, we can open it, this time for reading, and read all the lines in the file, one at a time. This time, the mode argument is ``'r'`` for reading:"
+msgstr ""
+
+#: ../../source/files.rst:106
+# 61986f801ae34f7b8bf59904813bd01b
+msgid "This is a handy pattern for our toolbox. In bigger programs, we'd squeeze more extensive logic into the body of the loop at line 8 --- for example, if each line of the file contained the name and email address of one of our friends, perhaps we'd split the line into some pieces and call a function to send the friend a party invitation."
+msgstr ""
+
+#: ../../source/files.rst:112
+# 67fe0ff73c38468bb560a54a94ac8793
+msgid "On line 8 we suppress the newline character that ``print`` usually appends to our strings.  Why?  This is because the string already has its own newline:  the ``readline`` method in line 3 returns everything up to *and including* the newline character.  This also explains the end-of-file detection logic: when there are no more lines to be read from the file, ``readline`` returns an empty string --- one that does not even have a newline at the end, hence its length is 0."
+msgstr ""
+
+#: ../../source/files.rst:122
+# 52bbc626d0db40ea909ee6b82651a505
+msgid "In our sample case here, we have three lines in the file, yet we enter the loop *four* times.  In Python, you only learn that the file has no more lines by bumping your head against the end of file, i.e. when you try to read a line that doesn't exist.  In some other programming languages (e.g. Pascal), things are different: there you read three lines, but you have what is called *look ahead* --- after reading the third line you already know that there are no more lines in the file. You're not even allowed to try to read the fourth line."
+msgstr ""
+
+#: ../../source/files.rst:132
+# 90becf30b80846208119104e528bc076
+msgid "So the templates for working line-at-a-time in Pascal and Python are subtly different!"
+msgstr ""
+
+#: ../../source/files.rst:135
+# 8ab798bfb8e0402fbfcac9bc5e323788
+msgid "When you transfer your Python skills to your next computer language, be sure to ask how you'll know when the file has ended: is the style in the language \"try, and when you bump your head you'll know\", or is it \"look ahead\"?"
+msgstr ""
+
+#: ../../source/files.rst:141
+# 49d2361f7e534a60b24d5eb0adc540d3
+msgid "If we try to open a file that doesn't exist, we get an error:"
+msgstr ""
+
+#: ../../source/files.rst:149
+# d2c72165f2054773861016a996d92a53
+msgid "Turning a file into a list of lines"
+msgstr ""
+
+#: ../../source/files.rst:151
+# 7a8664ab92db44e9b306d2f82173f417
+msgid "It is often useful to fetch data from a disk file and turn it into a list of lines.  Suppose we have a file containing our friends and their email addresses, one per line in the file.  But we'd like the lines sorted into alphabetical order.  A good plan is to read everything into a list of lines, then sort the list, and then write the sorted list back to another file:"
+msgstr ""
+
+#: ../../source/files.rst:173
+# 15f4a4023a804f8586b0fab2dd93c4fa
+msgid "The ``readlines`` method in line 2 reads all the lines and returns a list of the strings."
+msgstr ""
+
+#: ../../source/files.rst:176
+# 3aee723ec4ff41bdbafbb23508b505f4
+msgid "We could have used the template from the previous section to read each line one-at-a-time, and to build up the list ourselves, but it is a lot easier to use the method that the Python implementors gave us!"
+msgstr ""
+
+#: ../../source/files.rst:182
+# ad29654cd7644c01b37a068333441a6c
+msgid "Reading the whole file at once"
+msgstr ""
+
+#: ../../source/files.rst:184
+# c601d845b41947dd8cb05a785b74c56e
+msgid "Another way of working with text files is to read the complete contents of the file into a string, and then to use our string-processing skills to work with the contents."
+msgstr ""
+
+#: ../../source/files.rst:188
+# 0a0755bd41184bb5b8baff771aac305a
+msgid "We'd normally use this method of processing files if we were not interested in the line structure of the file.   For example, we've seen the ``split`` method on strings which can break a string into words.  So here is how we might count the number of words in a file:"
+msgstr ""
+
+#: ../../source/files.rst:204
+# 71d870a48ca9471f8f7a9a91fd485558
+msgid "You will notice here that we left out the ``'r'`` mode in line 1. By default, if you don't supply the mode, Python opens the file for reading."
+msgstr ""
+
+#: ../../source/files.rst:209
+# f157983fc2874a09a34465800dc9e2d3
+msgid "Working with binary files"
+msgstr ""
+
+#: ../../source/files.rst:211
+# 9c7b58d80ecf4c859a64b54910453662
+msgid "Files that hold photographs, videos, zip files, executable programs, etc. are called **binary** files: they're not organized into lines, and cannot be opened with a normal text editor.  Python works just as easily with binary files, but when you read from the file you're going to get bytes back rather than a string.  Here we'll copy one binary file to another:"
+msgstr ""
+
+#: ../../source/files.rst:232
+# e868ac1cf98e4ef28a4aa37ee88d07d3
+msgid "There are a few new things here.  In lines 1 and 2 we added a ``'b'`` to the mode to tell Python that the files are binary rather than text files.  In line 5, we see ``read`` can take an argument which tells it how many bytes to attempt to read from the file.  Here we chose to read and write up to 1024 bytes on each iteration of the loop.  When we get back an empty buffer from our attempt to read, we know we can break out of the loop and close both the files."
+msgstr ""
+
+#: ../../source/files.rst:240
+# f62951bdb81b4ba193b11d192990f714
+msgid "If you set a breakpoint at line 6, (or print  ``type(buf)`` there) you'll see that the type of ``buf`` is ``bytes``.  We don't do any detailed work with ``bytes`` objects in this textbook."
+msgstr ""
+
+#: ../../source/files.rst:247
+# d86a1f60feef4f6bbcf4aa93fe6a1564
+msgid "An example"
+msgstr ""
+
+#: ../../source/files.rst:249
+# 86c0105927ec4d4d9302011cdcaa1412
+msgid "Many useful line-processing programs will read a text file line-at-a-time and do some minor processing as they write the lines to an output file.  They might number the lines in the output file, or insert extra blank lines after every 60 lines to make it convenient for printing on sheets of paper, or extract some specific columns only from each line in the source file, or only print lines that contain a specific substring.  We call this kind of program a **filter**."
+msgstr ""
+
+#: ../../source/files.rst:256
+# bb5fddb54c0e4c149e4ed1083f2f627d
+msgid "Here is a filter that copies one file to another, omitting any lines that begin with ``#``:"
+msgstr ""
+
+#: ../../source/files.rst:278
+# 7fcd9d71d7354d328114c2d3f644231e
+msgid "The ``continue`` statement at line 9 skips over the remaining lines in the current iteration of the loop, but the loop will still iterate.  This style looks a bit contrived here, but it is often useful to say *\"get the lines we're not concerned with out of the way early, so that we have cleaner more focused logic in the meaty part of the loop that might be written around line 11.\"*"
+msgstr ""
+
+#: ../../source/files.rst:285
+# 8809fce1f0fe4f69a84d7b859bfe7677
+msgid "Thus, if ``text`` is the empty string, the loop exits. If the first character of ``text`` is a hash mark, the flow of execution goes to the top of the loop, ready to start processing the next line. Only if both conditions fail do we fall through to do the processing at line 11, in this example, writing the line into the new file."
+msgstr ""
+
+#: ../../source/files.rst:291
+# 42e94adfcbc8437fa51af8b70dad2809
+msgid "Let's consider one more case: suppose your original file contained empty lines.  At line 6 above, would this program find the first empty line in the file, and terminate immediately?   No!  Recall that ``readline`` always includes the newline character in the string it returns.  It is only when we try to read *beyond* the end of the file that we get back the empty string of length 0."
+msgstr ""
+
+#: ../../source/files.rst:300
+# bbb5c398e2ed4dabbaac2671c6dc15e4
+msgid "Directories"
+msgstr ""
+
+#: ../../source/files.rst:302
+# 1b0ef965c90f46b88abb40285ecedfad
+msgid "Files on non-volatile storage media are organized by a set of rules known as a **file system**. File systems are made up of files and **directories**, which are containers for both files and other directories."
+msgstr ""
+
+#: ../../source/files.rst:306
+# deb8852418914b30b1b6a14d1aeb9ca1
+msgid "When you create a new file by opening it and writing, the new file goes in the current directory (wherever you were when you ran the program). Similarly, when you open a file for reading, Python looks for it in the current directory."
+msgstr ""
+
+#: ../../source/files.rst:310
+# 43d6d748341a4ffda7c8f831169d4f16
+msgid "If you want to open a file somewhere else, you have to specify the **path** to the file, which is the name of the directory (or folder) where the file is located:"
+msgstr ""
+
+#: ../../source/files.rst:321
+# b735c956756147b79c5cc151a986cfab
+msgid "This (unix) example opens a file named ``words`` that resides in a directory named ``dict``, which resides in ``share``, which resides in ``usr``, which resides in the top-level directory of the system, called ``/``. It then reads in each line into a list using ``readlines``, and prints out the first 5 elements from that list."
+msgstr ""
+
+#: ../../source/files.rst:327
+# c9b3b0f467dc4c84bdc0c452d524a55d
+msgid "A Windows path might be ``\"c:/temp/words.txt\"`` or ``\"c:\\\\temp\\\\words.txt\"``. Because backslashes are used to escape things like newlines and tabs, you need to write two backslashes in a literal string to get one!  So the length of these two strings is the same!"
+msgstr ""
+
+#: ../../source/files.rst:332
+# 09d1e2b217434d49ad794ca1a560d5b8
+msgid "You cannot use ``/`` or ``\\`` as part of a filename; they are reserved as a **delimiter** between directory and filenames."
+msgstr ""
+
+#: ../../source/files.rst:335
+# bf3e97a816fa4a47b91c7ce96cdbffc4
+msgid "The file ``/usr/share/dict/words`` should exist on unix-based systems, and contains a list of words in alphabetical order."
+msgstr ""
+
+#: ../../source/files.rst:340
+# df36826a61464fe89bddd585bcb0df9d
+msgid "What about fetching something from the web?"
+msgstr ""
+
+#: ../../source/files.rst:342
+# dd3c56b6c3d44047ba82c4bdaef5fb6f
+msgid "The Python libraries are pretty messy in places.  But here is a very simple example that copies the contents at some web URL to a local file."
+msgstr ""
+
+#: ../../source/files.rst:355
+# 9a06aaa0ae0b40b2bab2ed61931fe6b7
+msgid "The ``urlretrieve`` function --- just one call --- could be used to download any kind of content from the Internet."
+msgstr ""
+
+#: ../../source/files.rst:359
+# 8f7646bf54fb4ebf9cb0b32f23365231
+msgid "The resource we're trying to fetch must exist!  Check this using a browser."
+msgstr ""
+
+#: ../../source/files.rst:360
+# 7301c77af3154355a4511e78f641c380
+msgid "We'll need permission to write to the destination filename, and the file will be created in the \"current directory\" - i.e. the same folder that the Python program is saved in."
+msgstr ""
+
+#: ../../source/files.rst:362
+# 03b55488814a4da79be13280a3873c30
+msgid "If we are behind a proxy server that requires authentication, (as some students are), this may require some more special handling to work around our proxy. Use a local resource for the purpose of this demonstration!"
+msgstr ""
+
+#: ../../source/files.rst:366
+# e215342984a846af875e95973c434d80
+msgid "Here is a slightly different example.  Rather than save the web resource to our local disk, we read it directly into a string, and return it:"
+msgstr ""
+
+#: ../../source/files.rst:386
+# 19f5ad9d5cdd4ae0842d4d48b805a14e
+msgid "Opening the remote url returns what we call a **socket**.  This is a handle to our end of the connection between our program and the remote web server.  We can call read, write, and close methods on the socket object in much the same way as we can work with a file handle."
+msgstr ""
+
+#: ../../source/files.rst:393
+# 91e73ed055bc4a07b6cd767302d36d9e
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/files.rst:399
+# d88e0f15a6824fdea3614c142a8b1887
+msgid "A sequence of one or more characters used to specify the boundary between separate parts of text."
+msgstr ""
+
+#: ../../source/files.rst:403
+# 373493da032b4240bbb73cd3c6259ce9
+msgid "A named collection of files, also called a folder.  Directories can contain files and other directories, which are referred to as *subdirectories* of the directory that contains them."
+msgstr ""
+
+#: ../../source/files.rst:408
+# 10753f381eb143338cf4b28747c31d99
+msgid "A named entity, usually stored on a hard drive, floppy disk, or CD-ROM, that contains a stream of characters."
+msgstr ""
+
+#: ../../source/files.rst:412
+# c629a1ba62a54c4db958166f87255623
+msgid "A method for naming, accessing, and organizing files and the data they contain."
+msgstr ""
+
+#: ../../source/files.rst:416
+# 3cce32dfe376488783ae1d1a5d3d7563
+msgid "An object in our program that is connected to an underlying resource (e.g. a file). The file handle lets our program manipulate / read/ write / close the actual file that is on our disk."
+msgstr ""
+
+#: ../../source/files.rst:421
+# 143506ffb655498097fd36e29f6f8f62
+msgid "A name that is prefixed by some namespace identifier and the dot operator, or by an instance object, e.g. ``math.sqrt`` or ``tess.forward(10)``."
+msgstr ""
+
+#: ../../source/files.rst:425
+# 82a4d3a6710244e8862540ac855069f7
+msgid "A distinct method of operation within a computer program.  Files in Python can be opened in one of three modes: read (``'r'``), write (``'w'``), and append (``'a'``)."
+msgstr ""
+
+#: ../../source/files.rst:430
+# 2b4e64c22b1d4f0b87bdc912d7cb032d
+msgid "Memory that can maintain its state without power. Hard drives, flash drives, and rewritable compact disks (CD-RW) are each examples of non-volatile memory."
+msgstr ""
+
+#: ../../source/files.rst:435
+# 6b65187879b9412dac95272e125b09e6
+msgid "A sequence of directory names that specifies the exact location of a file."
+msgstr ""
+
+#: ../../source/files.rst:439
+# 70f042403bf642c6b73b6324daa906d1
+msgid "A file that contains printable characters organized into lines separated by newline characters."
+msgstr ""
+
+#: ../../source/files.rst:443
+# bd66ae90e84e4bd681f323e2c5b134b0
+msgid "One end of a connection allowing one to read and write information to or from another computer."
+msgstr ""
+
+#: ../../source/files.rst:447
+# 514064a98aee457c91d4b75cab65e844
+msgid "Memory which requires an electrical current to maintain state. The *main memory* or RAM of a computer is volatile.  Information stored in RAM is lost when the computer is turned off."
+msgstr ""
+
+#: ../../source/files.rst:452
+# dd061853441649a09ba907de2f46480e
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/files.rst:454
+# fc5dc65964f84a539242d7fd5d2e52db
+msgid "Write a program that reads a file and writes out a new file with the lines in reversed order (i.e. the first line in the old file becomes the last one in the new file.)"
+msgstr ""
+
+#: ../../source/files.rst:458
+# fb011f0a093f42b3b3ee8f95e27f2dec
+msgid "Write a program that reads a file and prints only those lines that contain the substring ``snake``."
+msgstr ""
+
+#: ../../source/files.rst:461
+# d941316297b140f79991f474a83eff70
+msgid "Write a program that reads a text file and produces an output file which is a copy of the file, except the first five columns of each line contain a four digit line number, followed by a space. Start numbering the first line in the output file at 1.  Ensure that every line number is formatted to the same width in the output file.  Use one of your Python programs as test data for this exercise: your output should be a printed and numbered listing of the Python program."
+msgstr ""
+
+#: ../../source/files.rst:469
+# f3e447a7d1ae4613a670137aec311004
+msgid "Write a program that undoes the numbering of the previous exercise: it should read a file with numbered lines and produce another file without line numbers."
+msgstr ""
+

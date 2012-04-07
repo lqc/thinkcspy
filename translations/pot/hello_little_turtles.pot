@@ -1,0 +1,538 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/hello_little_turtles.rst:13
+# 88b2686efb2341f88238b667dab22e71
+msgid "Hello, little turtles!"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:22
+# 58c6ec8c2fdd483b9d014c1f8d2638eb
+msgid "There are many *modules* in Python that provide very powerful features that we can use in our own programs.  Some of these can send email, or fetch web pages. The one we'll look at in this chapter allows us to create turtles and get them to draw shapes and patterns."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:27
+# 907d6674869845668f45363bc334235e
+msgid "The turtles are fun, but the real purpose of the chapter is to teach ourselves a little more Python, and to develop our theme of *computational thinking*, or *thinking like a computer scientist*.  Most of the Python covered here will be explored in more depth later."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:36
+# 377f645bc1fb4aedad22a2b545eca58a
+msgid "Our first turtle program"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:38
+# 0d11610d5181412fafacc2b0c0b3a9a7
+msgid "Let's write a couple of lines of Python program to create a new turtle and start drawing a rectangle. (We'll call the variable that refers to our first turtle `alex`, but we can choose another name if we follow the naming rules from the previous chapter)."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:56
+# 53c3e3e473a54db581cf67808dc7e7f7
+msgid "When we run this program, a new window pops up:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:60
+# c29ccdbe6a794458a7a3573be7799c73
+msgid "Here are a couple of things you'll need to understand about this program."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:62
+# db471cd52d4044c4a698bdca63b7f613
+msgid "The first line tells Python to load a module named ``turtle``. That module brings us two new types that we can use: the ``Turtle`` type, and the ``Screen`` type.  The dot notation ``turtle.Turtle`` means *\"The Turtle type that is defined within the turtle module\"*.   (Remember that Python is case sensitive, so the module name, with a lowercase `t`, is different from the type Turtle.)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:69
+# f5bcb7404ccd4b93970eb4dff2791958
+msgid "We then create and open what it calls a screen (we would prefer to call it a window), which we assign to variable `wn`. Every window contains a **canvas**, which is the area inside the window on which we can draw."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:73
+# 3bb3765818094e159f9112622af6acbd
+msgid "In line 3 we create a turtle. The variable `alex` is made to refer to this turtle. These first three lines set us up, ready for doing some useful things."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:76
+# 6472191718ab4686a4902d0e41264818
+msgid "In lines 5-7, we instruct the **object** alex to move, and to turn. We do this by **invoking**, or activating, alex's **methods** --- these are the instructions that all turtles know how to respond to."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:80
+# e3b2caebb4614acc9facda913a5f27e1
+msgid "The last line plays a part too: the `wn` variable refers to the window shown above. When we invoke its `mainloop` method, it enters a state where it waits for events (like keypresses, or mouse movement and clicks). The program will terminate when the user closes the window."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:85
+# 2336486ad98b4b4f99255243808362cc
+msgid "An object can have various methods --- things it can do --- and it can also have **attributes** --- (sometimes called *properties*).  For example, each turtle has a *color* attribute.  The method invocation `alex.color(\"red\")` will make alex red, and drawing will be red too. (Note the word `color`  is spelled the American way!)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:91
+# cc4ecfc7d586474194c1d0cecc690e09
+msgid "The color of the turtle, the width of its pen, the position of the turtle within the window, which way it is facing, and so on are all part of its current **state**.   Similarly, the window object has a background color, and some text in the title bar, and a size and position on the screen.  These are all part of the state of the window object."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:97
+# 4010cca419994e7ebc3e40c7af0b6616
+msgid "Quite a number of methods exist that allow us to modify the turtle and the window objects.  We'll just show a couple. In this program we've only commented those lines that are different from the previous example (and we've used a different variable name for this turtle):"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:121
+# e52b041beda0444d8f752a80b0d0d15e
+msgid "When we run this program, this new window pops up, and will remain on the screen until we close it."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:129
+# 3e55cc058b574117b7d66b0dfea407c7
+msgid "Modify this program so that before it creates the window, it prompts the user to enter the desired background color. It should store the user's responses in a variable, and modify the color of the window according to the user's wishes. (Hint: you can find a list of permitted color names at http://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm.  It includes some quite unusual ones, like \"peach puff\"  and \"HotPink\".)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:136
+# d0f4b92865e1415daa9f21189395839b
+msgid "Do similar changes to allow the user, at runtime, to set tess' color."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:137
+# b6734348ccdc42f087401e72daabab7e
+msgid "Do the same for the width of tess' pen.  *Hint:* your dialog with the user will return a string, but tess' ``pensize`` method expects its argument to be an int.  So you'll need to convert the string to an int before you pass it to ``pensize``."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:145
+# 82123171a3644bec9740b2d8473d9299
+msgid "Instances --- a herd of turtles"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:147
+# b60f65e6ea5049c6bfc3eda190f91b56
+msgid "Just like we can have many different integers in a program, we can have many turtles. Each of them is called an **instance**.  Each instance has its own attributes and methods --- so alex might draw with a thin black pen and be at some position, while tess might be going in her own direction with a fat pink pen."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:187
+# 50a10a2a7d134ba0bbd44b09ac17a453
+msgid "Here is what happens when alex completes his rectangle, and tess completes her triangle:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:191
+# a2e4838ea21f4b28ba66b9b74b715a53
+msgid "Here are some *How to think like a computer scientist* observations:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:193
+# 756a6b0afab54954afcd906221e3c168
+msgid "There are 360 degrees in a full circle.  If we add up all the turns that a turtle makes, *no matter what steps occurred between the turns*, we can easily figure out if they add up to some multiple of 360.  This should convince us that alex is facing in exactly the same direction as he was when he was first created. (Geometry conventions have 0 degrees facing East, and that is the case here too!)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:198
+# 2ad98a0c76164890b3793b2312c9d44a
+msgid "We could have left out the last turn for alex, but that would not have been as satisfying.  If we're asked to draw a closed shape like a square or a rectangle, it is a good idea to complete all the turns and to leave the turtle back where it started, facing the same direction as it started in. This makes reasoning about the program and composing chunks of code into bigger programs easier for us humans!"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:205
+# f0478408e82d4289aba99cdffb3f8017
+msgid "We did the same with tess: she drew her triangle, and turned through a full 360 degrees. Then we turned her around and moved her aside.  Even the blank line 18 is a hint about how the programmer's *mental chunking* is working: in big terms, tess' movements were chunked as \"draw the triangle\" (lines 12-17) and then \"move away from the origin\" (lines 19 and 20)."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:210
+# ecafb670ba3f466fb9893decbfce2d64
+msgid "One of the key uses for comments is to record our mental chunking, and big ideas. They're not always explicit in the code."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:212
+# ef3fcdc73ed14c27a89c4e398f59e954
+msgid "And, uh-huh, two turtles may not be enough for a herd. But the important idea is that the turtle module gives us a kind of factory that lets us create as many turtles as we need. Each instance has its own state and behaviour."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:220
+# cc6ab6b324c64e55bade608fd3da1045
+msgid "The **for** loop"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:222
+# 94b618ed9dbd4a6b9269bd23e99f57d6
+msgid "When we drew the square, it was quite tedious.  We had to move then turn, move then turn, etc. etc. four times.  If we were drawing a hexagon, or an octogon, or a polygon with 42 sides, it would have been worse."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:226
+# ce5c467b52274acb8e94a3320e261fa6
+msgid "So a basic building block of all programs is to be able to repeat some code, over and over again."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:229
+# a9ea1c66e4c74bb082fe2fc91143ffca
+msgid "Python's **for** loop solves this for us.   Let's say we have some friends, and we'd like to send them each an email inviting them to our party.  We don't quite know how to send email yet, so for the moment we'll just print a message for each friend:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:242
+# 5f0ca98e5e97408babf1c00875744a3b
+msgid "When we run this, the output looks like this:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:254
+# 593befaf1e5045e49ead550e3b6aa1da
+msgid "The variable ``f`` in the ``for`` statement at line 1 is called the **loop variable**. We could have chosen any other variable name instead."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:256
+# 681b8727c71747ed8949f1371271cab6
+msgid "Lines 2 and 3 are the **loop body**.  The loop body is always indented. The indentation determines exactly what statements are \"in the body of the loop\"."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:258
+# 664e59a712394a5aa0c9b61f807ad73b
+msgid "On each *iteration* or *pass* of the loop, first a check is done to see if there are still more items to be processed.  If there are none left (this is called the **terminating condition** of the loop), the loop has finished. Program execution continues at the next statement after the loop body, (e.g. in this case the next statement below the comment in line 4)."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:263
+# c6d5eb3c250c469586ba28f14b72c479
+msgid "If there are items still to be processed, the loop variable is updated to refer to the next item in the list.  This means, in this case, that the loop body is executed here 7 times, and each time ``f`` will refer to a different friend."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:266
+# 6cfa4fb57e244125a8778a0117ef8258
+msgid "At the end of each execution of the body of the loop, Python returns to the ``for`` statement, to see if there are more items to be handled, and to assign the next one to ``f``."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:273
+# d1c9c67bd0c54c8f967f8a12b8656fb7
+msgid "Flow of Execution of the for loop"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:275
+# bfc797af48a24c9eaa3397606d31007f
+msgid "As a program executes, the interpreter always keeps track of which statement is about to be executed.  We call this the **control flow**, of the **flow of execution** of the program.  When humans execute programs, they often use their finger to point to each statement in turn.  So we could think of control flow as \"Python's moving finger\"."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:280
+# e6f2e3ae421142ef949b07ae4eee5ad6
+msgid "Control flow until now has been strictly top to bottom, one statement at a time.  The ``for`` loop changes this."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:285
+# 66cf3e34195349ba8e0b578f14c1bcdd
+msgid "Control flow is often easy to visualize and understand if we draw a flowchart. This shows the exact steps and logic of how the ``for`` statement executes."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:294
+# 8dbfacf4f8eb45ee87991ebeb3275c00
+msgid "The loop simplifies our turtle program"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:296
+# e05bb55814b54311bb912ef194f062b3
+msgid "To draw a square we'd like to do the same thing four times --- move the turtle, and turn. We previously used 8 lines to have alex draw the four sides of a square. This does exactly the same, but using just three lines:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:307
+# ab5c4c71533e42698f1318694164d663
+msgid "Some observations:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:309
+# f26ce13c7b954ee886beac71fa769476
+msgid "While \"saving some lines of code\" might be convenient, it is not the big deal here. What is much more important is that we've found a \"repeating pattern\" of statements, and reorganized our program to repeat the pattern.  Finding the chunks and somehow getting our programs arranged around those chunks is a vital skill in *How to think like a computer scientist*."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:315
+# 91f213cdffa14dedb968dc47534a666d
+msgid "The values [0,1,2,3] were provided to make the loop body execute 4 times. We could have used any four values, but these are the conventional ones to use.  In fact, they are so popular that Python gives us special built-in ``range`` objects:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:329
+# 09dae197828745e3bc369ffb39a2dca3
+msgid "Computer scientists like to count from 0!"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:330
+# da2f63b36bbe486f89272eb4669c79ad
+msgid "``range`` can deliver a sequence of values to the loop variable in the ``for`` loop. They start at 0, and in these cases do not include the 4 or the 10."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:332
+# 0886a2282099434c88bdcb3d88ec69ce
+msgid "Our little trick earlier to make sure that alex did the final turn to complete 360 degrees has paid off: if we had not done that, then we would not have been able to use a loop for the fourth side of the square. It would have become a \"special case\", different from the other sides.  When possible, we'd much prefer to make our code fit a general pattern, rather than have to create a special case."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:339
+# 039c1e9d5b4248d0ab7936723d33e69a
+msgid "So to repeat something four times, a good Python programmer would do this:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:348
+# d4e3c2ec34594f2c9d1dbd5b46ce6793
+msgid "By now you should be able to see how to change our previous program so that tess can also use a ``for`` loop to draw her equilateral triangle."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:351
+# 19cc2f95bf15446ea3ca09dbcbf28060
+msgid "But now, what would happen if we made this change?"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:361
+# 306f23333eef446eb81918818809f974
+msgid "A variable can also be assigned a value that is a list.  So lists can also be used in more general situations, not only in the ``for`` loop.  The code above could be rewritten like this:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:375
+# fbd23cbe83274634b983c800fbde1d9b
+msgid "A few more turtle methods and tricks"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:377
+# 5cbe4333b42d4895a48dcc20be0a6762
+msgid "Turtle methods can use negative angles or distances.  So ``tess.foward(-100)`` will move tess backwards, and ``tess.left(-30)`` turns her to the right.  Additionally, because there are 360 degrees in a circle, turning 30 to the left will get tess facing in the same direction as turning 330 to the right!  (The on-screen animation will differ, though --- you will be able to tell if tess is turning clockwise or counter-clockwise!)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:383
+# eb33ca275f9644349173b20a769c2d95
+msgid "This suggests that we don't need both a left and a right turn method --- we could be minimalists, and just have one method.  There is also a *backward* method.  (If you are very nerdy, you might enjoy saying ``alex.backward(-100)`` to move alex forward!)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:388
+# 9781c60cd4734e4b869ddfc8f274fc84
+msgid "Part of *thinking like a scientist* is to understand more of the structure and rich relationships in our field.  So revising a few basic facts about geometry and number lines, and spotting the relationships between left, right, backward, forward, negative and positive distances or angles values is a good start if we're going to play with turtles."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:394
+# 6c17ddbf005047c6b782b096733a3517
+msgid "A turtle's pen can be picked up or put down.  This allows us to move a turtle to a different place without drawing a line.   The methods are"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:404
+# fc1c6809c395487bbb05727919d6a73c
+msgid "Every turtle can have its own shape.  The ones available \"out of the box\" are ``arrow``, ``blank``, ``circle``, ``classic``, ``square``, ``triangle``, ``turtle``."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:415
+# aaa45eeb7d5a4be4aaeb477785226872
+msgid "We can speed up or slow down the turtle's animation speed. (Animation controls how quickly the turtle turns and moves forward).  Speed settings can be set between 1 (slowest) to 10 (fastest).  But if we set the speed to 0, it has a special meaning --- turn off animation and go as fast as possible."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:425
+# b99fdab738084f73ae242188e757bddd
+msgid "A turtle can \"stamp\" its footprint onto the canvas, and this will remain after the turtle has moved somewhere else. Stamping works, even when the pen is up."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:429
+# 705c0c5a0d724d319d1c8a4921119e9b
+msgid "Let's do an example that shows off some of these new features:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:453
+# e80abcdbfb0243018a0f867374638eac
+msgid "Be careful now!   How many times was the body of the loop executed?   How many turtle images do we see on the screen?  All except one of the shapes we see on the screen here are footprints created by ``stamp``.  But the program still only has *one* turtle instance --- can you figure out which one here is the real tess?  (Hint: if you're not sure, write a new line of code after the ``for`` loop to change tess' color, or to put her pen down and draw a line, or to change her shape, etc.)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:461
+# fcd9015e8acc4b97a5d03d3f462ec8a6
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:467
+# 0096b97d0bfc42fdba23df2a5fd5f929
+msgid "Some state or value that belongs to a particular object.  For example, tess has a color."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:471
+# 8103b2a9d98b483495bdca6d8ccec0e8
+msgid "A surface within a window where drawing takes place."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:474
+# 1181aef138844ad1be40de77c671f54c
+msgid "See *flow of execution* in the next chapter."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:477
+# 81f713ac5cf941adae09431e54578171
+msgid "A statement in Python for convenient repetition of statements in the *body* of the loop."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:480
+# 2e86b210751741ef90d9bc7740299e8a
+msgid "Any number of statements nested inside a loop. The nesting is indicated by the fact that the statements are indented under the for loop statement."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:484
+# cef03a36aafa462185cc0b2c4c32b608
+msgid "A variable used as part of a for loop. It is assigned a different value on each iteration of the loop."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:488
+# 4d1fc3ff13bc48159b0c53f48d69f181
+msgid "An object of a certain type, or class.  `tess` and `alex` are different instances of the class `Turtle`."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:492
+# 042b9b46c7a448a3b4a5533be7a79684
+msgid "A function that is attached to an object.  Invoking or activating the method causes the object to respond in some way, e.g. ``forward`` is the method when we say ``tess.forward(100)``."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:497
+# ac2ec28d9b68411b8dc11970e57fef7a
+msgid "An object has methods.  We use the verb invoke to mean *activate the method*.  Invoking a method is done by putting parentheses after the method name, with some possible arguments.  So  ``tess.forward()`` is an invocation of the ``forward`` method."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:503
+# 5b23bef5af4b44e7b0e8dae5f62254c1
+msgid "A file containing Python definitions and statements intended for use in other Python programs. The contents of a module are made available to the other program by using the *import* statement."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:508
+# 85a8d099561f492c834e1c3c5de499c7
+msgid "A \"thing\" to which a variable can refer.  This could be a screen window, or one of the turtles we have created."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:512
+# a0da0aadd0f94ede83c2d23b224678a5
+msgid "A built-in function in Python for generating sequences of integers.  It is especially useful when we need to write a for loop that executes a fixed number of times."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:516
+# 186d979a3c31459293ae5dc8b0e16a49
+msgid "A condition that occurs which causes a loop to stop repeating its body. In the ``for`` loops we saw in this chapter, the terminating condition has been when there are no more elements to assign to the loop variable."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:523
+# fbe1cfb33449466c94f75f05169b0436
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:524
+# edcaa80e94d94134b1ba06417ba8e0ef
+msgid "Write a program that prints ``We like Python's turtles!`` 1000 times."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:526
+# 493884efc1cf48bfbd429aeac29201b1
+msgid "Give three attributes of your cellphone object.  Give three methods of your cellphone."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:533
+# fb19b5acd28d419f8b95035271785fcd
+msgid "Suppose our turtle tess is at heading 0 --- facing east.  We execute the statement ``tess.left(3645)``.  What does tess do, and what is her final heading?"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:536
+# 0bf5976c67214801bf9af7f0eef9e491
+msgid "Assume you have the assignment ``xs = [12, 10, 32, 3, 66, 17, 42, 99, 20]``"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:538
+# f8f3dd741e3f496aa5ba521b5995c803
+msgid "Write a loop that prints each of the numbers on a new line."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:539
+# 97b2b1cee33541b483a74694c09ab8b2
+msgid "Write a loop that prints each number and its square on a new line."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:540
+# 8cec99f7531c4ca7935e76c3bf3ea7a7
+msgid "Write a loop that adds all the numbers from the list into a variable called `total`. You should set the `total` variable to have the value 0 before you start adding them up, and print the value in ``total`` after the loop has completed."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:543
+# a709b23a1e114d69895605c212934407
+msgid "Print the product of all the numbers in the list. (product means all multiplied together)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:546
+# 970d7b0882c742e59f7bc0089d3b1646
+msgid "Use ``for`` loops to make a turtle draw these regular polygons (regular means all sides the same lengths, all angles the same):"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:549
+# 3ff2f252533341b1b7edf2e5f8a4d449
+msgid "An equilateral triangle"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:550
+# d0337967527140bd9d39df87f0670791
+msgid "A square"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:551
+# 0922d20992184f248d7235fe0fe4391a
+msgid "A hexagon (six sides)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:552
+# 4f52b3c9c48a48059fadc3f085c0511b
+msgid "An octagon (eight sides)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:556
+# d782bc6dd43544169ac1ffaba837a45f
+msgid "A drunk pirate makes a random turn and then takes 100 steps forward, makes another random turn, takes another 100 steps, turns another random amount, etc.  A social science student records the angle of each turn before the next 100 steps are taken. Her experimental data is ``[160, -43, 270, -97, -43, 200, -940, 17, -86]``. (Positive angles are counter-clockwise.)  Use a turtle to draw the path taken by our drunk friend."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:561
+# d25297d23ebb4507bd9e735fb3316502
+msgid "Enhance your program above to also tell us what the drunk pirate's heading is after he has finished stumbling around.  (Assume he begins at heading 0)."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:564
+# dfd5e031d87b48c88e549c3a943f4272
+msgid "If you were going to draw a regular polygon with 18 sides, what angle would you need to turn the turtle at each corner?"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:567
+# f9e0eaa0c3114c17a0e72862b5d4bd3b
+msgid "At the interactive prompt, anticipate what each of the following lines will do, and then record what happens. Score yourself, giving yourself one point for each one you anticipate correctly:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:585
+# cab1b4f719f542b49b206ca227926135
+msgid "Write a program to draw a shape like this:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:589
+# ed6c13d230434a3c9105879bc2135883
+msgid "Hints:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:591
+# 78640a8fc4224dea9431a46c3ab6e193
+msgid "Try this on a piece of paper, moving and turning your cellphone as if it was a turtle.  Watch how many complete rotations your cellphone makes before you complete the star.  Since each full rotation is 360 degrees, you can figure out the total number of degrees that your phone was rotated through.  If you divide that by 5, because there are five points to the star, you'll know how many degrees to turn the turtle at each point."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:596
+# c4c26cff73c2424482574415b01b0f3d
+msgid "You can hide a turtle behind its invisibility cloak if you don't want it shown.  It will still draw its lines if its pen is down.  The method is invoked as ``tess.hideturtle()`` .  To make the turtle visible abain, use ``tess.showturtle()`` ."
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:600
+# 7cb412fab16b4f19ae03df081cf1f9c4
+msgid "Write a program to draw a face of a clock that looks something like this:"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:605
+# 803e6596a4164a6bab188bb58f716db2
+msgid "Create a turtle, and assign it to a variable.  When you ask for its type, what do you get?"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:607
+# c38245f21f3c4447ba2e933e5fb2243a
+msgid "What is the collective noun for turtles?  (Hint: they don't come in *herds*.)"
+msgstr ""
+
+#: ../../source/hello_little_turtles.rst:609
+# 7c400f1b1bed4a0ca95d2ddbb7fa83c3
+msgid "What the collective noun for pythons?  Is a python a viper?  Is a python venomous?"
+msgstr ""
+

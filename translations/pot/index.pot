@@ -1,0 +1,255 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/index.rst:2
+# f9339c6698514eff9028efbd89b105c5
+msgid "How to Think Like a Computer Scientist"
+msgstr ""
+
+#: ../../source/index.rst:9
+# d0d16511b972463b80d347b7610ddbf9
+msgid "Learning with Python 3 (RLE)"
+msgstr ""
+
+#: ../../source/index.rst:11
+# 4caa02dd91df4b8aaa94ea943c1c9be8
+msgid "Version date: February 2012"
+msgstr ""
+
+#: ../../source/index.rst:13
+# af410ec37f0644fb97ab6c8c28293246
+msgid "by Peter Wentworth, Jeffrey Elkner, Allen B. Downey, and Chris Meyers"
+msgstr ""
+
+#: ../../source/index.rst:15
+# 58476494351345f7a0c31098d29ea025
+msgid "(based on 2nd edition by Jeffrey Elkner, Allen B. Downey, and Chris Meyers)"
+msgstr ""
+
+#: ../../source/index.rst:17
+# c13b9a18018846ba90ae410c87e35a17
+msgid "Corresponding author: p.wentworth@ru.ac.za"
+msgstr ""
+
+#: ../../source/index.rst:19
+# 1c7eb798bce840fd9c144b1a9e6634ac
+msgid "Source repository is at https://code.launchpad.net/~thinkcspy-rle-team/thinkcspy/thinkcspy3-rle"
+msgstr ""
+
+#: ../../source/index.rst:21
+# 6fb9aa9760584b168207cc3f46dbc791
+msgid "For offline use, download a zip file of the html or a pdf version (updated less often) from http://www.ict.ru.ac.za/Resources/cspw/thinkcspy3/"
+msgstr ""
+
+#: ../../source/index.rst:24
+#: ../../source/index.rst:120
+# f17bac27742c47d4a815e16e1c5eff95
+# 2a843fd94a464db3b1ca4306e4e7e8e7
+msgid ":ref:`search`"
+msgstr ""
+
+#: ../../source/index.rst:26
+# b73e0dd032b34eceb35db68bdb974160
+msgid "`Copyright Notice <copyright.html>`__"
+msgstr ""
+
+#: ../../source/index.rst:27
+# 59a36f0cda95417b9bc38769d1624e0b
+msgid "`Foreword <foreword.html>`__"
+msgstr ""
+
+#: ../../source/index.rst:28
+# 22ef73f8b9c64a93a885cc8e775d6d00
+msgid "`Preface <preface.html>`__"
+msgstr ""
+
+#: ../../source/index.rst:29
+# d387f625bc3f4203a4b292590d9dacf7
+msgid "`Preface-3 <preface3-rle.html>`__ *This Rhodes Local Edition (RLE) of the book*"
+msgstr ""
+
+#: ../../source/index.rst:30
+# ba5572516a794cbfba2a2a0035b2ac7b
+msgid "`Contributor List <contrib.html>`__"
+msgstr ""
+
+#: ../../source/index.rst:31
+# 92676903229a43468a37b517e4924ceb
+msgid "`Chapter 1 <way_of_the_program.html>`__ *The way of the program*"
+msgstr ""
+
+#: ../../source/index.rst:32
+# d71453f4d0e64df6b4a4290a063faafc
+msgid "`Chapter 2 <variables_expressions_statements.html>`__ *Variables, expressions, and statements*"
+msgstr ""
+
+#: ../../source/index.rst:33
+# 7092238e56e34283b514beeb44605598
+msgid "`Chapter 3 <hello_little_turtles.html>`__ *Hello, little turtles!*"
+msgstr ""
+
+#: ../../source/index.rst:34
+# 9a86e3f5070e4cec89c229f3967f77e0
+msgid "`Chapter 4 <functions.html>`__ *Functions*"
+msgstr ""
+
+#: ../../source/index.rst:35
+# d796c4f0c557435cae8a5186790e2d87
+msgid "`Chapter 5 <conditionals.html>`__ *Conditionals*"
+msgstr ""
+
+#: ../../source/index.rst:36
+# 52719a1d12db48dba6b6d5310bb67aa0
+msgid "`Chapter 6 <fruitful_functions.html>`__ *Fruitful functions*"
+msgstr ""
+
+#: ../../source/index.rst:37
+# a0b6abd5ee804b799d1ba5c005c012d9
+msgid "`Chapter 7 <iteration.html>`__ *Iteration*"
+msgstr ""
+
+#: ../../source/index.rst:38
+# 38d14752494a4f3ba71ddcd25f603ee3
+msgid "`Chapter 8 <strings.html>`__ *Strings*"
+msgstr ""
+
+#: ../../source/index.rst:39
+# 29ddf0bfbe1d426d8fee3a8c38e44813
+msgid "`Chapter 9 <tuples.html>`__ *Tuples*"
+msgstr ""
+
+#: ../../source/index.rst:40
+# b800a9a53e94425c854ce4231611837c
+msgid "`Chapter 10 <events.html>`__ *Event handling*"
+msgstr ""
+
+#: ../../source/index.rst:41
+# a2c2447b07b34b048f4f18929ff532d5
+msgid "`Chapter 11 <lists.html>`__ *Lists*"
+msgstr ""
+
+#: ../../source/index.rst:42
+# 478d8312ae9b4e98a9eced8fad876394
+msgid "`Chapter 12 <modules.html>`__ *Modules*"
+msgstr ""
+
+#: ../../source/index.rst:43
+# fb38616af3304396ab5d8cbd5fda3874
+msgid "`Chapter 13 <files.html>`__ *Files*"
+msgstr ""
+
+#: ../../source/index.rst:44
+# ea4023cb569f490c82d10aa0a5b959b8
+msgid "`Chapter 14 <list_algorithms.html>`__ *List Algorithms*"
+msgstr ""
+
+#: ../../source/index.rst:45
+# 08810a19de98464a9ec327bf798ae8e3
+msgid "`Chapter 15 <classes_and_objects_I.html>`__ *Classes and Objects - the Basics*"
+msgstr ""
+
+#: ../../source/index.rst:46
+# 8adb1bc9ed7d481c9ee47d084bc16bd4
+msgid "`Chapter 16 <classes_and_objects_II.html>`__ *Classes and Objects - Digging a little deeper*"
+msgstr ""
+
+#: ../../source/index.rst:47
+# 18341d4ceb7b46fea6addf6a3dd5fa72
+msgid "`Chapter 17 <pygame.html>`__ *PyGame*"
+msgstr ""
+
+#: ../../source/index.rst:48
+# 1f5a3082fd38423a95ca417d8d8844ff
+msgid "`Chapter 18 <recursion.html>`__ *Recursion*"
+msgstr ""
+
+#: ../../source/index.rst:49
+# 477ab5de9522444fb3bd3584bb5e7569
+msgid "`Chapter 19 <exceptions.html>`__ *Exceptions*"
+msgstr ""
+
+#: ../../source/index.rst:50
+# 355bc92a0c8940b18a01f7dd2094e1b7
+msgid "`Chapter 20 <dictionaries.html>`__ *Dictionaries*"
+msgstr ""
+
+#: ../../source/index.rst:51
+# 5ff86e013a7d4d748010f3e1d1b800fb
+msgid "`Chapter 21 <even_more_oop.html>`__ *Even more OOP*"
+msgstr ""
+
+#: ../../source/index.rst:52
+# 8d43437b17d5482791c360d1a65ed614
+msgid "`Chapter 22 <collections.html>`__ *Collections of Objects*"
+msgstr ""
+
+#: ../../source/index.rst:53
+# 92c83be710a6486e91aec3001765ace8
+msgid "`Chapter 23 <inheritance.html>`__ *Inheritance*"
+msgstr ""
+
+#: ../../source/index.rst:54
+# 43b27d23ddff4eed9298f7859f2a78f5
+msgid "`Chapter 24 <linked_lists.html>`__ *Linked Lists*"
+msgstr ""
+
+#: ../../source/index.rst:55
+# 3eac6fd89fff40f6bc6a7f5deb1ddb14
+msgid "`Chapter 25 <stacks.html>`__ *Stacks*"
+msgstr ""
+
+#: ../../source/index.rst:56
+# 5ac981e45c194cf5ad4751afd42482a9
+msgid "`Chapter 26 <queues.html>`__ *Queues*"
+msgstr ""
+
+#: ../../source/index.rst:57
+# 3bc2a7e26ee448a994f17952d368d751
+msgid "`Chapter 27 <trees.html>`__ *Trees*"
+msgstr ""
+
+#: ../../source/index.rst:58
+# 775ecd496cfb44b6b0b986877ebff1e6
+msgid "`Appendix A <app_a.html>`__ *Debugging*"
+msgstr ""
+
+#: ../../source/index.rst:59
+# d760b0613e4c4d4abc0cc53ca9cb8ab7
+msgid "`Appendix B <app_b.html>`__ *An odds-and-ends Workbook*"
+msgstr ""
+
+#: ../../source/index.rst:60
+# 728067118ff24e23896b73e0ae912338
+msgid "`Appendix C <app_c.html>`__ *Configuring Ubuntu for Python Development*"
+msgstr ""
+
+#: ../../source/index.rst:61
+# e3633af24b224c8b8894640dc077b82d
+msgid "`Appendix D <app_d.html>`__ *Customizing and Contributing to the Book*"
+msgstr ""
+
+#: ../../source/index.rst:62
+# 36dd9f5356894651b6998c281c6f5143
+msgid "`Appendix E <app_e.html>`__ *Some Tips, Tricks, and Common Errors*"
+msgstr ""
+
+#: ../../source/index.rst:63
+# 4ccce6bc378c4e0197de78e565592000
+msgid "`GNU Free Document License <fdl-1.3.html>`__"
+msgstr ""
+

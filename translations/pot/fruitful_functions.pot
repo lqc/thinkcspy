@@ -1,0 +1,683 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/fruitful_functions.rst:12
+# 94f2dc39c43e49e5b94a69f3f6650eda
+msgid "Fruitful functions"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:22
+# a56434994b804ea0a0fd68a62bb40def
+msgid "Return values"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:24
+# bdd93322c29a4a58980ccb206fdd9676
+msgid "The built-in functions we have used, such as ``abs``, ``pow``, ``int``, ``max``, and ``range``, have produced results. Calling each of these functions generates a value, which we usually assign to a variable or use as part of an expression."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:34
+# e4cc44f3324b4ea99a5d42dc0eccb8b3
+msgid "We also wrote our own function to return the final amount for a compound interest calculation."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:36
+# 8c3a8d1d47b74d1e99f085fea34b95e2
+msgid "In this chapter, we are going to write more functions that return values, which we will call *fruitful functions*, for want of a better name.  The first example is ``area``, which returns the area of a circle with the given radius:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:47
+# c8a498acb80c4e54bcb4c3bd50150ef4
+msgid "We have seen the ``return`` statement before, but in a fruitful function the ``return`` statement includes a **return value**. This statement means: evaluate the return expression, and then return it immediately as the result (the fruit) of this function.  The expression provided can be arbitrarily complicated, so we could have written this function like this:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:59
+# a49a7832f0314d3bba6032995fdd519b
+msgid "On the other hand, **temporary variables** like ``b`` above often make debugging easier."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:62
+# a83f243b6db245d895da3a58ce12dfd2
+msgid "Sometimes it is useful to have multiple return statements, one in each branch of a conditional. We have already seen the built-in ``abs``, now we see how to write our own:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:77
+# 90d8bb5960744e08961d238b57dd7f80
+msgid "Another way to write the above function is to leave out the ``else`` and just follow the ``if`` condition by the second ``return`` statement."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:88
+# 617fd14a45af4376872304606dd97188
+msgid "Think about this version and convince yourself it works the same as the first one."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:91
+# 5b35690e4f9447a8af44b6de5451fa37
+msgid "Code that appears after a ``return`` statement, or any other place the flow of execution can never reach, is called **dead code**, or **unreachable code**."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:94
+# c6911402d9c04fb8bc10f1b419e846de
+msgid "In a fruitful function, it is a good idea to ensure that every possible path through the program hits a ``return`` statement. The following version of ``absolute_value`` fails to do this:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:107
+# 656b10e297dd4b6a93e87ce0899adf43
+msgid "This version is not correct because if ``x`` happens to be 0, neither condition is true, and the function ends without hitting a ``return`` statement. In this case, the return value is a special value called **None**:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:116
+# 2dcf032428c14630926a14eeded6e487
+msgid "All Python functions return ``None`` whenever they do not return another value."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:118
+# 3c872891be2c4217a54a8cae98be4a98
+msgid "It is also possible to use a return statement in the middle of a ``for`` loop, in which case control immediately returns from the function.  Let us assume that we want a function which looks through a list of words.  It should return the first 2-letter word.  If there is not one, it should return the empty string:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:140
+# 41a014def28c44689bd01bcaa2d41a16
+msgid "Single-step through this code and convince yourself that in the first test case that we've provided, the function returns while processing the second element in the list: it does not have to traverse the whole list."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:148
+# 5ef55d3d984c49a3bc4c9b07c30a5c5c
+msgid "Program development"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:150
+# 57bd65ee429b41d1b34c185c41f2f3cb
+msgid "At this point, you should be able to look at complete functions and tell what they do. Also, if you have been doing the exercises, you have written some small functions. As you write larger functions, you might start to have more difficulty, especially with runtime and semantic errors."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:155
+# b7007795d34c48a9a3601a81d7f8e4de
+msgid "To deal with increasingly complex programs, we are going to suggest a technique called **incremental development**. The goal of incremental development is to avoid long debugging sessions by adding and testing only a small amount of code at a time."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:160
+# ad091898518a463f9ddd4b96a408ee9f
+msgid "As an example, suppose you want to find the distance between two points, given by the coordinates (x\\ :sub:`1`\\ , y\\ :sub:`1`\\ ) and (x\\ :sub:`2`\\ , y\\ :sub:`2`\\ ).  By the Pythagorean theorem, the distance is:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:167
+# 82abeaa9f5114439a7caa6279f0179ec
+msgid "The first step is to consider what a ``distance`` function should look like in Python. In other words, what are the inputs (parameters) and what is the output (return value)?"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:171
+# 958b53c016c741e1a47b134cee5dce8a
+msgid "In this case, the two points are the inputs, which we can represent using four parameters. The return value is the distance, which is a floating-point value."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:174
+# 3f8bdd4d341d48fcb8dd4087b1f59665
+msgid "Already we can write an outline of the function that captures our thinking so far:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:182
+# d6c87ac4b77c43a38f889a93cbe9fd0d
+msgid "Obviously, this version of the function doesn't compute distances; it always returns zero. But it is syntactically correct, and it will run, which means that we can test it before we make it more complicated."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:186
+# c4b8d95295fd489ab7c3bd84bd044379
+msgid "To test the new function, we call it with sample values:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:193
+# 6f039127738b41c2bd25b8ddbab42626
+msgid "We chose these values so that the horizontal distance equals 3 and the vertical distance equals 4; that way, the result is 5 (the hypotenuse of a 3-4-5 triangle). When testing a function, it is useful to know the right answer."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:197
+# 5540aa5449c948a595a39b322aad1ab4
+msgid "At this point we have confirmed that the function is syntactically correct, and we can start adding lines of code. After each incremental change, we test the function again. If an error occurs at any point, we know where it must be --- in the last line we added."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:202
+# a6b905ccf79446dda2bb6b191341e197
+msgid "A logical first step in the computation is to find the differences x\\ :sub:`2`\\ - x\\ :sub:`1`\\  and y\\ :sub:`2`\\ - y\\ :sub:`1`\\ .  We will store those values in temporary variables named ``dx`` and ``dy``."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:214
+# 845446fd7030475394642a88a1558eea
+msgid "If we call the function with the arguments shown above, when the flow of execution gets to the return statement, `dx` should be 3 and `dy` should be 4. We can check that this is the case in **PyScripter** by putting the cursor on the return statement, and running the program to break execution when it gets to the cursor (using the `F4` key). Then we inspect the variables ``dx`` and ``dy`` by hovering the mouse above them, to confirm that the function is getting the right parameters and performing the first computation correctly. If not, there are only a few lines to check."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:223
+# c8fc3752dfbb49aeb8fdf6ea500bcf69
+msgid "Next we compute the sum of squares of ``dx`` and ``dy``:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:234
+# 1701d0dece88419293fe1bc539f5d464
+msgid "Again, we could run the program at this stage and check the value of ``dsquared`` (which should be 25)."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:237
+# 44039356ff4a4363875cc83b462175dd
+msgid "Finally, using the fractional exponent ``0.5`` to find the square root, we compute and return the result:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:250
+# e159bb9985f04cf58ef75879fe04fb01
+msgid "If that works correctly, you are done. Otherwise, you might want to inspect the value of ``result`` before the return statement."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:253
+# 2f771704fa944f91b67f03fbb5a8196b
+msgid "When you start out, you might add only a line or two of code at a time. As you gain more experience, you might find yourself writing and debugging bigger conceptual chunks. Either way, stepping through your code one line at a time and verifying that each step matches your expectations can save you a lot of debugging time.  As you improve your programming skills you should find yourself managing bigger and bigger chunks: this is very similar to the way we learnt to read letters, syllables, words, phrases, sentences, paragraphs, etc., or the way we learn to chunk music --- from individual notes to chords, bars, phrases, and so on."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:262
+# fb3b7b0e217a4c87bcec32e17277fff6
+msgid "The key aspects of the process are:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:264
+# b7394a7372d34177920040a572acb838
+msgid "Start with a working skeleton program and make small incremental changes. At any point, if there is an error, you will know exactly where it is."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:266
+# e2eb66b0a092422980bcd0085e4c89cd
+msgid "Use temporary variables to hold intermediate values so that you can easily inspect and check them."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:268
+# 510ee86909764ca9b6edc8125016159d
+msgid "Once the program is working, relax, sit back, and play around with your options. (There is interesting research that links \"playfulness\" to better understanding, better learning, more enjoyment, and a more positive mindset about what you can achieve --- so spend some time fiddling around!) You might want to consolidate multiple statements into one bigger compound expression, or rename the variables you've used, or see if you can make the function shorter. A good guideline is to aim for making code as easy as possible for others to read."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:276
+# 4596761633594ee0b7f4bbf6a6452d5e
+msgid "Here is another version of the function.  It makes use of a square root function that is in the ``math`` module (we'll learn about modules shortly).  Which do you prefer?  Which looks \"closer\" to the Pythagorean formula we started out with?"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:297
+# 1581b0de5a6c4a69b10e2a597b19857d
+msgid "Debugging with ``print``"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:299
+# 28a3ca94ccdc451795a0ce4fdb829994
+msgid "Another powerful technique for debugging (an alternative to single-stepping and inspection of program variables), is to insert extra ``print`` functions in carefully selected places in your code.  Then, by inspecting the output of the program, you can check whether the algorithm is doing what you expect it to.  Be clear about the following, however:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:305
+# 6d2dec7e2b244f7cbc69da44fd197d8d
+msgid "You must have a clear solution to the problem, and must know what should happen before you can debug a program.  Work on *solving* the problem on a piece of paper (perhaps using a flowchart to record the steps you take) *before* you concern yourself with writing code.  Writing a program doesn't solve the problem --- it simply *automates* the manual steps you would take. So first make sure you have a pen-and-paper manual solution that works. Programming then is about making those manual steps happen automatically."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:313
+# 8a556a5f55944c738a81a9836a0fa575
+msgid "Do not write **chatterbox** functions.  A chatterbox is a fruitful function that, in addition to its primary task, also asks the user for input, or prints output, when it would be more useful if it simply shut up and did its work quietly."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:318
+# 5ae2d055b559429b9188fd9c177b5cf4
+msgid "For example, we've seen built-in functions like ``range``, ``max`` and ``abs``.  None of these would be useful building blocks for other programs if they prompted the user for input, or printed their results while they performed their tasks."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:323
+# 3dcafc90bd56421d871088bf66100958
+msgid "So a good tip is to avoid calling ``print`` and ``input`` functions inside fruitful functions, *unless the primary purpose of your function is to perform input and output*.  The one exception to this rule might be to temporarily sprinkle some calls to ``print`` into your code to help debug and understand what is happening when the code runs, but these will then be removed once you get things working."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:334
+# a7ee02e8bf8b474cb00a61c3814f78b7
+msgid "Composition"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:336
+# 7410dcc3487747eeb5b573a291baa4c5
+msgid "As you should expect by now, you can call one function from within another. This ability is called **composition**."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:339
+# 3fb52981a6404fc99256f11a86b80720
+msgid "As an example, we'll write a function that takes two points, the center of the circle and a point on the perimeter, and computes the area of the circle."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:342
+# 301862834fe648bf8721ae8a8a0eed31
+msgid "Assume that the center point is stored in the variables ``xc`` and ``yc``, and the perimeter point is in ``xp`` and ``yp``. The first step is to find the radius of the circle, which is the distance between the two points. Fortunately, we've just written a function, ``distance``, that does just that, so now all we have to do is use it:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:353
+# de97722dcb4140c1b62e19e1c6a31714
+msgid "The second step is to find the area of a circle with that radius and return it. Again we will use one of our earlier functions:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:362
+# 5beefda783084ef39246736831a42e0f
+msgid "Wrapping that up in a function, we get:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:372
+# 3596eb1cff4343179d66501b77c0c75f
+msgid "We called this function ``area2`` to distinguish it from the ``area`` function defined earlier. There can only be one function with a given name within a module."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:376
+# f45070a7d885408982e68f7a703ec46f
+msgid "The temporary variables ``radius`` and ``result`` are useful for development, debugging, and single-stepping through the code to inspect what is happening, but once the program is working, we can make it more concise by composing the function calls:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:391
+# a28e524acc3e43d3af0054c2100744c7
+msgid "Boolean functions"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:393
+# c353f4dea73941f88e3ba45677e62362
+msgid "Functions can return boolean values, which is often convenient for hiding complicated tests inside functions. For example:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:405
+# 6c7774f16995436092c42307a7eb68b5
+msgid "The name of this function is ``is_divisible``. It is common to give **boolean functions** names that sound like yes/no questions.  ``is_divisible`` returns either ``True`` or ``False`` to indicate whether the ``x`` is or is not divisible by ``y``."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:410
+# 8192d4d158f34b42b59ac58493c2c1cc
+msgid "We can make the function more concise by taking advantage of the fact that the condition of the ``if`` statement is itself a boolean expression. We can return it directly, avoiding the ``if`` statement altogether:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:420
+# 9b96bad1e06e44e280d782f0e22cdbf6
+msgid "This session shows the new function in action:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:429
+# 4f919ca20b40489d92916a93e2d03303
+msgid "Boolean functions are often used in conditional statements:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:439
+# ae4d6633d0414a1395825465639f0393
+msgid "It might be tempting to write something like:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:447
+# 09695e82324e4d53a029773db233f309
+msgid "but the extra comparison is unnecessary."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:452
+# e00fb8041c8b463f9d31f8c9612e2e58
+msgid "Programming with style"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:454
+# 1b3e45566dd947f799f8c36849bf4ccc
+msgid "Readability is very important to programmers, since in practice programs are read and modified far more often then they are written.  All the code examples in this book will be consistent with the *Python Enhancement Proposal 8* (`PEP 8 <http://www.python.org/dev/peps/pep-0008/>`__), a style guide developed by the Python community."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:459
+# c5f923f4d2ea4281b5df0ea91b21e2ca
+msgid "We'll have more to say about style as our programs become more complex, but a few pointers will be helpful already:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:462
+# 98a6fa116635426fbd43fdb8a7869d32
+msgid "use 4 spaces for indentation"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:463
+# d4552112b8a648a79c21a9fbab79e13f
+msgid "imports should go at the top of the file"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:464
+# 1fa575a74af34f58bab9c1c94dcebedb
+msgid "separate function definitions with two blank lines"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:465
+# a69391f9b7e44543b96ef85db8b9e4f0
+msgid "keep function definitions together"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:466
+# b95f8f0ba6e14894bfa1538048e25305
+msgid "keep top level statements, including function calls, together at the bottom of the program"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:471
+# 29b4ca4a3d6c44358722c721668f5e31
+msgid "Unit testing"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:473
+# 9ccdd256b4ef443aa77a63a3ad43b040
+msgid "It is a common best practice in software development these days to include automatic **unit testing** of source code. Unit testing provides a way to automatically verify that individual pieces of code, such as functions, are working properly. This makes it possible to change the implementation of a function at a later time and quickly test that it still does what it was intended to do."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:480
+# 9a25f3fa13654cc988c2ad57da0d1e64
+msgid "Unit testing also forces the programmer to think about the different cases that the function needs to handle.  You also only have to type the tests once into the script, rather than having to keep entering the same test data over and over as you develop your code."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:485
+# 8267c857ce7b452b8ad3362bd560f159
+msgid "Extra code in your program which is there because it makes debugging or testing easier is called **scaffolding**."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:488
+# 9aabc8f95c24458aae9eb70841b500f5
+msgid "A collection of tests for some code is called its **test suite**."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:490
+# 666fd8b0af36435daacee4283fe8a03b
+msgid "There are a few different preferred ways to do unit testing in Python --- but at this stage we're going to ignore what the Python community usually does, and we're going to start with two functions that we'll write ourselves. We'll use these for writing our unit tests."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:495
+# c50b384c6a214ef48f42a0aea3720a4a
+msgid "Let's start with the ``absolute_value`` function that we wrote earlier in this chapter.  Recall that we wrote a few different versions, the last of which was incorrect, and had a bug. Would tests have caught this bug?"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:499
+# d8a312ea0e0243afa9645c966449c895
+msgid "First we plan our tests.  We'd like to know if the function returns the correct value when its argument is negative, or when its argument is positive, or when its argument is zero.  When planning your tests, you'll always want to think carefully about the \"edge\" cases --- here, an argument of 0 to ``absolute_value`` is on the edge of where the function behaviour changes, and as we saw at the beginning of the chapter, it is an easy spot for the programmer to make a mistake!  So it is a good case to include in our test suite."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:508
+# f4cb1f3f74814ff5a3a5bc2a22e5737d
+msgid "We're going to write a helper function for checking the results of one test.  It takes two arguments --- the actual value that was returned from the computation, and the value we expected to get. It compares these, and will either print a message telling us that the test passed, or it will print a message to inform us that the test failed.  The first two lines of the body (after the function's docstring) can be copied to your own code as they are here: they import a module called ``sys``, and extract the caller's line number from the stack frame.  This allows us to print the line number of the test, which will help when we want to fix any tests that fail."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:535
+# 062cf3e0f2b74577a8048f93d79cda2f
+msgid "There is also some slightly tricky string formatting using the ``format`` method which we will gloss over for the moment, and cover in detail in a future chapter. But with this function written, we can proceed to construct our test suite:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:553
+# d17e45d5009b4e8dbee31d36362e1423
+msgid "Here you'll see that we've constructed five tests in our test suite.  We could run this against the first or second versions (the correct versions) of ``absolute_value``, and we'd get output similar to the following:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:565
+# a93c9d153b084003a91fe617bf227155
+msgid "But let's say you change the function to an incorrect version like this:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:577
+# 7a265340dfa54a98a6ddd2983a71194e
+msgid "Can you find at least two mistakes in this code?  Running our test suite we get::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:585
+# c09e190d2edf4991b7e4bf2d03ba5ffc
+msgid "These are three examples of *failing tests*."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:589
+# f201306265b24877b61ebc85036118c7
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:594
+# e53a439228ce4003a9ef93cfb5dbcadd
+msgid "A function that returns a boolean value.  The only possible values of the ``bool`` type are ``False`` and ``True``."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:598
+# efd07a6c69454970bdf5161a55db72ac
+msgid "A function which interacts with the user (using ``input`` or ``print``) when it should not. Silent functions that just convert their input arguments into their output results are usually the most useful ones."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:603
+# 94bc9f8ee2244b25beb4c598561bdff3
+msgid "Calling one function from within the body of another, or using the return value of one function as an argument to the call of another."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:607
+# 8ef78cb7c7d9465caf76a8ae663436c9
+msgid "Part of a program that can never be executed, often because it appears after a ``return`` statement."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:611
+# 50c8b42d85494be69e8a3c00a40fbbe0
+msgid "A function that yields a return value instead of ``None``."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:614
+# 7d290294e8b84a48b016e5e295dc2eed
+msgid "A program development plan intended to simplify debugging by adding and testing only a small amount of code at a time."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:618
+# 0b243d308eca4e0782af3098e5b55fb6
+msgid "A special Python value. One use in Python is that it is returned by functions that do not execute a return statement with a return argument."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:622
+# b9d240a7443c456da156988de9208c6b
+msgid "The value provided as the result of a function call."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:625
+# b95b718bceef478c8defef36763c00e4
+msgid "Code that is used during program development to assist with development and debugging. The unit test code that we added in this chapter are examples of scaffolding."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:630
+# 11fdaab7f1624db6a147bfa19d0a400e
+msgid "A variable used to store an intermediate value in a complex calculation."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:634
+# ba1a11f928e1440483ce0ff8d05d927e
+msgid "A collection of tests for some code you have written."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:637
+# c3b74cf1f1834cbe8d816197255e9855
+msgid "An automatic procedure used to validate that individual units of code are working properly."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:643
+# 4c9e16bd1c904117bcb4f4fe7b5671a1
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:645
+# a2e73b63e32c432ebd0d6f1aa9aef4fe
+msgid "All of the exercises below should be added to a single file.  In that file, you should also add the ``test`` and ``test_suite`` scaffolding functions shown above, and then, as you work through the exercises, add the new tests to your test suite. (If you open the online version of the textbook, you can easily cut and paste the tests and the fragments of code into your Python editor.)"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:651
+# 400157429e8040ee92d082478d99a303
+msgid "After completing each exercise, confirm that all the tests pass."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:653
+# 22d7f1b290074824bef11957cafd7c65
+msgid "The four compass points can be abbreviated by single-letter strings as \"N\", \"E\", \"S\", and \"W\". Write a function ``turn_clockwise`` that takes one of these four compass points as its parameter, and returns the next compass point in the clockwise direction. Here are some tests that should pass::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:661
+# fec12cba54244dfda64351c9f1dec1b8
+msgid "You might ask `\"What if the argument to the function is some other value?\"`  For all other cases, the function should return the value ``None``::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:668
+# c79d536119e44b648fba737a5480f245
+msgid "Write a function ``day_name`` that converts an integer number 0 to 6 into the name of a day.  Assume day 0 is \"Sunday\".  Once again, return None if the arguments to the function are not valid.  Here are some tests that should pass::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:677
+# 60f7251a060e4b6197af3746081dbbc5
+msgid "Write the inverse function ``day_num`` which is given a day name, and returns its number::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:684
+# b21d68b2d59b4671994510f04af80ed6
+msgid "Once again, if this function is given an invalid argument, it should return ``None``::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:688
+# 9671b86826ca4931b55eba4394ce4235
+msgid "Write a function that helps answer questions like '\"Today is Wednesday.  I leave on holiday in 19 days time.  What day will that be?\"' So the function must take a day name and a ``delta`` argument --- the number of days to add --- and should return the resulting day name::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:697
+# 14d4d71ea94d4305a46dbbdd13679634
+msgid "`Hint: use the first two functions written above to help you write this one.`"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:699
+# f7106835acfd4d5f8368216f274ec923
+msgid "Can your ``day_add`` function already work with negative deltas? For example, -1 would be yesterday, or -7 would be a week ago::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:706
+# 9a03e65250ea464fb242762f8b8fecaf
+msgid "If your function already works, explain why.  If it does not work, make it work."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:708
+# 82ee07f8d7244120be73f14162b43900
+msgid "`Hint:` Play with some cases of using the modulus function `%` (introduced at the beginning of the previous chapter).  Specifically, explore what happens to  ``x % 7``  when x is negative."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:712
+# 0be8ff6abac141278196239ec600bce5
+msgid "Write a function ``days_in_month`` which takes the name of a month, and returns the number of days in the month.  Ignore leap years::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:718
+# dee274d9988748d49d9811a86fa5aaf8
+msgid "If the function is given invalid arguments, it should return ``None``."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:720
+# 9a0815fbb5924f499f59aac80f31124b
+msgid "Write a function ``to_secs`` that converts hours, minutes and seconds to a total number of seconds.  Here are some tests that should pass::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:729
+# a54afa526e754d6ca0b022ed57f3a979
+msgid "Extend ``to_secs`` so that it can cope with real values as inputs.  It should always return an integer number of seconds (truncated towards zero)::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:735
+# bb18fb7a2a1e4c9090de7fee5017392e
+msgid "Write three functions that are the \"inverses\" of ``to_secs``:"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:737
+# 0b354c79527143e68b450e2feab4d09f
+msgid "``hours_in`` returns the whole integer number of hours represented by a total number of seconds."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:740
+# 47b981815c7f4e88bde20a6ca471851c
+msgid "``minutes_in`` returns the whole integer number of left over minutes in a total number of seconds, once the hours have been taken out."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:744
+# db3549c5d8ae449fa1caff58f9e6035f
+msgid "``seconds_in`` returns the left over seconds represented by a total number of seconds."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:747
+# 3c2ad69d830d4641a838745ad0491c0f
+msgid "You may assume that the total number of seconds passed to these functions is an integer. Here are some test cases::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:754
+# 8879fd1736894dd495ebc8d6ed2554f2
+msgid "Which of these tests fail?  Explain why. ::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:764
+# c00b525d3a2547c1ab76cc220097e2de
+msgid "Write a ``compare`` function that returns ``1`` if ``a > b``, ``0`` if ``a == b``, and ``-1`` if ``a < b`` ::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:772
+# f0a825ce88454eee84c1e844db508fd1
+msgid "Write a function called ``hypotenuse`` that returns the length of the hypotenuse of a right triangle given the lengths of the two legs as parameters::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:781
+# 5a655d60c043411f871aeb30c2aa38f5
+msgid "Write a function ``slope(x1, y1, x2, y2)`` that returns the slope of the line through the points (x1, y1) and (x2, y2). Be sure your implementation of ``slope`` can pass the following tests::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:790
+# 96ca5df5fb5247bca8cfc7047ab02f72
+msgid "Then use a call to ``slope`` in a new function named ``intercept(x1, y1, x2, y2)`` that returns the y-intercept of the line through the points ``(x1, y1)`` and ``(x2, y2)`` ::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:798
+# 990ca8d89e3c48a79f52aa928a8081f5
+msgid "Write a function called ``is_even(n)`` that takes an integer as an argument and returns ``True`` if the argument is an **even number** and ``False`` if it is **odd**."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:802
+# 72cecdeba47c42a38a803a425858269e
+msgid "Add your own tests to the test suite."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:804
+# 86c543f6474840bf90428baaf2116b14
+msgid "Now write the function ``is_odd(n)`` that returns ``True`` when ``n`` is odd and ``False`` otherwise. Include unit tests for this function too."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:807
+# eaac5737ee914795b365fc2f640707d6
+msgid "Finally, modify it so that it uses a call to ``is_even`` to determine if its argument is an odd integer, and ensure that its test still pass."
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:810
+# 092dda8af8db4fb9a308657b9458131f
+msgid "Write a function ``is_factor(f, n)`` that passes these tests::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:820
+# 31666c7bba1d4c4cbab54949d755e842
+msgid "An important role of unit tests is that they can also act as unambiguous \"specifications\" of what is expected.  These test cases answer the question *Do we treat 1 and 15 as factors of 15?*"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:824
+# db42151fcfcd44fda2b387364af7c7f0
+msgid "Write ``is_multiple`` to satisfy these unit tests::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:832
+# 81d07d52a0824749862316baf3fc3258
+msgid "Can you find a way to use ``is_factor`` in your definition of ``is_multiple``?"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:834
+# 5ae058645acc4268b7d6655ab3b17d20
+msgid "Write the function ``f2c(t)`` designed to return the integer value of the nearest degree Celsius for given temperature in Fahrenheit. (*hint:* you may want to make use of the built-in function, ``round``. Try printing ``round.__doc__`` in a Python shell or looking up help for the ``round`` function, and experimenting with it until you are comfortable with how it works.) ::"
+msgstr ""
+
+#: ../../source/fruitful_functions.rst:849
+# c8b8ce45d705456d84be78ae75d8320f
+msgid "Now do the opposite: write the function ``c2f`` which converts Celcius to Fahrenheit::"
+msgstr ""
+

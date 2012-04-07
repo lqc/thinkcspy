@@ -1,0 +1,513 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/trees.rst:12
+# 4d3727f899324c1db607682a63a1ad45
+msgid "Trees"
+msgstr ""
+
+#: ../../source/trees.rst:14
+# e2745f40da22483386d51f074f509203
+msgid "Like linked lists, trees are made up of nodes. A common kind of tree is a **binary tree**, in which each node contains a reference to two other nodes (possibly ``None``). These references are referred to as the left and right subtrees. Like list nodes, tree nodes also contain cargo. A state diagram for a tree looks like this:"
+msgstr ""
+
+#: ../../source/trees.rst:21
+# 5dfaadd193e34e17ae57ede7fb11acef
+msgid "To avoid cluttering up the picture, we often omit the ``None``\\s."
+msgstr ""
+
+#: ../../source/trees.rst:23
+# 468d39309e6242d7bcdfdc14c90dc7bc
+msgid "The top of the tree (the node ``tree`` refers to) is called the **root**. In keeping with the tree metaphor, the other nodes are called branches and the nodes at the tips with null references are called **leaves**. It may seem odd that we draw the picture with the root at the top and the leaves at the bottom, but that is not the strangest thing."
+msgstr ""
+
+#: ../../source/trees.rst:29
+# 8c4780e3f3e14354927491a1a26fc90b
+msgid "To make things worse, computer scientists mix in another metaphor -- the family tree. The top node is sometimes called a **parent** and the nodes it refers to are its **children**. Nodes with the same parent are called **siblings**."
+msgstr ""
+
+#: ../../source/trees.rst:33
+# c235d0de9c964526a9ce6ed5a810d958
+msgid "Finally, there is a geometric vocabulary for talking about trees. We already mentioned left and right, but there is also up (toward the parent/root) and down (toward the children/leaves). Also, all of the nodes that are the same distance from the root comprise a **level** of the tree."
+msgstr ""
+
+#: ../../source/trees.rst:38
+# ef9b322086a141b591ebde025b856a4d
+msgid "We probably don't need three metaphors for talking about trees, but there they are."
+msgstr ""
+
+#: ../../source/trees.rst:41
+# 61c475a934a145b2a86145646071b3b7
+msgid "Like linked lists, trees are recursive data structures because they are defined recursively.  A tree is either:"
+msgstr ""
+
+#: ../../source/trees.rst:44
+# 967830cc840944879ad3788331796239
+msgid "the empty tree, represented by ``None``, or"
+msgstr ""
+
+#: ../../source/trees.rst:45
+# 58e8fc59ed3645b39091c46b0d042c34
+msgid "a node that contains an object reference (cargo) and two tree references."
+msgstr ""
+
+#: ../../source/trees.rst:49
+# 96c97aa11a2341cd87ffc0044bef086e
+msgid "Building trees"
+msgstr ""
+
+#: ../../source/trees.rst:51
+# ff89563798424a5b95df4f58b6674f08
+msgid "The process of assembling a tree is similar to the process of assembling a linked list. Each constructor invocation builds a single node."
+msgstr ""
+
+#: ../../source/trees.rst:66
+# 17eee613af2647b89476ef3e107d958d
+msgid "The ``cargo`` can be any type, but the ``left`` and ``right`` parameters should be tree nodes. ``left`` and ``right`` are optional; the default value is ``None``."
+msgstr ""
+
+#: ../../source/trees.rst:70
+# 43ea95b0e6a746b4ae3c06b9120faaae
+msgid "To print a node, we just print the cargo."
+msgstr ""
+
+#: ../../source/trees.rst:72
+# 43338eb4e26846e1956b5cec20be1ca4
+msgid "One way to build a tree is from the bottom up. Allocate the child nodes first:"
+msgstr ""
+
+#: ../../source/trees.rst:80
+# e86de345d50c477fad0fba0bf91600c5
+msgid "Then create the parent node and link it to the children:"
+msgstr ""
+
+#: ../../source/trees.rst:87
+# 955d63dbfc1349afbd7e128912e4d090
+msgid "We can write this code more concisely by nesting constructor invocations:"
+msgstr ""
+
+#: ../../source/trees.rst:93
+# edb7e54560374a9389d2ba5105e91208
+msgid "Either way, the result is the tree at the beginning of the chapter."
+msgstr ""
+
+#: ../../source/trees.rst:97
+# ba04ae9f401647c997a068543e4e6f2e
+msgid "Traversing trees"
+msgstr ""
+
+#: ../../source/trees.rst:99
+# bc3de36641674cac9452fae46d56c10b
+msgid "Any time you see a new data structure, your first question should be, How do I traverse it? The most natural way to traverse a tree is recursively. For example, if the tree contains integers as cargo, this function returns their sum:"
+msgstr ""
+
+#: ../../source/trees.rst:111
+# 0a5fc5bcf2e6440fb4d931d48c57cb9b
+msgid "The base case is the empty tree, which contains no cargo, so the sum is 0. The recursive step makes two recursive calls to find the sum of the child trees. When the recursive calls complete, we add the cargo of the parent and return the total."
+msgstr ""
+
+#: ../../source/trees.rst:118
+# 4f2bc63d685b4d5fa213aedfc1fedc79
+msgid "Expression trees"
+msgstr ""
+
+#: ../../source/trees.rst:120
+# d56e64318b4b489da34966aff0d4054e
+msgid "A tree is a natural way to represent the structure of an expression.  Unlike other notations, it can represent the computation unambiguously. For example, the infix expression ``1 + 2 * 3`` is ambiguous unless we know that the multiplication happens before the addition."
+msgstr ""
+
+#: ../../source/trees.rst:125
+# 937a8ebfa29042358084932d069804ca
+msgid "This expression tree represents the same computation:"
+msgstr ""
+
+#: ../../source/trees.rst:128
+# c3828b769a644cc3bdc13ca5a445cc8d
+msgid "The nodes of an expression tree can be operands like ``1`` and ``2`` or operators like ``+`` and ``*``. Operands are leaf nodes; operator nodes contain references to their operands. (All of these operators are **binary**, meaning they have exactly two operands.)"
+msgstr ""
+
+#: ../../source/trees.rst:133
+# 9088cac4df46436bb8cfc9cda63a14ae
+msgid "We can build this tree like this:"
+msgstr ""
+
+#: ../../source/trees.rst:139
+# 8fd733bd9fe4488fbaa8653e363ea905
+msgid "Looking at the figure, there is no question what the order of operations is; the multiplication happens first in order to compute the second operand of the addition."
+msgstr ""
+
+#: ../../source/trees.rst:143
+# d93e49b77a404c9b9829ce6bf07d50f2
+msgid "Expression trees have many uses. The example in this chapter uses trees to translate expressions to postfix, prefix, and infix. Similar trees are used inside compilers to parse, optimize, and translate programs."
+msgstr ""
+
+#: ../../source/trees.rst:149
+# ddb9ed123e0844be93afca34fdc0e2ee
+msgid "Tree traversal"
+msgstr ""
+
+#: ../../source/trees.rst:151
+# 2c42cc38a0524df19eda9eba1b4e638c
+msgid "We can traverse an expression tree and print the contents like this:"
+msgstr ""
+
+#: ../../source/trees.rst:162
+# bd0b04ca6b5a4e17bebddd299bd97d50
+msgid "In other words, to print a tree, first print the contents of the root, then print the entire left subtree, and then print the entire right subtree. This way of traversing a tree is called a **preorder**, because the contents of the root appear *before* the contents of the children. For the previous example, the output is:"
+msgstr ""
+
+#: ../../source/trees.rst:174
+# 0f97a8f674104ae3be53f70a2f0d097a
+msgid "This format is different from both postfix and infix; it is another notation called **prefix**, in which the operators appear before their operands."
+msgstr ""
+
+#: ../../source/trees.rst:177
+# 2763d3fbc2b14d37b0e29cda593dfd0a
+msgid "You might suspect that if you traverse the tree in a different order, you will get the expression in a different notation. For example, if you print the subtrees first and then the root node, you get:"
+msgstr ""
+
+#: ../../source/trees.rst:190
+# 35e8f8cf7d444538b74a396b127ae6f6
+msgid "The result, ``1 2 3 * +``, is in postfix! This order of traversal is called **postorder**."
+msgstr ""
+
+#: ../../source/trees.rst:193
+# 173bcab66a4046978808454b5b4f97ed
+msgid "Finally, to traverse a tree **inorder**, you print the left tree, then the root, and then the right tree:"
+msgstr ""
+
+#: ../../source/trees.rst:205
+# c9832d3d54ec4a5580730def1f9f679a
+msgid "The result is ``1 + 2 * 3``, which is the expression in infix."
+msgstr ""
+
+#: ../../source/trees.rst:207
+# 27f7261e32fa480f84cddf00e9f582e2
+msgid "To be fair, we should point out that we have omitted an important complication. Sometimes when we write an expression in infix, we have to use parentheses to preserve the order of operations. So an inorder traversal is not quite sufficient to generate an infix expression."
+msgstr ""
+
+#: ../../source/trees.rst:212
+# a40bd780020c49f1a9904efd8f3e1d19
+msgid "Nevertheless, with a few improvements, the expression tree and the three recursive traversals provide a general way to translate expressions from one format to another."
+msgstr ""
+
+#: ../../source/trees.rst:216
+# 7dae2fc1f16b45d7981e91a75cc95e44
+msgid "If we do an inorder traversal and keep track of what level in the tree we are on, we can generate a graphical representation of a tree:"
+msgstr ""
+
+#: ../../source/trees.rst:228
+# ffa2015eec0541ad94c1dfae0f4923cb
+msgid "The parameter ``level`` keeps track of where we are in the tree. By default, it is initially 0. Each time we make a recursive call, we pass ``level+1`` because the child's level is always one greater than the parent's. Each item is indented by two spaces per level. The result for the example tree is:"
+msgstr ""
+
+#: ../../source/trees.rst:242
+# 7ae6eaeedb2a4e2b8c57f8e1526f0a32
+msgid "If you look at the output sideways, you see a simplified version of the original figure."
+msgstr ""
+
+#: ../../source/trees.rst:247
+# 349d4045e7b14a00b8c7c47c99be5992
+msgid "Building an expression tree"
+msgstr ""
+
+#: ../../source/trees.rst:249
+# fccec25040a749cea09e7eed0bb369e4
+msgid "In this section, we parse infix expressions and build the corresponding expression trees. For example, the expression ``(3 + 7) * 9`` yields the following tree:"
+msgstr ""
+
+#: ../../source/trees.rst:254
+# 660e1f556f254a8fbb652935bfc5e57a
+msgid "Notice that we have simplified the diagram by leaving out the names of the attributes."
+msgstr ""
+
+#: ../../source/trees.rst:257
+# 0b932d267ddf4e1cbeeeb53498728a95
+msgid "The parser we will write handles expressions that include numbers, parentheses, and the operators ``+`` and ``*``. We assume that the input string has already been tokenized into a Python list (producing this list is left as an exercise). The token list for ``(3 + 7) * 9`` is:"
+msgstr ""
+
+#: ../../source/trees.rst:266
+# 1dd85297eb4d4af38d3526e1987b192d
+msgid "The ``end`` token is useful for preventing the parser from reading past the end of the list."
+msgstr ""
+
+#: ../../source/trees.rst:269
+# 4a8ba92c37f24a1ab0e7c561a4a94b90
+msgid "The first function we'll write is ``get_token``, which takes a token list and an expected token as parameters. It compares the expected token to the first token on the list: if they match, it removes the token from the list and returns ``True``; otherwise, it returns ``False``:"
+msgstr ""
+
+#: ../../source/trees.rst:284
+# 1b4ac2b2ee974dd7873cf76a4988aa75
+msgid "Since ``token_list`` refers to a mutable object, the changes made here are visible to any other variable that refers to the same object."
+msgstr ""
+
+#: ../../source/trees.rst:287
+# 4867e564e7ef48cd9455a00cfcb3eba8
+msgid "The next function, ``get_number``, handles operands. If the next token in ``token_list`` is a number, ``get_number`` removes it and returns a leaf node containing the number; otherwise, it returns ``None``."
+msgstr ""
+
+#: ../../source/trees.rst:300
+# 5c5ba09e667d42ba8c51e2ae6eb08baa
+msgid "Before continuing, we should test ``get_number`` in isolation. We assign a list of numbers to ``token_list``, extract the first, print the result, and print what remains of the token list:"
+msgstr ""
+
+#: ../../source/trees.rst:313
+# aef74e6005fa458b9e08e429fe927f15
+msgid "The next method we need is ``get_product``, which builds an expression tree for products. A simple product has two numbers as operands, like ``3 * 7``."
+msgstr ""
+
+#: ../../source/trees.rst:317
+# 63ac19cbc3614cedb600f736e731c959
+msgid "Here is a version of ``get_product`` that handles simple products."
+msgstr ""
+
+#: ../../source/trees.rst:330
+# 6a37ba506e0f460aba199e9e7b8aff74
+msgid "Assuming that ``get_number`` succeeds and returns a singleton tree, we assign the first operand to ``a``. If the next character is ``*``, we get the second number and build an expression tree with ``a``, ``b``, and the operator."
+msgstr ""
+
+#: ../../source/trees.rst:334
+# 9d01f7fa47154ecf8484ea269e55cc4a
+msgid "If the next character is anything else, then we just return the leaf node with ``a``. Here are two examples:"
+msgstr ""
+
+#: ../../source/trees.rst:351
+# 418b792c093c46a89af5be5cd47e5662
+msgid "The second example implies that we consider a single operand to be a kind of product. This definition of product is counter-intuitive, but it turns out to be useful."
+msgstr ""
+
+#: ../../source/trees.rst:355
+# 0b286c095b35435784a1dc02ae351890
+msgid "Now we have to deal with compound products, like like ``3 * 5 * 13``. We treat this expression as a product of products, namely ``3 * (5 * 13)``.  The resulting tree is:"
+msgstr ""
+
+#: ../../source/trees.rst:360
+# 5e829150815f44eab5048de53855cb2c
+msgid "With a small change in ``get_product``, we can handle an arbitrarily long product:"
+msgstr ""
+
+#: ../../source/trees.rst:374
+# 89243e92c01c472080b67f21026ec8ee
+msgid "In other words, a product can be either a singleton or a tree with ``*`` at the root, a number on the left, and a product on the right. This kind of recursive definition should be starting to feel familiar."
+msgstr ""
+
+#: ../../source/trees.rst:378
+# 69cb5c282a2b4ccdaa80566528f98caf
+msgid "Let's test the new version with a compound product:"
+msgstr ""
+
+#: ../../source/trees.rst:387
+# 9c8b7d37baf54fb4a9f578bd47980027
+msgid "Next we will add the ability to parse sums. Again, we use a slightly counter-intuitive definition of sum. For us, a sum can be a tree with ``+`` at the root, a product on the left, and a sum on the right. Or, a sum can be just a product."
+msgstr ""
+
+#: ../../source/trees.rst:392
+# 88fb010042634e908a1c6f623aba272f
+msgid "If you are willing to play along with this definition, it has a nice property: we can represent any expression (without parentheses) as a sum of products. This property is the basis of our parsing algorithm."
+msgstr ""
+
+#: ../../source/trees.rst:396
+# 9baf8d52bf95448e8bd921851d3dda0c
+msgid "``get_sum`` tries to build a tree with a product on the left and a sum on the right. But if it doesn't find a ``+``, it just builds a product."
+msgstr ""
+
+#: ../../source/trees.rst:410
+# ec33b7706507458190e888514c2104f6
+msgid "Let's test it with ``9 * 11 + 5 * 7``:"
+msgstr ""
+
+#: ../../source/trees.rst:419
+# 30e298ea21fb4f58bbf1d9bed78e7782
+msgid "We are almost done, but we still have to handle parentheses. Anywhere in an expression where there can be a number, there can also be an entire sum enclosed in parentheses. We just need to modify ``get_number`` to handle **subexpressions**:"
+msgstr ""
+
+#: ../../source/trees.rst:438
+# ce63b9017b9344eebd52bf06e27fd3a8
+msgid "Let's test this code with ``9 * (11 + 5) * 7``:"
+msgstr ""
+
+#: ../../source/trees.rst:447
+# 3da59ae33fec440e8c787191e237e2b0
+msgid "The parser handled the parentheses correctly; the addition happens before the multiplication."
+msgstr ""
+
+#: ../../source/trees.rst:450
+# a96bf21fca6c42b78bca14f5938840a7
+msgid "In the final version of the program, it would be a good idea to give ``get_number`` a name more descriptive of its new role."
+msgstr ""
+
+#: ../../source/trees.rst:455
+# 137b7b3dd9ed4cea8f924c8643d14a05
+msgid "Handling errors"
+msgstr ""
+
+#: ../../source/trees.rst:457
+# 44c3b3a309aa46e891f3e91053b8e2bc
+msgid "Throughout the parser, we've been assuming that expressions are well-formed. For example, when we reach the end of a subexpression, we assume that the next character is a close parenthesis. If there is an error and the next character is something else, we should deal with it."
+msgstr ""
+
+#: ../../source/trees.rst:474
+# dfc2b155cbd749c7827826c58be9bc60
+msgid "The ``raise`` statement throws the exception object which we create. In this case we simply used the most appropriate type of built-in exception that we could find, but you should be aware that you can create your own more specific user-defined exceptions if you need to. If the function that called ``get_number``, or one of the other functions in the traceback, handles the exception, then the program can continue.  Otherwise, Python will print an error message and quit."
+msgstr ""
+
+#: ../../source/trees.rst:484
+# 2c62f52eb1f84940ad4acadfe57baae6
+msgid "The animal tree"
+msgstr ""
+
+#: ../../source/trees.rst:486
+# 05d3ee80f57a4fb0a15c863a9aec9f8c
+msgid "In this section, we develop a small program that uses a tree to represent a knowledge base."
+msgstr ""
+
+#: ../../source/trees.rst:489
+# bd022d40a77f48e3b9f00d137e763b4f
+msgid "The program interacts with the user to create a tree of questions and animal names. Here is a sample run:"
+msgstr ""
+
+#: ../../source/trees.rst:515
+# b50106d43cb7452a91f14869a0297faa
+msgid "Here is the tree this dialog builds:"
+msgstr ""
+
+#: ../../source/trees.rst:518
+# c6303adda94a43409e3e1278b6bcf7cf
+msgid "At the beginning of each round, the program starts at the top of the tree and asks the first question. Depending on the answer, it moves to the left or right child and continues until it gets to a leaf node. At that point, it makes a guess. If the guess is not correct, it asks the user for the name of the new animal and a question that distinguishes the (bad) guess from the new animal. Then it adds a node to the tree with the new question and the new animal."
+msgstr ""
+
+#: ../../source/trees.rst:525
+# 7a4e96cb6f0b4c88b59d025378e24285
+msgid "Here is the code:"
+msgstr ""
+
+#: ../../source/trees.rst:575
+# 922e121058454eaaaea116f5aceec8b0
+msgid "The function ``yes`` is a helper; it prints a prompt and then takes input from the user. If the response begins with *y* or *Y*, the function returns ``True``."
+msgstr ""
+
+#: ../../source/trees.rst:579
+# ae38e865a9144a25aed27d4e25d0775e
+msgid "The condition of the outer loop of ``animal`` is ``True``, which means it will continue until the ``break`` statement executes, if the user is not thinking of an animal."
+msgstr ""
+
+#: ../../source/trees.rst:583
+# 6a547665f0d04a4ca55bf5a424b84431
+msgid "The inner ``while`` loop walks the tree from top to bottom, guided by the user's responses."
+msgstr ""
+
+#: ../../source/trees.rst:586
+# a21002163b7347b0831f3a91cc1f091d
+msgid "When a new node is added to the tree, the new question replaces the cargo, and the two children are the new animal and the original cargo."
+msgstr ""
+
+#: ../../source/trees.rst:589
+# 1ef7c921bd5a41d8bbfcd4f8ef304a7c
+msgid "One shortcoming of the program is that when it exits, it forgets everything you carefully taught it! Fixing this problem is left as an exercise."
+msgstr ""
+
+#: ../../source/trees.rst:594
+# d65819dba60549af8c14bfa98af9442f
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/trees.rst:599
+# 867f33f959a24ac2a14f613dc3c1c175
+msgid "An operator that takes two operands."
+msgstr ""
+
+#: ../../source/trees.rst:602
+# 8f9ed6d439694ecd8f95124f0f5f422e
+msgid "A tree in which each node refers to zero, one, or two dependent nodes."
+msgstr ""
+
+#: ../../source/trees.rst:605
+# 01dec384d8124193a324cb5550d0b970
+msgid "One of the nodes referred to by a node."
+msgstr ""
+
+#: ../../source/trees.rst:608
+# 236509db01f449e3b7f87fa7a7d94d42
+msgid "A bottom-most node in a tree, with no children."
+msgstr ""
+
+#: ../../source/trees.rst:611
+# 4f6cbd40e3144c76a606b2c2073bc90b
+msgid "The set of nodes equidistant from the root."
+msgstr ""
+
+#: ../../source/trees.rst:614
+# 655c6e4e562e4c08ac6ddc6e13627f5e
+msgid "The node that refers to a given node."
+msgstr ""
+
+#: ../../source/trees.rst:617
+# 62c8bd4dc2104c639c7107a64d514e50
+msgid "A way to traverse a tree, visiting the children of each node before the node itself."
+msgstr ""
+
+#: ../../source/trees.rst:621
+# e112a11693e947eb89b79adba99c0831
+msgid "A way of writing a mathematical expression with each operator appearing before its operands."
+msgstr ""
+
+#: ../../source/trees.rst:625
+# 49bfdeadba244b91a95f8707fc2eb14f
+msgid "A way to traverse a tree, visiting each node before its children."
+msgstr ""
+
+#: ../../source/trees.rst:628
+# 3c55d357721247af9195d6b0a8c8ead6
+msgid "The topmost node in a tree, with no parent."
+msgstr ""
+
+#: ../../source/trees.rst:631
+# 92fbab04fa8646c0b6da8a4ac07e0dbc
+msgid "Nodes that share a common parent."
+msgstr ""
+
+#: ../../source/trees.rst:634
+# 2e8800354a0a4118a294fa39949888e5
+msgid "An expression in parentheses that acts as a single operand in a larger expression."
+msgstr ""
+
+#: ../../source/trees.rst:639
+# c6ff207102664d209cf85cb602952db4
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/trees.rst:641
+# 3a82c96b7c654f6785b1858a47d7d045
+msgid "Modify ``print_tree_inorder`` so that it puts parentheses around every operator and pair of operands. Is the output correct and unambiguous?  Are the parentheses always necessary?"
+msgstr ""
+
+#: ../../source/trees.rst:644
+# f538ad67bb7849d6a792d01cb3d2248a
+msgid "Write a function that takes an expression string and returns a token list."
+msgstr ""
+
+#: ../../source/trees.rst:645
+# 5202faf1af854fcca5b17bf4dbb26c08
+msgid "Find other places in the expression tree functions where errors can occur and add appropriate ``raise`` statements. Test your code with improperly formed expressions."
+msgstr ""
+
+#: ../../source/trees.rst:648
+# bd35282ee10c4f2aa350cdec18414871
+msgid "Think of various ways you might save the animal knowledge tree in a file. Implement the one you think is easiest."
+msgstr ""
+

@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/recursion.rst:12
+#: ../../source/recursion.rst:210
+# 9c34c599125548268855bd21be405040
+# f851d2491c8b48c7a2d04e6f9e77bd0b
+msgid "Recursion"
+msgstr ""
+
+#: ../../source/recursion.rst:16
+# 8d5d123f5709489e95d35c510c837802
+msgid "Drawing Fractals"
+msgstr ""
+
+#: ../../source/recursion.rst:18
+# ce7846e2e6fe4c58a0f48c2a5a0f454d
+msgid "**Recursion** means \"defining something in terms of itself\" usually at some smaller scale, perhaps multiple times, to achieve your objective. For example, we might say \"A human being is someone whose mother is a human being.\""
+msgstr ""
+
+#: ../../source/recursion.rst:22
+# ed36f1d77ee24524858b2fddff6fe109
+msgid "For our purposes, a **fractal** is a drawing which also has *self-similar* structure, where it can be defined in terms of itself."
+msgstr ""
+
+#: ../../source/recursion.rst:25
+# faea39265efd44ba8986951a652f9acb
+msgid "Let us start by looking at the famous Koch fractal.  An order 0 Koch fractal is simply a straight line of a given size."
+msgstr ""
+
+#: ../../source/recursion.rst:30
+# c2b208f667ba414ba09c40aed687880b
+msgid "An order 1 Koch fractal is obtained like this: instead of drawing just one line, draw instead four smaller segments, in the pattern shown here:"
+msgstr ""
+
+#: ../../source/recursion.rst:35
+# 8a3109c60df345b5aa0f18b834d68a00
+msgid "Now what would happen if we repeated this Koch pattern again on each of the order 1 segments? We'd get this order 2 Koch fractal:"
+msgstr ""
+
+#: ../../source/recursion.rst:40
+# 0d721e7338a049558c02a8048c7b3644
+msgid "Repeating our pattern again gets us an order 3 Koch fractal:"
+msgstr ""
+
+#: ../../source/recursion.rst:44
+# 08760afd1a2249b7b85f4e56d85659c9
+msgid "Now let us think about it the other way around.  To draw a Koch fractal of order 3, we can simply draw four order 2 Koch fractals.  But each of these in turn needs four order 1 Koch fractals, and each of those in turn needs four order 0 fractals.  Ultimately, the only drawing that will take place is at order 0. This is very simple to code up in Python:"
+msgstr ""
+
+#: ../../source/recursion.rst:70
+# ce9833c1c2014a74bb0b53420817d72e
+msgid "The key thing that is new here is that if order is not zero, ``koch`` calls itself recursively to get its job done."
+msgstr ""
+
+#: ../../source/recursion.rst:73
+# 0aafea2af52e4994915d88df2e249eee
+msgid "Let's make a simple observation and tighten up this code.  Remember that turning right by 120 is the same as turning left by -120.  So with a bit of clever rearrangement, we can use a loop instead of lines 10-16:"
+msgstr ""
+
+#: ../../source/recursion.rst:88
+# 2d9c082110f94275aa2e3648425f82fd
+msgid "The final turn is 0 degrees --- so it has no effect.  But it has allowed us to find a pattern and reduce seven lines of code to three, which will make things easier for our next observations."
+msgstr ""
+
+#: ../../source/recursion.rst:94
+# c66d335802cf457b96dff809b93e658d
+msgid "One way to think about this is to convince yourself that the function works correctly when you call it for an order 0 fractal.  Then do a mental *leap of faith*, saying *\"the fairy godmother* (or Python, if you can think of Python as your fairy godmother) *knows how to handle the recursive level 0 calls for me on lines 11, 13, 15, and 17, so I don't need to think about that detail!\"*  All I need to focus on is how to draw an order 1 fractal *if I can assume the order 0 one is already working.*"
+msgstr ""
+
+#: ../../source/recursion.rst:103
+# 57f77bc70fbf4293a690a844b73d04cf
+msgid "You're practicing *mental abstraction* --- ignoring the subproblem while you solve the big problem."
+msgstr ""
+
+#: ../../source/recursion.rst:106
+# 9017759c47d44218a776869d70ef71d1
+msgid "If this mode of thinking works (and you should practice it!), then take it to the next level.  Aha! now can I see that it will work when called for order 2 *under the assumption that it is already working for level 1*."
+msgstr ""
+
+#: ../../source/recursion.rst:110
+# d03a33e7ff60460586ce010060739f03
+msgid "And, in general, if I can assume the order n-1 case works, can I just solve the level n problem?"
+msgstr ""
+
+#: ../../source/recursion.rst:113
+# 08a3550aeafa4c75a9af1931c72f7b38
+msgid "Students of mathematics who have played with proofs of induction should see some very strong similarities here."
+msgstr ""
+
+#: ../../source/recursion.rst:118
+# 380d6bf49148468985bb38c6707b7988
+msgid "Another way of trying to understand recursion is to get rid of it! If we had separate functions to draw a level 3 fractal, a level 2 fractal, a level 1 fractal and a level 0 fractal, we could simplify the above code, quite mechanically, to a situation where there was no longer any recursion, like this:"
+msgstr ""
+
+#: ../../source/recursion.rst:144
+# 3c89c17f01d14a3b98afe720bc0971be
+msgid "This trick of \"unrolling\" the recursion gives us an operational view of what happens.  You can trace the program into ``koch_3``, and from there, into ``koch_2``, and then into ``koch_1``, etc., all the way down the different layers of the recursion."
+msgstr ""
+
+#: ../../source/recursion.rst:149
+# e337eea1bc90481c8180d595509302eb
+msgid "This might be a useful hint to build your understanding.  The mental goal is, however, to be able to do the abstraction!"
+msgstr ""
+
+#: ../../source/recursion.rst:160
+# 44c177f583ba44ec88e547e2ba0ecf25
+msgid "Recursive data structures"
+msgstr ""
+
+#: ../../source/recursion.rst:162
+# bc716ca44e034f2ba39ba84dafc3893e
+msgid "All of the Python data types we have seen can be grouped inside lists and tuples in a variety of ways. Lists and tuples can also be nested, providing a myriad possibilities for organizing data. The organization of data for the purpose of making it easier to use is called a **data structure**."
+msgstr ""
+
+#: ../../source/recursion.rst:167
+# 99562bb99fd947d2b6297b6a535d6cb4
+msgid "It's election time and we are helping to compute the votes as they come in. Votes arriving from individual wards, precincts, municipalities, counties, and states are sometimes reported as a sum total of votes and sometimes as a list of subtotals of votes. After considering how best to store the tallies, we decide to use a *nested number list*, which we define as follows:"
+msgstr ""
+
+#: ../../source/recursion.rst:173
+# b20e122c367e4789872b15a44bdaba22
+msgid "A *nested number list* is a list whose elements are either:"
+msgstr ""
+
+#: ../../source/recursion.rst:175
+# 765ed25902df47e3abd1441a2be2bf6a
+msgid "numbers"
+msgstr ""
+
+#: ../../source/recursion.rst:176
+# 3033f28fc0664e29b83d43786be2cfbd
+msgid "nested number lists"
+msgstr ""
+
+#: ../../source/recursion.rst:178
+# 2a80603ee4d24271931dfb2fa085d43b
+msgid "Notice that the term, *nested number list* is used in its own definition. **Recursive definitions** like this are quite common in mathematics and computer science. They provide a concise and powerful way to describe **recursive data structures** that are partially composed of smaller and simpler instances of themselves. The definition is not circular, since at some point we will reach a list that does not have any lists as elements."
+msgstr ""
+
+#: ../../source/recursion.rst:185
+# 033cdf3c3eb0447fa2d329dba5835ae7
+msgid "Now suppose our job is to write a function that will sum all of the values in a nested number list. Python has a built-in function which finds the sum of a sequence of numbers:"
+msgstr ""
+
+#: ../../source/recursion.rst:194
+# 0f190d4c667a4f80af0aa59cca046514
+msgid "For our *nested number list*, however, ``sum`` will not work:"
+msgstr ""
+
+#: ../../source/recursion.rst:204
+# da9d8d52de65426dac536dfa5b612cd7
+msgid "The problem is that the third element of this list, ``[11, 13]``, is itself a list, so it cannot just be added to ``1``, ``2``, and ``8``."
+msgstr ""
+
+#: ../../source/recursion.rst:212
+# 0261b0cd907f4341800c8d7211dd51e5
+msgid "To sum all the numbers in our recursive nested number list we need to traverse the list, visiting each of the elements within its nested structure, adding any numeric elements to our sum, and *repeating this process* with any elements which are lists."
+msgstr ""
+
+#: ../../source/recursion.rst:217
+# e69b90cdb1fb4c1b8e32934a624cedf5
+msgid "Modern programming languages generally support **recursion**, which means that functions can *call themselves* within their definitions.  Thanks to recursion, the Python code needed to sum the values of a nested number list is surprisingly short:"
+msgstr ""
+
+#: ../../source/recursion.rst:234
+# c7885c69298e402e8e03b2b39e075cb6
+msgid "The body of ``r_sum`` consists mainly of a ``for`` loop that traverses ``nested_num_list``. If ``element`` is a numerical value (the ``else`` branch), it is simply added to ``tot``. If ``element`` is a list, then ``r_sum`` is called again, with the element as an argument.  The statement inside the function definition in which the function calls itself is known as the **recursive call**."
+msgstr ""
+
+#: ../../source/recursion.rst:241
+# 7ecbae94f2364ccc9f2728712ada5b69
+msgid "Recursion is truly one of the most beautiful and elegant tools in computer science."
+msgstr ""
+
+#: ../../source/recursion.rst:244
+# 649e139588674d44bc6983fc53c1be78
+msgid "A slightly more complicated problem is finding the largest value in our nested number list:"
+msgstr ""
+
+#: ../../source/recursion.rst:274
+# a13d32d6e0284d598c30ffb3573c934b
+msgid "Tests are included to provide examples of ``r_max`` at work."
+msgstr ""
+
+#: ../../source/recursion.rst:276
+# 0d1f60ba3af5433c99b79a8a186ede98
+msgid "The added twist to this problem is finding a value for initializing ``largest``. We can't just use ``nxs[0]``, since that may be either a element or a list. To solve this problem (at every recursive call) we initialize a boolean flag.  When we've found the value of interest, we check to see whether this is the initializing (first) value for ``largest``, or a value that could potentially change ``largest``."
+msgstr ""
+
+#: ../../source/recursion.rst:283
+# 60f61a06b95c4cc798c0566c03c291cf
+msgid "The two examples above each have a **base case** which does not lead to a recursive call: the case where the element is a number and not a list. Without a base case, you'll have **infinite recursion**, and your program will not work. Python stops after reaching a maximum recursion depth and returns a runtime error.   See how this happens, by running this little script which we will call `infinite_recursion.py`:"
+msgstr ""
+
+#: ../../source/recursion.rst:298
+# 98f58d6bdfd3432db92ffbc8426c5bda
+msgid "After watching the messages flash by, you will be presented with the end of a long traceback that ends with a message like the following::"
+msgstr ""
+
+#: ../../source/recursion.rst:303
+# 653cce29209a4b71b991557f1ec1d93e
+msgid "We would certainly never want something like this to happen to a user of one of our programs, so in the next chapter we'll see how errors, any kinds of errors, are handled in Python."
+msgstr ""
+
+#: ../../source/recursion.rst:310
+# a01a012e3b5a40c4afc3900635151ce7
+msgid "Case study: Fibonacci numbers"
+msgstr ""
+
+#: ../../source/recursion.rst:312
+# d3e470374b124a24a107a201d4dbbb27
+msgid "The famous **Fibonacci sequence** 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 134, ... was devised by Fibonacci (1170-1250), who used this to model the breeding of (pairs) of rabbits. If, in generation 7 you had 21 pairs in total, of which 13 were adults, then next generation the adults will all have bred new children, and the previous children will have grown up to become adults. So in generation 8 you'll have 13+21=34, of which 21 are adults."
+msgstr ""
+
+#: ../../source/recursion.rst:319
+# 0fa500bb751c463291f38adcbf63fa08
+msgid "This *model* to explain rabbit breeding made the simplifying assumption that rabbits never died. Scientists often make (unrealistic) simplifying assumptions and restrictions to make some headway with the problem."
+msgstr ""
+
+#: ../../source/recursion.rst:323
+# d8db1d47022443aca0271e25cecc7e12
+msgid "If we number the terms of the sequence from 0, we can describe each term recursively as the sum of the previous two terms::"
+msgstr ""
+
+#: ../../source/recursion.rst:330
+# 624659adfbed43cfaf705a8961431c30
+msgid "This translates very directly into some Python:"
+msgstr ""
+
+#: ../../source/recursion.rst:341
+# 0bddacc3edcb475dbab9846827229d05
+msgid "This is a particularly inefficient algorithm, and we'll show one way of fixing it when we learn about dictionaries:"
+msgstr ""
+
+#: ../../source/recursion.rst:355
+# e5032d2da8884aec82913b022c32ea14
+msgid "We get the correct result, but an exploding amount of work! ::"
+msgstr ""
+
+#: ../../source/recursion.rst:361
+# 17937bb84e4042979ffda6b10d92cd21
+msgid "Example with recursive directories and files"
+msgstr ""
+
+#: ../../source/recursion.rst:363
+# c8f58484f7a84bb3ae906e73c293449b
+msgid "The following program lists the contents of a directory and all its subdirectories."
+msgstr ""
+
+#: ../../source/recursion.rst:392
+# ea2701fcef2149838ef9751ae59827f1
+msgid "Calling the function ``print_files`` with some folder name will produce output similar to this::"
+msgstr ""
+
+#: ../../source/recursion.rst:412
+# 829fa6a416c040e6a7830a8d966f4227
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/recursion.rst:417
+# 46cfc3f313e642a7b89f8f77d7bd9f13
+msgid "A branch of the conditional statement in a recursive function that does not give rise to further recursive calls."
+msgstr ""
+
+#: ../../source/recursion.rst:421
+# ee3fea230c6a460d8c971c3bc41ccf3b
+msgid "A function that calls itself recursively without ever reaching any base case. Eventually, infinite recursion causes a runtime error."
+msgstr ""
+
+#: ../../source/recursion.rst:425
+# 57038d3d73284777b2156f56393ad383
+msgid "The process of calling a function that is already executing."
+msgstr ""
+
+#: ../../source/recursion.rst:428
+# d59be6942db14dcdbe1fa604b6789408
+msgid "The statement that calls an already executing function.  Recursion can also be indirect --- function `f` can call `g` which calls `h`, and `h` could make a call back to `f`."
+msgstr ""
+
+#: ../../source/recursion.rst:433
+# 28af80cfad584d778dc58c68a68066d1
+msgid "A definition which defines something in terms of itself. To be useful it must include *base cases* which are not recursive. In this way it differs from a *circular definition*.  Recursive definitions often provide an elegant way to express complex data structures, like a directory that can contain other directories, or a menu that can contain other menus."
+msgstr ""
+
+#: ../../source/recursion.rst:440
+# 2e16067800ad4d90ae1b88b35b22da6d
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/recursion.rst:442
+# 6ae3199b876c4826961b75c2af4fe288
+msgid "Modify the Koch fractal program so that it draws a Koch snowflake, like this:"
+msgstr ""
+
+#: ../../source/recursion.rst:450
+# c2d4064129354f62be9bd3f7bc3588dd
+msgid "Draw a Cesaro torn line fractal, of the order given by the user. We show four different lines of orders 0,1,2,3. In this example, the angle of the tear is 10 degrees."
+msgstr ""
+
+#: ../../source/recursion.rst:456
+# 79bc9701303a4ecfa20a869e8737f19b
+msgid "Four lines make a square.  Use the code in part a) to draw cesaro squares. Varying the angle gives interesting effects --- experiment a bit, or perhaps let the user input the angle of the tear."
+msgstr ""
+
+#: ../../source/recursion.rst:464
+# 031960953eed4bc582350b244eacd1ff
+msgid "(For the mathematically inclined). In the squares shown here, the higher-order drawings become a little larger. (Look at the bottom lines of each square - they're not aligned.) This is because we just halved the drawn part of the line for each recursive subproblem. So we've \"grown\" the overall square by the width of the tear(s). Can you solve the geometry problem so that the total size of the subproblem case (including the tear) remains exactly the same size as the original?"
+msgstr ""
+
+#: ../../source/recursion.rst:473
+# a6df6550632e45978409826bc740f81e
+msgid "A Sierpinski triangle of order 0 is an equilateral triangle. An order 1 triangle can be drawn by drawing 3 smaller triangles (shown slightly disconnected here, just to help our understanding). Higher order 2 and 3 triangles are also shown. Draw Sierpinski triangles of any order input by the user."
+msgstr ""
+
+#: ../../source/recursion.rst:481
+# 3df4cdf85ccb4f7ebc0d4f2b5efb0625
+msgid "Adapt the above program to change the color of its three sub-triangles at some depth of recursion. The illustration below shows two cases: on the left, the color is changed at depth 0 (the outmost level of recursion), on the right, at depth 2. If the user supplies a negative depth, the color never changes. (Hint: add a new optional parameter ``colorChangeDepth`` (which defaults to -1), and make this one smaller on each recursive subcall. Then, in the section of code before you recurse, test whether the parameter is zero, and change color.)"
+msgstr ""
+
+#: ../../source/recursion.rst:492
+# d4255746c2c24ecbb323704ae5d75a54
+msgid "Write a function, ``recursive_min``, that returns the smallest value in a nested number list.  Assume there are no empty lists or sublists:"
+msgstr ""
+
+#: ../../source/recursion.rst:502
+# 19738dc1d59d4e67b4144843a9da744c
+msgid "Write a function ``count`` that returns the number of occurrences of ``target`` in  a nested list:"
+msgstr ""
+
+#: ../../source/recursion.rst:515
+# 28793fcb96d740f9aceaa662ff698740
+msgid "Write a function ``flatten`` that returns a simple list containing all the values in a nested list:"
+msgstr ""
+
+#: ../../source/recursion.rst:527
+# c7e832d49e70461f88672a349e3c6cdf
+msgid "Rewrite the fibonacci algorithm without using recursion. Can you find bigger terms of the sequence?  Can you find ``fib(200)``?"
+msgstr ""
+
+#: ../../source/recursion.rst:530
+# a382d12625b645a1a4bcac91aaf2b692
+msgid "Use help to find out what ``sys.getrecursionlimit()`` and ``sys.setrecursionlimit(n)`` do. Create several experiments similar to what was done in `infinite_recursion.py` to test your understanding of how these module functions work."
+msgstr ""
+
+#: ../../source/recursion.rst:536
+# 0d1997e0b55d468aa637ee0f46a888a6
+msgid "Write a program that walks a directory structure (as in the last section of this chapter), but instead of printing filenames, it returns a list of all the full paths of files in the directory or the subdirectories.  (Don't include directories in this list --- just files.)  For example, the output list might have elements like this::"
+msgstr ""
+
+#: ../../source/recursion.rst:550
+# cc491a41de2d4bc1b656d0b8ff7d50fd
+msgid "Write a program named ``litter.py`` that creates an empty file named ``trash.txt`` in each subdirectory of a directory tree given the root of the tree as an argument (or the current directory as a default). Now write a program named ``cleanup.py`` that removes all these files.  *Hint:* Use the program from the example in the last section of this chapter as a basis for these two recursive programs.  Because you're going to destroy files on your disks, you better get this right, or you risk losing files you care about.  So excellent advice is that initially you should fake the deletion of the files --- just print the full path names of each file that you intend to delete.  Once you're happy that your logic is correct, and you can see that you're not deleting the wrong things, you can replace the print statement with the real thing."
+msgstr ""
+

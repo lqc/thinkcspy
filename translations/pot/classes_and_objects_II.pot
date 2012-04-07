@@ -1,0 +1,258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/classes_and_objects_II.rst:13
+# e5171899c436488ea9d73f33ab88c002
+msgid "Classes and Objects - Digging a little deeper"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:18
+# 74dc24bba81241548049599e39619cc2
+msgid "Rectangles"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:20
+# ef9b607df76647f8b20486f74db0bf31
+msgid "Let's say that we want a class to represent a rectangle which is located somewhere in the XY plane. The question is, what information do we have to provide in order to specify such a rectangle? To keep things simple, assume that the rectangle is oriented either vertically or horizontally, never at an angle."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:26
+# 614a072388f44642a7386046bbb851c8
+msgid "There are a few possibilities: we could specify the center of the rectangle (two coordinates) and its size (width and height); or we could specify one of the corners and the size; or we could specify two opposing corners. A conventional choice is to specify the upper-left corner of the rectangle, and the size."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:32
+# 65619af456a445b3bb95a1cd2f5105e1
+msgid "Again, we'll define a new class, and provide it with an initializer and a string converter method:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:56
+# f5f8bd28624a4bd9ab509204b73d5cc4
+msgid "To specify the upper-left corner, we have embedded a Point object (as we used it in the previous chapter) within our new Rectangle object! We create two new ``Rectangle`` objects, and then print them producing:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:65
+# c81875cedec243b9b7f3020d6ca69e83
+msgid "The dot operator composes. The expression ``box.corner.x`` means, Go to the object that ``box`` refers to and select its attribute named ``corner``; then go to that object and select its attribute named ``x``."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:69
+# 48a02e14c6204d15b92fefbdd17cecda
+msgid "The figure shows the state of this object:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:76
+# f85cf5000a1c4f85b0718111999ceecd
+msgid "Objects are mutable"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:78
+# 396383c0590f4a378908dd17430f268a
+msgid "We can change the state of an object by making an assignment to one of its attributes. For example, to grow the size of a rectangle without changing its position, we could modify the values of ``width`` and ``height``:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:88
+# cefadcd7b2cc48dd993ba1d2f8b74576
+msgid "Of course, we'd probably like to provide a method to encapsulate this inside the class.  We will also provide another method to move the position of the rectangle elsewhere:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:108
+# 9c08f1d8d1fe4eb98796d0db21187699
+msgid "Let us try this:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:125
+# 0698a22034154d378afaa942ae421909
+msgid "Sameness"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:127
+# 674265a03e904f77960da14e2d2d9edc
+msgid "The meaning of the word *same* seems perfectly clear until you give it some thought, and then you realize there is more to it than you expected."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:130
+# 08f44805b74c42bcaac4e1929353fec8
+msgid "For example, if you say, Chris and I have the same car, you mean that his car and yours are the same make and model, but that they are two different cars. If you say, Chris and I have the same mother, you mean that his mother and yours are the same person."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:135
+# 56a6f26decce42a3b4be818a09fcb744
+msgid "When you talk about objects, there is a similar ambiguity. For example, if two ``Point``\\ s are the same, does that mean they contain the same data (coordinates) or that they are actually the same object?"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:139
+# a19e3db7f3bb46de8fe530c9a8936fc5
+msgid "We've already seen the ``is`` operator in the chapter on lists, where we talked about aliases: it allows us to find out if two references refer to the same object:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:150
+# f8af873f2f8d466e92e9b45252e4b9e1
+msgid "Even though ``p1`` and ``p2`` contain the same coordinates, they are not the same object. If we assign ``p1`` to ``p3``, then the two variables are aliases of the same object:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:160
+# c460cf0ea3bb483b8bd190977e13cffe
+msgid "This type of equality is called **shallow equality** because it compares only the references, not the contents of the objects."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:163
+# 06ac41661fce40dc812e578e23787e15
+msgid "To compare the contents of the objects --- **deep equality** --- we can write a function called ``same_coordinates``:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:172
+# aa8c9ac7c21b45ceb919717db51fe46b
+msgid "Now if we create two different objects that contain the same data, we can use ``same_point`` to find out if they represent points with the same coordinates."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:182
+# 756f0375bd88494183923431c15bf7ae
+msgid "Of course, if the two variables refer to the same object, they have both shallow and deep equality."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:187
+# 92beea94fcb94c53a06e5ebbdf5070e8
+msgid "\"When I use a word,\" Humpty Dumpty said, in a rather scornful tone, \"it means just what I choose it to mean --- neither more nor less.\"   *Alice in Wonderland*"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:189
+# a3330db3ab49431a83a6534fd4258aa1
+msgid "Python has a powerful feature that allows a designer of a class to decide what an operation like ``==`` or ``<`` should mean.  (We've just shown how we can control how our own objects are converted to strings, so we've already made a start!)  We'll cover more detail later. But sometimes the implementors will attach shallow equality semantics, and sometimes deep equality, as shown in this little experiment:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:208
+# 867f32f134464dfe9bb10eea4c4a6cc4
+msgid "This outputs:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:215
+# fde89eecc3f64a919f33e8328b9194cd
+msgid "So we conclude that even though the two lists (or tuples, etc.) are distinct objects with different memory addresses, for lists the ``==`` operator tests for deep equality, while in the case of points it makes a shallow test."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:222
+# e8dc3dc641c3434faa588661e16b9e02
+msgid "Copying"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:224
+# 7d3ca0c53ce445968e823ef2dd076a17
+msgid "Aliasing can make a program difficult to read because changes made in one place might have unexpected effects in another place. It is hard to keep track of all the variables that might refer to a given object."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:228
+# c5f17e0314934dd1902095584e4c5da1
+msgid "Copying an object is often an alternative to aliasing. The ``copy`` module contains a function called ``copy`` that can duplicate any object:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:243
+# 6d594ebb77224994a41a51645a704a90
+msgid "Once we import the ``copy`` module, we can use the ``copy`` function to make a new ``Point``. ``p1`` and ``p2`` are not the same point, but they contain the same data."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:247
+# 895804bb36db4b44977f0548659f26b1
+msgid "To copy a simple object like a ``Point``, which doesn't contain any embedded objects, ``copy`` is sufficient. This is called **shallow copying**."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:251
+# 3919fd052a8a471693d0d6171cb90483
+msgid "For something like a ``Rectangle``, which contains a reference to a ``Point``, ``copy`` doesn't do quite the right thing. It copies the reference to the ``Point`` object, so both the old ``Rectangle`` and the new one refer to a single ``Point``."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:256
+# 87f0fac5b8f045af862012c95e6d69fb
+msgid "If we create a box, ``b1``, in the usual way and then make a copy, ``b2``, using ``copy``, the resulting state diagram looks like this:"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:261
+# 717a0515e2644f8791eacb6aebd1e699
+msgid "This is almost certainly not what we want. In this case, invoking ``grow`` on one of the ``Rectangles`` would not affect the other, but invoking ``move`` on either would affect both! This behavior is confusing and error-prone. The shallow copy has created an alias to the Point that represents the corner."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:267
+# ae9ba04b80b445e4bd9487cb53e41931
+msgid "Fortunately, the ``copy`` module contains a function named ``deepcopy`` that copies not only the object but also any embedded objects. You will not be surprised to learn that this operation is called a **deep copy**."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:275
+# 53c2757a871f4cedba3c0bdd1bf621c9
+msgid "Now ``b1`` and ``b2`` are completely separate objects."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:279
+# e372d3e906f64d528656e714d7ff9343
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:284
+# f953c32a099043be9d3fc0bae5f82e6e
+msgid "To copy the contents of an object as well as any embedded objects, and any objects embedded in them, and so on; implemented by the ``deepcopy`` function in the ``copy`` module."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:289
+# af5146e3928145b1a264cce3731d19a8
+msgid "Equality of values, or two references that point to objects that have the same value."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:293
+# d2056e34d9d04903b10f71e25899fcc7
+msgid "To copy the contents of an object, including any references to embedded objects; implemented by the ``copy`` function in the ``copy`` module."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:297
+# 5cce2fed5ba9450381d050307dd859a5
+msgid "Equality of references, or two references that point to the same object."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:301
+# 6b24dcd450c146829234ad016e3f33e0
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:303
+# 5772e33ce106451792e7e6b89ca648d5
+msgid "Add a method ``area`` to the Rectangle class that returns the area of any instance::"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:308
+# 11cedbd0300e4997b87f07425a9613b5
+msgid "Write a ``perimeter`` method in the Rectangle class so that we can find the perimeter of any rectangle instance::"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:314
+# 5a5973a6505b4a1eb96cacead44986a3
+msgid "Write a ``flip`` method in the Rectangle class that swaps the width and the height of any rectangle instance::"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:324
+# 2a2563b89e2e4fdeabd8a4bd0208f9c1
+msgid "Write a new method in the Rectangle class to test if a Point falls within the rectangle.  For this exercise, assume that a rectangle at (0,0) with width 10 and height 5 has *open* upper bounds on the width and height, i.e. it stretches in the x direction from [0 to 10), where 0 is included but 10 is excluded, and from [0 to 5) in the y direction.  So it does not contain the point (10, 2).  These tests should pass::"
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:339
+# f50d7fa82dfa4e7d869e8c5dfc91e3e0
+msgid "In games, we often put a rectangular \"bounding box\" around our sprites. (A sprite is an object that can move about in the game, as we will see shortly.)  We can then do *collision detection* between, say, bombs and spaceships, by comparing whether their rectangles overlap anywhere."
+msgstr ""
+
+#: ../../source/classes_and_objects_II.rst:344
+# 7857f6a9a2324f899afbb6e9f9560d6e
+msgid "Write a function to determine whether two rectangles collide. *Hint: this might be quite a tough exercise!  Think carefully about all the cases before you code.*"
+msgstr ""
+

@@ -1,0 +1,803 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/list_algorithms.rst:14
+# a3edbcd14fec47ba80bf37f9b25bebb5
+msgid "List Algorithms"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:16
+# 4b406542c93b494ebad2c3f75fc3e80c
+msgid "This chapter is a bit different from what we've done so far: rather than introduce more new Python syntax and features, we're going to focus on the program development process, and some algorithms that work with lists."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:20
+# d0368ae5be8b407398c6ef079382c12c
+msgid "As in all parts of this book, our expectation is that you, the reader, will copy our code into your Python environment, play and experiment, and work along with us."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:26
+# 60f28bfcad2044538c602e967afede5b
+msgid "Test-driven development"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:28
+# d534d21a0a164a728ecc9d12401bae86
+msgid "Early in our `Fruitful functions` chapter we introduced the idea of *incremental development*, where we added small fragments of code to slowly build up the whole, so that we could easily find problems early. Later in that same chapter we introduced `unit testing` and gave code for our testing framework so that we could capture, in code, appropriate tests for the functions we were writing."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:35
+# d5983aa7453d4aed8f2aa18518ecf34c
+msgid "**Test-driven development (TDD)** is a software development practice which takes these practices one step further.  The key idea is that automated tests should be written *first*.  This technique is called *test-driven* because --- if we are to believe the extremists --- non-testing code should only be written when there is a failing test to make pass."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:41
+# 1d35945ec99847ac958ff8f4113049e2
+msgid "We can still retain our mode of working in small incremental steps, but now we'll define and express those steps in terms of a sequence of increasingly sophisticated unit tests that demand more from our code at each stage."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:45
+# 515b5b2365b54b76afe6f7517a529c4e
+msgid "We'll turn our attention to some standard algorithms that process lists now, but as we proceed through this chapter we'll attempt to do so in the spirit envisaged by TDD."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:50
+# 6a8bfa6afa1347fc901ec4fbc36e6fd6
+msgid "The linear search algorithm"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:52
+# 5d4ea161a97e438db520041fd6950f33
+msgid "We'd like to know the index where a specific item occurs within in a list of items. Specifically, we'll return the index of the item if it is found, or we'll return -1 if the item doesn't occur in the list.  Let us start with some tests:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:65
+# 72ea2f26eb7146de83f045dac543a69d
+msgid "Motivated by the fact that our tests don't even run, let alone pass, we now write the function:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:78
+# 22ce6fb015ba45918a8fd4f47d93d6ff
+msgid "There are a some points to learn here: We've seen a similar algorithm in section 8.10 when we searched for a character in a string.  There we used a ``while`` loop, here we've used a ``for`` loop, coupled with ``enumerate`` to extract the ``(i, v)`` pair on each iteration. There are other variants --- for example, we could have used ``range`` and made the loop run only over the indexes, or we could have used the idiom of returning ``None`` when the item was not found in the list.  But the essential similarity in all these variations is that we test every item in the list in turn, from first to last, using the pattern of the short-circuit `eureka traversal` that we introduced in section 8.10 --- that we return from the function as soon as we find the target that we're looking for."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:89
+# b3894a53390e47d68cfe207240a91bda
+msgid "Searching all items of a sequence from first to last is called a **linear search**. Each time we check whether ``v == target`` we'll call it a **probe**.  We like to count probes as a measure of how efficient our algorithm is, and this will be a good enough indication of how long our algorithm will take to execute."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:94
+# 4564f5abbf14470089faa8fdd3350e98
+msgid "Linear searching is characterized by the fact that the number of probes needed to find some target depends directly on the length of the list. So if the list becomes ten times bigger, we can expect to wait ten times longer when searching for things. Notice too, that if we're searching for a target that is not present in the list, we'll have to go all the way to the end before we can return the negative value. So this case needs N probes, where N is the length of the list. However, if we're searching for a target that does exist in the list, we could be lucky and find it immediately in position 0, or we might have to look further, perhaps even all the way to the last item. On average, when the target is present, we're going to need to go about halfway through the list, or N/2 probes."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:105
+# b17ffb1654824276a707755d5878ae53
+msgid "We say that this search has **linear performance** (linear meaning `straight line`) because, if we were to measure the search times for different sizes of lists (N), and then plot a graph of time-to-search against N, we'd get a more-or-less straight line graph."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:109
+# 3ac1879458d34328afa1ce10c3de6afc
+msgid "Analysis like this is pretty meaningless for small lists --- the computer is quick enough not to bother if the list only has a handful of items. So generally, we're interested in the **scalability** of our algorithms --- how do they perform if we throw bigger problems at them.  Would this search be a sensible one to use if we had a million or ten million items (perhaps the catalog of books in your local library) in our list?  What happens for really large datasets, e.g. how does Google search so brilliantly well?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:117
+# c9b51e5e2db247898aaeba2fbe69e36a
+msgid "A more realistic problem"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:119
+# 0a3eaabe919f430288917c1bf9abfca9
+msgid "As children learn to read, there are expectations that their vocabulary will grow.  So a child of age 14 is expected to know more words than a child of age 8. When prescribing reading books for a grade, an important question might be *\"which words in this book are not in the expected vocabulary at this level?\"*"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:124
+# ff072cb4be404da48a979183aeb44b11
+msgid "Let us assume we can read a vocabulary of words into our program, and read the text of a book, and split it into words.  Let us write some tests for what we need to do next.  Test data can usually be very small, even if we intend to finally use our program for larger cases:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:139
+# fe98474c2a8244cba0aae4d85f3f3b34
+msgid "Notice we were a bit lazy, and used ``split`` to create our list of words --- it is easier than typing out the list, and very convenient if you want to input a sentence into the program and turn it into a list of words."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:143
+# 1a104a71875b4adcb57bc8cbee8d8d70
+msgid "We now need to implement the function for which we've written tests, and we'll make use of our linear search.  The basic strategy is to run through each of the words in the book, look it up in the vocabulary, and if it is not in the vocabulary, save it into a new resulting list which we return from the function:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:159
+# 1a661f3f59464c5c90ef9235c056295f
+msgid "We can happily report now that the tests all pass."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:161
+# 6a57f076948b4425b0d602129679865f
+msgid "Now let us look at the scalability.  We have more realistic vocabulary in a text file, so let us read in the file (as a single string) and split it into a list of words. For convenience, we'll create a function to do this for us, and test it on a file we happen to have available:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:181
+# 3bbdf7f55c034de7b9ee254100080c80
+msgid "Python responds with:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:188
+# bd42944fb46e4011b373a3a377209294
+msgid "So we've got a more sensible size vocabulary. Now let us load up a book. Loading a book is much like loading words from a file, but we're going to do a little extra black magic.  Books are full of punctuation, and have mixtures of lowercase and uppercase letters.  We need to clean up the contents of the book.  This will involve removing punctuation, and converting everything to the same case (lowercase, because our vocabulary is all in lowercase).  So we'll want a more sophisticated way of converting text to words."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:203
+# c41ab46ac677490e84d74652501fd81d
+msgid "There is a powerful ``translate`` method available for strings.  The idea is that one sets up desired substitutions --- for every character, we can give a corresponding replacement character.  The ``translate`` method will apply these replacements throughout the whole string.  So here we go:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:227
+# 7035ccb778b84d9c8fc0b0f55aff1f6e
+msgid "The translation turns all uppercase characters into lowercase, and all punctuation characters and digits into spaces. Then, of course, ``split`` will get rid of the spaces as it breaks the text into a list of words.  The tests pass."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:231
+# 518bef0f2d6a45f6bbbf5cfa581bfdd7
+msgid "Now we're ready to read in our book:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:248
+# 9749725694244a5fb5b605a68a33d664
+msgid "Python prints the following (all on one line, we've cheated a bit for the textbook):"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:268
+# e31655af181e460e95d3915e51e227c6
+msgid "Well now we have all the pieces ready.  Let us see what words in this book are not in the vocabulary:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:275
+# ec9998c05d9945eb8b879b33a50e4414
+msgid "We wait a considerable time now, something like a minute, before Python finally works its way through this, and prints a list of 3398 words in the book that are not in the vocabulary.  Mmm...  This is not particularly scaleable.  For a vocabulary that is twenty times larger (you'll often find school dictionaries with 300 000 words, for example), and longer books, this is going to be slow.  So let us make some timing measurements while we think about how we can improve this in the next section."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:293
+# 9daa44ecdc2b43ab87c86f3cb3f207f1
+msgid "We get the results and some timing that we can refer back to later:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:301
+# f827873e592c4bf7a1d0c0466067be3f
+msgid "Binary Search"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:303
+# 3c96ac369174423c92655c644dd34641
+msgid "If you think about what we've just done, it is not how we work in real life. If you were given a vocabulary and asked to tell if some word was present, you'd probably start in the middle. You can do this because the vocabulary is ordered --- so you can probe some word in the middle, and immediately realize that your target was before (or perhaps after) the one you had probed.  Applying this principle repeatedly leads us to a very much better algorithm for searching in a list of items that are already ordered.  (Note that if the items are not ordered, you have little choice other than to look through all of them.  But, if we know the items are in order, we can improve our searching technique)."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:313
+# da102cd0e20a4d679945b95105c4928f
+msgid "Lets start with some tests.  Remember, the list needs to be sorted:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:324
+# f0b19d687dd74907b9744100c19e33a1
+msgid "Even our test cases are interesting this time: notice that we start with items not in the list and look at boundary conditions --- in the middle of the list, less than all items in the list, bigger than the biggest. Then we use a loop to use every list item as a target, and to confirm that our binary search returns the corresponding index of that item in the list."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:330
+# ef117bead43847bb8d57c2c8a757d06a
+msgid "It is useful to think about having a *region-of-interest* (roi) within the list being searched.  This roi will be the portion of the list in which it is still possible that our target might be found.  Our algorithm will start with the roi set to all the items in the list. On the first probe in the middle of the roi, there are three possible outcomes: either we find the target, or we learn that we can discard the top half of the roi, or we learn that we can discard the bottom half of the roi.  And we keep doing this repeatedly, until we find our target, or until we end up with no more items in our region of interest.  We can code this as follows:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:367
+# 3b8d2907525c4c1c902c0f050e31b6fe
+msgid "The region of interest is represented by two variables, a lower bound ``lb`` and an upper bound ``ub``.  It is important to be precise about what values these indexes have.  We'll make ``lb`` hold the index of the first item in the roi, and make ``ub`` hold the index just *beyond* the last item of interest.  So these semantics are similar to a Python slice semantics: the region of interest is exactly the slice ``xs[lb:ub]``.  (The algorithm never actually takes any array slices!)"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:374
+# 7eae294716b0409a993af609f1f7636a
+msgid "With this code in place, our tests pass.   Great.  Now if we substitute a call to this search algorithm instead of calling the ``search_linear`` in ``find_unknown_words``, can we improve our performance?  Let's do that, and again run this test:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:387
+# 9abe8db240084de980bc3441cb8dd111
+msgid "What a spectacular difference! More than 200 times faster!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:394
+# 820ed72e0b63483cb7e4b11ea0069459
+msgid "Why is this binary search so much faster than the linear search?  If we uncomment the print statement on lines 15 and 16, we'll get a trace of the probes done during a search.  Let's go ahead, and try that:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:417
+# 44aec474524547a78a0edd6afd224fb4
+msgid "Here we see that finding the target word \"magic\" needed just 14 probes before it was found at index 10328.  The important thing is that each probe more or less halves the remaining region of interest. By contrast, the linear search would have needed 10329 probes."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:422
+# 3b879f2838da4a6bbd0ed36fa8e448b1
+msgid "The word *binary* means *two*.  Binary search gets its name from the fact that each probe splits the list into two pieces and discards the one half from the region of interest."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:425
+# 8fd9e674c80d4d318da7afb794cbc8c7
+msgid "The beauty of the algorithm is that we could double the size of the vocabulary, and it would only need one more probe!  And after another doubling, just another one probe. So as the vocabulary gets bigger, this algorithm's performance becomes even more impressive."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:430
+# 7f9cd513a0bd4509b8b0a9ca3aeef997
+msgid "Can we put a formula to this?   If our list size is N, what is the most number of probes k we could need?  The maths is a bit easier if we turn the question around: how big a list N could we deal with if we were only allowed to make k probes?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:434
+# 9e1f2c7d5dc340a0bcc27ec8151062ea
+msgid "With 1 probe, we can only search a list of size 1.  With two probes we could cope with lists up to size 3 - (test the middle item with the first probe, then test either the left or right sublist with the remaining probe).  With one more probe, we could cope with 7 items (the middle item, and two sublists of size 3).  With four probes, we can search 15 items, and 5 probes lets us search up to 31 items.  So the general relationship is given by the formula"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:439
+# bc9f39a90bdf43caa5b14a84b4efb2aa
+msgid "N =  2\\ :sup:`k`\\  - 1"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:441
+# 271cf73e59064f70827b05fb49fece8d
+msgid "where k is the number of probes we're allowed to make, and N is the maximum size of the list that can be searched in that many probes.   This function is *exponential* in k - because k occurs as the exponent.  If we wanted to turn the formula around and solve for k in terms of N, we need to move the constant 1 to the other side, and take a log (base 2) on each side. (The log is the inverse of an exponent.)  So the formula for k in terms of N is now:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:450
+# ad01c7b508d740b08672ff5e10bdffc1
+msgid "The square-only-on-top brackets are called *ceiling brackets*: this means that you must round the number up to the next whole integer."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:453
+# dbd325dc68c74309af927e74ca29f188
+msgid "Let us try this on a calculator, or in Python, which is the mother of all calculators: suppose I have 1000 elements to be searched, what is the maximum number of probes I'll need? (There is a pesky +1 in the formula, so let us not forget to add it on...):"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:463
+# eadb656f3d894c65ab583f4f6d3af1bd
+msgid "Telling us that we'll need 9.96 probes maximum, to search 1000 items is not quite what we want. We forgot to take the ceiling.  The ``ceil`` function in the math module does exactly this.  So more accurately, now:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:478
+# 7b6909e29044484e8104e5277f614b83
+msgid "This tells us that searching 1000 items needs 10 probes. (Well technically, with 10 probes we can search exactly 1023 items, but the easy and useful stuff to remember here are that \"1000 items needs 10 probes, a million needs 20 probes, and a billion items only needs 30 probes\")."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:483
+# a8255eab4dbd4a8aa12d9701ea41c601
+msgid "You will rarely encounter algorithms that scale to large datasets as beautifully as binary search does!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:486
+# f7093d937af046a09988b768a943e9d9
+msgid "Removing adjacent duplicates from a list"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:488
+# 4d85fe30b83248f6af14db6147a5bd84
+msgid "We often want to get the unique elements in a list, i.e. produce a new list in which each different element occurs just once.  Consider our case of looking for words in Alice in Wonderland that are not in our vocabulary.  We had a report that there are 3398 such words, but there are duplicates in that list.  In fact, the word \"alice\" occurs 398 times in the book, and it is not in our vocabulary!  How should we remove these duplicates?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:494
+# f98932ac4bf0453bb7bcf73311878067
+msgid "A good approach is to sort the list, then remove all adjacent duplicates.  Let us start with removing adjacent duplicates"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:505
+# a07ed6c154404ac9985a692d6b50ff87
+msgid "The algorithm is easy and efficient.  We simply have to remember the most recent item that was inserted into the result, and avoid inserting it again:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:524
+# a57cc130101e42e0b307a808cc30b201
+msgid "The amount of work done in this algorithm is linear --- each item in ``xs`` causes the loop to execute exactly once, and there are no nested loops.  So doubling the number of elements in ``xs`` should cause this program to run twice as long: the relationship between the size of the list and the time to run will be graphed as a straight (linear) line."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:530
+# 936db9a5dfe94e5f94565fadd21ce62a
+msgid "Let us go back now to our analysis of `Alice in Wonderland`.  Before checking the words in the book against the vocabulary, we'll sort those words into order, and eliminate duplicates. So our new code looks like this:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:545
+# 9d037bfe84d04802b3acbba160834dc9
+msgid "Almost magically, we get the following output:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:569
+# 11b35f45de934e718edee8fa9a749a85
+msgid "It should surprise you that Lewis Carroll was able to write a classic piece of literature using only 2570 different words!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:573
+# 588d1373cb6146d48888ff3b32650273
+msgid "Merging sorted lists"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:575
+# 2f2008734db848c8a8a3f911c770e1dd
+msgid "Suppose we have two sorted lists. Devise an algorithm to merge them together into a single sorted list."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:577
+# d50b80d146eb45b29a10663dfe460bd3
+msgid "A simple but inefficient algorithm could be to simply append the two lists together, and sort the result:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:586
+# 0eb988ca5ed84149983970ef10512b5a
+msgid "But this doesn't take advantage of the fact that the two lists are already sorted, and is going to have poor scalability and performance for very large lists."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:589
+# fae6bfc86026456780fd09c422d37a0a
+msgid "Lets get some tests together first:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:610
+# cab05b9fbd214a1badf8839fd4f44b95
+msgid "Here is our merge algorithm:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:639
+# 83adcbb33d3640f9a254ee76e094d905
+msgid "The algorithm works as follows: we create a result list, and keep two indexes, one into each list (lines 3-5).  On each iteration of the loop, whichever list item is smaller is copied to the result list, and that list's index is advanced.  As soon as either index reaches the end of its list, we copy all the remaining items from the other list into the result, which we return."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:646
+# 897a3c42b28940cd8a9398e8096c2135
+msgid "Alice in Wonderland, again!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:648
+# 5e9002932413473c81790ac960607998
+msgid "Underlying the algorithm for merging sorted lists is a deep pattern of computation that is widely reusable.  The pattern essence is *\"Run through the lists always processing the smallest remaining items from each, with these cases to consider:\"*"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:652
+# 10817165325b4d049d52a589516e153e
+msgid "What should we do when either list has no more items?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:653
+# 46a17c3457854c31847687aa319a4456
+msgid "What should we do if the smallest items from each list are equal to each other?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:654
+# ae6f22343b794719a3fce157867cff91
+msgid "What should we do if the smallest item in the first list is smaller than the smallest one the second list?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:655
+# e78b1f0d5f6f4b4282e7af3241a2b319
+msgid "What should we do in the remaining case?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:657
+# 7f8b6f822a7042b3ba0cabc8125c502e
+msgid "Lets assume we have two sorted lists.  Exercise your algorithmic skills by adapting the merging algorithm pattern for each of these cases:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:660
+#: ../../source/list_algorithms.rst:1094
+# 628502aeef294e70bcd11bd54bb291a8
+# a21415c4b03c4b2db4e4dc9a69cf8e19
+msgid "Return only those items that are present in both lists."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:661
+#: ../../source/list_algorithms.rst:1095
+# 6cf7f413b7cf4589a94668d3feff0d0d
+# a161b3ecb811438cb1e78e3daec2fa0d
+msgid "Return only those items that are present in the first list, but not in the second."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:662
+#: ../../source/list_algorithms.rst:1096
+# 88c6f887840345819e16c816114dde51
+# e8fb3546d33a4aa588f52e8758c2a28e
+msgid "Return only those items that are present in the second list, but not in the first."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:663
+#: ../../source/list_algorithms.rst:1097
+# ff1c90e00b7e45d49b44a94d79715e62
+# 9b1dd7dcccb84b0a90f6fd1050e2a904
+msgid "Return items that are present in either the first or the second list."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:664
+#: ../../source/list_algorithms.rst:1098
+# 268d17f0b6f54a089bc2534a1c1753fe
+# 14aba1560a0e4abc88e7a2067520883d
+msgid "Return items from the first list that are not eliminated by a matching element in the second list.  In this case, an item in the second list \"knocks out\" just one matching item in the first list.  This operation is sometimes called *bagdiff*. For example  ``bagdiff([5,7,11,11,11,12,13], [7,8,11])`` would return  ``[5,11,11,12,13]``"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:669
+# fe3cadbe98b945aab484ca5d77a2850b
+msgid "In the previous section we sorted the words from the book, and eliminated duplicates. Our vocabulary is also sorted.  So third case above --- find all items in the second list that are not in the first list, would be another way to implement ``find_unknown_words``. Instead of searching for every word in the dictionary (either by linear or binary search), why not use a variant of the merge to return the words that occur in the book, but not in the vocabulary."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:706
+# 549c40edda9a45d3abd0cd1fb8314faa
+msgid "Now we put it all together:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:720
+# 583983b886bc4f11aaa46b951dcdbe24
+msgid "Even more stunning performance here:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:727
+# 1f65f08173914989affea186197b45ed
+msgid "Let's review what we've done. We started with a word-by-word linear lookup in the vocabulary that ran in about 50 seconds.  We implemented a clever binary search, and got that down to 0.22 seconds, more than 200 times faster. But then we did something even better: we sorted the words from the book, eliminated duplicates, and used a merging pattern to find words from the book that were not in the dictionary.  This was about five times faster than even the binary lookup algorithm.  At the end of the chapter our algorithm is more than a 1000 times faster than our first attempt!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:736
+# d7df75bf380a4807a7c8ea7c325a6e5c
+msgid "That is what we can call a good day at the office!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:741
+# 48feac8717494ae99bd8f04e7a7fbd68
+msgid "Eight queens puzzle, part 1"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:743
+# 87a0be571aa043cba7b47f16ccf2acb4
+msgid "As told by Wikipedia, *\"The eight queens puzzle is the problem of placing eight chess queens on an 8x8 chessboard so that no two queens attack each other. Thus, a solution requires that no two queens share the same row, column, or diagonal.\"*"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:749
+# 204e73f9c48d44b7aeac4f620cf0cfe8
+msgid "Please try this yourself, and find a few more solutions by hand."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:751
+# 9e56053718c3474696c8b16f8edf41f6
+msgid "We'd like to write a program to find solutions to this puzzle.  In fact, the puzzle generalizes to placing N queens on an NxN board, so we're going to think about the general case, not just the 8x8 case.  Perhaps we can find solutions for 12 queens on a 12x12 board, or 20 queens on a 20x20 board."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:756
+# b1cd7b47cb7d44ae9671e606b421740c
+msgid "How do we approach a complex problem like this?  A good starting point is to think about our *data structures* --- how exactly do we plan to represent the state of the chessboard and its queens in our program?  Once we have some handle on what our puzzle is going to look like in memory, we can begin to think about the functions and logic we'll need to solve the puzzle, i.e. how do we put another queen onto the board somewhere, and to check whether it clashes with any of the queens already on the board."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:763
+# 03070da5b142487f866bbfeea00a945b
+msgid "The steps of finding a good representation, and then finding a good algorithm to operate on the data cannot always be done independently of each other.  As you think about the operations you require, you may want to change or reorganize the data somewhat to make it easier to do the operations you need."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:768
+# 593d1aa49384410196e3b7fc1dfb7f82
+msgid "This relationship between algorithms and data was elegantly expressed in the title of a book *Algorithms + Data Structures = Programs*, written by one of the pioneers in Computer Science, Niklaus Wirth, the inventor of Pascal."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:772
+# 50f3e198a85449bbbad726266c18c74e
+msgid "Let's brainstorm some ideas about how a chessboard and queens could be represented in memory."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:774
+# 1d6280574360405b87797dac83042611
+msgid "A two dimensional matrix (a list of 8 lists, each containing 8 squares) is one possibility. At each square of the board would like to know whether it contains a queen or not --- just two possible states for each square --- so perhaps each element in the lists could be True or False, or, more simply, 0 or 1."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:779
+# a9856f91b5bc470bb63eea32f97e2680
+msgid "Our state for the solution above could then have this data representation:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:793
+# 3367dc6713f04750b3d503a8d821eca2
+msgid "You should also be able to see how the empty board would be represented, and you should start to imagine what operations or changes you'd need to make to the data to place another queen somewhere on the board."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:797
+# fbb75052b42942e0899911a8a513e3bb
+msgid "Another idea might be to keep a list of coordinates of where the queens are.  Using the notation in the illustration, for example, we could represent the state of that solution as:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:806
+# 772ba9845bd3434ebd5bd1ecd755c532
+msgid "We could make other tweaks to this --- perhaps each element in this list should rather be a tuple, with integer coordinates for both axes.  And being good computer scientists, we'd probably start numbering each axis from 0 instead of at 1. Now our representation could be:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:816
+# d05dd72dee0d48bb979e53aa666e9ca6
+msgid "Looking at this representation, we can't help but notice that the first coordinates are ``0,1,2,3,4,5,6,7`` and they correspond exactly to the index position of the pairs in the list.  So we could discard them, and come up with this really compact alternative representation of the solution:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:826
+# e75705ffc8274d7985f8963e5d4f55cb
+msgid "This will be what we'll use, let's see where that takes us."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:832
+# 801cc93000434425a7443e80c83f7668
+msgid "We've come up with a great representation. But will it work for other puzzles? Our list representation has the constraint that one can only put one queen in each column. But that is a puzzle constraint anyway --- no two queens are allowed to share the same column.  So puzzle and data representation are well matched."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:837
+# c9273f96b0ba429d901e2c25f5065267
+msgid "But if we were trying to solve a different puzzle on a chessboard, perhaps play a game of checkers, where many pieces could occupy the same column, our representation would not work."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:841
+# c2382621ff7d4931962c2693f12bd985
+msgid "Let us now take some grand insight into the problem.  Do you think it is a coincidence that there are no repeated numbers in the solution?  The solution  ``[6,4,2,0,5,7,1,3]`` contains the numbers ``0,1,2,3,4,5,6,7``, but none are duplicated!  Could other solutions contain duplicate numbers, or not?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:846
+# df5a09f2c9e74ac4b07c2e4252538f54
+msgid "A little thinking should convince you that there can never be duplicate numbers in a solution: the numbers represent the row on which the queen is placed, and because we are never permitted to put two queens in the same row, no solution will ever have duplicate row numbers in it."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:853
+# 1f78296eaacc40a1a7fd38ac2df04ea9
+msgid "*In our representation, any solution to the N queens problem must therefore be a permutation of the numbers [0 .. N-1].*"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:855
+# 5bb5a6c405df4167883cb7ffed2dfcbe
+msgid "Note that not all permutations are solutions.  For example, ``[0,1,2,3,4,5,6,7]`` has all queens on the same diagonal."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:858
+# 6d6058eee36b4577865a6fe6231f9db3
+msgid "Wow, we seem to be making progress on this problem merely by thinking, rather than coding!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:860
+# de7ba643b81845cb829bbc70a425955e
+msgid "Our algorithm should start taking shape now.  We can start with the list [0..N-1], generate various permutations of that list, and check each permutation to see if it has any clashes (queens that are on the same diagonal).  If it has no clashes, it is a solution, and we can print it."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:865
+# fd96b5d100bf4cbbb6f89178369e741d
+msgid "Let us be precise and clear on this issue: if we only use permutations of the rows, and we're using our compact representation, no queens can clash on either rows or columns, and we don't even have to concern ourselves with those cases.  So the only clashes we need to test for are clashes on the diagonals."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:870
+# dd59203cfa1b4f23a31721f95c89f816
+msgid "It sounds like a useful function will be one that can test if two queens share a diagonal.  Each queen is on some (x,y) position. So does the queen at (5,2) share a diagonal with the one at (2,0)? Does (5,2) clash with (3,0)?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:883
+# 58ee4165baa14fb7b50b2e725d23ee95
+msgid "A little geometry will help us here. A diagonal has a slope of either 1 or -1.  The question we really want to ask is *is their distance between them the same in the x and the y direction?* If it is, they share a diagonal.   Because diagonals can be to the left or right, it will make sense for this program to use the absolute distance in each direction:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:899
+# c11906eaaa0a47c5b6cf06ee05b187c7
+msgid "If you copy the code and run it, you'll be happy to learn that the tests pass!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:901
+# c41a164d4a74472f9bfb4044ea1e50c3
+msgid "Now let's consider how we construct a solution by hand.  We'll put a queen somewhere in the first column, then place one in the second column, only if it does not clash with the one already on the board.  And then we'll put a third one on, checking it against the two queens already to its left. When we consider the queen on column 6, we'll need to check for clashes against those in all the columns to its left, i.e. in columns 0,1,2,3,4,5."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:908
+# 9d3170fec08e48e7baee0275495a174b
+msgid "So the next building block is a function that, given a partially completed puzzle, can check whether the queen at column ``c`` clashes with any of the queens to its left, at columns 0,1,2,..c-1:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:928
+# b9f11a41af644a68bad1b33e14136ff2
+msgid "Here is our function that makes them all pass:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:943
+# 1be1fd2c391e4d2ea49eaa46187e7bb7
+msgid "Finally, we're going to give our program one of our permutations --- i.e. all queens placed somewhere, one on each row, one on each column.  But does the permutation have any diagonal clashes?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:955
+# cbbfea2539d6433791619ec75524a6f1
+msgid "And the code to make the tests pass:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:970
+# 8698e3b851404ad5ba111347b9e5d3b2
+msgid "Summary of what we've done so far:  we now have a powerful function called ``has_clashes`` that can tell if a configuration is a solution to the queens puzzle.   Let's get on now with generating lots of permutations and finding solutions!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:978
+# b31ee33a21df4cfab4db09a88ea6412f
+msgid "Eight queens puzzle, part 2"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:980
+# ff01fcad1f4545b3afaf832e702a1208
+msgid "This is the fun, easy part.  We could try to find all permutations of ``[0,1,2,3,4,5,6,7]`` --- that might be algorithmically challenging, and would be a *brute force* way of tackling the problem.  We just try everything, and find all possible solutions."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:984
+# c615e783a7f844a1b3fbc0ea45a88212
+msgid "Of course we know there are N! permutations of N things, so we can get an early idea of how long it would take to search all of them for all solutions.  Not too long at all, actually - 8! is only 40320 different cases to check out.  This is vastly better than starting with 64 places to put eight queens.  If you do the sums for how many ways can you choose 8 of the 64 squares for your queens, the formula (called *N choose k* where you're choosing k=8 squares of the available N=64) yields a whopping 4426165368, obtained from (64! / (8! x 56!))."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:992
+# 47dee288b1044e759227b17066fadc6f
+msgid "So our earlier key insight --- that we only need to consider permutations --- has reduced what we call the *problem space* from about 4.4 billion cases to just 40320!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:995
+# e1999227c21543e4a072097774696cae
+msgid "We're not even going to explore all those, however.  When we introduced the random number module, we learnt that it had a ``shuffle`` method that randomly permuted a list of items. So we're going to write a \"random\" algorithm to find solutions to the N queens problem.  We'll begin with the permutation [0,1,2,3,4,5,6,7] and we'll repeatedly shuffle the list, and test each to see if it works!  Along the way we'll count how many attempts we need before we find each solution, and we'll find 10 solutions  (we could hit the same solution more than once, because shuffle is random!):"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1023
+# 6ab929b6e1a149a9937b02dbee4e72ab
+msgid "Almost magically, and at great speed, we get this:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1039
+# 0e3146ae5d4c41d79b8cb1926f72cf66
+msgid "Here is an interesting fact about this algorithm.  There are know to be 92 solutions to this puzzle, and we know there are 40320 permutations, all in all.  So on average, you probably need to try 40320/92 shuffles which is about 438, before you stumble across a solution.  The number of tries we printed looks like our experimental data agrees quite nicely with our theory!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1045
+# 6ada1199d3f948e6b59a890129f05e5a
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1050
+# d17c951a4aef477485f6a135d892326b
+msgid "A famous algorithm that searches for a target in a sorted list.  Each probe in the list allows us to discard half the remaining items, so the algorithm is very efficient."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1054
+# e826eab44d52416e972b81c46a4109c7
+msgid "Relating to a straight line.  Here, we talk about graphing how the time taken by an algorithm depends on the size of the data it is processing.  Linear algorithms have straight-line graphs that can describe this relationship."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1059
+# 9dd59dbfb6714de1b561a1e5d60474f0
+msgid "A search that probes each item in a list or sequence, from first, until it finds what it is looking for.  It is used for searching for a target in unordered lists of items."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1063
+# efce40cb6893416197c47a78115f7664
+msgid "An efficient algorithm that merges two already sorted lists, to produce a sorted list result. The merge algorithm is really a pattern of computation that can be adapted and reused for various other scenarios, such as finding words that are in a book, but not in a vocabulary."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1068
+# 66b3e5965b244a7195c389c578e8f4f9
+msgid "Each time we take a look when searching for an item is called a probe.  In our chapter on `Iteration` we also played a guessing game where the computer tried to guess the user's secret number. Each of those tries would also be called a probe."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1073
+# e5083c255bb344a1b2276510abe7d99c
+msgid "A software development practice which arrives at a desired feature through a series of small, iterative steps motivated by automated tests which are *written first* that express increasing refinements of the desired feature.  (see the Wikipedia article on `Test-driven development <http://en.wikipedia.org/wiki/Test_driven_development>`__ for more information.)"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1087
+# 4ed6f3a90b6f484eae86b3e44e7f34d3
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1089
+# c90d4d2bcea04977abecc0d02020c876
+msgid "The section in this chapter called `Alice in Wonderland, again!`_ started with the observation that the merge algorithm uses a pattern that can be reused in other situations.  Adapt the merge algorithm to write each of these functions, as was suggested there:"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1103
+# 32a63849942b4989b7f2c1f1695c6115
+msgid "Modify the queens program to solve some boards of size 4, 12, and 16.  What is the maximum size puzzle you can usually solve in under a minute?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1106
+# b6b9f0fcccde4d22ab4e9dbe917e047d
+msgid "Adapt the queens program so that we keep a list of solutions that have already printed, so that we don't print the same solution more than once."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1109
+# e220a312a5db46d49a2a28ef5915dc19
+msgid "Chess boards are symmetric: if we have a solution to the queens problem, its mirror solution --- either flipping the board on the X or in the Y axis, is also a solution.  And giving the board a 90 degree, 180 degree, or 270 degree rotation is also a solution.  In some sense, solutions that are just mirror images or rotations of other solutions --- in the same family --- are less interesting than the unique \"core cases\".   Of the 92 solutions for the 8 queens problem, there are only 12 unique families if you take rotations and mirror images into account. Wikipedia has some fascinating stuff about this."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1119
+# 44f59a12a1ba4d2c990bf7b7c799775a
+msgid "Write a function to mirror a solution in the Y axis,"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1120
+# d03aad2a51f14d9c975c3ef83742cbc1
+msgid "Write a function to mirror a solution in the X axis,"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1121
+# 3cdf7043bbb843b7b6b44ad22132d557
+msgid "Write a function to rotate a solution by 90 degrees anti-clockwise, and use this to provide 180 and 270 degree rotations too."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1123
+# 9153e8665f7646c88e54f8773d38b3da
+msgid "Write a function which is given a solution, and it generates the family of symmetries for that solution.   For example, the symmetries of ``[0,4,7,5,2,6,1,3]`` are ::"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1132
+# 308dd41f842246599f016adf6134376d
+msgid "Now adapt the queens program so it won't list solutions that are in the same family.  It only prints solutions from unique families."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1135
+# b6c45d8e3d3c42f88e803ac3a022be15
+msgid "Every week a computer scientist buys four lotto tickets. He always chooses the same prime numbers, with the hope that he ever hits the jackpot, he will be able to go on TV and tell everyone his secret --- and this will suddenly create widespread public interest in prime numbers.  He represents his weekly tickets in Python as a list of lists::"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1146
+# ed1c22314f254afcb9bf8684add3a3c2
+msgid "Complete these exercises."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1148
+# 6261ae5cd482400c90631af0b2ee41c1
+msgid "Each lotto draw takes six random balls, numbered from 1 to 49.  Write a function to return a lotto draw."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1150
+# e6391ee457a8493c8777d301962bdc93
+msgid "Write a function that returns compares a single ticket and a draw, and returns the number of correct picks on that ticket::"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1155
+# a7d7c2aaaf90473290f2d1075ff509f6
+msgid "Write a function that takes a list of tickets and a draw, and returns a list telling how many picks were correct on each ticket::"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1160
+# d8156bb4f4af4ea1886e00b7c81e7e52
+msgid "Write a function that takes a list of integers, and returns the number of primes in the list::"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1164
+# bfd1f614a66c42be9ab5189f15f11801
+msgid "Write a function to discover whether the computer scientist has missed any prime numbers in his selection of the four tickets.  Return a list of all primes that he has missed::"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1169
+# b7e7dae3999149498da7388721f3304a
+msgid "Write a function that repeatedly makes a new draw, and compares the draw to the four tickets."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1171
+# b0f0faa603a643e99d77db3643cf2650
+msgid "Count how many draws are needed until one of the computer scientist's tickets has at least 3 correct picks. Try the experiment twenty times, and average out the number of draws needed."
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1175
+# 50067dd1cc284a8093da96a41b0317d0
+msgid "How many draws are needed, on average, before he gets at least 4 picks correct?"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1177
+# d7841e5b137c4f2486e3b674bce3dd4d
+msgid "How many draws are needed, on average, before he gets at least 5 correct?  (Hint: this might take a while.  It would be nice if you could print some dots, like a progress bar, to show when each of the 20 experiments has completed.)"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1181
+# c1dd6b93ffdf49ffb062fcc97a5f3ac2
+msgid "Notice that we have difficulty constructing test cases here, because our random numbers are not deterministic. Automated testing only really works if you already know what the answer should be!"
+msgstr ""
+
+#: ../../source/list_algorithms.rst:1185
+# 4ab61f14165d464894b5d82f478ce72a
+msgid "Read Alice in Wonderland.  You can read the plain text version we have with this textbook, or if you have e-book reader software on your PC, or a Kindle, iPhone, Android, etc. you'll be able to find a suitable version for your device at http://www.gutenberg.org/.  They also have html and pdf versions, with pictures, and thousands of other classic books!"
+msgstr ""
+

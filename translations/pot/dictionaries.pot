@@ -1,0 +1,408 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/dictionaries.rst:13
+# f7522c740f524603b22032ac50c53ec7
+msgid "Dictionaries"
+msgstr ""
+
+#: ../../source/dictionaries.rst:17
+# 5391bd4bbb2c4174b9da051706e13df2
+msgid "All of the compound data types we have studied in detail so far --- strings, lists, and tuples --- are sequence types, which use integers as indices to access the values they contain within them."
+msgstr ""
+
+#: ../../source/dictionaries.rst:21
+# b9bc5c6c880d4847b33375253116b6a9
+msgid "**Dictionaries** are yet another kind of compound type. They are Python's built-in **mapping type**. They map **keys**, which can be any immutable type, to values, which can be any type, just like the values of a list or tuple."
+msgstr ""
+
+#: ../../source/dictionaries.rst:25
+# 68bab58eb6ed4479ac96bda5ec45d134
+msgid "As an example, we will create a dictionary to translate English words into Spanish. For this dictionary, the keys are strings."
+msgstr ""
+
+#: ../../source/dictionaries.rst:28
+# 0668a837583d45f0bf4899871f431070
+msgid "One way to create a dictionary is to start with the empty dictionary and add **key-value pairs**. The empty dictionary is denoted ``{}``:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:37
+# 27f00cd3c83a457cbbf9d7d93563907a
+msgid "The first assignment creates a dictionary named ``eng2sp``; the other assignments add new key-value pairs to the dictionary. We can print the current value of the dictionary in the usual way:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:46
+# 97229fa31e314e0188e85a958e7e41c8
+msgid "The key-value pairs of the dictionary are separated by commas. Each pair contains a key and a value separated by a colon."
+msgstr ""
+
+#: ../../source/dictionaries.rst:49
+# 3ddb8733c7094d84bdfc6ebf61b9999c
+msgid "The order of the pairs may not be what you expected. Python uses complex algorithms, designed for very fast access, to determine where the key-value pairs are stored in a dictionary. For our purposes we can think of this ordering as unpredictable."
+msgstr ""
+
+#: ../../source/dictionaries.rst:54
+# 46e21c15075443dfb79c6356c7825a2e
+msgid "Another way to create a dictionary is to provide a list of key-value pairs using the same syntax as the previous output:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:61
+# cb25233999954925a78d97abba7c41fa
+msgid "It doesn't matter what order we write the pairs. The values in a dictionary are accessed with keys, not with indices, so there is no need to care about ordering."
+msgstr ""
+
+#: ../../source/dictionaries.rst:65
+# a6bbdd83f7254a068441e461bc08dfd2
+msgid "Here is how we use a key to look up the corresponding value:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:72
+# 38d56811b8d440048cf3b21e5cafd266
+msgid "The key ``'two'`` yields the value ``'dos'``."
+msgstr ""
+
+#: ../../source/dictionaries.rst:74
+# 5cce2847dfb3474ebf85b61255be6718
+msgid "Lists, tuples, and strings have been called *sequences*, because their items occur in order.  The dictionary is the first compound type that we've seen that is not a sequence, so we can't index or slice a dictionary."
+msgstr ""
+
+#: ../../source/dictionaries.rst:81
+# 21fe4c7606d44f9c99eb9c6abeab106f
+msgid "Dictionary operations"
+msgstr ""
+
+#: ../../source/dictionaries.rst:83
+# 28503333bce64db29160e0b4ec6f370e
+msgid "The ``del`` statement removes a key-value pair from a dictionary. For example, the following dictionary contains the names of various fruits and the number of each fruit in stock:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:93
+# fdf430d37b2d4557bbb874419ffe8ede
+msgid "If someone buys all of the pears, we can remove the entry from the dictionary:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:101
+# 77310e3cceeb4a2e821880a2b57109ad
+msgid "Or if we're expecting more pears soon, we might just change the value associated with pears:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:110
+# f540a859b1c2492581f24405c93ac5f4
+msgid "A new shipment of bananas arriving could be handled like this:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:118
+# e549f51ce6fe4b639ac3e6835797f06d
+msgid "The ``len`` function also works on dictionaries; it returns the number of key-value pairs:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:128
+# f78444f74a034843a1093437a4118808
+msgid "Dictionary methods"
+msgstr ""
+
+#: ../../source/dictionaries.rst:130
+# 8fc36ae9a1bb44069c8140bd0338f4eb
+msgid "Dictionaries have a number of useful built-in methods."
+msgstr ""
+
+#: ../../source/dictionaries.rst:132
+# 653a799060554a18b35b501fbbff5322
+msgid "The ``keys`` method returns what Python 3 calls a **view** of its underlying keys. A view object has some similarities to the ``range`` object we saw earlier --- it is a lazy promise, to deliver its elements when they're needed by the rest of the program.  We can iterate over the view, or turn the view into a list like this:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:147
+# 695893f074de45a0a8fd251c9b600aa9
+msgid "This produces this output:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:156
+# 52f39a2b366c4c30a93b592045b4fb71
+msgid "It is so common to iterate over the keys in a dictionary that you can omit the ``keys`` method call in the ``for`` loop --- iterating over a dictionary implicitly iterates over its keys:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:167
+# 3333806597f445fa85bc9565cacfc5ea
+msgid "The ``values`` method is similar; it returns a view object which can be turned into a list:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:175
+# 7210aa9f5fa744ebad6ca1530fea504c
+msgid "The ``items`` method also returns a view, which promises a list of tuples --- one tuple for each key-value pair:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:183
+# 26bdf50ddc50490eae95ab57e4dfa4b2
+msgid "Tuples are often useful for getting both the key and the value at the same time while you are looping:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:192
+# 81d877946ab44e7eba9725cf3d84b05d
+msgid "This produces:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:201
+# cc8a07e155804e45a382e5b4f4d46f34
+msgid "The ``in`` and ``not in`` operators can test if a key is in the dictionary:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:213
+# 21d99718bde7480a8b0876a03cd32dda
+msgid "This method can be very useful, since looking up a non-existent key in a dictionary causes a runtime error:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:227
+# e7da48c94b514bd1b449068c11cfa24a
+msgid "Aliasing and copying"
+msgstr ""
+
+#: ../../source/dictionaries.rst:229
+# 4c4475eea35647f093bb1af4ecae2ffe
+msgid "As in the case of lists, because dictionaries are mutable, you need to be aware of aliasing.  Whenever two variables refer to the same object, changes to one affect the other."
+msgstr ""
+
+#: ../../source/dictionaries.rst:233
+# c32e4874928e49e892f23f3955c63c60
+msgid "If you want to modify a dictionary and keep a copy of the original, use the ``copy`` method. For example, ``opposites`` is a dictionary that contains pairs of opposites:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:243
+# b8b235dc44484dafbafa76ccffd8eb02
+msgid "``alias`` and ``opposites`` refer to the same object; ``copy`` refers to a fresh copy of the same dictionary. If we modify ``alias``, ``opposites`` is also changed:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:253
+# be2e6d57a5a14118ae93d804ef48a393
+msgid "If we modify ``copy``, ``opposites`` is unchanged:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:264
+# 73fa6cfa0e4c4495b9c1c70d2f73819f
+msgid "Sparse matrices"
+msgstr ""
+
+#: ../../source/dictionaries.rst:266
+# 8b75528c966a45b4a9bdda0067c5346a
+msgid "We previously used a list of lists to represent a matrix. That is a good choice for a matrix with mostly nonzero values, but consider a `sparse matrix <http://en.wikipedia.org/wiki/Sparse_matrix>`__ like this one:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:273
+# d454e1688b9d4d42a2e698a3cff1e212
+msgid "The list representation contains a lot of zeroes:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:283
+# 141337c590dd4169a248aae22180e82d
+msgid "An alternative is to use a dictionary. For the keys, we can use tuples that contain the row and column numbers. Here is the dictionary representation of the same matrix:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:291
+# 4a6b56af769342069e845447ea16a587
+msgid "We only need three key-value pairs, one for each nonzero element of the matrix. Each key is a tuple, and each value is an integer."
+msgstr ""
+
+#: ../../source/dictionaries.rst:294
+# 8bd6f934ded34d6ca8b1c14440a0ba3e
+msgid "To access an element of the matrix, we could use the ``[]`` operator:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:301
+# 5df7206d7d3944bfae42bc5cc9f92e48
+msgid "Notice that the syntax for the dictionary representation is not the same as the syntax for the nested list representation. Instead of two integer indices, we use one index, which is a tuple of integers."
+msgstr ""
+
+#: ../../source/dictionaries.rst:305
+# 72762fb967534763bf7d339c65c53d03
+msgid "There is one problem. If we specify an element that is zero, we get an error, because there is no entry in the dictionary with that key:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:313
+# a0f574ae8d1a45c7a8404c2d97c8cdc8
+msgid "The ``get`` method solves this problem:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:320
+# 29610322a9e14d28a1c9ba3fdde856ed
+msgid "The first argument is the key; the second argument is the value ``get`` should return if the key is not in the dictionary:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:328
+# 26709eff3c23427cbc5a913b4303aba3
+msgid "``get`` definitely improves the semantics of accessing a sparse matrix.  Shame about the syntax."
+msgstr ""
+
+#: ../../source/dictionaries.rst:334
+# 3e1a7fd9cdee49df8e7f2da0d54f780f
+msgid "Memos"
+msgstr ""
+
+#: ../../source/dictionaries.rst:336
+# 670ace30a335404799928f53f9edf8e6
+msgid "If you played around with the ``fibo`` function from the chapter on recursion, you might have noticed that the bigger the argument you provide, the longer the function takes to run. Furthermore, the run time increases very quickly. On one of our machines, ``fib(20)`` finishes instantly, ``fib(30)`` takes about a second, and ``fib(40)`` takes roughly forever."
+msgstr ""
+
+#: ../../source/dictionaries.rst:342
+# ad6116fc925b4b50ae2e695be1ffa82f
+msgid "To understand why, consider this **call graph** for ``fib`` with ``n = 4``:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:348
+# e46ea150c22d48e7a4d2664b49db3bfc
+msgid "A call graph shows some function frames (instances when the function has been invoked), with lines connecting each frame to the frames of the functions it calls. At the top of the graph, ``fib`` with ``n = 4`` calls ``fib`` with ``n = 3`` and ``n = 2``. In turn, ``fib`` with ``n = 3`` calls ``fib`` with ``n = 2`` and ``n = 1``. And so on."
+msgstr ""
+
+#: ../../source/dictionaries.rst:355
+# 4bdb5d567b9448d2a1f0e8be2d34279d
+msgid "Count how many times ``fib(0)`` and ``fib(1)`` are called.  This is an inefficient solution to the problem, and it gets far worse as the argument gets bigger."
+msgstr ""
+
+#: ../../source/dictionaries.rst:359
+# 683e9fae7eef45599d83e6b85b943634
+msgid "A good solution is to keep track of values that have already been computed by storing them in a dictionary. A previously computed value that is stored for later use is called a **memo**. Here is an implementation of ``fib`` using memos:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:377
+# 3082ebfe8b2e4df0ad2d8089c5768451
+msgid "The dictionary named ``alreadyknown`` keeps track of the Fibonacci numbers we already know. We start with only two pairs: 0 maps to 1; and 1 maps to 1."
+msgstr ""
+
+#: ../../source/dictionaries.rst:380
+# 8f6c44dc35f240abbedc35f8a18c4b18
+msgid "Whenever ``fib`` is called, it checks the dictionary to determine if it contains the result. If it's there, the function can return immediately without making any more recursive calls. If not, it has to compute the new value. The new value is added to the dictionary before the function returns."
+msgstr ""
+
+#: ../../source/dictionaries.rst:385
+# fe6ad951520b4a219a628ee515bb815c
+msgid "Using this version of ``fib``, our machines can compute ``fib(100)`` in an eyeblink."
+msgstr ""
+
+#: ../../source/dictionaries.rst:394
+# 62f80f337c9a4128a539754426840045
+msgid "Counting letters"
+msgstr ""
+
+#: ../../source/dictionaries.rst:396
+# ce5c1236fde644c5921f289f110f3612
+msgid "In the exercises in Chapter 8 we wrote a function that counted the number of occurrences of a letter in a string. A more general version of this problem is to form a frequency table of the letters in the string, that is, how many times each letter appears."
+msgstr ""
+
+#: ../../source/dictionaries.rst:401
+# 4f750034fd934c7aa76edd13d3abbf66
+msgid "Such a frequency table might be useful for compressing a text file. Because different letters appear with different frequencies, we can compress a file by using shorter codes for common letters and longer codes for letters that appear less frequently."
+msgstr ""
+
+#: ../../source/dictionaries.rst:406
+# 52fc90cc2f864eebac809a00f3a95a4f
+msgid "Dictionaries provide an elegant way to generate a frequency table:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:417
+# 09b5dfdada2a49c09864f2537a4d597e
+msgid "We start with an empty dictionary. For each letter in the string, we find the current count (possibly zero) and increment it. At the end, the dictionary contains pairs of letters and their frequencies."
+msgstr ""
+
+#: ../../source/dictionaries.rst:421
+# 92d9a5fdf61349a5889833f40b1ef3eb
+msgid "It might be more appealing to display the frequency table in alphabetical order. We can do that with the ``items`` and ``sort`` methods:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:431
+# eb3477760652405da8fc7a1af6992cd4
+msgid "Notice in the first line we had to call the type conversion function ``list``. That turns the promise we get from ``items`` into a list, a step that is needed before we can use the list's ``sort`` method."
+msgstr ""
+
+#: ../../source/dictionaries.rst:437
+# cb77dff3dcd44f77a6b1cf679f980f5d
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/dictionaries.rst:442
+# f2a37e571a6b4f25ae8881c03fbdda4a
+msgid "A graph consisting of nodes which represent function frames (or invocations), and directed edges (lines with arrows) showing which frames gave rise to other frames."
+msgstr ""
+
+#: ../../source/dictionaries.rst:447
+# 7c418d8452db4bd5acfb76489aa801d0
+msgid "A collection of key-value pairs that maps from keys to values. The keys can be any immutable type, and the values can be any type."
+msgstr ""
+
+#: ../../source/dictionaries.rst:451
+# 6cff87c89ea34d9ba023e6adfd7c5bc0
+msgid "A data item that is *mapped to* a value in a dictionary. Keys are used to look up values in a dictionary."
+msgstr ""
+
+#: ../../source/dictionaries.rst:455
+# 26a935fc63da424a854b30b886efcae5
+msgid "One of the pairs of items in a dictionary. Values are looked up in a dictionary by key."
+msgstr ""
+
+#: ../../source/dictionaries.rst:459
+# f88270c110f44e9696e7deac62193c79
+msgid "A mapping type is a data type comprised of a collection of keys and associated values. Python's only built-in mapping type is the dictionary.  Dictionaries implement the `associative array <http://en.wikipedia.org/wiki/Associative_array>`__ abstract data type."
+msgstr ""
+
+#: ../../source/dictionaries.rst:466
+# c0313f34aa544137b62a32d4c0c1141b
+msgid "Temporary storage of precomputed values to avoid duplicating the same computation."
+msgstr ""
+
+#: ../../source/dictionaries.rst:470
+# 9a463bd3172b4d2588dd620955d91492
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/dictionaries.rst:472
+# 26cbf22de2744cc3b60d8ae3b089bb46
+msgid "Write a program that reads a string and returns a table of the letters of the alphabet in alphabetical order which occur in the string together with the number of times each letter occurs. Case should be ignored. A sample output of the program when the user enters the data"
+msgstr ""
+
+#: ../../source/dictionaries.rst:477
+# 535814acb7ca455085cb32d07e80d64f
+msgid "ThiS is String with Upper and lower case Letters"
+msgstr ""
+
+#: ../../source/dictionaries.rst:479
+# 4e3943a9e380488ab3bae711a1298eca
+msgid "would look this this::"
+msgstr ""
+
+#: ../../source/dictionaries.rst:498
+# 90ef5ca09adc47578d9e1c6ec340d85a
+msgid "Give the Python interpreter's response to each of the following from a continuous interpreter session:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:542
+# 1b0d239c9a164079ba61797a2b515013
+msgid "Be sure you understand why you get each result. Then apply what you have learned to fill in the body of the function below:"
+msgstr ""
+
+#: ../../source/dictionaries.rst:559
+# 913b7c2bf76745459fc35216c4c135b7
+msgid "Write a program called ``alice_words.py`` that creates a text file named ``alice_words.txt`` containing an alphabetical listing of all the words, and the number of times each occurs, in the text version of `Alice's Adventures in Wonderland`. (You can obtain a free plain text version of the book, along with many others, from http://www.gutenberg.org.) The first 10 lines of your output file should look something like this::"
+msgstr ""
+
+#: ../../source/dictionaries.rst:577
+# e3a312c7c49b433992b15c0cd83ecffa
+msgid "How many times does the word, ``alice``, occur in the book?"
+msgstr ""
+
+#: ../../source/dictionaries.rst:579
+# 99eaf56e10dd4fa080cda9dd62c36be8
+msgid "What is the longest word in Alice in Wonderland? How many characters does it have?"
+msgstr ""
+

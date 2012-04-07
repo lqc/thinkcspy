@@ -1,0 +1,363 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/stacks.rst:12
+# 9fffce4686c3469dbafcb22451ac830a
+msgid "Stacks"
+msgstr ""
+
+#: ../../source/stacks.rst:16
+# 827a2f853ddb4effa8e80305ac43d2c1
+msgid "Abstract data types"
+msgstr ""
+
+#: ../../source/stacks.rst:18
+# 3b808a3fd7be41d7867448f0b33af41f
+msgid "The data types you have seen so far are all concrete, in the sense that we have completely specified how they are implemented. For example, the ``Card`` class represents a card using two integers. As we discussed at the time, that is not the only way to represent a card; there are many alternative implementations."
+msgstr ""
+
+#: ../../source/stacks.rst:23
+# 01c4ec5b91eb4e77add8fbbc32b6477c
+msgid "An **abstract data type**, or ADT, specifies a set of operations (or methods) and the semantics of the operations (what they do), but it does not not specify the implementation of the operations. That's what makes it abstract."
+msgstr ""
+
+#: ../../source/stacks.rst:27
+# ac5a73734e3a4adca2060913450ca829
+msgid "Why is that useful?"
+msgstr ""
+
+#: ../../source/stacks.rst:29
+# 1ad43f7dc0ee4aac92c5ccf2085d6401
+msgid "It simplifies the task of specifying an algorithm if you can denote the operations you need without having to think at the same time about how the operations are performed."
+msgstr ""
+
+#: ../../source/stacks.rst:32
+# 8781b68fa3e4467ea550a91c2328e1e9
+msgid "Since there are usually many ways to implement an ADT, it might be useful to write an algorithm that can be used with any of the possible implementations."
+msgstr ""
+
+#: ../../source/stacks.rst:35
+# 831758fed3794bd58421f23f30e96d03
+msgid "Well-known ADTs, such as the Stack ADT in this chapter, are often implemented in standard libraries so they can be written once and used by many programmers."
+msgstr ""
+
+#: ../../source/stacks.rst:38
+# af9fd24e0a21487490507c17ccec7b25
+msgid "The operations on ADTs provide a common high-level language for specifying and talking about algorithms."
+msgstr ""
+
+#: ../../source/stacks.rst:41
+# 56e76fa28ec14e3ca4bf9921392951c3
+msgid "When we talk about ADTs, we often distinguish the code that uses the ADT, called the **client** code, from the code that implements the ADT, called the **provider** code."
+msgstr ""
+
+#: ../../source/stacks.rst:47
+# b56bc612e4834dc8947ddfa62bd20438
+msgid "The Stack ADT"
+msgstr ""
+
+#: ../../source/stacks.rst:49
+# 81ac9ee3717d47cb98227d892c0b3b76
+msgid "In this chapter, we will look at one common ADT, the **stack**. A stack is a collection, meaning that it is a data structure that contains multiple elements. Other collections we have seen include dictionaries and lists."
+msgstr ""
+
+#: ../../source/stacks.rst:53
+# fef18b79a1de498cacfad0be1def7fe5
+msgid "An ADT is defined by the operations that can be performed on it, which is called an **interface**. The interface for a stack consists of these operations:"
+msgstr ""
+
+#: ../../source/stacks.rst:58
+# 77d4860c38e44faba8c22df986e3ff5b
+msgid "Initialize a new empty stack."
+msgstr ""
+
+#: ../../source/stacks.rst:61
+# 5c8bc8ab01f147efac8ccaa891aac962
+msgid "Add a new item to the stack."
+msgstr ""
+
+#: ../../source/stacks.rst:64
+# a389524c30cc4926a3136aae64e4d302
+msgid "Remove and return an item from the stack. The item that is returned is always the last one that was added."
+msgstr ""
+
+#: ../../source/stacks.rst:68
+# f0c9162938eb4581bdbfa9e8ad5cacb5
+msgid "Check whether the stack is empty."
+msgstr ""
+
+#: ../../source/stacks.rst:70
+# 4461329250544339a6fed8296a810827
+msgid "A stack is sometimes called a last in, first out or LIFO data structure, because the last item added is the first to be removed."
+msgstr ""
+
+#: ../../source/stacks.rst:75
+# bb90737194214e6cbef34f6cf50fba63
+msgid "Implementing stacks with Python lists"
+msgstr ""
+
+#: ../../source/stacks.rst:77
+# 686db4082d3f4823a27453881e9f24c0
+msgid "The list operations that Python provides are similar to the operations that define a stack. The interface isn't exactly what it is supposed to be, but we can write code to translate from the Stack ADT to the built-in operations."
+msgstr ""
+
+#: ../../source/stacks.rst:81
+# eacaae4b9e9044b6be24785e7b64c090
+msgid "This code is called an **implementation** of the Stack ADT. In general, an implementation is a set of methods that satisfy the syntactic and semantic requirements of an interface."
+msgstr ""
+
+#: ../../source/stacks.rst:85
+# e68be4f4f0644c77a1d690533ec7d7fe
+msgid "Here is an implementation of the Stack ADT that uses a Python list:"
+msgstr ""
+
+#: ../../source/stacks.rst:103
+# 56081b3099b040c09b72e87b144f894c
+msgid "A ``Stack`` object contains an attribute named ``items`` that is a list of items in the stack. The initialization method sets ``items`` to the empty list."
+msgstr ""
+
+#: ../../source/stacks.rst:106
+# be3132f8af0b4efebc17ee6ac97cf96a
+msgid "To push a new item onto the stack, ``push`` appends it onto ``items``. To pop an item off the stack, ``pop`` uses the homonymous ( *same-named*) list method to remove and return the last item on the list."
+msgstr ""
+
+#: ../../source/stacks.rst:110
+# ec57dd9441254ae18ec91b04ae6aaa15
+msgid "Finally, to check if the stack is empty, ``is_empty`` compares ``items`` to the empty list."
+msgstr ""
+
+#: ../../source/stacks.rst:113
+# ba67a1fc759c4333a9864b22b000aa2a
+msgid "An implementation like this, in which the methods consist of simple invocations of existing methods, is called a **veneer**. In real life, veneer is a thin coating of good quality wood used in furniture-making to hide lower quality wood underneath. Computer scientists use this metaphor to describe a small piece of code that hides the details of an implementation and provides a simpler, or more standard, interface."
+msgstr ""
+
+#: ../../source/stacks.rst:122
+# 5b28dc35054c4cd4965a5ed2c73fd086
+msgid "Pushing and popping"
+msgstr ""
+
+#: ../../source/stacks.rst:124
+# ec61ea4dd5c7484d8aec7283bf5d2f0b
+msgid "A stack is a **generic data structure**, which means that we can add any type of item to it. The following example pushes two integers and a string onto the stack:"
+msgstr ""
+
+#: ../../source/stacks.rst:135
+# 3483ecca54354720ac3547d01b346a16
+msgid "We can use ``is_empty`` and ``pop`` to remove and print all of the items on the stack:"
+msgstr ""
+
+#: ../../source/stacks.rst:144
+# 835c9117b0e04004a614175073e1ae52
+msgid "The output is ``+ 45 54``. In other words, we just used a stack to print the items backward! Granted, it's not the standard format for printing a list, but by using a stack, it was remarkably easy to do."
+msgstr ""
+
+#: ../../source/stacks.rst:148
+# 08a426358167456ea6028738b704f907
+msgid "You should compare this bit of code to the implementation of ``print_backward`` in the last chapter. There is a natural parallel between the recursive version of ``print_backward`` and the stack algorithm here. The difference is that ``print_backward`` uses the runtime stack to keep track of the nodes while it traverses the list, and then prints them on the way back from the recursion. The stack algorithm does the same thing, except that it uses a ``Stack`` object instead of the runtime stack."
+msgstr ""
+
+#: ../../source/stacks.rst:158
+# 85ed7ca4226f4eecb0975d9469fff704
+msgid "Using a stack to evaluate postfix"
+msgstr ""
+
+#: ../../source/stacks.rst:160
+# 8ce1d360c92c48acb20377b5085078f3
+msgid "In most programming languages, mathematical expressions are written with the operator between the two operands, as in ``1 + 2``. This format is called **infix**. An alternative used by some calculators is called **postfix**. In postfix, the operator follows the operands, as in ``1 2 +``."
+msgstr ""
+
+#: ../../source/stacks.rst:165
+# 5b60f84fedb5424085202c7d94d32fa8
+msgid "The reason postfix is sometimes useful is that there is a natural way to evaluate a postfix expression using a stack:"
+msgstr ""
+
+#: ../../source/stacks.rst:168
+# 916fef5a19cb4fd7a25806b1b533caff
+msgid "Starting at the beginning of the expression, get one term (operator or operand) at a time."
+msgstr ""
+
+#: ../../source/stacks.rst:171
+# f58a6fb0fdf744409dd52ac6c5a918bb
+msgid "If the term is an operand, push it on the stack."
+msgstr ""
+
+#: ../../source/stacks.rst:172
+# 70e7b3233ec14202bb0382397322d5a6
+msgid "If the term is an operator, pop two operands off the stack, perform the operation on them, and push the result back on the stack."
+msgstr ""
+
+#: ../../source/stacks.rst:175
+# c922c5950ced4d84a9b1b09c26817750
+msgid "When you get to the end of the expression, there should be exactly one operand left on the stack. That operand is the result."
+msgstr ""
+
+#: ../../source/stacks.rst:180
+# 1e34c4ea128d4382a01f8b3720a75a28
+msgid "Parsing"
+msgstr ""
+
+#: ../../source/stacks.rst:182
+# 0914fb4baa6546f1b78e31630b35ca46
+msgid "To implement the previous algorithm, we need to be able to traverse a string and break it into operands and operators. This process is an example of **parsing**, and the results---the individual chunks of the string -- are called **tokens**. You might remember these words from Chapter 1."
+msgstr ""
+
+#: ../../source/stacks.rst:187
+# 09aec6473e3d49e0ac146144070d5502
+msgid "Python provides a ``split`` method in both string objects and the ``re`` (regular expression) module. A string's ``split`` method splits it into a list using a single character as a **delimiter**. For example:"
+msgstr ""
+
+#: ../../source/stacks.rst:196
+# d373ce1e282041e482b6054533bbbc41
+msgid "In this case, the delimiter is the space character, so the string is split at each space."
+msgstr ""
+
+#: ../../source/stacks.rst:199
+# b8bb57b2aa4f4ef79e16fb429422c9c8
+msgid "The function ``re.split`` is more powerful, allowing us to provide a regular expression instead of a delimiter. A regular expression is a way of specifying a set of strings. For example, ``[A-z]`` is the set of all letters and ``[0-9]`` is the set of all numbers. The ``^`` operator negates a set, so ``[^0-9]`` is the set of everything that is not a number, which is exactly the set we want to use to split up postfix expressions:"
+msgstr ""
+
+#: ../../source/stacks.rst:212
+# b85802f7bb6e46ce8794a18a2de1d4eb
+msgid "The resulting list includes the operands ``123`` and ``456`` and the operators ``*`` and ``/``. It also includes two empty strings that are inserted after the operands."
+msgstr ""
+
+#: ../../source/stacks.rst:218
+# f1f1b10189b94b7d81006a08d9103c3a
+msgid "Evaluating postfix"
+msgstr ""
+
+#: ../../source/stacks.rst:220
+# 891a37d359d94c1d91edf31dee15a4d2
+msgid "To evaluate a postfix expression, we will use the parser from the previous section and the algorithm from the section before that. To keep things simple, we'll start with an evaluator that only implements the operators ``+`` and ``*``:"
+msgstr ""
+
+#: ../../source/stacks.rst:246
+# c7ef831fbc40409097c040d059fd2fa9
+msgid "The first condition takes care of spaces and empty strings. The next two conditions handle operators. We assume, for now, that anything else must be an operand. Of course, it would be better to check for erroneous input and report an error message, but we'll get to that later."
+msgstr ""
+
+#: ../../source/stacks.rst:251
+# ff24bad2195442aca641a9bf83cacbd1
+msgid "Let's test it by evaluating the postfix form of ``(56+47)*2``:"
+msgstr ""
+
+#: ../../source/stacks.rst:258
+# 9195e0436c5c4001bd9723d189cb27e8
+msgid "That's close enough."
+msgstr ""
+
+#: ../../source/stacks.rst:262
+# e1dd2c45b804495a9a6b154bbefec60d
+msgid "Clients and providers"
+msgstr ""
+
+#: ../../source/stacks.rst:264
+# b647a47f02e045d5b9463cd5150577b0
+msgid "One of the fundamental goals of an ADT is to separate the interests of the provider, who writes the code that implements the ADT, and the client, who uses the ADT. The provider only has to worry about whether the implementation is correct -- in accord with the specification of the ADT -- and not how it will be used."
+msgstr ""
+
+#: ../../source/stacks.rst:270
+# 4770e81840584df68148d4fbb455d241
+msgid "Conversely, the client *assumes* that the implementation of the ADT is correct and doesn't worry about the details. When you are using one of Python's built-in types, you have the luxury of thinking exclusively as a client."
+msgstr ""
+
+#: ../../source/stacks.rst:274
+# e8e4d9ba7f5846ee915748ba667b7985
+msgid "Of course, when you implement an ADT, you also have to write client code to test it. In that case, you play both roles, which can be confusing. You should make some effort to keep track of which role you are playing at any moment."
+msgstr ""
+
+#: ../../source/stacks.rst:280
+# 38f96cd8e28b4877a40c20208854ea3f
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/stacks.rst:285
+# 96b631819c0446128debd85a6cd132d6
+msgid "A data type (usually a collection of objects) that is defined by a set of operations but that can be implemented in a variety of ways."
+msgstr ""
+
+#: ../../source/stacks.rst:289
+# 1a6b78437e84459e9bc7cd60c56989e2
+msgid "A program (or the person who wrote it) that uses an ADT."
+msgstr ""
+
+#: ../../source/stacks.rst:292
+# 19820da849d54b70a4f0f02a84979409
+msgid "A character that is used to separate tokens, such as punctuation in a natural language."
+msgstr ""
+
+#: ../../source/stacks.rst:296
+# c0eb17f01468462ca3019f0c889992b7
+msgid "A kind of data structure that can contain data of any type."
+msgstr ""
+
+#: ../../source/stacks.rst:299
+# e803d3a33e4141f8a4a2a956db1b1ec7
+msgid "Code that satisfies the syntactic and semantic requirements of an interface."
+msgstr ""
+
+#: ../../source/stacks.rst:303
+# 5e30000a69dd4571930cef0da973f1cb
+msgid "The set of operations that define an ADT."
+msgstr ""
+
+#: ../../source/stacks.rst:306
+# 242efad967a64bb4b015ebe7bec37805
+msgid "A way of writing mathematical expressions with the operators between the operands."
+msgstr ""
+
+#: ../../source/stacks.rst:310
+# 85eb09b70f7e4ae68e784965b8b3b97f
+msgid "To read a string of characters or tokens and analyze its grammatical structure."
+msgstr ""
+
+#: ../../source/stacks.rst:314
+# 3f2281a3ef934f8fbf39afed46dc98b0
+msgid "A way of writing mathematical expressions with the operators after the operands."
+msgstr ""
+
+#: ../../source/stacks.rst:318
+# 119a926f815e4f77a2730513cc673732
+msgid "The code (or the person who wrote it) that implements an ADT."
+msgstr ""
+
+#: ../../source/stacks.rst:321
+# 9fc2627594564c7fb00e3042a23bed45
+msgid "A set of characters that are treated as a unit for purposes of parsing, such as the words in a natural language."
+msgstr ""
+
+#: ../../source/stacks.rst:325
+# 3cea6559f73e40fe8e3a79a47a29e7fa
+msgid "A class definition that implements an ADT with method definitions that are invocations of other methods, sometimes with simple transformations. The veneer does no significant work, but it improves or standardizes the interface seen by the client."
+msgstr ""
+
+#: ../../source/stacks.rst:331
+# c5c2f8f3cd07444b9b79b2e9136f9803
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/stacks.rst:333
+# c2fe0aa006104cae8481cfa0e461aed9
+msgid "Apply the postfix algorithm to the expression ``1 2 + 3 *``.This example demonstrates one of the advantages of postfix---there is no need to use parentheses to control the order of operations. To get the same result in infix, we would have to write ``(1 + 2) * 3``."
+msgstr ""
+
+#: ../../source/stacks.rst:337
+# 18ce86767b0b4b00af05b433d697260f
+msgid "Write a postfix expression that is equivalent to ``1 + 2 * 3``."
+msgstr ""
+

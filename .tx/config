@@ -1,0 +1,199 @@
+[thinkcs-py.pygame]
+source_file = translations/pot/pygame.pot
+source_lang = en
+trans.pl = translations/pl/pygame.pot
+
+[thinkcs-py.tuples]
+source_file = translations/pot/tuples.pot
+source_lang = en
+trans.pl = translations/pl/tuples.pot
+
+[thinkcs-py.collections]
+source_file = translations/pot/collections.pot
+source_lang = en
+trans.pl = translations/pl/collections.pot
+
+[thinkcs-py.events]
+source_file = translations/pot/events.pot
+source_lang = en
+trans.pl = translations/pl/events.pot
+
+[thinkcs-py.way_of_the_program]
+source_file = translations/pot/way_of_the_program.pot
+source_lang = en
+trans.pl = translations/pl/way_of_the_program.pot
+
+[thinkcs-py.contrib]
+source_file = translations/pot/contrib.pot
+source_lang = en
+trans.pl = translations/pl/contrib.pot
+
+[thinkcs-py.linked_lists]
+source_file = translations/pot/linked_lists.pot
+source_lang = en
+trans.pl = translations/pl/linked_lists.pot
+
+[thinkcs-py.index]
+source_file = translations/pot/index.pot
+source_lang = en
+trans.pl = translations/pl/index.pot
+
+[thinkcs-py.app_d]
+source_file = translations/pot/app_d.pot
+source_lang = en
+trans.pl = translations/pl/app_d.pot
+
+[thinkcs-py.app_e]
+source_file = translations/pot/app_e.pot
+source_lang = en
+trans.pl = translations/pl/app_e.pot
+
+[thinkcs-py.inheritance]
+source_file = translations/pot/inheritance.pot
+source_lang = en
+trans.pl = translations/pl/inheritance.pot
+
+[thinkcs-py.copyright]
+source_file = translations/pot/copyright.pot
+source_lang = en
+trans.pl = translations/pl/copyright.pot
+
+[thinkcs-py.app_a]
+source_file = translations/pot/app_a.pot
+source_lang = en
+trans.pl = translations/pl/app_a.pot
+
+[thinkcs-py.app_b]
+source_file = translations/pot/app_b.pot
+source_lang = en
+trans.pl = translations/pl/app_b.pot
+
+[thinkcs-py.app_c]
+source_file = translations/pot/app_c.pot
+source_lang = en
+trans.pl = translations/pl/app_c.pot
+
+[thinkcs-py.lists]
+source_file = translations/pot/lists.pot
+source_lang = en
+trans.pl = translations/pl/lists.pot
+
+[thinkcs-py.files]
+source_file = translations/pot/files.pot
+source_lang = en
+trans.pl = translations/pl/files.pot
+
+[thinkcs-py.classes_and_objects_I]
+source_file = translations/pot/classes_and_objects_I.pot
+source_lang = en
+trans.pl = translations/pl/classes_and_objects_I.pot
+
+[main]
+host = https://www.transifex.net
+type = PO
+
+[thinkcs-py.foreword]
+source_file = translations/pot/foreword.pot
+source_lang = en
+trans.pl = translations/pl/foreword.pot
+
+[thinkcs-py.conditionals]
+source_file = translations/pot/conditionals.pot
+source_lang = en
+trans.pl = translations/pl/conditionals.pot
+
+[thinkcs-py.exceptions]
+source_file = translations/pot/exceptions.pot
+source_lang = en
+trans.pl = translations/pl/exceptions.pot
+
+[thinkcs-py.strings]
+source_file = translations/pot/strings.pot
+source_lang = en
+trans.pl = translations/pl/strings.pot
+
+[thinkcs-py.stacks]
+source_file = translations/pot/stacks.pot
+source_lang = en
+trans.pl = translations/pl/stacks.pot
+
+[thinkcs-py.iteration]
+source_file = translations/pot/iteration.pot
+source_lang = en
+trans.pl = translations/pl/iteration.pot
+
+[thinkcs-py.list_algorithms]
+source_file = translations/pot/list_algorithms.pot
+source_lang = en
+trans.pl = translations/pl/list_algorithms.pot
+
+[thinkcs-py.dictionaries]
+source_file = translations/pot/dictionaries.pot
+source_lang = en
+trans.pl = translations/pl/dictionaries.pot
+
+[thinkcs-py.modules]
+source_file = translations/pot/modules.pot
+source_lang = en
+trans.pl = translations/pl/modules.pot
+
+[thinkcs-py.functions]
+source_file = translations/pot/functions.pot
+source_lang = en
+trans.pl = translations/pl/functions.pot
+
+[thinkcs-py.queues]
+source_file = translations/pot/queues.pot
+source_lang = en
+trans.pl = translations/pl/queues.pot
+
+[thinkcs-py.preface]
+source_file = translations/pot/preface.pot
+source_lang = en
+trans.pl = translations/pl/preface.pot
+
+[thinkcs-py.trees]
+source_file = translations/pot/trees.pot
+source_lang = en
+trans.pl = translations/pl/trees.pot
+
+[thinkcs-py.fruitful_functions]
+source_file = translations/pot/fruitful_functions.pot
+source_lang = en
+trans.pl = translations/pl/fruitful_functions.pot
+
+[thinkcs-py.classes_and_objects_II]
+source_file = translations/pot/classes_and_objects_II.pot
+source_lang = en
+trans.pl = translations/pl/classes_and_objects_II.pot
+
+[thinkcs-py.even_more_oop]
+source_file = translations/pot/even_more_oop.pot
+source_lang = en
+trans.pl = translations/pl/even_more_oop.pot
+
+[thinkcs-py.preface3-rle]
+source_file = translations/pot/preface3-rle.pot
+source_lang = en
+trans.pl = translations/pl/preface3-rle.pot
+
+[thinkcs-py.variables_expressions_statements]
+source_file = translations/pot/variables_expressions_statements.pot
+source_lang = en
+trans.pl = translations/pl/variables_expressions_statements.pot
+
+[thinkcs-py.fdl-1_3]
+source_file = translations/pot/fdl-1.3.pot
+source_lang = en
+trans.pl = translations/pl/fdl-1.3.pot
+
+[thinkcs-py.recursion]
+source_file = translations/pot/recursion.pot
+source_lang = en
+trans.pl = translations/pl/recursion.pot
+
+[thinkcs-py.hello_little_turtles]
+source_file = translations/pot/hello_little_turtles.pot
+source_lang = en
+trans.pl = translations/pl/hello_little_turtles.pot
+

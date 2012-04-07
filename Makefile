@@ -92,3 +92,6 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) build/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in build/doctest/output.txt."
+
+gettext:
+	$(SPHINXBUILD) -b gettext -d build/doctrees_gettext source translations/pot

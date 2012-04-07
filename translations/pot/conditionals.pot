@@ -1,0 +1,971 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/conditionals.rst:12
+# d51b521a58d94ea79b403070f7fb12b8
+msgid "Conditionals"
+msgstr ""
+
+#: ../../source/conditionals.rst:14
+# abcc070148474ab588a4fecb43e86118
+msgid "Programs get really interesting when we can test conditions and change the program behaviour depending on the outcome of the tests.  That's what this chapter is about."
+msgstr ""
+
+#: ../../source/conditionals.rst:29
+# 85193d86342549ee9ae1e0c5cdb30272
+msgid "Boolean values and expressions"
+msgstr ""
+
+#: ../../source/conditionals.rst:31
+# 333c9f4ee9404846ad054a9057f4a6f4
+msgid "A *boolean* value is either true or false.  It is named after the British mathematician, George Boole, who first formulated *boolean algebra* --- some rules for reasoning about and combining these values. This is the basis of all modern computer logic."
+msgstr ""
+
+#: ../../source/conditionals.rst:36
+# ba9a3fc45c464ddf845bdbea7cb43b73
+msgid "In Python, the two boolean values are ``True`` and ``False`` (the capitalization must be exactly as shown), and the Python type is called ``bool``."
+msgstr ""
+
+#: ../../source/conditionals.rst:48
+# 9d9b250e722a4e768912214df7a3b5f5
+msgid "A **boolean expression** is an expression that evaluates to produce a result which is a boolean value.  For example, the operator ``==`` tests if two values are equal. It produces (or *yields*) a boolean value:"
+msgstr ""
+
+#: ../../source/conditionals.rst:62
+# a1b1b60794be4ae5b6b10c19165aee1a
+msgid "In the first statement, the two operands evaluate to equal values, so the expression evaluates to ``True``; in the second statement, 5 is not equal to 6, so we get ``False``."
+msgstr ""
+
+#: ../../source/conditionals.rst:65
+# 94a1e0f68e0e4bc49bc022bae5f4c645
+msgid "The ``==`` operator is one of six common **comparison operators** which all produce a ``bool`` result; here are all six:"
+msgstr ""
+
+#: ../../source/conditionals.rst:77
+# 94e48612cb1c4e2c8059cf1fb8a15030
+msgid "Although these operations are probably familiar, the Python symbols are different from the mathematical symbols. A common error is to use a single equal sign (``=``) instead of a double equal sign (``==``). Remember that ``=`` is an assignment operator and ``==`` is a comparison operator. Also, there is no such thing as ``=<`` or ``=>``."
+msgstr ""
+
+#: ../../source/conditionals.rst:83
+# 51aceae5c11a448dbf8d2c10db9d12fd
+msgid "Like any other types we've seen so far, boolean values can be assigned to variables, printed, etc."
+msgstr ""
+
+#: ../../source/conditionals.rst:101
+# d2714630b9174746b2619956ec08e56d
+msgid "Logical operators"
+msgstr ""
+
+#: ../../source/conditionals.rst:103
+# 6a634cf46ae1464781a72afea07b1607
+msgid "There are three **logical operators**,  ``and``, ``or``, and ``not``, that allow us to build more complex boolean expressions from simpler boolean expressions. The semantics (meaning) of these operators is similar to their meaning in English. For example, ``x > 0 and x < 10`` produces ``True`` only if ``x`` is greater than 0 *and* at the same time, x is less than 10."
+msgstr ""
+
+#: ../../source/conditionals.rst:110
+# d580cc018bb34361b2bc2fdac7166895
+msgid "``n % 2 == 0 or n % 3 == 0`` is ``True`` if *either* of the conditions is ``True``, that is, if the number ``n`` is divisible by 2 *or* it is divisible by 3.  (What do you think happens if ``n`` is divisible by both 2 and by 3 at the same time? Will the expression yield ``True`` or ``False``?  Try it in your Python interpreter.)"
+msgstr ""
+
+#: ../../source/conditionals.rst:115
+# 9fce2d5c42364375a7c725f481e25d8d
+msgid "Finally, the ``not`` operator negates a boolean value, so ``not(x > y)`` is ``True`` if ``(x > y)`` is ``False``, that is, if ``x`` is less than or equal to ``y``."
+msgstr ""
+
+#: ../../source/conditionals.rst:120
+# ef8fb95d091240528fe3b768bd148e99
+msgid "Truth Tables"
+msgstr ""
+
+#: ../../source/conditionals.rst:122
+# e56fe133b8674e768e6460f0cf2686f8
+msgid "A truth table is a small table that allows us to list all the possible inputs, and to give the results for the logical operators.  Because the ``and`` and ``or`` operators each have two operands, there are only four rows in a truth table that describes the semantics of ``and``."
+msgstr ""
+
+#: ../../source/conditionals.rst:129
+#: ../../source/conditionals.rst:141
+#: ../../source/conditionals.rst:153
+# c744f5d3d4c54b3ca3a46fc08b46d1a0
+# 4053116091b345aa8094736e337344ef
+# 4eb2f78801924324b92935af6c2d5cb1
+msgid "a"
+msgstr ""
+
+#: ../../source/conditionals.rst:129
+#: ../../source/conditionals.rst:141
+# b0b45e177a554f289e0b17e7c267d895
+# 518ac847f9074669818b83d80c3aeb70
+msgid "b"
+msgstr ""
+
+#: ../../source/conditionals.rst:129
+# b6fe5cd66bf5460d8dbc0b1a1d544d5c
+msgid "a and b"
+msgstr ""
+
+#: ../../source/conditionals.rst:131
+#: ../../source/conditionals.rst:131
+#: ../../source/conditionals.rst:131
+#: ../../source/conditionals.rst:132
+#: ../../source/conditionals.rst:132
+#: ../../source/conditionals.rst:133
+#: ../../source/conditionals.rst:133
+# c1c7cfeeb97445b29d634f2f12a0579e
+# c6621c636a794a90be280144bf9f613c
+# 445edb2364324807a82623a5dceba0a1
+# 442e6206701c415cb7daeb8c2c894a71
+# 3185fc680f2f4e2e9a870ba1af910c2e
+# 20767b5b61164a7d833f1567148a79b8
+# 41d9ed83ed654d4dab653060cba4cf9d
+msgid "False"
+msgstr ""
+
+#: ../../source/conditionals.rst:132
+#: ../../source/conditionals.rst:133
+#: ../../source/conditionals.rst:134
+#: ../../source/conditionals.rst:134
+#: ../../source/conditionals.rst:134
+# 70778b37fb6b43848737f0757e380c54
+# 3c6022b10ee742b68f699ee6341e4403
+# 73dfc2ac09f849249b88706ad47b81f7
+# d9cded046a214bcd92cbbf517b86a601
+# 7c29c994a6ff4476a3674d043802d4be
+msgid "True"
+msgstr ""
+
+#: ../../source/conditionals.rst:137
+# 3001e6be994f498185dd7dcb980422c1
+msgid "In a Truth Table, we sometimes use T and F as shorthand for the two boolean values: here is the truth table describing ``or``:"
+msgstr ""
+
+#: ../../source/conditionals.rst:141
+# c6bd3a3b9255466c9de477bbbd409daf
+msgid "a or b"
+msgstr ""
+
+#: ../../source/conditionals.rst:143
+#: ../../source/conditionals.rst:143
+#: ../../source/conditionals.rst:143
+#: ../../source/conditionals.rst:144
+#: ../../source/conditionals.rst:145
+#: ../../source/conditionals.rst:155
+#: ../../source/conditionals.rst:156
+#: ../../source/conditionals.rst:845
+#: ../../source/conditionals.rst:845
+#: ../../source/conditionals.rst:845
+#: ../../source/conditionals.rst:846
+#: ../../source/conditionals.rst:846
+#: ../../source/conditionals.rst:847
+#: ../../source/conditionals.rst:847
+#: ../../source/conditionals.rst:848
+#: ../../source/conditionals.rst:849
+#: ../../source/conditionals.rst:849
+#: ../../source/conditionals.rst:850
+#: ../../source/conditionals.rst:851
+# 33c96f275b7141ad83f21bf2f37270d0
+# 0d8252b0dcc94a5482655e8ed0529e39
+# d9ffb0bdb5d7441594ce9cff35e1a480
+# d2225cbc982e4378b272aea834f701f2
+# a1138730bddc4fe8ad55efe722cd0dd3
+# 9a879ecb929a4956aece2bee2e335b5f
+# 6853ac27c3304dada53388f72bbf090a
+# 6226e000a32348079659777d9b3bb306
+# 5c50bb41729a4da586c31546e9b75e1a
+# e049c8caf2934dcc81e6c71fa7b61efd
+# aabd50ea30af47389b0b17c22aaae4a5
+# feb82ccecf9049b9a4e1b4760d5d516e
+# 4bd82d46b965465596bc808a2efa4bea
+# 4e687dcfe2a74119b0744a4ebfbf28f0
+# 4c50e3584ccc42d3a263ec434b7c98c7
+# 1efacf8ec1cd47eea9d1a1685b0cce95
+# 9bc3023658944da1999cd0b9125beb5d
+# 5f6e687a75f04783a6728d243f695804
+# 203c0178f3be40d0918fe7c6cc433f48
+msgid "F"
+msgstr ""
+
+#: ../../source/conditionals.rst:144
+#: ../../source/conditionals.rst:144
+#: ../../source/conditionals.rst:145
+#: ../../source/conditionals.rst:145
+#: ../../source/conditionals.rst:146
+#: ../../source/conditionals.rst:146
+#: ../../source/conditionals.rst:146
+#: ../../source/conditionals.rst:155
+#: ../../source/conditionals.rst:156
+#: ../../source/conditionals.rst:846
+#: ../../source/conditionals.rst:847
+#: ../../source/conditionals.rst:848
+#: ../../source/conditionals.rst:848
+#: ../../source/conditionals.rst:849
+#: ../../source/conditionals.rst:850
+#: ../../source/conditionals.rst:850
+#: ../../source/conditionals.rst:851
+#: ../../source/conditionals.rst:851
+#: ../../source/conditionals.rst:852
+#: ../../source/conditionals.rst:852
+#: ../../source/conditionals.rst:852
+# 44b0a7f040294c69bae7a335ecc43ba4
+# d5674f95d48b445994837177402b66a4
+# f2b1eb6841ea4805b2e467f237529655
+# 5006a83ef4e04e239a68ec7f528353ae
+# f878c38191704f6baef2e43efa6fe544
+# 735ed7e0d1da46c68128505023c5a6bf
+# 7eba9e0a19ca47c5897630535032da0e
+# 9c3429be1c354c1a9d9d4462c07114fd
+# 3173e8b0aa4d4597b630ea6692cbcea3
+# c4b3359652c143e6bf5cc966d7473703
+# a695108bcfef4f5d985f976eefafaae8
+# ae9229ee0dc74d908081f8919d780f9d
+# 9f64c81142c9446da83c0c92a5dc5d84
+# 16abdad0c9d448cf9b6a909c605d08c5
+# d442fab23b2941ebbb16b9dc4e4e77fb
+# 1ffde0ab977e491181cf4995dc54d834
+# 1c2edf78027e457499bcd3ca95737799
+# 16b974300bab495f9c9512074d0e7dd8
+# 36912b94c1c34f61bdd5bcefb0b016e7
+# 8fdce536e69d45198f2e0769fc8c201b
+# 5d2d32633ad1449bb12858bf8f80e93d
+msgid "T"
+msgstr ""
+
+#: ../../source/conditionals.rst:149
+# 2cbafab5d86d46f58cb2958ebb1e29f4
+msgid "The third logical operator, ``not``, only takes a single operand, so its truth table only has two rows:"
+msgstr ""
+
+#: ../../source/conditionals.rst:153
+# 33e9b6b443664dbbb32ce264769d72a2
+msgid "not a"
+msgstr ""
+
+#: ../../source/conditionals.rst:161
+# 5f5e31160e294a0ca3601602986dcedc
+msgid "Simplifying Boolean Expressions"
+msgstr ""
+
+#: ../../source/conditionals.rst:163
+# 6d84ff79bc8145839acc3c3cbad75d86
+msgid "An algebra gives us some rules for simplifying and rearranging expressions. For example, we are all familiar in school algebra with rules like:"
+msgstr ""
+
+#: ../../source/conditionals.rst:170
+# ec06698755124c5fa44bbc1a7e62694f
+msgid "Here are some boolean algebra rules for working with the ``and`` operator:"
+msgstr ""
+
+#: ../../source/conditionals.rst:181
+# 9044e59b6a2a4313a44094d6c892089c
+msgid "Here are some corresponding rules for the ``or`` operator:"
+msgstr ""
+
+#: ../../source/conditionals.rst:192
+# b378b30ed0434f6c999a6c8dda28945a
+msgid "Two ``not`` operators cancel each other:"
+msgstr ""
+
+#: ../../source/conditionals.rst:212
+# 37bc3dd23ad84436aa52ba601901dd7e
+msgid "Conditional execution"
+msgstr ""
+
+#: ../../source/conditionals.rst:214
+# 67c04602ab7545e9ae93e84c6f15ec96
+msgid "In order to write useful programs, we almost always need the ability to check conditions and change the behavior of the program accordingly. **Conditional statements** give us this ability. The simplest form is the **if** statement:"
+msgstr ""
+
+#: ../../source/conditionals.rst:231
+# 6a5d0f57b3a44b6384a1bd6451307644
+msgid "The boolean expression after the ``if`` statement is called the **condition**. If it is true, then all the indented statements get executed. If not, then all the statements indented under the `else` clause get executed."
+msgstr ""
+
+#: ../../source/conditionals.rst:239
+# d437379661bb46e2a8e5d2d222e0f549
+msgid "The syntax for an ``if`` statement looks like this:"
+msgstr ""
+
+#: ../../source/conditionals.rst:249
+# d4a277fc562e43d7a71c282073934b40
+msgid "As with the function definition from the last chapter and other compound statements like ``for``, the ``if`` statement consists of a header line and a body. The header line begins with the keyword ``if`` followed by a *boolean expression* and ends with a colon (:)."
+msgstr ""
+
+#: ../../source/conditionals.rst:254
+# c28d9fac19124dff9c3378e9b0a09172
+msgid "The indented statements that follow are called a **block**. The first unindented statement marks the end of the block."
+msgstr ""
+
+#: ../../source/conditionals.rst:257
+# ce8432992d0d4e318ad238ad9ed0ba36
+msgid "Each of the statements inside the first block of statements are executed in order if the boolean expression evaluates to ``True``. The entire first block of statements is skipped if the boolean expression evaluates to ``False``, and instead all the statements under the ``else`` clause are executed."
+msgstr ""
+
+#: ../../source/conditionals.rst:262
+# 1ce01a19b3a644c8aa1d749fa174d005
+msgid "There is no limit on the number of statements that can appear under the two clauses of an ``if`` statement, but there has to be at least one statement in each block.  Occasionally, it is useful to have a section with no statements (usually as a place keeper, or scaffolding, for code we haven't written yet). In that case, we can use the ``pass`` statement, which does nothing except act as a placeholder."
+msgstr ""
+
+#: ../../source/conditionals.rst:280
+# 7884a317388b43beaa9dc2f5c63ce71f
+msgid "Omitting the `else` clause"
+msgstr ""
+
+#: ../../source/conditionals.rst:286
+# 022998fbd39d4052ab2c7972988fd532
+msgid "Another form of the ``if`` statement is one in which the ``else`` clause is omitted entirely. In this case, when the condition evaluates to ``True``, the statements are executed, otherwise the flow of execution continues to the statement after the ``if``."
+msgstr ""
+
+#: ../../source/conditionals.rst:301
+# 6adff84eba7c442088bbb183c78f8dca
+msgid "In this case, the print function that outputs the square root is the one after the ``if`` --- not because we left a blank line, but because of the way the code is indented.    Note too that the function call ``math.sqrt(x)`` will give an error unless we have an ``import math`` statement, usually placed near the top of our script."
+msgstr ""
+
+#: ../../source/conditionals.rst:308
+# 7b0d1ebed61f4b4c91d1b9627eb718cb
+msgid "Python documentation sometimes uses the term **suite** of statements to mean what we have called a *block* here. They mean the same thing, and since most other languages and computer scientists use the word *block*, we'll stick with that."
+msgstr ""
+
+#: ../../source/conditionals.rst:312
+# a23525fe7e194c858a392652ed3ebc70
+msgid "Notice too that ``else`` is not a statement.  The ``if`` statement has two *clauses*, one of which is the (optional) ``else`` clause."
+msgstr ""
+
+#: ../../source/conditionals.rst:321
+# 009567cb93c54edcb9f79b20eb78f02b
+msgid "Chained conditionals"
+msgstr ""
+
+#: ../../source/conditionals.rst:323
+# 43485a7bceca4f53a0513f8cbbbab9b4
+msgid "Sometimes there are more than two possibilities and we need more than two branches. One way to express a computation like that is a **chained conditional**:"
+msgstr ""
+
+#: ../../source/conditionals.rst:337
+# 27b1930dbeef4aeb98496732f359f091
+msgid "Flowchart of this chained conditional"
+msgstr ""
+
+#: ../../source/conditionals.rst:341
+# 23014b648fb641f5b80bc0fc149f1af8
+msgid "``elif`` is an abbreviation of ``else if``. Again, exactly one branch will be executed. There is no limit of the number of ``elif`` statements but only a single (and optional) final ``else`` statement is allowed and it must be the last branch in the statement:"
+msgstr ""
+
+#: ../../source/conditionals.rst:358
+# 34f860773ecf48b4a1479b3e5d6627f1
+msgid "Each condition is checked in order. If the first is false, the next is checked, and so on. If one of them is true, the corresponding branch executes, and the statement ends. Even if more than one condition is true, only the first true branch executes."
+msgstr ""
+
+#: ../../source/conditionals.rst:369
+# d69ab0279c26477d9b4ce3d42be3aa03
+msgid "Nested conditionals"
+msgstr ""
+
+#: ../../source/conditionals.rst:371
+# 4486896579004a1ebd14d6fd21ab9322
+msgid "One conditional can also be **nested** within another. (It is the same theme of composibility, again!)  We could have written the previous example as follows:"
+msgstr ""
+
+#: ../../source/conditionals.rst:392
+# e12c32dcaa4f49bd94d971a1f8ce3933
+msgid "The outer conditional contains two branches. The second branch contains another ``if`` statement, which has two branches of its own. Those two branches could contain conditional statements as well."
+msgstr ""
+
+#: ../../source/conditionals.rst:397
+# 6bbf883592e841b4824fd5e5b56f1599
+msgid "Although the indentation of the statements makes the structure apparent, nested conditionals very quickly become difficult to read.  In general, it is a good idea to avoid them when we can."
+msgstr ""
+
+#: ../../source/conditionals.rst:401
+# 13482de8536b4e9eae11f6a95b211ef7
+msgid "Logical operators often provide a way to simplify nested conditional statements. For example, we can rewrite the following code using a single conditional:"
+msgstr ""
+
+#: ../../source/conditionals.rst:412
+# cd48030d45844dcd9c1dca87cb9ab56c
+msgid "The ``print`` function is called only if we make it past both the conditionals, so instead of the above which uses two ``if`` statements each with a simple condition, we could make a more complex condition using the ``and`` operator.  Now we only need a single ``if`` statement:"
+msgstr ""
+
+#: ../../source/conditionals.rst:431
+# cd1d9ae2d3904acb8d225cbbb21517c7
+msgid "The ``return`` statement"
+msgstr ""
+
+#: ../../source/conditionals.rst:433
+# 435f2cfb18564b2ebf9954dd058ab05c
+msgid "The ``return`` statement, with or without a value, depending on whether the function is fruitful or void, allows us to terminate the execution of a function before (or when) we reach the end. One reason to use an *early return* is if we detect an error condition:"
+msgstr ""
+
+#: ../../source/conditionals.rst:449
+# 828ec463ff3f41c3a1ec2333559e4318
+msgid "The function ``print_square_root`` has a parameter named ``x``. The first thing it does is check whether ``x`` is less than or equal to 0, in which case it displays an error message and then uses ``return`` to exit the function. The flow of execution immediately returns to the caller, and the remaining lines of the function are not executed."
+msgstr ""
+
+#: ../../source/conditionals.rst:458
+# 30f7776f07fc4777817aaf8ee5c6cfb3
+msgid "Logical opposites"
+msgstr ""
+
+#: ../../source/conditionals.rst:460
+# c6c954211ccd4d8e982197058e3c7d06
+msgid "Each of the six relational operators has a logical opposite: for example, suppose we can get a driving licence when our age is greater or equal to 17, we can *not* get the driving licence when we are less than 17."
+msgstr ""
+
+#: ../../source/conditionals.rst:464
+# ac535ebde1d141b98a1e7f640d5a967c
+msgid "Notice that the opposite of ``>=`` is ``<``."
+msgstr ""
+
+#: ../../source/conditionals.rst:467
+# 38d6a0f456fe461385c0d77141119417
+msgid "operator"
+msgstr ""
+
+#: ../../source/conditionals.rst:467
+# 48180106995d4ac4b7ef15e8b037a4bd
+msgid "logical opposite"
+msgstr ""
+
+#: ../../source/conditionals.rst:469
+#: ../../source/conditionals.rst:470
+# 3dfdf09a54f14537b4c411049e01f9ed
+# 774145b4303c43b4b6044c5305a46068
+msgid "=="
+msgstr ""
+
+#: ../../source/conditionals.rst:469
+#: ../../source/conditionals.rst:470
+# 262ad5946db341f2bfeda7e865a3d02f
+# 7901584e18a34009a7a5a6572d2b84ac
+msgid "!="
+msgstr ""
+
+#: ../../source/conditionals.rst:471
+#: ../../source/conditionals.rst:474
+# deb3b877f5b54e44b6122b0617c477ad
+# 1f631dfef27443f8a94e49e328453b1f
+msgid "<"
+msgstr ""
+
+#: ../../source/conditionals.rst:471
+#: ../../source/conditionals.rst:474
+# 9637a2fa1e4e4302b6eb054c9088f71c
+# caf7f345634b426ca0704ea251eb792f
+msgid ">="
+msgstr ""
+
+#: ../../source/conditionals.rst:472
+#: ../../source/conditionals.rst:473
+# 0afa0b8284c947649e7689c8c22d4713
+# 171a7416745443a790b60dd15d3c4f7b
+msgid "<="
+msgstr ""
+
+#: ../../source/conditionals.rst:472
+#: ../../source/conditionals.rst:473
+# 7dfb22c9c50e44e7979149f1ef4d3d60
+# 7820602426454eadadea026c05e89f4f
+msgid ">"
+msgstr ""
+
+#: ../../source/conditionals.rst:477
+# 43a22ccf6c844451b2f4c6639ba9a676
+msgid "Understanding these logical opposites allows us to sometimes get rid of ``not`` operators.  ``not`` operators are often quite difficult to read in computer code, and our intentions will usually be clearer if we can eliminate them."
+msgstr ""
+
+#: ../../source/conditionals.rst:481
+# 8581d9394b6947f5be2b51110c294c78
+msgid "For example, if we wrote this Python:"
+msgstr ""
+
+#: ../../source/conditionals.rst:490
+# cdf6bfe4796b4bf89a1e03ea01c84405
+msgid "it would probably be clearer to use the simplification laws, and to write instead:"
+msgstr ""
+
+#: ../../source/conditionals.rst:501
+# 72406f16bd034f5aa621530f2980fe50
+msgid "Two powerful simplification laws (called de Morgan's laws) that are often helpful when dealing with complicated boolean expressions are:"
+msgstr ""
+
+#: ../../source/conditionals.rst:509
+# 30bc6a6a829445a7b2770683bc19e258
+msgid "For example, suppose we can slay the dragon only if our magic lightsabre sword is charged to 90% or higher, and we have 100 or more energy units in our protective shield. We find this fragment of Python code in the game:"
+msgstr ""
+
+#: ../../source/conditionals.rst:522
+# 4122bd5a100949cf8091d363a6f6a1bd
+msgid "de Morgan's laws together with the logical opposites would let us rework the condition in a (perhaps) easier to understand way like this:"
+msgstr ""
+
+#: ../../source/conditionals.rst:533
+# 7a30512d1d7641e4bae4a49d1164f3c4
+msgid "We could also get rid of the ``not`` by swapping around the ``then`` and ``else`` parts of the conditional.  So here is a third version, also equivalent:"
+msgstr ""
+
+#: ../../source/conditionals.rst:544
+# 6827776a1e0f49ac9c297a5757d369c5
+msgid "This version is probably the best of the three, because it very closely matches the initial English statement. Clarity of our code (for other humans), and making it easy to see that the code does what was expected should always be a high priority."
+msgstr ""
+
+#: ../../source/conditionals.rst:549
+# c2f991f801664860ba79919bab57377f
+msgid "As our programming skills grow we'll find we have more than one way to solve any problem.  So good programs are *designed*. We make choices that favour clarity, simplicity, and elegance.  The job title *software architect* says a lot about what we do --- we are *architects* who engineer our products to balance beauty, functionality, simplicity and clarity in our creations."
+msgstr ""
+
+#: ../../source/conditionals.rst:558
+# 2b64b95a0a3c43219dce1111c089b97f
+msgid "Once our program works, we should play around a bit trying to polish it up. Write good comments.  Think about whether the code would be clearer with different variable names.  Could we have done it more elegantly?  Should we rather use a function?  Can we simplify the conditionals?"
+msgstr ""
+
+#: ../../source/conditionals.rst:563
+# d07b14e5434c4ac6bd467c53cb608ff5
+msgid "We think of our code as our creation, our work of art!  We make it great."
+msgstr ""
+
+#: ../../source/conditionals.rst:570
+# 21cf2d59f28640bf98f54bbf64ab8e75
+msgid "Type conversion"
+msgstr ""
+
+#: ../../source/conditionals.rst:572
+# 256c8f1ff3114efd9993e3992c078b5c
+msgid "We've had a first look at this in an earlier chapter.  Seeing it again won't hurt!"
+msgstr ""
+
+#: ../../source/conditionals.rst:574
+# d5f4de97cbfd49c189a8fad9846bca5c
+msgid "Many Python types come with a built-in function that attempts to convert values of another type into its own type. The ``int(ARGUMENT)`` function, for example, takes any value and converts it to an integer, if possible, or complains otherwise:"
+msgstr ""
+
+#: ../../source/conditionals.rst:586
+# 0dc07530cbae46eda2941a331a436fc9
+msgid "``int`` can also convert floating-point values to integers, but remember that it truncates the fractional part:"
+msgstr ""
+
+#: ../../source/conditionals.rst:600
+# 56904ee137814cb3aef339621b5d0ada
+msgid "The ``float(ARGUMENT)`` function converts integers and strings to floating-point numbers:"
+msgstr ""
+
+#: ../../source/conditionals.rst:612
+# 0ffb42561e4849f98177376bb8ece87e
+msgid "It may seem odd that Python distinguishes the integer value ``1`` from the floating-point value ``1.0``. They may represent the same number, but they belong to different types. The reason is that they are represented differently inside the computer."
+msgstr ""
+
+#: ../../source/conditionals.rst:617
+# 502cbd5bfabf4f4ba51aeb7c21426686
+msgid "The ``str(ARGUMENT)`` function converts any argument given to it to type ``string``:"
+msgstr ""
+
+#: ../../source/conditionals.rst:633
+# 8071f5ebc2544feca42a8d84208db202
+msgid "``str(ARGUMENT)`` will work with any value and convert it into a string.  As mentioned earlier, ``True`` is boolean value; ``true`` is just an ordinary variable name, and is not defined here, so we get an error."
+msgstr ""
+
+#: ../../source/conditionals.rst:641
+# 553084503f8349ff88fe07b1941757d4
+msgid "A Turtle Bar Chart"
+msgstr ""
+
+#: ../../source/conditionals.rst:643
+# 4605132e13984057bdeb1144f6d1fc8e
+msgid "The turtle has a lot more power than we've seen so far.  If you want to see the full documentation, look at http://docs.python.org/library/turtle.html, or within PyScripter, use *Help* and search for the turtle module."
+msgstr ""
+
+#: ../../source/conditionals.rst:647
+# 708cb754121d4e76aea1124ae9b179bc
+msgid "Here are a couple of new tricks for our turtles:"
+msgstr ""
+
+#: ../../source/conditionals.rst:649
+# aa95edf002a24189918de0ce5f547d7f
+msgid "We can get a turtle to display text on the canvas at the turtle's current position.  The method is ``alex.write(\"Hello\")``."
+msgstr ""
+
+#: ../../source/conditionals.rst:651
+# 31b1c6ba835f449eac0d4ac541641a94
+msgid "We can fill a shape (circle, semicircle, triangle, etc.) with a color.  It is a two-step process. First we call the method ``alex.begin_fill()``, then we draw the shape, then we call ``alex.end_fill()``."
+msgstr ""
+
+#: ../../source/conditionals.rst:653
+# 0f83a5a3d827462b92de3428be0eb9b3
+msgid "We've previously set the color of our turtle - we can now also set its fill color, which need not be the same as the turtle and the pen color.  We use ``alex.color(\"blue\",\"red\")`` to set the turtle to draw in blue, and fill in red."
+msgstr ""
+
+#: ../../source/conditionals.rst:658
+# 9a9506401c3a4ccc9dc575d1568a3e22
+msgid "Ok, so can we get tess to draw a bar chart?  Let us start with some data to be charted,"
+msgstr ""
+
+#: ../../source/conditionals.rst:660
+# 2085a7af1b844251b908a43aa9a199da
+msgid "``xs = [48, 117, 200, 240, 160, 260, 220]``"
+msgstr ""
+
+#: ../../source/conditionals.rst:662
+# cb4f1ca968f045e6b2e42ff165b15f07
+msgid "Corresponding to each data measurement, we'll draw a simple rectangle of that height, with a fixed width."
+msgstr ""
+
+#: ../../source/conditionals.rst:686
+# 13c684956a86468ba7a6c8204e166c1e
+msgid "Ok, not fantasically impressive, but it is a nice start!  The important thing here was the mental chunking, or how we broke the problem into smaller pieces. Our chunk is to draw one bar, and we wrote a function to do that. Then, for the whole chart, we repeatedly called our function."
+msgstr ""
+
+#: ../../source/conditionals.rst:691
+# 693812516e9c4a89ae63512cccbd9a20
+msgid "Next, at the top of each bar, we'll print the value of the data. We'll do this in the body of ``draw_bar``, by adding   ``t.write('  ' + str(height))`` as the new third line of the body. We've put a little space in front of the number, and turned the number into a string.  Without this extra space we tend to cramp our text awkwardly against the bar to the left. The result looks a lot better now:"
+msgstr ""
+
+#: ../../source/conditionals.rst:701
+# 08482ef900094777a0de256a9e17a573
+msgid "And now we'll add two lines to fill each bar.  Our final program now looks like this:"
+msgstr ""
+
+#: ../../source/conditionals.rst:734
+# 1795107f1b5d4834a06f9ed395694a22
+msgid "It produces the following, which is more satisfying:"
+msgstr ""
+
+#: ../../source/conditionals.rst:739
+# 4352f499fa27406db21814eb8f6250f0
+msgid "Mmm.  Perhaps the bars should not be joined to each other at the bottom.  We'll need to pick up the pen while making the gap between the bars.  We'll leave that as an exercise for you!"
+msgstr ""
+
+#: ../../source/conditionals.rst:742
+# 6462c8964b624f7ea6c04ef98af4f34c
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/conditionals.rst:747
+# 42787c11299b427eb3f4b9c03042f4d2
+msgid "A group of consecutive statements with the same indentation."
+msgstr ""
+
+#: ../../source/conditionals.rst:750
+# b11d44b17df4426c80802336e1bc1877
+msgid "The block of statements in a compound statement that follows the header."
+msgstr ""
+
+#: ../../source/conditionals.rst:754
+# 7f9cbf31c73a44b0bb397f82e7b9be94
+msgid "Some rules for rearranging and reasoning about boolean expressions."
+msgstr ""
+
+#: ../../source/conditionals.rst:757
+# 1298a2a0559a43a7a35d263b66368054
+msgid "An expression that is either true or false."
+msgstr ""
+
+#: ../../source/conditionals.rst:760
+# 5caf8e0321184560b381fa63781e3e8f
+msgid "There are exactly two boolean values: ``True`` and ``False``. Boolean values result when a boolean expression is evaluated by the Python interepreter.  They have type ``bool``."
+msgstr ""
+
+#: ../../source/conditionals.rst:765
+# 8a3d79b3d31947ebb75533a2d824d7ec
+msgid "One of the possible paths of the flow of execution determined by conditional execution."
+msgstr ""
+
+#: ../../source/conditionals.rst:769
+# f8935a24ed554875a496475cc26e5a85
+msgid "A conditional branch with more than two possible flows of execution. In Python chained conditionals are written with ``if ... elif ... else`` statements."
+msgstr ""
+
+#: ../../source/conditionals.rst:774
+# ef748ff95c344df38211cb719acffb08
+msgid "One of the six operators that compares two values: ``==``, ``!=``, ``>``, ``<``, ``>=``, and ``<=``."
+msgstr ""
+
+#: ../../source/conditionals.rst:778
+# 97e56910e1764918aa44177569bb6f70
+msgid "The boolean expression in a conditional statement that determines which branch is executed."
+msgstr ""
+
+#: ../../source/conditionals.rst:782
+# eb7822f7ec674b6292d6b2c07bdb4243
+msgid "A statement that controls the flow of execution depending on some condition. In Python the keywords ``if``, ``elif``, and ``else`` are used for conditional statements."
+msgstr ""
+
+#: ../../source/conditionals.rst:787
+# c4295093bb9e4949a6e70e7cb772c2b1
+msgid "One of the operators that combines boolean expressions: ``and``, ``or``, and ``not``."
+msgstr ""
+
+#: ../../source/conditionals.rst:791
+# 8970882df37542a7b88da831b0a78e90
+msgid "One program structure within another, such as a conditional statement inside a branch of another conditional statement."
+msgstr ""
+
+#: ../../source/conditionals.rst:795
+# 7f25bf6e1e58429784aa76c8a7485dbc
+msgid "A visual cue that tells the user to input data."
+msgstr ""
+
+#: ../../source/conditionals.rst:798
+# 9e8b06dc99d7411cb990b8f873a1b303
+msgid "A concise table of boolean values that can describe the semantics of an operator."
+msgstr ""
+
+#: ../../source/conditionals.rst:802
+# f583660eecf143e78ddf694eb352ab01
+msgid "An explicit function call that takes a value of one type and computes a corresponding value of another type."
+msgstr ""
+
+#: ../../source/conditionals.rst:806
+# 7994c64bb815440f92f92392e938981f
+msgid "The process of adding a function header and parameters to a sequence of program statements is often refered to as \"wrapping the code in a function\".  This process is very useful whenever the program statements in question are going to be used multiple times.  It is even more useful when it allows the programmer to express their mental chunking, and how they've broken a complex problem into pieces."
+msgstr ""
+
+#: ../../source/conditionals.rst:815
+# c1a3b44eab2a451c9a723125d8a06600
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/conditionals.rst:817
+# c3f3c5b7016d437c98432f44c98614cd
+msgid "Assume the days of the week are numbered 0,1,2,3,4,5,6 from Sunday to Saturday. Write a function which is given the day number, and it returns the day name (a string)."
+msgstr ""
+
+#: ../../source/conditionals.rst:820
+# 74f52d9ec0ee424287e428a5126decb9
+msgid "You go on a wonderful holiday (perhaps to jail, if you don't like happy exercises) leaving on day number 3 (a Wednesday).  You return home after 137 sleeps. Write a general version of the program which asks for the starting day number, and the length of your stay, and it will tell you the name of day of the week you will return on."
+msgstr ""
+
+#: ../../source/conditionals.rst:825
+# bc694c33091b48c6a19849667196eaac
+msgid "Give the logical opposites of these conditions"
+msgstr ""
+
+#: ../../source/conditionals.rst:827
+# c583ee1f21104301b3e80660ea85fc29
+msgid "``a > b``"
+msgstr ""
+
+#: ../../source/conditionals.rst:828
+# 15333f1dd0894506984442cb5fb2634b
+msgid "``a >= b``"
+msgstr ""
+
+#: ../../source/conditionals.rst:829
+# b33d7f19cfde4928809d0fbed5cd3c02
+msgid "``a >= 18  and  day == 3``"
+msgstr ""
+
+#: ../../source/conditionals.rst:830
+# 96314bce68154f069f97abd5b7d6abf5
+msgid "``a >= 18  and  day != 3``"
+msgstr ""
+
+#: ../../source/conditionals.rst:832
+# 674dda3b35614e7cb3dd64addbfab49e
+msgid "What do these expressions evaluate to?"
+msgstr ""
+
+#: ../../source/conditionals.rst:834
+# 56b26911da9347be94d0ea0331f91f56
+msgid "``3 == 3``"
+msgstr ""
+
+#: ../../source/conditionals.rst:835
+# 68c9830c327f4888be72120b98847fa1
+msgid "``3 != 3``"
+msgstr ""
+
+#: ../../source/conditionals.rst:836
+# 0236d248d5284a1b81d258aa40a3946c
+msgid "``3 >= 4``"
+msgstr ""
+
+#: ../../source/conditionals.rst:837
+# aa14c60d0cee4af7933fc9ec04660169
+msgid "``not (3 < 4)``"
+msgstr ""
+
+#: ../../source/conditionals.rst:839
+# b1cf9421bf854f7ab56e11433300386d
+msgid "Complete this truth table:"
+msgstr ""
+
+#: ../../source/conditionals.rst:843
+# 1877c2ac0dbd4904ae97491216f567b5
+msgid "p"
+msgstr ""
+
+#: ../../source/conditionals.rst:843
+# f27a4170e09f4172ada381d527bad31f
+msgid "q"
+msgstr ""
+
+#: ../../source/conditionals.rst:843
+# 47bfc9dbd23a4a41bd8bb75712fdc4ba
+msgid "r"
+msgstr ""
+
+#: ../../source/conditionals.rst:843
+# 54c2903e5f4f4bfeab6659aeb4dca54e
+msgid "(not (p and q)) or r"
+msgstr ""
+
+#: ../../source/conditionals.rst:845
+#: ../../source/conditionals.rst:846
+#: ../../source/conditionals.rst:847
+#: ../../source/conditionals.rst:848
+#: ../../source/conditionals.rst:849
+#: ../../source/conditionals.rst:850
+#: ../../source/conditionals.rst:851
+#: ../../source/conditionals.rst:852
+# b7958bd604b8475c933f74f4d3c932ef
+# c4982356ab4d4a64924e6670f62e1650
+# 750631852a664c9cbcb01b9e4057cf55
+# 24fe44e583d44eaaa11c715921d94931
+# e849cb57e7f74678a2f0aac4dbcd9cbf
+# 531369b431e84fb286982b839bec8427
+# 3cbda08c8e2b4a94a62f3b659af9d802
+# 828a48125b7243beb5e887d2771b76eb
+msgid "?"
+msgstr ""
+
+#: ../../source/conditionals.rst:856
+# b67df6289e8b4291bb5f1b2149bfcad7
+msgid "Write a function which is given an exam mark, and it returns a string --- the grade for that mark --- according to this scheme:"
+msgstr ""
+
+#: ../../source/conditionals.rst:860
+# 9f7a9bea06df42e5a91902833df4c292
+msgid "Mark"
+msgstr ""
+
+#: ../../source/conditionals.rst:860
+# 335800415d2f4bfbb219d1b9b8ca8604
+msgid "Grade"
+msgstr ""
+
+#: ../../source/conditionals.rst:862
+# af61b906058b4deda2359679df16ffaf
+msgid ">= 75"
+msgstr ""
+
+#: ../../source/conditionals.rst:862
+# 8da0f7b440c940dab857c539ef866798
+msgid "First"
+msgstr ""
+
+#: ../../source/conditionals.rst:863
+# 9116520f6db845a593755d54e46c5ec8
+msgid "[70-75)"
+msgstr ""
+
+#: ../../source/conditionals.rst:863
+# 9f8cad12748540009e974b8e1e27d61b
+msgid "Upper Second"
+msgstr ""
+
+#: ../../source/conditionals.rst:864
+# d9543d39333e450bbfc0ae99b969bd2e
+msgid "[60-70)"
+msgstr ""
+
+#: ../../source/conditionals.rst:864
+# 8c5a6c0fb2ae4cb096cf63c226d7d887
+msgid "Second"
+msgstr ""
+
+#: ../../source/conditionals.rst:865
+# f703808e44ee48c197ecad39a9842059
+msgid "[50-60)"
+msgstr ""
+
+#: ../../source/conditionals.rst:865
+# 601406868ddc4ea3a090fdfcb758ce7a
+msgid "Third"
+msgstr ""
+
+#: ../../source/conditionals.rst:866
+# 8ab6e0ab19c243068aeed2a380b2da99
+msgid "[45-50)"
+msgstr ""
+
+#: ../../source/conditionals.rst:866
+# eebec72545a44ff8ae835b39aacbf67b
+msgid "F1 Supp"
+msgstr ""
+
+#: ../../source/conditionals.rst:867
+# 1732a22559f9436a901df5fc7daecc5f
+msgid "[40-45)"
+msgstr ""
+
+#: ../../source/conditionals.rst:867
+# 36f0fa6e18e04ce2b31df40f1035654e
+msgid "F2"
+msgstr ""
+
+#: ../../source/conditionals.rst:868
+# aae5aa2ad11042f39db7878c5d2021ef
+msgid "< 40"
+msgstr ""
+
+#: ../../source/conditionals.rst:868
+# a5d93ba6eab845a6af65ff57dbeafdaa
+msgid "F3"
+msgstr ""
+
+#: ../../source/conditionals.rst:871
+# 29b3aad5972f4ead9970fe5c7233e462
+msgid "The square and round brackets denote closed and open intervals. A closed interval includes the number, and open interval excludes it.   So 39.99999 gets grade F3, but 40 gets grade F2. Assume ::"
+msgstr ""
+
+#: ../../source/conditionals.rst:878
+# 427474f5f1d94a4c95a93f5e787a74e3
+msgid "Test your function by printing the mark and the grade for all the elements in this list."
+msgstr ""
+
+#: ../../source/conditionals.rst:880
+# 9f1eae741f264400929ea2dbfd4db608
+msgid "Modify the turtle bar chart program so that the pen is up for the small gaps between each bar."
+msgstr ""
+
+#: ../../source/conditionals.rst:882
+# 16b711d60ec14cd6bb9223191086fab8
+msgid "Modify the turtle bar chart program so that the bar for any value of 200 or more is filled with red, values between [100 and 200) are filled with yellow, and bars representing values less than 100 are filled with green."
+msgstr ""
+
+#: ../../source/conditionals.rst:886
+# 9a4bf1313c75413bb188dc09dd54b0f0
+msgid "In the turtle bar chart program, what do you expect to happen if one or more of the data values in the list is negative?   Try it out.  Change the program so that when it prints the text value for the negative bars, it puts the text below the bottom of the bar."
+msgstr ""
+
+#: ../../source/conditionals.rst:891
+# dada3ad674104b0faf90b6b965cf1c92
+msgid "Write a function ``find_hypot`` which, given the length of two sides of a right-angled triangle, returns the length of the hypotenuse.  (Hint:  ``x ** 0.5`` will return the square root.)"
+msgstr ""
+
+#: ../../source/conditionals.rst:894
+# 202545d4da694251aff02666afd650b9
+msgid "Write a function ``is_rightangled`` which, given the length of three sides of a triangle, will determine whether the triangle is right-angled.  Assume that the third argument to the function is always the longest side.  It will return ``True`` if the triangle is right-angled, or ``False`` otherwise."
+msgstr ""
+
+#: ../../source/conditionals.rst:899
+# c0f52ba6dc494edfbfb8eac892bd439e
+msgid "Hint: floating point arithmetic is not always exactly accurate, so it is not safe to test floating point numbers for equality. If a good programmer wants to know whether ``x`` is equal or close enough to ``y``, they would probably code it up as"
+msgstr ""
+
+#: ../../source/conditionals.rst:909
+# d82a27747ff34e85b706b89e549261da
+msgid "Extend the above program so that the sides can be given to the function in any order."
+msgstr ""
+

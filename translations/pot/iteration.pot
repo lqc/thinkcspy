@@ -1,0 +1,1275 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/iteration.rst:12
+# 98c2e0a2f6f84f0391ad799f0f130307
+msgid "Iteration"
+msgstr ""
+
+#: ../../source/iteration.rst:20
+# 788b739097ac44a3bcd7f90a24f89872
+msgid "Computers are often used to automate repetitive tasks. Repeating identical or similar tasks without making errors is something that computers do well and people do poorly."
+msgstr ""
+
+#: ../../source/iteration.rst:24
+# fd0d6e5fc7ff4a879e7b5196f6b9ca0b
+msgid "Repeated execution of a set of statements is called **iteration**.  Because iteration is so common, Python provides several language features to make it easier. We've already seen the ``for`` statement in chapter 3.  This the the form of iteration you'll likely be using most often.  But in this chapter we've going to look at the ``while`` statement --- another way to have your program do iteration, useful in slightly different circumstances."
+msgstr ""
+
+#: ../../source/iteration.rst:31
+# eaabea2646134aae9ed904d5ae547058
+msgid "Before we do that, let's just review a few ideas..."
+msgstr ""
+
+#: ../../source/iteration.rst:34
+# 5143544026e340ca98a5c92735e3ad8d
+msgid "Reassignment"
+msgstr ""
+
+#: ../../source/iteration.rst:36
+# d86a68a3dbe4466280fd4e732c6f372e
+msgid "As we have mentioned previously, it is legal to make more than one assignment to the same variable. A new assignment makes an existing variable refer to a new value (and stop referring to the old value)."
+msgstr ""
+
+#: ../../source/iteration.rst:48
+# 583fe0f3829042f2bb0c28273cc00189
+msgid "The output of this program is:"
+msgstr ""
+
+#: ../../source/iteration.rst:55
+# 62c7d22d6a8e48f58fedb58bbce801c7
+msgid "because the first time ``bruce`` is printed, its value is 5, and the second time, its value is 7."
+msgstr ""
+
+#: ../../source/iteration.rst:58
+# a0faa640f42941d9b61ce4a62910859f
+msgid "Here is what **reassignment** looks like in a state snapshot:"
+msgstr ""
+
+#: ../../source/iteration.rst:63
+# fed25f65a8d642a083aaba5317253e69
+msgid "With reassignment it is especially important to distinguish between an assignment statement and a boolean expression that tests for equality. Because Python uses the equal token (``=``) for assignment, it is tempting to interpret a statement like ``a = b`` as a boolean test.  Unlike mathematics, it is not!  Remember that the Python token for the equality operator is ``==``."
+msgstr ""
+
+#: ../../source/iteration.rst:70
+# 50011f5f3af64647b47762eadbb798c7
+msgid "Note too that an equality test is symmetric, but assignment is not. For example, if ``a == 7`` then ``7 == a``. But in Python, the statement ``a = 7`` is legal and ``7 = a`` is not."
+msgstr ""
+
+#: ../../source/iteration.rst:74
+# d6b7113565564a2090bb4c90ac28cf57
+msgid "Furthermore, in mathematics, a statement of equality is always true.  If ``a == b`` now, then ``a`` will always equal ``b``. In Python, an assignment statement can make two variables equal, but because of the possibility of reassignment, they don't have to stay that way:"
+msgstr ""
+
+#: ../../source/iteration.rst:86
+# 5aee373f2d76432e9fffc00222c3f95b
+msgid "The third line changes the value of ``a`` but does not change the value of ``b``, so they are no longer equal. (In some programming languages, a different symbol is used for assignment, such as ``<-`` or ``:=``, to avoid confusion.  Python chose to use the tokens ``=`` for assignment, and ``==`` for equality.  This is a popular choice also found in languages like C, C++, Java, and C#.)"
+msgstr ""
+
+#: ../../source/iteration.rst:94
+# ad7bddf151834ecda6d0c2cf90fc9077
+msgid "Updating variables"
+msgstr ""
+
+#: ../../source/iteration.rst:96
+# 122b3e6eeefe4b6cac2cc6de906eb88b
+msgid "When an assignment statement is executed, the right-hand-side expression (i.e. the expression that comes after the assignment token) is evaluated first.  Then the result of that evaluation is written into the variable on the left hand side, thereby changing it."
+msgstr ""
+
+#: ../../source/iteration.rst:100
+# 47ee38a17f014edb8e43e6d1788d64f4
+msgid "One of the most common forms of reassignment is an update, where the new value of the variable depends on its old value."
+msgstr ""
+
+#: ../../source/iteration.rst:109
+# 402dfdfc11214a2c9d4d0814464f2412
+msgid "Line 2 means `get the current value of n, multiply it by three and add one, and put the answer back into n as its new value`. So after executing the two lines above, ``n`` will have the value 16."
+msgstr ""
+
+#: ../../source/iteration.rst:113
+# b7786a7df2d1477cb95c2b0d29dffa54
+msgid "If you try to get the value of a variable that doesn't exist yet, you'll get an error:"
+msgstr ""
+
+#: ../../source/iteration.rst:122
+# 038df2f1afe04e8da41aed608471d37d
+msgid "Before you can update a variable, you have to **initialize** it, usually with a simple assignment:"
+msgstr ""
+
+#: ../../source/iteration.rst:130
+# 93634fd71bdc4178b6a569dc9471b324
+msgid "This second statement --- updating a variable by adding 1 to it --- is very common. It is called an **increment** of the variable; subtracting 1 is called a **decrement**. Sometimes programmers also talk about **bumping** a variable, which means the same as incrementing it by 1."
+msgstr ""
+
+#: ../../source/iteration.rst:138
+# d3e07ba51da444dcad62e105409ff7f8
+msgid "The ``for`` loop revisited"
+msgstr ""
+
+#: ../../source/iteration.rst:140
+# b4363e39136d4f65b6dc63d576e226e3
+msgid "Recall that the ``for`` loop processes each item in a list.  Each item in turn is (re-)assigned to the loop variable, and the body of the loop is executed. We saw this example in an earlier chapter:"
+msgstr ""
+
+#: ../../source/iteration.rst:151
+# 3edabee5a2294ab98f968247ddc00665
+msgid "Running through all the items in a list is called **traversing** the list, or **traversal**."
+msgstr ""
+
+#: ../../source/iteration.rst:154
+# 9a7334f6d59947878b6c0354b7cd81b8
+msgid "Let us write a function now to sum up all the elements in a list of numbers. Do this by hand first, and try to isolate exactly what steps you take.  You'll find you need to keep some \"running total\" of the sum so far, either on a piece of paper, or in your head.  Remembering things from one step to the next is precisely why we have variables in a program: so we'll need some variable to remember the \"running total\".  It should be initialized with a value of zero, and then we need to traverse the items in the list.  For each item, we'll want to update the running total by adding the next number to it."
+msgstr ""
+
+#: ../../source/iteration.rst:185
+# 15376cfe468346d6aa900f798f79960a
+msgid "The ``while`` statement"
+msgstr ""
+
+#: ../../source/iteration.rst:187
+# 142abfbdbb8c417091d512ac4591086d
+msgid "Here is a fragment of code that demonstrates the use of the ``while`` statement:"
+msgstr ""
+
+#: ../../source/iteration.rst:205
+# ec91a14ee67249dc9b0d64c55a941b3f
+msgid "You can almost read the ``while`` statement as if it were English. It means, While ``v`` is less than or equal to ``n``, continue executing the body of the loop. Within the body, each time, increment ``v``. When ``v`` passes ``n``, return your accumulated sum."
+msgstr ""
+
+#: ../../source/iteration.rst:209
+# fda4b10189e94debb1947ab932e6303b
+msgid "More formally, here is precise flow of execution for a ``while`` statement:"
+msgstr ""
+
+#: ../../source/iteration.rst:211
+# e38e674be1a14f1d9253e09cd0512441
+msgid "Evaluate the condition, yielding ``False`` or ``True``."
+msgstr ""
+
+#: ../../source/iteration.rst:212
+# fa7c4fd95276471b9ae113adbf18747a
+msgid "If the condition is false, exit the ``while`` statement and continue execution at the next statement."
+msgstr ""
+
+#: ../../source/iteration.rst:214
+# d6cf16aaddba4bd1934ee9bba7be2e70
+msgid "If the condition is true, execute each of the statements in the body and then go back to step 1."
+msgstr ""
+
+#: ../../source/iteration.rst:217
+# a126f43bb8ff4072bb4d864380ef822a
+msgid "The body consists of all of the statements below the header with the same indentation."
+msgstr ""
+
+#: ../../source/iteration.rst:220
+# b73de042ab7b4f02983fe2a5c7194b31
+msgid "This type of flow is called a **loop** because the third step loops back around to the top. Notice that if the condition is false the first time through the loop, the statements inside the loop are never executed."
+msgstr ""
+
+#: ../../source/iteration.rst:224
+# 2362b9b2681d439b9dee8c41a553bd14
+msgid "The body of the loop should change the value of one or more variables so that eventually the condition becomes false and the loop terminates. Otherwise the loop will repeat forever, which is called an **infinite loop**. An endless source of amusement for computer scientists is the observation that the directions on shampoo, lather, rinse, repeat, are an infinite loop."
+msgstr ""
+
+#: ../../source/iteration.rst:230
+# 54045c5890474b5c95522ebb5f7cebf1
+msgid "In the case here, we can prove that the loop terminates because we know that the value of ``n`` is finite, and we can see that the value of ``v`` increments each time through the loop, so eventually it will have to exceed ``n``. In other cases, it is not so easy to tell."
+msgstr ""
+
+#: ../../source/iteration.rst:235
+# 6d0563dea0524a4599e2240482503789
+msgid "What you will notice here is that the ``while`` loop is more work for you --- the programmer --- than the equivalent ``for`` loop.  When using a ``while`` loop one has to control the loop variable yourself: give it an initial value, test for completion, and then make sure you change something in the body so that the loop terminates.  By comparison, here is an alternative function that uses ``for`` instead:"
+msgstr ""
+
+#: ../../source/iteration.rst:251
+# 05bfa0cbb2054e89a9cb18816f01a550
+msgid "Notice the slightly tricky call to the ``range`` function --- we had to add one onto ``n``, because ``range`` generates its list up to but not including the value you give it. It would be easy to make a programming mistake and overlook this, but because we've made the investment of writing some unit tests, our test suite would have caught our error."
+msgstr ""
+
+#: ../../source/iteration.rst:256
+# 2be881b7bf42444ab11c714a9ffd5c64
+msgid "So why have two kinds of loop if ``for`` looks easier?  This next example shows a case where we need the extra power that we get from the ``while`` loop."
+msgstr ""
+
+#: ../../source/iteration.rst:262
+# 0fb9e08652e64e9699d032d16a597b1f
+msgid "The 3n + 1 sequence"
+msgstr ""
+
+#: ../../source/iteration.rst:264
+# a4699e2691004058a399427f036d1f9b
+msgid "Let's look at a simple sequence that has fascinated and foxed mathematicians for many years. They still cannot answer even quite simple questions about this."
+msgstr ""
+
+#: ../../source/iteration.rst:267
+# 551e7ea5266043babb66ac9156f64dd4
+msgid "The \"computational rule\" for creating the sequence is to start from some given ``n``, and to generate the next term of the sequence from ``n``, either by halving ``n``, (whenever ``n`` is even), or else by multiplying it by three and adding 1.  The sequence terminates when ``n`` reaches 1."
+msgstr ""
+
+#: ../../source/iteration.rst:273
+# 032cbc1a5fc749f99ba8e9f1eac89c43
+msgid "This Python function captures that algorithm:"
+msgstr ""
+
+#: ../../source/iteration.rst:290
+# 5072e040f8a2423b870b8947d823e55e
+msgid "Notice first that the print function has an extra argument ``end=', '``.  This tells the ``print`` function to follow the printed string with whatever the programmer chooses (in this case, a comma followed by a space), instead of ending the line. So each time something is printed in the loop, it is printed on the same line, with the output separated by commas.  The call to ``print(n, end='.\\n')`` when the loop terminates will then print the final value of ``n`` followed by a period and a newline character. (You'll cover the ``\\n`` (newline character) in the next chapter)."
+msgstr ""
+
+#: ../../source/iteration.rst:298
+# 3e6b6a935670417ca00f90bdb4deb8b5
+msgid "The condition for this loop is ``n != 1``, so the loop will continue running until ``n`` is ``1``, which will make the condition false."
+msgstr ""
+
+#: ../../source/iteration.rst:301
+# 2ad12dce4e7f4d20b6d773070456da84
+msgid "Each time through the loop, the program outputs the value of ``n`` and then checks whether it is even or odd. If it is even, the value of ``n`` is divided by 2 using integer division. If it is odd, the value is replaced by ``n * 3 + 1``. Here are some examples:"
+msgstr ""
+
+#: ../../source/iteration.rst:319
+# bc25ef198b414eaea20e2ecf360fd378
+msgid "Since ``n`` sometimes increases and sometimes decreases, there is no obvious proof that ``n`` will ever reach 1, or that the program terminates. For some particular values of ``n``, we can prove termination. For example, if the starting value is a power of two, then the value of ``n`` will be even each time through the loop until it reaches 1. The previous example ends with such a sequence, starting with 16."
+msgstr ""
+
+#: ../../source/iteration.rst:326
+# 1b0b6f9c5bc24464a672387d499fcd0d
+msgid "You might like to have some fun and see if you can find a small starting number that needs more than a hundred steps before it terminates."
+msgstr ""
+
+#: ../../source/iteration.rst:329
+# d380350b98de4b14bc344363ab97411b
+msgid "Particular values aside, the interesting question was first posed by a German mathematician called Lothar Collatz: the ``Collatz conjecture`` (also known as the ``3n + 1 conjecture``, is that this sequence terminates for *all* positive values of ``n``.  So far, no one has been able to prove it *or* disprove it!"
+msgstr ""
+
+#: ../../source/iteration.rst:334
+# 12863efd71fb4d30b161a997dbd00522
+msgid "Think carefully about what would be needed for a proof or disproof of the conjecture *\"All positive integers will eventually converge to 1\"*.  With fast computers we have been able to test every integer up to very large values, and so far, they all eventually end up at 1.  But this doesn't mean that there might not be some as-yet untested number which does not reduce to 1."
+msgstr ""
+
+#: ../../source/iteration.rst:340
+# 8349bb373a044bff803991d3967beaf9
+msgid "You'll notice that if you don't stop when you reach one the sequence gets into its own loop:  1, 4, 2, 1, 4, 2, 1, 4 ...   So another possibility is that there might be other cycles that we just haven't found."
+msgstr ""
+
+#: ../../source/iteration.rst:344
+# cfe0e93cba874b60ba37909b3cedb660
+msgid "Wikipedia has an informative article about the Collatz conjecture. The sequence also goes under a number of other names (Hailstone sequence, Wonderous numbers, etc.), and you'll find out just how many integers have already been tested by computer, and found to always converge!"
+msgstr ""
+
+#: ../../source/iteration.rst:352
+# 97d1ff8596134e61aaac908c73475497
+msgid "Use a ``for`` loop if you know, before you start looping, the maximum number of times that you'll need to execute the body. For example, if you're traversing a list of elements, you know that the maximum number of loop iterations you can possibly need is \"all the elements in the list\". Or if you need to print the 12 times table, we know right away how many times the loop will need to run."
+msgstr ""
+
+#: ../../source/iteration.rst:359
+# bf0a246b589145daab1cdb431885d4af
+msgid "So any problem like \"iterate this weather model for 1000 cycles\", or \"search this list of words\", \"find all prime numbers up to 10000\" suggest that a ``for`` loop is best."
+msgstr ""
+
+#: ../../source/iteration.rst:362
+# ab9debe37fae4b43bebeb67b26b7ce08
+msgid "By contrast, if you are required to repeat some computation until some condition is met, and you cannot calculate in advance when this will happen, as we did in this 3n + 1 problem, you'll need a ``while`` loop."
+msgstr ""
+
+#: ../../source/iteration.rst:366
+# 353c08991f44482eb842808ea6ec9206
+msgid "We call the first case **definite iteration** --- we have some definite bounds for what is needed.  The latter case is called **indefinite iteration** --- we're not sure how many iterations we'll need --- we cannot even establish an upper bound!"
+msgstr ""
+
+#: ../../source/iteration.rst:374
+# 9d73ed1b0dc74049973b8758d66c93cc
+msgid "Tracing a program"
+msgstr ""
+
+#: ../../source/iteration.rst:376
+# 176ee0c02dec44aab6694f8cb8e10d61
+msgid "To write effective computer programs a programmer needs to develop the ability to **trace** the execution of a computer program. Tracing involves becoming the computer and following the flow of execution through a sample program run, recording the state of all variables and any output the program generates after each instruction is executed."
+msgstr ""
+
+#: ../../source/iteration.rst:382
+# a7c13e815c564796986b97fc871ee287
+msgid "To understand this process, let's trace the call to ``seq3np1(3)`` from the previous section. At the start of the trace, we have a local variable, ``n`` (the parameter), with an initial value of 3. Since 3 is not equal to 1, the ``while`` loop body is executed. 3 is printed and ``3 % 2 == 0`` is evaluated. Since it evaluates to ``False``, the ``else`` branch is executed and ``3 * 3 + 1`` is evaluated and assigned to ``n``."
+msgstr ""
+
+#: ../../source/iteration.rst:389
+# aac5baf05e4843ae91e810822cb882d4
+msgid "To keep track of all this as you hand trace a program, make a column heading on a piece of paper for each variable created as the program runs and another one for output. Our trace so far would look something like this:"
+msgstr ""
+
+#: ../../source/iteration.rst:400
+# 1800700c8c534a29a48fad6898f82e48
+msgid "Since ``10 != 1`` evaluates to ``True``, the loop body is again executed, and 10 is printed. ``10 % 2 == 0`` is true, so the ``if`` branch is executed and ``n`` becomes 5. By the end of the trace we have:"
+msgstr ""
+
+#: ../../source/iteration.rst:417
+# 2a6a2a4ac7894d0d957b17d4bd483f2a
+msgid "Tracing can be a bit tedious and error prone (that's why we get computers to do this stuff in the first place!), but it is an essential skill for a programmer to have. From this trace we can learn a lot about the way our code works. We can observe that as soon as n becomes a power of 2, for example, the program will require log\\ :sub:`2`\\ (n) executions of the loop body to complete. We can also see that the final 1 will not be printed as output within the body of the loop, which is why we put the special ``print`` function at the end."
+msgstr ""
+
+#: ../../source/iteration.rst:425
+# 82ab2e3b94604a529ffa386c12ac2a60
+msgid "Tracing a program is, of course, related to single-stepping through your code and being able to inspect the variables. Using the computer to **single-step** for you is less error prone and more convenient. Also, as your programs get more complex, they might execute many millions of steps before they get to the code that you're really interested in, so manual tracing becomes impossible.  Being able to set a **breakpoint** where you need one is far more powerful. So we strongly encourage you to invest time in learning using to use your programming environment (PyScripter, in these notes) to full effect."
+msgstr ""
+
+#: ../../source/iteration.rst:435
+# fa555e6425cc4958a16e07641bdfd504
+msgid "There are also some great visualization tools becoming available to help you trace and understand small fragments of Python code.  The one we recommend is at http://netserv.ict.ru.ac.za/python3_viz"
+msgstr ""
+
+#: ../../source/iteration.rst:439
+# d7688eb20be3446e9039913854fa728f
+msgid "We've cautioned against chatterbox functions, but used them here.  As we learn a bit more Python, we'll be able to show you how to generate a list of values to hold the sequence, rather than having the function print them. Doing this would remove the need to have all these pesky ``print`` functions in the middle of our logic, and will make the function more useful."
+msgstr ""
+
+#: ../../source/iteration.rst:449
+# ab2c4502cb7343eb8b961499db279587
+msgid "Counting digits"
+msgstr ""
+
+#: ../../source/iteration.rst:451
+# f9384cb131d8499784e00b167355440a
+msgid "The following function counts the number of decimal digits in a positive integer:"
+msgstr ""
+
+#: ../../source/iteration.rst:464
+# 8bec97b106384c0e91b54e9533c30960
+msgid "A call to ``print(num_digits(710))`` will display ``3``. Trace the execution of this function call (perhaps using the single step function in PyScripter, or the Python visualizer, or on some paper) to convince yourself that it works."
+msgstr ""
+
+#: ../../source/iteration.rst:468
+# a2d1724ce7aa492397772421520355dc
+msgid "This function demonstrates an important pattern of computation called a **counter**. The variable ``count`` is initialized to 0 and then incremented each time the loop body is executed. When the loop exits, ``count`` contains the result --- the total number of times the loop body was executed, which is the same as the number of digits."
+msgstr ""
+
+#: ../../source/iteration.rst:474
+# 521194ca0cd7421ba44b5fda758ee31a
+msgid "If we wanted to only count digits that are either 0 or 5, adding a conditional before incrementing the counter will do the trick:"
+msgstr ""
+
+#: ../../source/iteration.rst:489
+# 3177a80e924848398b48da26d606f611
+msgid "Confirm that ``test(num_zero_and_five_digits(1055030250), 7)`` passes."
+msgstr ""
+
+#: ../../source/iteration.rst:491
+# 185b77a441a344ef8cbd1f7e48373cd6
+msgid "Notice, however, that ``test(num_digits(0), 1)`` fails.  Explain why.  Do you think this is a bug in the code, or a bug in the specifications, or our expectations, or the tests?"
+msgstr ""
+
+#: ../../source/iteration.rst:498
+# e8be046acd42464ea394e34106843a6c
+msgid "Abbreviated assignment"
+msgstr ""
+
+#: ../../source/iteration.rst:500
+# fec05c86442e45ab93df5cb0eae56af9
+msgid "Incrementing a variable is so common that Python provides an abbreviated syntax for it:"
+msgstr ""
+
+#: ../../source/iteration.rst:513
+# 0b247bbdecbc45228cc4cab71be93148
+msgid "``count += 1`` is an abreviation for ``count = count + 1`` . We pronounce the operator as *\"plus-equals\"*.  The increment value does not have to be 1:"
+msgstr ""
+
+#: ../../source/iteration.rst:523
+# fee1e136f5ee45e98badee01521e11f9
+msgid "There are similar abbreviations for ``-=``, ``*=``, ``/=``, ``//=`` and ``%=``:"
+msgstr ""
+
+#: ../../source/iteration.rst:544
+# f443722b9e8f48b391aaef8a558cb070
+msgid "Help and meta-notation"
+msgstr ""
+
+#: ../../source/iteration.rst:546
+# 3c71fc9eebbc4a7da98b982f8ea29da8
+msgid "Python comes with extensive documentation for all its built-in functions, and its libraries. Different systems have different ways of accessing this help.  In PyScripter, click on the *Help* menu item, and select *Python Manuals*.  Then search for help on the built-in function **range**.   You'll get something like this..."
+msgstr ""
+
+#: ../../source/iteration.rst:553
+# a5e8d193811946058f7798da7e9b5e06
+msgid "Notice the square brackets in the description of the arguments. These are examples of **meta-notation** --- notation that describes Python syntax, but is not part of it. The square brackets in this documentation mean that the argument is *optional* --- the programmer can omit it.  So what this first line of help tells us is that ``range`` must always have a ``stop`` argument, but it may have an optional ``start`` argument (which must be followed by a comma if it is present), and it can also have an optional ``step`` argument, preceded by a comma if it is present."
+msgstr ""
+
+#: ../../source/iteration.rst:565
+# bd43247cb1484eb09e05e688abfac838
+msgid "The examples from help show that ``range`` can have either 1, 2 or 3 arguments. The list can start at any starting value, and go up or down in increments other than 1. The documentation here also says that the arguments must be integers."
+msgstr ""
+
+#: ../../source/iteration.rst:570
+# 56f7b6a6a68f4370bef6b101e01036b5
+msgid "Other meta-notation you'll frequently encounter is the use of bold and italics.  The bold means that these are tokens --- keywords or symbols --- typed into your Python code exactly as they are, whereas the italic terms stand for \"something of this type\". So the syntax description"
+msgstr ""
+
+#: ../../source/iteration.rst:576
+# ec5bb2a71fef4c4eb79887e1c5d6c97f
+msgid "**for** *variable* **in** *list* **:**"
+msgstr ""
+
+#: ../../source/iteration.rst:578
+# 863b471f779d454097b7134dbf420619
+msgid "means you can substitute any legal variable and any legal list when you write your Python code."
+msgstr ""
+
+#: ../../source/iteration.rst:581
+# 61e7be4a915d4921a234b42be129ef7c
+msgid "This (simplified) description of the ``print`` function, shows another example of meta-notation in which the ellipses (``...``) mean that you can have as many objects as you like (even zero), separated by commas:"
+msgstr ""
+
+#: ../../source/iteration.rst:585
+# be93dd9c6e834c74b30200d93dcb38fc
+msgid "**print( [**\\ *object,* ... **] )**"
+msgstr ""
+
+#: ../../source/iteration.rst:587
+# 94076fe04e884e01b2cc70b5cd261da6
+msgid "Meta-notation gives us a concise and powerful way to describe the *pattern* of some syntax or feature."
+msgstr ""
+
+#: ../../source/iteration.rst:595
+# 9f79242234404113a926a1501ae4ca75
+msgid "Tables"
+msgstr ""
+
+#: ../../source/iteration.rst:597
+# c28054a9dfba4ce09959875338f6029a
+msgid "One of the things loops are good for is generating tabular data.  Before computers were readily available, people had to calculate logarithms, sines and cosines, and other mathematical functions by hand. To make that easier, mathematics books contained long tables listing the values of these functions. Creating the tables was slow and boring, and they tended to be full of errors."
+msgstr ""
+
+#: ../../source/iteration.rst:603
+# 393fe94972b4499fbc16ccffd9d64965
+msgid "When computers appeared on the scene, one of the initial reactions was, *\"This is great! We can use the computers to generate the tables, so there will be no errors.\"* That turned out to be true (mostly) but shortsighted. Soon thereafter, computers and calculators were so pervasive that the tables became obsolete."
+msgstr ""
+
+#: ../../source/iteration.rst:608
+# e9cc3602a0ba4513936a4f8c825f583f
+msgid "Well, almost. For some operations, computers use tables of values to get an approximate answer and then perform computations to improve the approximation. In some cases, there have been errors in the underlying tables, most famously in the table the Intel Pentium processor chip used to perform floating-point division."
+msgstr ""
+
+#: ../../source/iteration.rst:613
+# ba28766fc6f04659981cc302f41612ba
+msgid "Although a log table is not as useful as it once was, it still makes a good example of iteration. The following program outputs a sequence of values in the left column and 2 raised to the power of that value in the right column:"
+msgstr ""
+
+#: ../../source/iteration.rst:623
+# 853b56ac7cfb4fc990e6a7db03e3267c
+msgid "The string ``'\\t'`` represents a **tab character**. The backslash character in ``'\\t'`` indicates the beginning of an **escape sequence**.  Escape sequences are used to represent invisible characters like tabs and newlines. The sequence ``\\n`` represents a **newline**."
+msgstr ""
+
+#: ../../source/iteration.rst:628
+# 9fa69a676d744e14bb11eb879afd2d37
+msgid "An escape sequence can appear anywhere in a string; in this example, the tab escape sequence is the only thing in the string. How do you think you represent a backslash in a string?"
+msgstr ""
+
+#: ../../source/iteration.rst:632
+# dc8ccc911ea24c25900d7b6c9c8400e2
+msgid "As characters and strings are displayed on the screen, an invisible marker called the **cursor** keeps track of where the next character will go. After a ``print`` function, the cursor normally goes to the beginning of the next line."
+msgstr ""
+
+#: ../../source/iteration.rst:637
+# f3676dd753aa40388596aab77b4c0b4a
+msgid "The tab character shifts the cursor to the right until it reaches one of the tab stops. Tabs are useful for making columns of text line up, as in the output of the previous program:"
+msgstr ""
+
+#: ../../source/iteration.rst:657
+# fa35c79ab85d4d289345dd14b31916bc
+msgid "Because of the tab characters between the columns, the position of the second column does not depend on the number of digits in the first column."
+msgstr ""
+
+#: ../../source/iteration.rst:664
+# c307f382942148a5909ba5f818145a68
+msgid "Two-dimensional tables"
+msgstr ""
+
+#: ../../source/iteration.rst:666
+# 8a514bb6096a42fbbea22352fe8bb477
+msgid "A two-dimensional table is a table where you read the value at the intersection of a row and a column. A multiplication table is a good example. Let's say you want to print a multiplication table for the values from 1 to 6."
+msgstr ""
+
+#: ../../source/iteration.rst:670
+# e66be7575a0b44699d3e267e01aa720a
+msgid "A good way to start is to write a loop that prints the multiples of 2, all on one line:"
+msgstr ""
+
+#: ../../source/iteration.rst:680
+# 8b303f157d13471d83fca22e789f58c0
+msgid "Here we've used the ``range`` function, but made it start its sequence at 1. As the loop executes, the value of ``i`` changes from 1 to 6. When all the elements of the range have been assigned to ``i``, the loop terminates. Each time through the loop, it displays the value of ``2 * i``, followed by three spaces."
+msgstr ""
+
+#: ../../source/iteration.rst:686
+# 59fc39374e9144cabeee2890b67c8585
+msgid "Again, the extra ``end='   '`` argument in the ``print`` function suppresses the newline, and uses three spaces instead.  After the loop completes, the second call to ``print`` finishes the current line, and starts a new line."
+msgstr ""
+
+#: ../../source/iteration.rst:690
+# 95989c7fc9e049479dbc32a6e782d38a
+msgid "The output of the program is:"
+msgstr ""
+
+#: ../../source/iteration.rst:696
+# 443f97cea4664a33998694eaee1b72f8
+msgid "So far, so good. The next step is to **encapsulate** and **generalize**."
+msgstr ""
+
+#: ../../source/iteration.rst:702
+# eeb391af385d473faa377170a5eabc49
+msgid "Encapsulation and generalization"
+msgstr ""
+
+#: ../../source/iteration.rst:704
+# 4dab6373b94642b9b02abb2b8550f8c2
+msgid "Encapsulation is the process of wrapping a piece of code in a function, allowing you to take advantage of all the things functions are good for. You have already seen some examples of encapsulation, including ``is_divisible`` in a previous chapter."
+msgstr ""
+
+#: ../../source/iteration.rst:708
+# f86fcd756b544be4bbdbb77962f8e4ae
+msgid "Generalization means taking something specific, such as printing the multiples of 2, and making it more general, such as printing the multiples of any integer."
+msgstr ""
+
+#: ../../source/iteration.rst:712
+# 4f71848e2b94476a989cc4854dc179a2
+msgid "This function encapsulates the previous loop and generalizes it to print multiples of ``n``:"
+msgstr ""
+
+#: ../../source/iteration.rst:723
+# 8fe302a369b3454d852e711c5f60d265
+msgid "To encapsulate, all we had to do was add the first line, which declares the name of the function and the parameter list. To generalize, all we had to do was replace the value 2 with the parameter ``n``."
+msgstr ""
+
+#: ../../source/iteration.rst:727
+# 18bd3e0c82ba4455926fe02f24ff6bf6
+msgid "If we call this function with the argument 2, we get the same output as before. With the argument 3, the output is:"
+msgstr ""
+
+#: ../../source/iteration.rst:734
+# 2d4c9193f67741a5988fd79e9af273a2
+msgid "With the argument 4, the output is:"
+msgstr ""
+
+#: ../../source/iteration.rst:740
+# 95a3cb33595c4373a2350b71bd79ed5d
+msgid "By now you can probably guess how to print a multiplication table --- by calling ``print_multiples`` repeatedly with different arguments. In fact, we can use another loop:"
+msgstr ""
+
+#: ../../source/iteration.rst:750
+# 8baf773410a64133b8eaadc7750a45b6
+msgid "Notice how similar this loop is to the one inside ``print_multiples``.  All we did was replace the ``print`` function with a function call."
+msgstr ""
+
+#: ../../source/iteration.rst:753
+# 27621b89a07549c98b4b8f00c38cacad
+msgid "The output of this program is a multiplication table:"
+msgstr ""
+
+#: ../../source/iteration.rst:768
+# 24be65358d3940d3bd2260293000c60b
+msgid "More encapsulation"
+msgstr ""
+
+#: ../../source/iteration.rst:770
+# 2f64cb94bd7a4f679795650d169368a1
+msgid "To demonstrate encapsulation again, let's take the code from the last section and wrap it up in a function:"
+msgstr ""
+
+#: ../../source/iteration.rst:780
+# 30582bdcdb724db4bcb8ced376742139
+msgid "This process is a common **development plan**. We develop code by writing lines of code outside any function, or typing them in to the interpreter. When we get the code working, we extract it and wrap it up in a function."
+msgstr ""
+
+#: ../../source/iteration.rst:784
+# e1e0b0ce986843358d2d5d4612f9dd07
+msgid "This development plan is particularly useful if you don't know how to divide the program into functions when you start writing. This approach lets you design as you go along."
+msgstr ""
+
+#: ../../source/iteration.rst:794
+# c36ef3d953e04f83a88b18e61a0a5685
+msgid "Local variables"
+msgstr ""
+
+#: ../../source/iteration.rst:796
+# 36dbf0ffb0e14a4e9bdd50e630cc6d64
+msgid "You might be wondering how we can use the same variable, ``i``, in both ``print_multiples`` and ``print_mult_table``. Doesn't it cause problems when one of the functions changes the value of the variable?"
+msgstr ""
+
+#: ../../source/iteration.rst:800
+# 09ac599ad3d94886a0ba0b51435cce4c
+msgid "The answer is no, because the ``i`` in ``print_multiples`` and the ``i`` in ``print_mult_table`` are *not* the same variable."
+msgstr ""
+
+#: ../../source/iteration.rst:803
+# 0e72a073c11d48ae869375bcc15c4583
+msgid "Variables created inside a function definition are local; you can't access a local variable from outside its home function. That means you are free to have multiple variables with the same name as long as they are not in the same function."
+msgstr ""
+
+#: ../../source/iteration.rst:808
+# 3258816f2d0a4af2aac084e8c6db3a57
+msgid "Python examines all the statements in a function - if any of them assign a value to a variable, that is the clue that Python uses to make the variable a local variable."
+msgstr ""
+
+#: ../../source/iteration.rst:811
+# 6e8c402842bd48958f81cce0037d6b78
+msgid "The stack diagram for this program shows that the two variables named ``i`` are not the same variable. They can refer to different values, and changing one does not affect the other."
+msgstr ""
+
+#: ../../source/iteration.rst:818
+# 63e78d1799c34062b371ca990710c007
+msgid "The value of ``i`` in ``print_mult_table`` goes from 1 to 6. In the diagram it happens to be 3. The next time through the loop it will be 4. Each time through the loop, ``print_mult_table`` calls ``print_multiples`` with the current value of ``i`` as an argument. That value gets assigned to the parameter ``n``."
+msgstr ""
+
+#: ../../source/iteration.rst:823
+# 32f3ebb24156407f926be41524e5b0a4
+msgid "Inside ``print_multiples``, the value of ``i`` goes from 1 to 6. In the diagram, it happens to be 2. Changing this variable has no effect on the value of ``i`` in ``print_mult_table``."
+msgstr ""
+
+#: ../../source/iteration.rst:827
+# c6e545f10398431cba5c0905dbdf23f8
+msgid "It is common and perfectly legal to have different local variables with the same name. In particular, names like ``i`` and ``j`` are used frequently as loop variables. If you avoid using them in one function just because you used them somewhere else, you will probably make the program harder to read."
+msgstr ""
+
+#: ../../source/iteration.rst:832
+# 8462ac67211d4c6f952e6d5a26938336
+msgid "The visualizer at http://netserv.ict.ru.ac.za/python3_viz/ shows very clearly how the two variables ``i`` are distinct variables, and how they have independent values. (The visualizer has a limit of showing 100 steps, though --- not quite enough to run this particular example all the way to the end.)"
+msgstr ""
+
+#: ../../source/iteration.rst:840
+# fc0eb53c02334e5ead47c8e9e710d7a1
+msgid "The ``break`` statement"
+msgstr ""
+
+#: ../../source/iteration.rst:842
+# 5814116130e84f1f8e77fbb571e8f529
+msgid "The **break** statement is used to immediately leave the body of its loop.  The next statement to be executed is the first one after the body:"
+msgstr ""
+
+#: ../../source/iteration.rst:854
+#: ../../source/iteration.rst:1005
+# 322b59f49eb146939b5f6a30e8684ae0
+# e7ff815d274c4e569c038e4896dd99c1
+msgid "This prints:"
+msgstr ""
+
+#: ../../source/iteration.rst:864
+# 0209362684cb4af99b16dd55ac059bf5
+msgid "``for`` and ``while`` loops do their tests at the start, before executing any part of the body.   They're called **pre-test** loops, because the test happens before (pre) the body. ``break`` and ``return`` are our tools for adapting this standard behaviour."
+msgstr ""
+
+#: ../../source/iteration.rst:872
+# 2ce6ea70ca334a5c83324c2ec7b54f3e
+msgid "Other flavours of loops"
+msgstr ""
+
+#: ../../source/iteration.rst:874
+# 509f20dfa5914382b9d1cb906f126f4c
+msgid "Sometimes we'd like to have the **middle-test** loop with the exit test in the middle of the body, rather than at the beginning or at the end.  Or a **post-test** loop that puts its exit test as the last thing in the body. Other languages have different syntax and keywords for these different flavours, but Python just uses a combination of ``while`` and ``if condition: break`` to get the job done."
+msgstr ""
+
+#: ../../source/iteration.rst:880
+# 45edbc7a32924d50965bfa69a3a0a1bb
+msgid "A typical example is a problem where the user has to input numbers to be summed. To indicate that there are no more inputs, the user enters a special value, often the value -1, or the empty string.  This needs a middle-exit loop pattern: input the next number, then test whether to exit, or else process the number:"
+msgstr ""
+
+#: ../../source/iteration.rst:900
+# 071a8c07573b42a684fb2c644625a81a
+msgid "Convince yourself that this fits the middle-exit loop flowchart: line 3 does some useful work, lines 4 and 5 can exit the loop, and if they don't line 6 does more useful work before the next iteration starts."
+msgstr ""
+
+#: ../../source/iteration.rst:904
+# 9ce65d256e6e479399622b933ea247d7
+msgid "The ``while bool-expr:`` uses the boolean expression to determine whether to iterate again. ``True`` is a trivial boolean expression, so ``while True:``  means *always do the loop body again*.  This is a language *idiom* --- a convention that most programmers will recognize immediately. Since the expression on line 2 will never terminate the loop, (it is a dummy test) the programmer must arrange to break (or return) out of the loop body elsewhere, in some other way (i.e. in lines 4 and 5 in this sample). A clever compiler or interpreter will understand that line 2 is a fake test that must always succeed, so it won't even generate a test, and our flowchart never even put the diamond-shape dummy test box at the top of the loop!"
+msgstr ""
+
+#: ../../source/iteration.rst:914
+# 9006c5dd6bd14742b0e4bac42751536d
+msgid "Similarly, by just moving the ``if condition: break`` to the end of the loop body we create a pattern for a post-test loop.  Post-test loops are used when you want to be sure that the loop body always executes at least once (because the first test only happens at the end of the execution of the first loop body). This is useful, for example, if we want to play an interactive game against the user --- we always want to play at least one game:"
+msgstr ""
+
+#: ../../source/iteration.rst:934
+# 0eec446f29a34d1c9e0f524895f6b51a
+msgid "Once you've recognized that you need a loop to repeat something, think about its terminating condition --- when will I want to stop iterating? Then figure out whether you need to do the test before starting the first (and every other) iteration, or at the end of the first (and every other) iteration, or perhaps in the middle of each iteration.  Interactive programs that require input from the user or read from files often need to exit their loops in the middle or at the end of an iteration, when it becomes clear that there is no more data to process, or the user doesn't want to play our game anymore."
+msgstr ""
+
+#: ../../source/iteration.rst:945
+# a41383fb908444dcb06d0fa4726cdae4
+msgid "An example"
+msgstr ""
+
+#: ../../source/iteration.rst:947
+# 013d52fa1433407baccf931e1c0490c0
+msgid "The following program implements a simple guessing game:"
+msgstr ""
+
+#: ../../source/iteration.rst:972
+# 2eac9d0dc606488aae939886adb30fc9
+msgid "This program makes use of the mathematical law of **trichotomy** (given real numbers a and b, exactly one of these three must be true:  a > b, a < b, or a == b)."
+msgstr ""
+
+#: ../../source/iteration.rst:975
+# 61d76537e0d640b48dd8bd1d8d13d7b2
+msgid "At line 18 there is a call to the input function, but we don't do anything with the result, not even assign it to a variable.  This is legal in Python. Here it has the effect of popping up the input dialog window and waiting for the user to respond before the program terminates.  Programmers often use the trick of doing some extra input at the end of a script, just to keep the window open."
+msgstr ""
+
+#: ../../source/iteration.rst:981
+# 3de3f6c5d9e94339adc5a85354ee09ca
+msgid "Also notice the use of the ``msg`` variable, initially an empty string, on lines 6, 12 and 14. Each time through the loop we extend the message being displayed: this allows us to display the program's feedback right at the same place as we're asking for the next guess."
+msgstr ""
+
+#: ../../source/iteration.rst:990
+# fc17b40b42dc4247aa35f84023158f75
+msgid "The ``continue`` statement"
+msgstr ""
+
+#: ../../source/iteration.rst:992
+# 0c7603fa789440b39f4b016ba20d0d6c
+msgid "This is a control flow statement that causes the program to immediately skip the processing of the rest of the body of the loop, *for the current iteration*.  But the loop still carries on running for its remaining iterations:"
+msgstr ""
+
+#: ../../source/iteration.rst:1016
+# 42555526e8f14a95868e78ee53c118fd
+msgid "More generalization"
+msgstr ""
+
+#: ../../source/iteration.rst:1018
+# 1d31985ebec04b42b13debe26fde8342
+msgid "As another example of generalization, imagine you wanted a program that would print a multiplication table of any size, not just the six-by-six table. You could add a parameter to ``print_mult_table``:"
+msgstr ""
+
+#: ../../source/iteration.rst:1029
+# ce42283db129416e87d9b85c51af4a07
+msgid "We replaced the value 1 with the expression ``high+1``. If we call ``print_mult_table`` with the argument 7, it displays:"
+msgstr ""
+
+#: ../../source/iteration.rst:1042
+# e3c42cc3ba2e487599415862a171d3aa
+msgid "This is fine, except that we probably want the table to be square --- with the same number of rows and columns. To do that, we add another parameter to ``print_multiples`` to specify how many columns the table should have."
+msgstr ""
+
+#: ../../source/iteration.rst:1046
+# 0c4cf4e01f2e4b2ea2b50a09548b0704
+msgid "Just to be annoying, we call this parameter ``high``, demonstrating that different functions can have parameters with the same name (just like local variables). Here's the whole program:"
+msgstr ""
+
+#: ../../source/iteration.rst:1062
+# 87e98ad31c1a45c59817c03ce845c92d
+msgid "Notice that when we added a new parameter, we had to change the first line of the function (the function heading), and we also had to change the place where the function is called in ``print_mult_table``."
+msgstr ""
+
+#: ../../source/iteration.rst:1066
+# 6434ea3ed17749148f50d624246fb528
+msgid "Now, when we call ``print_mult_table(7)``:"
+msgstr ""
+
+#: ../../source/iteration.rst:1078
+# ca37e9321e534c6f842f8109192635fa
+msgid "When you generalize a function appropriately, you often get a program with capabilities you didn't plan. For example, you might notice that, because ab = ba, all the entries in the table appear twice. You could save ink by printing only half the table. To do that, you only have to change one line of ``print_mult_table``. Change"
+msgstr ""
+
+#: ../../source/iteration.rst:1089
+# bf1f6d776bbd481c8015b240f0129f8e
+msgid "to"
+msgstr ""
+
+#: ../../source/iteration.rst:1096
+# c3b4aaec9a2c4e71b87e870290b1a55b
+msgid "and you get::"
+msgstr ""
+
+#: ../../source/iteration.rst:1110
+# de63de25f39d46398eba8ded4dde9c72
+msgid "Functions"
+msgstr ""
+
+#: ../../source/iteration.rst:1112
+# d7c3e7637aef4a6a98d2bb59b82a0c8b
+msgid "A few times now, we have mentioned all the things functions are good for. By now, you might be wondering what exactly those things are.  Here are some of them:"
+msgstr ""
+
+#: ../../source/iteration.rst:1116
+# 3665d3e45fb54af592875e001d894e83
+msgid "Capturing your mental chunking. Breaking your complex tasks into sub-tasks, and giving the sub-tasks a meaningful name is a powerful mental technique.  Look back at the example that illustrated the post-test loop: we assumed that we had a function called ``play_the_game_once``.  This chunking allowed us to put aside the details of the particular game --- is it a card game, or noughts and crosses, or a role playing game --- and simply focus on one isolated part of our program logic --- letting the player choose whether they want to play again."
+msgstr ""
+
+#: ../../source/iteration.rst:1123
+# a07ff3c387c94e7099bdb27779e4c24a
+msgid "Dividing a long program into functions allows you to separate parts of the program, debug them in isolation, and then compose them into a whole."
+msgstr ""
+
+#: ../../source/iteration.rst:1125
+# 6a37569c038c4f94bfec06077e8296de
+msgid "Functions facilitate the use of iteration."
+msgstr ""
+
+#: ../../source/iteration.rst:1126
+# 569f86ac2f5d4152ac1ef7f3acf125af
+msgid "Well-designed functions are often useful for many programs. Once you write and debug one, you can reuse it."
+msgstr ""
+
+#: ../../source/iteration.rst:1130
+# c085df9130f748ac91ed4657bb310fc6
+msgid "Paired Data"
+msgstr ""
+
+#: ../../source/iteration.rst:1132
+# 2a7ee87c3cf84cb38a18abd71f24f896
+msgid "We've already seen lists of names and lists of numbers in Python. We're going to peek ahead in the textbook a little, and show a more advanced way of representing our data. Making a pair of things in Python is as simple as putting them into parentheses, like this:"
+msgstr ""
+
+#: ../../source/iteration.rst:1142
+# 6ced8b07a74b482e8c0315385072eeff
+msgid "We can put many pairs into a list of pairs:"
+msgstr ""
+
+#: ../../source/iteration.rst:1150
+# 5003820709364d268bce7875d457f9fd
+msgid "Here is a quick sample of things we can do with structured data like this.  First, print all the celebs:"
+msgstr ""
+
+#: ../../source/iteration.rst:1165
+# 0e596f62a4b14df2bbe52657a340189a
+msgid "Notice that the celebs list has just 3 elements, each of them pairs."
+msgstr ""
+
+#: ../../source/iteration.rst:1167
+# ef38515c78924d49a459371a7f2b60f1
+msgid "Now print the names of those celebs born before 1980:"
+msgstr ""
+
+#: ../../source/iteration.rst:1181
+# ee8fe9b90a004d0384a92202fed12ed0
+msgid "There is a new feature in the ``for`` loop: instead of using a single loop control variable, we've put a pair of variable names, ``nm`` and ``yr`` there instead. The loop is executed three times - once for each pair, and on each iteration both the variables are assigned values from the celeb that is being handled."
+msgstr ""
+
+#: ../../source/iteration.rst:1189
+# c9ecb6438caf43a6b4479cfe91967d03
+msgid "Nested Loops for Nested Data"
+msgstr ""
+
+#: ../../source/iteration.rst:1191
+# 75ec1724857c4a16af184bda95421887
+msgid "Now we'll come up with an even more adventurous list of structured data.  In this case, we have a list of students.  Each student has a name which is paired up with another list of subjects that they are enrolled for:"
+msgstr ""
+
+#: ../../source/iteration.rst:1205
+# 78a69fa2dc244dbaa01235f04d1401c4
+msgid "Here we've assigned a list of five elements to the variable `students`.  Let's print out each student name, and the number of subjects they are enrolled for:"
+msgstr ""
+
+#: ../../source/iteration.rst:1216
+# ec787b37d63f482bb175236b000563f0
+msgid "Python agreeably responds with the following output:"
+msgstr ""
+
+#: ../../source/iteration.rst:1226
+# af49b7e226a24b76a30d633371720c2c
+msgid "Now we'd like to ask how many students are taking CompSci. This needs a counter, and for each student we need a second loop that tests each of the subjects in turn:"
+msgstr ""
+
+#: ../../source/iteration.rst:1245
+# 05d62930ab2a48dbaf7cc9c87114cb39
+msgid "You should set up a list of your own data that interests you  --- perhaps a list of your CDs, each containing a list of song titles on the CD, or a list of movie titles, each with a list of movie stars who acted in the movie. You could then ask questions like \"Which movies starred Angelina Jolie?\""
+msgstr ""
+
+#: ../../source/iteration.rst:1255
+# c54df4d419564d46966e6a4196b4afac
+msgid "Newton's method for finding square roots"
+msgstr ""
+
+#: ../../source/iteration.rst:1257
+# 6f6bf64f35a848a19a5907419f916539
+msgid "Loops are often used in programs that compute numerical results by starting with an approximate answer and iteratively improving it."
+msgstr ""
+
+#: ../../source/iteration.rst:1260
+# 61437dffce0546b69045fba3a73b53b2
+msgid "For example, before we had calculators or computers, people needed to calculate square roots manually.  Newton used a particularly good method (there is some evidence that this method was known many years before). Suppose that you want to know the square root of ``n``. If you start with almost any approximation, you can compute a better approximation (closer to the actual answer) with the following formula:"
+msgstr ""
+
+#: ../../source/iteration.rst:1272
+# 68222139e50141c7acfc74b4ca7b17df
+msgid "Repeat this calculation a few times using your calculator.  Can you see why each iteration brings your estimate a little closer?  One of the amazing properties of this particular algorithm is how quickly it converges to an accurate answer --- a great advantage for doing it manually."
+msgstr ""
+
+#: ../../source/iteration.rst:1277
+# 3d94ad1f63ef44c097a398427c90a55b
+msgid "By using a loop and repeating this formula until the better approximation gets close enough to the previous one, we can write a function for computing the square root. (In fact, this is how your calculator finds square roots --- it may have a slightly different formula and method, but it is also based on repeatedly improving its guesses.)"
+msgstr ""
+
+#: ../../source/iteration.rst:1283
+# 7a48359040bb46559ff08c65de3e1291
+msgid "This is an example of an `indefinite` iteration problem: we cannot predict in advance how many times we'll want to improve our guess --- we just want to keep getting closer and closer.  Our stopping condition for the loop will be when our old guess and our improved guess are \"close enough\" to each other."
+msgstr ""
+
+#: ../../source/iteration.rst:1288
+# 94d4b85bec6642ffb9874b67c24b4ab1
+msgid "Ideally, we'd like the old and new guess to be exactly equal to each other when we stop. But exact equality is a tricky notion in computer arithmetic when real numbers are involved. Because real numbers are not represented absolutely accurately (after all, a number like pi or the square root of two has an infinite number of decimal places because it is irrational), we need to formulate the stopping test for the loop by asking \"is `a` close enough to `b`\"? This stopping condition can be coded like this:"
+msgstr ""
+
+#: ../../source/iteration.rst:1301
+# 6517f7d88afc4a9bae739980a1fcb0f7
+msgid "Notice that we take the absolute value of the difference between ``a`` and ``b``!"
+msgstr ""
+
+#: ../../source/iteration.rst:1303
+# 08c2959b03da48bb942659bbe17ee168
+msgid "This problem is also a good example of when a middle-exit loop is appropriate:"
+msgstr ""
+
+#: ../../source/iteration.rst:1322
+# 590861aac8584d9eb765a14fa80cb254
+msgid "The output is::"
+msgstr ""
+
+#: ../../source/iteration.rst:1328
+# e833daebb9c4424b934861ea0ccccb67
+msgid "See if you can improve the approximations by changing the stopping condition.  Also, step through the algorithm (perhaps by hand, using your calculator) to see how many iterations were needed before it achieved this level of accuracy for `sqrt(5)`."
+msgstr ""
+
+#: ../../source/iteration.rst:1336
+# f083851a86ad439fbea94015a016e5f8
+msgid "Algorithms"
+msgstr ""
+
+#: ../../source/iteration.rst:1338
+# 0e667639efea4efba8387f1583206846
+msgid "Newton's method is an example of an **algorithm**: it is a mechanical process for solving a category of problems (in this case, computing square roots)."
+msgstr ""
+
+#: ../../source/iteration.rst:1341
+# 972e24e0e5fd4950a70e431a5d1f8bbc
+msgid "Some kinds of knowledge are not algorithmic.  For example, learning dates from history or your multiplication tables involves memorization of specific solutions."
+msgstr ""
+
+#: ../../source/iteration.rst:1345
+# b8b37b343c75454cb5afdeb79f6475c5
+msgid "But the techniques you learned for addition with carrying, subtraction with borrowing, and long division are all algorithms. Or if you are an avid Sudoku puzzle solver, you might have some specific set of steps that you always follow."
+msgstr ""
+
+#: ../../source/iteration.rst:1349
+# f98ad46b1589466ba02915db321d13c9
+msgid "One of the characteristics of algorithms is that they do not require any intelligence to carry out. They are mechanical processes in which each step follows from the last according to a simple set of rules.  And they're designed to solve a general class or category of problems, not just a single problem."
+msgstr ""
+
+#: ../../source/iteration.rst:1354
+# 99745cec0c4a4b3382f2f4481784c41e
+msgid "Understanding that hard problems can be solved by step-by-step algorithmic processes (and having technology to execute these algorithms for us) is one of the major breakthroughs that has had enormous benefits.  So while the execution of the algorithm may be boring and may require no intelligence, algorithmic or computational thinking --- i.e. using algorithms and automation as the basis for approaching problems --- is rapidly transforming our society.  Some claim that this shift towards algorithmic thinking and processes is going to have even more impact on our society than the invention of the printing press. And the process of designing algorithms is interesting, intellectually challenging, and a central part of what we call programming."
+msgstr ""
+
+#: ../../source/iteration.rst:1366
+# a23fb96fbf3147fea2155b7470cbe62e
+msgid "Some of the things that people do naturally, without difficulty or conscious thought, are the hardest to express algorithmically.  Understanding natural language is a good example. We all do it, but so far no one has been able to explain *how* we do it, at least not in the form of a step-by-step mechanical algorithm."
+msgstr ""
+
+#: ../../source/iteration.rst:1374
+# 8f1d475a77c0433f88de7897b4915eea
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/iteration.rst:1380
+# bb79b650c3524ff5b439654eb9de5cd5
+msgid "A step-by-step process for solving a category of problems."
+msgstr ""
+
+#: ../../source/iteration.rst:1383
+# b1f219b5bf5241a08eb3fb5f6e9b8497
+msgid "The statements inside a loop."
+msgstr ""
+
+#: ../../source/iteration.rst:1386
+# b6ccc1010999466fbcef7992b6533408
+msgid "A place in your program code where program execution will pause (or break), allowing you to inspect the state of the program's variables, or single-step through individual statements, executing them one at a time."
+msgstr ""
+
+#: ../../source/iteration.rst:1391
+# 249119a178f5419e99bcae01371ac1c4
+msgid "Programmer slang. Synonym for increment."
+msgstr ""
+
+#: ../../source/iteration.rst:1394
+# 6ab5a285f01f4baa82c9d3b23f388102
+msgid "A variable used to count something, usually initialized to zero and incremented in the body of a loop."
+msgstr ""
+
+#: ../../source/iteration.rst:1398
+# 7e3f2147730d4832b28e091a04a24a4a
+msgid "An invisible marker that keeps track of where the next character will be printed."
+msgstr ""
+
+#: ../../source/iteration.rst:1402
+# 397f83cb93094269aeae3519c64d714b
+msgid "Decrease by 1."
+msgstr ""
+
+#: ../../source/iteration.rst:1405
+# abc70c42b92c49089b62038fa46744a1
+msgid "A loop where we have an upper bound on the number of times the body will be executed.  Definite iteration is usually best coded as a ``for`` loop."
+msgstr ""
+
+#: ../../source/iteration.rst:1410
+# 19ee6519d2c9494abbe053090e46b1aa
+msgid "A process for developing a program. In this chapter, we demonstrated a style of development based on developing code to do simple, specific things and then encapsulating and generalizing."
+msgstr ""
+
+#: ../../source/iteration.rst:1415
+# 9f87d7e4865445789b1efaf9d5354df5
+msgid "To divide a large complex program into components (like functions) and isolate the components from each other (by using local variables, for example)."
+msgstr ""
+
+#: ../../source/iteration.rst:1420
+# f4c244352b9543f4bd70b6f5247dc003
+msgid "An escape character, \\\\, followed by one or more printable characters used to designate a nonprintable character."
+msgstr ""
+
+#: ../../source/iteration.rst:1424
+# 524f963779a5423c92a8bbb8f4e310fb
+msgid "To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter). Generalization makes code more versatile, more likely to be reused, and sometimes even easier to write."
+msgstr ""
+
+#: ../../source/iteration.rst:1430
+# 6b19451a4a8d46fabd55ed98f7a2856d
+msgid "Both as a noun and as a verb, increment means to increase by 1."
+msgstr ""
+
+#: ../../source/iteration.rst:1433
+# 59362833abd8438891554491004986b0
+msgid "A loop in which the terminating condition is never satisfied."
+msgstr ""
+
+#: ../../source/iteration.rst:1436
+# 57ff0a0116c4466b9dfbf39551ee6687
+msgid "A loop where we just need to keep going until some condition is met. A ``while`` statement is used for this case."
+msgstr ""
+
+#: ../../source/iteration.rst:1440
+# 9a903079fe934969b75620f9c992d258
+msgid "To initialize a variable is to give it an initial value. Since in Python variables don't exist until they are assigned values, they are initialized when they are created.  In other programming languages this is not the case, and variables can be created without being initialized, in which case they have either default or *garbage* values."
+msgstr ""
+
+#: ../../source/iteration.rst:1448
+# 211c546a924940e9a697cbecc3bc183e
+msgid "Repeated execution of a set of programming statements."
+msgstr ""
+
+#: ../../source/iteration.rst:1451
+# ab03b3c4c34b4c25a0d1bc31f5970c50
+msgid "A statement or group of statements that execute repeatedly until a terminating condition is satisfied."
+msgstr ""
+
+#: ../../source/iteration.rst:1455
+# 4d83886540ff45b0b305cdf133619100
+msgid "A variable used as part of the terminating condition of a loop."
+msgstr ""
+
+#: ../../source/iteration.rst:1458
+# 1a6e9e66bb2a48969e609590c8351f43
+msgid "Extra symbols or notation that helps describe other notation. Here we introduced square brackets, ellipses, italics, and bold as meta-notation to help describe optional, repeatable, substitutable and fixed parts of the Python syntax."
+msgstr ""
+
+#: ../../source/iteration.rst:1463
+# 9401c06505374f6394e38d4d36009648
+msgid "A loop that executes some of the body, then tests for the exit condition, and then may execute some more of the body.  We don't have a special Python construct for this case, but can use ``while`` and ``break`` together."
+msgstr ""
+
+#: ../../source/iteration.rst:1469
+# a2edc218d0bf4e05a77adc48d455ed86
+msgid "A loop inside the body of another loop."
+msgstr ""
+
+#: ../../source/iteration.rst:1472
+# 02791ee6c30b47e18d37158516aaf9df
+msgid "A special character that causes the cursor to move to the beginning of the next line."
+msgstr ""
+
+#: ../../source/iteration.rst:1476
+# 5e07e804b92e4e85bf76d8b14890e950
+msgid "A loop that executes the body, then tests for the exit condition.  We don't have a special Python construct for this, but can use ``while`` and ``break`` together."
+msgstr ""
+
+#: ../../source/iteration.rst:1480
+# cb0446e3a0a941aaa462742d84952ac1
+msgid "A loop that tests before deciding whether the execute its body.  ``for`` and ``while`` are both pre-test loops."
+msgstr ""
+
+#: ../../source/iteration.rst:1484
+# cf6bd56a27944b77a875d0be05424da1
+msgid "Making more than one assignment to the same variable during the execution of a program."
+msgstr ""
+
+#: ../../source/iteration.rst:1488
+# f21c8dae5b2745759c4a684e71bc0167
+msgid "A mode of interpreter execution where you are able to execute your program one step at a time, and inspect the consequences of that step. Useful for debugging and building your internal mental model of what is going on."
+msgstr ""
+
+#: ../../source/iteration.rst:1494
+# 3f7c1fb2f460425496e28e64d22d33f4
+msgid "A special character that causes the cursor to move to the next tab stop on the current line."
+msgstr ""
+
+#: ../../source/iteration.rst:1498
+# 1a4650bbf1c849b5b8ca24131d51cf10
+msgid "Given any real numbers *a* and *b*, exactly one of the following relations holds: *a < b*, *a > b*, or *a == b*. Thus when you can establish that two of the relations are false, you can assume the remaining one is true."
+msgstr ""
+
+#: ../../source/iteration.rst:1504
+# aa1c3258a6cc4b2c9bff3ea80b4ee8a1
+msgid "To follow the flow of execution of a program by hand, recording the change of state of the variables and any output produced."
+msgstr ""
+
+#: ../../source/iteration.rst:1509
+# 9b615047d59a4ea09a9855851b3e2d54
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/iteration.rst:1511
+# e7d1481d3ce544dfbcfa0e2cc64fa180
+msgid "This chapter showed us how to sum a list of items, and how to count items.  The counting example also had an ``if`` statement that let us only count some selected items.  In the previous chapter we also showed a function ``find_first_2_letter_word`` that allowed us an \"early exit\" from inside a loop by using ``return`` when some condition occurred. We now also have ``break`` to exit a loop (but not the enclosing function, and ``continue`` to abandon the current iteration of the loop without ending the loop."
+msgstr ""
+
+#: ../../source/iteration.rst:1519
+# 38972dd5d822435d8b943bfab8b1a642
+msgid "Composition of list traversal, summing, counting, testing conditions and early exit is a rich collection of building blocks that can be combined in powerful ways to create many functions that are all slightly different."
+msgstr ""
+
+#: ../../source/iteration.rst:1523
+# 87f02bd3e1a0437aa73e17407b905213
+msgid "The first six questions are typical functions you should be able to write using only these building blocks."
+msgstr ""
+
+#: ../../source/iteration.rst:1526
+# a68ddbfbf0e54423b8a37e56bfdd8a5c
+msgid "Write a function to count how many odd numbers are in a list."
+msgstr ""
+
+#: ../../source/iteration.rst:1527
+# 08530f3b946344529ecbcbefc6b6081d
+msgid "Sum up all the even numbers in a list."
+msgstr ""
+
+#: ../../source/iteration.rst:1528
+# 9063dd9bda4e49d7a328220c08bfa116
+msgid "Sum up all the negative numbers in a list."
+msgstr ""
+
+#: ../../source/iteration.rst:1529
+# 04e71862c7384d6eafdb6dd7c85ffc6a
+msgid "Count how many words in a list have length 5."
+msgstr ""
+
+#: ../../source/iteration.rst:1530
+# 6842b04d58b448449a00c99baa8e2bce
+msgid "Sum all the elements in a list up to but not including the first even number. (Write your unit tests.  What if there is no even number?)"
+msgstr ""
+
+#: ../../source/iteration.rst:1532
+# 1611980c4dc74373953496dc464a3b16
+msgid "Count how many words occur in a list up to and including the first occurrence of the word \"sam\". (Write your unit tests for this case too.  What if \"sam\" does not occur?)"
+msgstr ""
+
+#: ../../source/iteration.rst:1535
+# 0efdc45737834fe7aaaabda44d7f6a3a
+msgid "Add a print function to Newton's ``sqrt`` function that prints out ``better`` each time it is calculated. Call your modified function with 25 as an argument and record the results."
+msgstr ""
+
+#: ../../source/iteration.rst:1539
+# a0b5d8df8a6c4e54a387f56abe25178a
+msgid "Trace the execution of the last version of ``print_mult_table`` and figure out how it works."
+msgstr ""
+
+#: ../../source/iteration.rst:1542
+# 479f4b36357b47ffbc73b0cfacd9bf36
+msgid "Write a function ``print_triangular_numbers(n)`` that prints out the first n triangular numbers. A call to ``print_triangular_numbers(5)`` would produce the following output::"
+msgstr ""
+
+#: ../../source/iteration.rst:1552
+# 22a1f0e7c3db49be91e4a1f4da29e91a
+msgid "(*hint: use a web search to find out what a triangular number is.*)"
+msgstr ""
+
+#: ../../source/iteration.rst:1555
+# b2b2174b76e24139988adc53293681b2
+msgid "Write a function, ``is_prime``, which takes a single integer argument and returns ``True`` when the argument is a *prime number* and ``False`` otherwise. Add tests for cases like this::"
+msgstr ""
+
+#: ../../source/iteration.rst:1563
+# 5107911029ce4ea7a5ec75f0f33be376
+msgid "The last case could represent your birth date.  Were you born on a prime day? In a class of 100 students, how many do you think would have prime birth dates?"
+msgstr ""
+
+#: ../../source/iteration.rst:1566
+# 739e752a0a36412a93b63998a42abd08
+msgid "Revisit the drunk pirate problem from the exercises in chapter 3. This time, the drunk pirate makes a turn, and then takes some steps forward, and repeats this. Our social science student now records `pairs` of data: the angle of each turn, and the number of steps taken after the turn.  Her experimental data is [(160, 20), (-43, 10), (270, 8), (-43, 12)].  Use a turtle to draw the path taken by our drunk friend."
+msgstr ""
+
+#: ../../source/iteration.rst:1572
+# ca64df8dc31243c39b3b5002c7064227
+msgid "Many interesting shapes can be drawn by the turtle by giving a list of pairs like we did above, where the first item of the pair is the angle to turn, and the second item is the distance to move forward.  Set up a list of pairs so that the turtle draws a house with a cross through the centre, as show here. This should be done without going over any of the lines / edges more than once, and without lifting your pen."
+msgstr ""
+
+#: ../../source/iteration.rst:1581
+# ea74f5348ae24cf18441b1fd813546da
+msgid "Not all shapes like the one above can be drawn without lifting your pen, or going over an edge more than once.  Which of these can be drawn?"
+msgstr ""
+
+#: ../../source/iteration.rst:1586
+# fd7cc7b212e6443a9ef9d2b079931438
+msgid "Now read Wikipedia's article(http://en.wikipedia.org/wiki/Eulerian_path) about Eulerian paths. Learn how to tell immediately by inspection whether it is possible to find a solution or not. If the path is possible, you'll also know where to put your pen to start drawing, and where you should end up!"
+msgstr ""
+
+#: ../../source/iteration.rst:1591
+# 8d5dcc0f9cf24e7fa73ed009212e8de1
+msgid "What will ``num_digits(0)`` return? Modify it to return ``1`` for this case. Why does a call to ``num_digits(-24)`` result in an infinite loop? (*hint: -1//10 evaluates to -1*)  Modify ``num_digits`` so that it works correctly with any integer value. Add these tests::"
+msgstr ""
+
+#: ../../source/iteration.rst:1599
+# d297da53648d49fd8dbb733f542b1a88
+msgid "Write a function ``num_even_digits(n)`` that counts the number of even digits in ``n``.  These tests should pass::"
+msgstr ""
+
+#: ../../source/iteration.rst:1607
+# 36d76cf1d4da4faaa21876604d9d9a80
+msgid "Write a function ``sum_of_squares(xs)`` that computes the sum of the squares of the numbers in the list ``xs``.  For example, ``sum_of_squares([2, 3, 4])`` should return 4+9+16 which is 29::"
+msgstr ""
+
+#: ../../source/iteration.rst:1615
+# 8c9522177f0a456eb88a6e86c718292c
+msgid "You and your friend are in a team to write a two-player game, human against computer, such as Tic-Tac-Toe / Noughts and Crosses. Your friend will write the logic to play one round of the game, while you will write the logic to allow many rounds of play, keep score, decide who plays, first, etc.  The two of you negotiate on how the two parts of the program will fit together, and you come up with this simple scaffolding (which your friend will improve later):"
+msgstr ""
+
+#: ../../source/iteration.rst:1644
+# 106c6c89cd3245bab5c9bcbcc84b2e1a
+msgid "Write the main program which repeatedly calls this function to play the game, and after each round it announces the outcome as \"I win!\", \"You win!\", or \"Game drawn!\". It then asks the player \"Do you want to play again?\" and either plays again, or says \"Goodbye\", and terminates."
+msgstr ""
+
+#: ../../source/iteration.rst:1648
+# d08d5781f0d74d88ad619f67ea2149ef
+msgid "Keep score of how many wins each player has had, and how many draws there have been. After each round of play, also announce the scores."
+msgstr ""
+
+#: ../../source/iteration.rst:1650
+# aaa014bac27941eebf101a061bcb54aa
+msgid "Add logic so that the players take turns to play first."
+msgstr ""
+
+#: ../../source/iteration.rst:1651
+# 0bd60f3573c541078ccb3248fd9bfe90
+msgid "Compute the percentage of wins for the human, out of all games played.  Also announce this at the end of each round."
+msgstr ""
+
+#: ../../source/iteration.rst:1653
+# 8c23683256af4de7805b4bc3d291cd3b
+msgid "Draw a flowchart of your logic."
+msgstr ""
+

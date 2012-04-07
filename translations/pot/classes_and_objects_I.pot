@@ -1,0 +1,503 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/classes_and_objects_I.rst:12
+# e6d44d5d138e49e1b15663616a8ac630
+msgid "Classes and Objects - the Basics"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:30
+# abb14fdbf2114c3d9213de9208ea5b52
+msgid "Object-oriented programming"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:32
+# 9423465e2b7d48d5b49774b9825ce577
+msgid "Python is an **object-oriented programming language**, which means that it provides features that support `object-oriented programming <http://en.wikipedia.org/wiki/Object-oriented_programming>`__ (**OOP**)."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:36
+# 7a741e2cbd2f4b7f97391ff330a2372b
+msgid "Object-oriented programming has its roots in the 1960s, but it wasn't until the mid 1980s that it became the main `programming paradigm <http://en.wikipedia.org/wiki/Programming_paradigm>`__ used in the creation of new software. It was developed as a way to handle the rapidly increasing size and complexity of software systems, and to make it easier to modify these large and complex systems over time."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:43
+# 2b443c134a454629977ff93e28c81686
+msgid "Up to now, most of the programs we have been writing use a `procedural programming <http://en.wikipedia.org/wiki/Procedural_programming>`__ paradigm. In procedural programming the focus is on writing functions or *procedures* which operate on data. In object-oriented programming the focus is on the creation of **objects** which contain both data and functionality together.   (We have seen turtle objects, string objects, and random number generators, to name a few places where we've already worked with objects.)"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:51
+# 5d76a09f8378404c997762510b032d73
+msgid "Usually, each object definition corresponds to some object or concept in the real world, and the functions that operate on that object correspond to the ways real-world objects interact."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:58
+# 18e93d067f07455385513cac74a812ea
+msgid "User-defined compound data types"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:60
+# 8185576cccc641ad997aca5c2562f564
+msgid "We've already seen classes like ``str``, ``int``, ``float`` and ``Turtle``. We are now ready to create our own user-defined class: the ``Point``."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:63
+# 20efd308b3994a70851d8ed64be7c608
+msgid "Consider the concept of a mathematical point. In two dimensions, a point is two numbers (coordinates) that are treated collectively as a single object. Points are often written in parentheses with a comma separating the coordinates. For example, ``(0, 0)`` represents the origin, and ``(x, y)`` represents the point ``x`` units to the right and ``y`` units up from the origin."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:70
+# 1210c3c9d70948e7a4d4ec400bfeec11
+msgid "Some of the typical operations that one associates with points might be calculating the distance of a point from the origin, or from another point, or finding a midpoint of two points, or asking if a point falls within a given rectangle or circle.  We'll shortly see how we can organize these together with the data."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:76
+# 550a68f3a6a74663bfe4c8cee3eb6354
+msgid "A natural way to represent a point in Python is with two numeric values. The question, then, is how to group these two values into a compound object. The quick and dirty solution is to use a tuple, and for some applications that might be a good choice."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:81
+# c5838636bbed40618c4ac266b36d819b
+msgid "An alternative is to define a new **class**. This approach involves a bit more effort, but it has advantages that will be apparent soon. We'll want our points to each have an ``x`` and a ``y`` attribute, so our first class definition looks like this:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:97
+# 97675f6f8fff4a1a8c9e8cfb7ec0973e
+msgid "Class definitions can appear anywhere in a program, but they are usually near the beginning (after the ``import`` statements). Some programmers and languages prefer to put every class in a module of its own --- we won't do that here. The syntax rules for a class definition are the same as for other compound statements. There is a header which begins with the keyword, ``class``, followed by the name of the class, and ending with a colon.  You'll know where the class ends by looking at the indentation."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:105
+# 4ee0f93019e246b29779dd45c8b64299
+msgid "If the first line after the class header is a string, it becomes the docstring of the class, and will be recognized by various tools.  (This is also the way docstrings work in functions.)"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:109
+# ca454a94aa0748e49474ed80d1b033d6
+msgid "Every class should have a method with the special name ``__init__``. This **initializer method** is automatically called whenever a new instance of ``Point`` is created.  It gives the programmer the opportunity to set up the attributes required within the new instance by giving them their initial state / values.  The ``self`` parameter (you could choose any other name, but nobody ever does!) is automatically set to reference the newly created object that needs to be initialized."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:117
+# ab6f2bc0fb9347378f98a3f1278b3598
+msgid "So let's use our new Point class now..."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:127
+# aaf4ccf37c7e422889f4a1bcf0f4c2b1
+msgid "This program prints:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:133
+# c98a59bad649404d9d38a959b29bc71b
+msgid "because during the initialization of the objects, we created two attributes called `x` and `y` for each, and gave them both the value 0."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:136
+# 451e4959806e46feb2111d11c5acbaed
+msgid "This should look familiar --- we've used classes before to create more than one object:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:147
+# 00dd18b5dada4ade9643607e0a2947c7
+msgid "The variables ``p`` and ``q`` are assigned references to two new ``Point`` objects. A function like ``Turtle`` or ``Point`` that creates a new object instance is called a **constructor**, and every class automatically provides a constructor function which is named the same as the class."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:152
+# 8b4de5c0a80d4cdbbf29d6c455ec1190
+msgid "It may be helpful to think of a class as a *factory* for making objects. The class itself isn't an instance of a point, but it contains the machinery to make point instances.   Every time you call the constructor, you're asking the factory to make you a new object.  As the object comes off the production line, its initialization method is executed to get the object properly set up with its factory default settings."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:159
+# a70c8fc2de194c2f996efda0611c96bc
+msgid "The combined process of \"make me a new object\" and \"get its settings initialized to the factory default settings\" is called **instantiation**."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:165
+# e5d6760fd9a0460eb0616313b5fb1aa5
+msgid "Attributes"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:167
+# 630aa379281848579daa743ab9d1090a
+msgid "Like real world objects, object instances have both attributes and methods."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:169
+# 0236c2f622d54ba3a957c2aa484ca30f
+msgid "We can modify the attributes in an instance using dot notation:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:176
+# 55dea9ad6d404e559fe459e8ec4332c6
+msgid "Both modules and instances create their own namespaces, and the syntax for accessing names contained in each, called **attributes**, is the same. In this case the attribute we are selecting is a data item from an instance."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:181
+# e32ee74aabf7400eae522079dd0a1fa6
+msgid "The following state diagram shows the result of these assignments:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:186
+# 34670f402fa94bdeb8f691c9ed4d4843
+msgid "The variable ``p`` refers to a Point object, which contains two attributes. Each attribute refers to a number."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:189
+# 5606e3901c914ccc90d1b5edba2468d3
+msgid "We can access the value of an attribute using the same syntax:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:199
+# a4304c2bbe9e4268a0ad763a39fa8aec
+msgid "The expression ``p.x`` means, \"Go to the object ``p`` refers to and get the value of ``x``\". In this case, we assign that value to a variable named ``x``. There is no conflict between the variable ``x`` (in the global namespace here) and the attribute ``x`` (in the namespace belonging to the instance). The purpose of dot notation is to fully qualify which variable you are referring to unambiguously."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:206
+# 0205075b784a4f208d06c5cb0bdfb49f
+msgid "You can use dot notation as part of any expression, so the following statements are legal:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:215
+# 3bed69d7552d4a769dd914a7b0892a9b
+msgid "The first line outputs ``(x=3, y=4)``.  The second line calculates the value 25."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:219
+# 6c0dfe7859cf4c40ba6cbdd883f46d45
+msgid "Improving our initializer"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:221
+# f446eda0992448178f55f5043599a26b
+msgid "To create a point at position (7, 6) currently needs three lines of code:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:230
+# e5e53b6315e24b50a8d0f0a910ad83fa
+msgid "We can make our class constructor more general by putting extra parameters into the ``__init__`` method, as shown in this example:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:246
+# 3e78dea9e7324fcda2d643d79edbd973
+msgid "The ``x`` and ``y`` parameters here are both optional.  If the caller does not supply arguments, they'll get the default values of 0.  Here is our improved class in action:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:261
+# 7e82c84614ba42d18c16c42d69c1c2eb
+msgid "If we are really fussy, we would argue that the ``__init__`` method's docstring is inaccurate. ``__init__`` doesn't *create* the object (i.e. set aside memory for it), --- it just initializes the object to its factory-default settings after its creation."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:265
+# ac7f18222d424e3e93b5b81f6db0375e
+msgid "But tools like PyScripter understand that instantiation --- creation and initialization --- happen together, and they choose to display the *initializer's* docstring as the tooltip to guide the programmer when you call the class constructor."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:269
+# dae430f706824454a2e87bc7a78a2d2f
+msgid "So we're writing the docstring so that it makes the most sense when it pops up to help the programmer who is using our ``Point`` class:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:276
+# adf71612df3e4be4b7d5325756c3ad93
+msgid "Adding other methods to our class"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:278
+# eeee38e79b184521b7aef6aa1a9da53e
+msgid "The key advantage of using a class like ``Point`` rather than a simple tuple ``(6, 7)`` now becomes apparent.  We can add methods to the ``Point`` class that are sensible operations for points, but which may not be appropriate for other tuples like ``(25, 12)`` which might represent, say, a day and a month, e.g. Christmas day. So being able to calculate the distance from the origin is sensible for points, but not for (day, month) data.  For (day, month) data, we'd like different operations, perhaps to find what day of the week it will fall on in 2020."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:288
+# 5238b6dc50dc4939a41febdd856ff0da
+msgid "Creating a class like ``Point`` brings an exceptional amount of \"organizational power\" to our programs, and to our thinking. We can group together the sensible operations, and the kinds of data they apply to, and each instance of the class can have its own state."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:293
+# 998a5752fe594d16a0225ff9a80f4eba
+msgid "A **method** behaves like a function but it is invoked on a specific instance, e.g. ``tess.right(90)``.   Like a data attribute, methods are accessed using dot notation."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:297
+# 98e87709c1694efb9ad9a48f216e230f
+msgid "Let's add another method, ``distance_from_origin``, to see better how methods work:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:315
+# 392eabce13ae4e96a65f8981f97e77c4
+msgid "Let's create a few point instances, look at their attributes, and call our new method on them:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:342
+# cdcb3886cc9a464387e8308031eade02
+msgid "When defining a method, the first parameter refers to the instance being manipulated.  As already noted, it is customary to name this parameter ``self``."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:345
+# f62851d2a4a54f2f984c89ace0c1e207
+msgid "Notice that the caller of ``distance_from_origin`` does not explicitly supply an argument to match the ``self`` parameter --- this is done for you, behind your back."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:351
+# 54be56aef50143a99f2dd9799a715691
+msgid "Instances as arguments and parameters"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:353
+# 5687368c1fb540ef9853aea059e7926d
+msgid "You can pass an object as an argument in the usual way. We've already seen this in some of the turtle examples, where we passed the turtle to some function like ``draw_bar`` in the chapter titled ``Conditionals``, so that the function could control and use whatever turtle instance we passed to it."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:358
+# f0060d8b1eff45b6976fecb280ce0e0c
+msgid "Be aware that your variable only holds a reference to an object, so passing ``tess`` into a function creates an alias: both the caller and the called function now have a reference, but there is only one turtle!"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:362
+# 44bff497f9cd44ed954978a3063d81c3
+msgid "Here is a simple function involving our new ``Point`` objects:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:371
+# 289d8430535747b8b3b870962eba2d86
+msgid "``print_point`` takes a point as an argument and formats the output in whichever way we choose.  If you call ``print_point(p)`` with point ``p`` as defined previously, the output is ``(3, 4)``."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:377
+# 9fec4b8e21fd4dbb9d0a7a29bef599de
+msgid "Converting an instance to a string"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:379
+# bf3c320bd4944f118a0f9476ebc17e20
+msgid "Most object-oriented programmers probably would not do what we've just done in ``print_point``. When we're working with classes and objects, a preferred alternative is to add a new method to the class.  And we don't like chatterbox methods that call ``print``.  A better approach is to have a method so that every instance can produce a string representation of itself.  Let's initially call it ``to_string``:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:395
+# 1f0535e8c253493688aa4bf6b8c4a5f4
+msgid "Now we can say:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:403
+# c8a097164fe1407ab3fac418affa66a8
+msgid "But, you ask, don't we already have an ``str`` type converter that can turn our object into a string?  Yes!  And doesn't ``print`` automatically use this when printing things?  Yes again! But these automatic mechanisms do not yet do exactly what we want:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:415
+# 7dfdbce13a8a45619f3d8d18bb98c4ce
+msgid "Python has a clever trick up its sleeve to fix this.  If we call our new method ``__str__`` instead of ``to_string``, the Python interpreter will use our code whenever it needs to convert a ``Point`` to a string. Let's re-do this again, now:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:429
+# 3c5871bbbdbd4de7b52192c8147f0eba
+msgid "and now things are looking great!"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:440
+# ab7c4905f87e4edc934b07ed5c0ed745
+msgid "Instances as return values"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:442
+# fa7688ccf9544855a571c176c35a19b1
+msgid "Functions and methods can return instances. For example, given two Point objects, find their midpoint.  First we'll write this as a regular function:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:454
+# 50b25391d1a641019510043f2f082201
+msgid "The function creates and returns a new ``Point`` object:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:465
+# f7e6a05dcb87451ea6740905311ec40e
+msgid "Now let us do this as a method instead.  Suppose you have a point object, and wish to find the midpoint halfway between it and some other target point:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:480
+# fdd88ed944ee4e7eb9fd7a6b4b89a351
+msgid "This method is identical to the function, aside from some renaming. It's usage might be like this:"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:491
+# e8dde6bf09df446397a4f36a5d4c4ccf
+msgid "While this example assigns each point to a variable, this need not be done. Just as function calls are composable, method calls and object instantiation are also composable, leading to this alternative that uses no variables::"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:500
+# 9d18817240e44d5b851a3d337140922f
+msgid "A change of perspective"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:502
+# 935248851d3149c792f59282c8aaaee0
+msgid "The original syntax for a function call, ``print_time(current_time)``, suggests that the function is the active agent. It says something like, *\"Hey, print_time! Here's an object for you to print.\"*"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:506
+# 080eccb5e2e14bad81d2040b3757bb9b
+msgid "In object-oriented programming, the objects are considered the active agents. An invocation like ``current_time.print_time()`` says *\"Hey current_time! Please print yourself!\"*"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:510
+# 95d9543d02784aa18ce85df51f77204c
+msgid "In our early introduction to turtles, we used an object-oriented style, so that we said ``tess.forward(100)``, which asks the turtle to move itself forward by the given number of steps."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:514
+# 8839e87ebe144ff2a599d0588fd88760
+msgid "This change in perspective might be more polite, but it may not initially be obvious that it is useful. But sometimes shifting responsibility from the functions onto the objects makes it possible to write more versatile functions, and makes it easier to maintain and reuse code."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:519
+# e81c79c49fab429197520fd98a088579
+msgid "The most important advantage of the object-oriented style is that it fits our mental chunking and real-life experience more accurately. In real life our ``cook`` method is part of our microwave oven --- we don't have a ``cook`` function sitting in the corner of the kitchen, into which we pass the microwave!  Similarly, we use the cellphone's own methods to send an sms, or to change its state to silent.  The functionality of real-world objects tends to be tightly bound up inside the objects themselves.  OOP allows us to accurately mirror this when we organize our programs."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:530
+# ca98fc09a423441c9c02826518700b3c
+msgid "Objects can have state"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:532
+# 04c80b19ac4f4a229723cdd317c8158c
+msgid "Objects are most useful when we also need to keep some state that is updated from time to time.  Consider a turtle object.  Its state consists of things like its position, its heading, its color, and its shape.  A method like ``left(90)`` updates the turtle's heading, ``forward`` changes its position, and so on."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:537
+# a330f1d9057f413ba018e16f87074336
+msgid "For a bank account object, a main component of the state would be the current balance, and perhaps a log of all transactions.  The methods would allow us to query the current balance, deposit new funds, or make a payment. Making a payment would include an amount, and a description, so that this could be added to the transaction log.  We'd also want a method to show the transaction log."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:545
+# b570139e5d454a0b9b4c6a648248bda2
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:551
+# e3b8b172680b446e8f8163753a601ffe
+msgid "One of the named data items that makes up an instance."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:554
+# 317b582875f444a3b53dd9dec8c99154
+msgid "A user-defined compound type. A class can also be thought of as a template for the objects that are instances of it. (The iPhone is a class. By December 2010, estimates are that 50 million instances had been sold!)"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:560
+# 164a60dbd0b64a8fa78e5e7f2ddf9deb
+msgid "Every class has a \"factory\", called by the same name as the class, for making new instances.  If the class has an *initializer method*, this method is used to get the attributes (i.e. the state) of the new object properly set up."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:565
+# fbc23567610141338fce2320dbf52c75
+msgid "A special method in Python (called ``__init__``) that is invoked automatically to set a newly created object's attributes to their initial (factory-default) state."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:570
+# fc8718e14ec94108957a935712bd33c4
+msgid "An object whose type is of some class.  Instance and object are used interchangeably."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:574
+# fc23c28b74284f0ab30302b9e134d97b
+msgid "To create an instance of a class, and to run its initializer."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:577
+# f5f53d7673dc46478ce61fa36b580b6b
+msgid "A function that is defined inside a class definition and is invoked on instances of that class."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:581
+# 05cc979412424fb48ceda69ead8c9f26
+msgid "A compound data type that is often used to model a thing or concept in the real world.  It bundles together the data and the operations that are relevant for that kind of data.  Instance and object are used interchangeably."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:587
+# 987e34b1cfd04dd2901b56d600cb6e63
+msgid "A powerful style of programming in which data and the operations that manipulate it are organized into classes and methods."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:591
+# 5acd50d34f7a455280a66574a2e0870b
+msgid "A language that provides features, such as user-defined classes and inheritance, that facilitate object-oriented programming."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:597
+# efa9e6c7a7ae405db18997cd4bf92ee8
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:599
+# 617c34d059324ab0a4a1982a9d61f918
+msgid "Rewrite the ``distance`` function from the chapter titled *fruitful functions* so that it takes two ``Point``\\ s as parameters instead of four numbers."
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:602
+# 20c6f0e7830c48e59f6458b54c21d94d
+msgid "Add a method ``reflect_x`` to Point which returns a new Point, one which is the reflection of the point about the x-axis.  For example, ``Point(3, 5).reflect_x()`` is (3, -5)"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:606
+# 5277b92be5094ff98fa9ea597ad296b3
+msgid "Add a method ``slope_from_origin`` which returns the slope of the line joining the origin to the point.   For example, ::"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:612
+# af2b95552866456a9d8b7804c7238abc
+msgid "What cases will cause your method to fail?"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:614
+# d86ffa16edc74627acb9ee6a8930108b
+msgid "The equation of a straight line is  \"y = ax + b\", (or perhaps \"y = mx + c\"). The coefficients a and b completely describe the line.  Write a method in the Point class so that if a point instance is given another point, it will compute the equation of the straight line joining the two points.  It must return the two coefficients as a tuple of two values.  For example,   ::"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:623
+# ed7238b9c48f418fba2d54d91a5fb281
+msgid "This tells us that the equation of the line joining the two points is \"y = 2x + 3\". When will your method fail?"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:626
+# 4091236acff74383a40a60ca7f7941d5
+msgid "Given four points that fall on the circumference of a circle, find the midpoint of the circle. When will you function fail?"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:629
+# c381ed15987345bdbdcbff916def9166
+msgid "*Hint:* You *must* know how to solve the geometry problem *before* you think of going anywhere near programming. You cannot program a solution to a problem if you don't understand what you want the computer to do!"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:633
+# d67f01258ca34c0dbba327c7a00e2d17
+msgid "Create a new class, SMS_store.  The class will instantiate SMS_store objects, like your inbox or your outbox on your cellphone::"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:638
+# 4a315811eeae48d6970ceaae2c0639d9
+msgid "This store can hold multiple SMS messages  (i.e. its internal state will just be a list of messages).  Each message will be represented as a tuple::"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:643
+# a943d1e1b31e4f95904558555f96ffcf
+msgid "Your inbox object should provide these methods::"
+msgstr ""
+
+#: ../../source/classes_and_objects_I.rst:664
+# 73cb3f7009ad44dbbee51f3cf12149ab
+msgid "Write the class, create a message store object, write tests for these methods, and implement the methods."
+msgstr ""
+

@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/tuples.rst:12
+# 7093a2e46384400e8b21137ce5daebba
+msgid "Tuples"
+msgstr ""
+
+#: ../../source/tuples.rst:17
+# 1e7e65eb1e5448e8a61e854915d4f8ac
+msgid "Tuples are used for grouping data"
+msgstr ""
+
+#: ../../source/tuples.rst:19
+# 6939346fe4214595a041889ea4698f10
+msgid "We've seen earlier that we can group together pairs of values by putting them into parentheses.  Recall this example:"
+msgstr ""
+
+#: ../../source/tuples.rst:26
+# 273bc1cddeff4b528ea0840a753f05df
+msgid "This is an example of a **data structure** --- a mechanism for grouping and organizing data to make it easier to use."
+msgstr ""
+
+#: ../../source/tuples.rst:29
+# bcc0c2916db6458783ec09b8a4546536
+msgid "The pair is an example of a **tuple**. Generalizing this, a tuple can be used to group any number of items into a single compound value. Syntactically, a tuple is a comma-separated sequence of values. Although it is not necessary, it is conventional to enclose tuples in parentheses:"
+msgstr ""
+
+#: ../../source/tuples.rst:39
+# 66045617733e4528bc645b0be856a18b
+msgid "Tuples are useful for representing what other languages often call *records* --- some related information that belongs together, like your student record.  There is no description of what each of these fields means, but we can guess.  A tuple lets us \"chunk\" together related information and use it as a single thing."
+msgstr ""
+
+#: ../../source/tuples.rst:44
+# 42eee3db168c4882b2ff68898a817a93
+msgid "Tuples support the same sequence operations as strings. The index operator selects an element from a tuple."
+msgstr ""
+
+#: ../../source/tuples.rst:52
+# d90ba3f00089485f9a393b8eb0fd573a
+msgid "But if we try to use item assignment to modify one of the elements of the tuple, we get an error:"
+msgstr ""
+
+#: ../../source/tuples.rst:60
+# 4048c3ce8ce54ad196dad3e0b0c5e518
+msgid "So like strings, tuples are immutable.  Once Python has created a tuple in memory, it cannot be changed."
+msgstr ""
+
+#: ../../source/tuples.rst:63
+# 486ed3f272af4feea7c49fbf5e674b69
+msgid "Of course, even if we can't modify the elements of a tuple, we can always make the ``julia`` variable reference a new tuple holding different information.  To construct the new tuple, it is convenient that we can slice parts of the old tuple and join up the bits to make the new tuple.  So  if ``julia`` has a new recent film, we could change her variable to reference a new tuple that used some information from the old one:"
+msgstr ""
+
+#: ../../source/tuples.rst:78
+# f5b3f4f8062e4e60bc0d6b013667dc6d
+msgid "To create a tuple with a single element (but you're probably not likely to do that too often), we have to include the final comma, because without the final comma, Python treats the ``(5)`` below as an integer in parentheses:"
+msgstr ""
+
+#: ../../source/tuples.rst:97
+# 8afe8920292545e9b5c30db6a9c53f8e
+msgid "Tuple assignment"
+msgstr ""
+
+#: ../../source/tuples.rst:99
+# 9a3660014f0b42e98d9d2ce6b6a80aff
+msgid "Python has a very powerful **tuple assignment** feature that allows a tuple of variables on the left of an assignment to be assigned values from a tuple on the right of the assignment.   (We already saw this used for pairs, but it generalizes.)"
+msgstr ""
+
+#: ../../source/tuples.rst:107
+# 745d65e877244f21b3a19b2ba3e168ae
+msgid "This does the equivalent of seven assignment statements, all on one easy line. One requirement is that the number of variables on the left must match the number of elements in the tuple."
+msgstr ""
+
+#: ../../source/tuples.rst:111
+# 3d5fba4ac0944f7fabbbfd7cf76be06c
+msgid "Once in a while, it is useful to swap the values of two variables.  With conventional assignment statements, we have to use a temporary variable. For example, to swap ``a`` and ``b``:"
+msgstr ""
+
+#: ../../source/tuples.rst:122
+# b55fdb7d404a450183f70b425632af36
+msgid "Tuple assignment solves this problem neatly:"
+msgstr ""
+
+#: ../../source/tuples.rst:129
+# 447d3f371f6c45a191c2053a06c01125
+msgid "The left side is a tuple of variables; the right side is a tuple of values. Each value is assigned to its respective variable. All the expressions on the right side are evaluated before any of the assignments. This feature makes tuple assignment quite versatile."
+msgstr ""
+
+#: ../../source/tuples.rst:134
+# 40b140b8f47841d9a2e545d38b40fb72
+msgid "Naturally, the number of variables on the left and the number of values on the right have to be the same:"
+msgstr ""
+
+#: ../../source/tuples.rst:146
+# 91eecf609cc740a79f4a01c84e90f994
+msgid "Tuples as return values"
+msgstr ""
+
+#: ../../source/tuples.rst:148
+# b4bb5da847104611a6126f4cc074d857
+msgid "Functions can always only return a single value, but by making that value a tuple, we can effectively group together as many values as we like, and return them together.   This is very useful --- we often want to know some batsman's highest and lowest score, or we want to find the mean and the standard deviation, or we want to know the year, the month, and the day, or if we're doing some some ecological modelling we may want to know the number of rabbits and the number of wolves on an island at a given time."
+msgstr ""
+
+#: ../../source/tuples.rst:156
+# a3fdb9f409a34592bd24da665d546e39
+msgid "For example, we could write a function that returns both the area and the circumference of a circle of radius r:"
+msgstr ""
+
+#: ../../source/tuples.rst:170
+# d212ca40f1a54fe09292d498307e8b57
+msgid "Composability of Data Structures"
+msgstr ""
+
+#: ../../source/tuples.rst:172
+# b84ccdaf683f4cccb980fd0b76fffdee
+msgid "We saw in an earlier chapter that we could make a list of pairs, and we had an example where one of the items in the tuple was itself a list:"
+msgstr ""
+
+#: ../../source/tuples.rst:184
+# 77f432a89811480b8ff3f7947edcca8d
+msgid "Tuples items can themselves be other tuples.  For example, we could improve the information about our movie stars to hold the full date of birth rather than just the year, and we could have a list of some of her movies and dates that they were made, and so on:"
+msgstr ""
+
+#: ../../source/tuples.rst:201
+# 212340976bcc4455b8dd6346796a59fe
+msgid "Notice in this case the tuple has just five elements - but each of those in turn can be another tuple, a list, a string, or any other kind of Python value."
+msgstr ""
+
+#: ../../source/tuples.rst:205
+# bbf79a1f19884dc99fd7581d16e48a9d
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/tuples.rst:211
+# 12484d9a214744dc9993d4a59ab16d2a
+msgid "An organization of data for the purpose of making it easier to use."
+msgstr ""
+
+#: ../../source/tuples.rst:214
+# 05cc811f644d4c98810c637db51501c6
+msgid "A data type which cannot be modified.  Assignments to elements or slices (sub-parts) of immutable types cause a runtime error."
+msgstr ""
+
+#: ../../source/tuples.rst:218
+# 64acb42a52f543d1bdcca04aaf55720b
+msgid "A data type which can be modified. All mutable types are compound types.  Lists and dictionaries (coming soon) are mutable data types; strings and tuples are not."
+msgstr ""
+
+#: ../../source/tuples.rst:223
+# e48baf7ff146448bad68fe8b450101a6
+msgid "An immutable data type that contains related elements. Tuples are used to group together related data, such as a person's name, their age, and their gender."
+msgstr ""
+
+#: ../../source/tuples.rst:228
+# 91219f427953463dadfddcda7afb481a
+msgid "An assignment to all of the elements in a tuple using a single assignment statement. Tuple assignment occurs *simultaneously* rather than in sequence, making it useful for swapping values."
+msgstr ""
+
+#: ../../source/tuples.rst:234
+# 0fb9206ce99b4461aa7a2f3586c2cfa5
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/tuples.rst:236
+# 33795f4160444f0e8cca88778f49b2a2
+msgid "We've said nothing in this chapter about whether you can pass tuples as arguments to a function. Construct a small Python example to test whether this is possible, and write up your findings."
+msgstr ""
+
+#: ../../source/tuples.rst:240
+# eac543c7f2974aa086951e68e4a6dbd7
+msgid "Is a pair a generalization of a tuple, or is a tuple a generalization of a pair?"
+msgstr ""
+
+#: ../../source/tuples.rst:242
+# 673f67838de94dce8067054d49aa600c
+msgid "Is a pair a kind of tuple, or is a tuple a kind of pair?"
+msgstr ""
+

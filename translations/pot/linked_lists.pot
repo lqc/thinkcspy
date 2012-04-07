@@ -1,0 +1,453 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/linked_lists.rst:12
+# 6b3d6f8fd0a84421aebabcf964013da7
+msgid "Linked lists"
+msgstr ""
+
+#: ../../source/linked_lists.rst:16
+# f6ce16e78dfc49f7a2fcfac6c92c9773
+msgid "Embedded references"
+msgstr ""
+
+#: ../../source/linked_lists.rst:18
+# fae4eb1cfe354536a5c27dd7185ef560
+msgid "We have seen examples of attributes that refer to other objects, which we called **embedded references**. A common data structure, the **linked list**, takes advantage of this feature."
+msgstr ""
+
+#: ../../source/linked_lists.rst:22
+# 178ed5e35df4429b972280cc6b5a9a54
+msgid "Linked lists are made up of **nodes**, where each node contains a reference to the next node in the list. In addition, each node contains a unit of data called the **cargo**."
+msgstr ""
+
+#: ../../source/linked_lists.rst:26
+# 520f659227194560a5836647aaa35c58
+msgid "A linked list is considered a **recursive data structure** because it has a recursive definition."
+msgstr ""
+
+#: ../../source/linked_lists.rst:29
+# bd7ae8fda6da46f6b067e95294ff2c6b
+msgid "A linked list is either:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:31
+# 38122fe233bb4776b46fa8ce3af52799
+msgid "the empty list, represented by ``None``, or"
+msgstr ""
+
+#: ../../source/linked_lists.rst:32
+# 60174a2409824253812de9e6847b09de
+msgid "a node that contains a cargo object and a reference to a linked list."
+msgstr ""
+
+#: ../../source/linked_lists.rst:35
+# 00077afab6a6416bb27c2ab17d6fc02f
+msgid "Recursive data structures lend themselves to recursive methods."
+msgstr ""
+
+#: ../../source/linked_lists.rst:39
+# ad6dd0ee79f64cb69576df18bda7ac41
+msgid "The ``Node`` class"
+msgstr ""
+
+#: ../../source/linked_lists.rst:41
+# 33bbb688657a4d1bbe501c0ca398148e
+msgid "As usual when writing a new class, we'll start with the initialization and ``__str__`` methods so that we can test the basic mechanism of creating and displaying the new type:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:56
+# 92fd44e055b34c168dd8802154fefc1b
+msgid "As usual, the parameters for the initialization method are optional.  By default, both the cargo and the link, ``next``, are set to ``None``."
+msgstr ""
+
+#: ../../source/linked_lists.rst:59
+# aed764468c824ca980503b973a6b5ff5
+msgid "The string representation of a node is just the string representation of the cargo. Since any value can be passed to the ``str`` function, we can store any value in a list."
+msgstr ""
+
+#: ../../source/linked_lists.rst:63
+# c28a7320eecf4f07b887e7c5aa5fdd5f
+msgid "To test the implementation so far, we can create a ``Node`` and print it:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:71
+# 34f4dd48f2d74742adb8efdd2b82c236
+msgid "To make it interesting, we need a list with more than one node:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:79
+# f155862e510c4414adc84ca9649219f2
+msgid "This code creates three nodes, but we don't have a list yet because the nodes are not **linked**. The state diagram looks like this:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:84
+# c151cad27f164ec193d7c05459f26b4b
+msgid "To link the nodes, we have to make the first node refer to the second and the second node refer to the third:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:92
+# d5a05b78ee2d409fb469cf5c574ccaa6
+msgid "The reference of the third node is ``None``, which indicates that it is the end of the list. Now the state diagram looks like this:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:97
+# 72ecc794ef0b452eb2d6532e8ceb84f5
+msgid "Now you know how to create nodes and link them into lists. What might be less clear at this point is why."
+msgstr ""
+
+#: ../../source/linked_lists.rst:102
+# aaf030f8f35a4e35b80912253b586c68
+msgid "Lists as collections"
+msgstr ""
+
+#: ../../source/linked_lists.rst:104
+# 9f473a51a12d45a297e4db2a5b6320e6
+msgid "Lists are useful because they provide a way to assemble multiple objects into a single entity, sometimes called a **collection**. In the example, the first node of the list serves as a reference to the entire list."
+msgstr ""
+
+#: ../../source/linked_lists.rst:108
+# c257380e87fa44f081275d7d8594d06c
+msgid "To pass the list as a parameter, we only have to pass a reference to the first node. For example, the function ``print_list`` takes a single node as an argument. Starting with the head of the list, it prints each node until it gets to the end:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:122
+# 3c541503e2754e95bb0fbff8aaf8216a
+msgid "To invoke this method, we pass a reference to the first node:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:129
+# 653bf8e174144bf1bb0b333ca3fac521
+msgid "Inside ``print_list`` we have a reference to the first node of the list, but there is no variable that refers to the other nodes. We have to use the ``next`` value from each node to get to the next node."
+msgstr ""
+
+#: ../../source/linked_lists.rst:133
+# 49b35dc91134448d966a5b63d31084bc
+msgid "To traverse a linked list, it is common to use a loop variable like ``node`` to refer to each of the nodes in succession."
+msgstr ""
+
+#: ../../source/linked_lists.rst:136
+# 9c09fdc321d24f3d9d24790f49f7f287
+msgid "This diagram shows the value of ``list`` and the values that ``node`` takes on:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:141
+# 8d5b70d1970e40b4b70851a65769f79b
+msgid "Lists and recursion"
+msgstr ""
+
+#: ../../source/linked_lists.rst:143
+# 0fb6ef732a654684b0d70079bb11aea2
+msgid "It is natural to express many list operations using recursive methods.  For example, the following is a recursive algorithm for printing a list backwards:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:146
+# a2bcd7887eff4b049b65e10f3613d1a3
+msgid "Separate the list into two pieces: the first node (called the head); and the rest (called the tail)."
+msgstr ""
+
+#: ../../source/linked_lists.rst:148
+# 00d32bc35d304e63b8aa41fa1dae9264
+msgid "Print the tail backward."
+msgstr ""
+
+#: ../../source/linked_lists.rst:149
+# db0d8b9c78904c43badb1a430cbc8546
+msgid "Print the head."
+msgstr ""
+
+#: ../../source/linked_lists.rst:151
+# 91afcff72f2848668064e5f0a6e7e374
+msgid "Of course, Step 2, the recursive call, assumes that we have a way of printing a list backward. But if we assume that the recursive call works -- the leap of faith -- then we can convince ourselves that this algorithm works."
+msgstr ""
+
+#: ../../source/linked_lists.rst:155
+# 9d3bd60feeac48589a4d044ee19b25e6
+msgid "All we need are a base case and a way of proving that for any list, we will eventually get to the base case. Given the recursive definition of a list, a natural base case is the empty list, represented by ``None``:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:169
+# 419cab01031245409ce0ff6c201b630b
+msgid "The first line handles the base case by doing nothing. The next two lines split the list into ``head`` and ``tail``. The last two lines print the list. The ``end`` argument of the print statement keeps Python from printing a newline after each node."
+msgstr ""
+
+#: ../../source/linked_lists.rst:174
+# 487abe2e50964593b07c867f456f2857
+msgid "We invoke this method as we invoked ``print_list``:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:181
+# dc53be8dd9184365993f1046fdff0b26
+msgid "The result is a backward list."
+msgstr ""
+
+#: ../../source/linked_lists.rst:183
+# 40eab9495d034527b0beb5ac574f4d2d
+msgid "You might wonder why ``print_list`` and ``print_backward`` are functions and not methods in the ``Node`` class. The reason is that we want to use ``None`` to represent the empty list and it is not legal to invoke a method on ``None``. This limitation makes it awkward to write list -- manipulating code in a clean object-oriented style."
+msgstr ""
+
+#: ../../source/linked_lists.rst:189
+# d4f69e9b925b438b852fe7c78b24bc0c
+msgid "Can we prove that ``print_backward`` will always terminate? In other words, will it always reach the base case? In fact, the answer is no.  Some lists will make this method crash."
+msgstr ""
+
+#: ../../source/linked_lists.rst:195
+# f86daa61d278432c8ec842bcf768c28d
+msgid "Infinite lists"
+msgstr ""
+
+#: ../../source/linked_lists.rst:197
+# c6987e4350b34af8b43b9e3ab247fe20
+msgid "There is nothing to prevent a node from referring back to an earlier node in the list, including itself. For example, this figure shows a list with two nodes, one of which refers to itself:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:203
+# 8091bbfe826942c0872e5285f0239ace
+msgid "If we invoke ``print_list`` on this list, it will loop forever. If we invoke ``print_backward``, it will recurse infinitely. This sort of behavior makes infinite lists difficult to work with."
+msgstr ""
+
+#: ../../source/linked_lists.rst:207
+# 3a6763fa8dc24258bf22713adddcddd6
+msgid "Nevertheless, they are occasionally useful. For example, we might represent a number as a list of digits and use an infinite list to represent a repeating fraction."
+msgstr ""
+
+#: ../../source/linked_lists.rst:211
+# 417c3b4a661546c989393da99a169441
+msgid "Regardless, it is problematic that we cannot prove that ``print_list`` and ``print_backward`` terminate. The best we can do is the hypothetical statement, \"If the list contains no loops, then these methods will terminate.\" This sort of claim is called a **precondition**. It imposes a constraint on one of the parameters and describes the behavior of the method if the constraint is satisfied. You will see more examples soon."
+msgstr ""
+
+#: ../../source/linked_lists.rst:220
+# 5e2648c74d9f4167ad9fda62553836d6
+msgid "The fundamental ambiguity theorem"
+msgstr ""
+
+#: ../../source/linked_lists.rst:222
+# 153820747b73457a8e5320d72c04c3e8
+msgid "One part of ``print_backward`` might have raised an eyebrow:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:230
+# a04124f1762047a0bf8f3998f74dbb0b
+msgid "After the first assignment, ``head`` and ``list`` have the same type and the same value. So why did we create a new variable?"
+msgstr ""
+
+#: ../../source/linked_lists.rst:233
+# 87cf8e0d46024529be37aa0bacabab12
+msgid "The reason is that the two variables play different roles. We think of ``head`` as a reference to a single node, and we think of ``list`` as a reference to the first node of a list. These roles are not part of the program; they are in the mind of the programmer."
+msgstr ""
+
+#: ../../source/linked_lists.rst:238
+# 9329f0ce4aa548abbf788732d5dbca8b
+msgid "In general we can't tell by looking at a program what role a variable plays. This ambiguity can be useful, but it can also make programs difficult to read. We often use variable names like ``node`` and ``list`` to document how we intend to use a variable and sometimes create additional variables to disambiguate."
+msgstr ""
+
+#: ../../source/linked_lists.rst:244
+# 5a0fedb2f78e4cb484318e4a01194e01
+msgid "We could have written ``print_backward`` without ``head`` and ``tail``, which makes it more concise but possibly less clear:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:255
+# c94a02b95d284f16bfa04ede17825be0
+msgid "Looking at the two function calls, we have to remember that ``print_backward`` treats its argument as a collection and ``print`` treats its argument as a single object."
+msgstr ""
+
+#: ../../source/linked_lists.rst:259
+# 0a98207408df43b6a0b3498a3550430e
+msgid "The **fundamental ambiguity theorem** describes the ambiguity that is inherent in a reference to a node: *A variable that refers to a node might treat the node as a single object or as the first in a list of nodes.*"
+msgstr ""
+
+#: ../../source/linked_lists.rst:265
+# bc935ab425414611aee34fc29d03a857
+msgid "Modifying lists"
+msgstr ""
+
+#: ../../source/linked_lists.rst:267
+# ff2f8b18c9c8498dbad3b68723c0d4b1
+msgid "There are two ways to modify a linked list. Obviously, we can change the cargo of one of the nodes, but the more interesting operations are the ones that add, remove, or reorder the nodes."
+msgstr ""
+
+#: ../../source/linked_lists.rst:271
+# 3bf08c2fe03d4021b68bfa95b4fcb461
+msgid "As an example, let's write a method that removes the second node in the list and returns a reference to the removed node:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:287
+# 21dad9b3bfe24805916f4f577e403770
+msgid "Again, we are using temporary variables to make the code more readable. Here is how to use this method:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:300
+# 844f92a6000d46e3bf0efc013d4b5366
+msgid "This state diagram shows the effect of the operation:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:304
+# fd8ea488e7a44bb2ae9e33fb17ab4504
+msgid "What happens if you invoke this method and pass a list with only one element (a **singleton**)? What happens if you pass the empty list as an argument? Is there a precondition for this method? If so, fix the method to handle a violation of the precondition in a reasonable way."
+msgstr ""
+
+#: ../../source/linked_lists.rst:311
+# 1826cf453ac54140b6788853ef24e070
+msgid "Wrappers and helpers"
+msgstr ""
+
+#: ../../source/linked_lists.rst:313
+# 57ae60320c784c8498f1eee789e3fd52
+msgid "It is often useful to divide a list operation into two methods. For example, to print a list backward in the conventional list format ``[3, 2, 1]`` we can use the ``print_backward`` method to print ``3, 2,`` but we need a separate method to print the brackets and the first node. Let's call it ``print_backward_nicely``:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:331
+# ba7db29266e74a9187b0f7102b84b8e5
+msgid "Again, it is a good idea to check methods like this to see if they work with special cases like an empty list or a singleton."
+msgstr ""
+
+#: ../../source/linked_lists.rst:334
+# 0ef5f41d3df04ef78634e1118b2adb3f
+msgid "When we use this method elsewhere in the program, we invoke ``print_backward_nicely`` directly, and it invokes ``print_backward`` on our behalf. In that sense, ``print_backward_nicely`` acts as a **wrapper**, and it uses ``print_backward`` as a **helper**."
+msgstr ""
+
+#: ../../source/linked_lists.rst:341
+# 1c9b4c094bda4f3ea1559502426b7349
+msgid "The ``LinkedList`` class"
+msgstr ""
+
+#: ../../source/linked_lists.rst:343
+# 80ad4c977d674358b62a823fcf935f77
+msgid "There are some subtle problems with the way we have been implementing lists. In a reversal of cause and effect, we'll propose an alternative implementation first and then explain what problems it solves."
+msgstr ""
+
+#: ../../source/linked_lists.rst:347
+# 49bc938af71a42a8821fc2da61316300
+msgid "First, we'll create a new class called ``LinkedList``. Its attributes are an integer that contains the length of the list and a reference to the first node. ``LinkedList`` objects serve as handles for manipulating lists of ``Node`` objects:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:360
+# 63fc9ae6b6db4fdfbaece89ffa7be308
+msgid "One nice thing about the ``LinkedList`` class is that it provides a natural place to put wrapper functions like ``print_backward_nicely``, which we can make a method of the ``LinkedList`` class:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:383
+# 54ad0e0a6e4f444aaafe1f1f2b1dc658
+msgid "Just to make things confusing, we renamed ``print_backward_nicely``. Now there are two methods named ``print_backward``: one in the ``Node`` class (the helper); and one in the ``LinkedList`` class (the wrapper). When the wrapper invokes ``self.head.print_backward``, it is invoking the helper, because ``self.head`` is a ``Node`` object."
+msgstr ""
+
+#: ../../source/linked_lists.rst:389
+# d414d5b0f0fa4549843c25bd626454eb
+msgid "Another benefit of the ``LinkedList`` class is that it makes it easier to add or remove the first element of a list. For example, ``add_first`` is a method for ``LinkedList``\\s; it takes an item of cargo as an argument and puts it at the beginning of the list:"
+msgstr ""
+
+#: ../../source/linked_lists.rst:405
+# 7ea0387d02934a179049dabcd8dacaff
+msgid "As usual, you should check code like this to see if it handles the special cases. For example, what happens if the list is initially empty?"
+msgstr ""
+
+#: ../../source/linked_lists.rst:410
+# a9e44eece3de4157b4f861aeb7c32722
+msgid "Invariants"
+msgstr ""
+
+#: ../../source/linked_lists.rst:412
+# f2819f8591d243efbfc4230d74799044
+msgid "Some lists are well formed; others are not. For example, if a list contains a loop, it will cause many of our methods to crash, so we might want to require that lists contain no loops. Another requirement is that the ``length`` value in the ``LinkedList`` object should be equal to the actual number of nodes in the list."
+msgstr ""
+
+#: ../../source/linked_lists.rst:418
+# 9a3b7d2af32e494ca2e50ae0789651f4
+msgid "Requirements like these are called **invariants** because, ideally, they should be true of every object all the time. Specifying invariants for objects is a useful programming practice because it makes it easier to prove the correctness of code, check the integrity of data structures, and detect errors."
+msgstr ""
+
+#: ../../source/linked_lists.rst:423
+# 8591c22550ff42478c528a9a2902b49a
+msgid "One thing that is sometimes confusing about invariants is that there are times when they are violated. For example, in the middle of ``add_first``, after we have added the node but before we have incremented ``length``, the invariant is violated. This kind of violation is acceptable; in fact, it is often impossible to modify an object without violating an invariant for at least a little while. Normally, we require that every method that violates an invariant must restore the invariant."
+msgstr ""
+
+#: ../../source/linked_lists.rst:431
+# 43d0600154eb44a88cc5b88338d08aa5
+msgid "If there is any significant stretch of code in which the invariant is violated, it is important for the comments to make that clear, so that no operations are performed that depend on the invariant."
+msgstr ""
+
+#: ../../source/linked_lists.rst:437
+# e8d458e2f3d341b383ac731db71a7f09
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/linked_lists.rst:442
+# 5a6c7310803a410db3e95c1718d0457d
+msgid "A reference stored in an attribute of an object."
+msgstr ""
+
+#: ../../source/linked_lists.rst:445
+# 7ec18488df484b9ab81677808c15628d
+msgid "A data structure that implements a collection using a sequence of linked nodes."
+msgstr ""
+
+#: ../../source/linked_lists.rst:449
+# 3a50a2a6142d4542b972ba6e0f9b6eee
+msgid "An element of a list, usually implemented as an object that contains a reference to another object of the same type."
+msgstr ""
+
+#: ../../source/linked_lists.rst:453
+# c2568b14e2f645e9a4a436b0bfd83fd6
+msgid "An item of data contained in a node."
+msgstr ""
+
+#: ../../source/linked_lists.rst:456
+# 6d65ea92fc5c49f4a41b87338927f60e
+msgid "An embedded reference used to link one object to another."
+msgstr ""
+
+#: ../../source/linked_lists.rst:459
+# 7eab51afa712450483f5f8294637ee9e
+msgid "An assertion that must be true in order for a method to work correctly."
+msgstr ""
+
+#: ../../source/linked_lists.rst:462
+# 1081804bbe424f28a69f86f17cd71cc7
+msgid "A reference to a list node can be treated as a single object or as the first in a list of nodes."
+msgstr ""
+
+#: ../../source/linked_lists.rst:466
+# 4a4719b8633346a690cf16d47cb56adc
+msgid "A linked list with a single node."
+msgstr ""
+
+#: ../../source/linked_lists.rst:469
+# 0cfd157321f5433f94b272796e645a28
+msgid "A method that acts as a middleman between a caller and a helper method, often making the method easier or less error-prone to invoke."
+msgstr ""
+
+#: ../../source/linked_lists.rst:473
+# 6efacb0a523140d1b9e3fcd6920979a6
+msgid "A method that is not invoked directly by a caller but is used by another method to perform part of an operation."
+msgstr ""
+
+#: ../../source/linked_lists.rst:477
+# c0cfe4a7e01946f6a5798f05bc40dcc2
+msgid "An assertion that should be true of an object at all times (except perhaps while the object is being modified)."
+msgstr ""
+
+#: ../../source/linked_lists.rst:482
+# 5092c6d6984e4edaa87254e1279fa193
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/linked_lists.rst:484
+# 26261a739e2646d1a8e318f1dd72e183
+msgid "By convention, lists are often printed in brackets with commas between the elements, as in ``[1, 2, 3]``. Modify ``print_list`` so that it generates output in this format."
+msgstr ""
+

@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/app_c.rst:10
+# 114b7b9f6c404bb19c79d054f2d46b72
+msgid "Configuring Ubuntu for Python Development"
+msgstr ""
+
+#: ../../source/app_c.rst:12
+# 4c304f0dffbe4a1d884df4b9763965f5
+msgid "*Note:* the following instructions assume that you are connected to the Internet and that you have both the ``main`` and ``universe`` package repositories enabled.  All unix shell commands are assumed to be running from your home directory ($HOME).  Finally, any command that begins with ``sudo`` assums that you have administrative rights on your machine.  If you do not --- please ask your system administrator about installing the software you need."
+msgstr ""
+
+#: ../../source/app_c.rst:20
+# b8e84303142d40aab85e3252feccc343
+msgid "What follows are instructions for setting up an Ubuntu 9.10 (Karmic) home environment for use with this book. I use Ubuntu GNU/Linux for both development and testing of the book, so it is the only system about which I can personally answer setup and configuration questions."
+msgstr ""
+
+#: ../../source/app_c.rst:25
+# fe4d16ff28ec49a1969980b6a20e9fd1
+msgid "In the spirit of software freedom and open collaboration, please contact me if you would like to maintain a similar appendix for your own favorite system. I'd be more than happy to link to it or put it on the Open Book Project site, provided you agree to answer user feedback concerning it."
+msgstr ""
+
+#: ../../source/app_c.rst:30
+# 1426236456c844caa961d5c80048ec0b
+msgid "Thanks!"
+msgstr ""
+
+#: ../../source/app_c.rst:32
+# 746de95df5ba4701a6160f03e3c9eedf
+msgid "`Jeffrey Elkner <mailto:jeff@elkner.net>`__"
+msgstr ""
+
+#: ../../source/app_c.rst:33
+# 1557c1631a7949aeb95cd5b301e74053
+msgid "Governor's Career and Technical Academy in Arlington"
+msgstr ""
+
+#: ../../source/app_c.rst:34
+# 66b65674c3b943b8a85ec89af89bfbca
+msgid "Arlington, Virginia"
+msgstr ""
+
+#: ../../source/app_c.rst:38
+# 882be832f8ee4316bad040ba8a9f2d60
+msgid "Vim"
+msgstr ""
+
+#: ../../source/app_c.rst:40
+# 7e5360d593364ed48f0b6db3c72f1745
+msgid "`Vim <http://www.vim.org>`__ can be used very effectively for Python development, but Ubuntu only comes with the `vim-tiny` package installed by default, so it doesn't support color syntax highlighting or auto-indenting."
+msgstr ""
+
+#: ../../source/app_c.rst:44
+# b9893c6d96194cc3859ddae07a4c7a38
+msgid "To use Vim, do the following:"
+msgstr ""
+
+#: ../../source/app_c.rst:46
+# aad2e9c631a74c7a83116f94de7a5e57
+msgid "From the unix command prompt, run::"
+msgstr ""
+
+#: ../../source/app_c.rst:50
+# 799647ae3d174016ad36a1b5b40583e7
+msgid "Create a file in your home directory named `.vimrc` that contains the following::"
+msgstr ""
+
+#: ../../source/app_c.rst:60
+# c4e35ac47f7f4cf79776b47c68eed504
+msgid "When you edit a file with a `.py` extension, you should now have color systax highlighting and auto indenting. Pressing the key should run your program, and bring you back to the editor when the program completes."
+msgstr ""
+
+#: ../../source/app_c.rst:64
+# 96c3e98ce89444eca323712274d56b14
+msgid "To learn to use vim, run the following command at a unix command prompt::"
+msgstr ""
+
+#: ../../source/app_c.rst:73
+# 879fe657d1534e60a54160efdc53c480
+msgid "GASP"
+msgstr ""
+
+#: ../../source/app_c.rst:75
+# edce1949305046cfaaa4be464fb38c70
+msgid "Several of the case studies use GASP (Graphics API for Students for Python), which is the only additional library needed to use this book."
+msgstr ""
+
+#: ../../source/app_c.rst:78
+# f0054f8513b84290a538fcfd6779d19b
+msgid "To install GASP on Ubuntu 9.04 (Jaunty) or later, run the following command at a unix command prompt::"
+msgstr ""
+
+#: ../../source/app_c.rst:83
+# ca1a915c405f40f08d79df8aca125f89
+msgid "or use the synaptic package manager."
+msgstr ""
+
+#: ../../source/app_c.rst:87
+# 6e0b5604718a4eabbed63efbf007ad4d
+msgid "Getting GASP from Launchpad"
+msgstr ""
+
+#: ../../source/app_c.rst:89
+# 072b39b2160f4e0d9f1bccb068222f8f
+msgid "To install the latest version of GASP into your home directory, run the following commands at a unix command prompt::"
+msgstr ""
+
+#: ../../source/app_c.rst:97
+# c7396452793f4fcb87b1baf41296b282
+msgid "`$HOME` environment"
+msgstr ""
+
+#: ../../source/app_c.rst:99
+# b2f35ae12062465697a42cea938d5b77
+msgid "The following creates a useful environment in your home directory for adding your own Python libraries and executable scripts:"
+msgstr ""
+
+#: ../../source/app_c.rst:102
+# 472b7bcb131243c6a1b9c5506f9d3c4d
+msgid "From the command prompt in your home directory, create `bin` and `lib/python` subdirectories by running the following commands::"
+msgstr ""
+
+#: ../../source/app_c.rst:108
+# c592d2c64fb44be1a141454470fbe307
+msgid "Add the following lines to the bottom of your `.bashrc` in your home directory::"
+msgstr ""
+
+#: ../../source/app_c.rst:116
+# 788aa467c32a4a03a8b8250cf3ee9827
+msgid "This will set your prefered editor to Vim, add your own `lib/python` subdirectory for your Python libraries to your Python path, and add your own `bin` directory as a place to put executable scripts. You need to logout and log back in before your local `bin` directory will be in your `search path <http://en.wikipedia.org/wiki/Path_(variable)>`__."
+msgstr ""
+
+#: ../../source/app_c.rst:124
+# 4e6c16a0cf1744bb886eac73ab56a256
+msgid "Making a python script executable and runnable from anywhere"
+msgstr ""
+
+#: ../../source/app_c.rst:126
+# 709cc341fff549f990b60ca12068eac4
+msgid "On unix systems, Python scripts can be made *executable* using the following process:"
+msgstr ""
+
+#: ../../source/app_c.rst:129
+# 0ab7e7414e8b4e45b9706c14a6d63a96
+msgid "Add this line as the first line in the script:"
+msgstr ""
+
+#: ../../source/app_c.rst:135
+# c675ecbaa35c43f8b460228cb0c754d4
+msgid "At the unix command prompt, type the following to make `myscript.py` executable::"
+msgstr ""
+
+#: ../../source/app_c.rst:140
+# c0968f5df0724ff6b56f70d991923c5b
+msgid "Move `myscript.py` into your `bin` directory, and it will be runnable from anywhere."
+msgstr ""
+

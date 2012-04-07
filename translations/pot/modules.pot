@@ -1,0 +1,683 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/modules.rst:12
+# fea20a3567534166937644da4fd70040
+msgid "Modules"
+msgstr ""
+
+#: ../../source/modules.rst:15
+# 8e650c8684094013b2dbafe33d6bd3a6
+msgid "A **module** is a file containing Python definitions and statements intended for use in other Python programs. There are many Python modules that come with Python as part of the **standard library**. We have seen at least two of these already, the ``turtle`` module and the ``string`` module."
+msgstr ""
+
+#: ../../source/modules.rst:20
+# 295cdf46cc8e431fbcc7f764e06c5f10
+msgid "We have also shown you how to access help. The help system contains a listing of all the standard modules that are available with Python. Play with help!"
+msgstr ""
+
+#: ../../source/modules.rst:29
+# 3d786f413a9a4a31b72aecd88cbb0af7
+msgid "Random numbers"
+msgstr ""
+
+#: ../../source/modules.rst:31
+# 2086d912bad0418fb1ae2048b016eace
+msgid "We often want to use random numbers in programs: here are a few typical uses:"
+msgstr ""
+
+#: ../../source/modules.rst:33
+# f7b05d7f61174537a50135fd581c0386
+msgid "To play a game of chance where the computer needs to throw some dice, pick a number, or flip a coin,"
+msgstr ""
+
+#: ../../source/modules.rst:34
+# 933a087bb49a4b14b9c67e550ec2046e
+msgid "To shuffle a deck of playing cards randomly,"
+msgstr ""
+
+#: ../../source/modules.rst:35
+# 29df9eb9fa674d4bb9a13ce76df73a5c
+msgid "To randomly allow a new enemy spaceship to appear and shoot at you,"
+msgstr ""
+
+#: ../../source/modules.rst:36
+# 51ba3422aeae43c2b5a773c54f8cebea
+msgid "To simulate possible rainfall when we make a computerized model for estimating the environmental impact of builing a dam,"
+msgstr ""
+
+#: ../../source/modules.rst:38
+# 0878a95490f14628a001dd087e14e551
+msgid "For encrypting your banking session on the Internet."
+msgstr ""
+
+#: ../../source/modules.rst:40
+# 05e593fc49264870913231de507c9c34
+msgid "Python provides a module ``random`` that helps with tasks like this.  You can look it up using help, but here are the key things we'll do with it:"
+msgstr ""
+
+#: ../../source/modules.rst:54
+# bbb7a608ad2a4ef788415be395daf30c
+msgid "The ``randrange`` method call generates generates an integer between its lower and upper argument, using the same semantics as ``range`` --- so the lower bound is included, but the upper bound is excluded.   All the values have an equal probability of occurring (i.e. the results are *uniformly* distributed).   Like ``range``, ``randrange`` can also take an optional step argument. So let's assume we needed a random odd number less than 100, we could say:"
+msgstr ""
+
+#: ../../source/modules.rst:66
+# 2996a56a8aae428abd29d3c6facbfcc0
+msgid "Other methods can also generate other distributions e.g. a bell-shaped, or \"normal\" distribution might be more appropriate for estimating seasonal rainfall, or the concentration of a compound in the body after taking a dose of medicine."
+msgstr ""
+
+#: ../../source/modules.rst:70
+# cb649281312e4907b2acfbde0dccf05a
+msgid "The ``random()`` method returns a floating point number in the interval [0.0, 1.0) --- the square bracket means \"closed interval on the left\" and the round parenthesis means \"open interval on the right\".  In other words, 0.0 is possible, but all returned numbers will be strictly less than 1.0.  It is usual to *scale* the results after calling this method, to get them into an interval suitable for your application.  In the case shown here, we've converted the result of the method call to a number in the interval [0.0, 5.0).  Once more, these are uniformly distributed numbers --- numbers close to 0 are just as likely to occur as numbers close to 0.5, or numbers close to 1.0."
+msgstr ""
+
+#: ../../source/modules.rst:79
+# c02aca920f1848f2ab84e5426a35356b
+msgid "This example shows how to shuffle a list.  (`shuffle` cannot work directly with a lazy promise, so notice that we had to convert the range object using the ``list`` type converter first.)"
+msgstr ""
+
+#: ../../source/modules.rst:93
+# d42da78ee46a49db81784323a6379fa0
+msgid "Repeatability and Testing"
+msgstr ""
+
+#: ../../source/modules.rst:95
+# e9827303a6a44f328c1c4ea44cf1599a
+msgid "Random number generators are based on a **deterministic** algorithm --- repeatable and predictable. So they're called **pseudo-random** generators --- they are not genuinely random. They start with a *seed* value. Each time you ask for another random number, you'll get one based on the current seed attribute, and the state of the seed (which is one of the attributes of the generator) will be updated."
+msgstr ""
+
+#: ../../source/modules.rst:101
+# d9a3f012b6004a118acf4bec0511dca4
+msgid "For debugging and for writing unit tests, it is convenient to have repeatability --- programs that do the same thing every time they are run. We can arrange this by forcing the random number generator to be initialized with a known seed every time.  (Often this is only wanted during testing --- playing a game of cards where the shuffled deck was always in the same order as last time you played would get boring very rapidly!)"
+msgstr ""
+
+#: ../../source/modules.rst:113
+# 7e386595c1e048deb2575b4e0ba40ef7
+msgid "This alternative way of creating a random number generator gives an explicit seed value to the object. Without this argument, the system probably uses something based on the time.  So grabbing some random numbers from ``drng`` today will give you precisely the same random sequence as it will tomorrow!"
+msgstr ""
+
+#: ../../source/modules.rst:119
+# b3de4cedbfa54f2fb3d361ab814cadaf
+msgid "Picking balls from bags, throwing dice, shuffling a pack of cards"
+msgstr ""
+
+#: ../../source/modules.rst:121
+# fd5b6a9d229d45769a36eae00080be77
+msgid "Here is an example to generate a list containing `n` random ints between a lower and an upper bound:"
+msgstr ""
+
+#: ../../source/modules.rst:145
+# 5cf6f26daf8d403c90fa576ea3d9616c
+msgid "Notice that we got a duplicate in the result. Often this is wanted, e.g. if we throw a die five times, we would expect some duplicates."
+msgstr ""
+
+#: ../../source/modules.rst:149
+# a1081b8ad1b14be3bdcb82cc7791ca45
+msgid "But what if you don't want duplicates?  If you wanted 5 distinct months, then this algorithm is wrong.  In this case a good algorithm is to generate the list of possibilities, shuffle it, and slice off the number of elements you want:"
+msgstr ""
+
+#: ../../source/modules.rst:160
+# 5636ac0d799a465aa0dc8e039e179ec4
+msgid "In statistics courses, the first case --- allowing duplicates --- is usually described as pulling balls out of a bag *with replacement* --- you put the drawn ball back in each time, so it can occur again.  The latter case, with no duplicates, is usually described as pulling balls out of the bag *without replacement*. Once the ball is drawn, it doesn't go back to be drawn again.  TV lotto games work like this."
+msgstr ""
+
+#: ../../source/modules.rst:166
+# f34eacc2693c4e38b2c8bcfa13afd636
+msgid "The second \"shuffle and slice\" algorithm would not be so great if you only wanted a few elements, but from a very large domain. Suppose I wanted five numbers between one and ten million, without duplicates. Generating a list of ten million items, shuffling it, and then slicing off the first five would be a performance disaster!  So let us have another try:"
+msgstr ""
+
+#: ../../source/modules.rst:197
+# fbb8a22d823e434c80eee681f04e01a3
+msgid "This agreeably produces 5 random numbers, without duplicates:"
+msgstr ""
+
+#: ../../source/modules.rst:203
+# b64dd48e37be48dfa69b08fa8ea4d541
+msgid "Even this function has its pitfalls.  Can you spot what is going to happen in this case?"
+msgstr ""
+
+#: ../../source/modules.rst:212
+# 9a657675d109454599b461ddacd2894d
+msgid "The ``time`` module"
+msgstr ""
+
+#: ../../source/modules.rst:214
+# e23d8b9c8ba44ac99beb75bea36889e7
+msgid "As we start to work with more sophisticated algorithms and bigger programs, at natural concern is *\"is our code efficient?\"*  One way to experiment is to time how long various operations take.  The ``time`` module has a function called ``clock`` that is recommended for this purpose.   Whenever ``clock`` is called, it returns a floating point number representing how many seconds have elapsed since your program started running."
+msgstr ""
+
+#: ../../source/modules.rst:220
+# b8450de4e42745a49c47c3447f5ffa54
+msgid "The way to use it is to call ``clock`` and assign the result to a variable, say ``t0``, just before you start executing the code you want to measure.  Then after execution, call ``clock`` again, (this time we'll save the result in variable ``t1``).  The difference ``t1-t0`` is the time elapsed, and is a measure of how fast your program is running."
+msgstr ""
+
+#: ../../source/modules.rst:225
+# 862192ae5b6d47d4b41bd4771aa0c4d9
+msgid "Let's try a small example.  Python has a built-in ``sum`` function that can sum the elements in a list.  We can also write our own.  How do we think they would compare for speed?   We'll try to do the summation of a list [0, 1, 2 ...] in both cases, and compare the results:"
+msgstr ""
+
+#: ../../source/modules.rst:257
+# 47652c45ce924f76a11dfaff0a2ada94
+msgid "On a reasonably modest laptop, we get these results:"
+msgstr ""
+
+#: ../../source/modules.rst:265
+# 3d0925d749564fadad2d32972716bf3a
+msgid "So our function runs about 57% slower than their built-in one. And summing up ten million elements in under a second is not too shabby!"
+msgstr ""
+
+#: ../../source/modules.rst:269
+# 81cc66dc139147c59acf7e11d893264e
+msgid "The ``math`` module"
+msgstr ""
+
+#: ../../source/modules.rst:271
+# fe8f000d3d984cde9908a79f8813d8ed
+msgid "The ``math`` module contains the kinds of mathematical functions you'd typically find on your calculator (`sin`, `cos`, `sqrt`, `asin`, `log`, `log10`) and some mathematical constants like `pi` and `e`:"
+msgstr ""
+
+#: ../../source/modules.rst:292
+# 676f0f67205f49d2b2606408b9022d53
+msgid "Like almost all other programming languages, angles are expressed in *radians* rather than degrees.  There are two functions ``radians`` and ``degrees`` to convert between the two popular ways of measuring angles."
+msgstr ""
+
+#: ../../source/modules.rst:296
+# 2e28ad64b0dd4b9bbd3305eeff7bb3c7
+msgid "Notice another difference between this module and our use of ``random`` and ``turtle``: in ``random`` and ``turtle`` we create objects and we call methods on the object.  This is because objects have *state* --- a turtle has a colour, a position, a heading, etc., and every random number generator has a seed value that determines its next result."
+msgstr ""
+
+#: ../../source/modules.rst:301
+# ea62176b2cd04989b4885b4dc778ecab
+msgid "Mathematical functions are \"pure\" and don't have any state --- calculating the square root of 2.0 doesn't depend on any kind of state or history about what happened in the past. So the functions are not methods of an object --- they are simply functions that are grouped together in a module called `math`."
+msgstr ""
+
+#: ../../source/modules.rst:309
+# 75a19f2d947e49438a387c58d0ff725b
+msgid "Creating your own modules"
+msgstr ""
+
+#: ../../source/modules.rst:311
+# 71f2fc8165ec4832afedca19c3aefaa1
+msgid "All we need to do to create our own modules is to save our script as a file with a ``.py`` extension on the filename.  Suppose, for example, this script is saved as a file named ``seqtools.py``:"
+msgstr ""
+
+#: ../../source/modules.rst:321
+# c524b6310930430eb25ed6e00b84ca78
+msgid "We can now use our module, both in scripts we write, or in the interactive Python interpreter. To do so, we must first *import* the module."
+msgstr ""
+
+#: ../../source/modules.rst:332
+# f5a4969519cb49ec9b62abab9fe78bde
+msgid "We do not include the ``.py`` file extension when importing. Python expects the file names of Python modules to end in ``.py``, so the file extension is not included in the **import statement**."
+msgstr ""
+
+#: ../../source/modules.rst:336
+# af9a2ca3098448a6a0ac47e5221571aa
+msgid "The use of modules makes it possible to break up very large programs into manageable sized parts, and to keep related parts together."
+msgstr ""
+
+#: ../../source/modules.rst:342
+# 76005c069d99485694e825532c58bf0e
+msgid "Namespaces"
+msgstr ""
+
+#: ../../source/modules.rst:345
+# 6b5913a9bf18468e92c8816acafcea63
+msgid "A **namespace** is a collection of identifiers that belong to a module, or to a function, (and as we will see soon, in classes too).  Generally, we like a namespace to hold \"related\" things, e.g. all the math functions, or all the typical things we'd do with random numbers."
+msgstr ""
+
+#: ../../source/modules.rst:350
+# 9149080f4b2042b4b82c40205f15b90e
+msgid "Each module has its own namespace, so we can use the same identifier name in multiple modules without causing an identification problem."
+msgstr ""
+
+#: ../../source/modules.rst:369
+# 85fa9f4ad4264b19a07e40695cb04b09
+msgid "We can now import both modules and access ``question`` and ``answer`` in each:"
+msgstr ""
+
+#: ../../source/modules.rst:382
+# d9d37a9db821457ca13b3a7cd18cc10d
+msgid "will output the following:"
+msgstr ""
+
+#: ../../source/modules.rst:391
+# 96fbdd6d8b484d51869faafb8eb6b976
+msgid "Functions also have their own namespaces:"
+msgstr ""
+
+#: ../../source/modules.rst:411
+# 3ba3d5eb000d4c25aa671e28bfccf596
+msgid "Running this program produces the following output:"
+msgstr ""
+
+#: ../../source/modules.rst:421
+# b52aedafe3cc4c0ca4949109f985175e
+msgid "The three ``n``'s here do not collide since they are each in a different namespace --- they are three names for three different variables, just like there might be three different instances of people, all called \"Bruce\"."
+msgstr ""
+
+#: ../../source/modules.rst:425
+# 2088d78cffe5429a937764026d818473
+msgid "Namespaces permit several programmers to work on the same project without having naming collisions."
+msgstr ""
+
+#: ../../source/modules.rst:430
+# 3a6a7918c5084154b4d72fd49eb64d4c
+msgid "Python has a convenient and simplifying one-to-one mapping, one module per file, giving rise to one namespace. Also, Python takes the module name from the file name, and this becomes the name of the namespace.  ``math.py`` is a filename, the module is called ``math``, and its namespace is ``math``. So in Python the concepts are more or less interchangeable."
+msgstr ""
+
+#: ../../source/modules.rst:436
+# c289e1c8d6684f738e486ca71a9e00a2
+msgid "But you will encounter other languages (e.g. C#), that allow one module to span multiple files, or one file to have multiple namespaces, or many files to all share the same namespace. So the name of the file doesn't need to be the same as the namespace."
+msgstr ""
+
+#: ../../source/modules.rst:441
+# 7105eec22c17439f9fb2b5dc6a05aae7
+msgid "So a good idea is to try to keep the concepts distinct in your mind."
+msgstr ""
+
+#: ../../source/modules.rst:443
+# c41980d2f2e5474d8ebf427e3ac0da31
+msgid "Files and directories organize *where* things are stored in our computer. On the other hand, namespaces and modules are a programming concept: they help us organize how we want to group related functions and attributes. They are not about \"where\" to store things, and should not have to coincide with the file and directory structures."
+msgstr ""
+
+#: ../../source/modules.rst:449
+# 165f2cc6289449dcb669c89b5278d142
+msgid "So in Python, if you rename the file ``math.py``, its module name also changes, your ``import`` statements would need to change, and your code that refers to functions or attributes inside that namespace would also need to change."
+msgstr ""
+
+#: ../../source/modules.rst:453
+# c2eff6dba4054aa785086f97cdc46729
+msgid "In other languages this is not necessarily the case.  So don't blur the concepts, just because Python blurs them!"
+msgstr ""
+
+#: ../../source/modules.rst:459
+# 0566e6b858084182ae56d40b41ee567b
+msgid "Scope and lookup rules"
+msgstr ""
+
+#: ../../source/modules.rst:461
+# d169dd0883b14d27ab930fd8936a96fa
+msgid "The **scope** of an identifier is the region of program code in which the identifier can be accessed, or used."
+msgstr ""
+
+#: ../../source/modules.rst:464
+# 2c79ea9dca594e3d93492d8d53d0e9ad
+msgid "There are three important scopes in Python:"
+msgstr ""
+
+#: ../../source/modules.rst:466
+# 4ae99fe39def489ab7699b2c9d03fedd
+msgid "**Local scope** refers to identifiers declared within a function.  These identifiers are kept in the namespace that belongs to the function, and each function has its own namespace."
+msgstr ""
+
+#: ../../source/modules.rst:468
+# 27d004af04c144f8a1af64e56fd6c2c0
+msgid "**Global scope** refers to all the identifiers declared within the current module, or file."
+msgstr ""
+
+#: ../../source/modules.rst:469
+# 0cea02ca787f4d9aaa07e48e44660e47
+msgid "**Built-in scope** refers to all the identifiers built into Python --- those like ``range`` and ``min`` that can be used without having to import anything, and are (almost) always available."
+msgstr ""
+
+#: ../../source/modules.rst:472
+# dbbec88dfb1f4598962d50b15eb79bac
+msgid "Python (like most other computer languages) uses precedence rules: the same name could occur in more than one of these scopes, but the innermost, or local scope, will always take precedence over the global scope, and the global scope always gets used in preference to the built-in scope.  Let's start with a simple example:"
+msgstr ""
+
+#: ../../source/modules.rst:485
+# f0f4f1cc285148c89a1383813082a787
+msgid "What gets printed?  We've defined our own function called ``range``, so there is now a potential ambiguity.  When we use ``range``, do we mean our own one, or the built-in one?  Using the scope lookup rules determines this: our own ``range`` function, not the built-in one, is called, because our function ``range`` is in the global namespace, which takes precedence over the built-in names."
+msgstr ""
+
+#: ../../source/modules.rst:491
+# c76b9614998d4f4eb744f454552f5130
+msgid "So although names likes ``range`` and ``min`` are built-in, they can be \"hidden\" from your use if you choose to define your own variables or functions that reuse those names.  (It is a confusing practice to redefine built-in names --- so to be a good programmer you need to understand the scope rules and understand that you can do nasty things that will cause confusion, and then you avoid doing them!)"
+msgstr ""
+
+#: ../../source/modules.rst:497
+# 8cddbd54a22140beb0251314da3bcc05
+msgid "Now, a slightly more complex example:"
+msgstr ""
+
+#: ../../source/modules.rst:510
+# bd32b06b71ac43da9dca8c043273807b
+msgid "This prints 17 10 3.  The reason is that the two variables ``m`` and ``n`` in lines 1 and 2 are outside the function in the global namespace.  Inside the function, new variables called ``n`` and ``m`` are created *just for the duration of the execution of f*. These are created in the local namespace of function ``f``.  Within the body of ``f``, the scope lookup rules determine that we use the local variables m and n.  By contrast, after we've returned from ``f``, the ``n`` and ``m`` arguments to the ``print`` function refer to the original variables on lines 1 and 2, and these have not been changed in any way by executing function ``f``."
+msgstr ""
+
+#: ../../source/modules.rst:518
+# c4567ee78a71458794192ae114c4594f
+msgid "Notice too that the ``def`` puts name ``f`` into the global namespace here.  So it can be called on line 7."
+msgstr ""
+
+#: ../../source/modules.rst:521
+# 14ba6a52eec84a3ba9fcc3ecd61a6b7c
+msgid "What is the scope of the variable ``n`` on line 1?  Its scope --- the region in which it is visible ---  is lines 1, 2, 6, 7.  It is hidden from view in lines 3,4,5 because of the local variable ``n``."
+msgstr ""
+
+#: ../../source/modules.rst:528
+# 161f0b866d0844bfa66f429115ee13be
+msgid "Attributes and the dot operator"
+msgstr ""
+
+#: ../../source/modules.rst:530
+# 39110f0339e44b94972187f1372441e3
+msgid "Variables defined inside a module are called **attributes** of the module. We've seen that objects have attributes too: for example, most objects have a ``__doc__`` attribute, some functions have a ``__annotations__`` attribute. Attributes are accessed by using the **dot operator** ( ``.``). The ``question`` attribute of ``module1`` and ``module2`` are accessed using ``module1.question`` and ``module2.question``."
+msgstr ""
+
+#: ../../source/modules.rst:537
+# d0ee971cd41048c9973a8a51cb9d4517
+msgid "Modules contain functions as well as attributes, and the dot operator is used to access them in the same way. ``seqtools.remove_at`` refers to the ``remove_at`` function in the ``seqtools`` module."
+msgstr ""
+
+#: ../../source/modules.rst:541
+# 868c818059fa4f718910db175a163071
+msgid "When we use a dotted name, we often refer to it as a **fully qualified name**, because we're saying exactly which ``question`` attribute we mean."
+msgstr ""
+
+#: ../../source/modules.rst:547
+# 6270de2e195e4bfc9c78386e4c7e1ae6
+msgid "Three ``import`` statement variants"
+msgstr ""
+
+#: ../../source/modules.rst:549
+# 2ea0d5a0881443808ffc0ceff8b2ad76
+msgid "Here are three different ways to import names into the current namespace, and to use them:"
+msgstr ""
+
+#: ../../source/modules.rst:557
+# 14d0d99b5b86449e96df97568d15de26
+msgid "Here just the single identifier ``math`` is added to the current namespace.  If you want to access one of the functions in the module, you need to use the dot notation to get to it."
+msgstr ""
+
+#: ../../source/modules.rst:560
+# 9b86e6f6cd314b28a31c9a2297556ca5
+msgid "Here is a different arrangement:"
+msgstr ""
+
+#: ../../source/modules.rst:568
+# 51bad1144fab4cfe997dd55e244d20a3
+msgid "The names are added directly to the current namespace, and can be used without qualification. The name ``math`` is not itself imported, so trying to use the qualified form ``math.sqrt`` would give an error."
+msgstr ""
+
+#: ../../source/modules.rst:571
+# e5376709b7d94d10b6395aa806b8234d
+msgid "Then we have a convenient shorthand:"
+msgstr ""
+
+#: ../../source/modules.rst:580
+# 297aaf0f5e264c2ebdc1c6c0e5200def
+msgid "Of these three, the first method is generally preferred, even though it means a little more typing each time. (But hey, with nice editors that do auto-completion, and fast fingers, that's a small price!)"
+msgstr ""
+
+#: ../../source/modules.rst:584
+# 383276d3c70d4b25a89f5f331d39bbf5
+msgid "Finally, observe this case:"
+msgstr ""
+
+#: ../../source/modules.rst:595
+# 98484af787cb4e55bcf40c7f9487c1b2
+msgid "Here we imported ``math``, but we imported it into the local namespace of ``area``. So the name is usable within the function body, but not in the enclosing script, because it is not in the global namespace."
+msgstr ""
+
+#: ../../source/modules.rst:600
+# 228220ca1035400da336f600918d1d99
+msgid "Turn your unit tester into a module"
+msgstr ""
+
+#: ../../source/modules.rst:602
+# f4cb1d06b57b40449c5e223d48214715
+msgid "Near the end of Chapter 6 we introduced unit testing, and our own ``test`` function, and you've had to copy this into each module for which you wrote tests.   Now we can put that definition into a module of its own, say ``my_own_unit_tester.py``, and simply use one line in each new script instead:"
+msgstr ""
+
+#: ../../source/modules.rst:614
+# 19130344649941c88bb3350e9174f335
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/modules.rst:620
+# 31f2500f30174ced81199f723d24c7ab
+msgid "``argv`` is short for *argument vector* and is a variable in the ``sys`` module which stores a list of command line arguments passed to a program at run time."
+msgstr ""
+
+#: ../../source/modules.rst:625
+# 1cc4bbd8ddc945edbb4c38f6168e2c13
+msgid "A variable defined inside a module (or class or instance -- as we will see later). Module attributes are accessed by using the **dot operator** ( ``.``)."
+msgstr ""
+
+#: ../../source/modules.rst:630
+# e78670229d0c4291a4465ad1ed7df894
+msgid "The sequence of characters read into the *command interpreter* in a *command line interface* (see the Wikipedia article on `command line interface <http://en.wikipedia.org/wiki/Command_line>`__ for more information)."
+msgstr ""
+
+#: ../../source/modules.rst:636
+# 958cefeaca754cf6a0c902f742bf5b7b
+msgid "A value passed to a program along with the program's invocation at the *command prompt* of a command line interface (CLI)."
+msgstr ""
+
+#: ../../source/modules.rst:640
+# 63b8dddb9a3b44e49a00bb3f468c8fa9
+msgid "A string displayed by a `command line interface <http://en.wikipedia.org/wiki/Command_line>`__ indicating that commands can be entered."
+msgstr ""
+
+#: ../../source/modules.rst:645
+# 0a0d68b956fb4b82962c3161aa652717
+msgid "A statement that causes the current iteration of a loop to be skipped. The flow of execution goes back to the top of the loop, evaluates the condition, and proceeds accordingly, so further execution of the loop body may still take place."
+msgstr ""
+
+#: ../../source/modules.rst:651
+# 13edd7147a0d49b2ae96693b72d69fb0
+msgid "The dot operator ( ``.``) permits access to attributes and functions of a module (or attributes and methods of a class or instance -- as we have seen elsewhere)."
+msgstr ""
+
+#: ../../source/modules.rst:656
+# 39804c83ca634a818f37dc3bb190ca46
+msgid "A statement which makes the objects contained in a module available for use within another module. There are two forms for the import statement. Using hypothetical modules named ``mymod1`` and ``mymod2`` each containing functions ``f1`` and ``f2``, and variables ``v1`` and ``v2``, examples of these two forms include:"
+msgstr ""
+
+#: ../../source/modules.rst:669
+# 928341f0a2f64b958b3b52d0d46d4c40
+msgid "The second form brings the imported objects into the namespace of the importing module, while the first form preserves a separate namespace for the imported module, requiring ``mymod1.v1`` to access the ``v1`` variable from that module."
+msgstr ""
+
+#: ../../source/modules.rst:675
+# 1268f58574fc4083bcd0968518fec4ee
+msgid "Function-like attribute of an object. Methods are *invoked* (called) on an object using the dot operator. For example:"
+msgstr ""
+
+#: ../../source/modules.rst:685
+# 18935d5afafd45a892fedf17cd84a4ab
+msgid "We say that the method, ``upper`` is invoked on the string, ``s``. ``s`` is implicitely the first argument to ``upper``."
+msgstr ""
+
+#: ../../source/modules.rst:689
+# e7593e5e3cde450db3677099a703de4e
+msgid "A file containing Python definitions and statements intended for use in other Python programs. The contents of a module are made available to the other program by using the ``import`` statement."
+msgstr ""
+
+#: ../../source/modules.rst:694
+# 8cf6a38f2d6c4d6cae01d415b01699b4
+msgid "A syntactic container providing a context for names so that the same name can reside in different namespaces without ambiguity. In Python, modules, classes, functions and methods all form namespaces."
+msgstr ""
+
+#: ../../source/modules.rst:699
+# ebe29b748f4b46cab97afef8e3bdf9ce
+msgid "A situation in which two or more names in a given namespace cannot be unambiguously resolved. Using"
+msgstr ""
+
+#: ../../source/modules.rst:707
+# 91581948e8864fc9afb4d42b359de90d
+msgid "instead of"
+msgstr ""
+
+#: ../../source/modules.rst:714
+# d69596d5ce43499d916d8225c96cd969
+msgid "prevents naming collisions."
+msgstr ""
+
+#: ../../source/modules.rst:716
+# f6bfdec522164259a918e6065fa5919e
+msgid "ndard library A library is a collection of software used as tools in the development of other software. The standard library of a programming language is the set of such tools that are distributed with the core programming language.  Python comes with an extensive standard library."
+msgstr ""
+
+#: ../../source/modules.rst:723
+# 5a5badd239a549f995fea48944c4794e
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/modules.rst:726
+# 2da325b3bdcb4ba3b9d5f8e256d10092
+msgid "Open help for the ``calendar`` module."
+msgstr ""
+
+#: ../../source/modules.rst:728
+# 6ff4622894dd4bd38df486ec509fe384
+msgid "Try the following:"
+msgstr ""
+
+#: ../../source/modules.rst:737
+# 29b245d11021421b815adadfc482fad6
+msgid "Observe that the week starts on Monday. An adventurous CompSci student believes that it is better mental chunking to have his week start on Thursday, because then there are only two working days to the weekend, and every week has a break in the middle.  Read the documentation for TextCalendar, and see how you can help him print a calendar that suits his needs."
+msgstr ""
+
+#: ../../source/modules.rst:743
+# ee5e8886954a4cfb90438b735ba181e4
+msgid "Find a function to print just the month in which your birthday occurs this year."
+msgstr ""
+
+#: ../../source/modules.rst:745
+# d7e5ece95e954ae7a9e5bda15f2aeefc
+msgid "Try this:"
+msgstr ""
+
+#: ../../source/modules.rst:753
+# c6ab61556c864b57823e44c01b249a05
+msgid "Try a few other languages, including one that doesn't work, and see what happens."
+msgstr ""
+
+#: ../../source/modules.rst:755
+# 12d6220c120a43a799ca08fcfccee16d
+msgid "Experiment with ``calendar.isleap``. What does it expect as an argument? What does it return as a result? What kind of a function is this?"
+msgstr ""
+
+#: ../../source/modules.rst:758
+# bc38a40703f241358a9933ac15a97d81
+msgid "Make detailed notes about what you learned from these exercises."
+msgstr ""
+
+#: ../../source/modules.rst:760
+# 4694fd56ad6543b09c66d791cdacc8bd
+msgid "Open help for the ``math`` module."
+msgstr ""
+
+#: ../../source/modules.rst:762
+# 568bc45380f6437286d3122a96ecf130
+msgid "How many functions are in the ``math`` module?"
+msgstr ""
+
+#: ../../source/modules.rst:763
+# 91e859c5335a42adb66312dbb39ff5e0
+msgid "What does ``math.ceil`` do? What about ``math.floor``? ( *hint:* both ``floor`` and ``ceil`` expect floating point arguments.)"
+msgstr ""
+
+#: ../../source/modules.rst:765
+# 72ee955d2489489d8850dee9f0f4b91f
+msgid "Describe how we have been computing the same value as ``math.sqrt`` without using the ``math`` module."
+msgstr ""
+
+#: ../../source/modules.rst:767
+# 0aafaec35f9c44218546598ca6e308bf
+msgid "What are the two data constants in the ``math`` module?"
+msgstr ""
+
+#: ../../source/modules.rst:769
+# e9da35fecee242c781a0219914367535
+msgid "Record detailed notes of your investigation in this exercise."
+msgstr ""
+
+#: ../../source/modules.rst:771
+# 7194003c90f142fa95e5703a4fca4705
+msgid "Investigate the ``copy`` module. What does ``deepcopy`` do? In which exercises from last chapter would ``deepcopy`` have come in handy?"
+msgstr ""
+
+#: ../../source/modules.rst:775
+# f23764dc1abe4ccd869951b5ac7ef7bd
+msgid "Create a module named ``mymodule1.py``. Add attributes ``myage`` set to your current age, and ``year`` set to the current year. Create another module named ``mymodule2.py``. Add attributes ``myage`` set to 0, and ``year`` set to the year you were born. Now create a file named ``namespace_test.py``. Import both of the modules above and write the following statement:"
+msgstr ""
+
+#: ../../source/modules.rst:788
+# 98bd9367e6744d3bb1a42b473a033576
+msgid "When you will run ``namespace_test.py`` you will see either ``True`` or ``False`` as output depending on whether or not you've already had your birthday this year."
+msgstr ""
+
+#: ../../source/modules.rst:792
+# 453490ff992c496ab97fa674da1c746b
+msgid "Add the following statement to ``mymodule1.py``, ``mymodule2.py``, and ``namespace_test.py`` from the previous exercise:"
+msgstr ""
+
+#: ../../source/modules.rst:800
+# b69b7b52543944d0a59a820b19645732
+msgid "Run ``namespace_test.py``. What happens? Why? Now add the following to the bottom of ``mymodule1.py``:"
+msgstr ""
+
+#: ../../source/modules.rst:809
+# 366db6b482e64a51aaa95263ec561f62
+msgid "Run ``mymodule1.py`` and ``namespace_test.py`` again. In which case do you see the new print statement?"
+msgstr ""
+
+#: ../../source/modules.rst:812
+# 4fc144dca7d645f28378d7ea541f075e
+msgid "In a Python shell / interactive interpreter, try the following:"
+msgstr ""
+
+#: ../../source/modules.rst:818
+# 735b58eb649c49a2bf740e9a6f1aaa5e
+msgid "What does Tim Peters have to say about namespaces?"
+msgstr ""
+
+#: ../../source/modules.rst:821
+# a71494c63db04baea502243785171155
+msgid "Give the Python interpreter's response to each of the following from a continuous interpreter session:"
+msgstr ""
+
+#: ../../source/modules.rst:833
+# c129a61a11bb48bebcbba013f39868be
+msgid "Be sure you understand why you get each result. Then apply what you have learned to fill in the body of the function below using the ``split`` and ``join`` methods of ``str`` objects:"
+msgstr ""
+
+#: ../../source/modules.rst:851
+# 711fe12f42e74369961523c74ef90215
+msgid "Your solution should pass the tests."
+msgstr ""
+
+#: ../../source/modules.rst:853
+# 2a4b0ed7303f41dab3d4033f40171699
+msgid "Create a module named ``wordtools.py`` with our test scaffolding in place."
+msgstr ""
+
+#: ../../source/modules.rst:855
+# ed25397b722d48aeb8539fc6074b9497
+msgid "Now add functions to these tests pass::"
+msgstr ""
+
+#: ../../source/modules.rst:889
+# 400d51937648427e8483589602e7a180
+msgid "Save this module so you can use the tools it contains in future programs."
+msgstr ""
+

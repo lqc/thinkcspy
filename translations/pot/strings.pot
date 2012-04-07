@@ -1,0 +1,743 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/strings.rst:12
+# e164f6ae28c84b1cb703454c1bd49777
+msgid "Strings"
+msgstr ""
+
+#: ../../source/strings.rst:17
+# 9dfb612acfe94ac687a15daaa7b06984
+msgid "A compound data type"
+msgstr ""
+
+#: ../../source/strings.rst:19
+# 73b4d877d5954ecb89e538ccb2db9a3c
+msgid "So far we have seen built-in types like ``int``, ``float``, ``bool``, ``str`` and we've seen lists and pairs. Strings, lists, and pairs are qualitatively different from the others because they are made up of smaller pieces.  In the case of strings, they're made up of smaller strings each containing one **character**."
+msgstr ""
+
+#: ../../source/strings.rst:25
+# e17190e7590146e69bbcf00de3735ddb
+msgid "Types that comprise smaller pieces are called **compound data types**. Depending on what we are doing, we may want to treat a compound data type as a single thing, or we may want to access its parts. This ambiguity is useful."
+msgstr ""
+
+#: ../../source/strings.rst:30
+# 560f7bbe57ba41fea16a9288cccb8299
+msgid "Working with strings as single things"
+msgstr ""
+
+#: ../../source/strings.rst:32
+# 0f4a45b46f1543eaa22ee1ea642f66da
+msgid "We previously saw that each turtle instance has its own attributes and a number of methods that can be applied to the instance.  For example, we could set the turtle's color, and we wrote ``tess.turn(90)``."
+msgstr ""
+
+#: ../../source/strings.rst:36
+# 71271b77845345369154ad1ce0a1c877
+msgid "Just like a turtle, a strings is also an object.  So each string instance has its own attributes and methods."
+msgstr ""
+
+#: ../../source/strings.rst:39
+# ae8768d6e5d442cf9429a1224ab9de3b
+msgid "For example:"
+msgstr ""
+
+#: ../../source/strings.rst:48
+# 9ff3a45906d2489584d4aac141bab1af
+msgid "`upper` is a method that can be invoked on any string object to create a new string, in which all the characters are in uppercase.  (The original string `ss` remains unchanged.)"
+msgstr ""
+
+#: ../../source/strings.rst:52
+# ffb1a3a5963d4589b75597cac676e6e2
+msgid "There are also methods like `lower`, `capitalize`, and `swapcase` that do other interesting stuff."
+msgstr ""
+
+#: ../../source/strings.rst:54
+# 0312a7e0c8ab4660883d45c5c62e4f90
+msgid "To learn what methods are available, you can consult the Help documentation, look for the ``string`` module, and read the documentation.  Or, if you're a bit lazier, simply type the following into a PyScripter script:"
+msgstr ""
+
+#: ../../source/strings.rst:64
+# 792c571d491f45728fb8e87603a56afa
+msgid "When you type the period to select one of the methods of `ss`, PyScripter will pop up a selection window showing all the methods (there are around 70 of them --- thank goodness we'll only use a few of those!) that could be used on your string."
+msgstr ""
+
+#: ../../source/strings.rst:70
+# 0aa864ff54f44ed380e2216b47d1542c
+msgid "When you type the name of the method, some further help about its parameter and return type, and its docstring, will be displayed.  This is a good example of a tool --- PyScripter --- using the meta-information --- the docstrings --- provided by the module programmers."
+msgstr ""
+
+#: ../../source/strings.rst:77
+# 2e3f4fa171324186a24c4f5be9ab6f2b
+msgid "Working with the parts of a string"
+msgstr ""
+
+#: ../../source/strings.rst:79
+# 31688dce7ed14acfbdec47c4cf45f690
+msgid "The **indexing operator** (Python uses square brackets to enclose the index) selects a single character substring from a string:"
+msgstr ""
+
+#: ../../source/strings.rst:89
+# 5fc8412c2d844fbebd3a69eb5cabd206
+msgid "The expression ``fruit[1]`` selects character number 1 from ``fruit``, and creates a new string containing just this one character. The variable ``m`` refers to the result. When we display ``m``, we could get a surprise:"
+msgstr ""
+
+#: ../../source/strings.rst:97
+# 791b8c0d3d994c7691c72b75414bbbd1
+msgid "Computer scientists always start counting from zero! The letter at subscript position zero of ``\"banana\"`` is ``b``.  So at position ``[1]`` we have the letter ``a``."
+msgstr ""
+
+#: ../../source/strings.rst:101
+# 9ae9b64d0d0f4d5dbcd16360e8fd68d6
+msgid "If you want the zero-eth letter of a string, you just put 0, or any expression with the value 0, in the brackets:"
+msgstr ""
+
+#: ../../source/strings.rst:110
+# 65bb8ec790e8403bb505f5b640e9f7f2
+msgid "The expression in brackets is called an **index**. An index specifies a member of an ordered collection, in this case the collection of characters in the string. The index *indicates* which one you want, hence the name. It can be any integer expression."
+msgstr ""
+
+#: ../../source/strings.rst:115
+# dd9eeb0b00e746cc950ab1916ec7a3c6
+msgid "Note that indexing returns a *string* --- Python has no special type for a single character. It is just a string of length 1."
+msgstr ""
+
+#: ../../source/strings.rst:118
+# 3a907fb0b2924f95940271071d76220d
+msgid "We've also seen lists previously.  The same indexing notation works to extract elements from a list:"
+msgstr ""
+
+#: ../../source/strings.rst:139
+# 267f8e6ac01f4c0986fb6429348ac379
+msgid "Length"
+msgstr ""
+
+#: ../../source/strings.rst:141
+# aea13f5f37544c24bc439a28c0fb35d3
+msgid "The ``len`` function, when applied to a string, returns the number of characters in a string:"
+msgstr ""
+
+#: ../../source/strings.rst:149
+# f5c8a319715340c6b0afe65a39fc1ea4
+msgid "To get the last letter of a string, you might be tempted to try something like this:"
+msgstr ""
+
+#: ../../source/strings.rst:158
+# b078fba232b64b93a96d87ce79145134
+msgid "That won't work. It causes the runtime error ``IndexError: string index out of range``. The reason is that there is no letter at index position 6 in ``\"banana\"``. Since we started counting at zero, the six indexes are numbered 0 to 5. To get the last character, we have to subtract 1 from ``length``:"
+msgstr ""
+
+#: ../../source/strings.rst:171
+# 424b9c1779f24da29a53c92bc677ee03
+msgid "Alternatively, we can use **negative indices**, which count backward from the end of the string. The expression ``fruit[-1]`` yields the last letter, ``fruit[-2]`` yields the second to last, and so on."
+msgstr ""
+
+#: ../../source/strings.rst:175
+# 21e773e0341b45c1a43fd48c2a94d61f
+msgid "As you might have guessed, indexing with a negative index also works like this for lists."
+msgstr ""
+
+#: ../../source/strings.rst:177
+# 75dee18e690443d581bd7b0320e81276
+msgid "We won't use negative indexes in the rest of these notes --- not many computer languages use this idiom, and you'll probably be better off avoiding it. But there is plenty of Python code out on the Internet that will use this trick, so it is best to know that it exists."
+msgstr ""
+
+#: ../../source/strings.rst:188
+# a0c37570299d4bd39fd2fd534695bc43
+msgid "Traversal and the ``for`` loop"
+msgstr ""
+
+#: ../../source/strings.rst:190
+# dc229d933784478cb533c54e5b638018
+msgid "A lot of computations involve processing a string one character at a time. Often they start at the beginning, select each character in turn, do something to it, and continue until the end. This pattern of processing is called a **traversal**. One way to encode a traversal is with a ``while`` statement:"
+msgstr ""
+
+#: ../../source/strings.rst:204
+# 7a46fe8c450b4ca7aa3edd6ab5574cbc
+msgid "This loop traverses the string and displays each letter on a line by itself. The loop condition is ``ix < len(fruit)``, so when ``ix`` is equal to the length of the string, the condition is false, and the body of the loop is not executed. The last character accessed is the one with the index ``len(fruit)-1``, which is the last character in the string."
+msgstr ""
+
+#: ../../source/strings.rst:210
+# 1d158587042048fc94c18d6014c58617
+msgid "But we've previously seen how the ``for`` loop can easily iterate over lists: ``for`` also works for strings:"
+msgstr ""
+
+#: ../../source/strings.rst:219
+# 744d4c0df7d14fcaba993553e3d34701
+msgid "Each time through the loop, the next character in the string is assigned to the variable ``c``. The loop continues until no characters are left."
+msgstr ""
+
+#: ../../source/strings.rst:222
+# aeeb1c5c80c5485ab536c86e8caabb77
+msgid "The following example shows how to use concatenation and a ``for`` loop to generate an abecedarian series. Abecedarian refers to a series or list in which the elements appear in alphabetical order. For example, in Robert McCloskey's book *Make Way for Ducklings*, the names of the ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack, and Quack.  This loop outputs these names in order:"
+msgstr ""
+
+#: ../../source/strings.rst:237
+# 58e9f0b8fb22464fb88e106301e5148e
+msgid "The output of this program is:"
+msgstr ""
+
+#: ../../source/strings.rst:251
+# af5fc7e756be470ba5552bdba0de6774
+msgid "Of course, that's not quite right because Ouack and Quack are misspelled. You'll fix this as an exercise below."
+msgstr ""
+
+#: ../../source/strings.rst:258
+# 4940d0c4b06a4d1b822238906f7ea53d
+msgid "Slices"
+msgstr ""
+
+#: ../../source/strings.rst:260
+# 9382fdcf9e624d24af41e10364cb7ec7
+msgid "A *substring* of a string is obtained by taking a **slice**.   Similarly, we can slice a list to refer to some sublist of the items in the list:"
+msgstr ""
+
+#: ../../source/strings.rst:276
+# ed4f208ec0474a5cad75a5d72afc18b8
+msgid "The operator ``[n:m]`` returns the part of the string from the n'th character to the m'th character, including the first but excluding the last. This behavior makes sense if you imagine the indices pointing *between* the characters, as in the following diagram:"
+msgstr ""
+
+#: ../../source/strings.rst:284
+# 6c3b07116bf04f55b854a09048602f32
+msgid "Now if you imagine this as a piece of paper, the slice operator ``[n:m]`` cuts the paper at the ``n`` and ``m`` positions."
+msgstr ""
+
+#: ../../source/strings.rst:287
+# 3293b5ece7064d5ea99f6be532c53f13
+msgid "Two tricks are added to this: if you omit the first index (before the colon), the slice starts at the beginning of the string (or list). If you omit the second index, the slice extends to the end of the string (or list). Thus:"
+msgstr ""
+
+#: ../../source/strings.rst:299
+# 1a4cb3cedf8f41bc88d2acabef02da0f
+msgid "What do you think ``s[:]`` means?   What about ``friends[4:]``?"
+msgstr ""
+
+#: ../../source/strings.rst:305
+# 8808feef5d9047a1b6c4cc00096a0ace
+msgid "String comparison"
+msgstr ""
+
+#: ../../source/strings.rst:307
+# d411c2452452462896659cc54ac7a4fa
+msgid "The comparison operators work on strings. To see if two strings are equal:"
+msgstr ""
+
+#: ../../source/strings.rst:315
+# bf20580bcd4e4a53861fc2a6c3335288
+msgid "Other comparison operations are useful for putting words in `lexicographical` order:"
+msgstr ""
+
+#: ../../source/strings.rst:328
+# 638b71665f744e229c100c35940fffa1
+msgid "This is similar to the alphabetical order you would use with a dictionary, except that all the uppercase letters come before all the lowercase letters. As a result:"
+msgstr ""
+
+#: ../../source/strings.rst:336
+# 4409f372190349729d4af104d5d3b23a
+msgid "A common way to address this problem is to convert strings to a standard format, such as all lowercase, before performing the comparison. A more difficult problem is making the program realize that zebras are not fruit."
+msgstr ""
+
+#: ../../source/strings.rst:344
+# 9c15e888f8d24888876456e317e1af1c
+msgid "Strings are immutable"
+msgstr ""
+
+#: ../../source/strings.rst:346
+# 0ced2a1c56744ef881b663e55122825d
+msgid "It is tempting to use the ``[]`` operator on the left side of an assignment, with the intention of changing a character in a string.  For example:"
+msgstr ""
+
+#: ../../source/strings.rst:356
+# 86e62312d8cc4cc8990f487f950db002
+msgid "Instead of producing the output ``Jello, world!``, this code produces the runtime error ``TypeError: 'str' object does not support item assignment``."
+msgstr ""
+
+#: ../../source/strings.rst:359
+# e54e9ef16bb54bbc842009bcaf7b6296
+msgid "Strings are **immutable**, which means you can't change an existing string. The best you can do is create a new string that is a variation on the original:"
+msgstr ""
+
+#: ../../source/strings.rst:369
+# 21038fa466cd40edbcdd1668bc4641b3
+msgid "The solution here is to concatenate a new first letter onto a slice of ``greeting``. This operation has no effect on the original string."
+msgstr ""
+
+#: ../../source/strings.rst:378
+# 16780a71fb3c4b07952edb22c6bb6da8
+msgid "The ``in`` and ``not in`` operators"
+msgstr ""
+
+#: ../../source/strings.rst:380
+# 825399ab50974bb498af2415c120d90c
+msgid "The ``in`` operator tests if one string is a substring of another:"
+msgstr ""
+
+#: ../../source/strings.rst:393
+# a521816a660e49f9ac6777dd7299a291
+msgid "Note that a string is a substring of itself, and the empty string is a substring of any other string. (Also note that computer scientists like to think about these edge cases quite carefully!)"
+msgstr ""
+
+#: ../../source/strings.rst:408
+# 417a6af0a36b44708b72a5ad76b13cda
+msgid "The ``not in`` operator returns the logical opposite results of ``in``:"
+msgstr ""
+
+#: ../../source/strings.rst:415
+# e444151b5e154c8b807c31c07949777c
+msgid "Combining the ``in`` operator with string concatenation using ``+``, we can write a function that removes all the vowels from a string:"
+msgstr ""
+
+#: ../../source/strings.rst:438
+# c272e026e07c4085b1843a5e4d4021cf
+msgid "A ``find`` function"
+msgstr ""
+
+#: ../../source/strings.rst:440
+# df16ef09168e4025add9621b30cf2165
+msgid "What does the following function do?"
+msgstr ""
+
+#: ../../source/strings.rst:463
+# e99d292d85a74409864b1f46d7eb9c18
+msgid "In a sense, ``find`` is the opposite of the indexing operator. Instead of taking an index and extracting the corresponding character, it takes a character and finds the index where that character appears. If the character is not found, the function returns ``-1``."
+msgstr ""
+
+#: ../../source/strings.rst:468
+# d3021edb01204698aae80db9f0bc8d0e
+msgid "This is another example where we see a ``return`` statement inside a loop. If ``strng[ix] == ch``, the function returns immediately, breaking out of the loop prematurely."
+msgstr ""
+
+#: ../../source/strings.rst:472
+# 0f96de5947e94d2aa9303641e0b90f74
+msgid "If the character doesn't appear in the string, then the program exits the loop normally and returns ``-1``."
+msgstr ""
+
+#: ../../source/strings.rst:475
+# cca47c1d1d974c06a46b872da5e35e69
+msgid "This pattern of computation is sometimes called a `eureka traversal` or \"short-circuit evaluation\",  because as soon as we find what we are looking for, we can cry \"Eureka!\", take the short-circuit, and stop looking."
+msgstr ""
+
+#: ../../source/strings.rst:483
+# 2d2266624e7147a79f9885c63969019e
+msgid "Looping and counting"
+msgstr ""
+
+#: ../../source/strings.rst:485
+# e7ade7e85ac448b5b1d801358e7d8535
+msgid "The following program counts the number of times the letter ``a`` appears in a string, and is another example of the counter pattern introduced in :ref:`counting`:"
+msgstr ""
+
+#: ../../source/strings.rst:506
+# ca1e7639165843fa98ce7acc7d42d8ec
+msgid "Optional parameters"
+msgstr ""
+
+#: ../../source/strings.rst:508
+# fb6c5bd690b94e91a2b3cb08257d3e0c
+msgid "To find the locations of the second or third occurrence of a character in a string, we can modify the ``find`` function, adding a third parameter for the starting position in the search string:"
+msgstr ""
+
+#: ../../source/strings.rst:525
+# 8acaa646ef4248a98e6ec33eb48d1ae4
+msgid "The call ``find2('banana', 'a', 2)`` now returns ``3``, the index of the first occurrence of 'a' in 'banana' after index 2. What does ``find2('banana', 'n', 3)`` return? If you said, 4, there is a good chance you understand how ``find2`` works."
+msgstr ""
+
+#: ../../source/strings.rst:530
+# 8e0047b18d644160965adc43da3577ef
+msgid "Better still, we can combine ``find`` and ``find2`` using an **optional parameter**:"
+msgstr ""
+
+#: ../../source/strings.rst:544
+# 13c9f9928d8643618c41927428dc8927
+msgid "When a function has an optional parameter, the caller `may` provide a matching argument. If the third argument is provided to ``find``, it gets assigned to ``start``.  But if the caller leaves the argument out, then start is given a default value indicated by the assignment ``start=0`` in the function definition."
+msgstr ""
+
+#: ../../source/strings.rst:549
+# 15620c3e9fea451d99bf34c85af46f2a
+msgid "So the call ``find('banana', 'a', 2)`` to this version of ``find`` behaves just like ``find2``, while in the call ``find('banana', 'a')``, ``start`` will be set to the **default value** of ``0``."
+msgstr ""
+
+#: ../../source/strings.rst:553
+# f6ece6848d7745b296041da57b62aa3d
+msgid "Adding another optional parameter to ``find`` makes it search from a starting position, up to but not including the end position:"
+msgstr ""
+
+#: ../../source/strings.rst:569
+# 1d065a67511241aea1340b2487c43f84
+msgid "The optional value for ``end`` is interesting: we give it a default value ``None`` if the caller does not supply any argument.  In the body of the function we test what ``end`` is, and if the caller did not supply any argument, we reassign ``end`` to be the length of the string. If the caller has supplied an argument for ``end``, however, the caller's value will be used in the loop."
+msgstr ""
+
+#: ../../source/strings.rst:574
+# d68daded02ca40198e76c991c56c42d0
+msgid "The semantics of ``start`` and ``end`` in this function are precisely the same as they are in the ``range`` function."
+msgstr ""
+
+#: ../../source/strings.rst:577
+# be89c12182d648d28c51e71013495187
+msgid "Here are some test cases that should pass:"
+msgstr ""
+
+#: ../../source/strings.rst:593
+# c4f342e74e1c491097b8bb6d8ed350ca
+msgid "The built-in ``find`` method"
+msgstr ""
+
+#: ../../source/strings.rst:595
+# 5c1423052ef54cfebb38582a3de85854
+msgid "Now that we've done all this work to write a powerful ``find`` function, we can let on that strings already have their own built-in``find`` method.  It can do everything that our one can do, and more!"
+msgstr ""
+
+#: ../../source/strings.rst:608
+# fc71d67b9c3e4837bce168a1e8d0d411
+msgid "The built-in ``find`` method is more general than our version. It can find substrings, not just single characters:"
+msgstr ""
+
+#: ../../source/strings.rst:618
+# d30d11469e0d43888238995d80682578
+msgid "Usually we'd prefer to use the methods that Python provides rather than reinvent our own equivalents. But many of the built-in functions and methods make good teaching exercises, and the underlying techniques you learn are your building blocks to becoming a proficient programmer."
+msgstr ""
+
+#: ../../source/strings.rst:624
+# a3f7f1f4d76846da84a829051b419549
+msgid "The ``split`` method"
+msgstr ""
+
+#: ../../source/strings.rst:626
+# e142c5b177254b368b6c3f26b84215bb
+msgid "One of the most useful methods on strings is the ``split`` method: it splits a single multi-word string into a list of individual words, removing all the whitespace between them.  (Whitespace means any tabs, newlines, or spaces.) This allows us to read input as a single string, and split it into words."
+msgstr ""
+
+#: ../../source/strings.rst:640
+# 483a5779e2db4f999fd261bdc3972b31
+msgid "Cleaning up your strings"
+msgstr ""
+
+#: ../../source/strings.rst:642
+# 5090343008b640e6b56ac45dc6e0d33f
+msgid "We'll often work with strings that contain punctuation, or tab and newline characters, especially, as we'll see in a future chapter, when we read our text from files or from the Internet. But if we're writing a program, say, to count word frequencies or check the spelling of each word, we'd prefer to strip off these unwanted characters."
+msgstr ""
+
+#: ../../source/strings.rst:647
+# 9713986984b74c358b198326e0468c34
+msgid "We'll show just one example of how to strip punctuation from a string. Remember that strings are immutable, so we cannot change the string with the punctuation --- we need to traverse the original string and create a new string, omitting any punctuation:"
+msgstr ""
+
+#: ../../source/strings.rst:664
+# 58d21ccfabbb4304915055c92b215d89
+msgid "Setting up that first assignment is messy and error-prone. Fortunately, the Python ``string`` module already does it for us.  So we will make a slight improvement to this program --- we'll import the ``string`` module and use its definition:"
+msgstr ""
+
+#: ../../source/strings.rst:687
+# dd34ec357dde4e3694cbde0bd812e002
+msgid "Composing together this function and the ``split`` method from the previous section makes a useful combination --- we'll clean out the punctuation, and ``split`` will clean out the newlines and tabs while turning the string into a list of words:"
+msgstr ""
+
+#: ../../source/strings.rst:708
+# 2303c1f127ec406f9e12f5fd6294a83a
+msgid "The output:"
+msgstr ""
+
+#: ../../source/strings.rst:714
+# fd02361195664b0bbae53461faee5b07
+msgid "There are other useful functions in the ``string`` module, other ways to classify characters, and other methods on string instances, but this book isn't intended to be a reference manual. On the other hand, the *Python Library Reference* is. Along with a wealth of other documentation, it is available from the Python website, `http://www.python.org <http://www.python.org>`__."
+msgstr ""
+
+#: ../../source/strings.rst:724
+# 51f64a1e45d04792b107db2bc7179e2f
+msgid "The format method for strings"
+msgstr ""
+
+#: ../../source/strings.rst:726
+# effe879dc06148b990d932a23c7fc977
+msgid "The easiest and most powerful way to format a string in Python 3 is to use the *format* method.  To see how this works, let's start with a few examples:"
+msgstr ""
+
+#: ../../source/strings.rst:745
+# 7d26ba211ad147299c555ea3be11c138
+msgid "Running the script produces:"
+msgstr ""
+
+#: ../../source/strings.rst:753
+# 515e8cdf4e4c48798bbb57baca38ead9
+msgid "The key idea is that one provides a *formatter string* which contains *placeholder fields*, ``... {0} ... {1} ... {2} ...`` etc. The **format method** of a string uses the numbers as indexes into its arguments, and substitutes the appropriate argument into each placeholder field."
+msgstr ""
+
+#: ../../source/strings.rst:759
+# fb4d968887dd4e29bf2ef731e0297878
+msgid "Each of the placeholders can also contain a **format specification** --- it is always introduced by the ``:`` symbol.  This can control things like"
+msgstr ""
+
+#: ../../source/strings.rst:762
+# 7e49de89c5524b1491c2e3b4f120578e
+msgid "whether the field is aligned left ``<``, centered ``^``, or right ``>``"
+msgstr ""
+
+#: ../../source/strings.rst:763
+# b831137119ce40ebb91718f0760db1c6
+msgid "the width allocated to the field within the result string (a number like ``10``)"
+msgstr ""
+
+#: ../../source/strings.rst:764
+# f9a6c100782e4eaeb1b95f46c17b730e
+msgid "the type of conversion (we'll initially only force conversion to float, ``f``, as we did in line 11 of the code above, or perhaps we'll ask integer numbers to be converted to hexadecimal using ``x``)"
+msgstr ""
+
+#: ../../source/strings.rst:766
+# a1fae3c75f444b68b3ef6485464c5f85
+msgid "if the type conversion is a float, you can also specify how many decimal places are wanted (typically, ``.2f`` is useful for working with currencies to two decimal places.)"
+msgstr ""
+
+#: ../../source/strings.rst:769
+# 6b99dcfa37224ad98d894b87ffbc1fc2
+msgid "Let's do a few simple and common examples that should be enough for most needs.  If you need to do anything more esoteric, use *help* and read all the gory details."
+msgstr ""
+
+#: ../../source/strings.rst:786
+# edcfcaaf03044863bb4014fbc879303a
+msgid "This script produces the output:"
+msgstr ""
+
+#: ../../source/strings.rst:795
+# 9c8c678a5325457eb092689ccd84f265
+msgid "You can have multiple placeholders indexing the same argument, or perhaps even have extra arguments that are not referenced at all:"
+msgstr ""
+
+#: ../../source/strings.rst:812
+# 2398cc03f3974c3894c80441f20ccf5f
+msgid "This produces the following:"
+msgstr ""
+
+#: ../../source/strings.rst:826
+# 93bfb23e05984c1f843882aa36b1921e
+msgid "As you might expect, you'll get an index error if your placeholders refer to arguments that you do not provide:"
+msgstr ""
+
+#: ../../source/strings.rst:836
+# 535b16ce71524c7fab0cc0f466d47088
+msgid "The following example illustrates the real utility of string formatting. First, we'll try to print a table without using string formatting:"
+msgstr ""
+
+#: ../../source/strings.rst:847
+# d86adbb149a24f7b84f7dcef7839daa8
+msgid "This program prints out a table of various powers of the numbers from 1 to 10. (This assumes that the tab width is 8.  You might see something even worse than this if you tab width is set to 4.) In its current form it relies on the tab character ( ``\\t``) to align the columns of values, but this breaks down when the values in the table get larger than the tab width:"
+msgstr ""
+
+#: ../../source/strings.rst:868
+# 2b4cc290abbc470a9abdbc907e4d8a12
+msgid "One possible solution would be to change the tab width, but the first column already has more space than it needs. The best solution would be to set the width of each column independently. As you may have guessed by now, string formatting provides a much nicer solution.  We can also right-justify each field:"
+msgstr ""
+
+#: ../../source/strings.rst:883
+# 92a84cea0de5412ca53329d903f185c5
+msgid "Running this version produces the following (much more satisfying) output:"
+msgstr ""
+
+#: ../../source/strings.rst:901
+# d135f10ad7c44266bce5757302c9f0ca
+msgid "Summary"
+msgstr ""
+
+#: ../../source/strings.rst:903
+# 388134ddb70f4039bc3e207067aff242
+msgid "This chapter introduced a lot of new ideas.  The following summary may prove helpful in remembering what you learned."
+msgstr ""
+
+#: ../../source/strings.rst:909
+# 89dd0011f30149d6a3e3af8a9a9e8a51
+msgid "Access a single character in a string using its position (starting from 0).  Example: ``'This'[2]`` evaluates to ``'i'``."
+msgstr ""
+
+#: ../../source/strings.rst:913
+# b425a51ce48b4d12832a1ca933c7b2dc
+msgid "Returns the number of characters in a string.  Example: ``len('happy')`` evaluates to ``5``."
+msgstr ""
+
+#: ../../source/strings.rst:917
+# b2f17e96dfb347f6aee345e3bc2783fd
+msgid "*Traversing* a string means accessing each character in the string, one at a time.  For example, the following for loop:"
+msgstr ""
+
+#: ../../source/strings.rst:925
+# 70aaedc090e74085a7d4c4d4cde80dfd
+msgid "executes the body of the loop 7 times with different values of `ix` each time."
+msgstr ""
+
+#: ../../source/strings.rst:928
+# 52f94e4b0afa42d584e7b8b736decf0b
+msgid "A *slice* is a substring of a string. Example: ``'bananas and cream'[3:6]`` evaluates to ``ana`` (so does ``'bananas and cream'[1:4]``)."
+msgstr ""
+
+#: ../../source/strings.rst:933
+# bb7952cd8f4b472bb8075eaacc61c797
+msgid "The six common comparison operators work with strings, evaluating according to `lexicographical` order.  Examples: ``'apple' < 'banana'`` evaluates to ``True``.  ``'Zeta' < 'Appricot'`` evaluates to ``False``.  ``'Zebra' <= 'aardvark'`` evaluates to ``True`` because all upper case letters precede lower case letters."
+msgstr ""
+
+#: ../../source/strings.rst:940
+# dad9ca60c7e546f289bb0d0d03f87ee6
+msgid "The ``in`` operator tests whether one string is contained inside another string.  Examples: ``'heck' in \"I'll be checking for you.\"`` evaluates to ``True``.  ``'cheese' in \"I'll be checking for you.\"`` evaluates to ``False``."
+msgstr ""
+
+#: ../../source/strings.rst:947
+# 8793f4fa0a6e44e79806818f455cb90f
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/strings.rst:952
+# 806de5478d994bf0a7e856a1b2d29a59
+msgid "A data type in which the values are made up of components, or elements, that are themselves values."
+msgstr ""
+
+#: ../../source/strings.rst:956
+# d9bcf7428c924cf5991326c033decd09
+msgid "The value given to an optional parameter if no argument for it is provided in the function call."
+msgstr ""
+
+#: ../../source/strings.rst:960
+# 04107267731f4a2caab252c26d88a7d0
+msgid "A string constant on the first line of a function or module definition (and as we will see later, in class and method definitions as well). Docstrings provide a convenient way to associate documentation with code. Docstrings are also used by programming tools to provide interactive help."
+msgstr ""
+
+#: ../../source/strings.rst:966
+# 10e2c2dc5df941e295c01a2dc4986396
+msgid "Use of the **dot operator**, ``.``, to access methods and attributes of an object."
+msgstr ""
+
+#: ../../source/strings.rst:969
+# 582f8d247c5a4d9dbe29625b36cf90c7
+msgid "A compound data type whose elements can not be assigned new values."
+msgstr ""
+
+#: ../../source/strings.rst:972
+# 4aad7955ff0a4be2b236ac49c3df15e6
+msgid "A variable or value used to select a member of an ordered collection, such as a character from a string, or an element from a list."
+msgstr ""
+
+#: ../../source/strings.rst:976
+# 09ab74bc13864f399261235f70e5a548
+msgid "A parameter written in a function header with an assignment to a default value which it will receive if no corresponding argument is given for it in the function call."
+msgstr ""
+
+#: ../../source/strings.rst:981
+# d7335e71b5124d9bac30080009c3f8a2
+msgid "A style of programming that shortcuts extra work as soon as the outcome is know with certainty. In this chapter our ``find`` function returned as soon as it found what it was looking for: it didn't traverse all the rest of the items in the string."
+msgstr ""
+
+#: ../../source/strings.rst:987
+# d4889326bce74723bc778e6ca50d9ae2
+msgid "A part of a string (substring) specified by a range of indices. More generally, a subsequence of any sequence type in Python can be created using the slice operator (``sequence[start:stop]``)."
+msgstr ""
+
+#: ../../source/strings.rst:992
+# c893e193cdd9433caf32af031b0e8e4d
+msgid "To iterate through the elements of a collection, performing a similar operation on each."
+msgstr ""
+
+#: ../../source/strings.rst:996
+# eeb36d0c96bd4e068f3c0b194605e252
+msgid "Any of the characters that move the cursor without printing visible characters. The constant ``string.whitespace`` contains all the white-space characters."
+msgstr ""
+
+#: ../../source/strings.rst:1002
+# 2b1f0db6a1ce46e894e5bbeb52e846a9
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/strings.rst:1004
+# 67ba9d018bb54a5aa4e7aef6714e29aa
+msgid "We suggest you create a single file containing the test scaffolding from our previous chapters, and put all functions that require tests into that file."
+msgstr ""
+
+#: ../../source/strings.rst:1007
+# 15d16adc02c140af9a13d2cf67f95aea
+msgid "What is the result of each of the following:"
+msgstr ""
+
+#: ../../source/strings.rst:1021
+# 1034054bc7364db2a0e9021cb5b75063
+msgid "Modify:"
+msgstr ""
+
+#: ../../source/strings.rst:1032
+# be07092f80cb45bc8896fad05c8ecbb6
+msgid "so that ``Ouack`` and ``Quack`` are spelled correctly."
+msgstr ""
+
+#: ../../source/strings.rst:1034
+# 871eb55ad4ab4ef3903f616cbd4ce410
+msgid "Encapsulate"
+msgstr ""
+
+#: ../../source/strings.rst:1046
+# f26d9e6dfbd746feb1515b4e10c97a99
+msgid "in a function named ``count_letters``, and generalize it so that it accepts the string and the letter as arguments.  Make the function return the number of characters, rather than print the answer.  The caller should do the printing."
+msgstr ""
+
+#: ../../source/strings.rst:1050
+# 741691358d774277a995c9554071dce9
+msgid "Now rewrite the ``count_letters`` function so that instead of traversing the string, it repeatedly calls the ``find`` method, with the optional third parameter to locate new occurrences of the letter being counted."
+msgstr ""
+
+#: ../../source/strings.rst:1054
+# 7b33a057026548d882b7f321f1487cd8
+msgid "Assign to a variable in your program a triple-quoted string that contains your favourite paragraph of text - perhaps a poem, a speech, instructions to bake a cake, some inspirational verses, etc."
+msgstr ""
+
+#: ../../source/strings.rst:1058
+# 5e2fadad314f450db6879bb23d015cf8
+msgid "Write a function which removes all punctuation from the string, breaks the string into a list of words, and counts the number of words in your text that contain the letter 'e'.  Your program should print an analysis of the text like this:"
+msgstr ""
+
+#: ../../source/strings.rst:1066
+# f86d9dfb38a8489e8f8477b2f9224317
+msgid "Print out a neatly formatted multiplication table, up to 12 x 12."
+msgstr ""
+
+#: ../../source/strings.rst:1068
+# c3812713117f48409f5331916b3f0a10
+msgid "Write a function that reverses its string argument, and satisfies these tests:"
+msgstr ""
+
+#: ../../source/strings.rst:1078
+# 25144f97be314b09b9fae45ecdc13a1e
+msgid "Write a function that mirrors its argument:"
+msgstr ""
+
+#: ../../source/strings.rst:1088
+# 3fdb1ca264eb4e76a08d658588857eac
+msgid "Write a function that removes all occurrences of a given letter from a string:"
+msgstr ""
+
+#: ../../source/strings.rst:1100
+# 021a0bc5804748d6afcfa036b55020d0
+msgid "Write a function that recognizes palindromes. (Hint: use your ``reverse`` function to make this easy!):"
+msgstr ""
+
+#: ../../source/strings.rst:1113
+# c1897c9cf75f42bca88a79498c641705
+msgid "Write a function that counts how many times a substring occurs in a string:"
+msgstr ""
+
+#: ../../source/strings.rst:1125
+# 5ff249e4eb914a2d96febbd7ef6fccde
+msgid "Write a function that removes the first occurrence of a string from another string:"
+msgstr ""
+
+#: ../../source/strings.rst:1135
+# 91e5655ede1b4e83b3ee03b1d50d25fc
+msgid "Write a function that removes all occurrences of a string from another string:"
+msgstr ""
+

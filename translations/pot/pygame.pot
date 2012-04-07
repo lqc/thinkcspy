@@ -1,0 +1,638 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/pygame.rst:14
+# d959ab29db504affa690651306eb322f
+msgid "PyGame"
+msgstr ""
+
+#: ../../source/pygame.rst:16
+# 8d9887eb26be45628a113686d1691557
+msgid "PyGame is a package that is not part of the standard Python distribution, so if you do not already have it installed (i.e. ``import pygame`` fails), download and install a suitable version from http://pygame.org/download.shtml. These notes are based on PyGame 1.9.1, the most recent version at the time of writing."
+msgstr ""
+
+#: ../../source/pygame.rst:20
+# 438d4a85afff4ca0a99dc6833d022694
+msgid "PyGame comes with a substantial set of tutorials, examples, and help, so there is ample opportunity to stretch yourself on the code. You may need to look around a bit to find these resources, though: if you've installed PyGame on a Windows machine, for example, they'll end up in a folder like C:\\\\Python31\\\\Lib\\\\site-packages\\\\pygame\\\\ where you will find directories for *docs* and *examples*."
+msgstr ""
+
+#: ../../source/pygame.rst:28
+# 1cdc6628d98041b4bfe31ba262e9b209
+msgid "The game loop"
+msgstr ""
+
+#: ../../source/pygame.rst:30
+# d3d2b23557a14ed2a6caf89ddafc4344
+msgid "The structure of the games we'll consider always follows this fixed pattern:"
+msgstr ""
+
+#: ../../source/pygame.rst:34
+# 5d12475435944253b43a666f63ac9894
+msgid "In every game, in the *setup* section we'll create a window, load and prepare some content, and then enter the **game loop**.  The game loop continuously does four main things:"
+msgstr ""
+
+#: ../../source/pygame.rst:37
+# d9c72bb562b1424291c006bc22aedaf1
+msgid "it **polls** for events --- i.e. asks the system whether events have occurred --- and responds appropriately,"
+msgstr ""
+
+#: ../../source/pygame.rst:39
+# 38ca3efe66e64abf9c6c8a58aac867dd
+msgid "it updates whatever internal data structures or objects need changing,"
+msgstr ""
+
+#: ../../source/pygame.rst:40
+# 56a76593db7e4da0b310e105d3e9b823
+msgid "it draws the current state of the game into a (non-visible) surface,"
+msgstr ""
+
+#: ../../source/pygame.rst:41
+# 40b65cf6282b4978a97563986377d5da
+msgid "it puts the just-drawn surface on display."
+msgstr ""
+
+#: ../../source/pygame.rst:83
+# c2873b6c54984123bee310c21c248464
+msgid "This program pops up a window which stays there until we close it:"
+msgstr ""
+
+#: ../../source/pygame.rst:87
+# 2bb689be05504a619fd03aa09b370006
+msgid "PyGame does all its drawing onto rectangular *surfaces*. After initializing PyGame at line 5, we create a window holding our main surface. The main loop of the game extends from line 15 to 30, with the following key bits of logic:"
+msgstr ""
+
+#: ../../source/pygame.rst:91
+# e5dba9b3f79948b9901b093fa7c9b330
+msgid "First (line 16) we poll to fetch the next event that might be ready for us.  This step will always be followed by some conditional statements that will determine whether any event that we're interested in has happened.  Polling for the event consumes it, as far as PyGame is concerned, so we only get one chance to fetch and use each event.   On line 17 we test whether the type of the event is the predefined constant called pygame.QUIT.  This is the event that we'll see when the user clicks the close button on the PyGame window.   In response to this event, we leave the loop."
+msgstr ""
+
+#: ../../source/pygame.rst:99
+# d5e513d38d874f10a1b4fb27ebd2565a
+msgid "Once we've left the loop, the code at line 32 closes window, and we'll return from function ``main``.  Your program could go on to do other things, or reinitialize pygame and create another window, but it will usually just end too."
+msgstr ""
+
+#: ../../source/pygame.rst:102
+# e54e3db64f044be5a0e4ed253bc9a9bc
+msgid "There are different kinds of events --- key presses, mouse motion, mouse clicks, joystick movement, and so on.  It is usual that we test and handle all these cases with new code squeezed in before line 19.  The general idea is \"handle events first, then worry about the other stuff\"."
+msgstr ""
+
+#: ../../source/pygame.rst:106
+# f3e4f704e3d44ab08a7fbc63e336590f
+msgid "At line 20 we'd update objects or data --- for example, if we wanted to vary the color, position, or size of the rectangle we're about to draw, we'd re-assign ``some_color``, and ``small_rect`` here."
+msgstr ""
+
+#: ../../source/pygame.rst:109
+# 21a42a7f3ec74f14bfc7d6c406d03f91
+msgid "A modern way to write games (now that we have fast computers and fast graphics cards) is to redraw everything from scratch on every iteration of the game loop.  So the first thing we do at line 24 is fill the entire surface with a background color.  The ``fill`` method of a surface takes two arguments --- the color to use for filling, and the rectangle to be filled.  But the second argument is optional, and if it is left out the entire surface is filled."
+msgstr ""
+
+#: ../../source/pygame.rst:115
+# 18c17846fbe44668b28a673887059ce9
+msgid "In line 27 we fill a second rectangle, this time using ``some_color``. The placement and size of the rectangle are given by the tuple ``small_rect``, a 4-element tuple ``(x, y, width, height)``."
+msgstr ""
+
+#: ../../source/pygame.rst:118
+# 0087550b7689465fa3ad5985800dfb6e
+msgid "It is important to understand that the origin of the PyGame's surface is at the top left corner (unlike the turtle module that puts its origin in the middle of the screen). So, if you wanted the rectangle closer to the top of the window, you need to make its y coordinate smaller."
+msgstr ""
+
+#: ../../source/pygame.rst:122
+# 9d7f4dd20441485caa8623d5115559c0
+msgid "If your graphics display hardware tries to read from memory at the same time as the program is writing to that memory, they will interfere with each other, causing video noise and flicker.  To get around this, PyGame keeps two buffers in the main surface --- the *back buffer* that the program draws to, while the *front buffer* is being shown to the user.  Each time the program has fully prepared its back buffer, it flips the back/front role of the two buffers. So the drawing on lines 24 and 27 does does not change what is seen on the screen until we ``flip`` the buffers, on line 30."
+msgstr ""
+
+#: ../../source/pygame.rst:134
+# 18a950b56f5f43489d58d7f145598741
+msgid "Displaying images and text"
+msgstr ""
+
+#: ../../source/pygame.rst:136
+# c6cc71137ee94b18b39eeb14e61ea121
+msgid "To draw an image on the main surface, we load the image, say a beach ball, into its own new surface. The main surface has a ``blit`` method that copies pixels from the beach ball surface into its own surface.  When we call ``blit``, we can specify where the beach ball should be placed on the main surface.  The term **blit** is widely used in computer graphics, and means *to make a fast copy of pixels from one area of memory to another*."
+msgstr ""
+
+#: ../../source/pygame.rst:144
+# 5981e0c7b8b048d687793a210486d362
+msgid "So in the setup section, before we enter the game loop, we'd load the image, like this:"
+msgstr ""
+
+#: ../../source/pygame.rst:152
+# 5f9d6461f6a14d99951064478d484eaf
+msgid "and after line 28 in the program above, we'd add this code to display our image at position (100,120):"
+msgstr ""
+
+#: ../../source/pygame.rst:160
+# a33cb6fbdef84c9ab18f88152a6d6988
+msgid "To display text, we need do do three things.  Before we enter the game loop, we instantiate a ``font`` object:"
+msgstr ""
+
+#: ../../source/pygame.rst:169
+# 0ce1bc85dde0466bb909b098c3887d18
+msgid "and after line 28, again, we use the font's ``render`` method to create a new surface containing the pixels of the drawn text, and then, as in the case for images, we blit our new surface onto the main surface.  Notice that ``render`` takes two extra parameters --- the second tells it whether to carefully smooth edges of the text while drawing (this process is called *anti-aliasing*), and the second is the color that we want the text text be.  Here we've used ``(0,0,0)`` which is black:"
+msgstr ""
+
+#: ../../source/pygame.rst:187
+# 2e228451d2404a23bdc6653052761e9a
+msgid "We'll demonstrate these two new features by counting the frames --- the iterations of the game loop --- and keeping some timing information.  On each frame, we'll display the frame count, and the frame rate.  We will only update the frame rate after every 500 frames, when we'll look at the timing interval and can do the calculations."
+msgstr ""
+
+#: ../../source/pygame.rst:254
+# 3fe3b33e2ebf4bb9bbbd81d851a576c4
+msgid "The frame rate is close to ridiculous --- a lot faster than one's eye can process frames. (Commercial video games usually plan their action for 60 frames per second (fps).)  Of course, our rate will drop once we start doing something a little more strenuous inside our game loop."
+msgstr ""
+
+#: ../../source/pygame.rst:263
+# 41ebe4d81b0d4c68848fd2e29af5d065
+msgid "Drawing a board for the N queens puzzle"
+msgstr ""
+
+#: ../../source/pygame.rst:265
+# 54f216064f1b46eabedab2863c316bdd
+msgid "In section :ref:`eightqueenssolver` we solved our N queens puzzle. For the 8x8 board, one of the solutions was the list ``[6,4,2,0,5,7,1,3]``. Let's now use PyGame to draw that chessboard with its queens."
+msgstr ""
+
+#: ../../source/pygame.rst:269
+# 387f1c2c906c4470be0668dbeb578f8f
+msgid "We begin with a background of black and red squares for the board. Perhaps we could create an image that we could load and draw, but that approach would need different background images for different size boards. Just drawing our own red and black rectangles of the appropriate size sounds like much more fun!"
+msgstr ""
+
+#: ../../source/pygame.rst:293
+# e135d1c0dde9485fbaa5cdbc1a7e7793
+msgid "Here we precompute ``sq_sz``, the integer size that each square will be, so that we can fit the squares nicely into the available window.  So if we'd like the board to be 480x480, and we're drawing an 8x8 chessboard, then each square will need to have a size of 60 units.  But we notice that a 7x7 board cannot fit nicely into 480 --- we're going to get some ugly border that our squares don't fill exactly. So we recompute the surface size to exactly fit our squares before we create the window."
+msgstr ""
+
+#: ../../source/pygame.rst:305
+# b036d346eb514da4a82cc8e024a89192
+msgid "Now let's draw the squares, in the game loop. We'll need a nested loop: the outer loop will run over the rows of the chessboard, the inner loop over the columns:"
+msgstr ""
+
+#: ../../source/pygame.rst:322
+# 6ad63176dbd14c65a276235f315dfdca
+msgid "There are two important ideas in this code: firstly, we compute the rectangle to be filled from the ``row`` and ``col`` loop variables, multiplying them by the size of the square to get their position.  And, of course, each square is a fixed width and height.  So ``the_square`` represents the rectangle to be filled on the current iteration of the loop.  The second idea is that we have to alternate colors on every square.  In the earlier setup code we created a list containing two colors, here we manipulate ``c_indx``  (which will always either have the value 0 or 1) to start each row on a color that is different from the previous row's starting color, and to switch colors each time a square is filled."
+msgstr ""
+
+#: ../../source/pygame.rst:339
+# 8a17d166750d41ecad4c7e2f5241e912
+msgid "This (together with the other fragments not shown to flip the surface onto the display) leads to the pleasing backgrounds like this, for different size boards:"
+msgstr ""
+
+#: ../../source/pygame.rst:344
+# 6df0f597cd4448498fbcae706efcb7a6
+msgid "Now, on to drawing the queens!  Recall that our solution ``[6,4,2,0,5,7,1,3]`` means that in column 0 of the board we want a queen at row 6, at column 1 we want a queen at row 4, and so on. So we need a loop running over each queen:"
+msgstr ""
+
+#: ../../source/pygame.rst:357
+# 1020eaf4e6274aeb8a08f0c9f047b73a
+msgid "In this chapter we already have a beach ball image, so we'll use that for our queens.  In the setup code before our game loop, we load the ball image (as we did before), and in the body of the loop, we add the line:"
+msgstr ""
+
+#: ../../source/pygame.rst:370
+# 886bd93e5d7f4c94bf9bc834a834b29e
+msgid "We're getting there, but those queens need to be centred in their squares!  Our problem arises from the fact that both the ball and the rectangle have their upper left corner as their reference points. If we're going to centre this ball in the square, we need to give it an extra offset in both the x and y direction.  (Since the ball is round and the square is square, the offset in the two directions will be the same, so we'll just compute a single offset value, and use it in both directions.)"
+msgstr ""
+
+#: ../../source/pygame.rst:381
+# 443daeb5b3af44879202e7942e87f91e
+msgid "The offset we need is half the (size of the square less the size of the ball).  So we'll precompute this in the game's setup section, after we've loaded the ball and determined the square size:"
+msgstr ""
+
+#: ../../source/pygame.rst:392
+# 247268978c73467bb238a80176b59012
+msgid "Now we touch up the drawing code for the ball and we're done:"
+msgstr ""
+
+#: ../../source/pygame.rst:400
+# ebeb349a9590490aa2d913e9c936f132
+msgid "We might just want to think about what would happen if the ball was bigger than the square.  In that case, ``ball_offset`` would become negative. So it would still be centered in the square - it would just spill over the boundaries, or perhaps obscure the square entirely!"
+msgstr ""
+
+#: ../../source/pygame.rst:405
+# 7249c1c25ed04b759147b51049fd0dd6
+msgid "Here is the complete program:"
+msgstr ""
+
+#: ../../source/pygame.rst:465
+# 74a586d039b54c66ac72c25d0b4698d2
+msgid "There is one more thing worth reviewing here.  The conditional statement on line 50 tests whether the name of the currently executing program is ``__main__``. This allows us to distinguish whether this module is being run as a main program, or whether it has been imported elsewhere, and used as a module.  If we run this module in Python, the test cases in lines 51-54 will be executed.  However, if we import this module into another program (i.e. our N queens solver from earlier) the condition at line 50 will be false, and the statements on lines 51-54 won't run."
+msgstr ""
+
+#: ../../source/pygame.rst:473
+# 388c181ac15a4b0680265463a2dae8b5
+msgid "In the section :ref:`eightqueensmainprog` our main program looked like this:"
+msgstr ""
+
+#: ../../source/pygame.rst:493
+# 41e1aa8765694ae9baa807c37e80e16a
+msgid "Now we just need two changes.  At the top of that program, we import the module that we've been working on here (assume we called it ``draw_queens``).  (You'll have to ensure that the two modules are saved in the same folder.)  Then after line 10 here we add a call to draw the solution that we've just discovered::"
+msgstr ""
+
+#: ../../source/pygame.rst:501
+# 737a0fed91ec4c1081d34c4362387e90
+msgid "And that gives a very satisfying combination of program that can search for solutions to the N queens problem, and when it finds each, it pops up the board showing the solution."
+msgstr ""
+
+#: ../../source/pygame.rst:505
+# c2943024acaa454c957a16c394fe6b42
+msgid "Sprites"
+msgstr ""
+
+#: ../../source/pygame.rst:507
+# 7870ab4d0b5346d2bb7395dc1c179d93
+msgid "A sprite is an object that can move about in a game, and has internal behaviour and state of its own.  For example, a spaceship would be a sprite, the player would be a sprite, and bullets and bombs would all be sprites."
+msgstr ""
+
+#: ../../source/pygame.rst:512
+# ce3a3bb57cdb4f56954b5279d3f77337
+msgid "Object oriented programming (OOP) is ideally suited to a situation like this: each object can have its own attributes and internal state, and a couple of methods.   Let's have some fun with our N queens board.  Instead of placing the queen in her final position, we'd like to drop her in from the top of the board, and let her fall into position, perhaps bouncing along the way."
+msgstr ""
+
+#: ../../source/pygame.rst:520
+# ac6307f6267249ebbe2185ace241bedd
+msgid "The first encapsulation we need is to turn each of our queens into an object.  We'll keep a list of all the active sprites (i.e. a list of queen objects), and arrange two new things in our game loop:"
+msgstr ""
+
+#: ../../source/pygame.rst:525
+# 06b2efd81c2b4ade81715f13ec1416ec
+msgid "After handling events, but before drawing, call an ``update`` method on every sprite.  This will give each sprite a chance to modify its internal state in some way --- perhaps change its image, or change its position, or rotate itself, or make itself grow a bit bigger or a bit smaller."
+msgstr ""
+
+#: ../../source/pygame.rst:530
+# 3228c1f018e6409c804fc8d8dddd9cba
+msgid "Once all the sprites have updated themselves, the game loop can begin drawing - first the background, and then call a ``draw`` method on each sprite in turn, and delegate (hand off) the task of drawing to the object itself.  This is in line with the OOP idea that we don't say \"Hey, *draw*, show this queen!\",  but we prefer to say \"Hey, *queen*, draw yourself!\"."
+msgstr ""
+
+#: ../../source/pygame.rst:538
+# 4896544d928444939c6a5245f9b52272
+msgid "We start with a simple object, no movement or animation yet, just scaffolding, to see how to fit all the pieces together:"
+msgstr ""
+
+#: ../../source/pygame.rst:560
+# 6412b4a037234592862f2a6e7d3f09c4
+msgid "We've given the sprite three attributes: an image to be drawn, a target position, and a current position.  If we're going to move the spite about, the current position may need to be different from the target, which is where we want the queen finally to end up.   In this code at this time we've done nothing in the ``update`` method, and our ``draw`` method (which can probably remain this simple in future) simply draws itself at its current position on the surface that is provided by the caller."
+msgstr ""
+
+#: ../../source/pygame.rst:570
+# 862ac8944d004838aa18658568583f21
+msgid "With its class definition in place, we now instantiate our N queens, put them into a list of sprites, and arrange for the game loop to call the ``update`` and ``draw`` methods on each frame.   The new bits of code, and the revised game loop look like this:"
+msgstr ""
+
+#: ../../source/pygame.rst:605
+# 615f98c71b784d10b14a5fd557324ea7
+msgid "This works just like it did before, but our extra work in making objects for the queens has prepared the way for some more ambitious extensions."
+msgstr ""
+
+#: ../../source/pygame.rst:608
+# 3d69c6d1ab124270924aafbaed2accb2
+msgid "Let us begin with a falling queen object.  At any instant, it will have a velocity i.e. a speed, in a certain direction. (We are only working with movement in the y direction, but use your imagination!) So in the object's ``update`` method, we want to change its current position by its velocity. If our N queens board is floating in space, velocity would stay constant, but hey, here on Earth we have gravity!  Gravity changes the velocity on each time interval, so we'll want a ball that speeds up as it falls further.  Gravity will be constant for all queens, so we won't keep it in the instances --- we'll just make it a variable in our module.  We'll make one other change too: we will start every queen at the top of the board, so that it can fall towards its target position.   With these changes, we now get the following:"
+msgstr ""
+
+#: ../../source/pygame.rst:643
+# 6e02a06dd0ef4e328fd92dfff990eacb
+msgid "Making these changes gives us a new chessboard in which each queen starts at the top of its column, and speeds up, until it drops off the bottom of the board and disappears forever. A good start --- we have movement!"
+msgstr ""
+
+#: ../../source/pygame.rst:649
+# 90e07e336b96476782140261d64beca4
+msgid "The next step is to get the ball to bounce when it reaches its own target position. It is pretty easy to bounce something --- you just change the sign of its velocity, and it will move at the same speed in the opposite direction.  Of course, if it is travelling up towards the top of the board it will be slowed down by gravity. (Gravity always sucks down!)  And you'll find it bounces all the way up to where it began from, reaches zero velocity, and starts falling all over again.  So we'll have bouncing balls that never settle."
+msgstr ""
+
+#: ../../source/pygame.rst:661
+# 079fb01ff7074d3abedbcfe4372ef2a4
+msgid "A realistic way to settle the object is to lose some energy (probably to friction) each time it bounces --- so instead of simply reversing the sign of the velocity, we multiply it by some fractional factor --- say -0.65. This means the ball only retains 65% of its energy on each bounce, so it will, as in real life, stop bouncing after a short while, and settle on its \"ground\"."
+msgstr ""
+
+#: ../../source/pygame.rst:668
+# cc0dc948f2c042969ba5159416fb89a2
+msgid "The only changes are in the ``update`` method, which now looks like this:"
+msgstr ""
+
+#: ../../source/pygame.rst:686
+# fd9451ec08734163ad1ae21e935fd22a
+msgid "Heh, heh, heh!  We're not going to show animated screenshots, so copy the code into your Python environment and see for yourself."
+msgstr ""
+
+#: ../../source/pygame.rst:691
+# ef97f30abcc748b4b200375bfb59d897
+msgid "Events"
+msgstr ""
+
+#: ../../source/pygame.rst:693
+# d2d250d1e432401b91970449c42abc00
+msgid "The only kind of event we're handled so far has been the QUIT event.  But we can also detect keydown and keyup events, mouse motion, and mousebutton down or up events. Consult the PyGame documentation and follow the link to Event."
+msgstr ""
+
+#: ../../source/pygame.rst:698
+# 84acea4b356844bf820505832200eeb0
+msgid "When your program polls for and receives an event object from PyGame, its event type will determine what secondary information is available.  Each event object carries a *dictionary* (which you may only cover in due course in these notes). The dictionary holds certain *keys* and *values* that make sense for the type of event."
+msgstr ""
+
+#: ../../source/pygame.rst:705
+# 83701669d508401abf61751dfcd35e44
+msgid "For example, if the type of event is MOUSEMOTION, we'll be able to find the mouse position and information about the state of the mouse buttons in the dictionary attached to the event.  Similarly, if the event is KEYDOWN, we can learn from the dictionary which key went down, and whether any modifier keys (shift, control, alt, etc.) are also down.  You also get events when the game window becomes active (i.e. gets focus) or loses focus."
+msgstr ""
+
+#: ../../source/pygame.rst:714
+# 8155b3a575b04f9c8e5617ecce74c14b
+msgid "The event object with type NOEVENT is returned if there are no events waiting.  Events can be printed, allowing you to experiment and play around.   So dropping these lines of code into the game loop directly after polling for any event is quite informative:"
+msgstr ""
+
+#: ../../source/pygame.rst:726
+# 1385aee9646948b29276aa653b809a23
+msgid "With this is place, hit the space bar and the escape key, and watch the events you get.  Click your three mouse buttons.  Move your mouse over the window. (This causes a vast cascade of events, so you may also need to filter those out of the printing.) You'll get output that looks something like this:"
+msgstr ""
+
+#: ../../source/pygame.rst:759
+# 81f52732b417477d8ca84a95bc6ba02a
+msgid "So let us now make these changes to the code near the top of our game loop:"
+msgstr ""
+
+#: ../../source/pygame.rst:786
+# 310696feb5364f14aaa5e70ef80e711a
+msgid "Lines 7-16 show typical processing for a KEYDOWN event --- if a key has gone down, we test which key it is, and take some action. With this in place, we have another way to quit our queens program --- by hitting the escape key.  Also, we can use keys to change the color of the board that is drawn."
+msgstr ""
+
+#: ../../source/pygame.rst:791
+# ff408ec03dcc41a48419b114b042d399
+msgid "Finally, at line 20, we respond (pretty lamely) to the mouse button going down."
+msgstr ""
+
+#: ../../source/pygame.rst:793
+# 5ebff311271447baa10e6462f751daf2
+msgid "As a final exercise in this section, we'll write a better response handler to mouse clicks. What we will do is figure out if the user has clicked the mouse on one of our sprites. If there is a sprite under the mouse when the click occurs, we'll send the click to the sprite and let it respond in some sensible way."
+msgstr ""
+
+#: ../../source/pygame.rst:798
+# 285363d6cb464244904ef665d5872fd3
+msgid "We'll begin with some code that finds out which sprite is under the clicked position, perhaps none! We add a method to the class, ``contains_point``, which returns True if the point is within the rectangle of the sprite:"
+msgstr ""
+
+#: ../../source/pygame.rst:814
+# 490a7c083e6e44468bf00c1c75aea29d
+msgid "Now in the game loop, once we've seen the mouse event, we determine which queen, if any, should be told to respond to the event:"
+msgstr ""
+
+#: ../../source/pygame.rst:827
+# 7691514555de46cf990c4e0143d1b86c
+msgid "And the final thing is to write a new method called ``handle_click`` in the ``Queen_sprite`` class. When a sprite is clicked, we'll just add some velocity in the up direction, i.e. kick it back into the air."
+msgstr ""
+
+#: ../../source/pygame.rst:837
+# 433f0f5893c74592876683b7b1dc6edc
+msgid "With these changes we have a playable game!  See if you can keep all the balls on the move, not allowing any one to settle!"
+msgstr ""
+
+#: ../../source/pygame.rst:840
+# b5eeea7107d4457ea757d8041790de5a
+msgid "A wave of animation"
+msgstr ""
+
+#: ../../source/pygame.rst:842
+# 4b80ce69350a4777a13f1a9d73d727cf
+msgid "Many games have sprites that are animated: they crouch, jump and shoot.  How do they do that?"
+msgstr ""
+
+#: ../../source/pygame.rst:844
+# 9d3f13916f4a4460857695622dbbb55f
+msgid "Consider this sequence of 10 images: if we display them in quick succession, Duke will wave at us. (Duke is a friendly visitor from the kingdom of Javaland.)"
+msgstr ""
+
+#: ../../source/pygame.rst:849
+# 837310dfc46b45b2b3cfb20866b56b2f
+msgid "A compound image containing smaller *patches* which are intended for animation is called a **sprite sheet**.   Download this sprite sheet by right-clicking in your browser and saving it in your working directory with the name ``duke_sprintesheet.png``."
+msgstr ""
+
+#: ../../source/pygame.rst:854
+# 89f5e00ed3d34704a1ddcf8308a17773
+msgid "The sprite sheet has been quite carefully prepared: each of the 10 patches are spaced exactly 50 pixels apart.  So, assuming we want to draw patch number 4 (numbering from 0), we want to draw only the rectangle that starts at x position 200, and is 50 pixels wide, within the sprite sheet. Here we've shown the patches and highlighted the patch we want to draw."
+msgstr ""
+
+#: ../../source/pygame.rst:861
+# 184b2d0f089643ec8edba17b8de0591e
+msgid "The ``blit`` method we've been using --- for copying pixels from one surface to another --- can copy a sub-rectangle of the source surface.  So the grand idea here is that each time we draw Duke, we won't blit the whole sprite sheet. Instead we'll provide an extra rectangle argument that determines which portion of the sprite sheet will be blitted."
+msgstr ""
+
+#: ../../source/pygame.rst:866
+# 47cfdce1b878485a91dc3b669e068ae2
+msgid "We're going to add new code in this section to our existing N queens drawing game.  What we want is to put some instances of Duke on the chessboard somewhere.  If the user clicks on one of them, we'll get him to respond by waving back, for one cycle of his animation."
+msgstr ""
+
+#: ../../source/pygame.rst:870
+# 403ddd4e727946f19e329a9bdf935dac
+msgid "But before we do that, we need another change.  Up until now, our game loop has been running at really fast frame rates that are unpredictable.  So we've chosen some *magic numbers* for gravity and for bouncing and kicking the ball on the basis of trial-and-error. If we're going to start animating more sprites, we need to tame our game loop to operate at a fixed, known frame rate.  This will allow us to plan our animation better."
+msgstr ""
+
+#: ../../source/pygame.rst:876
+# 67f4fe72483047709d156cb123fcf2e7
+msgid "PyGame gives us the tools to do this in just two lines of code.  In the setup section of the game, we instantiate a new ``Clock`` object:"
+msgstr ""
+
+#: ../../source/pygame.rst:884
+# 2cb4315e8561432e83259e3ca553df39
+msgid "and right at the bottom of the game loop, we call a method on this object that limits the frame rate to whatever we specify.  So let's plan our game and animation for 60 frames per second, by adding this line at the bottom of our game loop:"
+msgstr ""
+
+#: ../../source/pygame.rst:893
+# e59a1bf22438493ea9fc2db6645b7873
+msgid "You'll find that you have to go back and adjust the numbers for gravity and kicking the ball now, to match this much slower frame rate.  When we plan an animation so that it only works sensibly at a fixed frame rate, we say that we've *baked* the animation. In this case we're baking our animations for 60 frames per second."
+msgstr ""
+
+#: ../../source/pygame.rst:898
+# 3cd7f9a6cf0144b5b6af22b73b8e6ca5
+msgid "To fit into the existing framework that we already have for our queens board, we want to create a ``Duke_sprite`` class that has all the same methods as the ``Queens_sprite`` class.  Then we can add one or more Duke instances onto our list of ``all_sprites``, and our existing game loop will then call methods of the Duke instance.  Let us start with skeleton scaffolding for the new class:"
+msgstr ""
+
+#: ../../source/pygame.rst:929
+# 9da2a35cf0d14950aa4d87bede009626
+msgid "The only changes we'll need to the existing game are all in the setup section. We load up the new sprite sheet and instantiate a couple of instances of Duke, at the positions we want on the chessboard.  So before entering the game loop, we add this code:"
+msgstr ""
+
+#: ../../source/pygame.rst:948
+# 0081ec30ad9c47059125da8ac2715bf2
+msgid "Now the game loop will test if each instance has been clicked, will call the click handler for that instance.  It will also call update and draw for all sprites. All the remaining changes we need to make will be made in the methods of the ``Duke_sprite`` class."
+msgstr ""
+
+#: ../../source/pygame.rst:952
+# 0f00a25efd7f4fbdaa35ae38420edf2d
+msgid "Let's begin with drawing one of the patches.  We'll introduce a new attribute ``curr_patch_num`` into the class.  It holds a value between 0 and 9, and determines which patch to draw.  So the job of the ``draw`` method is to compute the sub-rectangle of the patch to be drawn, and to blit only that portion of the spritesheet:"
+msgstr ""
+
+#: ../../source/pygame.rst:965
+# fe06cca56b51460ba23a033bac485cea
+msgid "Now on to getting the animation to work. We need to arrange logic in ``update`` so that if we're busy animating, we change the ``curr_patch_num`` every so often, and we also decide when to bring Duke back to his rest position, and stop the animation.  An important issue is that the game loop frame rate --- in our case 60 fps --- is not the same as the *animation rate* --- the rate at which we want to change Duke's animation patches.  So we'll plan Duke wave's animation cycle for a duration of 1 second. In other words, we want to play out Duke's 10 animation patches over 60 calls to ``update``. (This is how the baking of the animation takes place!)  So we'll keep another animation frame counter in the class, which will be zero when we're not animating, and each call to ``update`` will increment the counter up to 59, and then back to 0.  We can then divide that animation counter by 6, to set the ``curr_patch_num`` variable to select the patch we want to show."
+msgstr ""
+
+#: ../../source/pygame.rst:988
+# 26834e487b72423490e9410850371ee3
+msgid "Notice that if ``anim_frame_count`` is zero, i.e. Duke is at rest, nothing happens here.  But if we start the counter running, it will count up to 59 before settling back to zero.   Notice also, that because ``anim_frame_count`` can only be a value between 0 and 59, the ``curr_patch_num`` will always stay between 0 and 9.  Just what we require!"
+msgstr ""
+
+#: ../../source/pygame.rst:994
+# 68f2add514a847099161ab83d5dbf349
+msgid "Now how do we trigger the animation, and start it running?  On the mouse click."
+msgstr ""
+
+#: ../../source/pygame.rst:1003
+# e6b0137ba71e46bb82a1f7162c29b851
+msgid "Two things of interest here.  We only start the animation if Duke is at rest. Clicks on Duke while he is already waving get ignored.  And when we do start the animation, we set the counter to 5 --- this means that on the very next call to ``update`` the counter becomes 6, and the image changes.  If we had set the counter to 1, we would have needed to wait for 5 more calls to ``update`` before anything happened --- a slight lag, but enough to make things feel sluggish."
+msgstr ""
+
+#: ../../source/pygame.rst:1011
+# 6dc4beec62ac42ef9a37d981edc8bd52
+msgid "The final touch-up is to initialize our two new attributes when we instantiate the class.  Here is the code for the whole class now:"
+msgstr ""
+
+#: ../../source/pygame.rst:1048
+# 11a29c18417842869efcdb7543f10089
+msgid "Now we have two extra Duke instances on our chessboard, and clicking on either causes that instance to wave."
+msgstr ""
+
+#: ../../source/pygame.rst:1055
+# ecab2f2d1cbd451198fccc675db1c32f
+msgid "Aliens - a case study"
+msgstr ""
+
+#: ../../source/pygame.rst:1057
+# 3c8f82dc56e448db88fb620f3d4cbb56
+msgid "Find the example games with the PyGame package, (On a windows system, something like C:\\\\Python3\\\\Lib\\\\site-packages\\\\pygame\\\\examples) and play the Aliens game.  Then read the code, in an editor or Python environment that shows line numbers."
+msgstr ""
+
+#: ../../source/pygame.rst:1060
+# b80888599a954734bdbc6b894ac6cd53
+msgid "It does a number of much more advanced things that we do, and relies on the PyGame framework for more of its logic.   Here are some of the points that you'll notice:"
+msgstr ""
+
+#: ../../source/pygame.rst:1063
+# c0c90932666c45c281a3fa343b12e9c1
+msgid "The frame rate is deliberately constrained near the bottom of the game loop at line 311.  If you change that number you can make the game very slow or unplayably fast!"
+msgstr ""
+
+#: ../../source/pygame.rst:1065
+# 7b32f7efa23046bd8ec9dd6efa56259b
+msgid "There are different kinds of sprites: Explosions, Shots, Bombs, Aliens and a Player.  Some of these have more than one image --- by swapping the images, we get animation of the sprites, i.e. the Alien spacecraft lights change, and this is done at line 112."
+msgstr ""
+
+#: ../../source/pygame.rst:1068
+# 6f7381bdf2284b0fbd73e67a4173619f
+msgid "Different kinds of objects are referenced in different groups of sprites, and PyGame helps maintain these.  This lets the program check for collisions between, say, the list of shots fired by the player, and the list of spaceships that are attacking.  PyGame does a lot of the hard work for you."
+msgstr ""
+
+#: ../../source/pygame.rst:1072
+# b22df62a7f414461ab9bf1da459b0771
+msgid "Unlike our game, objects in the Aliens game have a limited lifetime, and have to get killed.  For example, if you shoot, a Shot object is created --- if it reaches the top of the screen without expoding against anything, it has to be removed from the game.  Lines 141-142 do this.  Similarly, when a falling bomb gets close to the ground (line 156), it instantiates a new Explosion sprite, and the bomb kills itself."
+msgstr ""
+
+#: ../../source/pygame.rst:1077
+# e9d0dfd2b7554859b008be1c4a3b0506
+msgid "There are random timings that add to the fun --- when to spawn the next Alien, when an Alien drops the next bomb, etc."
+msgstr ""
+
+#: ../../source/pygame.rst:1079
+# 47940939f56f4ffb80d09fb66650d79b
+msgid "The game plays sounds too: a less-than-relaxing loop sound, plus sounds for the shots and explosions."
+msgstr ""
+
+#: ../../source/pygame.rst:1083
+# 05e7a528e4ac456a930994c332a5bc2f
+msgid "Reflections"
+msgstr ""
+
+#: ../../source/pygame.rst:1085
+# b0db822d298a4e95ac0dd8f22755c1ad
+msgid "Object oriented programming is a good organizational tool for software.  In the examples in this chapter, we've started to use (and hopefully appreciate) these benefits.  Here we had N queens each with its own state, falling to its own floor level, bouncing, getting kicked, etc. We might have managed without the organizational power of objects --- perhaps we could have kept lists of velocities for each queen, and lists of target positions, and so on --- our code would likely have been much more complicated, ugly, and a lot poorer!"
+msgstr ""
+
+#: ../../source/pygame.rst:1094
+# 60f1b99fc4e245c78cf96c9705611c1c
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/pygame.rst:1099
+# d4cbd1d9c07e46baa6fe54bb6111edbb
+msgid "The rate at which we play back successive patches to create the illusion of movement. In the sample we considered in this chapter, we played Duke's 10 patches over the duration of one second.  Not the same as the frame rate."
+msgstr ""
+
+#: ../../source/pygame.rst:1104
+# 2f0333004d994864adfa8f542aa1d320
+msgid "An animation that is designed to look good at a predetermined fixed frame rate. This reduces the amount of computation that needs to be done when the game is running. High-end commercial games usually bake their animations."
+msgstr ""
+
+#: ../../source/pygame.rst:1109
+# 740cd0495cee46aaa42bfee6497aa66c
+msgid "A verb used in computer graphics, meaning to make a fast copy of an image or pixels from a sub-rectangle of one image or surface to another surface or image."
+msgstr ""
+
+#: ../../source/pygame.rst:1113
+# 5090508d77364736b8ba7ff5964c3cfd
+msgid "The rate at which the game loop executes and updates the display."
+msgstr ""
+
+#: ../../source/pygame.rst:1116
+# 23e66a1fd0f14c5e9e5e46e87bdc3562
+msgid "A loop that drives the logic of a game.  It will usually poll for events, then update each of the objects in the game, then get everything drawn, and then put the newly drawn frame on display."
+msgstr ""
+
+#: ../../source/pygame.rst:1120
+# 14c1ef140989462485618bec67111bf7
+msgid "A single picture element, or dot, from which images are made."
+msgstr ""
+
+#: ../../source/pygame.rst:1123
+# 89ae4415d2f745f5b4f2d88b40bcb406
+msgid "To ask whether something like a keypress or mouse movement has happened.  Game loops usually poll to discover what events have occurred.  This is different from event-driven programs like the ones seen in the chapter titled \"Events\".  In those cases, the button click or keypress event triggers the call of a handler function in your program, but this happens behind your back."
+msgstr ""
+
+#: ../../source/pygame.rst:1129
+# 86b60d3886af46639fb4b431e4f40978
+msgid "An active agent or element in a game, with its own state, position and behaviour."
+msgstr ""
+
+#: ../../source/pygame.rst:1132
+# 45f3511e800e433a80c048d0e8f68739
+msgid "This is PyGame's term for what the Turtle module calls a *canvas*.  A surface is a rectangle of pixels used for displaying shapes and images."
+msgstr ""
+
+#: ../../source/pygame.rst:1137
+# 6afa28b866764f1293692f7055081fbb
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/pygame.rst:1139
+# a5990cf44a654dee8236f4174371b0ac
+msgid "Have fun with Python, and with PyGame."
+msgstr ""
+
+#: ../../source/pygame.rst:1141
+# 85cc5985e5c7456d9f546e3a8531c012
+msgid "We deliberately left a bug in the code for animating Duke.  If you click on one of the chessboard squares to the right of Duke, he waves anyway.  Why?  Find a one-line fix for the bug."
+msgstr ""
+
+#: ../../source/pygame.rst:1144
+# 8784936e5d6742faa022a9d9c56e6b0b
+msgid "Search Google for \"sprite sheet playing cards\".  Create a list [0..51] to represent an encoding of the 52 cards in a deck. Shuffle the cards, slice off the top five as your hand in a poker deal. Display the hand you have been dealt."
+msgstr ""
+
+#: ../../source/pygame.rst:1148
+# 674ee3433c0d4f5094e4acb35f01092b
+msgid "So the Aliens game is in outer space, without gravity. Shots fly away forever, and bombs don't speed up when they fall.  Add some gravity to the game.   Decide if you're going to allow your own shots to fall back on your head and kill you."
+msgstr ""
+
+#: ../../source/pygame.rst:1152
+# 66fe60ea64c84a1ebb7bccebc552519a
+msgid "Those pesky Aliens seem to pass right through each other!  Change the game so that they collide, and destroy each other in a mighty explosion."
+msgstr ""
+

@@ -1,0 +1,238 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/events.rst:14
+# ea21282d81f44f3397393b42a24de491
+msgid "Event-Driven Programming"
+msgstr ""
+
+#: ../../source/events.rst:16
+# 3af1856a1cbb46edaa6df60de624d621
+msgid "Most programs and devices like your cellphone respond to *events* --- things that happen. For example, you might move your mouse, and the computer responds.  Or you click a button, and the program does something interesting.   In this chapter we'll touch very briefly on how event-driven programming works."
+msgstr ""
+
+#: ../../source/events.rst:22
+# 1c5e9cf6ece34106a1c5f04b09c1c85c
+msgid "Keypress events"
+msgstr ""
+
+#: ../../source/events.rst:24
+# b2190ab354154e4fa57b27ab4af0d01b
+msgid "Here's a program with some new features.  Copy it into your workspace, run it.  When the turtle window opens, press the arrow keys and make tess move about!"
+msgstr ""
+
+#: ../../source/events.rst:65
+# 19bf6f7de2444436a1b784d90810c039
+msgid "Here are some points to note:"
+msgstr ""
+
+#: ../../source/events.rst:67
+# d649b8391e6c409bb03650035446529e
+msgid "You need the call to the window's ``listen`` method at line 31, otherwise it won't notice your keypresses."
+msgstr ""
+
+#: ../../source/events.rst:68
+# 341a1771421d485ca78e4aa921902aa6
+msgid "We named our handler functions ``h1``, ``h2`` and so on, but you can choose better names.  The handlers can be arbitrarily complex functions that call other functions, etc."
+msgstr ""
+
+#: ../../source/events.rst:70
+# 1e92fde983a54b36859d888e94ccfb98
+msgid "Pressing the ``q`` key on the keyboard calls function ``h4`` (because we `bound` the ``q`` key to ``h4`` on line 26). While executing ``h4``, the window's ``bye`` method (line 24) closes the turtle window, which causes the window's mainloop call (line 31) to end its execution.  Since we did not write any more statements after line 32, this means that our program has completed everything, so it too will terminate."
+msgstr ""
+
+#: ../../source/events.rst:74
+# 462beccea3de49c1aa6ceb3129b6113a
+msgid "You can refer to keys on the keyboard by their character code (as we did in line 26), or by their symbolic names. Some of the symbolic names you can try are Cancel (the Break key), BackSpace, Tab, Return(the Enter key), Shift_L (any Shift key), Control_L (any Control key), Alt_L (any Alt key), Pause, Caps_Lock, Escape, Prior (Page Up), Next (Page Down), End, Home, Left, Up, Right, Down, Print, Insert, Delete, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, Num_Lock, and Scroll_Lock."
+msgstr ""
+
+#: ../../source/events.rst:81
+# 5459bad2bb3d4e2c8905665859108877
+msgid "Mouse events"
+msgstr ""
+
+#: ../../source/events.rst:83
+# f9612a5d0a3d4a75ab43913849b50dc6
+msgid "A mouse event is a bit different from a keypress event because its handler needs two parameters to receive x,y coordinate information telling us where the mouse was when the event occurred."
+msgstr ""
+
+#: ../../source/events.rst:107
+# b9c48b1225e0405f97bd100c6c4b929f
+msgid "There is a new turtle method used at line 14 --- this allows us to move the turtle to an *absolute* coordinate position.  (Most of the examples that we've seen so far move the turtle *relative* to where it currently is).   So what this program does is move the turtle (and draw a line) to wherever the mouse is clicked.  Try it out!"
+msgstr ""
+
+#: ../../source/events.rst:112
+# b94ba667bdce4abd97fd315f5d05bfc7
+msgid "If we add this line before line 14, we'll learn a useful debugging trick too::"
+msgstr ""
+
+#: ../../source/events.rst:116
+# 7e53095e18c34f14bce1ebb16de8c896
+msgid "Because we can easily change the text in the window's title bar, it is a useful place to display occasional debugging or status information. (Of course, this is not the real purpose of the window title!)"
+msgstr ""
+
+#: ../../source/events.rst:121
+# f17489b4035b4b73bb7339a9c1bd7be7
+msgid "But there is more!"
+msgstr ""
+
+#: ../../source/events.rst:123
+# c4da0debb2a94ea983b77fc9b1ea2294
+msgid "Not only can the window receive mouse events: individual turtles can also have their own handlers for mouse clicks.  The turtle that \"receives\" the click event will be the one under the mouse.   So we'll create two turtles.  Each will bind a handler to its onclick event.  And the two handlers can do different things for their turtles."
+msgstr ""
+
+#: ../../source/events.rst:160
+# 432d90f8ddae4aa587ef621520a89c8c
+msgid "Run this, click on the turtles, see what happens!"
+msgstr ""
+
+#: ../../source/events.rst:164
+# bb6488882c85453cad900a764463cdfc
+msgid "Automatic events from a timer"
+msgstr ""
+
+#: ../../source/events.rst:166
+# 4b54985f9df045d6aaa5650ba9d0f5ae
+msgid "Alarm clocks, kitchen timers, and thermonuclear bombs in James Bond movies are set to create an \"automatic\" event after a certain interval. The turtle module in Python has a timer that can cause an event when its time is up."
+msgstr ""
+
+#: ../../source/events.rst:191
+# 9c0169598ddd4f0ea0699dd2dd0d2c40
+msgid "On line 16 the timer is started and set to explode in 2000 milliseconds (2 seconds). When the event does occur, the handler is called, and tess springs into action."
+msgstr ""
+
+#: ../../source/events.rst:194
+# 5c85be033b3544e6a8952b57bff6921f
+msgid "Unfortunately, when one sets a timer, it only goes off once. So a common idiom, or style, is to restart the timer inside the handler.  In this way the timer will keep on giving new events.  Try this program:"
+msgstr ""
+
+#: ../../source/events.rst:219
+# d4add2d163e04d87960dbd569cc77d99
+msgid "An example: state machines"
+msgstr ""
+
+#: ../../source/events.rst:221
+# 503595d97cc9469a8f9b7a6b8dd1d335
+msgid "A state machine is a system that can be in one of a few different `states`. We draw a state diagram to represent the machine, where each state is drawn as a circle or an ellipse. Certain events occur which cause the system to leave one state and `transition` into a different state.  These `state transitions` are usually drawn as an arrow on the diagram."
+msgstr ""
+
+#: ../../source/events.rst:226
+# 6773170827c0416dad9d4ab1b8ee8c59
+msgid "This idea is not new: when you first turn on your cellphone, it goes into a state which we could call \"Awaiting PIN\".  When the correct PIN is entered, it transitions into a different state --- say \"Ready\".  Then you could lock the phone, and it would enter a \"Locked\" state, and so on."
+msgstr ""
+
+#: ../../source/events.rst:231
+# 5bfdeea654fe41d4bc451e81160494b2
+msgid "A simple state machine that we encounter often is a traffic light.  Here is a state diagram which shows that the machine continually cycles through three different states, which we've numbered 0, 1 and 2."
+msgstr ""
+
+#: ../../source/events.rst:237
+# b5ed5e48560f4d7cb7b39e92737d246d
+msgid "We're going to build a program that uses a turtle to simulate the traffic lights. There are three lessons here. The first shows off some different ways to use our turtles. The second demonstrates how we would program a state machine in Python, by using a variable to keep track of the current state, and a number of different ``if`` statements to inspect the current state, and take the actions as we change to a different state. The third lesson is to use events from the keyboard to trigger the state changes."
+msgstr ""
+
+#: ../../source/events.rst:244
+# 0cf3542132a14c19bc3894e71fcda376
+msgid "Copy and run this program.  Make sure you understand what each line does, consulting the documentation as you need to."
+msgstr ""
+
+#: ../../source/events.rst:315
+# b0132ed6baf24e91a706cc7e9abea04d
+msgid "The new Python statement is at line 46.  The ``global`` keyword tells Python not to create a new local variable for ``state_num`` (in spite of the fact that the function assigns to this variable at lines 50, 54, and 58).  Instead, in this function, ``state_num`` always refers to the variable that was created at line 42."
+msgstr ""
+
+#: ../../source/events.rst:320
+# df32b0708ed84fea8133723788809f5a
+msgid "What the code in ``advance_state_machine`` does is advance from whatever the current state is, to the next state.  On the state change we move tess to her new position, change her color, and, of course, we assign to ``state num`` the number of the new state we've just entered."
+msgstr ""
+
+#: ../../source/events.rst:325
+# 4d66419859d845dd91b4d67be40a5661
+msgid "Each time the space bar is pressed, the event handler causes the traffic light machine to move to its new state."
+msgstr ""
+
+#: ../../source/events.rst:331
+# 6efbae2b18a4498db4fe48ead0a71ce5
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/events.rst:336
+# fb988f9635554404b0d99734bb53d641
+msgid "We bind a function (or associate it) with an event, meaning that when the event occurs, the function is called to handle it."
+msgstr ""
+
+#: ../../source/events.rst:340
+# 5320d53b630c43b9965fa1fcb23d0db4
+msgid "Something that happens \"outside\" the normal control flow of your program, usually from some user action. Typical events are mouse operations and keypresses.  We've also seen that a timer can be primed to create an event."
+msgstr ""
+
+#: ../../source/events.rst:345
+# e48c2c79ade343559933e03fc1de9dd3
+msgid "A function that is called in response to an event."
+msgstr ""
+
+#: ../../source/events.rst:349
+# 9415ba7c5c764de3b3129113ee066b08
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/events.rst:352
+# 06c61ee93da54fd9b49c0f7c33de0009
+msgid "Add some new key bindings to the first sample program:"
+msgstr ""
+
+#: ../../source/events.rst:354
+# a6c0615159444d05a5460f2ebafb80f4
+msgid "Pressing keys 'R', 'G' or 'B' should change tess' color to Red, Green or Blue."
+msgstr ""
+
+#: ../../source/events.rst:355
+# 82c00bb90a5f4ef7932df79612e2d751
+msgid "Pressing keys '+' or '-' should increase or decrease the width of tess' pen. Ensure that the pen size stays between 1 and 20 (inclusive)."
+msgstr ""
+
+#: ../../source/events.rst:357
+# a4aecc8481554e54b1539a73d4b65ac7
+msgid "Handle some other keys to change some attributes of tess, or attributes of the window, or to give her new behaviour that can be controlled from the keyboard."
+msgstr ""
+
+#: ../../source/events.rst:360
+# 9f48683d2bbf451081bd9dc936788642
+msgid "Change the traffic light program so that changes occur automatically, driven by a timer."
+msgstr ""
+
+#: ../../source/events.rst:362
+# bbd309ce2ce442d6b763b410ff8509ea
+msgid "In an earlier chapter we saw two turtle methods, ``hideturtle`` and ``showturtle`` that can hide or show a turtle.  This suggests that we could take a different approach to the traffic lights program.  Modify the program so that we create three separate turtles for each of the green, orange and red lights, and instead of moving tess to different positions and changing her color, we just make one of the three turtles visible at any time. Once you've made the changes, sit back and ponder some deep thoughts: you've got two programs, both seem to do the same thing. Is one approach somehow preferable to the other?  Which one more closely resembles reality --- i.e. the traffic lights in your town?"
+msgstr ""
+
+#: ../../source/events.rst:371
+# 7a7f6605b21d45d0a09727256ade4ea5
+msgid "Now that you've got a traffic light program with different turtles for each light, perhaps the visibility / invisibility trick wasn't such a great idea. If you watch the traffic lights, they turn on and off --- but when they're off they are still there, perhaps just a darker color. Modify the program now so that the lights don't disappear: they are either on, or off. But when they're off, they're still visible."
+msgstr ""
+
+#: ../../source/events.rst:377
+# 545b7df74b084248a1f9e4b73909edbe
+msgid "Your traffic light controller program has been patented, and you're about to become seriously rich.  But your new client needs a change.  They want four states in their state machine: Green, then Green and Orange together, then Orange only, and then Red.  Additionally, they want different times spent in each state.  The machine should spend 3 seconds in the Green state, followed by one second in the Green+Orange state, then one second in the Orange state, and then 2 seconds in the Red state. Change the logic in the state machine."
+msgstr ""
+
+#: ../../source/events.rst:386
+# 6a1a7f5b4a7e4fa19cc03323d47e4f01
+msgid "If you don't know how tennis scoring works, ask a friend or consult Wikipedia.  A single game in tennis between player A and player B always has a score.  We want to think about the \"state of the score\" as a state machine.   The game starts in state (0, 0), meaning neither player has any score yet.  We'll assume the first element in this pair is the score for player A.   If player A wins the first point, the score becomes (15, 0). If B wins the first point, the state becomes (0, 15).  Below are the first few states and transitions for a state diagram. In this diagram, each state has two possible outcomes (A wins the next point, or B does), and the uppermost arrow is always the transition that happens when A wins the point. Complete the diagram, showing all transitions and all states. (Hint: there are twenty states, if you include the duece state, the advantage states, and the \"A wins\" and \"B wins\" states in your diagram.)"
+msgstr ""
+

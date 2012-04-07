@@ -1,0 +1,590 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/app_a.rst:12
+# ca1b102ab7ac45c198ac280fedc1b2f2
+msgid "Debugging"
+msgstr ""
+
+#: ../../source/app_a.rst:14
+# 799dd0c84c3249be89a9f2cd52ad6202
+msgid "Different kinds of errors can occur in a program, and it is useful to distinguish among them in order to track them down more quickly:"
+msgstr ""
+
+#: ../../source/app_a.rst:17
+# 02b0e92a0c2b4594b45ade7767b30265
+msgid "Syntax errors are produced by Python when it is translating the source code into byte code. They usually indicate that there is something wrong with the syntax of the program. Example: Omitting the colon at the end of a ``def`` statement yields the somewhat redundant message ``SyntaxError: invalid syntax``."
+msgstr ""
+
+#: ../../source/app_a.rst:22
+# 2bbf49e9bf3c455f8c421097f6077f3c
+msgid "Runtime errors are produced by the runtime system if something goes wrong while the program is running. Most runtime error messages include information about where the error occurred and what functions were executing. Example: An infinite recursion eventually causes a runtime error of maximum recursion depth exceeded."
+msgstr ""
+
+#: ../../source/app_a.rst:27
+# 522eaf0f377b43e4ab7b292bc1c753a8
+msgid "Semantic errors are problems with a program that compiles and runs but doesn't do the right thing. Example: An expression may not be evaluated in the order you expect, yielding an unexpected result."
+msgstr ""
+
+#: ../../source/app_a.rst:31
+# 91d3d8b8c8f846599d29b7f5c20e4947
+msgid "The first step in debugging is to figure out which kind of error you are dealing with. Although the following sections are organized by error type, some techniques are applicable in more than one situation."
+msgstr ""
+
+#: ../../source/app_a.rst:37
+# dda19acb45fa4c5caf18b1302a34457c
+msgid "Syntax errors"
+msgstr ""
+
+#: ../../source/app_a.rst:39
+# 147943e6e8d74988a8d89211906d4f99
+msgid "Syntax errors are usually easy to fix once you figure out what they are. Unfortunately, the error messages are often not helpful. The most common messages are ``SyntaxError: invalid syntax`` and ``SyntaxError: invalid token``, neither of which is very informative."
+msgstr ""
+
+#: ../../source/app_a.rst:44
+# 05fe3b1e03074cefb6e2210b7900b826
+msgid "On the other hand, the message does tell you where in the program the problem occurred. Actually, it tells you where Python noticed a problem, which is not necessarily where the error is. Sometimes the error is prior to the location of the error message, often on the preceding line."
+msgstr ""
+
+#: ../../source/app_a.rst:49
+# 6ce93d291cde4cd1b9918d3a206125dd
+msgid "If you are building the program incrementally, you should have a good idea about where the error is. It will be in the last line you added."
+msgstr ""
+
+#: ../../source/app_a.rst:52
+# 906e47b74fea4f6395b7695f434b48b5
+msgid "If you are copying code from a book, start by comparing your code to the book's code very carefully. Check every character. At the same time, remember that the book might be wrong, so if you see something that looks like a syntax error, it might be."
+msgstr ""
+
+#: ../../source/app_a.rst:57
+# 9726e1186b774bcea38d2e7b9fe7b950
+msgid "Here are some ways to avoid the most common syntax errors:"
+msgstr ""
+
+#: ../../source/app_a.rst:59
+# 260a4c4cae734fc0b80d615e04b73ad4
+msgid "Make sure you are not using a Python keyword for a variable name."
+msgstr ""
+
+#: ../../source/app_a.rst:60
+# cbba287dd72d43c18717e9549d6dbdd7
+msgid "Check that you have a colon at the end of the header of every compound statement, including ``for``, ``while``, ``if``, and ``def`` statements."
+msgstr ""
+
+#: ../../source/app_a.rst:62
+# b97fff9d08ee4fe0a78441615698db32
+msgid "Check that indentation is consistent. You may indent with either spaces or tabs but it's best not to mix them. Each level should be nested the same amount."
+msgstr ""
+
+#: ../../source/app_a.rst:65
+# a31182c730344f18b05de020d7e143b8
+msgid "Make sure that any strings in the code have matching quotation marks."
+msgstr ""
+
+#: ../../source/app_a.rst:66
+# eaeeaf87c3f34d9caaf2cee775931ea6
+msgid "If you have multiline strings with triple quotes (single or double), make sure you have terminated the string properly. An unterminated string may cause an ``invalid token`` error at the end of your program, or it may treat the following part of the program as a string until it comes to the next string. In the second case, it might not produce an error message at all!"
+msgstr ""
+
+#: ../../source/app_a.rst:71
+# 48c1b61402d64fa7a74ceb145a4b35ba
+msgid "An unclosed bracket -- (, {, or [ -- makes Python continue with the next line as part of the current statement. Generally, an error occurs almost immediately in the next line."
+msgstr ""
+
+#: ../../source/app_a.rst:74
+# a7bbc56dc51d4bba9ac3b3acf29aedd1
+msgid "Check for the classic ``=`` instead of ``==`` inside a conditional."
+msgstr ""
+
+#: ../../source/app_a.rst:76
+# e5b6b220b1484fa2a5e76b946497d534
+msgid "If nothing works, move on to the next section..."
+msgstr ""
+
+#: ../../source/app_a.rst:80
+# ae7d1853a41a4b83b313857b20d11416
+msgid "I can't get my program to run no matter what I do."
+msgstr ""
+
+#: ../../source/app_a.rst:82
+# dcb4dbfd086242978a36fdd736f74b7e
+msgid "If the compiler says there is an error and you don't see it, that might be because you and the compiler are not looking at the same code. Check your programming environment to make sure that the program you are editing is the one Python is trying to run. If you are not sure, try putting an obvious and deliberate syntax error at the beginning of the program. Now run (or import) it again. If the compiler doesn't find the new error, there is probably something wrong with the way your environment is set up."
+msgstr ""
+
+#: ../../source/app_a.rst:90
+# 657eca056fc14112b61cd49d1022e976
+msgid "If this happens, one approach is to start again with a new program like Hello, World!, and make sure you can get a known program to run.  Then gradually add the pieces of the new program to the working one."
+msgstr ""
+
+#: ../../source/app_a.rst:96
+# 6a0d5887cc374dc3a67b225a5072b682
+msgid "Runtime errors"
+msgstr ""
+
+#: ../../source/app_a.rst:98
+# 4433cf92f74048bb9308114d9e6afd8c
+msgid "Once your program is syntactically correct, Python can import it and at least start running it. What could possibly go wrong?"
+msgstr ""
+
+#: ../../source/app_a.rst:103
+# 34e1cf7457344bb8a789ddd3a7d92bbd
+msgid "My program does absolutely nothing."
+msgstr ""
+
+#: ../../source/app_a.rst:105
+# 35ee731350f944c28258f0bba8968802
+msgid "This problem is most common when your file consists of functions and classes but does not actually invoke anything to start execution. This may be intentional if you only plan to import this module to supply classes and functions."
+msgstr ""
+
+#: ../../source/app_a.rst:110
+# 1c8b388ef68943438f7672c9f0185c3e
+msgid "If it is not intentional, make sure that you are invoking a function to start execution, or execute one from the interactive prompt. Also see the Flow of Execution section below."
+msgstr ""
+
+#: ../../source/app_a.rst:116
+# 5fa9460c57144d0f93b37630e3090256
+msgid "My program hangs."
+msgstr ""
+
+#: ../../source/app_a.rst:118
+# 79bafbdaa66a47a6a5e8bff217db1340
+msgid "If a program stops and seems to be doing nothing, we say it is hanging. Often that means that it is caught in an infinite loop or an infinite recursion."
+msgstr ""
+
+#: ../../source/app_a.rst:121
+# 356f2d26592f43e59d8bf2b39b97d9a0
+msgid "If there is a particular loop that you suspect is the problem, add a ``print`` statement immediately before the loop that says entering the loop and another immediately after that says exiting the loop."
+msgstr ""
+
+#: ../../source/app_a.rst:124
+# 3b70c8ec38014256923e7472fb2f3a1b
+msgid "Run the program. If you get the first message and not the second, you've got an infinite loop. Go to the Infinite Loop section below."
+msgstr ""
+
+#: ../../source/app_a.rst:126
+# e68e93410831424fa01ccd6f1c16075e
+msgid "Most of the time, an infinite recursion will cause the program to run for a while and then produce a RuntimeError: Maximum recursion depth exceeded error. If that happens, go to the Infinite Recursion section below."
+msgstr ""
+
+#: ../../source/app_a.rst:130
+# adf2873c9f8b4e4aaaf46c8b97f5583d
+msgid "If you are not getting this error but you suspect there is a problem with a recursive method or function, you can still use the techniques in the Infinite Recursion section."
+msgstr ""
+
+#: ../../source/app_a.rst:133
+# 6ece4693575b47e6bd83318f3e9ad2dd
+msgid "If neither of those steps works, start testing other loops and other recursive functions and methods."
+msgstr ""
+
+#: ../../source/app_a.rst:135
+# 6496fd506ef44363b205f4ffa41aa92a
+msgid "If that doesn't work, then it is possible that you don't understand the flow of execution in your program. Go to the Flow of Execution section below."
+msgstr ""
+
+#: ../../source/app_a.rst:140
+# b7645866235041178020915234aa1167
+msgid "Infinite Loop"
+msgstr ""
+
+#: ../../source/app_a.rst:142
+# 0e9c1fe85ace4b13bf781b6aad708f33
+msgid "If you think you have an infinite loop and you think you know what loop is causing the problem, add a ``print`` statement at the end of the loop that prints the values of the variables in the condition and the value of the condition."
+msgstr ""
+
+#: ../../source/app_a.rst:147
+#: ../../source/app_a.rst:368
+# 70d295f93c6c4cfab637bb3750f41aa1
+# a747debacc52494a8650dc0cd34ff9e3
+msgid "For example:"
+msgstr ""
+
+#: ../../source/app_a.rst:160
+# d081fcb907e448ccbc1803d56c5d3436
+msgid "Now when you run the program, you will see three lines of output for each time through the loop. The last time through the loop, the condition should be ``false``. If the loop keeps going, you will be able to see the values of ``x`` and ``y``, and you might figure out why they are not being updated correctly."
+msgstr ""
+
+#: ../../source/app_a.rst:165
+# 61303f15f62f47f89ab9527764059981
+msgid "In a development environment like PyScripter, one can also set a breakpoint at the start of the loop, and single-step through the loop.  While you do this, inspect the values of ``x`` and ``y`` by hovering your cursor over them."
+msgstr ""
+
+#: ../../source/app_a.rst:170
+# d03bd9660138450fbbd0626ab38b64f9
+msgid "Of course, all programming and debugging require that you have a good mental model of what the algorithm ought to be doing: if you don't understand what ought to happen to ``x`` and ``y``, printing or inspecting its value is of little use. Probably the best place to debug the code is away from your computer, working on your understanding of what should be happening."
+msgstr ""
+
+#: ../../source/app_a.rst:178
+# 4a13c21ed73e49ea9c36b4f03cdacc6e
+msgid "Infinite Recursion"
+msgstr ""
+
+#: ../../source/app_a.rst:180
+# 566a77b137fc44289db1cbca0c160791
+msgid "Most of the time, an infinite recursion will cause the program to run for a while and then produce a ``Maximum recursion depth exceeded`` error."
+msgstr ""
+
+#: ../../source/app_a.rst:183
+# 0ffffb0bafee49e68eafdc0c57ea1a82
+msgid "If you suspect that a function or method is causing an infinite recursion, start by checking to make sure that there is a base case.  In other words, there should be some condition that will cause the function or method to return without making a recursive invocation. If not, then you need to rethink the algorithm and identify a base case."
+msgstr ""
+
+#: ../../source/app_a.rst:189
+# e25b38290947488bb031f166d17c3a80
+msgid "If there is a base case but the program doesn't seem to be reaching it, add a ``print`` statement at the beginning of the function or method that prints the parameters. Now when you run the program, you will see a few lines of output every time the function or method is invoked, and you will see the parameters. If the parameters are not moving toward the base case, you will get some ideas about why not."
+msgstr ""
+
+#: ../../source/app_a.rst:196
+# 9aa4afcb14c74e45b7bbdda7bc6aa445
+msgid "Once again, if you have an environment that supports easy single-stepping, breakpoints, and inspection, learn to use them well. It is our opinion that walking through code step-by-step builds the best and most accurate mental model of how computation happens. Use it if you have it!"
+msgstr ""
+
+#: ../../source/app_a.rst:203
+# 8125e759fd8f4266b36a17a8531f9085
+msgid "Flow of Execution"
+msgstr ""
+
+#: ../../source/app_a.rst:205
+# abfd833c9c6547769a588e3c8f2ab845
+msgid "If you are not sure how the flow of execution is moving through your program, add ``print`` statements to the beginning of each function with a message like entering function ``foo``, where ``foo`` is the name of the function."
+msgstr ""
+
+#: ../../source/app_a.rst:209
+# 5383cfdacfe14aac88ccf5c30651504b
+msgid "Now when you run the program, it will print a trace of each function as it is invoked."
+msgstr ""
+
+#: ../../source/app_a.rst:212
+# 965cfaabfce4419cbdecbe007099baa9
+msgid "If you're not sure, step through the program with your debugger."
+msgstr ""
+
+#: ../../source/app_a.rst:215
+# 4b201e6d550346a08508c853918288a7
+msgid "When I run the program I get an exception."
+msgstr ""
+
+#: ../../source/app_a.rst:217
+# d6fee1a1ee9b4d148421fe8b9e1aa4de
+msgid "If something goes wrong during runtime, Python prints a message that includes the name of the exception, the line of the program where the problem occurred, and a traceback."
+msgstr ""
+
+#: ../../source/app_a.rst:221
+# d4592a51840943e593e4367d0ae414b7
+msgid "Put a breakpoint on the line causing the exception, and look around!"
+msgstr ""
+
+#: ../../source/app_a.rst:223
+# 012f84d3e4e34626a89ad7b811855efa
+msgid "The traceback identifies the function that is currently running, and then the function that invoked it, and then the function that invoked *that*, and so on. In other words, it traces the path of function invocations that got you to where you are. It also includes the line number in your file where each of these calls occurs."
+msgstr ""
+
+#: ../../source/app_a.rst:229
+# b16aa0643c8d4e18beb2255a0e2e5427
+msgid "The first step is to examine the place in the program where the error occurred and see if you can figure out what happened. These are some of the most common runtime errors:"
+msgstr ""
+
+#: ../../source/app_a.rst:234
+# ca634e89362340398f8435032a409066
+msgid "You are trying to use a variable that doesn't exist in the current environment. Remember that local variables are local. You cannot refer to them from outside the function where they are defined."
+msgstr ""
+
+#: ../../source/app_a.rst:239
+# 224773c6f4a74e98aa1790d95d0f17b5
+msgid "There are several possible causes:"
+msgstr ""
+
+#: ../../source/app_a.rst:241
+# 262532e94951444c882af9872576b77c
+msgid "You are trying to use a value improperly. Example: indexing a string, list, or tuple with something other than an integer."
+msgstr ""
+
+#: ../../source/app_a.rst:243
+# 67820e7f020a43dbbfc8119fb7cb83f6
+msgid "There is a mismatch between the items in a format string and the items passed for conversion. This can happen if either the number of items does not match or an invalid conversion is called for."
+msgstr ""
+
+#: ../../source/app_a.rst:246
+# e2a5aade85ee4698a802321c0532c14d
+msgid "You are passing the wrong number of arguments to a function or method. For methods, look at the method definition and check that the first parameter is ``self``. Then look at the method invocation; make sure you are invoking the method on an object with the right type and providing the other arguments correctly."
+msgstr ""
+
+#: ../../source/app_a.rst:253
+# e8cdf204a2624e949040d2a053455f4d
+msgid "You are trying to access an element of a dictionary using a key value that the dictionary does not contain."
+msgstr ""
+
+#: ../../source/app_a.rst:257
+# 41edc8e6e64e444cbc1ae2d6508f1b59
+msgid "You are trying to access an attribute or method that does not exist."
+msgstr ""
+
+#: ../../source/app_a.rst:260
+# b134dec044a24d7caf0c88cc5548314a
+msgid "The index you are using to access a list, string, or tuple is greater than its length minus one. Immediately before the site of the error, add a ``print`` statement to display the value of the index and the length of the array. Is the array the right size? Is the index the right value?"
+msgstr ""
+
+#: ../../source/app_a.rst:267
+# a3783567108946ac97d150820f0b8a9b
+msgid "I added so many ``print`` statements I get inundated with output."
+msgstr ""
+
+#: ../../source/app_a.rst:269
+# a9d29239886144748c5ac63beb3189bd
+msgid "One of the problems with using ``print`` statements for debugging is that you can end up buried in output. There are two ways to proceed: simplify the output or simplify the program."
+msgstr ""
+
+#: ../../source/app_a.rst:273
+# 1940fc9eb72d449f940c47833825782e
+msgid "To simplify the output, you can remove or comment out ``print`` statements that aren't helping, or combine them, or format the output so it is easier to understand."
+msgstr ""
+
+#: ../../source/app_a.rst:277
+# 16afdf4e517e429faf16a74cbf3624c2
+msgid "To simplify the program, there are several things you can do. First, scale down the problem the program is working on. For example, if you are sorting an array, sort a *small* array. If the program takes input from the user, give it the simplest input that causes the problem."
+msgstr ""
+
+#: ../../source/app_a.rst:282
+# 340d8fa26b3647a1a36b6ddac0a1e6b2
+msgid "Second, clean up the program. Remove dead code and reorganize the program to make it as easy to read as possible. For example, if you suspect that the problem is in a deeply nested part of the program, try rewriting that part with simpler structure. If you suspect a large function, try splitting it into smaller functions and testing them separately."
+msgstr ""
+
+#: ../../source/app_a.rst:289
+# 274b47661e65449a9d4805afc2f0fda5
+msgid "Often the process of finding the minimal test case leads you to the bug. If you find that a program works in one situation but not in another, that gives you a clue about what is going on."
+msgstr ""
+
+#: ../../source/app_a.rst:293
+# dcba7d89ce9d4894bb1eba29e2f3280b
+msgid "Similarly, rewriting a piece of code can help you find subtle bugs. If you make a change that you think doesn't affect the program, and it does, that can tip you off."
+msgstr ""
+
+#: ../../source/app_a.rst:297
+# b86ea9b69226467e9ce899ec61593337
+msgid "You can also wrap your debugging print statements in some condition, so that you suppress much of the output. For example, if you are trying to find an element using a binary search, and it is not working, you might code up a debugging print statement inside a conditional:  if the range of candidate elements is less that 6, then print debugging information, otherwise don't print."
+msgstr ""
+
+#: ../../source/app_a.rst:304
+# d3fe68b999ec4e78bcb218b0db424fef
+msgid "Similarly, breakpoints can be made conditional: you can set a breakpoint on a statement, then edit the breakpoint to say \"only break if this expression becomes true\"."
+msgstr ""
+
+#: ../../source/app_a.rst:309
+# 8efb46ff56554dafae00ead775cda1bf
+msgid "Semantic errors"
+msgstr ""
+
+#: ../../source/app_a.rst:311
+# f9282d775be14eeabfc4fde03b6c62ba
+msgid "In some ways, semantic errors are the hardest to debug, because the compiler and the runtime system provide no information about what is wrong. Only you know what the program is supposed to do, and only you know that it isn't doing it."
+msgstr ""
+
+#: ../../source/app_a.rst:316
+# 0dd36f1aba534d09bfcefff2bf45e9f8
+msgid "The first step is to make a connection between the program text and the behavior you are seeing. You need a hypothesis about what the program is actually doing. One of the things that makes that hard is that computers run so fast."
+msgstr ""
+
+#: ../../source/app_a.rst:321
+# c75f90ad48b04c0fb9db293372eee20d
+msgid "You will often wish that you could slow the program down to human speed, and with some debuggers you can. But the time it takes to insert a few well-placed ``print`` statements is often short compared to setting up the debugger, inserting and removing breakpoints, and walking the program to where the error is occurring."
+msgstr ""
+
+#: ../../source/app_a.rst:329
+# 7d7e761f7d114717a55a7d20cb159a06
+msgid "My program doesn't work."
+msgstr ""
+
+#: ../../source/app_a.rst:331
+# 5c81924253bb4bf4a615b66ee9899243
+msgid "You should ask yourself these questions:"
+msgstr ""
+
+#: ../../source/app_a.rst:334
+# 3fafc65132a14e75adc279ab3e8f8de1
+msgid "Is there something the program was supposed to do but which doesn't seem to be happening? Find the section of the code that performs that function and make sure it is executing when you think it should."
+msgstr ""
+
+#: ../../source/app_a.rst:337
+# 897b4116f9b8438eb885604360a0cda9
+msgid "Is something happening that shouldn't? Find code in your program that performs that function and see if it is executing when it shouldn't."
+msgstr ""
+
+#: ../../source/app_a.rst:340
+# c4101320c3e748d08b67236a594c8943
+msgid "Is a section of code producing an effect that is not what you expected? Make sure that you understand the code in question, especially if it involves invocations to functions or methods in other Python modules. Read the documentation for the functions you invoke. Try them out by writing simple test cases and checking the results."
+msgstr ""
+
+#: ../../source/app_a.rst:347
+# 0dd498aa0993418cb43bb4bd5f2d60da
+msgid "In order to program, you need to have a mental model of how programs work. If you write a program that doesn't do what you expect, very often the problem is not in the program; it's in your mental model."
+msgstr ""
+
+#: ../../source/app_a.rst:351
+# beded9f5d36448ea93cf39d88c8d482c
+msgid "The best way to correct your mental model is to break the program into its components (usually the functions and methods) and test each component independently. Once you find the discrepancy between your model and reality, you can solve the problem."
+msgstr ""
+
+#: ../../source/app_a.rst:356
+# 79389f12a4b44f3caee068e6e59ba080
+msgid "Of course, you should be building and testing components as you develop the program. If you encounter a problem, there should be only a small amount of new code that is not known to be correct."
+msgstr ""
+
+#: ../../source/app_a.rst:362
+# bef133c104a74059953194498782ad16
+msgid "I've got a big hairy expression and it doesn't do what I expect."
+msgstr ""
+
+#: ../../source/app_a.rst:364
+# 0d698989ca194064ae061eb955bb00d6
+msgid "Writing complex expressions is fine as long as they are readable, but they can be hard to debug. It is often a good idea to break a complex expression into a series of assignments to temporary variables."
+msgstr ""
+
+#: ../../source/app_a.rst:375
+# 9e6ae27eeb2b4ef8813f16828cd131e2
+msgid "This can be rewritten as:"
+msgstr ""
+
+#: ../../source/app_a.rst:384
+# a557cc2dd09d4b7ab7cf5a0fbd05ccff
+msgid "The explicit version is easier to read because the variable names provide additional documentation, and it is easier to debug because you can check the types of the intermediate variables and display or inspect their values."
+msgstr ""
+
+#: ../../source/app_a.rst:388
+# 82f79ad2d7964903beb60e4fa028c293
+msgid "Another problem that can occur with big expressions is that the order of evaluation may not be what you expect. For example, if you are translating the expression ``x/2pi`` into Python, you might write:"
+msgstr ""
+
+#: ../../source/app_a.rst:396
+# 29768a8b22454fcc8c4a6ab056e58c5d
+msgid "That is not correct because multiplication and division have the same precedence and are evaluated from left to right. So this expression computes ``(x/2)pi``."
+msgstr ""
+
+#: ../../source/app_a.rst:400
+# 0827c279894d4a95b4aff5068915e734
+msgid "A good way to debug expressions is to add parentheses to make the order of evaluation explicit:"
+msgstr ""
+
+#: ../../source/app_a.rst:407
+# 3668dc2d39e34dfca9b7898966fdb457
+msgid "Whenever you are not sure of the order of evaluation, use parentheses.  Not only will the program be correct (in the sense of doing what you intended), it will also be more readable for other people who haven't memorized the rules of precedence."
+msgstr ""
+
+#: ../../source/app_a.rst:414
+# 79d8d0b953464b8095ac9f8060c3c908
+msgid "I've got a function or method that doesn't return what I expect."
+msgstr ""
+
+#: ../../source/app_a.rst:416
+# f1d88586c9614d3f91da0fb17bb6eb45
+msgid "If you have a ``return`` statement with a complex expression, you don't have a chance to print the ``return`` value before returning. Again, you can use a temporary variable. For example, instead of:"
+msgstr ""
+
+#: ../../source/app_a.rst:424
+# 45680120a91c4f538269dcf3acde54fa
+msgid "you could write:"
+msgstr ""
+
+#: ../../source/app_a.rst:431
+# 7a853b78760f4027b21535f843826b9c
+msgid "Now you have the opportunity to display or inspect the value of ``count`` before returning."
+msgstr ""
+
+#: ../../source/app_a.rst:436
+# cecfaa5ca63e41689a556781a473d558
+msgid "I'm really, really stuck and I need help."
+msgstr ""
+
+#: ../../source/app_a.rst:438
+# 26cf00e54cd1423985c2171811eeb520
+msgid "First, try getting away from the computer for a few minutes. Computers emit waves that affect the brain, causing these effects:"
+msgstr ""
+
+#: ../../source/app_a.rst:441
+# 5691a832e8824c3f83be1d7c05c1458d
+msgid "Frustration and/or rage."
+msgstr ""
+
+#: ../../source/app_a.rst:442
+# 3c33fc762a4d485fbf77cfdfb30e35bc
+msgid "Superstitious beliefs ( the computer hates me ) and magical thinking ( the program only works when I wear my hat backward )."
+msgstr ""
+
+#: ../../source/app_a.rst:444
+# 1812ea7b40c34263816f5cbef0f7741d
+msgid "Random-walk programming (the attempt to program by writing every possible program and choosing the one that does the right thing)."
+msgstr ""
+
+#: ../../source/app_a.rst:447
+# c87bcff3eebd49f18a9f5a492e175129
+msgid "If you find yourself suffering from any of these symptoms, get up and go for a walk. When you are calm, think about the program. What is it doing? What are some possible causes of that behavior? When was the last time you had a working program, and what did you do next?"
+msgstr ""
+
+#: ../../source/app_a.rst:452
+# 7c1aadf5b4fc4ed88324103eef11fb34
+msgid "Sometimes it just takes time to find a bug. We often find bugs when we are away from the computer and let our minds wander. Some of the best places to find bugs are trains, showers, and in bed, just before you fall asleep."
+msgstr ""
+
+#: ../../source/app_a.rst:458
+# a8ddadf0e08c47f9889af3878449dc22
+msgid "No, I really need help."
+msgstr ""
+
+#: ../../source/app_a.rst:460
+# 8180cbb6934c4ad7ad1016e1b21461c7
+msgid "It happens. Even the best programmers occasionally get stuck.  Sometimes you work on a program so long that you can't see the error.  A fresh pair of eyes is just the thing."
+msgstr ""
+
+#: ../../source/app_a.rst:464
+# 4af515b54a254a3fada3b7baa8a9bb29
+msgid "Before you bring someone else in, make sure you have exhausted the techniques described here. Your program should be as simple as possible, and you should be working on the smallest input that causes the error. You should have ``print`` statements in the appropriate places (and the output they produce should be comprehensible). You should understand the problem well enough to describe it concisely."
+msgstr ""
+
+#: ../../source/app_a.rst:471
+# fe706fddebac45b0a49e1da35c5de1ee
+msgid "When you bring someone in to help, be sure to give them the information they need:"
+msgstr ""
+
+#: ../../source/app_a.rst:474
+# c86b75dc07f0423ba09216544a2a08eb
+msgid "If there is an error message, what is it and what part of the program does it indicate?"
+msgstr ""
+
+#: ../../source/app_a.rst:476
+# 578245198e86426181ad99fba0b591d8
+msgid "What was the last thing you did before this error occurred? What were the last lines of code that you wrote, or what is the new test case that fails?"
+msgstr ""
+
+#: ../../source/app_a.rst:478
+# b59f299558ce4103aec2c1d4861e559a
+msgid "What have you tried so far, and what have you learned?"
+msgstr ""
+
+#: ../../source/app_a.rst:480
+# 78c52357d6c9426a9c058c5859e3b90c
+msgid "Good instructors and helpers will also do something that should not offend you: they won't believe when you tell them *\"I'm sure all the input routines are working just fine, and that I've set up the data correctly!\"*. They will want to validate and check things for themselves. After all, your program has a bug. Your understanding and inspection of the code have not found it yet. So you should expect to have your assumptions challenged.  And as you gain skills and help others, you'll need to do the same for them."
+msgstr ""
+
+#: ../../source/app_a.rst:489
+# 33ed76944fc1480281360288a04aed68
+msgid "When you find the bug, take a second to think about what you could have done to find it faster. Next time you see something similar, you will be able to find the bug more quickly."
+msgstr ""
+
+#: ../../source/app_a.rst:493
+# 1f20463335364799b9c0dffcb9cf1fb8
+msgid "Remember, the goal is not just to make the program work. The goal is to learn how to make the program work."
+msgstr ""
+

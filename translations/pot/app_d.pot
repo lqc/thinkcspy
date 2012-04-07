@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/app_d.rst:10
+# 3665bf84a47141d6bb1d61177166c374
+msgid "Customizing and Contributing to the Book"
+msgstr ""
+
+#: ../../source/app_d.rst:12
+# b1f41bb549454c8ab9ee00fbcae7609c
+msgid "*Note:* the following instructions assume that you are connected to the Internet and that you have both the ``main`` and ``universe`` package repositories enabled.  All unix shell commands are assumed to be running from your home directory ($HOME).  Finally, any command that begins with ``sudo`` assumes that you have administrative rights on your machine.  If you do not --- please ask your system administrator about installing the software you need."
+msgstr ""
+
+#: ../../source/app_d.rst:20
+# b8e9d269c8964a1b8d483c8ba8234f83
+msgid "This book is free as in freedom, which means you have the right to modify it to suite your needs, and to redistribute your modifications so that our whole community can benefit."
+msgstr ""
+
+#: ../../source/app_d.rst:24
+# 0a892b8e37704191bff0f1d8004ff40b
+msgid "That freedom lacks meaning, however, if you the tools needed to make a custom version or to contribute corrections and additions are not within your reach.  This appendix attempts to put those tools in your hands."
+msgstr ""
+
+#: ../../source/app_d.rst:28
+# 584d5678d3d24272a82e17e823bf8d13
+msgid "Thanks!"
+msgstr ""
+
+#: ../../source/app_d.rst:30
+# d0c7dbf3c1684e6c8859101c1565aa26
+msgid "`Jeffrey Elkner <mailto:jeff@elkner.net>`__"
+msgstr ""
+
+#: ../../source/app_d.rst:31
+# 02a700c6c04647b29cd63697dd34059a
+msgid "Governor's Career and Technical Academy in Arlington"
+msgstr ""
+
+#: ../../source/app_d.rst:32
+# c6356402c3c346419dbb3e776670b3fe
+msgid "Arlington, Virginia"
+msgstr ""
+
+#: ../../source/app_d.rst:36
+# 2a0fc1f35d1b45fe9a6ab8dcddf827ba
+msgid "Getting the Source"
+msgstr ""
+
+#: ../../source/app_d.rst:38
+# 742d16530cf4461b9b0ef358780d44d5
+msgid "This book is `marked up <http://en.wikipedia.org/wiki/Markup_language>`__ in `ReStructuredText <http://en.wikipedia.org/wiki/ReStructuredText>`__ using a document generation system called `Sphinx <http://en.wikipedia.org/wiki/Sphinx_%28documentation_generator%29>`__."
+msgstr ""
+
+#: ../../source/app_d.rst:43
+# c341a72190244ce5b23a1b05daeb2b8b
+msgid "The source code is located on the `Launchpad website <http://en.wikipedia.org/wiki/Launchpad_%28website%29>`__ at http://bazaar.launchpad.net/~thinkcspy/thinkcspy/english2e/files."
+msgstr ""
+
+#: ../../source/app_d.rst:45
+# 39ad0dd25b8e4c97aa438368f399b292
+msgid "The easiest way to get the source code on an Ubuntu 9.10 computer is:"
+msgstr ""
+
+#: ../../source/app_d.rst:47
+# b2e9cb78f9214c2d9e3c3d9e27582c45
+msgid "run ``sudo apt-get install bzr`` on your system to install `bzr <http://en.wikipedia.org/wiki/Bazaar_%28software%29>`__."
+msgstr ""
+
+#: ../../source/app_d.rst:49
+# 8276a11149b74c14a2fd8e888c5ddc8e
+msgid "run ``bzr branch lp:thinkcspy``."
+msgstr ""
+
+#: ../../source/app_d.rst:51
+# 65be6ef471374764a0bf5f451f03afbd
+msgid "The last command above will download the book source from Launchpad into a directory named ``thinkcspy`` which contains the Sphinx source and configuration information needed to build the book."
+msgstr ""
+
+#: ../../source/app_d.rst:57
+# ddb47a93fa544acab1783c8e7f8ba862
+msgid "Making the HTML Version"
+msgstr ""
+
+#: ../../source/app_d.rst:59
+# 8a11ae801c5f4c1897b7518dfb31ad45
+msgid "To generate the html version of the book:"
+msgstr ""
+
+#: ../../source/app_d.rst:61
+# cd5148e246824d7880f0df4a776389b2
+msgid "run ``sudo apt-get install python-sphinx`` to install the Sphinx documentation system."
+msgstr ""
+
+#: ../../source/app_d.rst:63
+# 54df3ed246564df0a99aa12e5f9ed0eb
+msgid "``cd thinkcspy`` - change into the ``thinkcspy`` directory containing the book source."
+msgstr ""
+
+#: ../../source/app_d.rst:65
+# c25fb9a16dd141079393f702abfb794f
+msgid "``make html``."
+msgstr ""
+
+#: ../../source/app_d.rst:67
+# e44176bb270340349ee93cc3f370178a
+msgid "The last command will run sphinx and create a directory named ``build`` containing the html verion of the text."
+msgstr ""
+
+#: ../../source/app_d.rst:70
+# e199a1f5398c4d97a577278fb9713c62
+msgid "*Note*: Sphinx supports building other output types as well, such as `PDF <http://en.wikipedia.org/wiki/PDF>`__.  This requires that `LaTeX <http://en.wikipedia.org/wiki/LaTeX>`__ be present on your system.  Since I only personally use the html version, I will not attempt to document that process here."
+msgstr ""
+

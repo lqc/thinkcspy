@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012, Peter Wentworth, Jeffrey Elkner, Allen B. Downey and Chris Meyers
+# This file is distributed under the same license as the How to Think Like a Computer Scientist: Learning with Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: How to Think Like a Computer Scientist: Learning with Python 3rd Edition\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-07 17:54\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/queues.rst:12
+# 305b8be1796e4b80929b704f05d63bc5
+msgid "Queues"
+msgstr ""
+
+#: ../../source/queues.rst:14
+# ca24c8ed6b46400badd14e837ddbdb86
+msgid "This chapter presents two ADTs: the Queue and the Priority Queue. In real life, a **queue** is a line of customers waiting for service of some kind. In most cases, the first customer in line is the next customer to be served. There are exceptions, though. At airports, customers whose flights are leaving soon are sometimes taken from the middle of the queue. At supermarkets, a polite customer might let someone with only a few items go first."
+msgstr ""
+
+#: ../../source/queues.rst:21
+# 4ab1039115634cb1860545960b366bae
+msgid "The rule that determines who goes next is called the **queueing policy**. The simplest queueing policy is called **FIFO**, for first- in-first-out. The most general queueing policy is **priority queueing**, in which each customer is assigned a priority and the customer with the highest priority goes first, regardless of the order of arrival. We say this is the most general policy because the priority can be based on anything: what time a flight leaves; how many groceries the customer has; or how important the customer is. Of course, not all queueing policies are fair, but fairness is in the eye of the beholder."
+msgstr ""
+
+#: ../../source/queues.rst:30
+# fc796bc212fc4399afec94775d3b44eb
+msgid "The Queue ADT and the Priority Queue ADT have the same set of operations. The difference is in the semantics of the operations: a queue uses the FIFO policy; and a priority queue (as the name suggests) uses the priority queueing policy."
+msgstr ""
+
+#: ../../source/queues.rst:36
+# ea851220d51d4e71ba8aa823fc2d0d15
+msgid "The Queue ADT"
+msgstr ""
+
+#: ../../source/queues.rst:38
+# 3639465254864d5b9ad56e311bd3eab0
+msgid "The Queue ADT is defined by the following operations:"
+msgstr ""
+
+#: ../../source/queues.rst:41
+#: ../../source/queues.rst:205
+# 26299085f95b489aa8a5ac0cd882af3a
+# d172c5822e7f4d55a3aa809d0c2ad9b7
+msgid "Initialize a new empty queue."
+msgstr ""
+
+#: ../../source/queues.rst:44
+#: ../../source/queues.rst:208
+# e7511288a9714744a4dfe19eb0db04d6
+# 7f754d87c294478fb7b79230ff32c106
+msgid "Add a new item to the queue."
+msgstr ""
+
+#: ../../source/queues.rst:47
+# b466792eb0c54067ba9bc7b00a6b32c9
+msgid "Remove and return an item from the queue. The item that is returned is the first one that was added."
+msgstr ""
+
+#: ../../source/queues.rst:51
+#: ../../source/queues.rst:215
+# dfe9a9fa52f448eca6a9e39f7fa0959b
+# 5e4be40104c1488b93442019c9b33d8e
+msgid "Check whether the queue is empty."
+msgstr ""
+
+#: ../../source/queues.rst:55
+# 78341a820b9d47d59d99c170feeb17ad
+msgid "Linked Queue"
+msgstr ""
+
+#: ../../source/queues.rst:57
+# f720e031517d41faa4f5fdbb346d09af
+msgid "The first implementation of the Queue ADT we will look at is called a **linked queue** because it is made up of linked ``Node`` objects. Here is the class definition:"
+msgstr ""
+
+#: ../../source/queues.rst:91
+# b9c0e1f95e814001942eaee0aa00457c
+msgid "The methods ``is_empty`` and ``remove`` are identical to the ``LinkedList`` methods ``is_empty`` and ``remove_first``. The ``insert`` method is new and a bit more complicated."
+msgstr ""
+
+#: ../../source/queues.rst:95
+# 10ad60a2c698414e926c57672d2b8c51
+msgid "We want to insert new items at the end of the list. If the queue is empty, we just set ``head`` to refer to the new node."
+msgstr ""
+
+#: ../../source/queues.rst:98
+# 4b36c173fab24483a4c5894d51b4632b
+msgid "Otherwise, we traverse the list to the last node and tack the new node on the end. We can identify the last node because its ``next`` attribute is ``None``."
+msgstr ""
+
+#: ../../source/queues.rst:101
+# 90a83ef77d3645cfb481ea48f923aad7
+msgid "There are two invariants for a properly formed ``Queue`` object. The value of ``length`` should be the number of nodes in the queue, and the last node should have ``next`` equal to ``None``. Convince yourself that this method preserves both invariants."
+msgstr ""
+
+#: ../../source/queues.rst:108
+# 8bd6b8c33a4942e18b91129bcc6858b8
+msgid "Performance characteristics"
+msgstr ""
+
+#: ../../source/queues.rst:110
+# 63bbc416fbb84618924cfd0b66cfba60
+msgid "Normally when we invoke a method, we are not concerned with the details of its implementation. But there is one detail we might want to know---the performance characteristics of the method. How long does it take, and how does the run time change as the number of items in the collection increases?"
+msgstr ""
+
+#: ../../source/queues.rst:115
+# aede9719593b4c37ba7f48d76828b407
+msgid "First look at ``remove``. There are no loops or function calls here, suggesting that the runtime of this method is the same every time.  Such a method is called a **constant-time** operation. In reality, the method might be slightly faster when the list is empty since it skips the body of the conditional, but that difference is not significant."
+msgstr ""
+
+#: ../../source/queues.rst:121
+# 7a137e1c26b54905932ac0cc98ec7096
+msgid "The performance of ``insert`` is very different. In the general case, we have to traverse the list to find the last element."
+msgstr ""
+
+#: ../../source/queues.rst:124
+# 54321eb78ae24c80982be862635edd90
+msgid "This traversal takes time proportional to the length of the list.  Since the runtime is a linear function of the length, this method is called **linear time**. Compared to constant time, that's very bad."
+msgstr ""
+
+#: ../../source/queues.rst:130
+# 853f40e4565249d3b0f5f642bbe59287
+msgid "Improved Linked Queue"
+msgstr ""
+
+#: ../../source/queues.rst:132
+# 3134baefebbc4d56a2ed2610a5bdd52b
+msgid "We would like an implementation of the Queue ADT that can perform all operations in constant time. One way to do that is to modify the Queue class so that it maintains a reference to both the first and the last node, as shown in the figure:"
+msgstr ""
+
+#: ../../source/queues.rst:137
+# da9e67a4d4674733a1638dcbb7ee70dc
+msgid "The ``ImprovedQueue`` implementation looks like this:"
+msgstr ""
+
+#: ../../source/queues.rst:151
+# c0ec8c9089e84fc8ae74217708b51955
+msgid "So far, the only change is the attribute ``last``. It is used in ``insert`` and ``remove`` methods:"
+msgstr ""
+
+#: ../../source/queues.rst:173
+# eef506bfa0d140bab3e720b1bd8732b6
+msgid "Since ``last`` keeps track of the last node, we don't have to search for it. As a result, this method is constant time."
+msgstr ""
+
+#: ../../source/queues.rst:176
+# 2927b159308646ffb4d6cff8df1ddcfa
+msgid "There is a price to pay for that speed. We have to add a special case to ``remove`` to set ``last`` to ``None`` when the last node is removed:"
+msgstr ""
+
+#: ../../source/queues.rst:192
+# 9c05fc3f226c45b59fa9f14cb4a0df32
+msgid "This implementation is more complicated than the Linked Queue implementation, and it is more difficult to demonstrate that it is correct. The advantage is that we have achieved the goal -- both ``insert`` and ``remove`` are constant-time operations."
+msgstr ""
+
+#: ../../source/queues.rst:199
+# e72fdddb30d84d4fb98f8c67b3a3054e
+msgid "Priority queue"
+msgstr ""
+
+#: ../../source/queues.rst:201
+# f4a2564ea03d44ec89197b860f48f4d6
+msgid "The Priority Queue ADT has the same interface as the Queue ADT, but different semantics. Again, the interface is:"
+msgstr ""
+
+#: ../../source/queues.rst:211
+# b61df0823258415ca42bfcd17d8d943e
+msgid "Remove and return an item from the queue. The item that is returned is the one with the highest priority."
+msgstr ""
+
+#: ../../source/queues.rst:217
+# e581ccd9dc2f44a1baab6f7e33ebe24b
+msgid "The semantic difference is that the item that is removed from the queue is not necessarily the first one that was added. Rather, it is the item in the queue that has the highest priority. What the priorities are and how they compare to each other are not specified by the Priority Queue implementation. It depends on which items are in the queue."
+msgstr ""
+
+#: ../../source/queues.rst:223
+# 0caae823ea0e487da74de4d66058d094
+msgid "For example, if the items in the queue have names, we might choose them in alphabetical order. If they are bowling scores, we might go from highest to lowest, but if they are golf scores, we would go from lowest to highest. As long as we can compare the items in the queue, we can find and remove the one with the highest priority."
+msgstr ""
+
+#: ../../source/queues.rst:229
+# 453a3b608d3544d88df1c43ca1cfda0e
+msgid "This implementation of Priority Queue has as an attribute a Python list that contains the items in the queue."
+msgstr ""
+
+#: ../../source/queues.rst:245
+# faeb2560ba464884827d22ce80b25463
+msgid "The initialization method, ``is_empty``, and ``insert`` are all veneers on list operations. The only interesting method is ``remove``:"
+msgstr ""
+
+#: ../../source/queues.rst:262
+# 689a826a4a694b0b8106b35b855513e9
+msgid "At the beginning of each iteration, ``maxi`` holds the index of the biggest item (highest priority) we have seen *so far*. Each time through the loop, the program compares the ``i``'th item to the champion. If the new item is bigger, the value of ``maxi`` is set to ``i``."
+msgstr ""
+
+#: ../../source/queues.rst:267
+# c61d1b3ecdbe4b76a402a25c372feb07
+msgid "When the ``for`` statement completes, ``maxi`` is the index of the biggest item. This item is removed from the list and returned."
+msgstr ""
+
+#: ../../source/queues.rst:270
+# 780c77d4265d4af0bdc83b075c000ca2
+msgid "Let's test the implementation:"
+msgstr ""
+
+#: ../../source/queues.rst:285
+# 8b0b51a57feb4aa59bddb4b76e0e47e8
+msgid "If the queue contains simple numbers or strings, they are removed in numerical or alphabetical order, from highest to lowest. Python can find the biggest integer or string because it can compare them using the built-in comparison operators."
+msgstr ""
+
+#: ../../source/queues.rst:290
+# 7e7b589bd2ae42faa9e69c703f3dbdd7
+msgid "If the queue contains an object type, it has to provide a ``__gt__`` method. When ``remove`` uses the ``>`` operator to compare items, it invokes the ``__gt__`` for one of the items and passes the other as a parameter. As long as the ``__gt__`` method works correctly, the Priority Queue will work."
+msgstr ""
+
+#: ../../source/queues.rst:297
+# a1a7173fd8eb42068c8515179520dafd
+msgid "The ``Golfer`` class"
+msgstr ""
+
+#: ../../source/queues.rst:299
+# 7a4b358667bc46ea87f7f8e57e49e905
+msgid "As an example of an object with an unusual definition of priority, let's implement a class called ``Golfer`` that keeps track of the names and scores of golfers. As usual, we start by defining ``__init__`` and ``__str__``:"
+msgstr ""
+
+#: ../../source/queues.rst:314
+# 10fde2d328ff4c3f91df414b3e74a2dd
+msgid "``__str__`` uses the format method to put the names and scores in neat columns."
+msgstr ""
+
+#: ../../source/queues.rst:317
+# 3def6211806d4b40aae39e232514a311
+msgid "Next we define a version of ``__gt__`` where the lowest score gets highest priority. As always, ``__gt__`` returns ``True`` if ``self`` is greater than ``other``, and ``False`` otherwise."
+msgstr ""
+
+#: ../../source/queues.rst:329
+# e4c524126e8144ea82c6ccc29efe4d44
+msgid "Now we are ready to test the priority queue with the ``Golfer`` class:"
+msgstr ""
+
+#: ../../source/queues.rst:348
+# e7ef47279f7c4b09b3ac0764b619c17d
+msgid "Glossary"
+msgstr ""
+
+#: ../../source/queues.rst:353
+# aac1e8cab8384080a0cdec77b1d49f37
+msgid "An operation whose runtime does not depend on the size of the data structure."
+msgstr ""
+
+#: ../../source/queues.rst:357
+# c5460c6b4af54ab09de1879cc360ceb2
+msgid "First In, First Out, a queueing policy in which the first member to arrive is the first to be removed."
+msgstr ""
+
+#: ../../source/queues.rst:361
+# e84350557a2c48db9b7cce33c9b9f8b2
+msgid "An operation whose runtime is a linear function of the size of the data structure."
+msgstr ""
+
+#: ../../source/queues.rst:365
+# b69caaf549994b179e775707c4bb9083
+msgid "An implementation of a queue using a linked list."
+msgstr ""
+
+#: ../../source/queues.rst:368
+# e5cb11296e5a4b0e91a1916ee11e26fd
+msgid "A queueing policy in which each member has a priority determined by external factors. The member with the highest priority is the first to be removed."
+msgstr ""
+
+#: ../../source/queues.rst:373
+# af53f3dc2c2949dba176527343b1788f
+msgid "An ADT that defines the operations one might perform on a priority queue."
+msgstr ""
+
+#: ../../source/queues.rst:377
+# a55f94a0a0234c559bdcf87eeba81cb1
+msgid "An ordered set of objects waiting for a service of some kind."
+msgstr ""
+
+#: ../../source/queues.rst:380
+# d53a0237934341d8a4ee64e0b110d590
+msgid "An ADT that performs the operations one might perform on a queue."
+msgstr ""
+
+#: ../../source/queues.rst:383
+# 1752e65a3fcb412ca85f509508f78d9d
+msgid "The rules that determine which member of a queue is removed next."
+msgstr ""
+
+#: ../../source/queues.rst:387
+# 065e0448f54d41e598edfe224b3f2454
+msgid "Exercises"
+msgstr ""
+
+#: ../../source/queues.rst:389
+# 3d75933bb9bb4b48865f9dc285096381
+msgid "Write an implementation of the Queue ADT using a Python list.  Compare the performance of this implementation to the ``ImprovedQueue`` for a range of queue lengths."
+msgstr ""
+
+#: ../../source/queues.rst:393
+# 285b6c25114446a3870a7a92f341d001
+msgid "Write an implementation of the Priority Queue ADT using a linked list. You should keep the list sorted so that removal is a constant time operation. Compare the performance of this implementation with the Python list implementation."
+msgstr ""
+
