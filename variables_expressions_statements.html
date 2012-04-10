@@ -61,8 +61,7 @@
 <span id="values-n-types"></span><span id="index-1"></span><h2>2.1. Wartości i typy danych<a class="headerlink" href="#values-and-data-types" title="Stały odnośnik do tego nagłówka">¶</a></h2>
 <p><strong>Wartość</strong> jest jedną z podstawowych rzeczy &#8212; tak jak litera czy liczba &#8211; które przetwarza program. Wartości, które dotąd widzieliśmy to <tt class="docutils literal"><span class="pre">4</span></tt> (wynik naszego dodawania <tt class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></tt>) oraz <tt class="docutils literal"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></tt>.</p>
 <p>Wartości podzielone są na różne <strong>klasy</strong> lub <strong>typy danych</strong>: <tt class="docutils literal"><span class="pre">4</span></tt> jest <em>liczbą całkowitą</em> (ang. integer), a <tt class="docutils literal"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></tt> jest <em>napisem</em> (ang. string - nazwany tak gdyż jest to &#8220;sznurek&#8221; liter). Możesz (tak jak interpreter) rozpoznać napisy ponieważ są one ujęte w cudzysłów.</p>
-<p>If you are not sure what class a value falls into, Python has a function
-called <strong>type</strong> which can tell you.</p>
+<p>Jeśli nie jesteś pewien do jakiej klasy należy dana wartość, Python posiada funkcję <strong>type</strong> (z ang. typ, rodzaj), która odpowie Ci na to pytanie.</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
 <span class="go">&lt;class &#39;str&#39;&gt;</span>
@@ -71,20 +70,14 @@ called <strong>type</strong> which can tell you.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Not surprisingly, strings belong to the class <strong>str</strong> and integers belong to the
-class <strong>int</strong>. Less obviously, numbers with a decimal point belong to a class
-called <strong>float</strong>, because these numbers are represented in a format called
-<em>floating-point</em>.  At this stage, you can treat the words <em>class</em> and <em>type</em>
-interchangeably.  We&#8217;ll come back to a deeper understanding of what a class
-is in later chapters.</p>
+<p>Jak można się było spodziewać, napisy należą do klasy <strong>str</strong> (od &#8220;string&#8221;), a liczby całkowite do klasy <strong>int</strong> (od &#8220;integer&#8221;). Mniej oczywiste jest, iż liczby z dziesiętną częścią ułamkową należą do klasy <strong>float</strong>, ponieważ są one reprezentowane jako liczby <em>zmiennoprzecinkowe</em> (ang. <em>floating-point</em>). Na tym etapie, możesz traktować słowa <em>klasa</em> i <em>typ</em> jako synonimy. Dokładniejszym poznaniem znaczenia klasy zajmiemy się w dalszych rozdziałach.</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
 <span class="go">&lt;class &#39;float&#39;&gt;</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>What about values like <tt class="docutils literal"><span class="pre">&quot;17&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;3.2&quot;</span></tt>? They look like numbers, but they
-are in quotation marks like strings.</p>
+<p>Co z wartościami takimi jak <tt class="docutils literal"><span class="pre">&quot;17&quot;</span></tt> czy <tt class="docutils literal"><span class="pre">&quot;3.2&quot;</span></tt>? Wyglądają jak liczby, ale są w cudzysłowach tak jak napisy.</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;17&quot;</span><span class="p">)</span>
 <span class="go">&lt;class &#39;str&#39;&gt;</span>
@@ -93,9 +86,8 @@ are in quotation marks like strings.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>They&#8217;re strings!</p>
-<p>Strings in Python can be enclosed in either single quotes (<tt class="docutils literal"><span class="pre">'</span></tt>) or double quotes
-(<tt class="docutils literal"><span class="pre">&quot;</span></tt>), or three of each (<tt class="docutils literal"><span class="pre">'''</span></tt> or <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt>)</p>
+<p>Są to napisy!</p>
+<p>Napisy w języku Python zawarte są&nbsp;w apostrofach (<tt class="docutils literal"><span class="pre">'</span></tt>), cudzysłowach (<tt class="docutils literal"><span class="pre">&quot;</span></tt>) lub serii trzech trzech z tych znaków (<tt class="docutils literal"><span class="pre">'''`</span></tt> albo <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt>)</p>
 <blockquote>
 <div><div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&#39;This is a string.&#39;</span><span class="p">)</span>
 <span class="go">&lt;class &#39;str&#39;&gt;</span>
@@ -108,12 +100,8 @@ are in quotation marks like strings.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Double quoted strings can contain single quotes inside them, as in
-<tt class="docutils literal"><span class="pre">&quot;Bruce's</span> <span class="pre">beard&quot;</span></tt>, and single quoted strings can have double quotes
-inside them, as in <tt class="docutils literal"><span class="pre">'The</span> <span class="pre">knights</span> <span class="pre">who</span> <span class="pre">say</span> <span class="pre">&quot;Ni!&quot;'</span></tt>.</p>
-<p>Strings enclosed with three occurrences of either quote symbol are
-called triple quoted strings.  They can
-contain either single or double quotes:</p>
+<p>Napisy w cudzysłowach mogą zawierać apostrofy, np. <tt class="docutils literal"><span class="pre">&quot;alfabet</span> <span class="pre">Morse'a&quot;</span></tt>, a napisy w apostrofach mogą&nbsp;zawierać cudzysłów, np. <tt class="docutils literal"><span class="pre">'Rycerze</span> <span class="pre">którzy</span> <span class="pre">mówią</span> <span class="pre">&quot;Ni!&quot;'</span></tt>.</p>
+<p>Napisy zawarte w potrojonych cudzysłowach (lub apostrofach) mogą zawierać&nbsp;zarówno cudzysłowia jak i apostrofy:</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s">&#39;&#39;&#39;&quot;Oh no&quot;, she exclaimed, &quot;Ben&#39;s bike is broken!&quot;&#39;&#39;&#39;</span><span class="p">)</span>
 <span class="go">&quot;Oh no&quot;, she exclaimed, &quot;Ben&#39;s bike is broken!&quot;</span>
@@ -121,7 +109,7 @@ contain either single or double quotes:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Triple quoted strings can even span multiple lines:</p>
+<p>Napisy z potrójnymi cudzysłowami mogą obejmować wiele linii:</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;This message will</span>
 <span class="gp">... </span><span class="s">span several</span>
@@ -134,12 +122,7 @@ contain either single or double quotes:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Python doesn&#8217;t care whether you use single or double quotes or
-the three-of-a-kind quotes to surround your strings:
-once it has parsed the text of your program or command, the way it stores the
-value is identical in all cases, and the surrounding quotes are not part of
-the value. But when the interpreter wants to display a string, it has to
-decide which quotes to use to make it look like a string.</p>
+<p>Python nie rozróżnia czy użyte zostały przez Ciebie apostrofy, cudzysłowy czy potrójne cudzysłowy do oznaczenia napisy: po wczytaniu treści programu lub komendy, są one przechowywane w identyczny sposób, a użyte znaki nie są częścią wartości. Jednak, gdy interpreter chce pokazać Ci napis, musi zdecydować jakiego rodzaju cudzysłowów użyć aby wyglądał on jak napis.</p>
 <blockquote>
 <div><div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;This is a string.&#39;</span>
 <span class="go">&#39;This is a string.&#39;</span>
@@ -148,9 +131,7 @@ decide which quotes to use to make it look like a string.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>So the Python language designers usually chose to surround their strings
-by single quotes.  What do think would happen if the string already
-contained single quotes?</p>
+<p>W związku z tym autorzy języka Python zazwyczaj używają apostrofów do oznaczanie napisów. Jak myślisz, co się stanie jeśli napis już zawierał apostrofy?</p>
 <p>When you type a large integer, you might be tempted to use commas between
 groups of three digits, as in <tt class="docutils literal"><span class="pre">42,000</span></tt>. This is not a legal integer in
 Python, but it does mean something else, which is legal:</p>
@@ -170,11 +151,9 @@ strict, the notation is concise, and even the smallest change might
 mean something quite different from what you intended.</p>
 </div>
 <div class="section" id="variables">
-<span id="index-2"></span><h2>2.2. Variables<a class="headerlink" href="#variables" title="Stały odnośnik do tego nagłówka">¶</a></h2>
-<p>One of the most powerful features of a programming language is the ability to
-manipulate <strong>variables</strong>. A variable is a name that refers to a value.</p>
-<p>The <strong>assignment statement</strong> creates new variables and gives them
-values:</p>
+<span id="index-2"></span><h2>2.2. Zmienne<a class="headerlink" href="#variables" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Jedną z najistotniejszych funkcjonalności języka programowania jest jego zdolność do operowania na <strong>zmiennych</strong>. Zmienne są nazwami, które wskazują na wartość.</p>
+<p><strong>Instrukcja przypisania</strong> tworzy nowe zmienne i nadaje im wartości:</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="s">&quot;What&#39;s up, Doc?&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
@@ -182,14 +161,8 @@ values:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>This example makes three assignments. The first assigns the string value <tt class="docutils literal"><span class="pre">&quot;What's</span>
-<span class="pre">up,</span> <span class="pre">Doc?&quot;</span></tt> to a new variable named <tt class="docutils literal"><span class="pre">message</span></tt>. The second gives the integer
-<tt class="docutils literal"><span class="pre">17</span></tt> to <tt class="docutils literal"><span class="pre">n</span></tt>, and the third assigns the floating-point number <tt class="docutils literal"><span class="pre">3.14159</span></tt> to
-a variable called <tt class="docutils literal"><span class="pre">pi</span></tt>.</p>
-<p>The <strong>assignment token</strong>, <tt class="docutils literal"><span class="pre">=</span></tt>, should not be confused with <em>equals</em>, which uses
-the token <tt class="docutils literal"><span class="pre">==</span></tt>.  The assignment statement links a <em>name</em>,
-on the left hand side of the operator, with a <em>value</em>, on the right hand side.
-This is why you will get an error if you enter:</p>
+<p>Ten przykład wykonuje trzy przypisania. Pierwsze przypisuję wartość będącą napisem <tt class="docutils literal"><span class="pre">&quot;What's</span> <span class="pre">up,</span> <span class="pre">Doc?&quot;</span></tt> na nową zmienną nazwaną <tt class="docutils literal"><span class="pre">message</span></tt>. Następne kojarzy ze zmienną <tt class="docutils literal"><span class="pre">n</span></tt> liczbę całkowitą <tt class="docutils literal"><span class="pre">17</span></tt>, a ostatnie przypisuję liczbę zmiennoprzecinkową <tt class="docutils literal"><span class="pre">3.14159</span></tt> zmiennej <tt class="docutils literal"><span class="pre">pi</span></tt>.</p>
+<p>Nie należy mylić <strong>symbolu przypisania</strong>, <tt class="docutils literal"><span class="pre">=</span></tt>, z <em>równością</em>, która używa innego symbolu <tt class="docutils literal"><span class="pre">==</span></tt>. Instrukcja przypisanie wiąże <em>nazwę</em> po lewej stronie operatora, z wartością po prawej stronie. Dlatego też otrzymasz błąd jeśli wpiszesz:</p>
 <blockquote>
 <div><div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
 <span class="go">File &quot;&lt;interactive input&gt;&quot;, line 1</span>
@@ -198,20 +171,14 @@ This is why you will get an error if you enter:</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Wskazówka</p>
-<p class="last">When reading or writing code, say to yourself &#8220;n is assigned 17&#8221;
-or &#8220;n gets the value 17&#8221;.  Don&#8217;t say &#8220;n equals 17&#8221;.</p>
+<p class="last">Gdy czytasz lub piszesz kod, mów do siebie: &#8220;do n przypisuję 17-tkę&#8221;, albo &#8220;n otrzymuje wartość 17&#8221;. Nie mów &#8220;n równa się 17&#8221;.</p>
 </div>
 </div></blockquote>
-<p>A common way to represent variables on paper is to write the name with an arrow
-pointing to the variable&#8217;s value. This kind of figure is called a <strong>state
-snapshot</strong> because it shows what state each of the variables is in at a particular
-instant in time.  (Think of it as the variable&#8217;s state of mind).
-This diagram shows the result of executing the assignment statements:</p>
+<p>Często spotykanym sposobem reprezentowania zmiennych na kartce papieru jest zapisywanie ich jako nazw oraz strzałek wskazujących na ich wartości. Taki zapis nazywamy <strong>obrazem stanu</strong> ponieważ przedstawia on stan każdej zmiennej w konkretnym momencie czasu. Następujący diagram przedstawia wynik wykonania powyższych instrukcji przypisania:</p>
 <blockquote>
 <div><img alt="State snapshot" src="images/state.png" />
 </div></blockquote>
-<p>If you ask the interpreter to evaluate a variable, it will produce the value that is currently
-linked to the variable:</p>
+<p>Jeśli poprosisz interpreter aby obliczył wartość zmiennej, poda on wartość która jest aktualnie powiązana z tą zmienną:</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">message</span>
 <span class="go">&#39;What&#39;s up, Doc?&#39;</span>
@@ -222,8 +189,7 @@ linked to the variable:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>In each case the result is the value of the variable. Variables also have
-types; again, we can ask the interpreter what they are.</p>
+<p>W każdym z przypadku wynikiem jest wartość zmiennej. Zmienne mają też typy; tak jak wcześniej, możemy się zapytać interpreter jakie one są.</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 <span class="go">&lt;class &#39;str&#39;&gt;</span>
@@ -234,12 +200,8 @@ types; again, we can ask the interpreter what they are.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>The type of a variable is the type of the value it currently refers to.</p>
-<p>We use variables in a program to &#8220;remember&#8221; things, like the current score at the football game.
-But variables are <em>variable</em>. This means they can change over time, just like the scoreboard at a football game.
-You can assign a value to a variable, and later assign a different value to the same variable.
-(<em>This is different from maths. In maths, if you give `x` the value 3, it
-cannot change to link to a different value half-way through your calculations!</em>)</p>
+<p>Typem zmiennej jest zawsze typ wartości do jakiej się ona odnosi.</p>
+<p>Używamy zmiennych w programie aby &#8220;zapamiętywać&#8221; rzeczy, takie jak np. aktualny wynik meczu piłkarskiego. Oznacza to, że mogą się one zmieniać w czasie, tak samo jak może się zmieniać wynik meczu. Możesz zmiennej nadać pewną wartość, a później nadać inną wartość tej samej zmiennej. (<em>Inaczej niż w matematyce, gdzie jeśli zmiennej `x` nadamy wartość 3, to nie może się ona zmienić na inną w połowie obliczeń!</em>)</p>
 <blockquote>
 <div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">day</span> <span class="o">=</span> <span class="s">&quot;Thursday&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">day</span>
@@ -253,12 +215,11 @@ cannot change to link to a different value half-way through your calculations!</
 </pre></div>
 </div>
 </div></blockquote>
-<p>You&#8217;ll notice we changed the value of <tt class="docutils literal"><span class="pre">day</span></tt> three times, and on the third assignment we even gave it a value
-that was of a different type.</p>
+<p>Zauważ, że zmieniliśmy wartość zmiennej <tt class="docutils literal"><span class="pre">day</span></tt> trzy razy, a przy trzecim przypisaniu nawet nadaliśmy jej wartość zupełnie innego typu niż poprzednio.</p>
 <p>A great deal of programming is about having the computer remember things, e.g. <em>The number of missed calls on your phone</em>, and then arranging to update or change the variable when you miss another call.</p>
 </div>
 <div class="section" id="variable-names-and-keywords">
-<span id="index-3"></span><h2>2.3. Variable names and keywords<a class="headerlink" href="#variable-names-and-keywords" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<span id="index-3"></span><h2>2.3. Nazwy zmiennych i słowa kluczowe<a class="headerlink" href="#variable-names-and-keywords" title="Stały odnośnik do tego nagłówka">¶</a></h2>
 <p><strong>Variable names</strong> can be arbitrarily long. They can contain both letters and
 digits, but they have to begin with a letter or an underscore. Although it is legal to use
 uppercase letters, by convention we don&#8217;t. If you do, remember that case
@@ -357,7 +318,7 @@ statement to give the variable <tt class="docutils literal"><span class="pre">pi
 </div>
 </div>
 <div class="section" id="statements">
-<span id="index-4"></span><h2>2.4. Statements<a class="headerlink" href="#statements" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<span id="index-4"></span><h2>2.4. Instrukcje<a class="headerlink" href="#statements" title="Stały odnośnik do tego nagłówka">¶</a></h2>
 <p>A <strong>statement</strong> is an instruction that the Python interpreter can execute. We
 have only seen the assignment statement so far.  Some other kinds of statements that
 we&#8217;ll see shortly are <tt class="docutils literal"><span class="pre">while</span></tt> statements, <tt class="docutils literal"><span class="pre">for</span></tt> statements, <tt class="docutils literal"><span class="pre">if</span></tt> statements,
@@ -366,7 +327,7 @@ and <tt class="docutils literal"><span class="pre">import</span></tt> statements
 don&#8217;t produce any result.</p>
 </div>
 <div class="section" id="evaluating-expressions">
-<span id="index-5"></span><h2>2.5. Evaluating expressions<a class="headerlink" href="#evaluating-expressions" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<span id="index-5"></span><h2>2.5. Obliczanie wyrażeń<a class="headerlink" href="#evaluating-expressions" title="Stały odnośnik do tego nagłówka">¶</a></h2>
 <p>An <strong>expression</strong> is a combination of values, variables, operators, and calls to functions. If you
 type an expression at the Python prompt, the interpreter <strong>evaluates</strong> it and
 displays the result:</p>
@@ -397,7 +358,7 @@ itself is a simple expression, and so is a variable.</p>
 </div></blockquote>
 </div>
 <div class="section" id="operators-and-operands">
-<span id="index-6"></span><h2>2.6. Operators and operands<a class="headerlink" href="#operators-and-operands" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<span id="index-6"></span><h2>2.6. Operatory i argumenty<a class="headerlink" href="#operators-and-operands" title="Stały odnośnik do tego nagłówka">¶</a></h2>
 <p><strong>Operators</strong> are special tokens that represent computations like addition,
 multiplication and division. The values the operator uses are called <strong>operands</strong>.</p>
 <p>The following are all legal Python expressions whose meaning is more or less
@@ -794,7 +755,7 @@ program <em>self documenting</em>.</dd>
 </dl>
 </div>
 <div class="section" id="exercises">
-<h2>2.14. Exercises<a class="headerlink" href="#exercises" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<h2>2.14. Ćwiczenia<a class="headerlink" href="#exercises" title="Stały odnośnik do tego nagłówka">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Take the sentence: <em>All work and no play makes Jack a dull boy.</em>
 Store each word in a separate variable, then print out the sentence on
